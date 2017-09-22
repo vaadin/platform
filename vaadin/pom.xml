@@ -48,10 +48,6 @@
       <groupId>com.vaadin</groupId>
       <artifactId>flow-client</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>flow-server-production-mode</artifactId>
-    </dependency>
 
     <!-- Free Components -->
     <dependency>
