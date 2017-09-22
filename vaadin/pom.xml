@@ -32,7 +32,21 @@
       <id>vaadin-addons</id>
       <url>http://maven.vaadin.com/vaadin-addons</url>
     </repository>
+
+    <repository>
+      <id>flow-internal-release</id>
+      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+    </repository>
+
+    <repository>
+      <id>flow-internal-snapshots</id>
+      <url>https://repo.vaadin.com/nexus/content/repositories/flow-snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
+
   <dependencies>
 
     <!-- Flow -->
@@ -47,6 +61,10 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>flow-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>flow-data</artifactId>
     </dependency>
 
     <!-- Free Components -->

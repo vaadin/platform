@@ -16,7 +16,7 @@
   <url>http://vaadin.com</url>
 
   <properties>
-    <flow.version>0.1-SNAPSHOT</flow.version>
+    <flow.version>1.0-SNAPSHOT</flow.version>
     <testbench.version>5.1.0.alpha1</testbench.version>
     <board.version>1.1.0</board.version>
     <charts.version>6.0.0</charts.version>
@@ -39,6 +39,11 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-client</artifactId>
+        <version>${flow.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>flow-data</artifactId>
         <version>${flow.version}</version>
       </dependency>
       <dependency>
