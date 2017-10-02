@@ -10,7 +10,7 @@
   <groupId>com.vaadin</groupId>
   <artifactId>vaadin</artifactId>
   <packaging>jar</packaging>
-  <version>10.0.0.alpha2</version>
+  <version>10.0.0.alpha3</version>
   <name>Vaadin Platform</name>
   <description>Vaadin Platform</description>
   <url>http://vaadin.com</url>
