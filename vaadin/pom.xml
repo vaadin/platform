@@ -15,6 +15,13 @@
   <description>Vaadin Platform</description>
   <url>http://vaadin.com</url>
 
+  <distributionManagement>
+    <repository>
+      <id>flow-internal-release</id>
+      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <dependency>

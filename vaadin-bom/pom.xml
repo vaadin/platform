@@ -23,6 +23,13 @@
     <spreadsheet.version>3.0.0</spreadsheet.version>
   </properties>
 
+  <distributionManagement>
+    <repository>
+      <id>flow-internal-release</id>
+      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <!-- Flow -->
