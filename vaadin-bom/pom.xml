@@ -29,7 +29,12 @@
       <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
     </repository>
   </distributionManagement>
-
+  <repositories>
+    <repository>
+      <id>flow-internal-release</id>
+      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+    </repository>
+  </repositories>
   <dependencyManagement>
     <dependencies>
       <!-- Flow -->
