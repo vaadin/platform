@@ -76,6 +76,11 @@
         <artifactId>flow-spring-addon</artifactId>
         <version>${flow.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>flow-spring-boot-starter</artifactId>
+        <version>${flow.version}</version>
+      </dependency>
 
       <!-- Free Components -->
       <dependency>
