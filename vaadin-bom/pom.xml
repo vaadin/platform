@@ -146,12 +146,27 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-text-field-flow</artifactId>
+        <artifactId>vaadin-progress-bar-flow</artifactId>
         <version>1.0.0.alpha2</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-split-layout-flow</artifactId>
+        <version>1.0.0.alpha2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-tabs-flow</artifactId>
+        <version>1.0.0.alpha2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-text-field-flow</artifactId>
+        <version>1.0.0.alpha2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-upload-flow</artifactId>
         <version>1.0.0.alpha2</version>
       </dependency>
 
