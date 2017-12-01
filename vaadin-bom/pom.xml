@@ -142,7 +142,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-ordered-layout-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
@@ -162,7 +162,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-text-field-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
