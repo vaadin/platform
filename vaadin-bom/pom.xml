@@ -16,7 +16,7 @@
   <url>http://vaadin.com</url>
 
   <properties>
-    <flow.version>1.0.0.alpha11</flow.version>
+    <flow.version>1.0.0.alpha12</flow.version>
     <testbench.version>6.0.0.alpha1</testbench.version>
     <board.version>1.1.0</board.version>
     <charts.version>6.0.0</charts.version>
