@@ -152,8 +152,10 @@
       </dependency> -->
 
     <!-- Charts -->
-    <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-charts-flow</artifactId> 
-      </dependency> -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-charts-flow</artifactId>
+    </dependency>
 
     <!-- Spreadsheet -->
     <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-spreadsheet-flow</artifactId> 
