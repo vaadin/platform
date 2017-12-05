@@ -18,7 +18,7 @@
     <flow.version>1.0.0.alpha12</flow.version>
     <testbench.version>6.0.0.alpha1</testbench.version>
     <board.version>1.1.0</board.version>
-    <charts.version>6.0.0</charts.version>
+    <charts.version>6.0.0.alpha3</charts.version>
     <spreadsheet.version>3.0.0</spreadsheet.version>
   </properties>
 
@@ -187,8 +187,11 @@
         <version>${board.version}</version> </dependency> -->
 
       <!-- Charts -->
-      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-charts-flow</artifactId> 
-        <version>${charts.version}</version> </dependency> -->
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-charts-flow</artifactId> 
+        <version>${charts.version}</version>
+      </dependency>
 
       <!-- Spreadsheet -->
       <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-spreadsheet-flow</artifactId> 
