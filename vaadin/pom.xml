@@ -7,7 +7,6 @@
     <version>1.1.0</version>
     <relativePath />
   </parent>
-  <groupId>com.vaadin</groupId>
   <artifactId>vaadin</artifactId>
   <packaging>jar</packaging>
   <version>10.0-SNAPSHOT</version>
@@ -18,7 +17,7 @@
   <distributionManagement>
     <repository>
       <id>flow-internal-release</id>
-      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
     </repository>
   </distributionManagement>
 
@@ -139,6 +138,10 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-upload-flow</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>vaadin-valo-theme</artifactId>
     </dependency>
 
     <!-- TestBench must be included in the project separately to get a test 

@@ -7,7 +7,6 @@
     <version>1.1.0</version>
     <relativePath />
   </parent>
-  <groupId>com.vaadin</groupId>
   <artifactId>vaadin-bom</artifactId>
   <packaging>pom</packaging>
   <version>10.0-SNAPSHOT</version>
@@ -26,7 +25,7 @@
   <distributionManagement>
     <repository>
       <id>flow-internal-release</id>
-      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
     </repository>
   </distributionManagement>
   <repositories>
@@ -168,6 +167,11 @@
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-upload-flow</artifactId>
         <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>vaadin-valo-theme</artifactId>
+        <version>2.0.0-alpha5</version>
       </dependency>
 
       <!-- TestBench -->
