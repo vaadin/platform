@@ -191,7 +191,7 @@
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-charts-flow</artifactId> 
         <version>${charts.version}</version>
-      </dependency> -->
+      </dependency>
 
       <!-- Spreadsheet -->
       <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-spreadsheet-flow</artifactId> 
