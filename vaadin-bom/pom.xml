@@ -26,13 +26,13 @@
   <distributionManagement>
     <repository>
       <id>flow-internal-release</id>
-      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
     </repository>
   </distributionManagement>
   <repositories>
     <repository>
       <id>flow-internal-release</id>
-      <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
+      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
     </repository>
   </repositories>
   <dependencyManagement>
@@ -163,6 +163,11 @@
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-upload-flow</artifactId>
         <version>1.0.0.alpha2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>vaadin-valo-theme</artifactId>
+        <version>2.0.0-alpha5</version>
       </dependency>
 
       <!-- TestBench -->
