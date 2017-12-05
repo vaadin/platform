@@ -30,7 +30,7 @@
   </distributionManagement>
   <repositories>
     <repository>
-      <id>flow-internal-release</id>
+      <id>vaadin-prereleases</id>
       <url>https://maven.vaadin.com/vaadin-prereleases/</url>
     </repository>
   </repositories>
@@ -96,72 +96,77 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-button-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-checkbox-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-combo-box-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-date-picker-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-dialog-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-form-layout-flow</artifactId>
-        <version>1.0.0.alpha2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-grid-flow</artifactId>
-        <version>1.0.0.alpha1</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-icons-flow</artifactId>
         <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-checkbox-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-combo-box-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-date-picker-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-dialog-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-form-layout-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-grid-flow</artifactId>
+        <version>1.0.0.alpha3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-icons-flow</artifactId>
+        <version>1.0.0.alpha4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-iron-list-flow</artifactId>
+        <version>1.0.0.alpha1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
         <artifactId>vaadin-ordered-layout-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-progress-bar-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-split-layout-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-tabs-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-text-field-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-upload-flow</artifactId>
-        <version>1.0.0.alpha2</version>
+        <version>1.0.0.alpha3</version>
       </dependency>
       <dependency>
         <groupId>org.webjars.bower</groupId>
@@ -178,31 +183,16 @@
       </dependency>
 
       <!-- Board -->
-      <!--
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-board-flow</artifactId>
-        <version>${board.version}</version>
-      </dependency>
-      -->
+      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-board-flow</artifactId> 
+        <version>${board.version}</version> </dependency> -->
 
       <!-- Charts -->
-      <!--
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-charts-flow</artifactId>
-        <version>${charts.version}</version>
-      </dependency>
-      -->
+      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-charts-flow</artifactId> 
+        <version>${charts.version}</version> </dependency> -->
 
       <!-- Spreadsheet -->
-      <!--
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-spreadsheet-flow</artifactId>
-        <version>${spreadsheet.version}</version>
-      </dependency>
-      -->
+      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-spreadsheet-flow</artifactId> 
+        <version>${spreadsheet.version}</version> </dependency> -->
     </dependencies>
   </dependencyManagement>
 </project>
