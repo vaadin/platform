@@ -36,6 +36,11 @@
   </repositories>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <!-- Flow -->
       <dependency>
         <groupId>com.vaadin</groupId>
