@@ -18,7 +18,7 @@
     <flow.version>1.0.0.alpha14</flow.version>
     <testbench.version>6.0.0.alpha1</testbench.version>
     <board.version>1.1.0</board.version>
-    <charts.version>6.0.0.alpha6</charts.version>
+    <charts.version>6.0.0.alpha10</charts.version>
     <spreadsheet.version>3.0.0</spreadsheet.version>
   </properties>
 
