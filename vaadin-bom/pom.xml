@@ -189,7 +189,6 @@
         <version>2.0.0-alpha5</version>
       </dependency>
 
-      <!-- TestBench -->
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-testbench-core</artifactId>
@@ -197,20 +196,12 @@
         <scope>test</scope>
       </dependency>
 
-      <!-- Board -->
-      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-board-flow</artifactId> 
-        <version>${board.version}</version> </dependency> -->
-
-      <!-- Charts -->
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-charts-flow</artifactId> 
         <version>${charts.version}</version>
       </dependency>
 
-      <!-- Spreadsheet -->
-      <!-- <dependency> <groupId>com.vaadin</groupId> <artifactId>vaadin-spreadsheet-flow</artifactId> 
-        <version>${spreadsheet.version}</version> </dependency> -->
     </dependencies>
   </dependencyManagement>
 </project>
