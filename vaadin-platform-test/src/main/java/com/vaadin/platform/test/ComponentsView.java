@@ -16,13 +16,14 @@
 package com.vaadin.platform.test;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.vaadin.addon.charts.Chart;
+import com.vaadin.addon.charts.model.ChartType;
+import com.vaadin.addon.charts.model.ListSeries;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -148,6 +149,16 @@ public class ComponentsView extends VerticalLayout {
             log.log("File of size " + e.getLength() + " received");
         });
 
+        Chart lineChart = new Chart(ChartType.LINE);
+        lineChart.getElement().getStyle().set("height", "100px");
+        lineChart.getConfiguration()
+                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
+
+        Chart barChart = new Chart(ChartType.BAR);
+        barChart.getConfiguration()
+                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
+        barChart.getElement().getStyle().set("height", "100px");
+
         dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
 
@@ -193,6 +204,9 @@ public class ComponentsView extends VerticalLayout {
         components.add(passwordField);
         components.add(textArea);
         components.add(upload);
+
+        components.add(lineChart);
+        components.add(barChart);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
