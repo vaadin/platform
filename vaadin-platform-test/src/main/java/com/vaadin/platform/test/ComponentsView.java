@@ -16,7 +16,9 @@
 package com.vaadin.platform.test;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -43,6 +45,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -181,7 +184,7 @@ public class ComponentsView extends VerticalLayout {
                 new Button("Right"));
         SplitLayout splitVertical = new SplitLayout(new Button("Top"),
                 new Button("Bottom"));
-        splitVertical.setVertical(true);
+        splitVertical.setOrientation(Orientation.VERTICAL);
 
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
