@@ -1,0 +1,19 @@
+sudo: false
+dist: trusty
+language: java
+
+install:
+  - pushd vaadin-bom
+  - mvn install
+  - popd
+  - pushd vaadin
+  - mvn install
+  - popd
+  - pushd vaadin-platform-test
+  - mvn install
+  - popd
+
+script:
+ - pushd vaadin-platform-test
+ - mvn test -B
+ - popd
