@@ -140,7 +140,7 @@
     </dependency>
     <dependency>
       <groupId>org.webjars.bower</groupId>
-      <artifactId>vaadin-valo-theme</artifactId>
+      <artifactId>github-com-vaadin-vaadin-lumo-styles</artifactId>
     </dependency>
 
     <!-- TestBench must be included in the project separately to get a test 
