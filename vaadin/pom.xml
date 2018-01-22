@@ -64,6 +64,10 @@
       <groupId>com.vaadin</groupId>
       <artifactId>flow-data</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-lumo-theme</artifactId>
+    </dependency>
 
     <!-- Free Components -->
     <dependency>
@@ -137,10 +141,6 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-notification-flow</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bower</groupId>
-      <artifactId>github-com-vaadin-vaadin-lumo-styles</artifactId>
     </dependency>
 
     <!-- TestBench must be included in the project separately to get a test 
