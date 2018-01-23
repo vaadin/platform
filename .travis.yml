@@ -10,6 +10,9 @@ install:
   - pushd vaadin-bom
   - mvn install
   - popd
+  - pushd vaadin-core
+  - mvn install
+  - popd
   - pushd vaadin
   - mvn install
   - popd

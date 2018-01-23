@@ -41,6 +41,11 @@
         <artifactId>vaadin</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <!-- Flow -->
       <dependency>
         <groupId>com.vaadin</groupId>
