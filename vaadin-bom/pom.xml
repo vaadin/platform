@@ -18,6 +18,7 @@
     <flow.version>1.0.0.alpha19</flow.version>
     <testbench.version>6.0.0.alpha9</testbench.version>
     <charts.version>6.0.0.alpha14</charts.version>
+    <board.version>1.0.0.alpha2</board.version>
     <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
@@ -240,12 +241,30 @@
         <version>${testbench.version}</version>
         <scope>test</scope>
       </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-components-testbench</artifactId>
+      <version>1.0.0.alpha1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-board-testbench</artifactId>
+      <version>${board.version}</version>
+      <scope>test</scope>
+    </dependency>
 
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-charts-flow</artifactId> 
         <version>${charts.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-board-flow</artifactId>
+        <version>${board.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 </project>
