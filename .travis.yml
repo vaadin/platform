@@ -16,6 +16,9 @@ install:
   - pushd vaadin
   - mvn install
   - popd
+  - pushd vaadin-testbench
+  - mvn install
+  - popd
   - pushd vaadin-platform-test
   - mvn install
   - popd
