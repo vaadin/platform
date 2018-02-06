@@ -24,6 +24,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
@@ -155,16 +157,6 @@ public class ComponentsView extends VerticalLayout {
             log.log("File of size " + e.getContentLength() + " received");
         });
 
-        Chart lineChart = new Chart(ChartType.LINE);
-        lineChart.getElement().getStyle().set("height", "100px");
-        lineChart.getConfiguration()
-                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
-
-        Chart barChart = new Chart(ChartType.BAR);
-        barChart.getConfiguration()
-                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
-        barChart.getElement().getStyle().set("height", "100px");
-
         dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
 
@@ -192,6 +184,34 @@ public class ComponentsView extends VerticalLayout {
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
         add(log);
+
+        Board board = new Board();
+        Label header = new Label("This is a board");
+        header.getElement().getStyle().set("background-color", "lightblue");
+        header.getElement().getStyle().set("text-align", "center");
+        header.setWidth("100%");
+        Row row = new Row(header);
+        row.setComponentSpan(header, 4);
+
+        Chart lineChart = new Chart(ChartType.LINE);
+        lineChart.getElement().getStyle().set("height", "100px");
+        lineChart.getConfiguration()
+                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
+        lineChart.getElement().getStyle().set("width", "100%");
+        lineChart.getElement().getStyle().set("height", "100%");
+        Chart barChart = new Chart(ChartType.BAR);
+        barChart.getConfiguration()
+                .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
+        barChart.getElement().getStyle().set("height", "100%");
+        barChart.getElement().getStyle().set("width", "100%");
+
+        Row row2 = new Row(lineChart, barChart);
+        row2.setComponentSpan(lineChart, 2);
+        row2.setComponentSpan(barChart, 2);
+        row2.setHeight("300px");
+
+        board.add(row, row2);
+
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -211,15 +231,13 @@ public class ComponentsView extends VerticalLayout {
         components.add(textArea);
         components.add(upload);
 
-        components.add(lineChart);
-        components.add(barChart);
-
         layouts.add(formLayout);
         layouts.add(verticalLayout);
         layouts.add(horizontalLayout);
         layouts.add(splitHorizontal);
         layouts.add(splitVertical);
         layouts.add(tabs);
+        layouts.add(board);
 
     }
 

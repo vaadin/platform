@@ -70,7 +70,12 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-components-testbench</artifactId>
-      <version>1.0.0.alpha1</version>
+    </dependency>
+
+    <!-- Vaadin Board -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-board-testbench</artifactId>
     </dependency>
 
   </dependencies>

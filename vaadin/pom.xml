@@ -62,10 +62,14 @@
 
     <!-- TestBench must be included in the project separately to get a test scope -->
 
-    <!-- Charts -->
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-charts-flow</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-board-flow</artifactId>
     </dependency>
 
   </dependencies>
