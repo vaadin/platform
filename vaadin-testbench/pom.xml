@@ -57,7 +57,7 @@
 
     <dependency>
       <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-testbench</artifactId>
+      <artifactId>vaadin-testbench-core</artifactId>
     </dependency>
     
     <!-- Flow HTML components -->
