@@ -115,7 +115,7 @@ public class ComponentsView extends VerticalLayout {
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
-        progressBar.setValue(0.75d);
+        progressBar.setValue(7);
 
         RadioButtonGroup<String> radioButtons = new RadioButtonGroup<>();
         log.log("RadioButtonGroup default is " + radioButtons.getValue());
@@ -152,7 +152,7 @@ public class ComponentsView extends VerticalLayout {
             return baos;
         });
         upload.addSucceededListener(e -> {
-            log.log("File of size " + e.getLength() + " received");
+            log.log("File of size " + e.getContentLength() + " received");
         });
 
         Chart lineChart = new Chart(ChartType.LINE);
