@@ -17,7 +17,7 @@
   <properties>
     <flow.version>1.0.0.alpha19</flow.version>
     <testbench.version>6.0.0.alpha9</testbench.version>
-    <charts.version>6.0.0.alpha13</charts.version>
+    <charts.version>6.0.0.alpha14</charts.version>
     <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
