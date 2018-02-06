@@ -1,77 +1,76 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.vaadin</groupId>
-    <artifactId>vaadin-parent</artifactId>
-    <version>1.1.0</version>
-    <relativePath />
-  </parent>
-  <artifactId>vaadin</artifactId>
-  <packaging>jar</packaging>
-  <version>10.0-SNAPSHOT</version>
-  <name>Vaadin Platform</name>
-  <description>Vaadin Platform</description>
-  <url>http://vaadin.com</url>
-
-  <distributionManagement>
-    <repository>
-      <id>flow-internal-release</id>
-      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
-    </repository>
-  </distributionManagement>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-bom</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <artifactId>vaadin-platform-parent</artifactId>
+        <version>10.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>vaadin</artifactId>
+    <packaging>jar</packaging>
+    <name>Vaadin Platform</name>
+    <description>Vaadin Platform</description>
+    <url>http://vaadin.com</url>
+
+    <distributionManagement>
+        <repository>
+            <id>flow-internal-release</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+
+        <repository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases/</url>
+        </repository>
+
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
+
+        <!-- TestBench must be included in the project separately to get 
+            a test scope -->
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-charts-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-board-flow</artifactId>
+        </dependency>
+
     </dependencies>
-  </dependencyManagement>
-
-  <repositories>
-    <repository>
-      <id>vaadin-addons</id>
-      <url>http://maven.vaadin.com/vaadin-addons</url>
-    </repository>
-
-    <repository>
-      <id>vaadin-prereleases</id>
-      <url>https://maven.vaadin.com/vaadin-prereleases/</url>
-    </repository>
-
-    <repository>
-      <id>vaadin-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <dependencies>
-
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-core</artifactId>
-    </dependency>
-
-    <!-- TestBench must be included in the project separately to get a test scope -->
-
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-charts-flow</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-board-flow</artifactId>
-    </dependency>
-
-  </dependencies>
 
 </project>
