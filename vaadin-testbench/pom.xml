@@ -56,24 +56,28 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench-core</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Flow HTML components -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-html-components-testbench</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Vaadin Core components -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-components-testbench</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Vaadin Board -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-board-testbench</artifactId>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
