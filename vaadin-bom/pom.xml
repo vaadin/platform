@@ -14,7 +14,7 @@
 
     <properties>
         <flow.version>1.0.0.alpha20</flow.version>
-        <testbench.version>6.0.0.alpha9</testbench.version>
+        <testbench.version>6.0.0.alpha10</testbench.version>
         <charts.version>6.0.0.alpha14</charts.version>
         <board.version>1.0.0.alpha2</board.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -243,7 +243,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-components-testbench</artifactId>
-                <version>1.0.0.alpha2</version>
+                <version>1.0.0.alpha3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
