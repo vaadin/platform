@@ -35,7 +35,7 @@
         <vaadin.upload.flow.version>1.0.0.alpha8</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.alpha12</testbench.version>
-        <charts.version>6.0.0.alpha14</charts.version>
+        <charts.version>6.0.0.alpha15</charts.version>
         <board.version>1.0.0.alpha2</board.version>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
