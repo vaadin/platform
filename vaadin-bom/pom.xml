@@ -13,7 +13,7 @@
     <url>http://vaadin.com</url>
 
     <properties>
-        <flow.version>1.0.0.alpha21</flow.version>
+        <flow.version>1.0.0.alpha22</flow.version>
 
         <vaadin.button.flow.version>1.0.0.alpha8</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.alpha8</vaadin.checkbox.flow.version>
