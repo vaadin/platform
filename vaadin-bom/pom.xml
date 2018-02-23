@@ -15,23 +15,23 @@
     <properties>
         <flow.version>1.0.0.alpha22</flow.version>
 
-        <vaadin.button.flow.version>1.0.0.alpha8</vaadin.button.flow.version>
-        <vaadin.checkbox.flow.version>1.0.0.alpha8</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.alpha9</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.alpha8</vaadin.date.picker.flow.version>
-        <vaadin.dialog.flow.version>1.0.0.alpha8</vaadin.dialog.flow.version>
+        <vaadin.button.flow.version>1.0.0.alpha9</vaadin.button.flow.version>
+        <vaadin.checkbox.flow.version>1.0.0.alpha9</vaadin.checkbox.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.alpha10</vaadin.combo.box.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.alpha9</vaadin.date.picker.flow.version>
+        <vaadin.dialog.flow.version>1.0.0.alpha9</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.alpha8</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0.alpha11</vaadin.grid.flow.version>
+        <vaadin.grid.flow.version>1.0.0.alpha12</vaadin.grid.flow.version>
         <vaadin.icons.flow.version>1.0.0.alpha9</vaadin.icons.flow.version>
         <vaadin.iron.list.flow.version>1.0.0.alpha6</vaadin.iron.list.flow.version>
         <vaadin.list.box.flow.version>1.0.0.alpha4</vaadin.list.box.flow.version>
-        <vaadin.notification.flow.version>1.0.0.alpha7</vaadin.notification.flow.version>
+        <vaadin.notification.flow.version>1.0.0.alpha8</vaadin.notification.flow.version>
         <vaadin.ordered.layout.flow.version>1.0.0.alpha10</vaadin.ordered.layout.flow.version>
         <vaadin.progress.bar.flow.version>1.0.0.alpha8</vaadin.progress.bar.flow.version>
         <vaadin.radio.button.flow.version>1.0.0.alpha8</vaadin.radio.button.flow.version>
         <vaadin.split.layout.flow.version>1.0.0.alpha8</vaadin.split.layout.flow.version>
         <vaadin.tabs.flow.version>1.0.0.alpha9</vaadin.tabs.flow.version>
-        <vaadin.text.field.flow.version>1.0.0.alpha8</vaadin.text.field.flow.version>
+        <vaadin.text.field.flow.version>1.0.0.alpha9</vaadin.text.field.flow.version>
         <vaadin.upload.flow.version>1.0.0.alpha8</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.alpha14</testbench.version>
