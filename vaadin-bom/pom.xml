@@ -18,7 +18,7 @@
         <vaadin.button.flow.version>1.0.0.alpha9</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.alpha9</vaadin.checkbox.flow.version>
         <vaadin.combo.box.flow.version>1.0.0.alpha10</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.alpha9</vaadin.date.picker.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.alpha10</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.alpha9</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.alpha8</vaadin.form.layout.flow.version>
         <vaadin.grid.flow.version>1.0.0.alpha12</vaadin.grid.flow.version>
