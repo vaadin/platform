@@ -18,7 +18,7 @@
         <vaadin.button.flow.version>1.0.0.beta1</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.beta1</vaadin.checkbox.flow.version>
         <vaadin.combo.box.flow.version>1.0.0.beta1</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.beta1</vaadin.date.picker.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.beta2</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.beta1</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.beta1</vaadin.form.layout.flow.version>
         <vaadin.grid.flow.version>1.0.0.beta1</vaadin.grid.flow.version>
@@ -32,7 +32,7 @@
         <vaadin.split.layout.flow.version>1.0.0.beta1</vaadin.split.layout.flow.version>
         <vaadin.tabs.flow.version>1.0.0.beta1</vaadin.tabs.flow.version>
         <vaadin.text.field.flow.version>1.0.0.beta1</vaadin.text.field.flow.version>
-        <vaadin.upload.flow.version>1.0.0.beta1</vaadin.upload.flow.version>
+        <vaadin.upload.flow.version>1.0.0.beta2</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.alpha14</testbench.version>
         <charts.version>6.0.0.alpha16</charts.version>
