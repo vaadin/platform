@@ -9,7 +9,7 @@ fi
 
 vaadinMavenDir=../vaadin
 vaadinBowerDir=../../vaadin
-vaadinCoreBowerDir=../../vaadin
+vaadinCoreBowerDir=../../vaadin-core
 
 pushd `dirname $0`
 scriptDir=`pwd`
