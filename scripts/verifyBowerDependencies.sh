@@ -9,6 +9,7 @@ fi
 
 vaadinMavenDir=../vaadin
 vaadinBowerDir=../../vaadin
+vaadinCoreBowerDir=../../vaadin
 
 pushd `dirname $0`
 scriptDir=`pwd`
@@ -21,8 +22,15 @@ mvn dependency:tree|grep org.webjars.bowergithub|cut -d: -f2,4 > "$mavenTemp"
 mvn dependency:tree|grep com.vaadin.webjar:|cut -d: -f2,4 >> "$mavenTemp"
 popd
 
+pushd "$scriptDir/$vaadinCoreBowerDir"
+rm -rf bower_components
+bower install
+bower link
+popd
+
 pushd "$scriptDir/$vaadinBowerDir"
 rm -rf bower_components
+bower link vaadin-core
 bower install
 for bowerjson in bower_components/*/.bower.json
 do 
