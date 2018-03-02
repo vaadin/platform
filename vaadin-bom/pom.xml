@@ -25,7 +25,7 @@
         <vaadin.icons.flow.version>1.0.0.alpha9</vaadin.icons.flow.version>
         <vaadin.iron.list.flow.version>1.0.0.alpha7</vaadin.iron.list.flow.version>
         <vaadin.list.box.flow.version>1.0.0.alpha5</vaadin.list.box.flow.version>
-        <vaadin.notification.flow.version>1.0.0.alpha9</vaadin.notification.flow.version>
+        <vaadin.notification.flow.version>1.0.0.alpha10</vaadin.notification.flow.version>
         <vaadin.ordered.layout.flow.version>1.0.0.alpha10</vaadin.ordered.layout.flow.version>
         <vaadin.progress.bar.flow.version>1.0.0.alpha8</vaadin.progress.bar.flow.version>
         <vaadin.radio.button.flow.version>1.0.0.alpha8</vaadin.radio.button.flow.version>
