@@ -13,16 +13,16 @@
     <url>http://vaadin.com</url>
 
     <properties>
-        <flow.version>1.0.0.beta2</flow.version>
+        <flow.version>1.0.0.beta3</flow.version>
 
-        <vaadin.button.flow.version>1.0.0.beta1</vaadin.button.flow.version>
+        <vaadin.button.flow.version>1.0.0.beta2</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.beta1</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.beta1</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.beta2</vaadin.date.picker.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.beta2</vaadin.combo.box.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.beta3</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.beta1</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.beta1</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0.beta3</vaadin.grid.flow.version>
-        <vaadin.icons.flow.version>1.0.0.beta1</vaadin.icons.flow.version>
+        <vaadin.grid.flow.version>1.0.0.beta4</vaadin.grid.flow.version>
+        <vaadin.icons.flow.version>1.0.0.beta2</vaadin.icons.flow.version>
         <vaadin.iron.list.flow.version>1.0.0.beta2</vaadin.iron.list.flow.version>
         <vaadin.list.box.flow.version>1.0.0.beta1</vaadin.list.box.flow.version>
         <vaadin.notification.flow.version>1.0.0.beta1</vaadin.notification.flow.version>
@@ -31,7 +31,7 @@
         <vaadin.radio.button.flow.version>1.0.0.beta1</vaadin.radio.button.flow.version>
         <vaadin.split.layout.flow.version>1.0.0.beta1</vaadin.split.layout.flow.version>
         <vaadin.tabs.flow.version>1.0.0.beta1</vaadin.tabs.flow.version>
-        <vaadin.text.field.flow.version>1.0.0.beta1</vaadin.text.field.flow.version>
+        <vaadin.text.field.flow.version>1.0.0.beta2</vaadin.text.field.flow.version>
         <vaadin.upload.flow.version>1.0.0.beta3</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.beta1</testbench.version>
