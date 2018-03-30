@@ -27,7 +27,7 @@
         <vaadin.list.box.flow.version>1.0.0.beta2</vaadin.list.box.flow.version>
         <vaadin.notification.flow.version>1.0.0.beta3</vaadin.notification.flow.version>
         <vaadin.ordered.layout.flow.version>1.0.0.beta2</vaadin.ordered.layout.flow.version>
-        <vaadin.progress.bar.flow.version>1.0.0.beta2</vaadin.progress.bar.flow.version>
+        <vaadin.progress.bar.flow.version>1.0.0.beta3</vaadin.progress.bar.flow.version>
         <vaadin.radio.button.flow.version>1.0.0.beta3</vaadin.radio.button.flow.version>
         <vaadin.split.layout.flow.version>1.0.0.beta2</vaadin.split.layout.flow.version>
         <vaadin.tabs.flow.version>1.0.0.beta3</vaadin.tabs.flow.version>
