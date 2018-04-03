@@ -83,7 +83,7 @@
          <!-- Vaadin Charts -->
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-charts-flow-testbench</artifactId>
+            <artifactId>vaadin-charts-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
 
