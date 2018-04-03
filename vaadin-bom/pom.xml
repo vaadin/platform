@@ -346,17 +346,17 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.polymer</groupId>
                 <artifactId>polymer</artifactId>
-                <version>2.5.0</version>
+                <version>2.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.webcomponents</groupId>
                 <artifactId>shadycss</artifactId>
-                <version>1.1.1</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.webcomponents</groupId>
                 <artifactId>webcomponentsjs</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.1</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
