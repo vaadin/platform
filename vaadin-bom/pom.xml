@@ -269,7 +269,7 @@
             </dependency>
              <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-charts-flow-testbench</artifactId>
+                <artifactId>vaadin-charts-testbench</artifactId>
                 <version>${charts.version}</version>
                 <scope>test</scope>
             </dependency>
