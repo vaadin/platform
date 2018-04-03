@@ -79,6 +79,13 @@
             <artifactId>vaadin-board-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
+        
+         <!-- Vaadin Charts -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-charts-flow-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
