@@ -19,7 +19,7 @@
         <vaadin.checkbox.flow.version>1.0.0.beta3</vaadin.checkbox.flow.version>
         <vaadin.combo.box.flow.version>1.0.0.beta5</vaadin.combo.box.flow.version>
         <vaadin.date.picker.flow.version>1.0.0.beta6</vaadin.date.picker.flow.version>
-        <vaadin.dialog.flow.version>1.0.0.beta2</vaadin.dialog.flow.version>
+        <vaadin.dialog.flow.version>1.0.0.beta3</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.beta2</vaadin.form.layout.flow.version>
         <vaadin.grid.flow.version>1.0.0.beta7</vaadin.grid.flow.version>
         <vaadin.icons.flow.version>1.0.0.beta2</vaadin.icons.flow.version>
