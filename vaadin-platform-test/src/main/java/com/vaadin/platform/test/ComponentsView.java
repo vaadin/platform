@@ -208,7 +208,6 @@ public class ComponentsView extends VerticalLayout {
         Row row2 = new Row(lineChart, barChart);
         row2.setComponentSpan(lineChart, 2);
         row2.setComponentSpan(barChart, 2);
-        row2.setHeight("300px");
 
         board.add(row, row2);
 
@@ -246,7 +245,7 @@ public class ComponentsView extends VerticalLayout {
         super.onAttach(attachEvent);
         // Workaround for https://github.com/vaadin/flow/issues/3279
         dialog.open();
-        Notification notification = Notification.show("Hello", 10000,
+        Notification notification = Notification.show("Hello", 30000,
                 Position.TOP_CENTER);
         attachEvent.getUI().add(notification);
     }
