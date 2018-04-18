@@ -14,6 +14,7 @@
 
     <properties>
         <flow.version>1.0.0.beta7</flow.version>
+        <flow.spring.version>10.0.0.beta1</flow.spring.version>
 
         <vaadin.button.flow.version>1.0.0.beta4</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.beta3</vaadin.checkbox.flow.version>
@@ -116,13 +117,13 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>flow-spring-addon</artifactId>
-                <version>${flow.version}</version>
+                <artifactId>vaadin-spring</artifactId>
+                <version>${flow.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>flow-spring-boot-starter</artifactId>
-                <version>${flow.version}</version>
+                <artifactId>vaadin-spring-boot-starter</artifactId>
+                <version>${flow.spring.version}</version>
             </dependency>
             <!-- SLF4J -->
             <dependency>
