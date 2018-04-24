@@ -13,7 +13,6 @@ import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
@@ -27,6 +26,7 @@ import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
+import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
 
 public class ComponentsIT extends ParallelTest {
@@ -38,33 +38,41 @@ public class ComponentsIT extends ParallelTest {
     @Test
     public void appWorks() throws Exception {
         getDriver().get("http://localhost:8080/");
-        Assert.assertNotNull($(NotificationElement.class).waitForFirst());
-        Assert.assertNotNull($(DialogElement.class).first());
+        checkCustomElement($(NotificationElement.class).waitForFirst());
+        checkCustomElement($(DialogElement.class).first());
 
-        Assert.assertNotNull($(BoardElement.class).first());
-        Assert.assertNotNull($(RowElement.class).first());
-        Assert.assertNotNull($(ButtonElement.class).first());
-        Assert.assertNotNull($(ChartElement.class).first());
-        Assert.assertNotNull($(CheckboxElement.class).first());
-        Assert.assertNotNull($(ComboBoxElement.class).first());
-        Assert.assertNotNull($(DatePickerElement.class).first());
-        Assert.assertNotNull($(FormLayoutElement.class).first());
-        Assert.assertNotNull($(GridElement.class).first());
-        Assert.assertNotNull($(LabelElement.class).first());
-        Assert.assertNotNull($(IronListElement.class).first());
-        Assert.assertNotNull($(NotificationElement.class).first());
-        Assert.assertNotNull($(HorizontalLayoutElement.class).first());
-        Assert.assertNotNull($(VerticalLayoutElement.class).first());
-        Assert.assertNotNull($(ProgressBarElement.class).first());
-        Assert.assertNotNull($(RadioButtonGroupElement.class).first());
+        checkCustomElement($(BoardElement.class).first());
+        checkCustomElement($(RowElement.class).first());
+        checkCustomElement($(ButtonElement.class).first());
+        checkCustomElement($(ChartElement.class).first());
+        checkCustomElement($(CheckboxElement.class).first());
+        checkCustomElement($(ComboBoxElement.class).first());
+        checkCustomElement($(DatePickerElement.class).first());
+        checkCustomElement($(FormLayoutElement.class).first());
+        checkCustomElement($(GridElement.class).first());
+        checkCustomElement($(IronListElement.class).first());
+        checkCustomElement($(NotificationElement.class).first());
+        checkCustomElement($(HorizontalLayoutElement.class).first());
+        checkCustomElement($(VerticalLayoutElement.class).first());
+        checkCustomElement($(ProgressBarElement.class).first());
+        checkCustomElement($(RadioButtonGroupElement.class).first());
         // https://github.com/vaadin/vaadin-components-testbench/issues/28
-        Assert.assertNotNull($("vaadin-split-layout").first());
-        Assert.assertNotNull($(TabElement.class).first());
-        Assert.assertNotNull($(TabsElement.class).first());
-        Assert.assertNotNull($(PasswordFieldElement.class).first());
-        Assert.assertNotNull($(TextAreaElement.class).first());
-        Assert.assertNotNull($(TextFieldElement.class).first());
-        Assert.assertNotNull($(UploadElement.class).first());
+        checkCustomElement($("vaadin-split-layout").first());
+        checkCustomElement($(TabElement.class).first());
+        checkCustomElement($(TabsElement.class).first());
+        checkCustomElement($(PasswordFieldElement.class).first());
+        checkCustomElement($(TextAreaElement.class).first());
+        checkCustomElement($(TextFieldElement.class).first());
+        checkCustomElement($(UploadElement.class).first());
 
+    }
+
+    private void checkCustomElement(TestBenchElement element) {
+        Assert.assertNotNull(element);
+        String tagName = element.getTagName();
+        Assert.assertTrue(tagName.contains("-"));
+        // Check that the custom element has been registered
+        Assert.assertTrue((Boolean) executeScript(
+                "return !!window.customElements.get(arguments[0])", tagName));
     }
 }
