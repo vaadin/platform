@@ -33,9 +33,8 @@ import com.vaadin.testbench.parallel.ParallelTest;
 public class ComponentsIT extends ParallelTest {
 
     static {
-    // safari-10 excluded because of https://github.com/vaadin/flow/issues/3959
         Parameters.setGridBrowsers(
-                "ie11,firefox,chrome,safari-9,safari,edge");
+                "ie11,firefox,chrome,safari-9,safari-10,safari,edge");
     }
 
     @Test
