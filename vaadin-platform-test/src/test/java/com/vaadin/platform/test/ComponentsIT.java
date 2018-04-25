@@ -19,6 +19,7 @@ import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
+import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.tabs.testbench.TabElement;
 import com.vaadin.flow.component.tabs.testbench.TabsElement;
 import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
@@ -58,8 +59,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());
         checkCustomElement($(RadioButtonGroupElement.class).first());
-        // https://github.com/vaadin/vaadin-components-testbench/issues/28
-        checkCustomElement($("vaadin-split-layout").first());
+        checkCustomElement($(SplitLayoutElement.class).first());
         checkCustomElement($(TabElement.class).first());
         checkCustomElement($(TabsElement.class).first());
         checkCustomElement($(PasswordFieldElement.class).first());
