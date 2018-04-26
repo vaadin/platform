@@ -125,6 +125,11 @@
                 <artifactId>vaadin-spring-boot-starter</artifactId>
                 <version>${flow.spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-maven-plugin</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>

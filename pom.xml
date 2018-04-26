@@ -27,6 +27,7 @@
         <module>vaadin-core</module>
         <module>vaadin-platform-test</module>
         <module>vaadin-testbench</module>
+        <module>vaadin-maven-plugin</module>
     </modules>
 
 
