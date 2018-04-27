@@ -8,7 +8,7 @@
     </parent>
     <artifactId>vaadin</artifactId>
     <packaging>jar</packaging>
-    <name>Vaadin Platform</name>
+    <name>Vaadin Platform (vaadin)</name>
     <description>Vaadin Platform</description>
     <url>http://vaadin.com</url>
 
