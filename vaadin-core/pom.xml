@@ -8,8 +8,8 @@
     </parent>
     <artifactId>vaadin-core</artifactId>
     <packaging>jar</packaging>
-    <name>Vaadin Platform</name>
-    <description>Vaadin Platform (core)</description>
+    <name>Vaadin Platform (vaadin-core)</name>
+    <description>Vaadin Platform (vaadin-core)</description>
     <url>http://vaadin.com</url>
 
     <distributionManagement>
