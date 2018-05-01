@@ -74,14 +74,6 @@
             <!-- Flow -->
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-webjars-bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${flow.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
                 <artifactId>flow</artifactId>
                 <version>${flow.version}</version>
             </dependency>
