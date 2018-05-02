@@ -18,7 +18,7 @@
 
         <vaadin.button.flow.version>1.0.0.beta7</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.beta6</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.beta8</vaadin.combo.box.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.beta9</vaadin.combo.box.flow.version>
         <vaadin.date.picker.flow.version>1.0.0.beta10</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.beta7</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.beta6</vaadin.form.layout.flow.version>
@@ -370,7 +370,7 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-overlay</artifactId>
-                <version>3.0.1</version>
+                <version>3.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
