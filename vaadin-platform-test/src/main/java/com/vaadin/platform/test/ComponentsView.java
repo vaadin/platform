@@ -117,7 +117,7 @@ public class ComponentsView extends VerticalLayout {
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
-        progressBar.setValue(7);
+        progressBar.setValue(0.7);
 
         RadioButtonGroup<String> radioButtons = new RadioButtonGroup<>();
         log.log("RadioButtonGroup default is " + radioButtons.getValue());

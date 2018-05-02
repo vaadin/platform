@@ -13,27 +13,27 @@
     <url>http://vaadin.com</url>
 
     <properties>
-        <flow.version>1.0.0.beta7</flow.version>
+        <flow.version>1.0.0.beta9</flow.version>
         <flow.spring.version>10.0.0.beta1</flow.spring.version>
 
-        <vaadin.button.flow.version>1.0.0.beta4</vaadin.button.flow.version>
-        <vaadin.checkbox.flow.version>1.0.0.beta3</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.beta5</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.beta7</vaadin.date.picker.flow.version>
-        <vaadin.dialog.flow.version>1.0.0.beta4</vaadin.dialog.flow.version>
-        <vaadin.form.layout.flow.version>1.0.0.beta3</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0.beta7</vaadin.grid.flow.version>
-        <vaadin.icons.flow.version>1.0.0.beta2</vaadin.icons.flow.version>
-        <vaadin.iron.list.flow.version>1.0.0.beta2</vaadin.iron.list.flow.version>
-        <vaadin.list.box.flow.version>1.0.0.beta3</vaadin.list.box.flow.version>
-        <vaadin.notification.flow.version>1.0.0.beta4</vaadin.notification.flow.version>
-        <vaadin.ordered.layout.flow.version>1.0.0.beta3</vaadin.ordered.layout.flow.version>
-        <vaadin.progress.bar.flow.version>1.0.0.beta3</vaadin.progress.bar.flow.version>
-        <vaadin.radio.button.flow.version>1.0.0.beta4</vaadin.radio.button.flow.version>
-        <vaadin.split.layout.flow.version>1.0.0.beta2</vaadin.split.layout.flow.version>
-        <vaadin.tabs.flow.version>1.0.0.beta3</vaadin.tabs.flow.version>
-        <vaadin.text.field.flow.version>1.0.0.beta5</vaadin.text.field.flow.version>
-        <vaadin.upload.flow.version>1.0.0.beta6</vaadin.upload.flow.version>
+        <vaadin.button.flow.version>1.0.0.beta7</vaadin.button.flow.version>
+        <vaadin.checkbox.flow.version>1.0.0.beta6</vaadin.checkbox.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.beta8</vaadin.combo.box.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.beta10</vaadin.date.picker.flow.version>
+        <vaadin.dialog.flow.version>1.0.0.beta7</vaadin.dialog.flow.version>
+        <vaadin.form.layout.flow.version>1.0.0.beta6</vaadin.form.layout.flow.version>
+        <vaadin.grid.flow.version>1.0.0.beta10</vaadin.grid.flow.version>
+        <vaadin.icons.flow.version>1.0.0.beta5</vaadin.icons.flow.version>
+        <vaadin.iron.list.flow.version>1.0.0.beta5</vaadin.iron.list.flow.version>
+        <vaadin.list.box.flow.version>1.0.0.beta6</vaadin.list.box.flow.version>
+        <vaadin.notification.flow.version>1.0.0.beta7</vaadin.notification.flow.version>
+        <vaadin.ordered.layout.flow.version>1.0.0.beta6</vaadin.ordered.layout.flow.version>
+        <vaadin.progress.bar.flow.version>1.0.0.beta6</vaadin.progress.bar.flow.version>
+        <vaadin.radio.button.flow.version>1.0.0.beta7</vaadin.radio.button.flow.version>
+        <vaadin.split.layout.flow.version>1.0.0.beta5</vaadin.split.layout.flow.version>
+        <vaadin.tabs.flow.version>1.0.0.beta6</vaadin.tabs.flow.version>
+        <vaadin.text.field.flow.version>1.0.0.beta8</vaadin.text.field.flow.version>
+        <vaadin.upload.flow.version>1.0.0.beta9</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.beta6</testbench.version>
         <vaadin.components.testbench.version>1.0.0.beta3</vaadin.components.testbench.version>
@@ -72,14 +72,6 @@
                 <version>${project.version}</version>
             </dependency>
             <!-- Flow -->
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-webjars-bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${flow.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow</artifactId>
@@ -312,12 +304,12 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-meta</artifactId>
-                <version>2.1.0</version>
+                <version>2.1.1</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-iconset-svg</artifactId>
-                <version>2.2.0</version>
+                <version>2.2.1</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
@@ -378,12 +370,12 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-overlay</artifactId>
-                <version>2.1.1</version>
+                <version>3.0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-themable-mixin</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
