@@ -54,7 +54,6 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
         checkCustomElement($(IronListElement.class).first());
-        checkCustomElement($(NotificationElement.class).first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());
