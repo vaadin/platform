@@ -145,7 +145,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>javadoc-jar</id>
@@ -153,15 +152,6 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <includeDependencySources>true</includeDependencySources>
-                            <dependencySourceIncludes>
-                                <dependencySourceInclude>com.vaadin*</dependencySourceInclude>
-                            </dependencySourceIncludes>
-                            <!-- Don't fail on errors, there is plenty of those -->
-                            <doclint>none</doclint>
-                            <quiet>true</quiet>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
