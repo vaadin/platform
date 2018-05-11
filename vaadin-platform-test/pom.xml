@@ -40,6 +40,13 @@
             <id>vaadin-pre-relase</id>
             <url>http://maven.vaadin.com/vaadin-prereleases</url>
         </repository>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
