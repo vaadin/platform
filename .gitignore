@@ -7,3 +7,4 @@ target
 .settings
 tmp.*
 vaadin-maven-plugin/src/main
+.DS_Store
