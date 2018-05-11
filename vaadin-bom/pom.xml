@@ -13,27 +13,27 @@
     <url>http://vaadin.com</url>
 
     <properties>
-        <flow.version>1.0.0.beta9</flow.version>
-        <flow.spring.version>10.0.0.beta1</flow.spring.version>
+        <flow.version>1.0.0.beta10</flow.version>
+        <flow.spring.version>10.0.0.beta3</flow.spring.version>
 
-        <vaadin.button.flow.version>1.0.0.beta7</vaadin.button.flow.version>
-        <vaadin.checkbox.flow.version>1.0.0.beta6</vaadin.checkbox.flow.version>
+        <vaadin.button.flow.version>1.0.0.beta9</vaadin.button.flow.version>
+        <vaadin.checkbox.flow.version>1.0.0.beta8</vaadin.checkbox.flow.version>
         <vaadin.combo.box.flow.version>1.0.0.beta9</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.beta10</vaadin.date.picker.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.beta12</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.beta7</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.beta6</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0.beta10</vaadin.grid.flow.version>
-        <vaadin.icons.flow.version>1.0.0.beta5</vaadin.icons.flow.version>
-        <vaadin.iron.list.flow.version>1.0.0.beta5</vaadin.iron.list.flow.version>
-        <vaadin.list.box.flow.version>1.0.0.beta6</vaadin.list.box.flow.version>
+        <vaadin.grid.flow.version>1.0.0.beta12</vaadin.grid.flow.version>
+        <vaadin.icons.flow.version>1.0.0.beta7</vaadin.icons.flow.version>
+        <vaadin.iron.list.flow.version>1.0.0.beta7</vaadin.iron.list.flow.version>
+        <vaadin.list.box.flow.version>1.0.0.beta8</vaadin.list.box.flow.version>
         <vaadin.notification.flow.version>1.0.0.beta7</vaadin.notification.flow.version>
-        <vaadin.ordered.layout.flow.version>1.0.0.beta6</vaadin.ordered.layout.flow.version>
-        <vaadin.progress.bar.flow.version>1.0.0.beta6</vaadin.progress.bar.flow.version>
-        <vaadin.radio.button.flow.version>1.0.0.beta7</vaadin.radio.button.flow.version>
-        <vaadin.split.layout.flow.version>1.0.0.beta5</vaadin.split.layout.flow.version>
-        <vaadin.tabs.flow.version>1.0.0.beta6</vaadin.tabs.flow.version>
+        <vaadin.ordered.layout.flow.version>1.0.0.beta8</vaadin.ordered.layout.flow.version>
+        <vaadin.progress.bar.flow.version>1.0.0.beta8</vaadin.progress.bar.flow.version>
+        <vaadin.radio.button.flow.version>1.0.0.beta9</vaadin.radio.button.flow.version>
+        <vaadin.split.layout.flow.version>1.0.0.beta7</vaadin.split.layout.flow.version>
+        <vaadin.tabs.flow.version>1.0.0.beta8</vaadin.tabs.flow.version>
         <vaadin.text.field.flow.version>1.0.0.beta8</vaadin.text.field.flow.version>
-        <vaadin.upload.flow.version>1.0.0.beta9</vaadin.upload.flow.version>
+        <vaadin.upload.flow.version>1.0.0.beta11</vaadin.upload.flow.version>
 
         <testbench.version>6.0.0.beta7</testbench.version>
         <vaadin.components.testbench.version>1.0.0.beta3</vaadin.components.testbench.version>
