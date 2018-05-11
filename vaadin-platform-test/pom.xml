@@ -17,6 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <maven.deploy.skip>true</maven.deploy.skip>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
     </properties>
     <dependencyManagement>
