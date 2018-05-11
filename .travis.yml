@@ -8,6 +8,7 @@ install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - mvn install
+- mvn package -Pjavadocs
 script:
 - mvn test -B
 env:
