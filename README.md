@@ -9,9 +9,9 @@ The current Flow (https://github.com/vaadin/flow) version is 1.0.0.beta10.
 ## Java Components
 | Component | Version | Repository |
 |-----------|---------|------------|
-| Board | 2.0.0.beta4 | https://github.com/vaadin/vaadin-board-flow | 
+| Board* | 2.0.0.beta4 | https://github.com/vaadin/vaadin-board-flow | 
 | Button | 1.0.0.beta9 | https://github.com/vaadin/vaadin-button-flow |
-| Charts | 6.0.0.beta4 | https://github.com/vaadin/vaadin-charts-flow |
+| Charts* | 6.0.0.beta4 | https://github.com/vaadin/vaadin-charts-flow |
 | Checkbox | 1.0.0.beta8 | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | 1.0.0.beta9 | https://github.com/vaadin/vaadin-combo-box-flow |
 | DatePicker | 1.0.0.beta11 | https://github.com/vaadin/vaadin-date-picker-flow |
@@ -29,6 +29,9 @@ The current Flow (https://github.com/vaadin/flow) version is 1.0.0.beta10.
 | TextField | 1.0.0.beta8 | https://github.com/vaadin/vaadin-text-field-flow |
 | Upload | 1.0.0.beta11 | https://github.com/vaadin/vaadin-upload-flow |
 
+Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
+
+
 ## Themes
 | Theme | Version | Repository |
 |-------|---------|------------|
@@ -39,6 +42,8 @@ The current Flow (https://github.com/vaadin/flow) version is 1.0.0.beta10.
 |------|---------|------------|
 | Designer | 3.0.1 | https://github.com/vaadin/designer | 
 | TestBench | 6.0.0.beta8 | https://github.com/vaadin/testbench | 
+
+All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
 ## Starters
 See https://vaadin.com/start for more information.
