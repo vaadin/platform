@@ -4,7 +4,10 @@
 Web components are listed in https://github.com/vaadin/vaadin.
 
 ## Flow
-The current Flow (https://github.com/vaadin/flow) version is 1.0.0.beta10.
+| Part | Version | Repository |
+|------|---------|------------|
+| Flow | 1.0.0.beta01 | 1.0.0.beta10 |
+| Flow Spring integration | 10.0.0.beta3 | https://github.com/vaadin/spring |
 
 ## Java Components
 | Component | Version | Repository |
