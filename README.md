@@ -17,23 +17,23 @@ Web components are listed in https://github.com/vaadin/vaadin.
 | Charts* | 6.0.0.beta4 | https://github.com/vaadin/vaadin-charts-flow |
 | Checkbox | 1.0.0.beta8 | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | 1.0.0.beta9 | https://github.com/vaadin/vaadin-combo-box-flow |
-| DatePicker | 1.0.0.beta11 | https://github.com/vaadin/vaadin-date-picker-flow |
+| DatePicker | 1.0.0.beta12 | https://github.com/vaadin/vaadin-date-picker-flow |
 | Dialog | 1.0.0.beta7 | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | 1.0.0.beta6| https://github.com/vaadin/vaadin-form-layout-flow | 
 | Grid | 1.0.0.beta12 | https://github.com/vaadin/vaadin-grid-flow |
+| Icons | 1.0.0.beta7 | https://github.com/vaadin/vaadin-icons-flow |
+| IronList | 1.0.0.beta7 | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | 1.0.0.beta8 | https://github.com/vaadin/vaadin-list-box-flow |
 | Notification | 1.0.0.beta7 | https://github.com/vaadin/vaadin-notification-flow |
 | OrderedLayout | 1.0.0.beta8 | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | 1.0.0.beta8 | https://github.com/vaadin/vaadin-progress-bar-flow |
 | RadioButton | 1.0.0.beta9 | https://github.com/vaadin/vaadin-radio-button-flow | 
-| RadioButtonGroup | 1.0.0.beta9 | https://github.com/vaadin/vaadin-radio-button-flow | 
-| SplitLayout | 1.0.0.beta7 | https://github.com/vaadin/vaadin-split-layout-flow
+| SplitLayout | 1.0.0.beta7 | https://github.com/vaadin/vaadin-split-layout-flow |
 | Tabs | 1.0.0.beta8 | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | 1.0.0.beta8 | https://github.com/vaadin/vaadin-text-field-flow |
 | Upload | 1.0.0.beta11 | https://github.com/vaadin/vaadin-upload-flow |
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
-
 
 ## Themes
 | Theme | Version | Repository |
@@ -54,7 +54,7 @@ See https://vaadin.com/start for more information.
 ### Java
 | Starter | Repository |
 |---------|------------|
-| Full stack app | https://github.com/vaadin/bakery-app-starter-issues |
+| Full stack app* | https://github.com/vaadin/bakery-app-starter-issues |
 | Simple example app | https://github.com/vaadin/beverage-starter-flow |
 | Project skeleton | https://github.com/vaadin/skeleton-starter-flow |
 | Project skeleton (Spring) | https://github.com/vaadin/skeleton-starter-flow-spring |
@@ -64,5 +64,9 @@ See https://vaadin.com/start for more information.
 |---------|------------|
 | Angular | https://github.com/vaadin/base-starter-angular |
 | Polymer | https://github.com/vaadin/generator-polymer-init-vaadin-elements-app |
+| PWA | https://github.com/vaadin/expense-manager-demo |
 | React | https://github.com/vaadin/base-starter-react | 
 | Vue.js | https://github.com/vaadin/base-starter-vue |
+
+Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0. 
+
