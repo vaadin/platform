@@ -70,6 +70,7 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-testbench</artifactId>
                 <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
             <!-- Flow -->
             <dependency>
