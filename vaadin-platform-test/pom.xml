@@ -66,14 +66,10 @@
             <artifactId>flow-server-production-mode</artifactId>
         </dependency>
 
-        <!-- TestBench must be included in the project separately to get 
-            a test scope -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
