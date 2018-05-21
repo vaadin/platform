@@ -29,6 +29,8 @@ import java.util.stream.Stream;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.vaadin.flow.component.polymertemplate.TemplateInitializer;
+
 import static org.junit.Assert.fail;
 
 
@@ -91,7 +93,14 @@ public class ClassesSerializableTest {
             "com\\.vaadin\\.flow\\.component\\.Key",
             "com\\.vaadin\\.flow\\.server\\.VaadinRequest",
             "com\\.vaadin\\.flow\\.router\\.RouteNotFoundError\\$LazyInit",
-            "com\\.vaadin\\.flow\\.component\\.polymertemplate\\.TemplateDataAnalyzer\\$.*"};
+            "com\\.vaadin\\.flow\\.component\\.polymertemplate\\.TemplateDataAnalyzer\\$.*",
+            "com\\.vaadin\\.flow\\.component\\.HtmlComponent",// De-facto abstract class
+            "com\\.vaadin\\.flow\\.component\\.HtmlContainer",// De-facto abstract class
+            "com\\.vaadin\\.flow\\.component\\.polymertemplate\\.TemplateInitializer(\\$.*)?",
+            "com\\.vaadin\\.flow\\.component\\.polymertemplate\\.TemplateParser(\\$.*)?",
+            "com\\.vaadin\\.flow\\.dom\\.impl\\.ThemeListImpl\\$ThemeListIterator",
+            "com\\.vaadin\\.flow\\.templatemodel\\.PropertyMapBuilder(\\$.*)?"
+    };
 
 
     public static <T> T serializeAndDeserialize(T instance)
@@ -187,7 +196,6 @@ public class ClassesSerializableTest {
      * @throws Exception
      */
     @Test
-    @Ignore //todo remove when all the stuff is serializable
     public void testClassesSerializable() throws Exception {
         List<String> rawClasspathEntries = getRawClasspathEntries();
 
