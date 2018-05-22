@@ -75,10 +75,11 @@
                     <version>3.0.0</version>
                     <configuration>
                         <includeDependencySources>true</includeDependencySources>
-                        <dependencySourceIncludes>
-                            <dependencySourceInclude>com.vaadin*</dependencySourceInclude>
-                        </dependencySourceIncludes>
-                        <!-- Don't fail on errors, there is plenty of those -->
+                        <dependencySourceExcludes>
+                            <!-- Exclude client engine since it is not user facing API -->
+                            <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
+                        </dependencySourceExcludes>
+                        <!-- Don't fail on doclint errors for missing servlet artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
                     </configuration>
