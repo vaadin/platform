@@ -9,6 +9,8 @@ Web components are listed in https://github.com/vaadin/vaadin.
 | Flow | https://github.com/vaadin/flow |
 | Flow Spring integration | https://github.com/vaadin/spring |
 
+Flow is licensed under the Apache License 2.0.
+
 ## Java Components
 | Component | Repository |
 |-----------|------------|
@@ -70,3 +72,14 @@ See https://vaadin.com/start for more information.
 
 Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0. 
 
+## Getting started
+
+The process depends on your needs, but <https://vaadin.com/start> is the best place to get started on a project.
+
+## Contributing
+
+We would absolutely love to get the community involved, and we welcome any form of contributions – comments and questions on different communication channels, issues and pull request in the repositories, and anything that you build and share using our platform. If unsure, feel free to post an issue in this repository and we'll help you.
+
+## License
+
+Apache License 2.0 or CVAL 3.0, depending on the product.
