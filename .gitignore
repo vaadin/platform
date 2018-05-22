@@ -7,4 +7,9 @@ target
 .settings
 tmp.*
 vaadin-maven-plugin/src/main
+vaadin-maven-plugin/.factorypath
 .DS_Store
+
+scripts/generator/results
+scripts/generator/node_modules
+scripts/generator/yarn-error.log
