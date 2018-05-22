@@ -1,0 +1,27 @@
+{
+  "name": "vaadin-core",
+  "authors": [
+    "Vaadin Ltd"
+  ],
+  "description": "Vaadin components is an evolving set of free, open sourced custom HTML elements, built using Polymer.",
+  "license": "Apache-2.0",
+  "keywords": [
+    "vaadin",
+    "core",
+    "elements",
+    "web",
+    "components",
+    "webcomponents",
+    "web-components",
+    "element-collection"
+  ],
+  "main": "vaadin-core.html",
+  "ignore": [
+    "**/.*",
+    "**/node_modules",
+    "**/bower_components",
+    "**/test",
+    "**/tests"
+  ],
+  "dependencies": {}
+}
