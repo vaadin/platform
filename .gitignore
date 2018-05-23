@@ -13,3 +13,5 @@ vaadin-maven-plugin/.factorypath
 scripts/generator/results
 scripts/generator/node_modules
 scripts/generator/yarn-error.log
+
+vaadin-bom/pom.xml
