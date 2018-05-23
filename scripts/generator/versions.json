@@ -1,10 +1,10 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.0.0.beta10"
+            "javaVersion": "1.0.0.beta11"
         },
         "flow-spring": {
-            "javaVersion": "1.0.0.beta3"
+            "javaVersion": "1.0.0.beta4"
         },
         "vaadin-button": {
             "javaVersion": "1.0.0.beta9",
@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.0.beta9",
+            "javaVersion": "1.0.0.beta10",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,12 +26,12 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.0.beta12",
+            "javaVersion": "1.0.0.beta13",
             "jsVersion": "3.0.0",
             "component": true
         },
         "vaadin-dialog": {
-            "javaVersion": "1.0.0.beta7",
+            "javaVersion": "1.0.0.beta8",
             "jsVersion": "2.0.0",
             "component": true
         },
@@ -40,12 +40,12 @@
             "component": true
         },
         "vaadin-form-layout": {
-            "javaVersion": "1.0.0.beta6",
+            "javaVersion": "1.0.0.beta7",
             "jsVersion": "2.0.0",
             "component": true
         },
         "vaadin-grid": {
-            "javaVersion": "1.0.0.beta12",
+            "javaVersion": "1.0.0.beta13",
             "jsVersion": "5.0.3",
             "component": true
         },
@@ -55,7 +55,7 @@
             "component": true
         },
         "iron-list": {
-            "javaVersion": "1.0.0.beta7"
+            "javaVersion": "1.0.0.beta8"
         },
         "vaadin-item": {
             "jsVersion": "2.0.0",
@@ -70,7 +70,7 @@
             "jsVersion": "1.0.0"
         },
         "vaadin-notification": {
-            "javaVersion": "1.0.0.beta7",
+            "javaVersion": "1.0.0.beta8",
             "jsVersion": "1.0.0",
             "component": true
         },
@@ -85,7 +85,7 @@
             "component": true
         },
         "vaadin-radio-button": {
-            "javaVersion": "1.0.0.beta9",
+            "javaVersion": "1.0.0.beta10",
             "jsVersion": "1.0.0",
             "component": true
         },
@@ -100,7 +100,7 @@
             "component": true
         },
         "vaadin-text-field": {
-            "javaVersion": "1.0.0.beta8",
+            "javaVersion": "1.0.0.beta9",
             "jsVersion": "2.0.1",
             "component": true
         },
