@@ -36,6 +36,37 @@
         <developerConnection>scm:git:git@github.com:vaadin/platform.git</developerConnection>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+        <repository>
+            <id>vaadin-prerelease</id>
+            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>vaadin-prerelease</id>
+            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -44,10 +75,11 @@
                     <version>3.0.0</version>
                     <configuration>
                         <includeDependencySources>true</includeDependencySources>
-                        <dependencySourceIncludes>
-                            <dependencySourceInclude>com.vaadin*</dependencySourceInclude>
-                        </dependencySourceIncludes>
-                        <!-- Don't fail on errors, there is plenty of those -->
+                        <dependencySourceExcludes>
+                            <!-- Exclude client engine since it is not user facing API -->
+                            <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
+                        </dependencySourceExcludes>
+                        <!-- Don't fail on doclint errors for missing servlet artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
                     </configuration>
