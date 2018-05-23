@@ -3,7 +3,7 @@ notes from `versions.json`.
 
 ## Run
 
-`yarn install && node generate.js -platform=10.0.0.beta42 --versions=versions.json`
+`yarn install && node generate.js --platform=10.0.0.beta42 --versions=versions.json`
 
 ## Test
 
