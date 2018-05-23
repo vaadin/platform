@@ -3,7 +3,7 @@
   "description": "Bundle containing all elements which are part of the Vaadin platform",
   "homepage": "https://github.com/vaadin/vaadin",
   "authors": [
-    "Artur Signell <artur@vaadin.com>"
+    "Vaadin Ltd"
   ],
   "main": "",
   "license": [

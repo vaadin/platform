@@ -6,9 +6,9 @@ const render = require('./replacer.js');
 */
 function createBower(versions, bowerTemplate) {
     let jsDeps = {};
-    for (let dep in versions) {
-        if (versions[dep].jsVersion && !versions[dep].noDep) {
-            jsDeps[dep] = `${dep}#${versions[dep].jsVersion}`;
+    for (let [name, version] of Object.entries(versions)) {
+        if (version.jsVersion && !version.noDep) {
+            jsDeps[name] = `${name}#${version.jsVersion}`;
         }
     }
 
@@ -19,14 +19,13 @@ function createBower(versions, bowerTemplate) {
 
 /**
 @param {Object} versions data object for product versions.
-@param {String} bowerTemplate template string to replace versions in.
+@param {String} mavenTemplate template string to replace versions in.
 */
 function createMaven(versions, mavenTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
 
     let mavenDeps = '';
-    for (let dependencyName in allVersions) {
-        const dependency = allVersions[dependencyName];
+    for (let [dependencyName, dependency] of Object.entries(allVersions)) {
         if (dependency.javaVersion && !dependency.noDep) {
             const propertyName = dependencyName.replace(/-/g, '.') + '.version';
             const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
@@ -49,8 +48,7 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
 
     let componentVersions = '';
-    for (let versionName in allVersions) {
-        const version = allVersions[versionName];
+    for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
             const name = versionName
                 .replace(/-/g, ' ')
