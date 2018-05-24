@@ -1,4 +1,4 @@
-[Vaadin platform](https://vaadin.com/platformn) consists of a set of web components, a Java web framework, configurable themes, tools and a set of opinionated app starters.
+[Vaadin platform](https://vaadin.com/platformn) consists of a set of web components, a Java web framework, configurable themes, tools and a set of opinionated app starters. Platform releases gather all products in to a single package every quarter. The product versions included in a platform release are not necessarily the latest released versions, but are hand picked so that they work well together.
 
 ## Web components
 Web components are listed in https://github.com/vaadin/vaadin.
