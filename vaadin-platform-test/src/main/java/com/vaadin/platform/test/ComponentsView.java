@@ -38,7 +38,7 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcons;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
@@ -107,7 +107,7 @@ public class ComponentsView extends VerticalLayout {
         grid.setItems(gridItems);
 
         HorizontalLayout icons = new HorizontalLayout(
-                new Icon(VaadinIcons.VAADIN_H), new Icon(VaadinIcons.VAADIN_V));
+                new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
 
         IronList<String> ironList = new IronList<>();
         ironList.setHeight("50px");
