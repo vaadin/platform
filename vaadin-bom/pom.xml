@@ -14,7 +14,7 @@
 
     <properties>
         <flow.version>1.0.0.rc1</flow.version>
-        <flow.spring.version>10.0.0.beta5</flow.spring.version>
+        <flow.spring.version>10.0.0.rc1</flow.spring.version>
 
         <vaadin.button.flow.version>1.0.0.beta10</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.beta9</vaadin.checkbox.flow.version>
