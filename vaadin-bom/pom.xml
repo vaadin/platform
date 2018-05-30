@@ -35,7 +35,7 @@
         <vaadin.text.field.flow.version>1.0.0.beta10</vaadin.text.field.flow.version>
         <vaadin.upload.flow.version>1.0.0.beta12</vaadin.upload.flow.version>
 
-        <testbench.version>6.0.0.beta11</testbench.version>
+        <testbench.version>6.0.0.rc1</testbench.version>
         <vaadin.components.testbench.version>1.0.0.beta5</vaadin.components.testbench.version>
         <charts.version>6.0.0.beta5</charts.version>
         <board.version>2.0.0.beta5</board.version>
