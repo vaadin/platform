@@ -38,7 +38,7 @@
         <testbench.version>6.0.0.beta11</testbench.version>
         <vaadin.components.testbench.version>1.0.0.beta5</vaadin.components.testbench.version>
         <charts.version>6.0.0.beta5</charts.version>
-        <board.version>2.0.0.beta4</board.version>
+        <board.version>2.0.0.beta5</board.version>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
