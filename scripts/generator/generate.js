@@ -6,7 +6,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const writer = require('./src/writer');
 
 if(!argv['platform']) {
-    console.log('Specify platform version as \'---platform=11.12.13\'');
+    console.log('Specify platform version as \'--platform=11.12.13\'');
     process.exit(1);
 }
 
