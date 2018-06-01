@@ -20,17 +20,25 @@ const resultsDir = './results';
 
 const inputVersions = require(versionsFileName);
 
-const coreBowerTemplateFileName = path.resolve('./templates/template-vaadin-core-bower.json');
-const coreBowerResultFileName = path.resolve('./results/vaadin-core-bower.json');
+function getTemplateFilePath(filename) {
+    return path.resolve(`${__dirname}/templates/${filename}`);
+}
 
-const vaadinBowerTemplateFileName = path.resolve('./templates/template-vaadin-bower.json');
-const vaadinBowerResultFileName = path.resolve('./results/vaadin-bower.json');
+function getResultsFilePath(filename) {
+    return path.resolve(`${__dirname}/results/${filename}`);
+}
 
-const mavenBomTemplateFileName = path.resolve('./templates/template-vaadin-bom.xml');
-const mavenBomResultFileName = path.resolve('./results/vaadin-bom.xml');
+const coreBowerTemplateFileName = getTemplateFilePath('template-vaadin-core-bower.json');
+const coreBowerResultFileName = getResultsFilePath('vaadin-core-bower.json');
 
-const releaseNotesTemplateFileName = path.resolve('./templates/template-release-notes.md');
-const releaseNotesResultFileName = path.resolve('./results/release-notes.md');
+const vaadinBowerTemplateFileName = getTemplateFilePath('template-vaadin-bower.json');
+const vaadinBowerResultFileName = getResultsFilePath('vaadin-bower.json');
+
+const mavenBomTemplateFileName = getTemplateFilePath('template-vaadin-bom.xml');
+const mavenBomResultFileName = getResultsFilePath('vaadin-bom.xml');
+
+const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
+const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
