@@ -409,10 +409,6 @@ spdx-license-ids@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.0.tgz#7a7cd28470cc6d3a1cfe6d66886f6bc430d3ac87"
 
-stjs@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/stjs/-/stjs-0.0.5.tgz#3e594645ccb41fb97b80b279093e2f9e4fb1738e"
-
 strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"

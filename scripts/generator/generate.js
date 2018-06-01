@@ -1,16 +1,16 @@
-const ST = require('stjs');
 const path = require('path');
 const fs = require('fs');
 const argv = require('minimist')(process.argv.slice(2));
 
 const writer = require('./src/writer');
+const transformer = require('./src/transformer');
 
-if(!argv['platform']) {
+if (!argv['platform']) {
     console.log('Specify platform version as \'--platform=11.12.13\'');
     process.exit(1);
 }
 
-if(!argv['versions']) {
+if (!argv['versions']) {
     console.log('Specify product version file as \'--versions=versions.json\'');
     process.exit(1);
 }
@@ -32,7 +32,7 @@ const mavenBomResultFileName = path.resolve('./results/vaadin-bom.xml');
 const releaseNotesTemplateFileName = path.resolve('./templates/template-release-notes.md');
 const releaseNotesResultFileName = path.resolve('./results/release-notes.md');
 
-const versions = ST.select(inputVersions).transform({ version: argv['platform'] }).root();
+const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);

@@ -9,7 +9,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "stjs": "^0.0.5"
   },
   "devDependencies": {
     "chai": "^4.1.2",
