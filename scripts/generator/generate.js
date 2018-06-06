@@ -16,7 +16,7 @@ if (!argv['versions']) {
 }
 
 const versionsFileName = path.resolve(argv['versions']);
-const resultsDir = './results';
+const resultsDir = path.resolve(`${__dirname}/results`);
 
 const inputVersions = require(versionsFileName);
 
