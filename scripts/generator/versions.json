@@ -1,0 +1,143 @@
+{
+    "core": {
+        "flow": {
+            "javaVersion": "1.0.0.rc1"
+        },
+        "flow-spring": {
+            "javaVersion": "10.0.0.rc1"
+        },
+        "vaadin-button": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.0.1",
+            "component": true
+        },
+        "vaadin-checkbox": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.1.1",
+            "component": true
+        },
+        "vaadin-combo-box": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "4.0.1",
+            "component": true
+        },
+        "vaadin-context-menu": {
+            "jsVersion": "4.0.0",
+            "component": true
+        },
+        "vaadin-date-picker": {
+            "javaVersion": "1.0.0.rc2",
+            "jsVersion": "3.0.1",
+            "component": true
+        },
+        "vaadin-dialog": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.0.2",
+            "component": true
+        },
+        "vaadin-dropdown-menu": {
+            "jsVersion": "1.0.0",
+            "component": true
+        },
+        "vaadin-form-layout": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.0.1",
+            "component": true
+        },
+        "vaadin-grid": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "5.0.4",
+            "component": true
+        },
+        "vaadin-icons": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "4.1.4",
+            "component": true
+        },
+        "iron-list": {
+            "javaVersion": "1.0.0.rc1"
+        },
+        "vaadin-item": {
+            "jsVersion": "2.0.0",
+            "component": true
+        },
+        "vaadin-list-box": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "1.0.2",
+            "component": true
+        },
+        "vaadin-lumo-styles": {
+            "jsVersion": "1.0.0"
+        },
+        "vaadin-notification": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
+        "vaadin-ordered-layout": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "1.0.2",
+            "component": true
+        },
+        "vaadin-progress-bar": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
+        "vaadin-radio-button": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "1.0.1",
+            "component": true
+        },
+        "vaadin-split-layout": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "4.0.0",
+            "component": true
+        },
+        "vaadin-tabs": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.0.0",
+            "component": true
+        },
+        "vaadin-text-field": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "2.0.1",
+            "component": true
+        },
+        "vaadin-upload": {
+            "javaVersion": "1.0.0.rc1",
+            "jsVersion": "4.0.0",
+            "component": true
+        }
+    },
+    "vaadin": {
+        "vaadin-core": {
+            "jsVersion": "{{version}}"
+        },
+        "vaadin-board": {
+            "javaVersion": "2.0.0.rc1",
+            "jsVersion": "2.0.0",
+            "component": true,
+            "pro": true
+        },
+        "vaadin-charts": {
+            "javaVersion": "6.0.0.rc1",
+            "jsVersion": "6.0.1",
+            "component": true,
+            "pro": true
+        },
+        "vaadin-designer": {
+            "javaVersion": "3.0.2",
+            "noDep": true,
+            "pro": true
+        },
+        "vaadin-testbench": {
+            "javaVersion": "6.0.0.rc1",
+            "pro": true
+        },
+        "vaadin-testbench-components": {
+            "javaVersion": "1.0.0.rc1"
+        }
+    },
+    "platform": "{{version}}"
+}
