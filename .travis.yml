@@ -1,15 +1,22 @@
 sudo: false
 dist: trusty
 language: java
+node_js: 8.11.1
 cache:
+  yarn: true
   directories:
   - "$HOME/.m2"
+  - node_modules
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
+- cd scripts/generator && yarn install && node generate.js --platform=10.0-SNAPSHOT --versions=versions.json && cd ../../
+- mkdir vaadin-bom
+- cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
 - mvn install
 - mvn package -Pjavadocs
 script:
+- cd scripts/generator && yarn test && cd ../../
 - mvn test -B
 env:
   global:
