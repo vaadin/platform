@@ -165,7 +165,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-iron-list-flow</artifactId>
-                <version>${vaadin.iron.list.version}</version>
+                <version>${iron.list.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
