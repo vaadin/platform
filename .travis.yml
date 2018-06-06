@@ -13,8 +13,8 @@ install:
 - cd scripts/generator && yarn install && cd ../../ && node scripts/generator/generate.js --platform=10.0-SNAPSHOT --versions=versions.json
 - mkdir vaadin-bom
 - cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
-- mvn install
-- mvn package -Pjavadocs
+- mvn install -DskipTests
+- mvn package -Pjavadocs -DskipTests
 script:
 - cd scripts/generator && yarn test && cd ../../
 - mvn test -B
