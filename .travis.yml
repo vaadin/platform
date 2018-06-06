@@ -16,6 +16,7 @@ install:
 - mvn install
 - mvn package -Pjavadocs
 script:
+- cd scripts/generator && yarn test && cd ../../
 - mvn test -B
 env:
   global:
