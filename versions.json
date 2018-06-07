@@ -121,7 +121,7 @@
             "pro": true
         },
         "vaadin-charts": {
-            "javaVersion": "6.0.0.rc1",
+            "javaVersion": "6.0.0.rc2",
             "jsVersion": "6.0.1",
             "component": true,
             "pro": true
