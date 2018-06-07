@@ -3,7 +3,7 @@
   "authors": [
     "Vaadin Ltd"
   ],
-  "description": "Vaadin components is an evolving set of free, open sourced custom HTML elements, built using Polymer.",
+  "description": "The Vaadin core components are an evolving set of free and open source, standards-based web components.",
   "license": "Apache-2.0",
   "keywords": [
     "vaadin",
