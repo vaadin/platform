@@ -1,6 +1,6 @@
 {
   "name": "vaadin",
-  "description": "Bundle containing all elements which are part of the Vaadin platform",
+  "description": "Bundle containing all web components which are part of the Vaadin platform",
   "homepage": "https://github.com/vaadin/vaadin",
   "authors": [
     "Vaadin Ltd"
