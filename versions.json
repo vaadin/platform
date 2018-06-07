@@ -1,10 +1,10 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.0.0.rc1"
+            "javaVersion": "1.0.0.rc2"
         },
         "flow-spring": {
-            "javaVersion": "10.0.0.rc1"
+            "javaVersion": "10.0.0.rc2"
         },
         "vaadin-button": {
             "javaVersion": "1.0.0.rc1",
@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.0.rc1",
+            "javaVersion": "1.0.0.rc2",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,7 +26,7 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.0.rc2",
+            "javaVersion": "1.0.0.rc3",
             "jsVersion": "3.0.1",
             "component": true
         },
@@ -45,7 +45,7 @@
             "component": true
         },
         "vaadin-grid": {
-            "javaVersion": "1.0.0.rc1",
+            "javaVersion": "1.0.0.rc2",
             "jsVersion": "5.0.4",
             "component": true
         },
@@ -105,7 +105,7 @@
             "component": true
         },
         "vaadin-upload": {
-            "javaVersion": "1.0.0.rc1",
+            "javaVersion": "1.0.0.rc2",
             "jsVersion": "4.0.0",
             "component": true
         }
