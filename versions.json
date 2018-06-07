@@ -22,7 +22,7 @@
             "component": true
         },
         "vaadin-context-menu": {
-            "jsVersion": "4.0.0",
+            "jsVersion": "4.0.1",
             "component": true
         },
         "vaadin-date-picker": {
