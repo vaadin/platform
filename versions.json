@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.0.0.rc2"
+            "javaVersion": "1.0.0.rc3"
         },
         "flow-spring": {
             "javaVersion": "10.0.0.rc2"
@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.0.rc2",
+            "javaVersion": "1.0.0.rc3",
             "jsVersion": "4.0.1",
             "component": true
         },
