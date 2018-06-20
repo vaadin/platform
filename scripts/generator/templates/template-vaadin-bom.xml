@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
+                <version>${vaadin-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
