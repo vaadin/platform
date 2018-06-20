@@ -8,7 +8,7 @@
         },
         "vaadin-spring-boot-starter": {
             "javaVersion": "{{version}}"
-        },    
+        },
         "vaadin-button": {
             "javaVersion": "1.0.0.rc1",
             "jsVersion": "2.0.1",
