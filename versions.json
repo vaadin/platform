@@ -118,13 +118,13 @@
             "jsVersion": "{{version}}"
         },
         "vaadin-board": {
-            "javaVersion": "2.0.0.rc2",
+            "javaVersion": "2.0.0",
             "jsVersion": "2.0.0",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
-            "javaVersion": "6.0.0.rc2",
+            "javaVersion": "6.0.0",
             "jsVersion": "6.0.1",
             "component": true,
             "pro": true
@@ -135,11 +135,11 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "6.0.0.rc1",
+            "javaVersion": "6.0.0",
             "pro": true
         },
         "vaadin-testbench-components": {
-            "javaVersion": "1.0.0.rc1"
+            "javaVersion": "1.0.0"
         }
     },
     "platform": "{{version}}"
