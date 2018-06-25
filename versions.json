@@ -127,7 +127,7 @@
             "pro": true
         },
         "vaadin-designer": {
-            "javaVersion": "3.0.2",
+            "javaVersion": "3.0.4",
             "noDep": true,
             "pro": true
         },
