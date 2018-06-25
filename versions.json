@@ -6,9 +6,6 @@
         "flow-spring": {
             "javaVersion": "10.0.0"
         },
-        "vaadin-spring-boot-starter": {
-            "javaVersion": "{{version}}"
-        },
         "vaadin-button": {
             "javaVersion": "1.0.0",
             "jsVersion": "2.0.1",
@@ -130,7 +127,7 @@
             "pro": true
         },
         "vaadin-designer": {
-            "javaVersion": "3.0.2",
+            "javaVersion": "3.0.4",
             "noDep": true,
             "pro": true
         },
