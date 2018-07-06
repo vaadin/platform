@@ -1,9 +1,19 @@
-[Vaadin platform](https://vaadin.com/platformn) consists of a set of web components, a Java web framework, configurable themes, tools and a set of opinionated app starters. Platform releases gather all products in to a single package every quarter. The product versions included in a platform release are not necessarily the latest released versions, but are hand picked so that they work well together.
+# Vaadin platform
 
-## Web components
-Web components are listed in https://github.com/vaadin/vaadin.
+[Vaadin platform](https://vaadin.com/) consists of a set of web components, a Java web framework called Vaadin Flow, configurable themes, tools and a set of opinionated app starters. Platform releases gather all products in to a single package every quarter. The product versions included in a platform release are not necessarily the latest released versions, but are hand picked so that they work well together.
 
-## Flow
+Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin. 
+
+Use GitHub projects to open issues, propose new features, and contribute code. Below you can see links to different modules. If you don't know to which repository you should file your issue, just use this repository.
+
+## Vaadin Components - building blocks for your web app
+
+Vaadin web components are listed in https://github.com/vaadin/vaadin.
+
+## Vaadin Flow - Java framework to simplify web developmen
+
+Vaadin Flow is a Java web framework that abstracts client-server communication and provides you a Java API for web component.
+
 | Part | Repository |
 |------|------------|
 | Flow | https://github.com/vaadin/flow |
@@ -11,7 +21,10 @@ Web components are listed in https://github.com/vaadin/vaadin.
 
 Flow is licensed under the Apache License 2.0.
 
-## Java Components
+## Java APIs for Vaadin components
+
+These components provide a Java API for web components.
+
 | Component | Repository |
 |-----------|------------|
 | Board* | https://github.com/vaadin/vaadin-board-flow | 
@@ -50,7 +63,8 @@ Components marked with a `*` are part of the [Vaadin Pro Subscription](https://v
 
 All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
-## Starters
+## Starters - project templates for your next Vaadin app
+
 See https://vaadin.com/start for more information.
 
 ### Java
@@ -74,7 +88,7 @@ Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaa
 
 ## Getting started
 
-The process depends on your needs, but <https://vaadin.com/start> is the best place to get started on a project.
+Refer to [the documentation site](https://vaadin.com/docs) or visit <https://vaadin.com/start> to create a project.
 
 ## Contributing
 
