@@ -94,6 +94,16 @@ Refer to [the documentation site](https://vaadin.com/docs) or visit <https://vaa
 
 We would absolutely love to get the community involved, and we welcome any form of contributions – comments and questions on different communication channels, issues and pull request in the repositories, and anything that you build and share using our platform. If unsure, feel free to post an issue in this repository and we'll help you.
 
+## Building this project
+
+This project builds vaadin-bom, vaadin-core and some other artifacts that combines parts into packages that help to get started with various modules. Vaadin bom is generated using an NPM script based on the data in versions.json file. To make a development build execute following commands before doing the typical *mvn install*:
+
+```
+cd scripts/generator && npm install yarn && node_modules/yarn/bin/yarn install && cd ../../ && node scripts/generator/generate.js --platform=10.0-SNAPSHOT --versions=versions.json
+mkdir vaadin-bom
+cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
+```
+
 ## License
 
 Apache License 2.0 or CVAL 3.0, depending on the product.
