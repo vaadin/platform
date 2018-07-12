@@ -1,5 +1,6 @@
 .idea/
 target
+error-screenshots/
 
 *.iml
 .classpath
