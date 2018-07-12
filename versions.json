@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.0.0"
+            "javaVersion": "1.0.1"
         },
         "flow-spring": {
             "javaVersion": "10.0.0"
@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.1",
+            "javaVersion": "1.0.2",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,7 +26,7 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.0",
+            "javaVersion": "1.0.1",
             "jsVersion": "3.0.2",
             "component": true
         },
