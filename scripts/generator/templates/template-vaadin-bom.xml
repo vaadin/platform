@@ -220,10 +220,9 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-testbench-bom</artifactId>
+                <artifactId>vaadin-testbench-core</artifactId>
                 <version>${vaadin.testbench.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
