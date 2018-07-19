@@ -115,7 +115,7 @@
             "jsVersion": "{{version}}"
         },
         "vaadin-board": {
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "2.0.0",
             "component": true,
             "pro": true
