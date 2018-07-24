@@ -4,7 +4,7 @@ The Vaadin platform consists of a set of web components, a Java web framework, c
 
 With this beta release, we will change and improve things based on your feedback. This may lead into breaking changes, which will be listed for each part of the platform in the breaking changes section.
 
-For more information about the Vaadin platform and to find the latest release, please visit [vaadin.com/platform](https://vaadin.com/platform).
+Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Changes since previous version
 
@@ -15,7 +15,7 @@ Vaadin 10 is an LTS (long term support) version, which will be supported at leas
 
 ## New and Noteworthy
 
-Please [see the release blog post in vaadin.com](https://vaadin.com/blog/vaadin-10-beta)
+Please [see the release blog post in vaadin.com](https://vaadin.com/blog/vaadin-10-is-out-)
 
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
@@ -62,7 +62,7 @@ There are also full application examples available like **Bakery (Pro)** and **B
 
 For **frontend projects** you can get the dependencies with [Bower](https://bower.io) by running `bower install vaadin` or `bower install vaadin-core`.
 
-For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0.beta1/pom.xml#L27..L73).
+For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
 
 # Supported Technologies
 ## Operating Systems
@@ -103,7 +103,7 @@ Any IDE or editor that works with the language of your choice should work well. 
 
 **Vaadin Designer** supports the following IDEs:
 - Eclipse Java EE versions: Mars, Neon and Oxygen
-- JetBrains IntelliJ IDEA 15, 2016 and 2017. Community or Ultimate edition.
+- JetBrains IntelliJ IDEA 2016, 2017 and 2018. Community or Ultimate edition.
 
 ## Java Related Technologies and Tooling Support
 The included Java parts are compatible with Java 8 and newer.
@@ -123,12 +123,12 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+) 
-- There is no CDI support, go add a :+1: to https://github.com/vaadin/flow/issues/456 to indicate your interest in this
+- There is no CDI support, the official V10 compatible add-on will be released during summer 2018, see https://github.com/vaadin/cdi/tree/master for updates
 - There is no OSGi support, go add a :+1: to https://github.com/vaadin/flow/issues/455 to indicate your interest in this
 
 ## Designer
-- Focusing Palette search field or elements in Preview mode on macOS Eclipse doesn’t work https://github.com/vaadin/designer/issues/1596
-- DnD on the lower part of the editor on macOS Eclipse doesn’t work https://github.com/vaadin/designer/issues/1597
+- External preview doesn't work on IE11.
+- Horizontal scrolling using the trackpad doesn't work on macOS Eclipse.
 
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
