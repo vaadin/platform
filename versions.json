@@ -91,7 +91,7 @@
         },
         "vaadin-split-layout": {
             "javaVersion": "1.0.2",
-            "jsVersion": "4.0.0",
+            "jsVersion": "4.0.1",
             "component": true
         },
         "vaadin-tabs": {
