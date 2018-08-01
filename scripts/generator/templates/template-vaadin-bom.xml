@@ -237,10 +237,22 @@
                 <version>${vaadin.testbench.components.version}</version>
                 <scope>test</scope>
             </dependency>
-             <dependency>
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-charts-testbench</artifactId>
                 <version>${vaadin.charts.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-confirm-dialog-testbench</artifactId>
+                <version>${vaadin.confirm.dialog.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-cookie-consent-testbench</artifactId>
+                <version>${vaadin.cookie.consent.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -254,6 +266,16 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-charts-flow</artifactId>
                 <version>${vaadin.charts.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-confirm-dialog-flow</artifactId>
+                <version>${vaadin.confirm.dialog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-cookie-consent-flow</artifactId>
+                <version>${vaadin.cookie.consent.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
