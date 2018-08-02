@@ -27,7 +27,7 @@
         },
         "vaadin-date-picker": {
             "javaVersion": "1.0.3",
-            "jsVersion": "3.0.2",
+            "jsVersion": "3.0.3",
             "component": true
         },
         "vaadin-dialog": {
@@ -36,7 +36,7 @@
             "component": true
         },
         "vaadin-dropdown-menu": {
-            "jsVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true
         },
         "vaadin-form-layout": {
@@ -63,7 +63,7 @@
         },
         "vaadin-list-box": {
             "javaVersion": "1.0.2",
-            "jsVersion": "1.0.2",
+            "jsVersion": "1.0.3",
             "component": true
         },
         "vaadin-lumo-styles": {
@@ -101,7 +101,7 @@
         },
         "vaadin-text-field": {
             "javaVersion": "1.0.2",
-            "jsVersion": "2.0.1",
+            "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-upload": {
