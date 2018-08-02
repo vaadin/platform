@@ -23,11 +23,12 @@ function createBower(versions, bowerTemplate) {
 */
 function createMaven(versions, mavenTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
+    const includedProperties = computeUsedProperties(mavenTemplate);
 
     let mavenDeps = '';
     for (let [dependencyName, dependency] of Object.entries(allVersions)) {
-        if (dependency.javaVersion && !dependency.noDep) {
-            const propertyName = dependencyName.replace(/-/g, '.') + '.version';
+        const propertyName = dependencyName.replace(/-/g, '.') + '.version';
+        if (dependency.javaVersion && !dependency.noDep && includedProperties.includes(propertyName)) {
             const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
             mavenDeps = mavenDeps.concat(mavenDependency);
         }
@@ -39,6 +40,26 @@ function createMaven(versions, mavenTemplate) {
 
     return mavenBom;
 }
+
+/**
+ * @param {String} mavenTemplate template string
+ * @returns {String[]} an array of all maven properties used in the maven template
+ */
+function computeUsedProperties(mavenTemplate) {
+    const mavenPropertyRegExp = /\$\{(\w+[.\w]*)\}/g;
+    let currentMatch;
+    const usedProperties = [];
+    
+    do {
+        currentMatch = mavenPropertyRegExp.exec(mavenTemplate);
+        if (currentMatch) {
+            usedProperties.push(currentMatch[1]);
+        }
+    } while (currentMatch);
+
+    return usedProperties;
+}
+
 
 /**
 @param {Object} versions data object for product versions.

@@ -13,6 +13,8 @@ install:
 - cd scripts/generator && yarn install && cd ../../ && node scripts/generator/generate.js --platform=10.0-SNAPSHOT --versions=versions.json
 - mkdir vaadin-bom
 - cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
+- mkdir vaadin-spring-bom
+- cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
 - mvn install -DskipTests
 - mvn package -Pjavadocs -DskipTests
 script:

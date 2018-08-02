@@ -90,9 +90,9 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${foo.bar.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>\n<version>${foo.bar.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
@@ -126,9 +126,9 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${foo.bar.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>\n<version>${foo.bar.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
@@ -150,9 +150,32 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${bar.foo.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>\n<version>${bar.foo.version}</version>";
+
+        const result = creator.createMaven(testVersions, testTemplate);
+
+        expect(result).to.equal(expectedResult);
+    });
+
+    it('should skip unused properties', function () {
+        const testVersions = {
+            "core": {
+                "foo-bar": {
+                    "javaVersion": "2.22",
+                    "jsVersion": "1.11"
+                },
+                "bar-foo": {
+                    "jsVersion": "2.22",
+                    "javaVersion": "1.2.3"
+                }
+            }
+        };
+
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${bar.foo.version}</version>";
+
+        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>\n<version>${bar.foo.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
