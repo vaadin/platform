@@ -7,7 +7,7 @@ const render = require('./replacer.js');
 function createBower(versions, bowerTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
-        if (version.jsVersion && !version.noDep) {
+        if (version.jsVersion) {
             jsDeps[name] = `${name}#${version.jsVersion}`;
         }
     }
@@ -28,7 +28,7 @@ function createMaven(versions, mavenTemplate) {
     let mavenDeps = '';
     for (let [dependencyName, dependency] of Object.entries(allVersions)) {
         const propertyName = dependencyName.replace(/-/g, '.') + '.version';
-        if (dependency.javaVersion && !dependency.noDep && includedProperties.includes(propertyName)) {
+        if (dependency.javaVersion && includedProperties.includes(propertyName)) {
             const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
             mavenDeps = mavenDeps.concat(mavenDependency);
         }

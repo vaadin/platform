@@ -140,7 +140,6 @@
         },
         "vaadin-designer": {
             "javaVersion": "3.0.6",
-            "noDep": true,
             "pro": true
         },
         "vaadin-testbench": {
