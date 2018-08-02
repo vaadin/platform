@@ -3,10 +3,10 @@ notes from `versions.json`.
 
 ## Run
 
-`yarn install && node generate.js --platform=10.0.0.beta42 --versions=versions.json`
+`npm install && node generate.js --platform=10.0.0.beta42 --versions=versions.json`
 
 Generate Java dependencies with SNAPSHOT version by using `--useSnapshots`.
 
 ## Test
 
-`yarn test`
+`npm test`
