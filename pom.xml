@@ -44,6 +44,10 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>vaadin-prerelease</id>
+            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>

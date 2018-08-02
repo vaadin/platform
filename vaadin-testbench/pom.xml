@@ -60,10 +60,24 @@
             <scope>compile</scope>
         </dependency>
         
-         <!-- Vaadin Charts -->
+        <!-- Vaadin Charts -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-charts-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Vaadin Confirm Dialog -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-confirm-dialog-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Vaadin Cookie Consent -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-cookie-consent-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
 
