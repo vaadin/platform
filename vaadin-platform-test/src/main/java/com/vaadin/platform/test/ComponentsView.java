@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
@@ -32,6 +31,8 @@ import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -63,7 +64,6 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class ComponentsView extends VerticalLayout {
 
     private Log log;
-    private Dialog dialog;
 
     public ComponentsView() {
         log = new Log();
@@ -157,8 +157,11 @@ public class ComponentsView extends VerticalLayout {
             log.log("File of size " + e.getContentLength() + " received");
         });
 
-        dialog = new Dialog();
+        Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
+        dialog.open();
+
+        Notification.show("Hello", 30000, Position.TOP_CENTER);
 
         // Layouts
 
@@ -211,6 +214,14 @@ public class ComponentsView extends VerticalLayout {
 
         board.add(row, row2);
 
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        confirmDialog.setHeader("Meeting starting");
+        confirmDialog.setText("Your next meeting starts in 5 minutes");
+        confirmDialog.setConfirmText("OK");
+        confirmDialog.open();
+
+        CookieConsent cookieConsent = new CookieConsent();
+
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -229,6 +240,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(passwordField);
         components.add(textArea);
         components.add(upload);
+        components.add(cookieConsent);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
@@ -238,16 +250,6 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(tabs);
         layouts.add(board);
 
-    }
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        // Workaround for https://github.com/vaadin/flow/issues/3279
-        dialog.open();
-        Notification notification = Notification.show("Hello", 30000,
-                Position.TOP_CENTER);
-        attachEvent.getUI().add(notification);
     }
 
     private Map<String, String> map(String value1, String value2) {
