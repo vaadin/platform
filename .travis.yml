@@ -9,11 +9,7 @@ cache:
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
-- cd scripts/generator && npm install && cd ../../ && node scripts/generator/generate.js --platform=11.0-SNAPSHOT --versions=versions.json
-- mkdir vaadin-bom
-- cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
-- mkdir vaadin-spring-bom
-- cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
+- scripts/generateBoms.sh
 - scripts/checkForNonPinnedDependencies.sh
 - mvn install -DskipTests
 - mvn package -Pjavadocs -DskipTests
