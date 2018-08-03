@@ -14,7 +14,6 @@
 
     <properties>
 {{javadeps}}
-        <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
     <distributionManagement>
@@ -93,33 +92,7 @@
                 <artifactId>flow-maven-plugin</artifactId>
                 <version>${flow.version}</version>
             </dependency>
-            <!-- SLF4J -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jdk14</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jcl</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
+            
             <!-- Free Components -->
             <dependency>
                 <groupId>com.vaadin</groupId>
