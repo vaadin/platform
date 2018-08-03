@@ -9,7 +9,7 @@
     </parent>
     <artifactId>vaadin-platform-parent</artifactId>
     <packaging>pom</packaging>
-    <version>10.0-SNAPSHOT</version>
+    <version>11.0-SNAPSHOT</version>
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
     <url>http://vaadin.com</url>
@@ -23,6 +23,7 @@
 
     <modules>
         <module>vaadin</module>
+        <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
         <module>vaadin-platform-test</module>

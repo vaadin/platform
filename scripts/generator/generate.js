@@ -37,6 +37,9 @@ const vaadinBowerResultFileName = getResultsFilePath('vaadin-bower.json');
 const mavenBomTemplateFileName = getTemplateFilePath('template-vaadin-bom.xml');
 const mavenBomResultFileName = getResultsFilePath('vaadin-bom.xml');
 
+const mavenSpringBomTemplateFileName = getTemplateFilePath('template-vaadin-spring-bom.xml');
+const mavenSpringBomResultFileName = getResultsFilePath('vaadin-spring-bom.xml');
+
 const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
 const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 
@@ -49,4 +52,5 @@ if (!fs.existsSync(resultsDir)) {
 writer.writeBower(versions.core, coreBowerTemplateFileName, coreBowerResultFileName);
 writer.writeBower(versions.vaadin, vaadinBowerTemplateFileName, vaadinBowerResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
+writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
