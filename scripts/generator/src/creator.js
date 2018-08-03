@@ -28,7 +28,7 @@ function createMaven(versions, mavenTemplate) {
     let mavenDeps = '';
     for (let [dependencyName, dependency] of Object.entries(allVersions)) {
         const propertyName = dependencyName.replace(/-/g, '.') + '.version';
-        if (dependency.javaVersion && includedProperties.includes(propertyName)) {
+        if (dependency.javaVersion && includedProperties.has(propertyName)) {
             const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
             mavenDeps = mavenDeps.concat(mavenDependency);
         }
@@ -42,18 +42,18 @@ function createMaven(versions, mavenTemplate) {
 }
 
 /**
- * @param {String} mavenTemplate template string
- * @returns {String[]} an array of all maven properties used in the maven template
+ * @param {string} mavenTemplate template string
+ * @returns {Set<string>} a set containing all maven properties used in the maven template
  */
 function computeUsedProperties(mavenTemplate) {
-    const mavenPropertyRegExp = /\$\{(\w+[.\w]*)\}/g;
+    const mavenPropertyRegExp = /\${([^}]+)}/g;
     let currentMatch;
-    const usedProperties = [];
-    
+    const usedProperties = new Set();
+
     do {
         currentMatch = mavenPropertyRegExp.exec(mavenTemplate);
         if (currentMatch) {
-            usedProperties.push(currentMatch[1]);
+            usedProperties.add(currentMatch[1]);
         }
     } while (currentMatch);
 
