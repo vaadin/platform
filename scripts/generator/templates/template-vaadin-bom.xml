@@ -380,13 +380,6 @@
                 <artifactId>vaadin-list-mixin</artifactId>
                 <version>2.0.0</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.webjars.bowergithub.vaadin</groupId>
-                <artifactId>vaadin-text-field</artifactId>
-                <version>2.0.2</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 </project>
