@@ -12,6 +12,7 @@ install:
 - cd scripts/generator && npm install && cd ../../ && node scripts/generator/generate.js --platform=10.0-SNAPSHOT --versions=versions.json
 - mkdir vaadin-bom
 - cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
+- scripts/checkForNonPinnedDependencies.sh
 - mvn install -DskipTests
 - mvn package -Pjavadocs -DskipTests
 script:
