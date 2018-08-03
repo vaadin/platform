@@ -2,25 +2,29 @@
 
 The Vaadin platform consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
-With this beta release, we will change and improve things based on your feedback. This may lead into breaking changes, which will be listed for each part of the platform in the breaking changes section.
+With every major release, we will change and improve things based on your feedback. This may lead into breaking changes, which will be listed for each part of the platform in the breaking changes section.
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## Changes since previous version
-
-Include latest versions of all components, tools, Java web framework and app starters.
-
 ## Support
-Vaadin 10 is an LTS (long term support) version, which will be supported at least for 5 years after the GA (general availability) release. [Learn more about the support](https://vaadin.com/support).
+Vaadin 11 is supported for 4 months after GA (general availability). The latest LTS (long term support) version is Vaadin 10. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap). 
+
+[Learn more about our support](https://vaadin.com/support).
 
 ## New and Noteworthy
 
-Please [see the release blog post in vaadin.com](https://vaadin.com/blog/vaadin-10-is-out-)
+- Improved high level API for vaadin-charts with 6.1
+- vaadin-confirm-dialog (new component)
+- vaadin-cookie-consent (new component)
+- Gradle plugin for Flow projects
+- Gradle project support for Designer
 
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
 
-Projects marked as **(PRO)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
+Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
+
+Projects marked as **(Community)** are created by the Vaadin open source community, and are tested to be compatible with the platform. Support for these projects is not included in the subscription.
 
 ### Components
 {{components}}
@@ -30,18 +34,18 @@ Projects marked as **(PRO)** are available for users with [Pro](https://vaadin.c
 
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
-- Maven Plugin for Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
-- Maven Plugin for Vaadin {{core.flow.javaVersion}}
-- Vaadin Spring Addon [{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}})
+- Maven Plugin for Vaadin ([{{platform}}])
+- Gradle plugin for Flow **(Community)** ([{{community.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{community.gradle.javaVersion}}))
+- Vaadin Spring Addon ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
 
 ### Tools
-- Vaadin Designer **(PRO)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
-- Vaadin TestBench **(PRO)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
+- Vaadin Designer **(Pro)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
+- Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 
 ### App Starters
 All app starters are available at https://vaadin.com/start
 
-- Bakery App Starter for Flow and Spring  **(PRO)** (sources available via [vaadin.com/start](https://vaadin.com/start))
+- Bakery App Starter for Flow and Spring  **(Pro)** (sources available via [vaadin.com/start](https://vaadin.com/start))
 - Beverage Buddy App Starter for Flow ([github repository](https://github.com/vaadin/beverage-starter-flow))
 - Project Base for Flow ([github repository](https://github.com/vaadin/skeleton-starter-flow))
 - Project Base for Flow and Spring ([github repository](https://github.com/vaadin/skeleton-starter-flow-spring))
@@ -49,10 +53,10 @@ All app starters are available at https://vaadin.com/start
 - Project Base for Angular with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-angular))
 - Project Base for React with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-react))
 - Project Base for Vue with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-vue))
-- Starter project for creating Vaadin 10 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
+- Starter project for creating Vaadin 11 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
 
-# Getting Started with Vaadin 10
-The best way to get started with Vaadin 10 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
+# Getting Started with Vaadin 11
+The best way to get started with Vaadin 11 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
 The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
 
@@ -123,7 +127,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+) 
-- There is no CDI support, the official V10 compatible add-on will be released during summer 2018, see https://github.com/vaadin/cdi/tree/master for updates
+- There is no CDI support, the official V11 compatible add-on is targeted for Vaadin platform 12. See  https://github.com/vaadin/cdi/tree/master for updates
 - There is no OSGi support, go add a :+1: to https://github.com/vaadin/flow/issues/455 to indicate your interest in this
 
 ## Designer
