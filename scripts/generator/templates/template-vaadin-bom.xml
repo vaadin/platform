@@ -28,71 +28,19 @@
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin</artifactId>
-                <version>${project.version}</version>
+                <artifactId>vaadin-spring-bom</artifactId>
+                <version>{{platform}}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-core</artifactId>
-                <version>${project.version}</version>
+                <artifactId>vaadin-testbench-bom</artifactId>
+                <version>${vaadin.testbench.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-testbench</artifactId>
-                <version>${project.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Flow -->
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-server</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-push</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-client</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-data</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-lumo-theme</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-server-production-mode</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-spring</artifactId>
-                <version>${flow.spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-maven-plugin</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
+
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -118,147 +66,6 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jcl</artifactId>
                 <version>${slf4j.version}</version>
-            </dependency>
-
-            <!-- Free Components -->
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-html-components</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-button-flow</artifactId>
-                <version>${vaadin.button.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-checkbox-flow</artifactId>
-                <version>${vaadin.checkbox.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-combo-box-flow</artifactId>
-                <version>${vaadin.combo.box.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-date-picker-flow</artifactId>
-                <version>${vaadin.date.picker.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-dialog-flow</artifactId>
-                <version>${vaadin.dialog.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-form-layout-flow</artifactId>
-                <version>${vaadin.form.layout.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-grid-flow</artifactId>
-                <version>${vaadin.grid.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-icons-flow</artifactId>
-                <version>${vaadin.icons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-iron-list-flow</artifactId>
-                <version>${iron.list.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-list-box-flow</artifactId>
-                <version>${vaadin.list.box.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-notification-flow</artifactId>
-                <version>${vaadin.notification.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-ordered-layout-flow</artifactId>
-                <version>${vaadin.ordered.layout.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-progress-bar-flow</artifactId>
-                <version>${vaadin.progress.bar.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-radio-button-flow</artifactId>
-                <version>${vaadin.radio.button.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-split-layout-flow</artifactId>
-                <version>${vaadin.split.layout.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-tabs-flow</artifactId>
-                <version>${vaadin.tabs.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-text-field-flow</artifactId>
-                <version>${vaadin.text.field.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-upload-flow</artifactId>
-                <version>${vaadin.upload.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-testbench-bom</artifactId>
-                <version>${vaadin.testbench.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-html-components-testbench</artifactId>
-                <version>${flow.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-components-testbench</artifactId>
-                <version>${vaadin.testbench.components.version}</version>
-                <scope>test</scope>
-            </dependency>
-             <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-charts-testbench</artifactId>
-                <version>${vaadin.charts.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-board-testbench</artifactId>
-                <version>${vaadin.board.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-charts-flow</artifactId>
-                <version>${vaadin.charts.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-board-flow</artifactId>
-                <version>${vaadin.board.version}</version>
             </dependency>
 
             <!-- Transitive webjar dependencies, defined here for repeatable 

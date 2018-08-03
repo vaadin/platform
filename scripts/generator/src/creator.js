@@ -7,7 +7,7 @@ const render = require('./replacer.js');
 function createBower(versions, bowerTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
-        if (version.jsVersion && !version.noDep) {
+        if (version.jsVersion) {
             jsDeps[name] = `${name}#${version.jsVersion}`;
         }
     }
@@ -23,11 +23,12 @@ function createBower(versions, bowerTemplate) {
 */
 function createMaven(versions, mavenTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
+    const includedProperties = computeUsedProperties(mavenTemplate);
 
     let mavenDeps = '';
     for (let [dependencyName, dependency] of Object.entries(allVersions)) {
-        if (dependency.javaVersion && !dependency.noDep) {
-            const propertyName = dependencyName.replace(/-/g, '.') + '.version';
+        const propertyName = dependencyName.replace(/-/g, '.') + '.version';
+        if (dependency.javaVersion && includedProperties.has(propertyName)) {
             const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
             mavenDeps = mavenDeps.concat(mavenDependency);
         }
@@ -39,6 +40,26 @@ function createMaven(versions, mavenTemplate) {
 
     return mavenBom;
 }
+
+/**
+ * @param {string} mavenTemplate template string
+ * @returns {Set<string>} a set containing all maven properties used in the maven template
+ */
+function computeUsedProperties(mavenTemplate) {
+    const mavenPropertyRegExp = /\${([^}]+)}/g;
+    let currentMatch;
+    const usedProperties = new Set();
+
+    do {
+        currentMatch = mavenPropertyRegExp.exec(mavenTemplate);
+        if (currentMatch) {
+            usedProperties.add(currentMatch[1]);
+        }
+    } while (currentMatch);
+
+    return usedProperties;
+}
+
 
 /**
 @param {Object} versions data object for product versions.

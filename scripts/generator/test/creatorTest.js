@@ -48,35 +48,6 @@ describe('Bower creator', function () {
 
         expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
     });
-
-    it('should skip dependencies marked noDep', function () {
-        const testVersions = {
-            "foo-bar": {
-                "javaVersion": "2.22",
-                "jsVersion": "1.11"
-            },
-            "bar-foo": {
-                "jsVersion": "2.22",
-                "noDep": true
-            }
-        };
-
-        const testTemplate = {
-            foo: "bar",
-            dependencies: "removed"
-        };
-
-        const expectedResult = {
-            foo: "bar",
-            dependencies: {
-                "foo-bar": "foo-bar#1.11",
-            }
-        };
-
-        const result = creator.createBower(testVersions, testTemplate);
-
-        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
-    });
 });
 
 describe('Maven creator', function () {
@@ -90,9 +61,9 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${foo.bar.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>\n<version>${foo.bar.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
@@ -126,22 +97,21 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${foo.bar.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <foo.bar.version>2.22</foo.bar.version>\n</dependencies>\n<version>${foo.bar.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
         expect(result).to.equal(expectedResult);
     });
 
-    it('should skip dependencies marked noDep', function () {
+    it('should skip unused properties', function () {
         const testVersions = {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11",
-                    "noDep": true
+                    "jsVersion": "1.11"
                 },
                 "bar-foo": {
                     "jsVersion": "2.22",
@@ -150,9 +120,9 @@ describe('Maven creator', function () {
             }
         };
 
-        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>";
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${bar.foo.version}</version>";
 
-        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>";
+        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>\n<version>${bar.foo.version}</version>";
 
         const result = creator.createMaven(testVersions, testTemplate);
 
