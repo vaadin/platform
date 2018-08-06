@@ -19,11 +19,12 @@ function writeBower(versions, templateFileName, outputFileName) {
 @param {Object} versions data object for product versions.
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
+@param {String} additionalDependencyManagement optional string with dependencies to include into the dependencyManagementSection
 */
-function writeMaven(versions, templateFileName, outputFileName) {
+function writeMaven(versions, templateFileName, outputFileName, additionalDependencyManagement) {
     const mavenTemplate = fs.readFileSync(templateFileName, 'utf8');
 
-    const mavenBom = creator.createMaven(versions, mavenTemplate);
+    const mavenBom = creator.createMaven(versions, mavenTemplate, additionalDependencyManagement);
 
     fs.writeFileSync(outputFileName, mavenBom);
     console.log(`Wrote ${outputFileName}`);

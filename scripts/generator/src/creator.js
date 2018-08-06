@@ -20,8 +20,9 @@ function createBower(versions, bowerTemplate) {
 /**
 @param {Object} versions data object for product versions.
 @param {String} mavenTemplate template string to replace versions in.
+@param {String} additionalDependencyManagement optional string with dependencies to include into the dependencyManagementSection
 */
-function createMaven(versions, mavenTemplate) {
+function createMaven(versions, mavenTemplate, additionalDependencyManagement) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
     const includedProperties = computeUsedProperties(mavenTemplate);
 
@@ -34,7 +35,7 @@ function createMaven(versions, mavenTemplate) {
         }
     }
 
-    const mavenData = Object.assign(versions, { javadeps: mavenDeps });
+    const mavenData = Object.assign(versions, { javadeps: mavenDeps, transitiveWebJars: additionalDependencyManagement || '' });
 
     const mavenBom = render(mavenTemplate, mavenData);
 

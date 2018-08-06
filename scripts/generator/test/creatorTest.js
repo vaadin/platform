@@ -128,6 +128,29 @@ describe('Maven creator', function () {
 
         expect(result).to.equal(expectedResult);
     });
+
+    it('should write transitive dependencies', () => {
+        const testVersions = {
+            "core": {
+                "foo-bar": {
+                    "javaVersion": "2.22",
+                    "jsVersion": "1.11"
+                },
+                "bar-foo": {
+                    "jsVersion": "2.22",
+                    "javaVersion": "1.2.3"
+                }
+            }
+        };
+
+        const testTemplate = "<dependencies>\n{{javadeps}}</dependencies>\n<version>${bar.foo.version}</version>{{transitiveWebJars}}";
+
+        const expectedResult = "<dependencies>\n        <bar.foo.version>1.2.3</bar.foo.version>\n</dependencies>\n<version>${bar.foo.version}</version>testDependencyManagement";
+
+        const result = creator.createMaven(testVersions, testTemplate, "testDependencyManagement");
+
+        expect(result).to.equal(expectedResult);
+    });
 });
 
 describe('Release notes creator', function () {
