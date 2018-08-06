@@ -4,10 +4,22 @@ const argv = require('minimist')(process.argv.slice(2));
 
 const writer = require('./src/writer');
 const transformer = require('./src/transformer');
+const pomLookup = require('./src/pomLookup');
 
-if (!argv['platform']) {
-    console.log('Specify platform version as \'--platform=11.12.13\'');
-    process.exit(1);
+function determinePlatformVersion() {
+    if (argv['platform']) {
+        return argv['platform'];
+    }
+
+    console.log('Got no platform version specified in the parameter, using the parent pom file to determine it.');
+    console.log('Specify the parameter as \'--platform=11.12.13\' to override the behavior.');
+
+    const parentProjectVersion = pomLookup.getPlatformParentVersion();
+    if (!parentProjectVersion) {
+        console.error('Failed to find platform version. Either specify it as a script parameter or locate the parent pom correctly.');
+        process.exit(1);
+    }
+    return parentProjectVersion;
 }
 
 if (!argv['versions']) {
@@ -43,7 +55,7 @@ const mavenSpringBomResultFileName = getResultsFilePath('vaadin-spring-bom.xml')
 const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
 const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 
-const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
+const versions = transformer.transformVersions(inputVersions, determinePlatformVersion(), argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
