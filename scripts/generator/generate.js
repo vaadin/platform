@@ -63,6 +63,6 @@ if (!fs.existsSync(resultsDir)) {
 
 writer.writeBower(versions.core, coreBowerTemplateFileName, coreBowerResultFileName);
 writer.writeBower(versions.vaadin, vaadinBowerTemplateFileName, vaadinBowerResultFileName);
-writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
+writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName, pomLookup.getTransitiveWebJarsVersions(versions));
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
