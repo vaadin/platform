@@ -150,5 +150,10 @@
             "javaVersion": "1.0.0"
         }
     },
-    "platform": "{{version}}"
+    "platform": "{{version}}",
+    "community": {
+        "gradle": {
+            "javaVersion": "1.0.0.M4"
+        }
+    }
 }
