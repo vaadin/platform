@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,8 +26,8 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.3",
-            "jsVersion": "3.0.2",
+            "javaVersion": "1.0.4",
+            "jsVersion": "3.0.3",
             "component": true
         },
         "vaadin-dialog": {
@@ -36,7 +36,7 @@
             "component": true
         },
         "vaadin-dropdown-menu": {
-            "jsVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true
         },
         "vaadin-form-layout": {
@@ -45,7 +45,7 @@
             "component": true
         },
         "vaadin-grid": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "5.0.4",
             "component": true
         },
@@ -62,8 +62,8 @@
             "component": true
         },
         "vaadin-list-box": {
-            "javaVersion": "1.0.2",
-            "jsVersion": "1.0.2",
+            "javaVersion": "1.0.3",
+            "jsVersion": "1.0.3",
             "component": true
         },
         "vaadin-lumo-styles": {
@@ -100,8 +100,8 @@
             "component": true
         },
         "vaadin-text-field": {
-            "javaVersion": "1.0.2",
-            "jsVersion": "2.0.1",
+            "javaVersion": "1.0.3",
+            "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-upload": {
@@ -121,8 +121,8 @@
             "pro": true
         },
         "vaadin-charts": {
-            "javaVersion": "6.1.0.beta1",
-            "jsVersion": "6.1.0-beta3",
+            "javaVersion": "6.1.0",
+            "jsVersion": "6.1.0",
             "component": true,
             "pro": true
         },
