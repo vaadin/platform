@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-platform-parent</artifactId>
+        <version>11.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>vaadin-spring-boot-starter</artifactId>
+    <name>Spring Boot Starter</name>
+    <description>Spring Boot Starter for Vaadin Flow applications.</description>
+
+    <repositories>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-spring-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
+    
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <!-- End Spring -->
+
+    </dependencies>
+</project>
