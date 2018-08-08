@@ -106,7 +106,7 @@ The following built-in browsers in the following mobile operating systems:
 Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom, VS.code among others (including Emacs and Vim).
 
 **Vaadin Designer** supports the following IDEs:
-- Eclipse Java EE versions: Mars, Neon and Oxygen
+- Eclipse Java EE versions: Neon, Oxygen and Photon
 - JetBrains IntelliJ IDEA 2016, 2017 and 2018. Community or Ultimate edition.
 
 ## Java Related Technologies and Tooling Support
@@ -132,7 +132,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Designer
 - External preview doesn't work on IE11.
-- Horizontal scrolling using the trackpad doesn't work on macOS Eclipse.
+- Horizontal scrolling using the trackpad doesn't work Eclipse.
 
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
