@@ -139,7 +139,7 @@
             "pro": true
         },
         "vaadin-designer": {
-            "javaVersion": "3.0.6",
+            "javaVersion": "3.1.0",
             "pro": true
         },
         "vaadin-testbench": {
