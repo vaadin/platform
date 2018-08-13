@@ -7,7 +7,7 @@ With every major release, we will change and improve things based on your feedba
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
-Vaadin 11 is supported for 4 months after GA (general availability). The latest LTS (long term support) version is Vaadin 10. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap). 
+Vaadin 12 is an LTS (long term support) version, which will be supported at least for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 [Learn more about our support](https://vaadin.com/support).
 
@@ -53,10 +53,10 @@ All app starters are available at https://vaadin.com/start
 - Project Base for Angular with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-angular))
 - Project Base for React with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-react))
 - Project Base for Vue with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-vue))
-- Starter project for creating Vaadin 11 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
+- Starter project for creating Vaadin 12 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
 
-# Getting Started with Vaadin 11
-The best way to get started with Vaadin 11 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
+# Getting Started with Vaadin 12
+The best way to get started with Vaadin 12 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
 The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
 
@@ -78,7 +78,7 @@ Development is supported with the following operating systems, for any OS versio
 ## Desktop Browsers
 - Evergreen versions of the following browsers on :
   - Chrome on these operating systems:
-    - Windows 7, Windows 8.1, Windows 10 or later 
+    - Windows 7, Windows 8.1, Windows 10 or later
     - macOS 10.9 (OS X Mavericks) or later
     - 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
   - Firefox on these operating systems
@@ -126,7 +126,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 # Known Issues and Limitations
 
 ## Flow
-- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+) 
+- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
 - There is no CDI support. The official CDI add-on is targeted for Vaadin platform 12. See https://github.com/vaadin/cdi/tree/master for updates
 - There is no OSGi support. Add a :+1: to https://github.com/vaadin/flow/issues/455 to indicate your interest
 
