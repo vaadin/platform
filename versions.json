@@ -7,17 +7,17 @@
             "javaVersion": "10.0.0"
         },
         "vaadin-button": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "2.0.1",
             "component": true
         },
         "vaadin-checkbox": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "2.1.1",
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.5",
+            "javaVersion": "1.0.6",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,12 +26,12 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "3.0.3",
             "component": true
         },
         "vaadin-dialog": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "2.0.2",
             "component": true
         },
@@ -40,29 +40,29 @@
             "component": true
         },
         "vaadin-form-layout": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "2.0.1",
             "component": true
         },
         "vaadin-grid": {
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "5.0.4",
             "component": true
         },
         "vaadin-icons": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "4.1.4",
             "component": true
         },
         "iron-list": {
-            "javaVersion": "1.0.2"
+            "javaVersion": "1.0.3"
         },
         "vaadin-item": {
             "jsVersion": "2.0.0",
             "component": true
         },
         "vaadin-list-box": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "1.0.3",
             "component": true
         },
@@ -70,42 +70,42 @@
             "jsVersion": "1.0.0"
         },
         "vaadin-notification": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "1.0.0",
             "component": true
         },
         "vaadin-ordered-layout": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "1.0.2",
             "component": true
         },
         "vaadin-progress-bar": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "1.0.0",
             "component": true
         },
         "vaadin-radio-button": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "1.0.1",
             "component": true
         },
         "vaadin-split-layout": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "4.0.1",
             "component": true
         },
         "vaadin-tabs": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "2.0.0",
             "component": true
         },
         "vaadin-text-field": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-upload": {
-            "javaVersion": "1.0.2",
+            "javaVersion": "1.0.3",
             "jsVersion": "4.0.0",
             "component": true
         }
