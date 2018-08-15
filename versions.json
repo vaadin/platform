@@ -4,7 +4,7 @@
             "javaVersion": "1.0.4"
         },
         "flow-spring": {
-            "javaVersion": "10.0.2"
+            "javaVersion": "10.0.3"
         },
         "vaadin-button": {
             "javaVersion": "1.0.4",
