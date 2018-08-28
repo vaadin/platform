@@ -27,12 +27,12 @@
         },
         "vaadin-combo-box": {
             "javaVersion": "1.1.0",
-            "jsVersion": "4.1.0",
+            "jsVersion": "4.2.0-alpha3",
             "component": true
         },
         "vaadin-context-menu": {
             "javaVersion": "1.1.0",
-            "jsVersion": "4.1.0",
+            "jsVersion": "4.2.0-alpha2",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -40,7 +40,7 @@
         },
         "vaadin-date-picker": {
             "javaVersion": "1.1.0",
-            "jsVersion": "3.2.0",
+            "jsVersion": "3.3.0-alpha1",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -48,11 +48,11 @@
         },
         "vaadin-dialog": {
             "javaVersion": "1.1.0",
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.2.0-alpha2",
             "component": true
         },
         "vaadin-dropdown-menu": {
-            "jsVersion": "1.0.1",
+            "jsVersion": "1.2.0-alpha2",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -65,7 +65,7 @@
         },
         "vaadin-grid": {
             "javaVersion": "2.0.0",
-            "jsVersion": "5.1.0",
+            "jsVersion": "5.2.0-alpha5",
             "component": true
         },
         "vaadin-icons": {
@@ -127,7 +127,7 @@
         },
         "vaadin-notification": {
             "javaVersion": "1.1.0",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.2.0-alpha2",
             "component": true
         },
         "vaadin-ordered-layout": {
@@ -136,7 +136,7 @@
             "component": true
         },
         "vaadin-overlay": {
-            "jsVersion": "3.1.1"
+            "jsVersion": "3.2.0-alpha3"
         },
         "vaadin-progress-bar": {
             "javaVersion": "1.1.0",
