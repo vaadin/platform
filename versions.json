@@ -56,7 +56,7 @@
             "component": true
         },
         "iron-list": {
-            "javaVersion": "1.1.0.beta1",
+            "javaVersion": "1.1.0.beta1"
         },
         "vaadin-item": {
             "jsVersion": "2.0.0",
