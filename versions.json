@@ -119,8 +119,8 @@
             "jsVersion": "{{version}}"
         },
         "vaadin-board": {
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.0.0",
+            "javaVersion": "2.1.0.alpha1",
+            "jsVersion": "2.1.0-alpha1",
             "component": true,
             "pro": true
         },
@@ -131,7 +131,7 @@
             "pro": true
         },
         "vaadin-confirm-dialog": {
-            "javaVersion": "1.1.0.alpha2",
+            "javaVersion": "1.1.0.alpha3",
             "jsVersion": "1.1.0-alpha1",
             "component": true,
             "pro": true
