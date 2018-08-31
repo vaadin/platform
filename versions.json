@@ -131,13 +131,13 @@
             "pro": true
         },
         "vaadin-confirm-dialog": {
-            "javaVersion": "1.1.0.alpha1",
+            "javaVersion": "1.1.0.alpha2",
             "jsVersion": "1.1.0-alpha1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
-            "javaVersion": "1.1.0.alpha1",
+            "javaVersion": "1.1.0.alpha2",
             "jsVersion": "1.1.0-alpha2",
             "component": true,
             "pro": true
