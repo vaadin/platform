@@ -13,12 +13,12 @@
         },
         "vaadin-checkbox": {
             "javaVersion": "1.0.3",
-            "jsVersion": "2.1.1",
+            "jsVersion": "2.1.2",
             "component": true
         },
         "vaadin-combo-box": {
             "javaVersion": "1.0.7",
-            "jsVersion": "4.0.1",
+            "jsVersion": "4.0.2",
             "component": true
         },
         "vaadin-context-menu": {
@@ -106,7 +106,7 @@
         },
         "vaadin-upload": {
             "javaVersion": "1.0.3",
-            "jsVersion": "4.0.0",
+            "jsVersion": "4.0.1",
             "component": true
         }
     },
