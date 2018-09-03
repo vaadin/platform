@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.0.4"
+            "javaVersion": "1.0.5"
         },
         "flow-spring": {
             "javaVersion": "10.0.3"
@@ -17,7 +17,7 @@
             "component": true
         },
         "vaadin-combo-box": {
-            "javaVersion": "1.0.6",
+            "javaVersion": "1.0.7",
             "jsVersion": "4.0.1",
             "component": true
         },
@@ -26,7 +26,7 @@
             "component": true
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.5",
+            "javaVersion": "1.0.6",
             "jsVersion": "3.0.3",
             "component": true
         },
@@ -55,7 +55,7 @@
             "component": true
         },
         "iron-list": {
-            "javaVersion": "1.0.3"
+            "javaVersion": "1.0.4"
         },
         "vaadin-item": {
             "jsVersion": "2.0.0",
@@ -95,7 +95,7 @@
             "component": true
         },
         "vaadin-tabs": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "2.0.0",
             "component": true
         },
