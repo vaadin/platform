@@ -12,7 +12,8 @@ install:
 - scripts/generateBoms.sh
 - scripts/checkForNonPinnedDependencies.sh
 - mvn install -DskipTests
-- mvn package -Pjavadocs -DskipTests
+# Skip javadoc until https://github.com/vaadin/flow-component-base/issues/77 is fixed
+# - mvn package -Pjavadocs -DskipTests
 script:
 - cd scripts/generator && npm test && cd ../../
 - mvn test -B
