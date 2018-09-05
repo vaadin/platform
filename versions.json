@@ -6,6 +6,12 @@
         "flow-spring": {
             "javaVersion": "10.0.3"
         },
+        "polymer": {
+            "jsVersion": "2.6.1"
+        },
+        "shadycss": {
+            "jsVersion": "1.5.0"
+        },
         "vaadin-button": {
             "javaVersion": "1.1.0.beta1",
             "jsVersion": "2.1.0-beta2",
@@ -112,6 +118,9 @@
             "javaVersion": "1.1.0.beta1",
             "jsVersion": "4.2.0-beta2",
             "component": true
+        },
+        "webcomponentsjs": {
+            "jsVersion": "1.2.6"
         }
     },
     "vaadin": {
