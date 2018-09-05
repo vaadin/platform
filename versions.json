@@ -73,8 +73,42 @@
             "jsVersion": "4.2.0-beta1",
             "component": true
         },
+        "iron-a11y-announcer": {
+            "jsVersion": "2.0.0"
+        },
+        "iron-a11y-keys-behavior": {
+            "jsVersion": "2.1.1"
+        },
+        "iron-fit-behavior": {
+            "jsVersion": "2.2.1"
+        },
+        "iron-flex-layout": {
+            "jsVersion": "2.0.3"
+        },
+        "iron-icon": {
+            "jsVersion": "2.0.1"
+        },
+        "iron-iconset-svg": {
+            "jsVersion": "2.2.1"
+        },
         "iron-list": {
-            "javaVersion": "1.1.0"
+            "javaVersion": "1.1.0",
+            "jsVersion": "2.0.19"
+        },
+        "iron-media-query": {
+            "jsVersion": "2.0.0"
+        },
+        "iron-meta": {
+            "jsVersion": "2.1.1"
+        },
+        "iron-overlay-behavior": {
+            "jsVersion": "2.3.4"
+        },
+        "iron-resizable-behavior": {
+            "jsVersion": "2.1.1"
+        },
+        "iron-scroll-target-behavior": {
+            "jsVersion": "2.1.1"
         },
         "vaadin-item": {
             "jsVersion": "2.0.0",
