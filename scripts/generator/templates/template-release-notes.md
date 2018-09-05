@@ -6,10 +6,10 @@ With every major release, we will change and improve things based on your feedba
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## Support
+## Platform Support
 Vaadin 12 is supported for 4 months after GA (general availability). The latest LTS (long term support) version is Vaadin 10. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
-[Learn more about our support](https://vaadin.com/support).
+Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
 
@@ -24,7 +24,7 @@ The Vaadin platform includes the following projects. Release notes with detailed
 
 Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
 
-Projects marked as **(Community)** are created by the Vaadin open source community, and are tested to be compatible with the platform. Support for these projects is not included in the subscription.
+Projects marked as **(Community)** are created by the Vaadin open source community, and are tested to be compatible with the platform. Support for these projects is not included in Vaadin Warranty.
 
 ### Components
 {{components}}
