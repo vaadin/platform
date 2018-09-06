@@ -21,10 +21,12 @@ describe('Version transformer', function () {
         const testVersions = {
             "foo-bar": {
                 "javaVersion": "2.22",
+                "javaSnapshotVersion": "2.23-SNAPSHOT",
                 "jsVersion": "1.11"
             },
             "bar-foo": {
                 "javaVersion": "4.3.beta2",
+                "javaSnapshotVersion": "4.5-NOTSNAPSHOT",
                 "jsVersion": "5.7.beta33"
             },
 
@@ -33,7 +35,7 @@ describe('Version transformer', function () {
 
         const result = transformer.transformVersions(testVersions, "1.2.3", true);
 
-        expect(result['foo-bar'].javaVersion).to.equal("2.22-SNAPSHOT");
+        expect(result['foo-bar'].javaVersion).to.equal("2.23-SNAPSHOT");
         expect(result['foo-bar'].jsVersion).to.equal("1.11");
         expect(result['bar-foo'].javaVersion).to.equal("4.3-SNAPSHOT");
         expect(result['bar-foo'].jsVersion).to.equal("5.7.beta33");

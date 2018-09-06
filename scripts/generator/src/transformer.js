@@ -16,7 +16,7 @@ function transformVersions(versions, platformVersion, useSnapshots) {
 
 function transformPlatformVersion(versions, platformVersion) {
     const platformVersionVisitor = (key, value, parent) => {
-        if (value === '{{version}}') {
+        if (key != 'javaSnapshotVersion' && value === '{{version}}') {
             parent[key] = platformVersion;
         }
     };
@@ -28,8 +28,14 @@ function transformPlatformVersion(versions, platformVersion) {
 function transformJavaSnapshots(versions) {
     const majorMinorVersions = /(\d*?\.\d*).*/;
     const snapshotVersionVisitor = (key, value, parent) => {
-        if (key === 'javaVersion') {
+        // don't overwrite possible value set by 'javaSnapshotVersion'
+        if (key === 'javaVersion' && !(parent[key].endsWith("-SNAPSHOT"))) {
             parent[key] = value.replace(majorMinorVersions, "$1-SNAPSHOT");
+        }
+        // enforce snapshot version with 'javaSnapshotVersion'
+        // snapshot version must end with "-SNAPSHOT"
+        if (key === 'javaSnapshotVersion' && value.endsWith("-SNAPSHOT")) {
+            parent['javaVersion'] = value;
         }
     };
     const transformedVersions = Object.assign({}, versions);
