@@ -35,7 +35,7 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
 - Vaadin Spring Addon ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
-- Vaadin CDI Addon is available, but not yet included in the platform (targeted for V12). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions
+- Vaadin CDI Addon ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}})). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions.
 - Maven Plugin for Vaadin ([{{platform}}])
 - Gradle plugin for Flow **(Community)** ([{{community.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{community.gradle.javaVersion}}))
 
