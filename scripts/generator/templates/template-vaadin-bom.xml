@@ -41,6 +41,12 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-cdi</artifactId>
+                <version>${flow.cdi.version}</version>
+            </dependency>
+
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -68,7 +74,7 @@
                 <version>${slf4j.version}</version>
             </dependency>
 
-            <!-- Transitive webjar dependencies, defined here for repeatable 
+            <!-- Transitive webjar dependencies, defined here for repeatable
                 builds -->
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
