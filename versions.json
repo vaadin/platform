@@ -6,6 +6,9 @@
         "flow-spring": {
             "javaVersion": "10.1.0.beta1"
         },
+        "flow-cdi": {
+            "javaVersion": "10.0.0.beta1"
+        },
         "vaadin-button": {
             "javaVersion": "1.1.0.beta1",
             "jsVersion": "2.1.0-beta2",
