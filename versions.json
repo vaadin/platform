@@ -4,7 +4,7 @@
             "javaVersion": "1.0.5"
         },
         "flow-spring": {
-            "javaVersion": "10.0.3"
+            "javaVersion": "10.0.4"
         },
         "polymer": {
             "jsVersion": "2.6.1"
@@ -200,7 +200,7 @@
             "pro": true
         },
         "vaadin-designer": {
-            "javaVersion": "3.1.1",
+            "javaVersion": "3.1.2",
             "pro": true
         },
         "vaadin-testbench": {
