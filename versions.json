@@ -74,7 +74,7 @@
             "component": true
         },
         "iron-a11y-announcer": {
-            "jsVersion": "2.0.0"
+            "jsVersion": "2.1.0"
         },
         "iron-a11y-keys-behavior": {
             "jsVersion": "2.1.1"
@@ -86,7 +86,7 @@
             "jsVersion": "2.0.3"
         },
         "iron-icon": {
-            "jsVersion": "2.0.1"
+            "jsVersion": "2.1.0"
         },
         "iron-iconset-svg": {
             "jsVersion": "2.2.1"
@@ -96,7 +96,7 @@
             "jsVersion": "2.0.19"
         },
         "iron-media-query": {
-            "jsVersion": "2.0.0"
+            "jsVersion": "2.1.0"
         },
         "iron-meta": {
             "jsVersion": "2.1.1"
