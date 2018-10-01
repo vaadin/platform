@@ -70,7 +70,7 @@
         },
         "vaadin-icons": {
             "javaVersion": "1.1.0",
-            "jsVersion": "4.2.0-beta1",
+            "jsVersion": "4.2.0",
             "component": true
         },
         "iron-a11y-announcer": {
