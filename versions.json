@@ -52,7 +52,7 @@
             "component": true
         },
         "vaadin-dropdown-menu": {
-            "jsVersion": "1.0.1",
+            "jsVersion": "1.1.0",
             "component": true
         },
         "vaadin-element-mixin": {
