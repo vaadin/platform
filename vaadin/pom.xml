@@ -38,7 +38,7 @@
             <artifactId>vaadin-core</artifactId>
         </dependency>
 
-        <!-- TestBench must be included in the project separately to get 
+        <!-- TestBench must be included in the project separately to get
             a test scope -->
 
         <dependency>
