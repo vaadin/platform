@@ -22,7 +22,7 @@
         },
         "vaadin-checkbox": {
             "javaVersion": "1.1.0",
-            "jsVersion": "2.2.0",
+            "jsVersion": "2.2.2",
             "component": true
         },
         "vaadin-combo-box": {
@@ -111,7 +111,7 @@
             "jsVersion": "2.1.1"
         },
         "vaadin-item": {
-            "jsVersion": "2.0.0",
+            "jsVersion": "2.1.0",
             "component": true
         },
         "vaadin-list-box": {
@@ -120,10 +120,10 @@
             "component": true
         },
         "vaadin-lumo-styles": {
-            "jsVersion": "1.0.0"
+            "jsVersion": "1.2.0"
         },
         "vaadin-material-styles": {
-            "jsVersion": "1.1.2"
+            "jsVersion": "1.2.0"
         },
         "vaadin-notification": {
             "javaVersion": "1.1.0",
