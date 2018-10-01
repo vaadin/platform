@@ -248,6 +248,13 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-confirm-dialog-flow</artifactId>
                 <version>${vaadin.confirm.dialog.version}</version>
+                <exclusions>
+                    <!--TODO fix this in the actual component-->
+                    <exclusion>
+                        <groupId>org.webjars.bowergithub.vaadin</groupId>
+                        <artifactId>vaadin-dialog</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
