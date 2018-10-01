@@ -35,10 +35,16 @@
             "jsVersion": "4.1.0",
             "component": true
         },
+        "vaadin-control-state-mixin": {
+            "jsVersion": "2.1.1"
+        },
         "vaadin-date-picker": {
             "javaVersion": "1.1.0",
             "jsVersion": "3.2.0",
             "component": true
+        },
+        "vaadin-development-mode-detector": {
+            "jsVersion": "2.0.0"
         },
         "vaadin-dialog": {
             "javaVersion": "1.1.0",
@@ -48,6 +54,9 @@
         "vaadin-dropdown-menu": {
             "jsVersion": "1.0.1",
             "component": true
+        },
+        "vaadin-element-mixin": {
+            "jsVersion": "2.1.2"
         },
         "vaadin-form-layout": {
             "javaVersion": "1.1.0",
@@ -92,6 +101,9 @@
             "jsVersion": "1.1.0",
             "component": true
         },
+        "vaadin-overlay": {
+            "jsVersion": "3.1.1"
+        },
         "vaadin-progress-bar": {
             "javaVersion": "1.1.0",
             "jsVersion": "1.1.0",
@@ -117,6 +129,9 @@
             "jsVersion": "2.1.2",
             "component": true
         },
+        "vaadin-themable-mixin": {
+            "jsVersion": "1.3.2"
+        },
         "vaadin-upload": {
             "javaVersion": "1.1.0",
             "jsVersion": "4.2.1",
@@ -124,6 +139,9 @@
         },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
+        },
+        "vaadin-usage-statistics": {
+            "jsVersion": "2.0.1"
         }
     },
     "vaadin": {
