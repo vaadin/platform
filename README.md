@@ -54,6 +54,7 @@ Components marked with a `*` are part of the [Vaadin Pro Subscription](https://v
 | Theme | Repository |
 |-------|------------|
 | Lumo | https://github.com/vaadin/vaadin-lumo-styles |
+| Material | https://github.com/vaadin/vaadin-material-styles |
 
 ## Tools
 | Tool | Repository |
