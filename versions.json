@@ -183,7 +183,7 @@
             "jsVersion": "{{version}}"
         },
         "vaadin-board": {
-            "javaVersion": "2.1.0.alpha1",
+            "javaVersion": "2.1.0.alpha2",
             "jsVersion": "2.1.0-alpha1",
             "component": true,
             "pro": true
