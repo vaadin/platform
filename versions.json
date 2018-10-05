@@ -195,7 +195,7 @@
             "pro": true
         },
         "vaadin-confirm-dialog": {
-            "javaVersion": "1.1.0.alpha3",
+            "javaVersion": "1.1.0.alpha4",
             "jsVersion": "1.1.0-alpha1",
             "component": true,
             "pro": true
