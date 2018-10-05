@@ -196,7 +196,7 @@
                 <version>${vaadin.upload.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-context-menu-flow</artifactId>
                 <version>${vaadin.context.menu.version}</version>
             </dependency>
