@@ -195,6 +195,11 @@
                 <artifactId>vaadin-upload-flow</artifactId>
                 <version>${vaadin.upload.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-context-menu-flow</artifactId>
+                <version>${vaadin.context.menu.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -265,6 +270,17 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-board-flow</artifactId>
                 <version>${vaadin.board.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>mpr-v7</artifactId>
+                <version>${mpr.v7.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>mpr-v8</artifactId>
+                <version>${mpr.v8.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

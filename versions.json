@@ -176,6 +176,12 @@
         },
         "vaadin-usage-statistics": {
             "jsVersion": "2.0.1"
+        },
+        "mpr-v7": {
+            "javaVersion": "1.0.0"
+        },
+        "mpr-v8": {
+            "javaVersion": "1.1.0.alpha1"
         }
     },
     "vaadin": {
@@ -183,25 +189,25 @@
             "jsVersion": "{{version}}"
         },
         "vaadin-board": {
-            "javaVersion": "2.1.0.alpha1",
+            "javaVersion": "2.1.0.alpha2",
             "jsVersion": "2.1.0-alpha1",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
-            "javaVersion": "6.2.0.alpha1",
+            "javaVersion": "6.2.0.alpha2",
             "jsVersion": "6.2.0-alpha1",
             "component": true,
             "pro": true
         },
         "vaadin-confirm-dialog": {
-            "javaVersion": "1.1.0.alpha3",
+            "javaVersion": "1.1.0.alpha4",
             "jsVersion": "1.1.0-alpha1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
-            "javaVersion": "1.1.0.alpha2",
+            "javaVersion": "1.1.0.alpha3",
             "jsVersion": "1.1.0-alpha2",
             "component": true,
             "pro": true
