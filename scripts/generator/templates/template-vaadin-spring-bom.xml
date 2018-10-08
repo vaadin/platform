@@ -271,6 +271,17 @@
                 <artifactId>vaadin-board-flow</artifactId>
                 <version>${vaadin.board.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>mpr-v7</artifactId>
+                <version>${mpr.v7.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>mpr-v8</artifactId>
+                <version>${mpr.v8.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
