@@ -13,11 +13,8 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy
 
-- Improved high level API for vaadin-charts with 6.1
-- vaadin-confirm-dialog (new component)
-- vaadin-cookie-consent (new component)
-- Gradle plugin for Flow projects
-- Gradle project support for Designer
+- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
+- New Material theme for all components
 
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
@@ -30,7 +27,8 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 {{components}}
 
 ### Themes
-- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}})).
+- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
+- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
 
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
@@ -38,6 +36,10 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 - Vaadin CDI Addon ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}})). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions.
 - Maven Plugin for Vaadin ([{{platform}}])
 - Gradle plugin for Flow **(Community)** ([{{community.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{community.gradle.javaVersion}}))
+- Vaadin Multiplatform Runtime **(Prime)**
+  - for Framework 7 ([((core.mpr-v7.javaVersion))](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
+  - for Framework 8 ([((core.mpr-v8.javaVersion))](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+  - Both versions work with previous platform versions.
 
 ### Tools
 - Vaadin Designer **(Pro)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
