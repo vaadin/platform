@@ -45,7 +45,13 @@ for mavenDep in `cat "$mavenTemp"|sort`
 do 
 	name=`echo $mavenDep|cut -d: -f 1`
 	mavenVersion=`echo $mavenDep|cut -d: -f 2`
-	bowerVersion=`egrep "^$name:" "$bowerTemp"|cut -d: -f 2`
+	# This exception happens because the bower package name is vaadin-license-checker and the maven artifact of the webjar is license-checker
+	if [ "$name" = "license-checker" ]
+	then
+		bowerVersion=`egrep "^vaadin-license-checker:" "$bowerTemp"|cut -d: -f 2`
+	else
+		bowerVersion=`egrep "^$name:" "$bowerTemp"|cut -d: -f 2`
+	fi
 	if [ "$mavenVersion" != "$bowerVersion" ]
 	then
 		echo "##teamcity[testStarted name='$name']"
