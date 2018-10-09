@@ -48,16 +48,6 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 ### App Starters
 All app starters are available at https://vaadin.com/start
 
-- Bakery App Starter for Flow and Spring  **(Pro)** (sources available via [vaadin.com/start](https://vaadin.com/start))
-- Beverage Buddy App Starter for Flow ([github repository](https://github.com/vaadin/beverage-starter-flow))
-- Project Base for Flow ([github repository](https://github.com/vaadin/skeleton-starter-flow))
-- Project Base for Flow and Spring ([github repository](https://github.com/vaadin/skeleton-starter-flow-spring))
-- Project Base for Polymer with Vaadin Components ([github repository](https://github.com/vaadin/generator-polymer-init-vaadin-elements-app))
-- Project Base for Angular with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-angular))
-- Project Base for React with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-react))
-- Project Base for Vue with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-vue))
-- Starter project for creating Vaadin 12 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
-
 # Getting Started with Vaadin 12
 The best way to get started with Vaadin 12 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
