@@ -37,8 +37,8 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 - Maven Plugin for Vaadin ([{{platform}}])
 - Gradle plugin for Flow **(Community)** ([{{community.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{community.gradle.javaVersion}}))
 - Vaadin Multiplatform Runtime **(Prime)**
-  - for Framework 7 ([((core.mpr-v7.javaVersion))](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
-  - for Framework 8 ([((core.mpr-v8.javaVersion))](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+  - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
+  - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
   - Both versions work with previous platform versions.
 
 ### Tools
