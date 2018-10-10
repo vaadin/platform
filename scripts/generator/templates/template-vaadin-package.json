@@ -8,7 +8,6 @@
   "scripts": {
     "version": "node update-core-version.js && git add bower.json"
   },
-  "devDependencies": {},
   "keywords": [
     "vaadin",
     "core",
