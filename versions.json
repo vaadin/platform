@@ -227,8 +227,6 @@
             "component": true
         },
         "webcomponentsjs": {
-            "npmName": "@webcomponents/webcomponentsjs",
-            "npmVersion": "^2.0.0",
             "jsVersion": "1.2.6"
         },
         "vaadin-usage-statistics": {
