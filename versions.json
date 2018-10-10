@@ -34,13 +34,13 @@
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "1.1.0",
-            "jsVersion": "4.1.0",
+            "jsVersion": "4.2.0-alpha4",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "1.1.0",
-            "jsVersion": "4.1.0",
+            "jsVersion": "4.2.0-beta2",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -50,7 +50,12 @@
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
             "javaVersion": "1.1.0",
-            "jsVersion": "3.2.0",
+            "jsVersion": "3.3.0-beta1",
+            "component": true
+        },
+        "vaadin-time-picker": {
+            "npmName": "@vaadin/vaadin-time-picker",
+            "jsVersion": "1.1.0-alpha1",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -60,12 +65,12 @@
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
             "javaVersion": "1.1.0",
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.2.0-beta1",
             "component": true
         },
-        "vaadin-dropdown-menu": {
-            "npmName": "@vaadin/vaadin-dropdown-menu",
-            "jsVersion": "1.1.0",
+        "vaadin-select": {
+            "npmName": "@vaadin/vaadin-select",
+            "jsVersion": "2.0.0-beta1",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -81,7 +86,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.0.0",
-            "jsVersion": "5.1.0",
+            "jsVersion": "5.2.0-beta2",
             "component": true
         },
         "vaadin-icons": {
@@ -173,7 +178,7 @@
         "vaadin-notification": {
             "npmName": "@vaadin/vaadin-notification",
             "javaVersion": "1.1.0",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.2.0-beta1",
             "component": true
         },
         "vaadin-ordered-layout": {
@@ -184,7 +189,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.1.1"
+            "jsVersion": "3.2.0"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
