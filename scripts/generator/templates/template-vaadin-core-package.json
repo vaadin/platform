@@ -6,6 +6,9 @@
   "license": "Apache-2.0",
   "main": "vaadin-core.js",
   "dependencies": {},
+  "files": [
+    "vaadin-core.js"
+  ],
   "keywords": [
     "vaadin",
     "core",
