@@ -40,7 +40,7 @@
             "component": true
         },
         "vaadin-development-mode-detector": {
-            "jsVersion": "2.0.0"
+            "jsVersion": "1.1.0-beta1"
         },
         "vaadin-dialog": {
             "javaVersion": "1.0.3",
@@ -52,7 +52,7 @@
             "component": true
         },
         "vaadin-element-mixin": {
-            "jsVersion": "2.1.2"
+            "jsVersion": "1.1.2"
         },
         "vaadin-form-layout": {
             "javaVersion": "1.0.3",
@@ -165,7 +165,7 @@
             "component": true
         },
         "vaadin-usage-statistics": {
-            "jsVersion": "2.0.1"
+            "jsVersion": "1.1.0-beta1"
         },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
