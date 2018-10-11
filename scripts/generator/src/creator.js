@@ -19,6 +19,24 @@ function createBower(versions, bowerTemplate) {
 
 /**
 @param {Object} versions data object for product versions.
+@param {Object} packageJsonTemplate template data object to put versions to.
+*/
+function createPackageJson(versions, packageJsonTemplate) {
+    let jsDeps = {};
+    for (let [name, version] of Object.entries(versions)) {
+        if (version.npmName) {
+            const npmVersion = version.npmVersion || version.jsVersion;
+            jsDeps[version.npmName] = npmVersion;
+        }
+    }
+
+    packageJsonTemplate.dependencies = jsDeps;
+
+    return JSON.stringify(packageJsonTemplate, null, 2);
+}
+
+/**
+@param {Object} versions data object for product versions.
 @param {String} mavenTemplate template string to replace versions in.
 */
 function createMaven(versions, mavenTemplate) {
@@ -92,5 +110,6 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
 }
 
 exports.createBower = createBower;
+exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;
