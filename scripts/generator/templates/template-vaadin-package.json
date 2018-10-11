@@ -1,6 +1,6 @@
 {
   "name": "@vaadin/vaadin",
-  "version": "",
+  "version": "12.0.0",
   "description": "Vaadin Elements is an evolving set of open source custom HTML elements for building mobile and desktop web applications in modern browsers.",
   "author": "Vaadin Ltd",
   "license": "(Apache-2.0 OR SEE LICENSE IN https://vaadin.com/license/cval-3.0)",

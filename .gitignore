@@ -15,6 +15,7 @@ vaadin-maven-plugin/.factorypath
 scripts/generator/results
 scripts/generator/node_modules
 scripts/generator/yarn-error.log
+scripts/.temp*
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
