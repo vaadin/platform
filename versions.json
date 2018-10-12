@@ -284,14 +284,14 @@
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.0.0.alpha2",
+            "javaVersion": "1.0.0.alpha3",
             "jsVersion": "1.0.0-alpha2",
             "component": true,
             "pro": true
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "1.0-SNAPSHOT",
+            "javaVersion": "1.0.0.alpha5",
             "jsVersion": "1.0.0-alpha5",
             "component": true,
             "pro": true
