@@ -15,6 +15,8 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 - Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
 - New Material theme for all components
+- vaadin-app-layout (new component)
+- vaadin-crud (new component)
 
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
