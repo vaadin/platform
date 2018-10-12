@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.1.0"
+            "javaVersion": "1.2.0.alpha1"
         },
         "flow-spring": {
             "javaVersion": "10.1.0.beta1"
         },
         "flow-cdi": {
-            "javaVersion": "10.0.0.beta1"
+            "javaVersion": "10.0.0"
         },
         "polymer": {
             "npmName": "@polymer/polymer",
@@ -85,13 +85,13 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.1.0.alpha1",
             "jsVersion": "5.2.0-beta2",
             "component": true
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.alpha1",
             "jsVersion": "4.2.0",
             "component": true
         },
