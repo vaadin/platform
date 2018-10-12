@@ -13,11 +13,8 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy
 
-- Improved high level API for vaadin-charts with 6.1
-- vaadin-confirm-dialog (new component)
-- vaadin-cookie-consent (new component)
-- Gradle plugin for Flow projects
-- Gradle project support for Designer
+- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
+- New Material theme for all components
 
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
@@ -30,7 +27,8 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 {{components}}
 
 ### Themes
-- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}})).
+- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
+- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
 
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
@@ -38,6 +36,10 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 - Vaadin CDI Addon ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}})). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions.
 - Maven Plugin for Vaadin ([{{platform}}])
 - Gradle plugin for Flow **(Community)** ([{{community.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{community.gradle.javaVersion}}))
+- Vaadin Multiplatform Runtime **(Prime)**
+  - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
+  - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+  - Both versions work with previous platform versions.
 
 ### Tools
 - Vaadin Designer **(Pro)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
@@ -45,16 +47,6 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
 
 ### App Starters
 All app starters are available at https://vaadin.com/start
-
-- Bakery App Starter for Flow and Spring  **(Pro)** (sources available via [vaadin.com/start](https://vaadin.com/start))
-- Beverage Buddy App Starter for Flow ([github repository](https://github.com/vaadin/beverage-starter-flow))
-- Project Base for Flow ([github repository](https://github.com/vaadin/skeleton-starter-flow))
-- Project Base for Flow and Spring ([github repository](https://github.com/vaadin/skeleton-starter-flow-spring))
-- Project Base for Polymer with Vaadin Components ([github repository](https://github.com/vaadin/generator-polymer-init-vaadin-elements-app))
-- Project Base for Angular with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-angular))
-- Project Base for React with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-react))
-- Project Base for Vue with Vaadin Components ([github repository](https://github.com/vaadin/base-starter-vue))
-- Starter project for creating Vaadin 12 Java add-ons (sources available via [vaadin.com/start](https://vaadin.com/start))
 
 # Getting Started with Vaadin 12
 The best way to get started with Vaadin 12 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
@@ -65,7 +57,9 @@ There are also full application examples available like **Bakery (Pro)** and **B
 
 ### Getting Started Manually
 
-For **frontend projects** you can get the dependencies with [Bower](https://bower.io) by running `bower install vaadin` or `bower install vaadin-core`.
+For **frontend projects** you can get the dependencies with 
+ - [Bower](https://bower.io) by running `bower install vaadin` or `bower install vaadin-core`
+ - [NPM](https://www.npmjs.com) by running `npm install @vaadin/vaadin` or `npm install @vaadin/vaadin-core`
 
 For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
 
@@ -117,7 +111,7 @@ The included Java parts are compatible with Java 8 and newer.
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Apache Tomcat 8.0.x, 8.5, 9
 - Oracle WebLogic Server 12.2.1
-- IBM WebSphere Application Server 8.5 Liberty and 9
+- IBM WebSphere Application Server 8.5 Liberty Profile and 9
 - RedHat JBoss EAP 7
 - WildFly 8, 9, 10, 11, 12
 - Jetty 9
