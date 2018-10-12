@@ -1,4 +1,6 @@
 const render = require('./replacer.js');
+const request = require('sync-request');
+const compareVersions = require('compare-versions');
 
 /**
 @param {Object} versions data object for product versions.
@@ -89,27 +91,190 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
     let componentVersions = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
-            const name = versionName
-                .replace(/-/g, ' ')
-                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
-
-            //separated for readability
-            let result = `- ${name} `;
-            result = result.concat(version.pro ? '**(PRO)** ' : '');
-            result = result.concat(version.javaVersion ? `([Flow integration ${version.javaVersion}](https://github.com/vaadin/${versionName}-flow/releases/tag/${version.javaVersion})` : '');
-            result = result.concat((version.javaVersion && version.jsVersion) ? ', ' : '');
-            result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
-            result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
-            result = result.concat('\n');
+            const result = buildComponentReleaseString(versionName, version);
             componentVersions = componentVersions.concat(result);
         }
     }
 
-    const releaseNoteData = Object.assign(versions, { components: componentVersions });
+    const changed = getChangedSincePrevious(versions);
+
+    const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
+
     return render(releaseNoteTemplate, releaseNoteData);
+}
+
+function getChangedSincePrevious(versions) {
+    const previousVersion = calculatePreviousVersion(versions.platform);
+    if (!previousVersion) {
+        return '';
+    }
+    const previousVersionsJson = requestGH(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`);
+    if (!previousVersionsJson) {
+        return '';
+    }
+    const allVersions = Object.assign({}, versions.core, versions.vaadin, versions.community);
+    const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
+    const changesString = generateChangesString(allVersions, allPreviousVersions);
+    let result = '';
+    if (changesString) {
+        result = result.concat(`## Changes since [${previousVersion}](https://github.com/vaadin/platform/releases/tag/${previousVersion})\n`);
+        result = result.concat(changesString);
+    }
+    return result;
+}
+
+function generateChangesString(allVersions, allPreviousVersions) {
+    let javaChangedSincePreviousText = '';
+    let componentChangedSincePreviousText = '';
+    for (let [versionName, version] of Object.entries(allVersions)) {
+        if (version.component) {
+            const currentJSVersion = version.jsVersion;
+            const currentJavaVersion = toSemVer(version.javaVersion);
+            const previousVersionComponent = allPreviousVersions[versionName];
+            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            const previousJavaVersion = previousVersionComponent ? toSemVer(previousVersionComponent.javaVersion) : '0.0.0';
+            if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1 || compareVersions(currentJavaVersion, previousJavaVersion) === 1) {
+                const result = buildComponentReleaseString(versionName, version);
+                componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
+            }
+        } else if (version.javaVersion) {
+            const previousVersion = allPreviousVersions[versionName] ? allPreviousVersions[versionName].javaVersion : '0.0.0';
+            const result = compareAndBuildJavaComponentReleaseString(versionName, version.javaVersion, previousVersion);
+            javaChangedSincePreviousText = javaChangedSincePreviousText.concat(result);
+        }
+    }
+    let result = '';
+    if (javaChangedSincePreviousText || componentChangedSincePreviousText) {
+        result = result.concat(javaChangedSincePreviousText);
+        result = result.concat(componentChangedSincePreviousText);
+    }
+    return result;
+}
+
+function calculatePreviousVersion(platformVersion) {
+    const versionRegex = /((\d+\.\d+)\.(\d+))((\.(alpha|beta|rc))(\d+))?/g;
+    const versionMatch = versionRegex.exec(platformVersion);
+
+    if (!versionMatch) {
+        return '';
+    }
+    // Only generate for maintenance releases.
+    // Assumed that there will be no pre-releases of maintenance releases, e.g. 12.0.1.alphaX
+    let previousVersion = '';
+    if (versionMatch[3] > 0) {
+        previousVersion = versionMatch[2] + '.' + (versionMatch[3] - 1);
+    } else if (versionMatch[6] && versionMatch[7] > 1) {
+        previousVersion = versionMatch[1] + '.' + versionMatch[6] + (versionMatch[7] - 1)
+    } else if (versionMatch[6] && (versionMatch[6] === 'beta' || versionMatch[6] === 'rc') && versionMatch[7] === '1') {
+        // TODO: have a better way to handle this case, now it doesn't work if GH return multiple pages
+        const releases = requestGH('https://api.github.com/repos/vaadin/platform/releases');
+        const previousPrereleasePrefix = versionMatch[6] === 'beta' ? 'alpha' : 'beta';
+        const previousVersionRegex = new RegExp(versionMatch[1].replace(/\./g, '\\.') + '\\.' + previousPrereleasePrefix + '(\\d+)', 'gi');
+        let latestPreviousVersion = 0;
+        for (const rel of releases) {
+            const latestVersionMatched = previousVersionRegex.exec(rel.tag_name);
+            if (latestVersionMatched && latestVersionMatched[1] > latestPreviousVersion) {
+                latestPreviousVersion = latestVersionMatched[1];
+            }
+        }
+        previousVersion = versionMatch[1] + '.' + previousPrereleasePrefix + latestPreviousVersion;
+    }
+    return previousVersion;
+}
+
+function compareAndBuildJavaComponentReleaseString(versionName, currentVersion, previousVersion) {
+    let result = '';
+    const currentVersionSemver = toSemVer(currentVersion);
+    const previousVersionSemver = toSemVer(previousVersion);
+    if (compareVersions(currentVersionSemver, previousVersionSemver) === 1) {
+        result = getReleaseNoteLink(versionName, currentVersion);
+    }
+    return result;
+}
+
+function toSemVer(version) {
+    if (!version) {
+        return '0.0.0';
+    } else if (version.split('.').length - 1 === 3) {
+        const index = version.lastIndexOf('.');
+        return version.substr(0, index) + '-' + version.substr(index + 1);
+    }
+    return version;
+}
+
+function getReleaseNoteLink(name, version) {
+    let releaseNoteLink = '';
+    let title = '';
+    switch (name) {
+        case 'flow':
+            title = 'Vaadin Flow';
+            releaseNoteLink = 'https://github.com/vaadin/flow/releases/tag/';
+            break;
+        case 'flow-spring':
+            title = 'Vaadin Spring Addon';
+            releaseNoteLink = 'https://github.com/vaadin/spring/releases/tag/';
+            break;
+        case 'flow-cdi':
+            title = 'Vaadin CDI Addon';
+            releaseNoteLink = 'https://github.com/vaadin/cdi/releases/tag/';
+            break;
+        case 'mpr-v7':
+        case 'mpr-v8':
+            title = 'Vaadin Multiplatform Runtime **(Prime)** for Framework ' + name[name.length - 1];
+            releaseNoteLink = 'https://github.com/vaadin/cdi/releases/tag/';
+            break;
+        case 'vaadin-designer':
+            title = 'Vaadin Designer **(Pro)**';
+            releaseNoteLink = 'https://github.com/vaadin/designer/releases/tag/';
+            break;
+        case 'vaadin-testbench':
+            title = 'Vaadin TestBench **(Pro)**';
+            releaseNoteLink = 'https://github.com/vaadin/testbench/releases/tag/';
+            break;
+        case 'gradle':
+            title = 'Gradle plugin for Flow **(Community)**';
+            releaseNoteLink = 'https://github.com/devsoap/gradle-vaadin-flow/releases/tag/';
+            break;
+        default:
+            break;
+    }
+
+    return title ? `- ${title} ([${version}](${releaseNoteLink}${version}))\n` : '';
+}
+
+function buildComponentReleaseString(versionName, version) {
+    const name = versionName
+                .replace(/-/g, ' ')
+                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
+
+    //separated for readability
+    let result = `- ${name} `;
+    result = result.concat(version.pro ? '**(PRO)** ' : '');
+    result = result.concat(version.javaVersion ? `([Flow integration ${version.javaVersion}](https://github.com/vaadin/${versionName}-flow/releases/tag/${version.javaVersion})` : '');
+    result = result.concat((version.javaVersion && version.jsVersion) ? ', ' : '');
+    result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
+    result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
+    result = result.concat('\n');
+    return result;
+}
+
+function requestGH(path) {
+    // TODO: use token to have higher rate limit
+    const res = request('GET', path, {
+        headers: {
+            'user-agent': 'vaadin-platform',
+        },
+    });
+    if (res.statusCode != 200) {
+        return '';
+    }
+    return JSON.parse(res.getBody('utf8'));
 }
 
 exports.createBower = createBower;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;
+// export for testing purpose
+exports.generateChangesString = generateChangesString;
+exports.calculatePreviousVersion = calculatePreviousVersion;
