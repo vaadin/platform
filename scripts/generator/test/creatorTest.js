@@ -50,6 +50,84 @@ describe('Bower creator', function () {
     });
 });
 
+describe('Package json creator', function () {
+    it('should replace dependencies with a valid npmName of npmVersions', function () {
+        const testVersions = {
+            "foo-bar": {
+                "npmName": "@foo/foo-bar",
+                "npmVersion": "3.33",
+                "javaVersion": "2.22",
+                "jsVersion": "1.11"
+            }
+        };
+
+        const testTemplate = {
+            foo: "bar",
+            dependencies: "removed"
+        };
+
+        const expectedResult = {
+            foo: "bar",
+            dependencies: {
+                "@foo/foo-bar": "3.33",
+            }
+        };
+
+        const result = creator.createPackageJson(testVersions, testTemplate);
+
+        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
+    });
+
+    it('should skip no npmName dependencies', function () {
+        const testVersions = {
+            "bar-foo": {
+                "javaVersion": "2.22",
+                "jsVersion": "3.33"
+            }
+        };
+
+        const testTemplate = {
+            foo: "bar",
+            dependencies: "removed"
+        };
+
+        const expectedResult = {
+            foo: "bar",
+            dependencies: {}
+        };
+
+        const result = creator.createPackageJson(testVersions, testTemplate);
+
+        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
+    });
+
+    it('should skip use jsVersion if npmVersion is not found', function () {
+        const testVersions = {
+            "bar-foo": {
+                "npmName": "@foo/bar-foo",
+                "javaVersion": "2.22",
+                "jsVersion": "3.33"
+            }
+        };
+
+        const testTemplate = {
+            foo: "bar",
+            dependencies: "removed"
+        };
+
+        const expectedResult = {
+            foo: "bar",
+            dependencies: {
+                "@foo/bar-foo": "3.33"
+            }
+        };
+
+        const result = creator.createPackageJson(testVersions, testTemplate);
+
+        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
+    });
+});
+
 describe('Maven creator', function () {
     it('should replace dependencies with a valid XML of Java versions', function () {
         const testVersions = {

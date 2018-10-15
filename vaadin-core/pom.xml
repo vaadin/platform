@@ -57,6 +57,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-lumo-theme</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-material-theme</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
