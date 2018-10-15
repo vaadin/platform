@@ -1,5 +1,6 @@
 package com.vaadin.platform.test;
 
+import com.vaadin.flow.testcategory.IgnoreOSGi;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +32,9 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
+import org.junit.experimental.categories.Category;
 
+@Category(IgnoreOSGi.class)
 public class ComponentsIT extends ParallelTest {
 
     static {

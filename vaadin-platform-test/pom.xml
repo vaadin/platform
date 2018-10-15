@@ -1,13 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>platform-servlet-containers-test</module>
+        <module>platform-test-root-context</module>
+    </modules>
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
         <version>12.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-platform-test</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>Vaadin Platform Tests</name>
     <description>Vaadin Platform Tests</description>
     <url>http://vaadin.com</url>
@@ -19,6 +23,14 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <driver.binary.downloader.maven.plugin.version>1.0.14
+        </driver.binary.downloader.maven.plugin.version>
+        <flow.version>1.2-SNAPSHOT</flow.version>
+        <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
+        <jetty.version>9.4.8.v20180619</jetty.version>
+        <server.port>8888</server.port>
+        <server.stop.port>8889</server.stop.port>
+        <bnd.version>3.3.0</bnd.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -64,7 +76,15 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-test-util</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -83,9 +103,12 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
+                <version>${jetty.version}</version>
                 <configuration>
-                    <stopPort>9999</stopPort>
+                    <httpConnector>
+                        <port>${server.port}</port>
+                    </httpConnector>
+                    <stopPort>${server.stop.port}</stopPort>
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
                 </configuration>
@@ -186,6 +209,46 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.commonjava.maven.plugins</groupId>
+                <artifactId>directory-maven-plugin</artifactId>
+                <version>0.1</version>
+                <executions>
+                    <execution>
+                        <id>set-root-dir-for-common-lifecycle</id>
+                        <goals>
+                            <goal>highest-basedir</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <property>project.rootdir</property>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>set-root-dir-for-clean-lifecycle</id>
+                        <goals>
+                            <goal>highest-basedir</goal>
+                        </goals>
+                        <phase>pre-clean</phase>
+                        <configuration>
+                            <property>project.rootdir</property>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>${bnd.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 
         </plugins>
     </build>
