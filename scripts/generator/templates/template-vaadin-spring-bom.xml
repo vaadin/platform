@@ -239,6 +239,12 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-crud-testbench</artifactId>
+                <version>${vaadin.crud.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-cookie-consent-testbench</artifactId>
                 <version>${vaadin.cookie.consent.version}</version>
                 <scope>test</scope>
@@ -271,6 +277,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-app-layout-flow</artifactId>
                 <version>${vaadin.app.layout.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-crud-flow</artifactId>
+                <version>${vaadin.crud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
