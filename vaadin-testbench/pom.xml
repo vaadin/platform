@@ -88,13 +88,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Vaadin CRUD -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-crud-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
 </project>
