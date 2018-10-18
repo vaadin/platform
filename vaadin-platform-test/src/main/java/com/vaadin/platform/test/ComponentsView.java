@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
@@ -222,6 +223,8 @@ public class ComponentsView extends VerticalLayout {
 
         CookieConsent cookieConsent = new CookieConsent();
 
+        AppLayout appLayout = new AppLayout();
+
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -249,6 +252,7 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(splitVertical);
         layouts.add(tabs);
         layouts.add(board);
+        layouts.add(appLayout);
 
     }
 

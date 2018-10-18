@@ -3,6 +3,7 @@ package com.vaadin.platform.test;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
 import com.vaadin.flow.component.board.testbench.RowElement;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
@@ -51,6 +52,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(ChartElement.class).first());
         checkCustomElement($(ConfirmDialogElement.class).first());
         checkCustomElement($(CookieConsentElement.class).first());
+        checkCustomElement($(AppLayoutElement.class).first());
         checkCustomElement($(CheckboxElement.class).first());
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());

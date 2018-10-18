@@ -81,6 +81,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Vaadin App Layout -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-app-layout-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

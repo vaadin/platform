@@ -282,6 +282,13 @@
             "component": true,
             "pro": true
         },
+        "vaadin-app-layout": {
+            "npmName": "@vaadin/vaadin-app-layout",
+            "javaVersion": "1.0.0.alpha3",
+            "jsVersion": "1.0.0-alpha2",
+            "component": true,
+            "pro": true
+        },
         "vaadin-designer": {
             "javaVersion": "4.0.0.alpha4",
             "pro": true
