@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>vaadin-platform-test</artifactId>
+        <groupId>com.vaadin</groupId>
+        <version>12.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>platform-test-root-context</artifactId>
+    <packaging>war</packaging>
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <ui.jar.classes>${project.build.directory}/ui-jar</ui.jar.classes>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-test-root-context</artifactId>
+            <version>${flow.version}</version>
+            <type>jar</type>
+            <classifier>ui</classifier>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-flow-test-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.vaadin</groupId>
+                                    <artifactId>flow-test-root-context</artifactId>
+                                    <version>${flow.version}</version>
+                                    <type>jar</type>
+                                    <classifier>ui</classifier>
+                                    <includes>frontend/**,frontend-es6/**</includes>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-webjars-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includes>**/webjars/**</includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <executions>
+                    <!-- start and stop jetty (running our app) when running
+                        integration tests -->
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>clean-ui-classes</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="${ui.jar.classes}"></delete>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>repackage-webjars</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir
+                                        dir="${ui.jar.classes}/frontend/bower_components"></mkdir>
+                                <copy
+                                        todir="${ui.jar.classes}/frontend/bower_components">
+                                    <fileset
+                                            dir="${project.build.directory}/dependency/META-INF/resources/webjars/" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>ui-jar-classes</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${ui.jar.classes}">
+                                    <fileset
+                                            dir="${project.build.outputDirectory}" />
+                                </copy>
+                                <copy
+                                        todir="${ui.jar.classes}/META-INF/resources/frontend/bower_components">
+                                    <fileset
+                                            dir="${ui.jar.classes}/frontend/bower_components" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <!--  This makes static resource files be available
+                                via servlet context and via HTTP -->
+                                <resource>
+                                    <directory>src/main/webapp</directory>
+                                    <targetPath></targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>${project.name}
+                            </Implementation-Title>
+                            <Implementation-Version>${project.version}
+                            </Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        <index>false</index>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>ui-tests</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>ui</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${ui.jar.classes}</classesDirectory>
+                            <!-- Class from the "test-common" module are
+                                included into the resulting "root-context" jar. As a result we don't need
+                                "test-common" as a dependency. Another option is to have it as a separate
+                                bundle. And later on may be we need a test which does it. The lines below
+                                allows to exclude "test-common" module classes from the "root-context" jar.
+                                I don't really know why jar plugin puts classes from "test-common" module
+                                to the "root-context" jar. -->
+                            <!-- excludes> <exclude>**/servlet/*</exclude>
+                                </excludes -->
+                            <classifier>ui</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>4.0.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.platform.test-root-context</Bundle-SymbolicName>
+                        <Bundle-Name>Vaadin Platform Root Context Server Tests</Bundle-Name>
+                        <Bundle-Version>${osgi.bundle.version}</Bundle-Version>
+                        <Export-Package>com.vaadin.flow.uitest*;-noimport:=true</Export-Package>
+                        <Import-Package>!com.vaadin.flow.component.orderedlayout*,!com.vaadin.flow.dom.impl*, com.vaadin.flow.uitest.servlet*, *</Import-Package>
+                        <Embed-Dependency>*</Embed-Dependency>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
