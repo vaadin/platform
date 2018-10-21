@@ -1,13 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>platform-tests</module>
+        <module>platform-servlet-containers-test</module>
+        <module>platform-test-root-context</module>
+    </modules>
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
         <version>12.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-platform-test</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>Vaadin Platform Tests</name>
     <description>Vaadin Platform Tests</description>
     <url>http://vaadin.com</url>
@@ -19,6 +24,16 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <flow.version>1.2-SNAPSHOT</flow.version>
+        <!-- Plugins -->
+        <driver.binary.downloader.maven.plugin.version>1.0.14
+        </driver.binary.downloader.maven.plugin.version>
+        <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
+        <bnd.version>3.3.0</bnd.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <server.port>8888</server.port>
+        <server.stop.port>8889</server.stop.port>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -44,10 +59,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-server-production-mode</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -64,6 +75,23 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-test-util</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-button-flow</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ordered-layout-flow</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -73,6 +101,7 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy-production-files</goal>
                             <goal>package-for-production</goal>
@@ -83,9 +112,12 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
+                <version>${jetty.version}</version>
                 <configuration>
-                    <stopPort>9999</stopPort>
+                    <httpConnector>
+                        <port>${server.port}</port>
+                    </httpConnector>
+                    <stopPort>${server.stop.port}</stopPort>
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
                 </configuration>
@@ -94,7 +126,7 @@
                         <id>start-jetty</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>deploy-war</goal>
+                            <goal>start</goal>
                         </goals>
                     </execution>
                     <execution>
@@ -186,7 +218,18 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>${bnd.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
