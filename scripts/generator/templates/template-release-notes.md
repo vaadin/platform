@@ -15,6 +15,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 - Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
 - New Material theme for all components
+- vaadin-app-layout (new component)
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
