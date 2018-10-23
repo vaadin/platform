@@ -43,7 +43,7 @@ public class ComponentsIT extends ParallelTest {
 
     @Test
     public void appWorks() throws Exception {
-        getDriver().get("http://localhost:8080/");
+        getDriver().get("http://localhost:8888/");
         checkCustomElement($(NotificationElement.class).waitForFirst());
         checkCustomElement($(DialogElement.class).first());
 
