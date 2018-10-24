@@ -165,19 +165,6 @@ function calculatePreviousVersion(platformVersion) {
         previousVersion = versionMatch[2] + '.' + (versionMatch[3] - 1);
     } else if (versionMatch[6] && versionMatch[7] > 1) {
         previousVersion = versionMatch[1] + '.' + versionMatch[6] + (versionMatch[7] - 1)
-    } else if (versionMatch[6] && (versionMatch[6] === 'beta' || versionMatch[6] === 'rc') && versionMatch[7] === '1') {
-        // TODO: have a better way to handle this case, now it doesn't work if GH return multiple pages
-        const releases = requestGH('https://api.github.com/repos/vaadin/platform/releases');
-        const previousPrereleasePrefix = versionMatch[6] === 'beta' ? 'alpha' : 'beta';
-        const previousVersionRegex = new RegExp(versionMatch[1].replace(/\./g, '\\.') + '\\.' + previousPrereleasePrefix + '(\\d+)', 'gi');
-        let latestPreviousVersion = 0;
-        for (const rel of releases) {
-            const latestVersionMatched = previousVersionRegex.exec(rel.tag_name);
-            if (latestVersionMatched && latestVersionMatched[1] > latestPreviousVersion) {
-                latestPreviousVersion = latestVersionMatched[1];
-            }
-        }
-        previousVersion = versionMatch[1] + '.' + previousPrereleasePrefix + latestPreviousVersion;
     }
     return previousVersion;
 }
