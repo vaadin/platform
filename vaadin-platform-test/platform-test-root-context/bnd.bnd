@@ -3,6 +3,6 @@ Bundle-Name: Vaadin Platform Root Context Server Tests
 Bundle-Version: ${osgi.bundle.version}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
-Import-Package: !com.vaadin.flow.dom.impl*, com.vaadin.platform.uitest.servlet*, *
+Import-Package: !com.vaadin.flow.dom.impl*, *
 Export-Package: com.vaadin.platform.uitest*;-noimport:=true
 Web-ContextPath: /
