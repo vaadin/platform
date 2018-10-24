@@ -12,10 +12,6 @@
     <description>Vaadin Platform (vaadin-core)</description>
     <url>http://vaadin.com</url>
 
-    <properties>
-        <bnd.skip>true</bnd.skip>
-    </properties>
-
     <distributionManagement>
         <repository>
             <id>flow-internal-release</id>
