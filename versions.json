@@ -285,7 +285,7 @@
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
             "javaVersion": "1.0.0.alpha3",
-            "jsVersion": "1.0.0-alpha2",
+            "jsVersion": "1.0.0-beta1",
             "component": true,
             "pro": true
         },
