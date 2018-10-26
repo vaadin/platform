@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package flow.osgi;
+package com.vaadin.platform.osgi;
 
 import org.apache.commons.io.IOUtils;
 import org.osgi.service.http.HttpContext;
