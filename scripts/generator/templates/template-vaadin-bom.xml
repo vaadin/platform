@@ -197,6 +197,11 @@
                 <artifactId>vaadin-list-mixin</artifactId>
                 <version>2.1.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>2.1.0-beta1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
