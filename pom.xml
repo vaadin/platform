@@ -85,6 +85,13 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!--
+                In order to have some common files (e.g. drivers.xml and driver
+                folder) for all the modules, they can be put in the root path.
+                This plugin stores the root path of platform in a property named
+                project.rootdir to be used in sub-modules to access common files
+                from root.
+            -->
             <plugin>
                 <groupId>org.commonjava.maven.plugins</groupId>
                 <artifactId>directory-maven-plugin</artifactId>

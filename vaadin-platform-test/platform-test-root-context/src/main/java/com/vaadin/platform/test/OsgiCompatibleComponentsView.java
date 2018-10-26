@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-@Route("OSGi")
+@Route("osgi")
 public class OsgiCompatibleComponentsView extends Div {
     public OsgiCompatibleComponentsView() {
         Button button = new Button("Button text");

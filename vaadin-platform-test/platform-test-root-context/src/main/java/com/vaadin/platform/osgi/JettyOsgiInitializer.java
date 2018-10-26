@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package flow.osgi;
+package com.vaadin.platform.osgi;
 
 import com.vaadin.flow.server.startup.AnnotationValidator;
 import org.slf4j.LoggerFactory;
