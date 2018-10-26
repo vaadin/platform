@@ -34,7 +34,7 @@
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "2.0.0.alpha1",
-            "jsVersion": "4.2.0-alpha4",
+            "jsVersion": "4.2.0-beta1",
             "component": true
         },
         "vaadin-context-menu": {
@@ -86,7 +86,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.0.alpha1",
-            "jsVersion": "5.2.0",
+            "jsVersion": "5.2.1",
             "component": true
         },
         "vaadin-icons": {
@@ -173,7 +173,7 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.3.0"
+            "jsVersion": "1.3.1"
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
