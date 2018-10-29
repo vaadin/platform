@@ -31,7 +31,6 @@
         <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
         <bnd.version>3.3.0</bnd.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
         <server.port>8888</server.port>
         <server.stop.port>8889</server.stop.port>
     </properties>
