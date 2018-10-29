@@ -9,7 +9,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "minimist": "^1.2.0"
+    "compare-versions": "^3.4.0",
+    "minimist": "^1.2.0",
+    "sync-request": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
