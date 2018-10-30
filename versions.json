@@ -291,6 +291,13 @@
             "jsVersion": "1.0.0-beta1",
             "component": true
         },
+        "vaadin-crud": {
+            "npmName": "@vaadin/vaadin-crud",
+            "javaVersion": "1.0.0.alpha8",
+            "jsVersion": "1.0.0-alpha7",
+            "component": true,
+            "pro": true
+        },
         "vaadin-designer": {
             "javaVersion": "4.0.0.alpha4",
             "pro": true
