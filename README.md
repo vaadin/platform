@@ -10,7 +10,7 @@ Use GitHub projects to open issues, propose new features, and contribute code. B
 
 Vaadin web components are listed in https://github.com/vaadin/vaadin.
 
-## Vaadin Flow - Java framework to simplify web developmen
+## Vaadin Flow - Java framework to simplify web development
 
 Vaadin Flow is a Java web framework that abstracts client-server communication and provides you a Java API for web component.
 
