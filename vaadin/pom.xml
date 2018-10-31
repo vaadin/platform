@@ -66,6 +66,11 @@
             <artifactId>vaadin-app-layout-flow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-crud-flow</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

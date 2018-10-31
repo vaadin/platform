@@ -9,6 +9,9 @@
         "flow-cdi": {
             "javaVersion": "10.0.0"
         },
+        "flow-component-base": {
+            "javaVersion": "1.2.0.beta1"
+        },
         "polymer": {
             "npmName": "@polymer/polymer",
             "npmVersion": "3.0.5",
@@ -193,7 +196,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.0"
+            "jsVersion": "3.2.1"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
@@ -256,36 +259,42 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "2.1.0.alpha2",
-            "jsVersion": "2.1.0-alpha1",
+            "javaVersion": "2.1.0.beta2",
+            "jsVersion": "2.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
             "npmName": "@vaadin/vaadin-charts",
-            "javaVersion": "6.2.0.beta1",
+            "javaVersion": "6.2.0.beta2",
             "jsVersion": "6.2.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "1.1.0.beta1",
+            "javaVersion": "1.1.0.beta2",
             "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.1.0.beta1",
+            "javaVersion": "1.1.0.beta2",
             "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.0.0.alpha3",
-            "jsVersion": "1.0.0-alpha2",
+            "javaVersion": "1.0.0.beta2",
+            "jsVersion": "1.0.0-beta1",
+            "component": true
+        },
+        "vaadin-crud": {
+            "npmName": "@vaadin/vaadin-crud",
+            "javaVersion": "1.0.0.alpha8",
+            "jsVersion": "1.0.0-alpha7",
             "component": true,
             "pro": true
         },
