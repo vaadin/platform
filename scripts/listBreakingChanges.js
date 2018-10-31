@@ -55,8 +55,8 @@ const printChangesForProduct = (name, key, previousProduct, currentProduct) => {
     }
 }
 
-const printChanges = async () => {
-    const previousVersions = JSON.parse(await getUrl('https://raw.githubusercontent.com/vaadin/platform/11.0/versions.json'));
+const printChanges = async (previousVersion) => {
+    const previousVersions = JSON.parse(await getUrl(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`));
     
 
     for (let [key, value] of Object.entries(currentVersions.core)) {
@@ -80,5 +80,6 @@ const printChanges = async () => {
     }
 }
 
-
-printChanges();
+//so, so naive
+const previousVersion = process.argv[2] || '11.0';
+printChanges(previousVersion);
