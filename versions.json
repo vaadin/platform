@@ -7,7 +7,7 @@
             "javaVersion": "10.1.0.beta2"
         },
         "flow-cdi": {
-            "javaVersion": "10.0.0"
+            "javaVersion": "10.1.0.beta1"
         },
         "flow-component-base": {
             "javaVersion": "1.2.0.beta1"
