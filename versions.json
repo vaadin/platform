@@ -1,13 +1,16 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.2.0.alpha1"
+            "javaVersion": "1.2.0.beta2"
         },
         "flow-spring": {
-            "javaVersion": "10.1.0.beta1"
+            "javaVersion": "10.1.0.beta2"
         },
         "flow-cdi": {
-            "javaVersion": "10.0.0"
+            "javaVersion": "10.1.0.beta1"
+        },
+        "flow-component-base": {
+            "javaVersion": "1.2.0.beta1"
         },
         "polymer": {
             "npmName": "@polymer/polymer",
@@ -21,26 +24,26 @@
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.1.0",
             "component": true
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.2.2",
             "component": true
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "2.0.0.alpha1",
-            "jsVersion": "4.2.0-alpha4",
+            "javaVersion": "2.0.0.beta2",
+            "jsVersion": "4.2.0-beta2",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "1.2.0.alpha1",
-            "jsVersion": "4.2.0-beta1",
+            "javaVersion": "1.2.0.beta1",
+            "jsVersion": "4.2.0",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -49,8 +52,8 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "1.2.0.alpha1",
-            "jsVersion": "3.3.0-beta1",
+            "javaVersion": "1.2.0.beta1",
+            "jsVersion": "3.3.0",
             "component": true
         },
         "vaadin-time-picker": {
@@ -64,13 +67,13 @@
         },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
-            "javaVersion": "1.2.0.alpha1",
-            "jsVersion": "2.2.0-beta1",
+            "javaVersion": "1.2.0.beta1",
+            "jsVersion": "2.2.0",
             "component": true
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "jsVersion": "2.0.0-beta1",
+            "jsVersion": "2.0.0",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -79,19 +82,19 @@
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.1.0",
             "component": true
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "2.1.0.alpha1",
-            "jsVersion": "5.1.0",
+            "javaVersion": "2.1.0.alpha2",
+            "jsVersion": "5.2.1",
             "component": true
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "1.2.0.alpha1",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "4.2.0",
             "component": true
         },
@@ -128,7 +131,7 @@
         "iron-list": {
             "npmName": "@polymer/iron-list",
             "npmVersion": "3.0.1",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.0.19"
         },
         "iron-media-query": {
@@ -163,7 +166,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "1.1.0",
             "component": true
         },
@@ -173,7 +176,7 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.2.0"
+            "jsVersion": "1.3.1"
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
@@ -181,47 +184,47 @@
         },
         "vaadin-notification": {
             "npmName": "@vaadin/vaadin-notification",
-            "javaVersion": "1.2.0.alpha1",
-            "jsVersion": "1.2.0-beta1",
+            "javaVersion": "1.2.0.beta1",
+            "jsVersion": "1.2.0",
             "component": true
         },
         "vaadin-ordered-layout": {
             "npmName": "@vaadin/vaadin-ordered-layout",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "1.1.0",
             "component": true
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.0"
+            "jsVersion": "3.2.1"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "1.1.0",
             "component": true
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "1.1.2",
             "component": true
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "4.1.0",
             "component": true
         },
         "vaadin-tabs": {
             "npmName": "@vaadin/vaadin-tabs",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.1.1",
             "component": true
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "2.1.2",
             "component": true
         },
@@ -231,7 +234,7 @@
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.beta1",
             "jsVersion": "4.2.1",
             "component": true
         },
@@ -256,36 +259,42 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "2.1.0.alpha2",
-            "jsVersion": "2.1.0-alpha1",
+            "javaVersion": "2.1.0.beta2",
+            "jsVersion": "2.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
             "npmName": "@vaadin/vaadin-charts",
-            "javaVersion": "6.2.0.alpha2",
-            "jsVersion": "6.2.0-alpha1",
+            "javaVersion": "6.2.0.beta2",
+            "jsVersion": "6.2.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "1.1.0.alpha4",
-            "jsVersion": "1.1.0-alpha1",
+            "javaVersion": "1.1.0.beta2",
+            "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.1.0.alpha3",
-            "jsVersion": "1.1.0-alpha2",
+            "javaVersion": "1.1.0.beta2",
+            "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.0.0.alpha3",
-            "jsVersion": "1.0.0-alpha2",
+            "javaVersion": "1.0.0.beta2",
+            "jsVersion": "1.0.0-beta1",
+            "component": true
+        },
+        "vaadin-crud": {
+            "npmName": "@vaadin/vaadin-crud",
+            "javaVersion": "1.0.0.alpha8",
+            "jsVersion": "1.0.0-alpha7",
             "component": true,
             "pro": true
         },
@@ -298,7 +307,7 @@
             "pro": true
         },
         "vaadin-testbench-components": {
-            "javaVersion": "1.0.0"
+            "javaVersion": "2.0.0.alpha1"
         }
     },
     "platform": "{{version}}",

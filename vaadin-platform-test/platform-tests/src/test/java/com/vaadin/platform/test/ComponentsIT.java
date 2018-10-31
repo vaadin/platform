@@ -12,6 +12,7 @@ import com.vaadin.flow.component.checkbox.testbench.CheckboxElement;
 import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
+import com.vaadin.flow.component.crud.testbench.CrudElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
@@ -53,6 +54,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(ConfirmDialogElement.class).first());
         checkCustomElement($(CookieConsentElement.class).first());
         checkCustomElement($(AppLayoutElement.class).first());
+        checkCustomElement($(CrudElement.class).first());
         checkCustomElement($(CheckboxElement.class).first());
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());
