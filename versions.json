@@ -33,14 +33,14 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "1.1.0",
+            "javaVersion": "2.0.0.alpha1",
             "jsVersion": "4.2.0-alpha4",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "1.1.0",
-            "jsVersion": "4.2.0-beta2",
+            "javaVersion": "1.2.0.alpha1",
+            "jsVersion": "4.2.0-beta1",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -49,7 +49,7 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.alpha1",
             "jsVersion": "3.3.0-beta1",
             "component": true
         },
@@ -64,7 +64,7 @@
         },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.alpha1",
             "jsVersion": "2.2.0-beta1",
             "component": true
         },
@@ -86,7 +86,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.0.alpha1",
-            "jsVersion": "5.2.0-beta2",
+            "jsVersion": "5.1.0",
             "component": true
         },
         "vaadin-icons": {
@@ -181,7 +181,7 @@
         },
         "vaadin-notification": {
             "npmName": "@vaadin/vaadin-notification",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.2.0.alpha1",
             "jsVersion": "1.2.0-beta1",
             "component": true
         },
@@ -279,6 +279,13 @@
             "npmName": "@vaadin/vaadin-cookie-consent",
             "javaVersion": "1.1.0.alpha3",
             "jsVersion": "1.1.0-alpha2",
+            "component": true,
+            "pro": true
+        },
+        "vaadin-app-layout": {
+            "npmName": "@vaadin/vaadin-app-layout",
+            "javaVersion": "1.0.0.alpha3",
+            "jsVersion": "1.0.0-alpha2",
             "component": true,
             "pro": true
         },

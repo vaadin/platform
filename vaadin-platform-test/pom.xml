@@ -141,11 +141,6 @@
             <version>${flow.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-button-flow</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -271,6 +266,7 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
