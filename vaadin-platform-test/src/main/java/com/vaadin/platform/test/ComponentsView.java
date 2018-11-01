@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
@@ -33,6 +34,8 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
+import com.vaadin.flow.component.crud.BinderCrudEditor;
+import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -55,6 +58,7 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -222,6 +226,11 @@ public class ComponentsView extends VerticalLayout {
 
         CookieConsent cookieConsent = new CookieConsent();
 
+        AppLayout appLayout = new AppLayout();
+
+        Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
+            new Binder<>(Entity.class), new HorizontalLayout()));
+
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -241,6 +250,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(textArea);
         components.add(upload);
         components.add(cookieConsent);
+        components.add(crud);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
@@ -249,6 +259,7 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(splitVertical);
         layouts.add(tabs);
         layouts.add(board);
+        layouts.add(appLayout);
 
     }
 
