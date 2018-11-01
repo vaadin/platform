@@ -13,10 +13,20 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy
 
-- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
+- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+)
+- CDI & OSGi support in Flow
 - New Material theme for all components
-- vaadin-app-layout (new component)
-- vaadin-crud (new component)
+- New components:
+  - vaadin-app-layout
+  - vaadin-crud
+  - vaadin-time-picker
+  - vaadin-checkbox-group
+- New server-side API's
+  - ContextMenu
+  - TreeGrid
+- Content renderer functions
+- Simple column configuration for vaadin-grid
+- ComboBox lazy-loading
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
