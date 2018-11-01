@@ -45,7 +45,7 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
   - Both versions work with previous platform versions.
 
 ### Tools
-- Vaadin Designer **(Pro)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
+- Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 - Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 
 ### App Starters
@@ -104,7 +104,7 @@ The following built-in browsers in the following mobile operating systems:
 Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom, VS.code among others (including Emacs and Vim).
 
 **Vaadin Designer** supports the following IDEs:
-- Eclipse Java EE versions: Neon, Oxygen and Photon
+- Eclipse Java EE versions: Oxygen, Photon and 2018.
 - JetBrains IntelliJ IDEA 2016, 2017 and 2018. Community or Ultimate edition.
 
 ## Java Related Technologies and Tooling Support
