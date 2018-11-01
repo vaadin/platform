@@ -131,6 +131,10 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Payara Server
 - Payara Micro
 
+# Breaking changes
+This lists products that have breaking changes from V11
+- vaadin-combo-box Java API ([release notes](https://github.com/vaadin/vaadin-combo-box-flow/releases/tag/{{core.vaadin-combo-box.javaVersion}}))
+
 # Known Issues and Limitations
 
 ## Flow
