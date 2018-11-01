@@ -57,6 +57,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-lumo-theme</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-material-theme</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -132,26 +136,4 @@
         </dependency>
 
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>javadocs</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>javadoc-jar</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

@@ -38,7 +38,7 @@
             <artifactId>vaadin-core</artifactId>
         </dependency>
 
-        <!-- TestBench must be included in the project separately to get 
+        <!-- TestBench must be included in the project separately to get
             a test scope -->
 
         <dependency>
@@ -59,6 +59,16 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-cookie-consent-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-app-layout-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-crud-flow</artifactId>
         </dependency>
 
     </dependencies>

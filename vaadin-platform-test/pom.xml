@@ -83,7 +83,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
+                <version>9.4.11.v20180605</version>
                 <configuration>
                     <stopPort>9999</stopPort>
                     <stopWait>5</stopWait>

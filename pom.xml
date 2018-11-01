@@ -30,6 +30,7 @@
         <module>vaadin-testbench</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-spring-boot-starter</module>
+        <module>vaadin-platform-javadoc</module>
     </modules>
 
     <scm>
@@ -73,10 +74,15 @@
                     <version>3.0.0</version>
                     <configuration>
                         <includeDependencySources>true</includeDependencySources>
+                        <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
                             <!-- Exclude client engine since it is not user facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
+                            <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
                         </dependencySourceExcludes>
+                        <dependencySourceIncludes>
+                            <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
+                        </dependencySourceIncludes>
                         <!-- Don't fail on doclint errors for missing servlet artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
@@ -86,24 +92,4 @@
         </pluginManagement>
     </build>
 
-    <profiles>
-        <profile>
-            <id>javadocs</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>javadoc-jar</id>
-                                <goals>
-                                    <goal>aggregate-jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
