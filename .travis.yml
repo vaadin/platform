@@ -12,10 +12,12 @@ install:
 - scripts/generateBoms.sh
 - mvn install -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
- - mvn package -Pjavadocs -DskipTests
+- mvn package -Pjavadocs -DskipTests
+- npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
 - mvn test -B
+- scripts/verifyBowerDependencies.sh
 env:
   global:
   - secure: SohKmHZJqtw0GVvDCJxiTXtkDqEIGg6s9oQuygcTCg+E5tJgH5XMMW/IvRRb5dKao5N2UKmcXZsNdji0xEX33SPnl+CrD2cvHOtRcrvCyW4tygPvI+XyYF4xaCD5cb3jGikedV1WWPvS/k89mTgIMj+6i+DB/6Ex9iI5kbWjivlMGChQtzBU3OIhC/cnym6Z+NA9huAC+xWkcAD5reb/JFRD8l+qUD2uWQW0Cf04gc7J54zwnh/cdt8zyVQVKM0PIjk8ZvxbZ4NRbxaUFYvoeQucIwcIl/kjVFUY2UT1NrbMKTHgXDKhg8cDVDkixN3eUGwn1SlQQ/j93wZ/riGeFydxBMFA0S4uw+3ptmWrDvOLcok1VCtujI+jc1wPPC+tJV0m6E18/LLhP6BWl5L35PBnKrt99nakOdNV6b0qrSkrqJsrqZr6ZupwOyMJEqqgIZGf86OruNltGIogFzTRBCMK/VCzF1KRkrt5EERfB1xW46bLVG7so+f0p3byycRvJ4gfLq+UC8B1uWerzZQVjXOH89fLXhADKCg0C7Laz8obei0uC8igJXDGIcpluRpLS6InCVWgQFqihhHy/OSipJ8g9Z5py1RJNz+BykA7kywZ7QcAudKu5a/bcOFHokL4TJvsLhvRcbn7vknxS/0PvMw2bjym1t1XDRtzwPxctdU=
