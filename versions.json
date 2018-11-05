@@ -246,10 +246,10 @@
             "jsVersion": "2.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "1.0.0"
+            "javaVersion": "1.1.0"
         },
         "mpr-v8": {
-            "javaVersion": "1.1.0.alpha1"
+            "javaVersion": "1.1.0"
         }
     },
     "vaadin": {
