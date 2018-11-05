@@ -299,7 +299,6 @@
             "pro": true
         },
         "vaadin-designer": {
-            "javaVersion": "4.0.0.alpha4",
             "pro": true
         },
         "vaadin-testbench": {
