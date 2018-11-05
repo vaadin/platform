@@ -4,10 +4,10 @@
             "javaVersion": "1.2.0"
         },
         "flow-spring": {
-            "javaVersion": "10.1.0.beta2"
+            "javaVersion": "10.1.0"
         },
         "flow-cdi": {
-            "javaVersion": "10.1.0.beta1"
+            "javaVersion": "10.1.0"
         },
         "flow-component-base": {
             "javaVersion": "1.2.0"
