@@ -8,33 +8,39 @@ then
 fi
 
 vaadinMavenDir=../vaadin
-vaadinBowerDir=../../vaadin
-vaadinCoreBowerDir=../../vaadin-core
 
 pushd `dirname $0`
 scriptDir=`pwd`
+
+vaadinBowerDir="$scriptDir"/tmp.vaadin
+mkdir "$vaadinBowerDir"
+cp "$scriptDir"/generator/results/vaadin-bower.json "$vaadinBowerDir"/bower.json
+
+vaadinCoreBowerDir="$scriptDir"/tmp.vaadin-core
+mkdir "$vaadinCoreBowerDir"
+cp "$scriptDir"/generator/results/vaadin-core-bower.json "$vaadinCoreBowerDir"/bower.json
 
 mavenTemp="$scriptDir"/tmp.maven-deps
 bowerTemp="$scriptDir"/tmp.bower-deps
 
 pushd "$scriptDir/$vaadinMavenDir"
-mvn dependency:tree|grep org.webjars.bowergithub|cut -d: -f2,4 > "$mavenTemp"
-mvn dependency:tree|grep com.vaadin.webjar:|cut -d: -f2,4 >> "$mavenTemp"
+mvn dependency:tree|grep 'org\.webjars\.bowergithub' | cut -d: -f2,4 > "$mavenTemp"
+mvn dependency:tree|grep 'com\.vaadin\.webjar:' | cut -d: -f2,4 >> "$mavenTemp"
 popd
 
-pushd "$scriptDir/$vaadinCoreBowerDir"
+pushd "$vaadinCoreBowerDir"
 rm -rf bower_components
 bower install
 bower link
 popd
 
-pushd "$scriptDir/$vaadinBowerDir"
+pushd "$vaadinBowerDir"
 rm -rf bower_components
 bower link vaadin-core
 bower install
 for bowerjson in bower_components/*/.bower.json
-do 
-	cat $bowerjson|jq -r '(.name + ":" + .version)' 
+do
+	cat $bowerjson|jq -r '(.name + ":" + .version)'
 done > "$bowerTemp"
 
 popd
@@ -42,7 +48,7 @@ popd
 
 errors=0
 for mavenDep in `cat "$mavenTemp"|sort`
-do 
+do
 	name=`echo $mavenDep|cut -d: -f 1`
 	mavenVersion=`echo $mavenDep|cut -d: -f 2`
 	bowerVersion=`egrep "^$name:" "$bowerTemp"|cut -d: -f 2`
@@ -63,10 +69,10 @@ do
 	fi
 done
 
-rm -f "$mavenTemp" "$bowerTemp"
+rm -rf "$mavenTemp" "$bowerTemp" "$vaadinBowerDir" "$vaadinCoreBowerDir"
 
 
-if [ "$errors" != "0" ]
+if [[ "$errors" != "0" && "$TRAVIS_EVENT_TYPE" == "" ]]
 then
 	exit 1
 fi
