@@ -33,6 +33,8 @@ These components provide a Java API for web components.
 | Charts* | https://github.com/vaadin/vaadin-charts-flow |
 | Checkbox | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | https://github.com/vaadin/vaadin-combo-box-flow |
+| ConfirmDialog* | https://github.com/vaadin/vaadin-confirm-dialog-flow |
+| CookieConsent* | https://github.com/vaadin/vaadin-cookie-consent-flow |
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
