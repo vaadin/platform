@@ -13,10 +13,20 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy
 
-- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+).
+- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+)
+- CDI & OSGi support in Flow
 - New Material theme for all components
-- vaadin-app-layout (new component)
-- vaadin-crud (new component)
+- New components:
+  - vaadin-app-layout
+  - vaadin-crud
+  - vaadin-time-picker
+  - vaadin-checkbox-group
+- New server-side API's
+  - ContextMenu
+  - TreeGrid
+- Content renderer functions
+- Simple column configuration for vaadin-grid
+- ComboBox lazy-loading
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
@@ -45,7 +55,7 @@ Projects marked as **(Community)** are created by the Vaadin open source communi
   - Both versions work with previous platform versions.
 
 ### Tools
-- Vaadin Designer **(Pro)** ([{{vaadin.vaadin-designer.javaVersion}}](https://github.com/vaadin/designer/blob/{{vaadin.vaadin-designer.javaVersion}}/RELEASE-NOTES.md))
+- Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 - Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 
 ### App Starters
@@ -104,7 +114,7 @@ The following built-in browsers in the following mobile operating systems:
 Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom, VS.code among others (including Emacs and Vim).
 
 **Vaadin Designer** supports the following IDEs:
-- Eclipse Java EE versions: Neon, Oxygen and Photon
+- Eclipse Java EE versions: Oxygen, Photon and 2018.
 - JetBrains IntelliJ IDEA 2016, 2017 and 2018. Community or Ultimate edition.
 
 ## Java Related Technologies and Tooling Support
@@ -120,6 +130,10 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Jetty 9
 - Payara Server
 - Payara Micro
+
+# Breaking changes
+This lists products that have breaking changes from V11
+- vaadin-combo-box Java API ([release notes](https://github.com/vaadin/vaadin-combo-box-flow/releases/tag/{{core.vaadin-combo-box.javaVersion}}))
 
 # Known Issues and Limitations
 
