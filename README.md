@@ -27,11 +27,13 @@ These components provide a Java API for web components.
 
 | Component | Repository |
 |-----------|------------|
+| AppLayout | https://github.com/vaadin/vaadin-app-layout-flow | 
 | Board* | https://github.com/vaadin/vaadin-board-flow | 
 | Button | https://github.com/vaadin/vaadin-button-flow |
 | Charts* | https://github.com/vaadin/vaadin-charts-flow |
 | Checkbox | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | https://github.com/vaadin/vaadin-combo-box-flow |
+| Crud* | https://github.com/vaadin/vaadin-crud-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
