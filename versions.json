@@ -60,7 +60,7 @@
             "component": true
         },
         "vaadin-grid": {
-            "javaVersion": "1.0.5",
+            "javaVersion": "1.0.6",
             "jsVersion": "5.0.4",
             "component": true
         },
@@ -152,7 +152,7 @@
             "component": true
         },
         "vaadin-text-field": {
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "2.0.2",
             "component": true
         },
