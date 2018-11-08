@@ -4,7 +4,7 @@
             "javaVersion": "1.0.5"
         },
         "flow-spring": {
-            "javaVersion": "10.0.5"
+            "javaVersion": "10.1.1"
         },
         "polymer": {
             "jsVersion": "2.6.1"
