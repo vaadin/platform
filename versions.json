@@ -238,6 +238,12 @@
             "jsVersion": "4.2.1",
             "component": true
         },
+        "vaadin-app-layout": {
+            "npmName": "@vaadin/vaadin-app-layout",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
         },
@@ -284,12 +290,6 @@
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
-        },
-        "vaadin-app-layout": {
-            "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.0.0",
-            "jsVersion": "1.0.0",
-            "component": true
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",

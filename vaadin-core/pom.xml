@@ -134,6 +134,9 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-notification-flow</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-app-layout-flow</artifactId>
+        </dependency>
     </dependencies>
 </project>
