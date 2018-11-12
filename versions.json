@@ -213,9 +213,6 @@
         "vaadin-license-checker": {
             "javaVersion": "2.0.1",
             "jsVersion": "2.0.1"
-        },
-        "vaadin-overlay": {
-            "jsVersion": "3.0.3"
         }
     },
     "platform": "{{version}}",
