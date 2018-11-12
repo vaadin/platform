@@ -179,7 +179,7 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
-                <version>{{vaadin.vaadin-license-checker.javaVersion}}</version>
+                <version>${vaadin.license.checker.version}</version>
             </dependency>
 
             <dependency>
