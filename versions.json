@@ -32,7 +32,7 @@
             "component": true
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.1.1"
+            "jsVersion": "2.0.3"
         },
         "vaadin-date-picker": {
             "javaVersion": "1.0.6",
@@ -40,7 +40,7 @@
             "component": true
         },
         "vaadin-development-mode-detector": {
-            "jsVersion": "1.1.0-beta1"
+            "jsVersion": "1.0.3"
         },
         "vaadin-dialog": {
             "javaVersion": "1.0.3",
@@ -52,7 +52,7 @@
             "component": true
         },
         "vaadin-element-mixin": {
-            "jsVersion": "1.1.2"
+            "jsVersion": "1.0.2"
         },
         "vaadin-form-layout": {
             "javaVersion": "1.0.3",
@@ -157,7 +157,7 @@
             "component": true
         },
         "vaadin-themable-mixin": {
-            "jsVersion": "1.3.2"
+            "jsVersion": "1.1.6"
         },
         "vaadin-upload": {
             "javaVersion": "1.0.3",
@@ -165,7 +165,7 @@
             "component": true
         },
         "vaadin-usage-statistics": {
-            "jsVersion": "1.1.0-beta1"
+            "jsVersion": "1.0.8"
         },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
