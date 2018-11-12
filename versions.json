@@ -197,6 +197,10 @@
         },
         "vaadin-testbench-components": {
             "javaVersion": "1.0.0"
+        },
+        "vaadin-license-checker": {
+            "javaVersion": "2.0.1",
+            "jsVersion": "2.0.1"
         }
     },
     "platform": "{{version}}"
