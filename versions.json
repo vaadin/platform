@@ -197,7 +197,7 @@
             "pro": true
         },
         "vaadin-cookie-consent": {
-            "javaVersion": "1.0.1",
+            "javaVersion": "1.0.2",
             "jsVersion": "1.0.2",
             "component": true,
             "pro": true
