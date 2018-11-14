@@ -10,7 +10,7 @@
             "jsVersion": "2.6.1"
         },
         "shadycss": {
-            "jsVersion": "1.5.0"
+            "jsVersion": "1.2.1"
         },
         "vaadin-button": {
             "javaVersion": "1.0.4",
@@ -115,6 +115,9 @@
             "jsVersion": "1.0.3",
             "component": true
         },
+        "vaadin-list-mixin": {
+            "jsVersion": "2.0.1"
+        },
         "vaadin-lumo-styles": {
             "jsVersion": "1.0.0"
         },
@@ -199,7 +202,6 @@
             "javaVersion": "1.0.0"
         },
         "vaadin-license-checker": {
-            "javaVersion": "2.0.1",
             "jsVersion": "2.0.1"
         }
     },
