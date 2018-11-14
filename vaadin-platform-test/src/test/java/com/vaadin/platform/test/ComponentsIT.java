@@ -77,7 +77,7 @@ public class ComponentsIT extends ParallelTest {
 
     private void checkCustomElement(TestBenchElement element) {
         Assert.assertNotNull(element);
-        String tagName = element.getTagName();
+        String tagName = element.getTagName().toLowerCase();
         Assert.assertTrue(tagName.contains("-"));
         // Check that the custom element has been registered
         Assert.assertTrue((Boolean) executeScript(
