@@ -78,7 +78,7 @@ For **Java projects**, an example of the necessary setup can be found from the [
 
 # Supported Technologies
 ## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower as package manager) or Java 8
+Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/NPM as package manager) or Java 8
 - Windows
 - Linux
 - macOS
@@ -127,7 +127,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - IBM WebSphere Application Server 8.5 Liberty Profile and 9
 - RedHat JBoss EAP 7
 - WildFly 8, 9, 10, 11, 12
-- Jetty 9
+- Jetty 9.4
 - Payara Server
 - Payara Micro
 
