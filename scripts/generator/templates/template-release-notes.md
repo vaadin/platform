@@ -78,7 +78,7 @@ For **Java projects**, an example of the necessary setup can be found from the [
 
 # Supported Technologies
 ## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower as package manager) or Java 8
+Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/NPM as package manager) or Java 8
 - Windows
 - Linux
 - macOS
@@ -127,7 +127,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - IBM WebSphere Application Server 8.5 Liberty Profile and 9
 - RedHat JBoss EAP 7
 - WildFly 8, 9, 10, 11, 12
-- Jetty 9
+- Jetty 9.4
 - Payara Server
 - Payara Micro
 
@@ -139,7 +139,6 @@ This lists products that have breaking changes from V11
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
-- There is no OSGi support. Add a :+1: to https://github.com/vaadin/flow/issues/455 to indicate your interest
 
 ## Designer
 - External preview doesn't work on IE11.
