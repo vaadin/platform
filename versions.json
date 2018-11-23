@@ -307,6 +307,9 @@
         },
         "vaadin-testbench-components": {
             "javaVersion": "2.0.0"
+        },
+        "vaadin-license-checker": {
+            "jsVersion": "2.1.0"
         }
     },
     "platform": "{{version}}",
