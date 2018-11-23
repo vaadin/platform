@@ -3,8 +3,8 @@
 which jq
 if [ "$?" != "0" ]
 then
-	echo "Please install 'jq' to use this script"
-	exit 2
+  echo "Please install 'jq' to use this script"
+  exit 2
 fi
 
 vaadinMavenDir=../vaadin
@@ -40,7 +40,7 @@ bower link vaadin-core
 bower install
 for bowerjson in bower_components/*/.bower.json
 do
-	cat $bowerjson|jq -r '(.name + ":" + .version)'
+  cat $bowerjson|jq -r '(.name + ":" + .version)'
 done > "$bowerTemp"
 
 popd
@@ -49,24 +49,30 @@ popd
 errors=0
 for mavenDep in `cat "$mavenTemp"|sort`
 do
-	name=`echo $mavenDep|cut -d: -f 1`
-	mavenVersion=`echo $mavenDep|cut -d: -f 2`
-	bowerVersion=`egrep "^$name:" "$bowerTemp"|cut -d: -f 2`
-	if [ "$mavenVersion" != "$bowerVersion" ]
-	then
-		echo "##teamcity[testStarted name='$name']"
-		details="Maven version: $mavenVersion, Bower version: $bowerVersion"
-		
-		if [[ $name = *"vaadin"* ]]
-		then
-			echo "##teamcity[testFailed name='$name' type='comparisonFailure' message='Maven and Bower versions do not match' details='$details']"
-			errors=1
-		else
-			echo "##teamcity[testIgnored name='$name' message='Maven and Bower versions do not match\\n$details']"
-		fi
-		echo "##teamcity[testFinished name='$name']"
-		echo 
-	fi
+  name=`echo $mavenDep|cut -d: -f 1`
+  mavenVersion=`echo $mavenDep|cut -d: -f 2`
+  # This exception happens because the bower package name is vaadin-license-checker and the maven artifact of the webjar is license-checker
+  if [ "$name" = "license-checker" ]
+  then
+    bowerVersion=`egrep "^vaadin-license-checker:" "$bowerTemp"|cut -d: -f 2`
+  else
+    bowerVersion=`egrep "^$name:" "$bowerTemp"|cut -d: -f 2`
+  fi
+  if [ "$mavenVersion" != "$bowerVersion" ]
+  then
+    echo "##teamcity[testStarted name='$name']"
+    details="Maven version: $mavenVersion, Bower version: $bowerVersion"
+
+    if [[ $name = *"vaadin"* ]]
+    then
+      echo "##teamcity[testFailed name='$name' type='comparisonFailure' message='Maven and Bower versions do not match' details='$details']"
+      errors=1
+    else
+      echo "##teamcity[testIgnored name='$name' message='Maven and Bower versions do not match\\n$details']"
+    fi
+    echo "##teamcity[testFinished name='$name']"
+    echo
+  fi
 done
 
 rm -rf "$mavenTemp" "$bowerTemp" "$vaadinBowerDir" "$vaadinCoreBowerDir"
@@ -74,6 +80,6 @@ rm -rf "$mavenTemp" "$bowerTemp" "$vaadinBowerDir" "$vaadinCoreBowerDir"
 
 if [[ "$errors" != "0" && "$TRAVIS_EVENT_TYPE" == "" ]]
 then
-	exit 1
+  exit 1
 fi
 
