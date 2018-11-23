@@ -46,6 +46,9 @@ const mavenBomResultFileName = getResultsFilePath('vaadin-bom.xml');
 const mavenSpringBomTemplateFileName = getTemplateFilePath('template-vaadin-spring-bom.xml');
 const mavenSpringBomResultFileName = getResultsFilePath('vaadin-spring-bom.xml');
 
+const mavenPlatformTestTemplateFileName = getTemplateFilePath('template-vaadin-platform-test-pom.xml');
+const mavenPlatformTestResultFileName = getResultsFilePath('vaadin-platform-test-pom.xml');
+
 const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
 const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 
@@ -61,4 +64,5 @@ writer.writeBower(versions.vaadin, vaadinBowerTemplateFileName, vaadinBowerResul
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
+writer.writeMaven(versions, mavenPlatformTestTemplateFileName, mavenPlatformTestResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
