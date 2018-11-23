@@ -9,9 +9,6 @@
         "flow-cdi": {
             "javaVersion": "10.1.0"
         },
-        "flow-component-base": {
-            "javaVersion": "1.2.0"
-        },
         "polymer": {
             "npmName": "@polymer/polymer",
             "npmVersion": "3.0.5",
