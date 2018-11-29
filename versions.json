@@ -240,8 +240,8 @@
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.0.2",
-            "jsVersion": "1.0.1",
+            "javaVersion": "1.0.3",
+            "jsVersion": "1.0.2",
             "component": true
         },
         "webcomponentsjs": {
