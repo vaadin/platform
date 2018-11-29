@@ -32,7 +32,8 @@
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "1.2.0",
             "jsVersion": "2.2.3",
-            "component": true
+            "component": true,
+            "components": ["Checkbox", "Checkbox Group"]
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
@@ -90,7 +91,8 @@
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.1",
             "jsVersion": "5.2.1",
-            "component": true
+            "component": true,
+            "components": ["Grid", "Tree Grid", "Grid Context Menu"]
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
@@ -192,7 +194,8 @@
             "npmName": "@vaadin/vaadin-ordered-layout",
             "javaVersion": "1.2.0",
             "jsVersion": "1.1.0",
-            "component": true
+            "component": true,
+            "components": ["Horizontal Layout", "Vertical Layout", "Flex Layout"]
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
@@ -208,7 +211,8 @@
             "npmName": "@vaadin/vaadin-radio-button",
             "javaVersion": "1.2.0",
             "jsVersion": "1.1.2",
-            "component": true
+            "component": true,
+            "components": ["Radio Button", "Radio Button Group"]
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
@@ -226,7 +230,8 @@
             "npmName": "@vaadin/vaadin-text-field",
             "javaVersion": "1.2.0",
             "jsVersion": "2.1.3",
-            "component": true
+            "component": true,
+            "components": ["Text Field", "Text Area", "Password Field"]
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
