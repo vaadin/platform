@@ -150,7 +150,7 @@
             "component": true
         },
         "vaadin-tabs": {
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "2.0.0",
             "component": true
         },
