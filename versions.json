@@ -61,7 +61,7 @@
         },
         "vaadin-grid": {
             "javaVersion": "1.0.6",
-            "jsVersion": "5.0.4",
+            "jsVersion": "5.0.5",
             "component": true
         },
         "vaadin-icons": {
