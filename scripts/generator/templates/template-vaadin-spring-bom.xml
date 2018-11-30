@@ -255,6 +255,12 @@
                 <version>${vaadin.board.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-rich-text-editor-testbench</artifactId>
+                <version>${vaadin.rich.text.editor.version}</version>
+                <scope>test</scope>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -293,7 +299,12 @@
                 <artifactId>vaadin-board-flow</artifactId>
                 <version>${vaadin.board.version}</version>
             </dependency>
-            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-rich-text-editor-flow</artifactId>
+                <version>${vaadin.rich.text.editor.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>mpr-v7</artifactId>
