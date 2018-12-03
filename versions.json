@@ -156,7 +156,7 @@
         },
         "vaadin-text-field": {
             "javaVersion": "1.0.5",
-            "jsVersion": "2.0.2",
+            "jsVersion": "2.0.3",
             "component": true
         },
         "vaadin-themable-mixin": {
