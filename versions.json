@@ -312,7 +312,7 @@
     "platform": "{{version}}",
     "community": {
         "gradle": {
-            "javaVersion": "1.0.0.M4"
+            "javaVersion": "1.0.0.RC4"
         }
     }
 }
