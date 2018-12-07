@@ -22,7 +22,7 @@
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.1.1",
             "component": true
         },
         "vaadin-checkbox": {
@@ -40,7 +40,7 @@
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "1.2.0",
-            "jsVersion": "4.2.0",
+            "jsVersion": "4.2.1",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -50,12 +50,12 @@
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
             "javaVersion": "1.2.0",
-            "jsVersion": "3.3.1",
+            "jsVersion": "3.3.2",
             "component": true
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.1.1",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -65,7 +65,7 @@
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.2.0",
+            "jsVersion": "2.2.1",
             "component": true
         },
         "vaadin-select": {
@@ -193,7 +193,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.2"
+            "jsVersion": "3.2.3"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
