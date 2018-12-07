@@ -50,6 +50,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -231,6 +232,7 @@ public class ComponentsView extends VerticalLayout {
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
             new Binder<>(Entity.class), new HorizontalLayout()));
 
+        RichTextEditor richTextEditor = new RichTextEditor();
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -251,6 +253,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(upload);
         components.add(cookieConsent);
         components.add(crud);
+        components.add(richTextEditor);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
