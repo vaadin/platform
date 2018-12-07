@@ -127,8 +127,8 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+) 
-- There is no CDI support. The official CDI add-on is targeted for Vaadin platform 12. See https://github.com/vaadin/cdi/tree/master for updates
-- There is no OSGi support. Add a :+1: to https://github.com/vaadin/flow/issues/455 to indicate your interest
+- CDI support is [available as an add-on](https://vaadin.com/directory/component/vaadin-cdi), version `10.0` is compatible with V10 and V11. The add-on is included in the platform starting from V12.
+- OSGi support is available starting from Vaadin 12 (Dec. 5th 2018)
 
 ## Designer
 - External preview doesn't work on IE11.
