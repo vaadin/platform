@@ -4,7 +4,7 @@
             "javaVersion": "1.2.2"
         },
         "flow-spring": {
-            "javaVersion": "10.1.0"
+            "javaVersion": "10.1.1"
         },
         "flow-cdi": {
             "javaVersion": "10.1.0"
@@ -319,7 +319,7 @@
     "platform": "{{version}}",
     "community": {
         "gradle": {
-            "javaVersion": "1.0.0.M4"
+            "javaVersion": "1.0.0.RC4"
         }
     }
 }
