@@ -52,6 +52,7 @@ These components provide a Java API for web components.
 | Tabs | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | https://github.com/vaadin/vaadin-text-field-flow |
 | Upload | https://github.com/vaadin/vaadin-upload-flow |
+| TimePicker | https://github.com/vaadin/vaadin-time-picker-flow |
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
 
