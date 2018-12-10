@@ -253,6 +253,9 @@
         },
         "mpr-v8": {
             "javaVersion": "1.1.0"
+        },
+        "gradle": {
+            "javaVersion": "1.0.0.RC4"
         }
     },
     "vaadin": {
@@ -309,10 +312,5 @@
             "jsVersion": "2.1.0"
         }
     },
-    "platform": "{{version}}",
-    "community": {
-        "gradle": {
-            "javaVersion": "1.0.0.M4"
-        }
-    }
+    "platform": "{{version}}"
 }
