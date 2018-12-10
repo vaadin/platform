@@ -69,6 +69,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>flow-osgi</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-lumo-theme</artifactId>
                 <version>${flow.version}</version>
             </dependency>
@@ -124,6 +129,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-date-picker-flow</artifactId>
                 <version>${vaadin.date.picker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-time-picker-flow</artifactId>
+                <version>${vaadin.time.picker.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
