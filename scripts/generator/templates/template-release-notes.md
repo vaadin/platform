@@ -69,8 +69,8 @@ There are also full application examples available like **Bakery (Pro)** and **B
 ### Getting Started Manually
 
 For **frontend projects** you can get the dependencies with 
- - [Bower](https://bower.io) by running `bower install vaadin` or `bower install vaadin-core`
- - [NPM](https://www.npmjs.com) by running `npm install @vaadin/vaadin` or `npm install @vaadin/vaadin-core`
+ - [Bower](https://bower.io) by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
+ - [NPM](https://www.npmjs.com) by running `npm install @vaadin/vaadin@{{platform}}` or `npm install @vaadin/vaadin-core@{{platform}}`
 
 For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
 
