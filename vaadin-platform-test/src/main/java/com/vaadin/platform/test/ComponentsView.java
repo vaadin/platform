@@ -37,6 +37,7 @@ import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -93,6 +94,13 @@ public class ComponentsView extends VerticalLayout {
         log.log("DatePicker default is " + datePicker.getValue());
         datePicker.addValueChangeListener(e -> {
             log.log("DatePicker value changed from " + e.getOldValue() + " to "
+                    + e.getValue());
+        });
+
+        TimePicker timePicker = new TimePicker();
+        log.log("TimePicker default is " + timePicker.getValue());
+        timePicker.addValueChangeListener(e -> {
+            log.log("TimePicker value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
 

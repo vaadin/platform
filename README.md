@@ -47,10 +47,12 @@ These components provide a Java API for web components.
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |
 | RadioButton | https://github.com/vaadin/vaadin-radio-button-flow | 
+| RichTextEditor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
 | SplitLayout | https://github.com/vaadin/vaadin-split-layout-flow |
 | Tabs | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | https://github.com/vaadin/vaadin-text-field-flow |
 | Upload | https://github.com/vaadin/vaadin-upload-flow |
+| TimePicker | https://github.com/vaadin/vaadin-time-picker-flow |
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
 
