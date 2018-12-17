@@ -70,7 +70,7 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "jsVersion": "2.0.1",
+            "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-element-mixin": {
