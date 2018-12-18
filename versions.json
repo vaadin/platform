@@ -19,7 +19,7 @@
         },
         "vaadin-checkbox": {
             "javaVersion": "1.0.3",
-            "jsVersion": "2.1.2",
+            "jsVersion": "2.1.3",
             "component": true
         },
         "vaadin-combo-box": {
