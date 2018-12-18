@@ -28,7 +28,7 @@
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.2.4",
+            "jsVersion": "2.2.5",
             "component": true
         },
         "vaadin-combo-box": {
