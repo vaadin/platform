@@ -140,7 +140,7 @@
             "component": true
         },
         "vaadin-radio-button": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "1.0.1",
             "component": true
         },
