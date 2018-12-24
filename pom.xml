@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -27,6 +28,7 @@
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
         <module>vaadin-platform-test</module>
+        <module>platform-servlet-containers-tests</module>
         <module>vaadin-testbench</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-spring-boot-starter</module>
@@ -76,14 +78,16 @@
                         <includeDependencySources>true</includeDependencySources>
                         <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
-                            <!-- Exclude client engine since it is not user facing API -->
+                            <!-- Exclude client engine since it is not user 
+                                facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
                             <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
                         </dependencySourceExcludes>
                         <dependencySourceIncludes>
                             <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
                         </dependencySourceIncludes>
-                        <!-- Don't fail on doclint errors for missing servlet artifact -->
+                        <!-- Don't fail on doclint errors for missing servlet 
+                            artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
                     </configuration>
