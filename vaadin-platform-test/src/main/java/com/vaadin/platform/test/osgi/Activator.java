@@ -15,6 +15,8 @@
  */
 package com.vaadin.platform.test.osgi;
 
+import java.util.Hashtable;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
@@ -57,9 +59,11 @@ public class Activator implements BundleActivator {
                     ServiceReference<HttpService> reference) {
                 // HTTP service is available, register our servlet...
                 HttpService httpService = this.context.getService(reference);
+                Hashtable<String, String> params = new Hashtable<>();
+                params.put("productionMode", "true");
                 try {
                     httpService.registerServlet("/*", new FixedVaadinServlet(),
-                            null, null);
+                            params, null);
                 } catch (ServletException | NamespaceException exception) {
                     throw new RuntimeException(exception);
                 }

@@ -33,7 +33,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
         </dependency>
-
+        
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-osgi</artifactId>
@@ -46,7 +46,7 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
-
+        
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
