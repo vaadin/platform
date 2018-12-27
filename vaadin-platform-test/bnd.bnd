@@ -7,3 +7,4 @@ Import-Package: *
 Export-Package: com.vaadin.platform.test*;-noimport:=true
 Vaadin-OSGi-Extender: true
 Bundle-Activator: com.vaadin.platform.test.osgi.Activator
+
