@@ -1,5 +1,7 @@
 package com.vaadin.platform.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +71,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($("vaadin-time-picker").first());
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
+        checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
@@ -89,8 +92,7 @@ public class ComponentsIT extends ParallelTest {
 
         TestBenchElement htmlButton = button.$(TestBenchElement.class)
                 .id("button");
-        Assert.assertTrue(htmlButton.getSize().getHeight() > 0);
-        Assert.assertTrue(htmlButton.getSize().getWidth() > 0);
+        assertElementRendered(htmlButton);
 
         button.click();
 
@@ -104,8 +106,7 @@ public class ComponentsIT extends ParallelTest {
 
         TestBenchElement htmlButton = checkbox.$("input")
                 .attribute("type", "checkbox").first();
-        Assert.assertTrue(htmlButton.getSize().getHeight() > 0);
-        Assert.assertTrue(htmlButton.getSize().getWidth() > 0);
+        assertElementRendered(htmlButton);
 
         checkbox.click();
 
@@ -120,8 +121,7 @@ public class ComponentsIT extends ParallelTest {
 
         TestBenchElement groupField = checkboxGroup.$("div")
                 .attribute("part", "group-field").first();
-        Assert.assertTrue(groupField.getSize().getHeight() > 0);
-        Assert.assertTrue(groupField.getSize().getWidth() > 0);
+        assertElementRendered(groupField);
 
         checkboxGroup.$(CheckboxElement.class).first().click();
 
@@ -136,15 +136,13 @@ public class ComponentsIT extends ParallelTest {
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
-        Assert.assertTrue(textField.getSize().getHeight() > 0);
-        Assert.assertTrue(textField.getSize().getWidth() > 0);
+        assertElementRendered(textField);
 
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
 
-        Assert.assertTrue(dropDown.getSize().getHeight() > 0);
-        Assert.assertTrue(dropDown.getSize().getWidth() > 0);
+        assertElementRendered(dropDown);
 
         getCommandExecutor().executeScript("arguments[0].value='1'", comboBox);
 
@@ -159,15 +157,13 @@ public class ComponentsIT extends ParallelTest {
 
         TextFieldElement textField = datePicker.$(TextFieldElement.class)
                 .id("input");
-        Assert.assertTrue(textField.getSize().getHeight() > 0);
-        Assert.assertTrue(textField.getSize().getWidth() > 0);
+        assertElementRendered(textField);
 
         datePicker.$("div").attribute("part", "toggle-button").first().click();
 
         WebElement dropDown = $("vaadin-date-picker-overlay").id("overlay");
 
-        Assert.assertTrue(dropDown.getSize().getHeight() > 0);
-        Assert.assertTrue(dropDown.getSize().getWidth() > 0);
+        assertElementRendered(dropDown);
 
         getCommandExecutor().executeScript("arguments[0].value='2018-12-04'",
                 datePicker);
@@ -183,15 +179,13 @@ public class ComponentsIT extends ParallelTest {
 
         TestBenchElement textField = timePicker
                 .$("vaadin-time-picker-text-field").first();
-        Assert.assertTrue(textField.getSize().getHeight() > 0);
-        Assert.assertTrue(textField.getSize().getWidth() > 0);
+        assertElementRendered(textField);
 
         timePicker.$("span").attribute("part", "toggle-button").first().click();
 
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
 
-        Assert.assertTrue(dropDown.getSize().getHeight() > 0);
-        Assert.assertTrue(dropDown.getSize().getWidth() > 0);
+        assertElementRendered(dropDown);
 
         getCommandExecutor().executeScript("arguments[0].value='01:37'",
                 timePicker);
@@ -205,13 +199,17 @@ public class ComponentsIT extends ParallelTest {
     public void gridIsRenderedAndRecievesSelectionEvents() {
         GridElement grid = $(GridElement.class).first();
 
-        Assert.assertTrue(grid.getSize().getHeight() > 0);
-        Assert.assertTrue(grid.getSize().getWidth() > 0);
+        assertElementRendered(grid);
 
         TestBenchElement table = grid.$("table").id("table");
 
-        Assert.assertTrue(table.getSize().getHeight() > 0);
-        Assert.assertTrue(table.getSize().getWidth() > 0);
+        assertElementRendered(table);
+
+        Assert.assertEquals("Some", grid.getCell(0, 0).getText());
+        Assert.assertEquals("Data", grid.getCell(0, 1).getText());
+
+        Assert.assertEquals("Second", grid.getCell(1, 0).getText());
+        Assert.assertEquals("Row", grid.getCell(1, 1).getText());
 
         grid.select(0);
 
@@ -219,6 +217,42 @@ public class ComponentsIT extends ParallelTest {
         Assert.assertEquals(
                 "Grid selection changed to 'Optional[{bar=Data, foo=Some}]'",
                 log.getText());
+    }
+
+    @Test
+    public void iconsAreRendered() {
+        TestBenchElement hIcon = $("iron-icon").first();
+        TestBenchElement vIcon = $("iron-icon").get(1);
+
+        assertElementRendered(hIcon);
+        assertElementRendered(vIcon);
+
+        TestBenchElement svg = hIcon.$("svg").first();
+        assertElementRendered(svg);
+
+        svg = vIcon.$("svg").first();
+        assertElementRendered(svg);
+    }
+
+    @Test
+    public void ironListIsRendered() {
+        IronListElement ironList = $(IronListElement.class).first();
+
+        TestBenchElement itemsContainer = ironList.$("div").id("items");
+        assertElementRendered(itemsContainer);
+
+        List<TestBenchElement> items = ironList.$("span").all();
+        Assert.assertEquals(3, items.size());
+        items.stream().forEach(this::assertElementRendered);
+
+        for (int i = 0; i < items.size(); i++) {
+            Assert.assertEquals("Item " + i, items.get(i).getText());
+        }
+    }
+
+    private void assertElementRendered(WebElement element) {
+        Assert.assertTrue(element.getSize().getHeight() > 0);
+        Assert.assertTrue(element.getSize().getWidth() > 0);
     }
 
     private void checkCustomElement(TestBenchElement element) {
