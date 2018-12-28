@@ -31,13 +31,13 @@ import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -58,6 +58,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
@@ -82,6 +83,12 @@ public class ComponentsView extends VerticalLayout {
             log.log("Checkbox value changed from '" + e.getOldValue() + "' to '"
                     + e.getValue() + "'");
         });
+
+        CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
+        checkboxGroup.setItems("foo", "bar");
+        checkboxGroup.addValueChangeListener(event -> log
+                .log("CheckboxGroup value changed from " + event.getOldValue()
+                        + "' to '" + event.getValue() + "'"));
 
         ComboBox<String> combobox = new ComboBox<>("ComboBox label");
         combobox.setItems("First", "Second", "Third");
@@ -237,7 +244,7 @@ public class ComponentsView extends VerticalLayout {
         AppLayout appLayout = new AppLayout();
 
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
-            new Binder<>(Entity.class), new HorizontalLayout()));
+                new Binder<>(Entity.class), new HorizontalLayout()));
 
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
@@ -246,8 +253,10 @@ public class ComponentsView extends VerticalLayout {
 
         components.add(button);
         components.add(checkbox);
+        components.add(checkboxGroup);
         components.add(combobox);
         components.add(datePicker);
+        components.add(timePicker);
         components.add(grid);
         components.add(icons);
         components.add(ironList);
