@@ -27,6 +27,7 @@ import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
+import com.vaadin.flow.component.radiobutton.testbench.RadioButtonElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.tabs.testbench.TabElement;
@@ -248,6 +249,50 @@ public class ComponentsIT extends ParallelTest {
         for (int i = 0; i < items.size(); i++) {
             Assert.assertEquals("Item " + i, items.get(i).getText());
         }
+    }
+
+    @Test
+    public void progressBarIsRendered() {
+        ProgressBarElement ironList = $(ProgressBarElement.class).first();
+
+        TestBenchElement bar = ironList.$("div").attribute("part", "bar")
+                .first();
+        assertElementRendered(bar);
+
+        TestBenchElement value = bar.$("div").attribute("part", "value")
+                .first();
+
+        assertElementRendered(value);
+
+        Assert.assertTrue(
+                value.getSize().getWidth() < bar.getSize().getWidth());
+    }
+
+    @Test
+    public void radioButtonGroupIsRenderedAndRecievesValueChangeEvents() {
+        RadioButtonGroupElement radioButtonGroup = $(
+                RadioButtonGroupElement.class).first();
+
+        TestBenchElement groupField = radioButtonGroup.$("div")
+                .attribute("part", "group-field").first();
+        assertElementRendered(groupField);
+
+        List<RadioButtonElement> radioButtons = radioButtonGroup
+                .$(RadioButtonElement.class).all();
+        Assert.assertEquals(5, radioButtons.size());
+
+        radioButtons.stream().forEach(this::assertElementRendered);
+
+        for (int i = 0; i < 5; i++) {
+            Assert.assertEquals("Item " + i, radioButtons.get(i).getText());
+        }
+
+        radioButtons.get(0).click();
+
+        WebElement log = findElement(By.id("log"));
+        Assert.assertEquals(
+                "RadioButtonGroup value changed from null to Item 0",
+                log.getText());
     }
 
     private void assertElementRendered(WebElement element) {
