@@ -186,7 +186,7 @@ public class ComponentsView extends VerticalLayout {
         dialog.add(new Label("This is the contents of the dialog"));
         dialog.open();
 
-        Notification.show("Hello", 30000, Position.TOP_CENTER);
+        Notification.show("Hello", 2000000, Position.TOP_CENTER);
 
         // Layouts
 

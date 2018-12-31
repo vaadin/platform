@@ -321,6 +321,56 @@ public class ComponentsIT extends ParallelTest {
         assertLog("Upload received file text/plain with text foo");
     }
 
+    @Test
+    public void dialogIsRendered() {
+        TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
+                .id("overlay");
+
+        TestBenchElement content = dialogOverlay.$(TestBenchElement.class)
+                .id("content");
+
+        assertElementRendered(content);
+
+        TestBenchElement contentComponent = dialogOverlay
+                .$("flow-component-renderer").first().$("div").first();
+
+        Assert.assertEquals("This is the contents of the dialog",
+                contentComponent.getText());
+    }
+
+    @Test
+    public void notificationIsRendered() {
+        waitUntil(driver -> $(NotificationElement.class).all().size() > 0);
+        NotificationElement notification = $(NotificationElement.class).first();
+
+        TestBenchElement card = (TestBenchElement) notification.getContext();
+        assertElementRendered(card);
+
+        waitUntil(driver -> "Hello".equals(notification.getText()));
+    }
+
+    @Test
+    public void formLayoutIsRendered() {
+        FormLayoutElement formLayoutElement = $(FormLayoutElement.class)
+                .first();
+
+        TestBenchElement layoutElement = formLayoutElement
+                .$(TestBenchElement.class).id("layout");
+
+        assertElementRendered(layoutElement);
+
+        List<TextFieldElement> textFields = formLayoutElement
+                .$(TextFieldElement.class).all();
+
+        Assert.assertEquals(6, textFields.size());
+
+        int xLocation = textFields.get(0).getLocation().getX();
+        for (int i = 1; i < 6; i++) {
+            Assert.assertEquals(xLocation,
+                    textFields.get(i).getLocation().getX());
+        }
+    }
+
     private void assertTextComponent(TestBenchElement element,
             String mainhtmlTag, String msg) {
         TestBenchElement input = element.$(mainhtmlTag)
