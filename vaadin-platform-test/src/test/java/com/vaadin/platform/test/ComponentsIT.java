@@ -371,6 +371,24 @@ public class ComponentsIT extends ParallelTest {
         }
     }
 
+    @Test
+    public void verticalLayoutIsRendered() {
+        VerticalLayoutElement verticalLayoutElement = $(
+                VerticalLayoutElement.class).id("test-vertical-layout");
+
+        assertElementRendered(verticalLayoutElement);
+
+        List<ButtonElement> buttons = verticalLayoutElement
+                .$(ButtonElement.class).all();
+
+        Assert.assertEquals(3, buttons.size());
+
+        int xLocation = buttons.get(0).getLocation().getX();
+        for (int i = 1; i < 3; i++) {
+            Assert.assertEquals(xLocation, buttons.get(i).getLocation().getX());
+        }
+    }
+
     private void assertTextComponent(TestBenchElement element,
             String mainhtmlTag, String msg) {
         TestBenchElement input = element.$(mainhtmlTag)

@@ -196,6 +196,7 @@ public class ComponentsView extends VerticalLayout {
         });
 
         VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.setId("test-vertical-layout");
         IntStream.range(0, 3).forEach(i -> verticalLayout
                 .add(new Button("VerticalLayout Button " + i)));
 
