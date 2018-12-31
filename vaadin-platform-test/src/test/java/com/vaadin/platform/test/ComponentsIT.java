@@ -1,5 +1,9 @@
 package com.vaadin.platform.test;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
@@ -7,6 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
@@ -97,8 +104,7 @@ public class ComponentsIT extends ParallelTest {
 
         button.click();
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("Clicked button", log.getText());
+        assertLog("Clicked button");
     }
 
     @Test
@@ -111,9 +117,7 @@ public class ComponentsIT extends ParallelTest {
 
         checkbox.click();
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("Checkbox value changed from 'false' to 'true'",
-                log.getText());
+        assertLog("Checkbox value changed from 'false' to 'true'");
     }
 
     @Test
@@ -126,9 +130,7 @@ public class ComponentsIT extends ParallelTest {
 
         checkboxGroup.$(CheckboxElement.class).first().click();
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("CheckboxGroup value changed from '' to 'foo'",
-                log.getText());
+        assertLog("CheckboxGroup value changed from '' to 'foo'");
     }
 
     @Test
@@ -147,9 +149,7 @@ public class ComponentsIT extends ParallelTest {
 
         getCommandExecutor().executeScript("arguments[0].value='1'", comboBox);
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("ComboBox value changed from 'null' to 'First'",
-                log.getText());
+        assertLog("ComboBox value changed from 'null' to 'First'");
     }
 
     @Test
@@ -169,9 +169,7 @@ public class ComponentsIT extends ParallelTest {
         getCommandExecutor().executeScript("arguments[0].value='2018-12-04'",
                 datePicker);
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("DatePicker value changed from null to 2018-12-04",
-                log.getText());
+        assertLog("DatePicker value changed from null to 2018-12-04");
     }
 
     @Test
@@ -191,9 +189,7 @@ public class ComponentsIT extends ParallelTest {
         getCommandExecutor().executeScript("arguments[0].value='01:37'",
                 timePicker);
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals("TimePicker value changed from null to 01:37",
-                log.getText());
+        assertLog("TimePicker value changed from null to 01:37");
     }
 
     @Test
@@ -214,10 +210,7 @@ public class ComponentsIT extends ParallelTest {
 
         grid.select(0);
 
-        WebElement log = findElement(By.id("log"));
-        Assert.assertEquals(
-                "Grid selection changed to 'Optional[{bar=Data, foo=Some}]'",
-                log.getText());
+        assertLog("Grid selection changed to 'Optional[{bar=Data, foo=Some}]'");
     }
 
     @Test
@@ -289,10 +282,60 @@ public class ComponentsIT extends ParallelTest {
 
         radioButtons.get(0).click();
 
+        assertLog("RadioButtonGroup value changed from null to Item 0");
+    }
+
+    @Test
+    public void textFieldIsRenderedAndRecievesValueChangeEvents() {
+        assertTextComponent($(TextFieldElement.class).first(), "input",
+                "TextField value changed from to foo");
+    }
+
+    @Test
+    public void passwordFieldIsRenderedAndRecievesValueChangeEvents() {
+        assertTextComponent($(PasswordFieldElement.class).first(), "input",
+                "PasswordField value changed from to foo");
+    }
+
+    @Test
+    public void textAreaIsRenderedAndRecievesValueChangeEvents() {
+        assertTextComponent($(TextAreaElement.class).first(), "textarea",
+                "TextArea value changed from to foo");
+    }
+
+    @Test
+    public void uploadIsRenderedAndUploadFile() throws IOException {
+        UploadElement upload = $(UploadElement.class).first();
+
+        ButtonElement uploadButton = upload.$(ButtonElement.class).first();
+        assertElementRendered(uploadButton);
+
+        TestBenchElement dropLabel = upload.$(TestBenchElement.class)
+                .id("dropLabelContainer");
+
+        Assert.assertEquals("Drop file here", dropLabel.getText());
+
+        File tempFile = createTempFile();
+        fillPathToUploadInput(tempFile.getPath());
+
+        assertLog("Upload received file text/plain with text foo");
+    }
+
+    private void assertTextComponent(TestBenchElement element,
+            String mainhtmlTag, String msg) {
+        TestBenchElement input = element.$(mainhtmlTag)
+                .attribute("part", "value").first();
+
+        assertElementRendered(input);
+
+        getCommandExecutor().executeScript("arguments[0].value='foo'", element);
+
+        assertLog(msg);
+    }
+
+    private void assertLog(String msg) {
         WebElement log = findElement(By.id("log"));
-        Assert.assertEquals(
-                "RadioButtonGroup value changed from null to Item 0",
-                log.getText());
+        Assert.assertEquals(msg, log.getText());
     }
 
     private void assertElementRendered(WebElement element) {
@@ -308,4 +351,41 @@ public class ComponentsIT extends ParallelTest {
         Assert.assertTrue((Boolean) executeScript(
                 "return !!window.customElements.get(arguments[0])", tagName));
     }
+
+    private File createTempFile() throws IOException {
+        File tempFile = File.createTempFile("TestFileUpload", ".txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        writer.write("foo");
+        writer.close();
+        tempFile.deleteOnExit();
+        return tempFile;
+    }
+
+    private void fillPathToUploadInput(String tempFileName) {
+        // create a valid path in upload input element. Instead of selecting a
+        // file by some file browsing dialog, we use the local path directly.
+        WebElement input = $(UploadElement.class).first()
+                .$(TestBenchElement.class).id("fileInput");
+        setLocalFileDetector(input);
+        input.sendKeys(tempFileName);
+    }
+
+    private void setLocalFileDetector(WebElement element) {
+        if (getRunLocallyBrowser() != null) {
+            return;
+        }
+
+        if (element instanceof WrapsElement) {
+            element = ((WrapsElement) element).getWrappedElement();
+        }
+        if (element instanceof RemoteWebElement) {
+            ((RemoteWebElement) element)
+                    .setFileDetector(new LocalFileDetector());
+        } else {
+            throw new IllegalArgumentException(
+                    "Expected argument of type RemoteWebElement, received "
+                            + element.getClass().getName());
+        }
+    }
+
 }

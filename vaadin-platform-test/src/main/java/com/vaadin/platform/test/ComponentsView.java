@@ -15,13 +15,16 @@
  */
 package com.vaadin.platform.test;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import org.apache.commons.io.IOUtils;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
@@ -60,7 +63,10 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -148,12 +154,14 @@ public class ComponentsView extends VerticalLayout {
         });
 
         TextField textField = new TextField();
+        textField.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("TextField default is " + textField.getValue());
         textField.addValueChangeListener(e -> {
             log.log("TextField value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
         PasswordField passwordField = new PasswordField();
+        passwordField.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("PasswordField default is " + passwordField.getValue());
         passwordField.addValueChangeListener(e -> {
             log.log("PasswordField value changed from " + e.getOldValue()
@@ -161,20 +169,18 @@ public class ComponentsView extends VerticalLayout {
         });
 
         TextArea textArea = new TextArea();
+        textArea.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("TextArea default is " + textArea.getValue());
         textArea.addValueChangeListener(e -> {
             log.log("TextArea value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
 
-        Upload upload = new Upload();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        upload.setReceiver((filename, mimetype) -> {
-            return baos;
-        });
-        upload.addSucceededListener(e -> {
-            log.log("File of size " + e.getContentLength() + " received");
-        });
+        MemoryBuffer buffer = new MemoryBuffer();
+        Upload upload = new Upload(buffer);
+        upload.addSucceededListener(
+                event -> handleUploadedFile(event.getMIMEType(),
+                        event.getMIMEType(), buffer.getInputStream()));
 
         Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
@@ -285,6 +291,23 @@ public class ComponentsView extends VerticalLayout {
         map.put("foo", value1);
         map.put("bar", value2);
         return map;
+    }
+
+    private void handleUploadedFile(String mimeType, String fileName,
+            InputStream stream) {
+        if (mimeType.startsWith("text")) {
+            String text = "";
+            try {
+                text = IOUtils.toString(stream, "UTF-8");
+            } catch (IOException e) {
+                text = "exception reading stream";
+            }
+            log.log("Upload received file " + fileName + " with text " + text);
+        } else {
+            String text = String.format("Mime type: '%s'\nSHA-256 hash: '%s'",
+                    mimeType, MessageDigestUtil.sha256(stream.toString()));
+            log.log("Upload received file " + fileName + " with " + text);
+        }
     }
 
 }
