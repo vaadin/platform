@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -29,6 +30,7 @@ import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
@@ -81,6 +83,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(GridElement.class).first());
         checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).first());
+        checkCustomElement($("vaadin-list-box").first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());
@@ -130,7 +133,7 @@ public class ComponentsIT extends ParallelTest {
 
         checkboxGroup.$(CheckboxElement.class).first().click();
 
-        assertLog("CheckboxGroup value changed from '' to 'foo'");
+        assertLog("CheckboxGroup value changed from '[]' to '[foo]'");
     }
 
     @Test
@@ -387,6 +390,140 @@ public class ComponentsIT extends ParallelTest {
         for (int i = 1; i < 3; i++) {
             Assert.assertEquals(xLocation, buttons.get(i).getLocation().getX());
         }
+    }
+
+    @Test
+    public void horizontalLayoutIsRendered() {
+        HorizontalLayoutElement horizontalLayoutElement = $(
+                HorizontalLayoutElement.class).id("test-horizontal-layout");
+
+        assertElementRendered(horizontalLayoutElement);
+
+        List<LabelElement> labels = horizontalLayoutElement
+                .$(LabelElement.class).all();
+
+        Assert.assertEquals(3, labels.size());
+
+        int yLocation = labels.get(0).getLocation().getY();
+        for (int i = 1; i < 3; i++) {
+            Assert.assertEquals(yLocation, labels.get(i).getLocation().getY());
+        }
+    }
+
+    @Test
+    public void splitLayoutIsRendered() {
+        SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
+                .first();
+
+        assertElementRendered(splitLayoutElement);
+
+        TestBenchElement splitter = splitLayoutElement.$("div").id("splitter");
+
+        assertElementRendered(splitter);
+
+        List<ButtonElement> labels = splitLayoutElement.$(ButtonElement.class)
+                .all();
+
+        Assert.assertEquals(2, labels.size());
+
+        int yLocation = labels.get(0).getLocation().getY();
+        Assert.assertEquals(yLocation, labels.get(1).getLocation().getY());
+    }
+
+    @Test
+    public void tabsIsRenderedAndRecievesSelectionEvents() {
+        TabsElement tabsElement = $(TabsElement.class).first();
+
+        assertElementRendered(tabsElement.$("div").id("scroll"));
+
+        List<TabElement> tabs = tabsElement.$(TabElement.class).all();
+
+        Assert.assertEquals(2, tabs.size());
+
+        assertElementRendered(tabs.get(0));
+
+        Assert.assertEquals("foo", tabs.get(0).getText());
+        Assert.assertEquals("bar", tabs.get(1).getText());
+
+        getCommandExecutor().executeScript("arguments[0].selected=1",
+                tabsElement);
+
+        assertLog("Tabs selected index changed to 1");
+    }
+
+    @Test
+    public void listBoxIsRenderedAndRecievesValueChangeEvents() {
+        TestBenchElement listBoxElement = $("vaadin-list-box").first();
+
+        TestBenchElement itemsContainer = listBoxElement.$("div")
+                .attribute("part", "items").first();
+
+        assertElementRendered(itemsContainer);
+
+        List<TestBenchElement> items = listBoxElement.$("vaadin-item").all();
+
+        Assert.assertEquals(7, items.size());
+
+        items.stream().forEach(this::assertElementRendered);
+
+        for (int i = 0; i < 7; i++) {
+            Assert.assertEquals("Item " + i, items.get(i).getText());
+        }
+
+        TestBenchElement listBoxInnerComponent = listBoxElement.$("div")
+                .id("list-box-component");
+
+        assertElementRendered(listBoxInnerComponent);
+        Assert.assertEquals("One more item as a component",
+                listBoxInnerComponent.getText());
+
+        getCommandExecutor().executeScript("arguments[0].selected=1",
+                listBoxElement);
+
+        assertLog("ListBox value changed from 'null' to 'Item 1'");
+    }
+
+    @Test
+    public void contextMenuIsRenderedAndRecievesItemSelectionEvents() {
+        // store every click event in document.$myEvent
+        getCommandExecutor().executeScript(
+                "document.body.addEventListener('click', function(e){ document.$myEvent = e; });");
+
+        TestBenchElement contextMenuTarget = $(TestBenchElement.class)
+                .id("context-menu-target");
+
+        new Actions(getDriver()).moveByOffset(10, 10).click().build().perform();
+
+        // emulate click on context menu target knowing how the context menu
+        // connector works.
+        getCommandExecutor().executeScript(
+                "arguments[0].$contextMenuConnector.openEvent= document.$myEvent;"
+                        + "arguments[0].dispatchEvent(new CustomEvent('vaadin-context-menu-before-open'));",
+                contextMenuTarget);
+
+        Assert.assertEquals(1, $("vaadin-context-menu").all().size());
+
+        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay")
+                .id("overlay");
+
+        assertElementRendered(contextMenuOverlay);
+
+        assertElementRendered(contextMenuOverlay.$("div").id("overlay"));
+
+        List<TestBenchElement> items = contextMenuOverlay.$("vaadin-item")
+                .all();
+        Assert.assertEquals(2, items.size());
+
+        for (int i = 0; i < 2; i++) {
+            assertElementRendered(
+                    items.get(0).$("div").attribute("part", "content").first());
+            Assert.assertEquals("Item " + i, items.get(i).getText());
+        }
+
+        getCommandExecutor().executeScript("arguments[0].click();",
+                items.get(0));
+
+        assertLog("Context menu Item 0 is clicked");
     }
 
     private void assertTextComponent(TestBenchElement element,

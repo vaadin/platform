@@ -21,9 +21,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import com.vaadin.testbench.parallel.ParallelTest;
-
-public class WaitHttpIT extends ParallelTest {
+public class WaitHttpIT {
 
     @Test
     public void waitForHttp()

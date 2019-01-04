@@ -37,6 +37,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
@@ -44,10 +45,13 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
+import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -93,7 +97,7 @@ public class ComponentsView extends VerticalLayout {
         CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
         checkboxGroup.setItems("foo", "bar");
         checkboxGroup.addValueChangeListener(event -> log
-                .log("CheckboxGroup value changed from " + event.getOldValue()
+                .log("CheckboxGroup value changed from '" + event.getOldValue()
                         + "' to '" + event.getValue() + "'"));
 
         ComboBox<String> combobox = new ComboBox<>("ComboBox label");
@@ -139,6 +143,16 @@ public class ComponentsView extends VerticalLayout {
         Stream<String> items = IntStream.range(0, 100)
                 .mapToObj(i -> ("Item " + i));
         ironList.setItems(items);
+
+        ListBox<String> listBox = new ListBox<>();
+        listBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)));
+        Div listBoxComponent = new Div();
+        listBoxComponent.setId("list-box-component");
+        listBoxComponent.setText("One more item as a component");
+        listBox.addValueChangeListener(event -> log
+                .log("ListBox value changed from '" + event.getOldValue()
+                        + "' to '" + event.getValue() + "'"));
+        listBox.add(listBoxComponent);
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
@@ -201,6 +215,7 @@ public class ComponentsView extends VerticalLayout {
                 .add(new Button("VerticalLayout Button " + i)));
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setId("test-horizontal-layout");
         IntStream.range(0, 3).forEach(i -> horizontalLayout
                 .add(new Label("HorizontalLayout Label " + i)));
 
@@ -212,6 +227,18 @@ public class ComponentsView extends VerticalLayout {
 
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
+        tabs.addSelectedChangeListener(event -> log.log(
+                "Tabs selected index changed to " + tabs.getSelectedIndex()));
+
+        Div contextMenuTarget = new Div();
+        contextMenuTarget.setText("Context Menu Target");
+        contextMenuTarget.setId("context-menu-target");
+        ContextMenu menu = new ContextMenu(contextMenuTarget);
+        menu.setOpenOnClick(true);
+        menu.addItem(new Span("Item 0"),
+                event -> log.log("Context menu Item 0 is clicked"));
+        menu.addItem(new Span("Item 1"),
+                event -> log.log("Context menu Item 1 is clicked"));
         add(log);
 
         Board board = new Board();
@@ -267,6 +294,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(grid);
         components.add(icons);
         components.add(ironList);
+        components.add(listBox);
         components.add(progressBar);
         components.add(radioButtons);
         components.add(textField);
@@ -282,6 +310,7 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(splitHorizontal);
         layouts.add(splitVertical);
         layouts.add(tabs);
+        layouts.add(contextMenuTarget);
         layouts.add(board);
         layouts.add(appLayout);
 
