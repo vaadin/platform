@@ -257,6 +257,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <sauceUsername>${sauce.user}</sauceUsername>
+                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                    <options>${sauce.options}</options>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
