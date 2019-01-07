@@ -27,6 +27,7 @@ import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.osgi.util.tracker.ServiceTracker;
 
+import com.vaadin.flow.server.Constants;
 import com.vaadin.flow.server.VaadinServlet;
 
 public class Activator implements BundleActivator {
@@ -52,26 +53,36 @@ public class Activator implements BundleActivator {
                 // HTTP service is no longer available, unregister our
                 // servlet...
                 service.unregister("/*");
+                service.unregister("/prod-mode/*");
             }
 
             @Override
             public HttpService addingService(
                     ServiceReference<HttpService> reference) {
-                // HTTP service is available, register our servlet...
-                HttpService httpService = this.context.getService(reference);
-                Hashtable<String, String> params = new Hashtable<>();
-                params.put("productionMode", "true");
-                try {
-                    httpService.registerServlet("/*", new FixedVaadinServlet(),
-                            params, null);
-                } catch (ServletException | NamespaceException exception) {
-                    throw new RuntimeException(exception);
-                }
-                return httpService;
+                registerServlet(context, reference, "/*", false);
+                return registerServlet(context, reference, "/prod-mode/*",
+                        true);
             }
         };
         // start tracking all HTTP services...
         httpTracker.open();
+    }
+
+    private HttpService registerServlet(BundleContext context,
+            ServiceReference<HttpService> reference, String mapping,
+            boolean productionMode) {
+        // HTTP service is available, register our servlet...
+        HttpService httpService = context.getService(reference);
+        Hashtable<String, String> params = new Hashtable<>();
+        params.put(Constants.SERVLET_PARAMETER_PRODUCTION_MODE,
+                Boolean.toString(productionMode));
+        try {
+            httpService.registerServlet(mapping, new FixedVaadinServlet(),
+                    params, null);
+        } catch (ServletException | NamespaceException exception) {
+            throw new RuntimeException(exception);
+        }
+        return httpService;
     }
 
     @Override
