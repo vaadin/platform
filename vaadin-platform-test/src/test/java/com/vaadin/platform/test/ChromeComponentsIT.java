@@ -285,7 +285,7 @@ public class ChromeComponentsIT extends ParallelTest {
         TestBenchElement dropLabel = upload.$(TestBenchElement.class)
                 .id("dropLabelContainer");
 
-        Assert.assertEquals("Drop file here", dropLabel.getText());
+        assertElementRendered(dropLabel);
 
         File tempFile = createTempFile();
         fillPathToUploadInput(tempFile.getPath());
