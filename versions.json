@@ -14,8 +14,8 @@
         },
         "shadycss": {
             "npmName": "@webcomponents/shadycss",
-            "npmVersion": "1.5.2",
-            "jsVersion": "1.5.0"
+            "npmVersion": "1.8.0",
+            "jsVersion": "1.8.0"
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
