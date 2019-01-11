@@ -1,16 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.2.3"
+            "javaVersion": "1.3.0.alpha2"
         },
         "flow-spring": {
             "javaVersion": "10.1.1"
         },
         "flow-cdi": {
             "javaVersion": "10.1.0"
-        },
-        "flow-component-base": {
-            "javaVersion": "1.2.0"
         },
         "polymer": {
             "npmName": "@polymer/polymer",
@@ -31,7 +28,7 @@
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.2.4",
+            "jsVersion": "2.2.5",
             "component": true
         },
         "vaadin-combo-box": {
@@ -74,7 +71,7 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "jsVersion": "2.0.1",
+            "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -231,7 +228,7 @@
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.3.2"
+            "jsVersion": "1.4.0"
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
@@ -318,6 +315,9 @@
         },
         "vaadin-testbench-components": {
             "javaVersion": "2.0.0"
+        },
+        "vaadin-license-checker": {
+            "jsVersion": "2.1.0"
         }
     },
     "platform": "{{version}}"
