@@ -10,8 +10,6 @@
             "javaVersion": "10.1.0"
         },
         "polymer": {
-            "npmName": "@polymer/polymer",
-            "npmVersion": "3.1.0",
             "jsVersion": "2.7.0"
         },
         "shadycss": {
