@@ -296,11 +296,11 @@
                 <artifactId>webcomponentsjs</artifactId>
                 <version>{{core.webcomponentsjs.jsVersion}}</version>
             </dependency>
-            <!-- Shadycss 1.5.0 is an exceptional case where the jsVersion is 1.5.0 but the webjar should be 1.5.0-1 -->
+            <!-- Shadycss 1.8.0 is the latest bower based release for shadycss -->
             <dependency>
                 <groupId>org.webjars.bowergithub.webcomponents</groupId>
                 <artifactId>shadycss</artifactId>
-                <version>1.5.0-1</version>
+                <version>1.8.0</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
