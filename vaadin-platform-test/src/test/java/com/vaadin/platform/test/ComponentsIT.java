@@ -31,6 +31,7 @@ import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
@@ -81,6 +82,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(TextAreaElement.class).first());
         checkCustomElement($(TextFieldElement.class).first());
         checkCustomElement($(UploadElement.class).first());
+        checkCustomElement($(RichTextEditorElement.class).first());
     }
 
     private void checkCustomElement(TestBenchElement element) {

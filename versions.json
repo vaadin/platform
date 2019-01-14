@@ -10,36 +10,34 @@
             "javaVersion": "10.1.0"
         },
         "polymer": {
-            "npmName": "@polymer/polymer",
-            "npmVersion": "3.0.5",
-            "jsVersion": "2.6.1"
+            "jsVersion": "2.7.0"
         },
         "shadycss": {
             "npmName": "@webcomponents/shadycss",
-            "npmVersion": "1.5.2",
-            "jsVersion": "1.5.0"
+            "npmVersion": "1.8.0",
+            "jsVersion": "1.8.0"
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.1.1",
+            "jsVersion": "2.1.2",
             "component": true
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "1.2.0",
-            "jsVersion": "2.2.5",
+            "jsVersion": "2.2.6",
             "component": true
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "2.0.1",
-            "jsVersion": "4.2.1",
+            "javaVersion": "2.0.2",
+            "jsVersion": "4.2.2",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "1.2.2",
+            "javaVersion": "1.2.3",
             "jsVersion": "4.2.1",
             "component": true
         },
@@ -49,7 +47,7 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "1.2.1",
+            "javaVersion": "1.2.3",
             "jsVersion": "3.3.2",
             "component": true
         },
@@ -86,8 +84,8 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "2.1.3",
-            "jsVersion": "5.3.0-alpha6",
+            "javaVersion": "2.1.5",
+            "jsVersion": "5.3.0-alpha7",
             "component": true
         },
         "vaadin-icons": {
@@ -129,7 +127,7 @@
         "iron-list": {
             "npmName": "@polymer/iron-list",
             "npmVersion": "3.0.1",
-            "javaVersion": "1.2.1",
+            "javaVersion": "1.2.2",
             "jsVersion": "2.0.19"
         },
         "iron-media-query": {
@@ -205,7 +203,7 @@
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
             "javaVersion": "1.2.0",
-            "jsVersion": "1.1.3",
+            "jsVersion": "1.1.4",
             "component": true
         },
         "vaadin-split-layout": {
