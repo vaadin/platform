@@ -193,7 +193,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.4"
+            "jsVersion": "3.2.5"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
@@ -222,7 +222,7 @@
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
             "javaVersion": "1.2.1",
-            "jsVersion": "2.1.5",
+            "jsVersion": "2.1.6",
             "component": true
         },
         "vaadin-themable-mixin": {
