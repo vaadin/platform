@@ -1,6 +1,7 @@
 package com.vaadin.platform.test;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
@@ -41,9 +42,13 @@ public class ComponentsIT extends ParallelTest {
                 "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge");
     }
 
+    @Before
+    public void setUp() {
+        getDriver().get("http://localhost:8080/prod-mode/");
+    }
+
     @Test
     public void appWorks() throws Exception {
-        getDriver().get("http://localhost:8080/");
         checkCustomElement($(NotificationElement.class).waitForFirst());
         checkCustomElement($(DialogElement.class).first());
 
@@ -56,11 +61,15 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(AppLayoutElement.class).first());
         checkCustomElement($(CrudElement.class).first());
         checkCustomElement($(CheckboxElement.class).first());
+        checkCustomElement($("vaadin-checkbox-group").first());
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());
+        checkCustomElement($("vaadin-time-picker").first());
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
+        checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).first());
+        checkCustomElement($("vaadin-list-box").first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());
@@ -72,7 +81,6 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(TextAreaElement.class).first());
         checkCustomElement($(TextFieldElement.class).first());
         checkCustomElement($(UploadElement.class).first());
-
     }
 
     private void checkCustomElement(TestBenchElement element) {
@@ -83,4 +91,5 @@ public class ComponentsIT extends ParallelTest {
         Assert.assertTrue((Boolean) executeScript(
                 "return !!window.customElements.get(arguments[0])", tagName));
     }
+
 }
