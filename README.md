@@ -47,7 +47,6 @@ These components provide a Java API for web components.
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |
 | RadioButton | https://github.com/vaadin/vaadin-radio-button-flow | 
-| RichTextEditor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
 | SplitLayout | https://github.com/vaadin/vaadin-split-layout-flow |
 | Tabs | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | https://github.com/vaadin/vaadin-text-field-flow |
