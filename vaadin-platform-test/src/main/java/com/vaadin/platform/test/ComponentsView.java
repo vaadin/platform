@@ -15,13 +15,16 @@
  */
 package com.vaadin.platform.test;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import org.apache.commons.io.IOUtils;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
@@ -31,20 +34,24 @@ import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
+import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -59,8 +66,12 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -83,6 +94,12 @@ public class ComponentsView extends VerticalLayout {
             log.log("Checkbox value changed from '" + e.getOldValue() + "' to '"
                     + e.getValue() + "'");
         });
+
+        CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
+        checkboxGroup.setItems("foo", "bar");
+        checkboxGroup.addValueChangeListener(event -> log
+                .log("CheckboxGroup value changed from '" + event.getOldValue()
+                        + "' to '" + event.getValue() + "'"));
 
         ComboBox<String> combobox = new ComboBox<>("ComboBox label");
         combobox.setItems("First", "Second", "Third");
@@ -128,6 +145,16 @@ public class ComponentsView extends VerticalLayout {
                 .mapToObj(i -> ("Item " + i));
         ironList.setItems(items);
 
+        ListBox<String> listBox = new ListBox<>();
+        listBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)));
+        Div listBoxComponent = new Div();
+        listBoxComponent.setId("list-box-component");
+        listBoxComponent.setText("One more item as a component");
+        listBox.addValueChangeListener(event -> log
+                .log("ListBox value changed from '" + event.getOldValue()
+                        + "' to '" + event.getValue() + "'"));
+        listBox.add(listBoxComponent);
+
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
         progressBar.setValue(0.7);
@@ -142,12 +169,14 @@ public class ComponentsView extends VerticalLayout {
         });
 
         TextField textField = new TextField();
+        textField.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("TextField default is " + textField.getValue());
         textField.addValueChangeListener(e -> {
             log.log("TextField value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
         PasswordField passwordField = new PasswordField();
+        passwordField.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("PasswordField default is " + passwordField.getValue());
         passwordField.addValueChangeListener(e -> {
             log.log("PasswordField value changed from " + e.getOldValue()
@@ -155,26 +184,24 @@ public class ComponentsView extends VerticalLayout {
         });
 
         TextArea textArea = new TextArea();
+        textArea.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("TextArea default is " + textArea.getValue());
         textArea.addValueChangeListener(e -> {
             log.log("TextArea value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
 
-        Upload upload = new Upload();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        upload.setReceiver((filename, mimetype) -> {
-            return baos;
-        });
-        upload.addSucceededListener(e -> {
-            log.log("File of size " + e.getContentLength() + " received");
-        });
+        MemoryBuffer buffer = new MemoryBuffer();
+        Upload upload = new Upload(buffer);
+        upload.addSucceededListener(
+                event -> handleUploadedFile(event.getMIMEType(),
+                        event.getMIMEType(), buffer.getInputStream()));
 
         Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
         dialog.open();
 
-        Notification.show("Hello", 30000, Position.TOP_CENTER);
+        Notification.show("Hello", 2000000, Position.TOP_CENTER);
 
         // Layouts
 
@@ -184,10 +211,12 @@ public class ComponentsView extends VerticalLayout {
         });
 
         VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.setId("test-vertical-layout");
         IntStream.range(0, 3).forEach(i -> verticalLayout
                 .add(new Button("VerticalLayout Button " + i)));
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setId("test-horizontal-layout");
         IntStream.range(0, 3).forEach(i -> horizontalLayout
                 .add(new Label("HorizontalLayout Label " + i)));
 
@@ -199,6 +228,18 @@ public class ComponentsView extends VerticalLayout {
 
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
+        tabs.addSelectedChangeListener(event -> log.log(
+                "Tabs selected index changed to " + tabs.getSelectedIndex()));
+
+        Div contextMenuTarget = new Div();
+        contextMenuTarget.setText("Context Menu Target");
+        contextMenuTarget.setId("context-menu-target");
+        ContextMenu menu = new ContextMenu(contextMenuTarget);
+        menu.setOpenOnClick(true);
+        menu.addItem(new Span("Item 0"),
+                event -> log.log("Context menu Item 0 is clicked"));
+        menu.addItem(new Span("Item 1"),
+                event -> log.log("Context menu Item 1 is clicked"));
         add(log);
 
         Board board = new Board();
@@ -238,7 +279,7 @@ public class ComponentsView extends VerticalLayout {
         AppLayout appLayout = new AppLayout();
 
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
-            new Binder<>(Entity.class), new HorizontalLayout()));
+                new Binder<>(Entity.class), new HorizontalLayout()));
 
         RichTextEditor richTextEditor = new RichTextEditor();
         VerticalLayout components = new VerticalLayout();
@@ -248,11 +289,14 @@ public class ComponentsView extends VerticalLayout {
 
         components.add(button);
         components.add(checkbox);
+        components.add(checkboxGroup);
         components.add(combobox);
         components.add(datePicker);
+        components.add(timePicker);
         components.add(grid);
         components.add(icons);
         components.add(ironList);
+        components.add(listBox);
         components.add(progressBar);
         components.add(radioButtons);
         components.add(textField);
@@ -269,6 +313,7 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(splitHorizontal);
         layouts.add(splitVertical);
         layouts.add(tabs);
+        layouts.add(contextMenuTarget);
         layouts.add(board);
         layouts.add(appLayout);
 
@@ -279,6 +324,23 @@ public class ComponentsView extends VerticalLayout {
         map.put("foo", value1);
         map.put("bar", value2);
         return map;
+    }
+
+    private void handleUploadedFile(String mimeType, String fileName,
+            InputStream stream) {
+        if (mimeType.startsWith("text")) {
+            String text = "";
+            try {
+                text = IOUtils.toString(stream, "UTF-8");
+            } catch (IOException e) {
+                text = "exception reading stream";
+            }
+            log.log("Upload received file " + fileName + " with text " + text);
+        } else {
+            String text = String.format("Mime type: '%s'\nSHA-256 hash: '%s'",
+                    mimeType, MessageDigestUtil.sha256(stream.toString()));
+            log.log("Upload received file " + fileName + " with " + text);
+        }
     }
 
 }
