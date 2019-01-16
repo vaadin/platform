@@ -16,7 +16,7 @@ install:
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn test -B
+- mvn verify -B
 - scripts/verifyBowerDependencies.sh
 env:
   global:
