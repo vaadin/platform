@@ -86,7 +86,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.5",
-            "jsVersion": "5.2.6",
+            "jsVersion": "5.2.7",
             "component": true
         },
         "vaadin-icons": {
@@ -204,7 +204,7 @@
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
             "javaVersion": "1.2.0",
-            "jsVersion": "1.1.4",
+            "jsVersion": "1.1.5",
             "component": true
         },
         "vaadin-split-layout": {
@@ -222,7 +222,7 @@
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
             "javaVersion": "1.2.1",
-            "jsVersion": "2.1.6",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-themable-mixin": {
