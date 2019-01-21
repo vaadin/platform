@@ -65,7 +65,6 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.data.binder.Binder;
@@ -283,7 +282,6 @@ public class ComponentsView extends VerticalLayout {
         components.add(checkboxGroup);
         components.add(combobox);
         components.add(datePicker);
-        components.add(timePicker);
         components.add(grid);
         components.add(icons);
         components.add(ironList);
