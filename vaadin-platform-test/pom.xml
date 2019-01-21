@@ -112,6 +112,38 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>ui-jar-classes</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir
+                                    dir="${ui.jar.classes}/frontend"></mkdir>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend/bower_components">
+                                    <fileset
+                                        dir="${project.build.directory}/frontend/bower_components" />
+                                </copy>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend-es5">
+                                    <fileset
+                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
+                                </copy>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend-es6">
+                                    <fileset
+                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
+                                </copy>
+                                <copy todir="${ui.jar.classes}">
+                                    <fileset
+                                        dir="${project.build.outputDirectory}" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -149,56 +181,6 @@
                         <goals>
                             <goal>copy-production-files</goal>
                             <goal>package-for-production</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>clean-ui-classes</id>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <tasks>
-                                <delete dir="${ui.jar.classes}"></delete>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ui-jar-classes</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir
-                                    dir="${ui.jar.classes}/frontend"></mkdir>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend/bower_components">
-                                    <fileset
-                                        dir="${project.build.directory}/frontend/bower_components" />
-                                </copy>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend-es5">
-                                    <fileset
-                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
-                                </copy>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend-es6">
-                                    <fileset
-                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}">
-                                    <fileset
-                                        dir="${project.build.outputDirectory}" />
-                                </copy>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -325,6 +307,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
