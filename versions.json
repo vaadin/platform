@@ -75,7 +75,7 @@
         },
         "vaadin-element-mixin": {
             "npmName": "@vaadin/vaadin-element-mixin",
-            "jsVersion": "2.1.2"
+            "jsVersion": "2.1.3"
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
@@ -86,7 +86,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.5",
-            "jsVersion": "5.2.7",
+            "jsVersion": "5.2.8",
             "component": true
         },
         "vaadin-icons": {
@@ -227,7 +227,7 @@
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.3.2"
+            "jsVersion": "1.3.3"
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
@@ -246,7 +246,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.1"
+            "jsVersion": "2.0.2"
         },
         "mpr-v7": {
             "javaVersion": "1.1.0"
