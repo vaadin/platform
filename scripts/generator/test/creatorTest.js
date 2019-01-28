@@ -69,7 +69,7 @@ describe('Package json creator', function () {
         const expectedResult = {
             foo: "bar",
             dependencies: {
-                "@foo/foo-bar": "3.33",
+                "@foo/foo-bar": "^3.33",
             }
         };
 
@@ -118,7 +118,7 @@ describe('Package json creator', function () {
         const expectedResult = {
             foo: "bar",
             dependencies: {
-                "@foo/bar-foo": "3.33"
+                "@foo/bar-foo": "^3.33"
             }
         };
 
