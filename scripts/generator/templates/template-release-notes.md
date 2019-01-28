@@ -12,21 +12,12 @@ Vaadin 13 is supported for 4 months after GA (general availability). The latest 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
-
-- Multiplatform runtime for running Framework 7 or 8 applications inside the platform (V10+)
-- CDI & OSGi support in Flow
-- New Material theme for all components
+- Grid style generator
 - New components:
-  - vaadin-app-layout
-  - vaadin-crud
-  - vaadin-time-picker
-  - vaadin-checkbox-group
-- New server-side API's
-  - ContextMenu
-  - TreeGrid
-- Content renderer functions
-- Simple column configuration for vaadin-grid
-- ComboBox lazy-loading
+  - Rich text editor
+- New server-side API's:
+  - Time picker
+
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
