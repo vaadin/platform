@@ -19,14 +19,14 @@ popd
 pushd $vaadinNpmDir
 sed -i "s~\"@vaadin/vaadin-core\": .*~\"@vaadin/vaadin-core\": \"file:$vaadinCoreNpmDir/$vaadinCorePackage\",~g" package.json
 npm install
-result=`npm ls|grep -v deduped|sed "s/[^a-zA-Z0-9]*@/@/"|cut -d@ -f 2|sort|uniq -d|sort -n`
+npm install -g find-duplicate-dependencies
+result=`find-duplicate-dependencies`
 popd
 
 rm -rf "$vaadinCoreNpmDir" "$vaadinNpmDir"
 
 if [[ ! -z "$result" ]]
 then
-  echo "The following dependencies have multiple versions in @vaadin/vaadin: "
   echo "$result"
   if [[ "$TRAVIS_EVENT_TYPE" == "" ]]
   then
