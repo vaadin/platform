@@ -28,7 +28,7 @@ function createPackageJson(versions, packageJsonTemplate) {
     for (let [name, version] of Object.entries(versions)) {
         if (version.npmName) {
             const npmVersion = version.npmVersion || version.jsVersion;
-            jsDeps[version.npmName] = npmVersion;
+            jsDeps[version.npmName] = "^" + npmVersion;
         }
     }
 
