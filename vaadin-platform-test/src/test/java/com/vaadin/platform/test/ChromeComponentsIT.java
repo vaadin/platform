@@ -145,26 +145,6 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
-    public void timePickerIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement timePicker = $("vaadin-time-picker").first();
-
-        TestBenchElement textField = timePicker
-                .$("vaadin-time-picker-text-field").first();
-        assertElementRendered(textField);
-
-        timePicker.$("span").attribute("part", "toggle-button").first().click();
-
-        WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
-
-        assertElementRendered(dropDown);
-
-        getCommandExecutor().executeScript("arguments[0].value='01:37'",
-                timePicker);
-
-        assertLog("TimePicker value changed from null to 01:37");
-    }
-
-    @Test
     public void gridIsRenderedAndRecievesSelectionEvents() {
         GridElement grid = $(GridElement.class).first();
 

@@ -64,7 +64,6 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($("vaadin-checkbox-group").first());
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());
-        checkCustomElement($("vaadin-time-picker").first());
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
         checkCustomElement($("iron-icon").first());
