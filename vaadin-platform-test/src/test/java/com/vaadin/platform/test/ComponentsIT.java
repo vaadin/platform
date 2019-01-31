@@ -19,6 +19,8 @@ import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
+import com.vaadin.flow.component.login.testbench.LoginFormElement;
+import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
@@ -70,6 +72,8 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).first());
         checkCustomElement($("vaadin-list-box").first());
+        checkCustomElement($(LoginFormElement.class).first());
+        checkCustomElement($(LoginOverlayElement.class).first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());

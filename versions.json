@@ -240,6 +240,12 @@
             "jsVersion": "1.0.2",
             "component": true
         },
+        "vaadin-login": {
+            "npmName": "@vaadin/vaadin-login",
+            "javaVersion": "1.0.0.alpha2",
+            "jsVersion": "1.0.0-beta1",
+            "component": true
+        },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
         },
