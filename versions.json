@@ -34,7 +34,7 @@
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "2.0.2",
-            "jsVersion": "4.2.2",
+            "jsVersion": "4.2.3",
             "component": true
         },
         "vaadin-context-menu": {
@@ -193,7 +193,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.5"
+            "jsVersion": "3.2.7"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
