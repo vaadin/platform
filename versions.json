@@ -298,7 +298,7 @@
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.1.0.beta1",
             "jsVersion": "1.0.1",
             "component": true,
             "pro": true
