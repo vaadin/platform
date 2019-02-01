@@ -270,7 +270,7 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "2.1.1",
+            "javaVersion": "2.2.0.beta1",
             "jsVersion": "2.1.0",
             "component": true,
             "pro": true
