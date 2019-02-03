@@ -95,6 +95,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Vaadin Custom Field -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-custom-field-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

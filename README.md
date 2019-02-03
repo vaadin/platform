@@ -36,6 +36,7 @@ These components provide a Java API for web components.
 | ConfirmDialog* | https://github.com/vaadin/vaadin-confirm-dialog-flow |
 | CookieConsent* | https://github.com/vaadin/vaadin-cookie-consent-flow |
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
+| Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 

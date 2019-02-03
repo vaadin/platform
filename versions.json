@@ -234,6 +234,12 @@
             "jsVersion": "4.2.1",
             "component": true
         },
+        "vaadin-custom-field": {
+            "npmName": "@vaadin/vaadin-custom-field",
+            "javaVersion": "1.0.0.beta1",
+            "jsVersion": "1.0.0-beta1",
+            "component": true
+        },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
             "javaVersion": "1.0.3",
