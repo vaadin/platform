@@ -75,7 +75,6 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(IronListElement.class).first());
         checkCustomElement($("vaadin-list-box").first());
         checkCustomElement($(LoginFormElement.class).first());
-        checkCustomElement($(LoginOverlayElement.class).first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());

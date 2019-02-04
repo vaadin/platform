@@ -286,8 +286,6 @@ public class ComponentsView extends VerticalLayout {
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
-        LoginOverlay loginOverlay = new LoginOverlay();
-        loginOverlay.setOpened(true);
         LoginForm loginForm = new LoginForm();
 
         Details details = new Details("Summary", new Span("Content"));
@@ -305,7 +303,6 @@ public class ComponentsView extends VerticalLayout {
         components.add(icons);
         components.add(ironList);
         components.add(listBox);
-        components.add(loginForm);
         components.add(progressBar);
         components.add(radioButtons);
         components.add(textField);
@@ -314,6 +311,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(upload);
         components.add(cookieConsent);
         components.add(crud);
+        components.add(loginForm);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
