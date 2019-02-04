@@ -470,7 +470,9 @@ public class ChromeComponentsIT extends ParallelTest {
                         + "arguments[0].dispatchEvent(new CustomEvent('vaadin-context-menu-before-open'));",
                 contextMenuTarget);
 
-        Assert.assertEquals(1, $("vaadin-context-menu").all().size());
+        // Check to see if the context-menu is there.
+        // If not, a NoSuchElementException will be thrown
+        $("vaadin-context-menu").id("the-context-menu");
 
         TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay")
                 .id("overlay");

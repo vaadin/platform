@@ -38,7 +38,7 @@
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "2.0.0.beta1",
-            "jsVersion": "4.2.1",
+            "jsVersion": "4.3.0-beta1",
             "component": true
         },
         "vaadin-control-state-mixin": {
