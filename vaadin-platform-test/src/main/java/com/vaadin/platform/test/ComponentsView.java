@@ -42,6 +42,7 @@ import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -289,6 +290,8 @@ public class ComponentsView extends VerticalLayout {
         loginOverlay.setOpened(true);
         LoginForm loginForm = new LoginForm();
 
+        Details details = new Details("Summary", new Span("Content"));
+
         add(new HorizontalLayout(components, layouts));
 
         components.add(button);
@@ -297,6 +300,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(combobox);
         components.add(datePicker);
         components.add(timePicker);
+        components.add(details);
         components.add(grid);
         components.add(icons);
         components.add(ironList);

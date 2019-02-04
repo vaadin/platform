@@ -71,6 +71,11 @@
             <artifactId>vaadin-login-flow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-details-flow</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

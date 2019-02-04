@@ -137,6 +137,17 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-flow</artifactId>
+                <version>${vaadin.details.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-testbench</artifactId>
+                <version>${vaadin.details.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-form-layout-flow</artifactId>
                 <version>${vaadin.form.layout.version}</version>
             </dependency>

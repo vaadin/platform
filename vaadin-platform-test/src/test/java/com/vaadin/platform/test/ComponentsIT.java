@@ -15,6 +15,7 @@ import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
 import com.vaadin.flow.component.crud.testbench.CrudElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
+import com.vaadin.flow.component.details.testbench.DetailsElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
@@ -67,6 +68,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());
         checkCustomElement($("vaadin-time-picker").first());
+        checkCustomElement($(DetailsElement.class).first());
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
         checkCustomElement($("iron-icon").first());

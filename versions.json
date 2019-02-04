@@ -61,6 +61,12 @@
             "npmName": "@vaadin/vaadin-development-mode-detector",
             "jsVersion": "2.0.0"
         },
+        "vaadin-details": {
+            "npmName": "@vaadin/vaadin-details",
+            "javaVersion": "1.0.0.beta1",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
             "javaVersion": "1.2.0",
