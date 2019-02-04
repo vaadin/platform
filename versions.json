@@ -22,7 +22,8 @@
             "javaVersion": "1.0.0.beta2",
             "jsVersion": "1.0.0",
             "component": true
-        },"vaadin-button": {
+        },
+        "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "1.2.0",
             "jsVersion": "2.1.2",
