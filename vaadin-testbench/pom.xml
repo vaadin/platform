@@ -108,6 +108,13 @@
             <artifactId>vaadin-details-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Vaadin Accordion -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-accordion-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

@@ -27,6 +27,7 @@ These components provide a Java API for web components.
 
 | Component | Repository |
 |-----------|------------|
+| Accordion | https://github.com/vaadin/vaadin-accordion-flow | 
 | AppLayout | https://github.com/vaadin/vaadin-app-layout-flow | 
 | Board* | https://github.com/vaadin/vaadin-board-flow | 
 | Button | https://github.com/vaadin/vaadin-button-flow |

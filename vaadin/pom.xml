@@ -76,6 +76,11 @@
             <artifactId>vaadin-details-flow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-accordion-flow</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
