@@ -481,7 +481,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
         assertElementRendered(contextMenuOverlay.$("div").id("overlay"));
 
-        List<TestBenchElement> items = contextMenuOverlay.$("vaadin-item")
+        List<TestBenchElement> items = contextMenuOverlay.$("vaadin-context-menu-item")
                 .all();
         Assert.assertEquals(2, items.size());
 
