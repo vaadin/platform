@@ -235,6 +235,7 @@ public class ComponentsView extends VerticalLayout {
         contextMenuTarget.setText("Context Menu Target");
         contextMenuTarget.setId("context-menu-target");
         ContextMenu menu = new ContextMenu(contextMenuTarget);
+        menu.setId("the-context-menu");
         menu.setOpenOnClick(true);
         menu.addItem(new Span("Item 0"),
                 event -> log.log("Context menu Item 0 is clicked"));
