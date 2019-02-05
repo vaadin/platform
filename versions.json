@@ -296,7 +296,7 @@
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "1.2.0.beta1",
+            "javaVersion": "1.2.0",
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
