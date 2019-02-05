@@ -22,7 +22,8 @@
             "javaVersion": "1.0.0.beta2",
             "jsVersion": "1.0.0",
             "component": true
-        },"vaadin-button": {
+        },
+        "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "1.2.0",
             "jsVersion": "2.1.2",
@@ -96,7 +97,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "2.1.5",
-            "jsVersion": "5.3.0-alpha7",
+            "jsVersion": "5.3.0",
             "component": true
         },
         "vaadin-icons": {
@@ -232,7 +233,7 @@
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
             "javaVersion": "1.2.1",
-            "jsVersion": "2.3.0-alpha7",
+            "jsVersion": "2.3.0",
             "component": true
         },
         "vaadin-themable-mixin": {
