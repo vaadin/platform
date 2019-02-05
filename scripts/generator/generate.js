@@ -40,6 +40,9 @@ const vaadinBowerResultFileName = getResultsFilePath('vaadin-bower.json');
 const vaadinPackageTemplateFileName = getTemplateFilePath('template-vaadin-package.json');
 const vaadinPackageResultFileName = getResultsFilePath('vaadin-package.json');
 
+const coreShrinkwrapTemplateFileName = getTemplateFilePath('template-vaadin-core-shrinkwrap-package.json');
+const coreShrinkwrapResultFileName = getResultsFilePath('vaadin-core-shrinkwrap-package.json');
+
 const vaadinShrinkwrapTemplateFileName = getTemplateFilePath('template-vaadin-shrinkwrap-package.json');
 const vaadinShrinkwrapResultFileName = getResultsFilePath('vaadin-shrinkwrap-package.json');
 
@@ -66,6 +69,7 @@ writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
 
+writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 const shrinkwrap = {};
 Object.assign(shrinkwrap, versions.core);
 Object.assign(shrinkwrap, versions.vaadin);
