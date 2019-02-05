@@ -236,8 +236,8 @@
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "1.0.0.beta1",
-            "jsVersion": "1.0.0-beta1",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
             "component": true
         },
         "vaadin-app-layout": {
