@@ -42,6 +42,7 @@ import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
+import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -286,6 +287,24 @@ public class ComponentsView extends VerticalLayout {
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
                 new Binder<>(Entity.class), new HorizontalLayout()));
 
+        final TextField wrappedField = new TextField();
+        CustomField<String> customField = new CustomField<String>() {
+                {
+                    setLabel("Name");
+                    add(wrappedField);
+                }
+        
+                @Override
+                protected String generateModelValue() {
+                    return wrappedField.getValue();
+                }
+        
+                @Override
+                protected void setPresentationValue(String newPresentationValue) {
+                    wrappedField.setValue(newPresentationValue);
+                }
+        };        
+        
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
@@ -318,6 +337,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(cookieConsent);
         components.add(crud);
         components.add(loginForm);
+        components.add(customField);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);

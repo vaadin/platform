@@ -81,6 +81,11 @@
             <artifactId>vaadin-accordion-flow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-custom-field-flow</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
