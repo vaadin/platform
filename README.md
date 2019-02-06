@@ -27,6 +27,7 @@ These components provide a Java API for web components.
 
 | Component | Repository |
 |-----------|------------|
+| Accordion | https://github.com/vaadin/vaadin-accordion-flow | 
 | AppLayout | https://github.com/vaadin/vaadin-app-layout-flow | 
 | Board* | https://github.com/vaadin/vaadin-board-flow | 
 | Button | https://github.com/vaadin/vaadin-button-flow |
@@ -38,12 +39,16 @@ These components provide a Java API for web components.
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
 | Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
+| Details | https://github.com/vaadin/vaadin-details-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
 | Grid | https://github.com/vaadin/vaadin-grid-flow |
+| Grid Pro* | https://github.com/vaadin/vaadin-grid-pro-flow |
+| Rich Text Editor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
 | Icons | https://github.com/vaadin/vaadin-icons-flow |
 | IronList | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | https://github.com/vaadin/vaadin-list-box-flow |
+| Login | https://github.com/vaadin/vaadin-login-flow |
 | Notification | https://github.com/vaadin/vaadin-notification-flow |
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |

@@ -17,6 +17,12 @@
             "npmVersion": "1.8.0",
             "jsVersion": "1.8.0"
         },
+        "vaadin-accordion": {
+            "npmName": "@vaadin/vaadin-accordion",
+            "javaVersion": "1.0.1",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "1.3.0",
@@ -60,6 +66,12 @@
         "vaadin-development-mode-detector": {
             "npmName": "@vaadin/vaadin-development-mode-detector",
             "jsVersion": "2.0.0"
+        },
+        "vaadin-details": {
+            "npmName": "@vaadin/vaadin-details",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
+            "component": true
         },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
@@ -247,6 +259,12 @@
             "jsVersion": "1.0.2",
             "component": true
         },
+        "vaadin-login": {
+            "npmName": "@vaadin/vaadin-login",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
+            "component": true
+        },
         "webcomponentsjs": {
             "jsVersion": "1.2.6"
         },
@@ -292,8 +310,8 @@
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.1.1",
-            "jsVersion": "1.2.0",
+            "javaVersion": "1.2.0",
+            "jsVersion": "1.1.0",
             "component": true,
             "pro": true
         },
@@ -304,9 +322,17 @@
             "component": true,
             "pro": true
         },
+        "vaadin-grid-pro": {
+            "npmName": "@vaadin/vaadin-grid-pro",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
+            "component": true,
+            "pro": true
+        },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "jsVersion": "1.0.0-beta2",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true,
             "pro": true
         },
