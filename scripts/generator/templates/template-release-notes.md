@@ -2,7 +2,7 @@
 
 The Vaadin platform consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
-With every major release, we will change and improve things based on your feedback. This may lead into breaking changes, which will be listed for each part of the platform in the breaking changes section.
+With every major release, we will change and improve things based on your feedback. This may lead to breaking changes, which will be listed for each part of the platform in the breaking changes section.
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
@@ -12,12 +12,23 @@ Vaadin 13 is supported for 4 months after GA (general availability). The latest 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
-- Grid style generator
 - New components:
   - Rich text editor
+  - Grid pro
+  - Login
+  - Accordion
+  - Details
+  - Email field
+  - Number field
+  - Custom field
 - New server-side API's:
   - Time picker
-
+  - Select
+- Dynamic routes for Flow
+- Grid style generator
+- Keyboard shortcuts API for Flow
+- Compact variant for Lumo
+- Theme settings for Designer
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
@@ -59,9 +70,10 @@ There are also full application examples available like **Bakery (Pro)** and **B
 
 ### Getting Started Manually
 
-For **frontend projects** you can get the dependencies with 
- - [Bower](https://bower.io) by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
- - [NPM](https://www.npmjs.com) by running `npm install @vaadin/vaadin@{{platform}}` or `npm install @vaadin/vaadin-core@{{platform}}`
+For **frontend projects** you can get the dependencies with [Bower](https://bower.io) or [NPM](https://www.npmjs.com).
+ - Bower by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
+ - NPM by running `npm install @vaadin/vaadin@{{platform}}` or `npm install @vaadin/vaadin-core@{{platform}}`
+ - There are also version-locked (with [shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap.html)) NPM dependencies available from `@vaadin/vaadin-shrinkwrap#{{platform}}` and `@vaadin/vaadin-core-shrinkwrap#{{platform}}`.
 
 For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
 
@@ -99,8 +111,7 @@ The following built-in browsers in the following mobile operating systems:
 - Google Chrome evergreen on Android (requiring Android 4.4 or newer)
 
 ## Development environments
-
-Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom, VS.code among others (including Emacs and Vim).
+Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom and Visual Studio Code among others (including Emacs and Vim).
 
 **Vaadin Designer** supports the following IDEs:
 - Eclipse Java EE versions: Oxygen, Photon and 2018.
@@ -121,16 +132,21 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Payara Micro
 
 # Breaking changes
-This lists products that have breaking changes from V11
-- vaadin-combo-box Java API ([release notes](https://github.com/vaadin/vaadin-combo-box-flow/releases/tag/{{core.vaadin-combo-box.javaVersion}}))
+This lists products that have breaking changes from V12
+- Flow spring integration ([release notes](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
+- vaadin-context-menu Java API ([release notes](https://github.com/vaadin/vaadin-context-menu-flow/releases/tag/{{core.vaadin-context-menu.javaVersion}}))
+- vaadin-grid Java API ([release notes](https://github.com/vaadin/vaadin-grid-flow/releases/tag/{{core.vaadin-grid.javaVersion}}))
 
 # Known Issues and Limitations
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
 
+## Components
+- The theme variant dark doesn't work in IE11 when applied to the `<html>` element.
+
 ## Designer
-- External preview doesn't work on IE11.
+- External preview doesn't work in IE11.
 - Horizontal scrolling using the trackpad doesn't work Eclipse.
 
 # Migrating from Vaadin 8
@@ -145,13 +161,3 @@ A few rules of thumb will help you and us in finding the correct repository for 
 3) If you encounter an issue with Flow which does not seem to be related to a specific component, the problem is likely in Flow itself. The Flow repository is https://github.com/vaadin/flow
 4) If you encounter an issue with Designer, the repository is https://github.com/vaadin/designer
 5) If you encounter an issue with TestBench, the repository is https://github.com/vaadin/testbench
-6) If you encounter issues with code or the UI in any of the app starters, the corresponding repositories are:
-  a) https://github.com/vaadin/bakery-app-starter-issues for Bakery
-  b) https://github.com/vaadin/beverage-starter-flow for Beverage Buddy
-  c) https://github.com/vaadin/skeleton-starter-flow for Flow project base
-  d) https://github.com/vaadin/skeleton-starter-flow for Flow and Spring Boot project base
-  e) https://github.com/vaadin/generator-polymer-init-vaadin-elements-app for Polymer project base
-  f) https://github.com/vaadin/base-starter-angular for Angular project base
-  g) https://github.com/vaadin/base-starter-react for React project base
-  h) https://github.com/vaadin/base-starter-vue for Vue project base
-

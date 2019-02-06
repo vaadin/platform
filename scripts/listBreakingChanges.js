@@ -36,17 +36,17 @@ const printChangesForProduct = (name, key, previousProduct, currentProduct) => {
     }
 
     if(!currentVersion && previousVersion) {
-        // console.log(`${key} version was removed in the current version`);
+        console.log(`${name} ${key} version was removed in the current version`);
         return;
     }
     
     if(!previousVersion && currentVersion) {
-    //    console.log(`${key} version didn't exist in the previous version`);
+        console.log(`${name} ${key} version didn't exist in the previous version`);
         return;
     }
 
     if(!currentVersion.match(majorVersionRegexp) || !previousVersion.match(majorVersionRegexp)) {
-        //    console.log(`${key} has non-numeric version`);
+        console.log(`${name} ${key} has non-numeric version`);
         return
     }
 
@@ -56,8 +56,9 @@ const printChangesForProduct = (name, key, previousProduct, currentProduct) => {
 }
 
 const printChanges = async (previousVersion) => {
+    console.log(`Searching for changes between current and version ${previousVersion}`);
+
     const previousVersions = JSON.parse(await getUrl(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`));
-    
 
     for (let [key, value] of Object.entries(currentVersions.core)) {
         if(!previousVersions.core[key]) { 
@@ -81,5 +82,5 @@ const printChanges = async (previousVersion) => {
 }
 
 //so, so naive
-const previousVersion = process.argv[2] || '11.0';
+const previousVersion = process.argv[2] || '10.0';
 printChanges(previousVersion);
