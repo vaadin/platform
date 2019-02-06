@@ -322,9 +322,17 @@
             "component": true,
             "pro": true
         },
+        "vaadin-grid-pro": {
+            "npmName": "@vaadin/vaadin-grid-pro",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.0",
+            "component": true,
+            "pro": true
+        },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "jsVersion": "1.0.0-beta2",
+            "javaVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true,
             "pro": true
         },

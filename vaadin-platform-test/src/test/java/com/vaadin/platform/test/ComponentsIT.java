@@ -15,6 +15,9 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
 import com.vaadin.flow.component.crud.testbench.CrudElement;
+import com.vaadin.flow.component.gridpro.testbench.GridProElement;
+import com.vaadin.flow.component.gridpro.testbench.GridTHTDElement;
+import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
 import com.vaadin.flow.component.customfield.testbench.CustomFieldElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.details.testbench.DetailsElement;
@@ -66,6 +69,8 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(AccordionElement.class).first());
         checkCustomElement($(AppLayoutElement.class).first());
         checkCustomElement($(CrudElement.class).first());
+        checkCustomElement($(GridProElement.class).first());
+        checkCustomElement($(RichTextEditorElement.class).first());
         checkCustomElement($(CustomFieldElement.class).first());
         checkCustomElement($(CheckboxElement.class).first());
         checkCustomElement($("vaadin-checkbox-group").first());
