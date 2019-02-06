@@ -95,6 +95,27 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Vaadin Login -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-login-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Vaadin Details -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-details-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Vaadin Accordion -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-accordion-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Vaadin Custom Field -->
         <dependency>
             <groupId>com.vaadin</groupId>

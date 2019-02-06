@@ -107,6 +107,16 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-accordion-flow</artifactId>
+                <version>${vaadin.accordion.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-accordion-testbench</artifactId>
+                <version>${vaadin.accordion.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-button-flow</artifactId>
                 <version>${vaadin.button.version}</version>
             </dependency>
@@ -134,6 +144,17 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-dialog-flow</artifactId>
                 <version>${vaadin.dialog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-flow</artifactId>
+                <version>${vaadin.details.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-testbench</artifactId>
+                <version>${vaadin.details.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -244,6 +265,12 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-login-testbench</artifactId>
+                <version>${vaadin.login.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-crud-testbench</artifactId>
                 <version>${vaadin.crud.version}</version>
                 <scope>test</scope>
@@ -300,6 +327,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-app-layout-flow</artifactId>
                 <version>${vaadin.app.layout.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-login-flow</artifactId>
+                <version>${vaadin.login.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
