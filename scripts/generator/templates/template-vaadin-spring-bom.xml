@@ -114,6 +114,7 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-accordion-testbench</artifactId>
                 <version>${vaadin.accordion.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
