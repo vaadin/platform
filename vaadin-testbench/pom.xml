@@ -102,6 +102,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Vaadin Grid Pro -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-grid-pro-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

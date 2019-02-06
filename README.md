@@ -41,6 +41,7 @@ These components provide a Java API for web components.
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
 | Grid | https://github.com/vaadin/vaadin-grid-flow |
+| Grid Pro* | https://github.com/vaadin/vaadin-grid-pro-flow |
 | Icons | https://github.com/vaadin/vaadin-icons-flow |
 | IronList | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | https://github.com/vaadin/vaadin-list-box-flow |

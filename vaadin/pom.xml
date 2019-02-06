@@ -71,6 +71,11 @@
             <artifactId>vaadin-custom-field-flow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-grid-pro-flow</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
