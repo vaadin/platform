@@ -41,6 +41,8 @@ import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
+import com.vaadin.flow.component.gridpro.GridPro;
+import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -282,6 +284,10 @@ public class ComponentsView extends VerticalLayout {
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
                 new Binder<>(Entity.class), new HorizontalLayout()));
 
+        GridPro<Entity> gridPro = new GridPro<>();
+
+        RichTextEditor richTextEditor = new RichTextEditor();
+
         final TextField wrappedField = new TextField();
         CustomField<String> customField = new CustomField<String>() {
                 {
@@ -323,6 +329,8 @@ public class ComponentsView extends VerticalLayout {
         components.add(upload);
         components.add(cookieConsent);
         components.add(crud);
+        components.add(gridPro);
+        components.add(richTextEditor);
         components.add(customField);
 
         layouts.add(formLayout);
