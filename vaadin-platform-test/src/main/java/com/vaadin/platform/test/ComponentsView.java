@@ -336,6 +336,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(combobox);
         components.add(datePicker);
         components.add(timePicker);
+        components.add(select);
         components.add(details);
         components.add(grid);
         components.add(icons);
