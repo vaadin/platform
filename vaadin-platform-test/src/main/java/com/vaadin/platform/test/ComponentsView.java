@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.IOUtils;
-
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
@@ -42,14 +40,13 @@ import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
-import com.vaadin.flow.component.gridpro.GridPro;
-import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Paragraph;
@@ -59,13 +56,14 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.richtexteditor.RichTextEditor;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -82,6 +80,7 @@ import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
+import org.apache.commons.io.IOUtils;
 
 @Route("")
 @Theme(Lumo.class)
@@ -126,6 +125,14 @@ public class ComponentsView extends VerticalLayout {
         log.log("TimePicker default is " + timePicker.getValue());
         timePicker.addValueChangeListener(e -> {
             log.log("TimePicker value changed from " + e.getOldValue() + " to "
+                    + e.getValue());
+        });
+
+        Select<String> select = new Select<>();
+        select.setItems("Spring", "Summer", "Autumn", "Winter");
+        log.log("Select default is " + select.getValue());
+        select.addValueChangeListener(e -> {
+            log.log("select value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
 
@@ -295,22 +302,22 @@ public class ComponentsView extends VerticalLayout {
 
         final TextField wrappedField = new TextField();
         CustomField<String> customField = new CustomField<String>() {
-                {
-                    setLabel("Name");
-                    add(wrappedField);
-                }
-        
-                @Override
-                protected String generateModelValue() {
-                    return wrappedField.getValue();
-                }
-        
-                @Override
-                protected void setPresentationValue(String newPresentationValue) {
-                    wrappedField.setValue(newPresentationValue);
-                }
-        };        
-        
+            {
+                setLabel("Name");
+                add(wrappedField);
+            }
+
+            @Override
+            protected String generateModelValue() {
+                return wrappedField.getValue();
+            }
+
+            @Override
+            protected void setPresentationValue(String newPresentationValue) {
+                wrappedField.setValue(newPresentationValue);
+            }
+        };
+
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
