@@ -171,7 +171,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
         select.$("div").attribute("part", "toggle-button").first().click();
 
-        WebElement dropDown = $("vaadin-select-overlay").id("overlay");
+        WebElement dropDown = $("vaadin-select-overlay").first();
 
         assertElementRendered(dropDown);
 
