@@ -27,13 +27,13 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "1.2.0",
+            "javaVersion": "1.2.1",
             "jsVersion": "2.2.6",
             "component": true
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "4.2.3",
             "component": true
         },
@@ -203,7 +203,7 @@
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "1.2.0",
+            "javaVersion": "1.2.1",
             "jsVersion": "1.1.5",
             "component": true
         },
@@ -231,7 +231,7 @@
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "1.2.0",
+            "javaVersion": "1.2.1",
             "jsVersion": "4.2.1",
             "component": true
         },
