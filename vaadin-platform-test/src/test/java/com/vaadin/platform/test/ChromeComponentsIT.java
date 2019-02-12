@@ -177,7 +177,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
         getCommandExecutor().executeScript("arguments[0].value='1'", select);
 
-        assertLog("ComboBox value changed from null to Spring");
+        assertLog("Select value changed from null to Spring");
     }
 
     @Test

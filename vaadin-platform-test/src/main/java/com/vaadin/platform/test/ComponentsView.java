@@ -132,7 +132,7 @@ public class ComponentsView extends VerticalLayout {
         select.setItems("Spring", "Summer", "Autumn", "Winter");
         log.log("Select default is " + select.getValue());
         select.addValueChangeListener(e -> {
-            log.log("select value changed from " + e.getOldValue() + " to "
+            log.log("Select value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
 
