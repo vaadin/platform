@@ -1,9 +1,5 @@
 package com.vaadin.platform.test;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
@@ -15,23 +11,22 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
 import com.vaadin.flow.component.crud.testbench.CrudElement;
-import com.vaadin.flow.component.gridpro.testbench.GridProElement;
-import com.vaadin.flow.component.gridpro.testbench.GridTHTDElement;
-import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
 import com.vaadin.flow.component.customfield.testbench.CustomFieldElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.details.testbench.DetailsElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.gridpro.testbench.GridProElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.login.testbench.LoginFormElement;
-import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
+import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
+import com.vaadin.flow.component.select.testbench.SelectElement;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.tabs.testbench.TabElement;
 import com.vaadin.flow.component.tabs.testbench.TabsElement;
@@ -42,6 +37,9 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ComponentsIT extends ParallelTest {
 
@@ -95,6 +93,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(TextAreaElement.class).first());
         checkCustomElement($(TextFieldElement.class).first());
         checkCustomElement($(UploadElement.class).first());
+        checkCustomElement($(SelectElement.class).first());
     }
 
     private void checkCustomElement(TestBenchElement element) {

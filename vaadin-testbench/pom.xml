@@ -53,6 +53,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Vaadin Select -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-select-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Vaadin Board -->
         <dependency>
             <groupId>com.vaadin</groupId>
