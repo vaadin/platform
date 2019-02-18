@@ -236,6 +236,26 @@
                 <version>{{core.vaadin-control-state-mixin.jsVersion}}</version>
             </dependency>
             <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-login</artifactId>
+                <version>{{core.vaadin-login.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-accordion</artifactId>
+                <version>{{core.vaadin-accordion.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-details</artifactId>
+                <version>{{core.vaadin-details.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-custom-field</artifactId>
+                <version>{{core.vaadin-custom-field.jsVersion}}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
                 <version>{{core.iron-icon.jsVersion}}</version>
