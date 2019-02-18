@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import com.vaadin.flow.component.select.testbench.SelectElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -162,6 +163,21 @@ public class ChromeComponentsIT extends ParallelTest {
                 timePicker);
 
         assertLog("TimePicker value changed from null to 01:37");
+    }
+
+    @Test
+    public void selectIsRenderedAndReceivesValueChangeEvent() {
+        SelectElement select = $(SelectElement.class).first();
+
+        select.$("div").attribute("part", "toggle-button").first().click();
+
+        WebElement dropDown = $("vaadin-select-overlay").first();
+
+        assertElementRendered(dropDown);
+
+        getCommandExecutor().executeScript("arguments[0].value='1'", select);
+
+        assertLog("Select value changed from null to Spring");
     }
 
     @Test

@@ -279,7 +279,7 @@
             "javaVersion": "1.1.0"
         },
         "gradle": {
-            "javaVersion": "1.0.0.RC4"
+            "javaVersion": "1.0.0.RC8"
         }
     },
     "vaadin": {
