@@ -255,7 +255,7 @@
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.1.1",
             "jsVersion": "1.0.2",
             "component": true
         },
@@ -289,7 +289,7 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "2.2.0",
+            "javaVersion": "2.2.1",
             "jsVersion": "2.1.0",
             "component": true,
             "pro": true
@@ -303,21 +303,21 @@
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "1.2.0",
+            "javaVersion": "1.2.1",
             "jsVersion": "1.1.1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.2.0",
+            "javaVersion": "1.2.1",
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.1.1",
             "jsVersion": "1.0.1",
             "component": true,
             "pro": true
