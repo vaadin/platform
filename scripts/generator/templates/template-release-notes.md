@@ -21,13 +21,13 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
   - Email field
   - Number field
   - Custom field
-- New server-side API's:
+- New server-side APIs:
   - Time picker
   - Select
-- Dynamic routes for Flow
+- Dynamic registration of routes for Flow
 - Grid style generator
 - Keyboard shortcuts API for Flow
-- Compact variant for Lumo
+- Compact preset for Lumo
 - Theme settings for Designer
 
 {{changesSincePrevious}}
@@ -47,7 +47,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
 - Vaadin Spring Addon ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
 - Vaadin CDI Addon ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}})). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions.
-- Maven Plugin for Vaadin ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
+- Maven Plugin for Vaadin ({{platform}})
 - Gradle plugin for Flow ([{{core.gradle.javaVersion}}](https://github.com/devsoap/gradle-vaadin-flow/releases/tag/{{core.gradle.javaVersion}}))
 - Vaadin Multiplatform Runtime **(Prime)**
   - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
@@ -143,7 +143,7 @@ This lists products that have breaking changes from V12
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
 
 ## Components
-- The theme variant dark doesn't work in IE11 when applied to the `<html>` element.
+- The dark theme preset does not work in IE11 when applied to the `<html>` element.
 
 ## Designer
 - External preview doesn't work in IE11.

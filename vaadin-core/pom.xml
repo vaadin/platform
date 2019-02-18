@@ -64,6 +64,10 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-accordion-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-flow</artifactId>
         </dependency>
         <dependency>
@@ -76,7 +80,15 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-custom-field-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-date-picker-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-details-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -109,6 +121,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-list-box-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-login-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
