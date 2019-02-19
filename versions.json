@@ -331,7 +331,7 @@
         },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "javaVersion": "1.0.0",
+            "javaVersion": "1.0.1",
             "jsVersion": "1.0.1",
             "component": true,
             "pro": true
