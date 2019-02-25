@@ -249,7 +249,7 @@
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "1.0.0",
+            "javaVersion": "2.0.0",
             "jsVersion": "1.0.0",
             "component": true
         },
