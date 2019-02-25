@@ -112,7 +112,7 @@ function getChangedSincePrevious(versions) {
     if (!previousVersionsJson) {
         return '';
     }
-    const allVersions = Object.assign({}, versions.core, versions.vaadin, versions.community);
+    const allVersions = Object.assign({}, versions.core, versions.vaadin);
     const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
     const changesString = generateChangesString(allVersions, allPreviousVersions);
     let result = '';
@@ -219,7 +219,7 @@ function getReleaseNoteLink(name, version) {
             releaseNoteLink = 'https://github.com/vaadin/testbench/releases/tag/';
             break;
         case 'gradle':
-            title = 'Gradle plugin for Flow **(Community)**';
+            title = 'Gradle plugin for Flow';
             releaseNoteLink = 'https://github.com/devsoap/gradle-vaadin-flow/releases/tag/';
             break;
         default:
