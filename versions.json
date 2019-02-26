@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.4.0"
+            "javaVersion": "1.4.1"
         },
         "flow-spring": {
             "javaVersion": "11.0.0"
@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "3.0.1",
+            "javaVersion": "3.0.2",
             "jsVersion": "5.3.2",
             "component": true
         },
