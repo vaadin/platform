@@ -141,6 +141,7 @@ This lists products that have breaking changes from V12
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
+- There are [some issues](https://github.com/vaadin/flow/issues/5146) in using Web Sockets as the Push channel in certain OSGi environments, but long polling works.
 
 ## Components
 - The dark theme preset does not work in IE11 when applied to the `<html>` element.
