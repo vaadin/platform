@@ -256,6 +256,16 @@
                 <version>{{core.vaadin-custom-field.jsVersion}}</version>
             </dependency>
             <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-grid-pro</artifactId>
+                <version>{{vaadin.vaadin-grid-pro.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-configrm-dialog</artifactId>
+                <version>{{vaadin.vaadin-configrm-dialog.jsVersion}}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
                 <version>{{core.iron-icon.jsVersion}}</version>
