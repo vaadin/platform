@@ -344,7 +344,7 @@
             "pro": true
         },
         "vaadin-testbench-components": {
-            "javaVersion": "2.0.1"
+            "javaVersion": "2.0.2"
         },
         "vaadin-license-checker": {
             "jsVersion": "2.1.0"
