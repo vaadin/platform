@@ -82,7 +82,7 @@
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
             "javaVersion": "1.0.0",
-            "jsVersion": "2.0.3",
+            "jsVersion": "2.0.4",
             "component": true
         },
         "vaadin-element-mixin": {
