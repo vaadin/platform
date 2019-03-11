@@ -4,10 +4,6 @@ The Vaadin platform consists of a set of web components, a Java web framework, c
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## Changes since previous version
-
-Include latest versions of all components, tools, Java web framework and app starters.
-
 ## Support
 Vaadin 10 is an LTS (long term support) version, which will be supported at least for 5 years after the GA (general availability) release. [Learn more about the support](https://vaadin.com/support).
 
@@ -15,6 +11,7 @@ Vaadin 10 is an LTS (long term support) version, which will be supported at leas
 
 Please [see the release blog post in vaadin.com](https://vaadin.com/blog/vaadin-10-is-out-)
 
+{{changesSincePrevious}}
 ## Included Projects and Change Log
 The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
 
