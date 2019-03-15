@@ -7,7 +7,7 @@ With every major release, we will change and improve things based on your feedba
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Platform Support
-Vaadin 13 is supported for 4 months after GA (general availability). The latest LTS (long term support) version is Vaadin 10. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 14 is an LTS (long term support) version, which will be supported at least for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -61,8 +61,8 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 ### App Starters
 All app starters are available at https://vaadin.com/start
 
-# Getting Started with Vaadin 13
-The best way to get started with Vaadin 13 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
+# Getting Started with Vaadin 14
+The best way to get started with Vaadin 14 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
 The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
 
