@@ -11,24 +11,6 @@
     <artifactId>vaadin-spring-boot-starter</artifactId>
     <name>Spring Boot Starter</name>
     <description>Spring Boot Starter for Vaadin Flow applications.</description>
-
-    <repositories>
-        <repository>
-            <id>vaadin-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>vaadin-prereleases</id>
-            <url>https://maven.vaadin.com/vaadin-prereleases</url>
-        </repository>
-    </repositories>
-
     <properties>
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
     </properties>
