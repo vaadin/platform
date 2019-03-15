@@ -6,11 +6,27 @@ cache:
   directories:
   - "$HOME/.m2"
   - node_modules
+
+# Make it possible to run tests on a local Chrome
+before_install:
+ - export CHROME_BIN=/usr/bin/google-chrome
+ - export DISPLAY=:99.0
+ - sh -e /etc/init.d/xvfb start
+# The Following line fixes random Chrome startup failures (https://github.com/SeleniumHQ/docker-selenium/issues/87)
+ - export DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+addons:
+  apt:
+    sources:
+     - google-chrome
+    packages:
+     - google-chrome-stable
+
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - scripts/generateBoms.sh
-- mvn install -DskipTests
+- mvn clean install -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
 - mvn package -Pjavadocs -DskipTests
 - npm install -g bower

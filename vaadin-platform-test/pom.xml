@@ -211,6 +211,7 @@
                     <stopPort>9999</stopPort>
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
+                    <skip>${skipTests}</skip>
                 </configuration>
                 <executions>
                     <execution>
@@ -225,63 +226,6 @@
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.20</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <sauce.user>${sauce.user}</sauce.user>
-                        <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
-                        <sauce.options>${sauce.options}</sauce.options>
-                    </systemPropertyVariables>
-                    <trimStackTrace>false</trimStackTrace>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.saucelabs.maven.plugin</groupId>
-                <artifactId>sauce-connect-plugin</artifactId>
-                <version>2.1.25</version>
-                <configuration>
-                    <sauceUsername>${sauce.user}</sauceUsername>
-                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
-                    <options>${sauce.options}</options>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.saucelabs</groupId>
-                        <artifactId>ci-sauce</artifactId>
-                        <version>1.138</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <!-- Start Sauce Connect prior to running the integration 
-                        tests -->
-                    <execution>
-                        <id>start-sauceconnect</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start-sauceconnect</goal>
-                        </goals>
-                    </execution>
-                    <!-- Stop the Sauce Connect process after the integration 
-                        tests have finished -->
-                    <execution>
-                        <id>stop-sauceconnect</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop-sauceconnect</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -353,6 +297,139 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <skip>${skipTests}</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.lazerycode.selenium</groupId>
+                <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                <version>1.0.17</version>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.20</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <trimStackTrace>false</trimStackTrace>
+                            <systemPropertyVariables>
+                                <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                                <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
+                            </systemPropertyVariables>
+                            <skip>${skipTests}</skip>
+                        </configuration>
+                    </plugin>
+                    <!-- Plugin for automatically download Chrome Driver for tests -->
+                    <plugin>
+                        <groupId>com.lazerycode.selenium</groupId>
+                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                        <version>1.0.17</version>
+                        <configuration>
+                            <!-- root directory that downloaded driver binaries will be stored
+                                in -->
+                            <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
+                            <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
+                            <customRepositoryMap>webdrivers.xml</customRepositoryMap>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>it-saucelabs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.20</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <sauce.user>${sauce.user}</sauce.user>
+                                <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
+                                <sauce.options>${sauce.options}</sauce.options>
+                            </systemPropertyVariables>
+                            <trimStackTrace>false</trimStackTrace>
+                            <skip>${skipTests}</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.saucelabs.maven.plugin</groupId>
+                        <artifactId>sauce-connect-plugin</artifactId>
+                        <version>2.1.25</version>
+                        <configuration>
+                            <sauceUsername>${sauce.user}</sauceUsername>
+                            <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                            <options>${sauce.options}</options>
+                            <skip>${skipTests}</skip>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.saucelabs</groupId>
+                                <artifactId>ci-sauce</artifactId>
+                                <version>1.138</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <!-- Start Sauce Connect prior to running the integration
+                                tests -->
+                            <execution>
+                                <id>start-sauceconnect</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start-sauceconnect</goal>
+                                </goals>
+                            </execution>
+                            <!-- Stop the Sauce Connect process after the integration
+                                tests have finished -->
+                            <execution>
+                                <id>stop-sauceconnect</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop-sauceconnect</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

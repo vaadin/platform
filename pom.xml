@@ -40,7 +40,6 @@
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
         <developerConnection>scm:git:git@github.com:vaadin/platform.git</developerConnection>
     </scm>
-
     <repositories>
         <repository>
             <id>vaadin-snapshots</id>
@@ -99,6 +98,7 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.0.0</version>
                     <configuration>
@@ -122,5 +122,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
