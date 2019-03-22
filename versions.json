@@ -24,7 +24,7 @@
         },
         "vaadin-combo-box": {
             "javaVersion": "1.0.7",
-            "jsVersion": "4.0.2",
+            "jsVersion": "4.0.3",
             "component": true
         },
         "vaadin-context-menu": {
@@ -32,7 +32,7 @@
             "component": true
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.0.3"
+            "jsVersion": "2.0.4"
         },
         "vaadin-date-picker": {
             "javaVersion": "1.0.6",
@@ -160,10 +160,10 @@
             "component": true
         },
         "vaadin-themable-mixin": {
-            "jsVersion": "1.1.6"
+            "jsVersion": "1.1.7"
         },
         "vaadin-upload": {
-            "javaVersion": "1.0.3",
+            "javaVersion": "1.0.4",
             "jsVersion": "4.0.1",
             "component": true
         },
