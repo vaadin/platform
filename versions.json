@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "1.5.0.alpha1"
+            "javaVersion": "1.5.0.alpha2"
         },
         "flow-spring": {
             "javaVersion": "11.0.0"
@@ -297,7 +297,7 @@
         "vaadin-charts": {
             "npmName": "@vaadin/vaadin-charts",
             "javaVersion": "6.3.0",
-            "jsVersion": "6.2.1",
+            "jsVersion": "6.2.2",
             "component": true,
             "pro": true
         },
