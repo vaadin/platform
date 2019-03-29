@@ -266,6 +266,11 @@
                 <version>{{vaadin.vaadin-confirm-dialog.jsVersion}}</version>
             </dependency>
             <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-charts</artifactId>
+                <version>{{vaadin.vaadin-charts.jsVersion}}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
                 <version>{{core.iron-icon.jsVersion}}</version>
