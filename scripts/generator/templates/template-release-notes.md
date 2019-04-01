@@ -12,23 +12,8 @@ Vaadin 14 is an LTS (long term support) version, which will be supported at leas
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
-- New components:
-  - Rich text editor
-  - Grid pro
-  - Login
-  - Accordion
-  - Details
-  - Email field
-  - Number field
-  - Custom field
-- New server-side APIs:
-  - Time picker
-  - Select
-- Dynamic registration of routes for Flow
-- Grid style generator
-- Keyboard shortcuts API for Flow
-- Compact preset for Lumo
-- Theme settings for Designer
+- New theme variants for Notification
+- Customise value representation for Grid Pro
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
@@ -62,13 +47,30 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 All app starters are available at https://vaadin.com/start
 
 # Getting Started with Vaadin 14
+## App starters
 The best way to get started with Vaadin 14 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
 The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
 
-There are also full application examples available like **Bakery (Pro)** and **Beverage Buddy**. Those show you some opinionated examples on how to build different types of applications, with optionally integrating to a backend.
+There are also full application examples available like **Bakery (Pro)** and **Beverage Buddy**. Those show you opinionated examples on how to build different types of applications, with optionally integrating to a backend.
 
-### Getting Started Manually
+## Maven Archetypes
+
+Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE. There is currently one Maven archetype available, the `vaadin-archetype-application` which corresponds to the project base for Flow. The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
+
+```
+mvn -B archetype:generate \
+		-DarchetypeGroupId=com.vaadin \
+		-DarchetypeArtifactId=vaadin-archetype-application \
+		-DarchetypeVersion={{platform}}\
+		-DgroupId=org.test \
+		-DartifactId=vaadin-app \
+		-Dversion=1.0-SNAPSHOT
+		cd vaadin-app
+		mvn package jetty:run
+```
+
+## Getting Started Manually
 
 For **frontend projects** you can get the dependencies with [Bower](https://bower.io) or [NPM](https://www.npmjs.com).
  - Bower by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
@@ -114,8 +116,8 @@ The following built-in browsers in the following mobile operating systems:
 Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom and Visual Studio Code among others (including Emacs and Vim).
 
 **Vaadin Designer** supports the following IDEs:
-- Eclipse Java EE versions: Oxygen, Photon and 2018.
-- JetBrains IntelliJ IDEA 2016, 2017 and 2018. Community or Ultimate edition.
+- Eclipse Java EE versions: Photon, 2018 and 2019.
+- JetBrains IntelliJ IDEA 2017, 2018 and 2019. Community or Ultimate edition.
 
 ## Java Related Technologies and Tooling Support
 The included Java parts are compatible with Java 8 and newer.
@@ -132,10 +134,8 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Payara Micro
 
 # Breaking changes
-This lists products that have breaking changes from V12
-- Flow spring integration ([release notes](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
-- vaadin-context-menu Java API ([release notes](https://github.com/vaadin/vaadin-context-menu-flow/releases/tag/{{core.vaadin-context-menu.javaVersion}}))
-- vaadin-grid Java API ([release notes](https://github.com/vaadin/vaadin-grid-flow/releases/tag/{{core.vaadin-grid.javaVersion}}))
+This lists products that have breaking changes from V13
+
 
 # Known Issues and Limitations
 
