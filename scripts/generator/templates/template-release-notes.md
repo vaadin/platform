@@ -62,13 +62,30 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 All app starters are available at https://vaadin.com/start
 
 # Getting Started with Vaadin 13
+## App starters
 The best way to get started with Vaadin 13 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
 
 The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
 
 There are also full application examples available like **Bakery (Pro)** and **Beverage Buddy**. Those show you some opinionated examples on how to build different types of applications, with optionally integrating to a backend.
 
-### Getting Started Manually
+## Maven Archetypes
+
+Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE. There is currently one Maven archetype available, the `vaadin-archetype-application` which corresponds to the project base for Flow. The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
+
+```
+mvn -B archetype:generate \
+  -DarchetypeGroupId=com.vaadin \
+  -DarchetypeArtifactId=vaadin-archetype-application \
+  -DarchetypeVersion={{platform}} \
+  -DgroupId=org.test \
+  -DartifactId=vaadin-app \
+  -Dversion=1.0-SNAPSHOT &&
+cd vaadin-app &&
+mvn package jetty:run
+```
+
+## Getting Started Manually
 
 For **frontend projects** you can get the dependencies with [Bower](https://bower.io) or [NPM](https://www.npmjs.com).
  - Bower by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
