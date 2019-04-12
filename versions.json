@@ -59,7 +59,7 @@
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "javaVersion": "1.1.1",
+            "javaVersion": "1.1.2",
             "jsVersion": "1.2.1",
             "component": true
         },
