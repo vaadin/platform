@@ -125,10 +125,11 @@ The included Java parts are compatible with Java 8 and newer.
 ## Application Servers
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Apache Tomcat 8.0.x, 8.5, 9
+- Apache TomEE 7.0.4->
 - Oracle WebLogic Server 12.2.1
 - IBM WebSphere Application Server 8.5 Liberty Profile and 9
 - RedHat JBoss EAP 7
-- WildFly 8, 9, 10, 11, 12
+- WildFly 14, 15, 16
 - Jetty 9.4
 - Payara Server
 - Payara Micro
