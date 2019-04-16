@@ -347,6 +347,17 @@
                 <artifactId>license-checker</artifactId>
                 <version>{{vaadin.vaadin-license-checker.jsVersion}}</version>
             </dependency>
+            </dependency>            
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-crud</artifactId>
+                <version>{{core.vaadin-crud.jsVersion}}</version>
+            </dependency>            
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-rich-text-editor</artifactId>
+                <version>{{core.vaadin-rich-text-editor.jsVersion}}</version>
+            </dependency>   
         </dependencies>
     </dependencyManagement>
 </project>
