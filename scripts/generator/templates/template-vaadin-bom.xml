@@ -348,12 +348,12 @@
                 <version>{{vaadin.vaadin-license-checker.jsVersion}}</version>
             </dependency>            
             <dependency>
-                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-crud</artifactId>
                 <version>{{vaadin.vaadin-crud.jsVersion}}</version>
             </dependency>            
             <dependency>
-                <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-rich-text-editor</artifactId>
                 <version>{{vaadin.vaadin-rich-text-editor.jsVersion}}</version>
             </dependency>           
