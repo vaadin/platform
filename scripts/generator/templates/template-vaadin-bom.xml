@@ -350,12 +350,12 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-crud</artifactId>
-                <version>{{core.vaadin-crud.jsVersion}}</version>
+                <version>{{vaadin.vaadin-crud.jsVersion}}</version>
             </dependency>            
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-rich-text-editor</artifactId>
-                <version>{{core.vaadin-rich-text-editor.jsVersion}}</version>
+                <version>{{vaadin.vaadin-rich-text-editor.jsVersion}}</version>
             </dependency>           
         </dependencies>
     </dependencyManagement>
