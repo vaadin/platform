@@ -346,8 +346,7 @@
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
                 <version>{{vaadin.vaadin-license-checker.jsVersion}}</version>
-            </dependency>
-            </dependency>            
+            </dependency>                 
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-crud</artifactId>
