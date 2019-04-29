@@ -174,6 +174,23 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
+                                <mkdir
+                                    dir="${ui.jar.classes}/frontend"></mkdir>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend/bower_components">
+                                    <fileset
+                                        dir="${project.build.directory}/frontend/bower_components" />
+                                </copy>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend-es5">
+                                    <fileset
+                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
+                                </copy>
+                                <copy
+                                    todir="${ui.jar.classes}/frontend-es6">
+                                    <fileset
+                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
+                                </copy>
                                 <copy todir="${ui.jar.classes}">
                                     <fileset
                                         dir="${project.build.outputDirectory}" />
