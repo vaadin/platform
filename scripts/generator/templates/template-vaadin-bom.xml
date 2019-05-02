@@ -265,6 +265,11 @@
                 <artifactId>vaadin-confirm-dialog</artifactId>
                 <version>{{vaadin.vaadin-confirm-dialog.jsVersion}}</version>
             </dependency>
+             <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-charts</artifactId>
+                <version>{{vaadin.vaadin-charts.jsVersion}}</version>
+            </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
@@ -341,7 +346,17 @@
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
                 <version>{{vaadin.vaadin-license-checker.jsVersion}}</version>
-            </dependency>
+            </dependency>                 
+            <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-crud</artifactId>
+                <version>{{vaadin.vaadin-crud.jsVersion}}</version>
+            </dependency>            
+            <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-rich-text-editor</artifactId>
+                <version>{{vaadin.vaadin-rich-text-editor.jsVersion}}</version>
+            </dependency>   
         </dependencies>
     </dependencyManagement>
 </project>
