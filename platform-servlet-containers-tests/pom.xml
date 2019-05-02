@@ -41,9 +41,11 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!--
     <modules>
         <module>felix-jetty</module>
     </modules>
+    -->
 
     <build>
         <plugins>
