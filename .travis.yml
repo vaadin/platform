@@ -7,10 +7,11 @@ cache:
   - "$HOME/.m2"
   - node_modules
 matrix:
-  - name: "NPM MODE"
-    env: VAADIN_OPTS=""
-  - name: "BOWER MODE"
-    env: VAADIN_OPTS="-Dvaadin.bowerMode=true"
+  include:
+    - name: "NPM MODE"
+      env: VAADIN_OPTS=""
+    - name: "BOWER MODE"
+      env: VAADIN_OPTS="-Dvaadin.bowerMode=true"
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
