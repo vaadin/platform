@@ -154,56 +154,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>clean-ui-classes</id>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <tasks>
-                                <delete dir="${ui.jar.classes}"></delete>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ui-jar-classes</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir
-                                    dir="${ui.jar.classes}/frontend"></mkdir>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend/bower_components">
-                                    <fileset
-                                        dir="${project.build.directory}/frontend/bower_components" />
-                                </copy>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend-es5">
-                                    <fileset
-                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
-                                </copy>
-                                <copy
-                                    todir="${ui.jar.classes}/frontend-es6">
-                                    <fileset
-                                        dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}">
-                                    <fileset
-                                        dir="${project.build.outputDirectory}" />
-                                </copy>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.11.v20180605</version>
@@ -355,4 +305,105 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>bower</id>
+            <activation>
+                <property>
+                    <name>vaadin.bowerMode</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>clean-ui-classes</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <tasks>
+                                        <delete dir="${ui.jar.classes}"></delete>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>ui-jar-classes</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${ui.jar.classes}/frontend"></mkdir>
+                                        <copy todir="${ui.jar.classes}/frontend/bower_components">
+                                            <fileset dir="${project.build.directory}/frontend/bower_components" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}/frontend-es5">
+                                            <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}/frontend-es6">
+                                            <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}">
+                                            <fileset dir="${project.build.outputDirectory}" />
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>npm</id>
+            <activation>
+                <property>
+                    <name>!vaadin.bowerMode</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>clean-ui-classes</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <tasks>
+                                        <delete dir="${ui.jar.classes}"></delete>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>ui-jar-classes</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${ui.jar.classes}">
+                                            <fileset dir="${project.build.outputDirectory}" />
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
