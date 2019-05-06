@@ -310,7 +310,7 @@
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.2.1",
+            "javaVersion": "2.0.0.beta1",
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
