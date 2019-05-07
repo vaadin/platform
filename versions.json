@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "3.0.3",
+            "javaVersion": "3.0.4",
             "jsVersion": "5.3.3",
             "component": true
         },
@@ -261,7 +261,7 @@
         },
         "vaadin-login": {
             "npmName": "@vaadin/vaadin-login",
-            "javaVersion": "1.0.0",
+            "javaVersion": "2.0.0.beta1",
             "jsVersion": "1.0.0",
             "component": true
         },
@@ -310,8 +310,8 @@
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "1.2.1",
-            "jsVersion": "1.1.0",
+            "javaVersion": "2.0.0.beta1",
+            "jsVersion": "1.1.1",
             "component": true,
             "pro": true
         },
