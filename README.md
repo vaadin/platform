@@ -35,6 +35,7 @@ These components provide a Java API for web components.
 | Checkbox | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | https://github.com/vaadin/vaadin-combo-box-flow |
 | ConfirmDialog* | https://github.com/vaadin/vaadin-confirm-dialog-flow |
+| ContextMenu | https://github.com/vaadin/vaadin-context-menu-flow |
 | CookieConsent* | https://github.com/vaadin/vaadin-cookie-consent-flow |
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
 | Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
@@ -44,7 +45,6 @@ These components provide a Java API for web components.
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
 | Grid | https://github.com/vaadin/vaadin-grid-flow |
 | Grid Pro* | https://github.com/vaadin/vaadin-grid-pro-flow |
-| Rich Text Editor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
 | Icons | https://github.com/vaadin/vaadin-icons-flow |
 | IronList | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | https://github.com/vaadin/vaadin-list-box-flow |
@@ -53,12 +53,13 @@ These components provide a Java API for web components.
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |
 | RadioButton | https://github.com/vaadin/vaadin-radio-button-flow | 
+| Rich Text Editor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
+| Select | https://github.com/vaadin/vaadin-select-flow |
 | SplitLayout | https://github.com/vaadin/vaadin-split-layout-flow |
 | Tabs | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | https://github.com/vaadin/vaadin-text-field-flow |
-| Upload | https://github.com/vaadin/vaadin-upload-flow |
 | TimePicker | https://github.com/vaadin/vaadin-time-picker-flow |
-| Select | https://github.com/vaadin/vaadin-select-flow |
+| Upload | https://github.com/vaadin/vaadin-upload-flow |
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
 
