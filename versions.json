@@ -185,7 +185,7 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.4.2"
+            "jsVersion": "1.5.0"
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
