@@ -264,6 +264,12 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-menu-bar-testbench</artifactId>
+                <version>${vaadin.menu.bar.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-charts-testbench</artifactId>
                 <version>${vaadin.charts.version}</version>
                 <scope>test</scope>
