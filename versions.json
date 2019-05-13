@@ -193,7 +193,7 @@
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
-            "javaVersion": "1.0.0",
+            "javaVersion": "1.0.0.rc1",
             "jsVersion": "1.0.0",
             "component": true
         },
@@ -337,7 +337,7 @@
         },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "javaVersion": "1.0.1",
+            "javaVersion": "2.0.0.rc1",
             "jsVersion": "1.0.2",
             "component": true,
             "pro": true

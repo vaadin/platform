@@ -230,6 +230,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-menu-bar-flow</artifactId>
+                <version>${vaadin.menu.bar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-upload-flow</artifactId>
                 <version>${vaadin.upload.version}</version>
             </dependency>
