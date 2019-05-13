@@ -44,7 +44,7 @@
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "2.0.1",
-            "jsVersion": "4.3.4",
+            "jsVersion": "4.3.5",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -185,7 +185,7 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.4.2"
+            "jsVersion": "1.4.3"
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
@@ -311,7 +311,7 @@
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
             "javaVersion": "1.2.1",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.1.1",
             "component": true,
             "pro": true
         },
