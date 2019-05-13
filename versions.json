@@ -24,7 +24,7 @@
         },
         "vaadin-combo-box": {
             "javaVersion": "1.0.7",
-            "jsVersion": "4.0.3",
+            "jsVersion": "4.0.4",
             "component": true
         },
         "vaadin-context-menu": {
