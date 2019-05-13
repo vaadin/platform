@@ -295,14 +295,14 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "2.2.1",
+            "javaVersion": "3.0.0.rc1",
             "jsVersion": "2.1.0",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
             "npmName": "@vaadin/vaadin-charts",
-            "javaVersion": "6.3.0",
+            "javaVersion": "7.0.0.rc1",
             "jsVersion": "6.2.2",
             "component": true,
             "pro": true
