@@ -98,7 +98,7 @@
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "4.0.0.rc1",
-            "jsVersion": "5.4.0",
+            "jsVersion": "5.4.1",
             "component": true
         },
         "vaadin-icons": {
