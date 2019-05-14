@@ -271,6 +271,11 @@
                 <version>{{vaadin.vaadin-charts.jsVersion}}</version>
             </dependency>
             <dependency>
+                <groupId>com.vaadin.webjar</groupId>
+                <artifactId>vaadin-cookie-consent</artifactId>
+                <version>{{vaadin.vaadin-cookie-consent.jsVersion}}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
                 <version>{{core.iron-icon.jsVersion}}</version>
