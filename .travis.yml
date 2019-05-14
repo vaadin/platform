@@ -6,6 +6,12 @@ cache:
   directories:
   - "$HOME/.m2"
   - node_modules
+matrix:
+  include:
+    - name: "NPM MODE"
+      env: VAADIN_OPTS=""
+    - name: "BOWER MODE"
+      env: VAADIN_OPTS="-Dvaadin.bowerMode=true"
 branches:
   only:
   - master
@@ -14,13 +20,13 @@ install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - scripts/generateBoms.sh
-- mvn install -Dvaadin.bowerMode=true -DskipTests
+- mvn install $VAADIN_OPTS -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
-- mvn package -Dvaadin.bowerMode=true -Pjavadocs -DskipTests
+- mvn package $VAADIN_OPTS -Pjavadocs -DskipTests
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn verify -Dvaadin.bowerMode=true -B
+- mvn verify $VAADIN_OPTS -B
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
