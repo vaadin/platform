@@ -20,6 +20,7 @@ import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.gridpro.testbench.GridProElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.login.testbench.LoginFormElement;
+import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
@@ -92,6 +93,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(PasswordFieldElement.class).first());
         checkCustomElement($(TextAreaElement.class).first());
         checkCustomElement($(TextFieldElement.class).first());
+        checkCustomElement($(MenuBarElement.class).first());
         checkCustomElement($(UploadElement.class).first());
         checkCustomElement($(SelectElement.class).first());
     }
