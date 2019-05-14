@@ -56,6 +56,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -298,6 +299,9 @@ public class ComponentsView extends VerticalLayout {
 
         GridPro<Entity> gridPro = new GridPro<>();
 
+        MenuBar menuBar = new MenuBar();
+        menuBar.addItem("foo");
+
         RichTextEditor richTextEditor = new RichTextEditor();
 
         final TextField wrappedField = new TextField();
@@ -354,6 +358,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(gridPro);
         components.add(richTextEditor);
         components.add(customField);
+        components.add(menuBar);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);

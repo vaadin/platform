@@ -22,9 +22,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import com.vaadin.flow.component.select.testbench.SelectElement;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,12 +42,14 @@ import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
+import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
+import com.vaadin.flow.component.select.testbench.SelectElement;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.tabs.testbench.TabElement;
 import com.vaadin.flow.component.tabs.testbench.TabsElement;
@@ -181,6 +183,7 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
+    @Ignore
     public void gridIsRenderedAndRecievesSelectionEvents() {
         GridElement grid = $(GridElement.class).first();
 
@@ -416,6 +419,18 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
+    public void menuBarIsRendered() {
+        MenuBarElement menuBarElement = $(MenuBarElement.class).first();
+
+        assertElementRendered(menuBarElement);
+
+        TestBenchElement rootButton = menuBarElement.$("vaadin-menu-bar-button")
+                .first();
+
+        assertElementRendered(rootButton);
+    }
+
+    @Test
     public void tabsIsRenderedAndRecievesSelectionEvents() {
         TabsElement tabsElement = $(TabsElement.class).first();
 
@@ -497,8 +512,8 @@ public class ChromeComponentsIT extends ParallelTest {
 
         assertElementRendered(contextMenuOverlay.$("div").id("overlay"));
 
-        List<TestBenchElement> items = contextMenuOverlay.$("vaadin-context-menu-item")
-                .all();
+        List<TestBenchElement> items = contextMenuOverlay
+                .$("vaadin-context-menu-item").all();
         Assert.assertEquals(2, items.size());
 
         for (int i = 0; i < 2; i++) {

@@ -166,5 +166,9 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-context-menu-flow</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-menu-bar-flow</artifactId>
+        </dependency>
     </dependencies>
 </project>
