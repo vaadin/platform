@@ -378,13 +378,8 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <artifactId>vaadin-notification-testbench</artifactId>
-                <version>${vaadin.notification.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                  <groupId>com.vaadin</groupId>
-                 <artifactId>vaadin-notification-flow-testbench</artifactId>
+                 <artifactId>vaadin-notification-testbench</artifactId>
                  <version>${vaadin.notification.version}</version>
                  <scope>test</scope>
             </dependency>
