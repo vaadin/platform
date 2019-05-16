@@ -21,7 +21,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 - Grid columns auto-width
 - App Layout with drawer
 - The possibility to use Polymer 3, npm and JavaScript Modules instead of Polymer 2, Bower and HTML Imports.
-- Embedding Flow applications is now possible by exporting it as a web component. Flow 1.5 Added support for exporting as html-import, 2.0 adds support for exporting as JavaScript module
+- Embedding Flow applications is now possible by exporting it as a web component.
 - Adding @PreserveOnRefresh on a router layout or route will preserve the user edited component state when the user refreshes the page by reusing the component instances
 - It is possible to obtain details like screen width & height and time zone on the server side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
 - When executing JavaScript from the server side Java, it is possible to get the return value of the execution to the server side using Page.executeJs(String expression, Serializable... parameters)
