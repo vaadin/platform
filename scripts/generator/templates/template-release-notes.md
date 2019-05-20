@@ -71,14 +71,14 @@ Maven is the de-facto build tool for Java web applications. Major IDEs also supp
 
 ```
 mvn -B archetype:generate \
-		-DarchetypeGroupId=com.vaadin \
-		-DarchetypeArtifactId=vaadin-archetype-application \
-		-DarchetypeVersion={{platform}}\
-		-DgroupId=org.test \
-		-DartifactId=vaadin-app \
-		-Dversion=1.0-SNAPSHOT
-		cd vaadin-app
-		mvn package jetty:run
+                -DarchetypeGroupId=com.vaadin \
+                -DarchetypeArtifactId=vaadin-archetype-application \
+                -DarchetypeVersion={{platform}}\
+                -DgroupId=org.test \
+                -DartifactId=vaadin-app \
+                -Dversion=1.0-SNAPSHOT
+                cd vaadin-app
+                mvn package jetty:run
 ```
 
 ## Getting Started Manually
@@ -144,6 +144,9 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Jetty 9.4
 - Payara Server
 - Payara Micro
+
+## Supported Node.js Versions
+Node.js version 10.x for the npm mode.
 
 # Breaking changes
 This lists products that have breaking changes from V13
