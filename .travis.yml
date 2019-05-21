@@ -17,17 +17,16 @@ branches:
   - master
   - /^\d\d\.0$/
 install:
-- export SHRINKWRAP_VERSION=`npm view @vaadin/vaadin-core-shrinkwrap dist-tags.next`
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - scripts/generateBoms.sh
-- mvn install $VAADIN_OPTS -DskipTests -Dshrinkwrap.version=$SHRINKWRAP_VERSION
+- mvn install $VAADIN_OPTS -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
-- mvn package $VAADIN_OPTS -Pjavadocs -DskipTests -Dshrinkwrap.version=$SHRINKWRAP_VERSION
+- mvn package $VAADIN_OPTS -Pjavadocs -DskipTests
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn verify $VAADIN_OPTS -B -Dshrinkwrap.version=$SHRINKWRAP_VERSION
+- mvn verify $VAADIN_OPTS -B
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
