@@ -77,8 +77,8 @@ mvn -B archetype:generate \
                 -DgroupId=org.test \
                 -DartifactId=vaadin-app \
                 -Dversion=1.0-SNAPSHOT
-                cd vaadin-app
-                mvn package jetty:run
+                && cd vaadin-app
+                && mvn package jetty:run
 ```
 
 ## Getting Started Manually
