@@ -27,11 +27,11 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
+        <module>vaadin-maven-plugin</module>
+        <module>vaadin-testbench</module>
         <module>vaadin-platform-test/pom-npm.xml</module>
         <module>vaadin-platform-test/pom-bower.xml</module>
         <module>platform-servlet-containers-tests</module>
-        <module>vaadin-testbench</module>
-        <module>vaadin-maven-plugin</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>
