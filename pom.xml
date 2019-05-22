@@ -27,7 +27,8 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
-        <module>vaadin-platform-test</module>
+        <module>vaadin-platform-test/pom-npm.xml</module>
+        <module>vaadin-platform-test/pom-bower.xml</module>
         <module>platform-servlet-containers-tests</module>
         <module>vaadin-testbench</module>
         <module>vaadin-maven-plugin</module>
@@ -105,7 +106,7 @@
                         <includeDependencySources>true</includeDependencySources>
                         <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
-                            <!-- Exclude client engine since it is not user 
+                            <!-- Exclude client engine since it is not user
                                 facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
                             <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
@@ -113,7 +114,7 @@
                         <dependencySourceIncludes>
                             <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
                         </dependencySourceIncludes>
-                        <!-- Don't fail on doclint errors for missing servlet 
+                        <!-- Don't fail on doclint errors for missing servlet
                             artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
