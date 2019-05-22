@@ -268,7 +268,7 @@
         "vaadin-login": {
             "npmName": "@vaadin/vaadin-login",
             "javaVersion": "2.0.0.rc1",
-            "jsVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true
         },
         "webcomponentsjs": {
@@ -346,7 +346,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "6.1.0.rc1",
+            "javaVersion": "6.1.0.rc3",
             "pro": true
         },
         "vaadin-license-checker": {
