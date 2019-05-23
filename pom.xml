@@ -40,7 +40,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>vaadin-crud-flow-integration-tests/pom-npm.xml</module>
+                <module>vaadin-platform-test/pom-npm.xml</module>
             </modules>
         </profile>
         <profile>
@@ -49,7 +49,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>vaadin-crud-flow-integration-tests/pom-bower-mode.xml</module>
+                <module>vaadin-platform-test/pom-bower-mode.xml</module>
             </modules>
         </profile>
     </profiles>
