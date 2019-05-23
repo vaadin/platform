@@ -29,13 +29,30 @@
         <module>vaadin-core</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
-        <module>vaadin-platform-test/pom-npm.xml</module>
-        <module>vaadin-platform-test/pom-bower.xml</module>
         <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>
-
+    <profiles>
+        <profile>
+            <id>npm-it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vaadin-crud-flow-integration-tests/pom-npm.xml</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>bower-it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vaadin-crud-flow-integration-tests/pom-bower-mode.xml</module>
+            </modules>
+        </profile>
+    </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
