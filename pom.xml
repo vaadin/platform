@@ -40,7 +40,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>vaadin-platform-test/pom-npm.xml</module>
+                <module>vaadin-platform-test</module>
             </modules>
         </profile>
         <profile>
