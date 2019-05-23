@@ -7,10 +7,10 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>14.0-SNAPSHOT</version>
     </parent>
-    <artifactId>vaadin-platform-test-npm-mode</artifactId>
+    <artifactId>vaadin-platform-test-bower-mode</artifactId>
     <packaging>war</packaging>
-    <name>Vaadin Platform Tests in NPM mode</name>
-    <description>Vaadin Platform Tests in NPM mode</description>
+    <name>Vaadin Platform Tests in Bower Mode</name>
+    <description>Vaadin Platform Tests in Bower Mode</description>
     <url>http://vaadin.com</url>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -115,19 +115,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>auto-clean</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>3.0.0</version>
@@ -160,14 +147,11 @@
                     <execution>
                         <id>war-frontend-resources</id>
                         <goals>
-                            <goal>validate</goal>
-                            <goal>build-frontend</goal>
+                            <goal>copy-production-files</goal>
+                            <goal>package-for-production</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <productionMode>true</productionMode>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -340,11 +324,15 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy todir="${ui.jar.classes}/frontend">
-                                    <fileset dir="${project.build.directory}/frontend" />
+                                <mkdir dir="${ui.jar.classes}/frontend"></mkdir>
+                                <copy todir="${ui.jar.classes}/frontend/bower_components">
+                                    <fileset dir="${project.build.directory}/frontend/bower_components" />
                                 </copy>
-                                <copy todir="${ui.jar.classes}/build">
-                                    <fileset dir="${project.build.directory}/${project.build.finalName}/build" />
+                                <copy todir="${ui.jar.classes}/frontend-es5">
+                                    <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
+                                </copy>
+                                <copy todir="${ui.jar.classes}/frontend-es6">
+                                    <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
                                 </copy>
                                 <copy todir="${ui.jar.classes}">
                                     <fileset dir="${project.build.outputDirectory}" />
