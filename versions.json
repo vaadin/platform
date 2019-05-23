@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.0.0.rc1"
+            "javaVersion": "2.0.0.rc2"
         },
         "flow-spring": {
             "javaVersion": "12.0.0.rc2"
@@ -140,7 +140,7 @@
         "iron-list": {
             "npmName": "@polymer/iron-list",
             "npmVersion": "3.0.1",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "2.0.19"
         },
         "iron-media-query": {
@@ -175,7 +175,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.1.0",
             "component": true
         },
@@ -330,14 +330,14 @@
         },
         "vaadin-grid-pro": {
             "npmName": "@vaadin/vaadin-grid-pro",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "2.0.0",
             "component": true,
             "pro": true
         },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.0.2",
             "component": true,
             "pro": true
