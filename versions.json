@@ -295,35 +295,35 @@
         },
         "vaadin-board": {
             "npmName": "@vaadin/vaadin-board",
-            "javaVersion": "3.0.0.rc1",
+            "javaVersion": "3.0.0.rc2",
             "jsVersion": "2.1.0",
             "component": true,
             "pro": true
         },
         "vaadin-charts": {
             "npmName": "@vaadin/vaadin-charts",
-            "javaVersion": "7.0.0.rc1",
+            "javaVersion": "7.0.0.rc2",
             "jsVersion": "6.2.2",
             "component": true,
             "pro": true
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.1.1",
             "component": true,
             "pro": true
         },
         "vaadin-cookie-consent": {
             "npmName": "@vaadin/vaadin-cookie-consent",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.1.1",
             "component": true,
             "pro": true
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.0.2",
             "component": true,
             "pro": true
