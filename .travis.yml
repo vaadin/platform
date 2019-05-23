@@ -6,6 +6,12 @@ cache:
   directories:
   - "$HOME/.m2"
   - node_modules
+matrix:
+  include:
+    - name: "NPM MODE"
+      env: VAADIN_OPTS="-Denforcer.skip"
+    - name: "BOWER MODE"
+      env: VAADIN_OPTS="-Denforcer.skip -DbowerBuild"
 branches:
   only:
   - master
@@ -14,13 +20,13 @@ install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - scripts/generateBoms.sh --useSnapshots
-- mvn install -DskipTests
+- mvn install $VAADIN_OPTS -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
-- mvn package -Pjavadocs -DskipTests
+- mvn package $VAADIN_OPTS -Pjavadocs -DskipTests
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn clean verify -B
+- mvn clean verify $VAADIN_OPTS -B
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh

@@ -9,7 +9,7 @@
     </parent>
     <artifactId>vaadin-platform-test-bower-mode</artifactId>
     <packaging>war</packaging>
-    <name>Vaadin Platform Tests</name>
+    <name>Vaadin Platform Tests in Bower Mode</name>
     <description>Vaadin Platform Tests in Bower Mode</description>
     <url>http://vaadin.com</url>
     <properties>

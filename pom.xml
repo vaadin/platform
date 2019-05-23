@@ -22,20 +22,6 @@
         </repository>
     </distributionManagement>
 
-    <modules>
-        <module>vaadin</module>
-        <module>vaadin-spring-bom</module>
-        <module>vaadin-bom</module>
-        <module>vaadin-core</module>
-        <module>vaadin-maven-plugin</module>
-        <module>vaadin-testbench</module>
-        <module>vaadin-platform-test/pom-npm.xml</module>
-        <module>vaadin-platform-test/pom-bower.xml</module>
-        <module>platform-servlet-containers-tests</module>
-        <module>vaadin-spring-boot-starter</module>
-        <module>vaadin-platform-javadoc</module>
-    </modules>
-
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
@@ -123,5 +109,40 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>npm</id>
+            <activation>
+                <property>
+                    <name>!bowerBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>vaadin</module>
+                <module>vaadin-spring-bom</module>
+                <module>vaadin-bom</module>
+                <module>vaadin-core</module>
+                <module>vaadin-maven-plugin</module>
+                <module>vaadin-testbench</module>
+                <module>vaadin-platform-test/pom-npm.xml</module>
+                <module>vaadin-platform-test/pom-bower.xml</module>
+                <module>platform-servlet-containers-tests</module>
+                <module>vaadin-spring-boot-starter</module>
+                <module>vaadin-platform-javadoc</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>bower</id>
+            <activation>
+                <property>
+                    <name>bowerBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>vaadin-platform-test/pom-bower.xml</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
