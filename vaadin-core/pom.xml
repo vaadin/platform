@@ -171,6 +171,32 @@
             <artifactId>vaadin-menu-bar-flow</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <!-- compute shrink version -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>regex-property</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>shrink.version</name>
+                            <value>${project.version}</value>
+                            <!-- change `.suffix1` by `-suffix1` -->
+                            <regex>\.([A-z]\w+)$</regex>
+                            <replacement>-$1</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <profiles>
         <profile>
             <id>shrinkWrap</id>
