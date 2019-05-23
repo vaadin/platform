@@ -75,7 +75,7 @@
         },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "2.2.1",
             "component": true
         },
