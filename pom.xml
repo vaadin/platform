@@ -49,7 +49,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>vaadin-platform-test/pom-bower-mode.xml</module>
+                <module>vaadin-platform-test/pom-bower.xml</module>
             </modules>
         </profile>
     </profiles>
