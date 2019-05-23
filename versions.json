@@ -267,7 +267,7 @@
         },
         "vaadin-login": {
             "npmName": "@vaadin/vaadin-login",
-            "javaVersion": "2.0.0.rc1",
+            "javaVersion": "2.0.0.rc2",
             "jsVersion": "1.0.1",
             "component": true
         },
