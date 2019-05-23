@@ -193,7 +193,7 @@
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
-            "javaVersion": "1.0.0.rc2",
+            "javaVersion": "1.0.0.rc3",
             "jsVersion": "1.0.1",
             "component": true
         },
