@@ -20,6 +20,6 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 /**
  * Empty class which makes flow add npm vaadin-shrinkwrap dependency.
  */
-@NpmPackage(value = "@vaadin/vaadin-shrinkwrap", version = "${project.version}")
+@NpmPackage(value = "@vaadin/vaadin-shrinkwrap", version = "${shrink.version}")
 public class VaadinShrinkWrap {
 }
