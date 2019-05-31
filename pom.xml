@@ -27,14 +27,32 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
-        <module>vaadin-platform-test</module>
-        <module>platform-servlet-containers-tests</module>
-        <module>vaadin-testbench</module>
         <module>vaadin-maven-plugin</module>
+        <module>vaadin-testbench</module>
+        <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>
-
+    <profiles>
+        <profile>
+            <id>npm-it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vaadin-platform-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>bower-it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vaadin-platform-test/pom-bower.xml</module>
+            </modules>
+        </profile>
+    </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
@@ -105,7 +123,7 @@
                         <includeDependencySources>true</includeDependencySources>
                         <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
-                            <!-- Exclude client engine since it is not user 
+                            <!-- Exclude client engine since it is not user
                                 facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
                             <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
@@ -113,7 +131,7 @@
                         <dependencySourceIncludes>
                             <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
                         </dependencySourceIncludes>
-                        <!-- Don't fail on doclint errors for missing servlet 
+                        <!-- Don't fail on doclint errors for missing servlet
                             artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>

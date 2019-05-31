@@ -9,9 +9,9 @@ cache:
 matrix:
   include:
     - name: "NPM MODE"
-      env: VAADIN_OPTS=""
+      env: VAADIN_OPTS="-Dvaadin.bowerMode=false -Pnpm-it,!bower-it"
     - name: "BOWER MODE"
-      env: VAADIN_OPTS="-Dvaadin.bowerMode=true"
+      env: VAADIN_OPTS="-Dvaadin.bowerMode=true -P!npm-it,bower-it"
 branches:
   only:
   - master
@@ -26,7 +26,7 @@ install:
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn verify $VAADIN_OPTS -B
+- mvn clean verify $VAADIN_OPTS -B
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
