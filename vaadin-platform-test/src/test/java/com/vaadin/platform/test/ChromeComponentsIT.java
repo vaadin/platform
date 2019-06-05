@@ -32,6 +32,7 @@ import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.checkbox.testbench.CheckboxElement;
@@ -200,6 +201,21 @@ public class ChromeComponentsIT extends ParallelTest {
         grid.select(0);
 
         assertLog("Grid selection changed to 'Optional[{bar=Data, foo=Some}]'");
+    }
+
+    @Test
+    public void gridContextMenuRenderedAndReceivesTargetItem() {
+        GridElement grid = $(GridElement.class).first();
+        grid.getCell(1, 0).click();
+
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(
+                By.tagName("vaadin-context-menu-overlay")));
+        TestBenchElement contextMenuItem = $("vaadin-context-menu-overlay")
+                .first().$("vaadin-context-menu-item").first();
+        Assert.assertEquals("foo", contextMenuItem.getText());
+
+        contextMenuItem.click();
+        assertLog("GridContextMenu on item Second");
     }
 
     @Test
