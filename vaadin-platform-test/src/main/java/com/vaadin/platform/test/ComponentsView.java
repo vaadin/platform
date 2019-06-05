@@ -46,6 +46,7 @@ import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.contextmenu.GridContextMenu;
 import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
@@ -150,6 +151,12 @@ public class ComponentsView extends VerticalLayout {
         gridItems.add(map("Some", "Data"));
         gridItems.add(map("Second", "Row"));
         grid.setItems(gridItems);
+
+        GridContextMenu<Map<String, String>> gridContextMenu = grid
+                .addContextMenu();
+        gridContextMenu.addItem("foo", e -> e.getItem().ifPresent(
+                item -> log.log("GridContextMenu on item " + item.get("foo"))));
+        gridContextMenu.setOpenOnClick(true);
 
         HorizontalLayout icons = new HorizontalLayout(
                 new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
