@@ -145,8 +145,9 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Payara Server
 - Payara Micro
 
-## Supported Node.js Versions
+## Supported Node.js and npm versions
 Node.js version 10.x for the npm mode.
+Npm version 5.6.0 or greater.
 
 # Breaking changes
 This lists products that have breaking changes from V13
