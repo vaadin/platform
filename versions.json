@@ -189,7 +189,7 @@
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
-            "jsVersion": "1.2.2"
+            "jsVersion": "1.2.3"
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
