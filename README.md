@@ -49,6 +49,7 @@ These components provide a Java API for web components.
 | IronList | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | https://github.com/vaadin/vaadin-list-box-flow |
 | Login | https://github.com/vaadin/vaadin-login-flow |
+| MenuBar | https://github.com/vaadin/vaadin-menu-bar-flow |
 | Notification | https://github.com/vaadin/vaadin-notification-flow |
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |

@@ -46,6 +46,7 @@ import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.contextmenu.GridContextMenu;
 import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
@@ -56,6 +57,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -149,6 +151,12 @@ public class ComponentsView extends VerticalLayout {
         gridItems.add(map("Some", "Data"));
         gridItems.add(map("Second", "Row"));
         grid.setItems(gridItems);
+
+        GridContextMenu<Map<String, String>> gridContextMenu = grid
+                .addContextMenu();
+        gridContextMenu.addItem("foo", e -> e.getItem().ifPresent(
+                item -> log.log("GridContextMenu on item " + item.get("foo"))));
+        gridContextMenu.setOpenOnClick(true);
 
         HorizontalLayout icons = new HorizontalLayout(
                 new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
@@ -298,6 +306,9 @@ public class ComponentsView extends VerticalLayout {
 
         GridPro<Entity> gridPro = new GridPro<>();
 
+        MenuBar menuBar = new MenuBar();
+        menuBar.addItem("foo");
+
         RichTextEditor richTextEditor = new RichTextEditor();
 
         final TextField wrappedField = new TextField();
@@ -354,6 +365,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(gridPro);
         components.add(richTextEditor);
         components.add(customField);
+        components.add(menuBar);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
