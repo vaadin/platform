@@ -160,7 +160,7 @@
                     <execution>
                         <id>war-frontend-resources</id>
                         <goals>
-                            <goal>validate</goal>
+                            <goal>prepare-frontend</goal>
                             <goal>build-frontend</goal>
                         </goals>
                     </execution>
