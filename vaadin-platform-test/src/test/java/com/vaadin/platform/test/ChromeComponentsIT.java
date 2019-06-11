@@ -414,7 +414,6 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
-    @Ignore
     public void splitLayoutIsRendered() {
         SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
                 .first();
