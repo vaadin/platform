@@ -160,7 +160,7 @@
                     <execution>
                         <id>war-frontend-resources</id>
                         <goals>
-                            <goal>validate</goal>
+                            <goal>prepare-frontend</goal>
                             <goal>build-frontend</goal>
                         </goals>
                     </execution>
@@ -342,9 +342,6 @@
                             <tasks>
                                 <copy todir="${ui.jar.classes}/frontend">
                                     <fileset dir="${project.build.directory}/frontend" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}/build">
-                                    <fileset dir="${project.build.directory}/${project.build.finalName}/build" />
                                 </copy>
                                 <copy todir="${ui.jar.classes}">
                                     <fileset dir="${project.build.outputDirectory}" />
