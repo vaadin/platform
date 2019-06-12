@@ -244,9 +244,11 @@ public class ComponentsView extends VerticalLayout {
 
         SplitLayout splitHorizontal = new SplitLayout(new Button("Left"),
                 new Button("Right"));
+        splitHorizontal.getStyle().set("flex", "none");
         SplitLayout splitVertical = new SplitLayout(new Button("Top"),
                 new Button("Bottom"));
         splitVertical.setOrientation(Orientation.VERTICAL);
+        splitVertical.getStyle().set("flex", "none");
 
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
