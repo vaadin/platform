@@ -346,7 +346,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "6.2.0.beta1",
+            "javaVersion": "6.2.0",
             "pro": true
         },
         "vaadin-license-checker": {
