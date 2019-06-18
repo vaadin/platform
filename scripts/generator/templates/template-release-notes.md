@@ -90,6 +90,19 @@ For **frontend projects** you can get the dependencies with [Bower](https://bowe
 
 For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
 
+### Manually changing Vaadin version for Java projects
+
+Add the following dependency to dependencyManagement in pom.xml.
+```
+<dependency>
+    <groupId>com.vaadin</groupId>
+    <artifactId>vaadin-bom</artifactId>
+    <version>{{platform}}</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+```
+
 # Supported Technologies
 ## Operating Systems
 Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/NPM as package manager) or Java 8
