@@ -18,7 +18,7 @@ Here are the highlighted new and improved features in Vaadin 14. To see the full
 ### Framework
 - The possibility to use Polymer 3, npm and JavaScript Modules instead of Polymer 2, Bower and HTML Imports.
 - Adding @PreserveOnRefresh on a router layout or route will preserve the user edited component state when the user refreshes the page by reusing the component instances
-- Embedding Flow applications is now possible by exporting it as a web component.
+- Embedding Flow application is now possible by exporting it as a web component.
 - When executing JavaScript from the server side Java, it is possible to get the return value of the execution to the server side using Page.executeJs(String expression, Serializable... parameters)
 - It is possible to obtain details like screen width & height and time zone on the server side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
 
