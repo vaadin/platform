@@ -12,19 +12,25 @@ Vaadin 14 is an LTS (long term support) version, which will be supported at leas
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
-- New theme variants for Notification
+
+Here are the highlighted new and improved features in Vaadin 14. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+
+### Framework
+- The possibility to use Polymer 3, npm and JavaScript Modules instead of Polymer 2, Bower and HTML Imports.
+- Adding @PreserveOnRefresh on a router layout or route will preserve the user edited component state when the user refreshes the page by reusing the component instances
+- Embedding Flow applications is now possible by exporting it as a web component.
+- When executing JavaScript from the server side Java, it is possible to get the return value of the execution to the server side using Page.executeJs(String expression, Serializable... parameters)
+- It is possible to obtain details like screen width & height and time zone on the server side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
+
+### Components
+- Grid rows drag and drop
+- Grid columns auto-width
 - Customise value representation for Grid Pro
 - Menubar component added
-- Grid rows drag and drop
+- App Layout with drawer
 - Clear button visibility APIs
 - Dropdown select value change without opening
-- Grid columns auto-width
-- App Layout with drawer
-- The possibility to use Polymer 3, npm and JavaScript Modules instead of Polymer 2, Bower and HTML Imports.
-- Embedding Flow applications is now possible by exporting it as a web component.
-- Adding @PreserveOnRefresh on a router layout or route will preserve the user edited component state when the user refreshes the page by reusing the component instances
-- It is possible to obtain details like screen width & height and time zone on the server side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
-- When executing JavaScript from the server side Java, it is possible to get the return value of the execution to the server side using Page.executeJs(String expression, Serializable... parameters)
+- New theme variants for Notification
 
 {{changesSincePrevious}}
 ## Included Projects and Change Log
