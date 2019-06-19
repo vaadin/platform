@@ -31,7 +31,7 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "2.0.0.rc4",
+            "javaVersion": "2.0.0",
             "jsVersion": "2.2.10",
             "component": true
         },
