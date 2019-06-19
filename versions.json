@@ -19,7 +19,7 @@
         },
         "vaadin-accordion": {
             "npmName": "@vaadin/vaadin-accordion",
-            "javaVersion": "2.0.0.rc3",
+            "javaVersion": "2.0.0",
             "jsVersion": "1.0.1",
             "component": true
         },
@@ -37,7 +37,7 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.0.rc3",
+            "javaVersion": "3.0.0",
             "jsVersion": "5.0.3",
             "component": true
         },
@@ -69,7 +69,7 @@
         },
         "vaadin-details": {
             "npmName": "@vaadin/vaadin-details",
-            "javaVersion": "2.0.0.rc2",
+            "javaVersion": "2.0.0",
             "jsVersion": "1.0.1",
             "component": true
         },
@@ -193,7 +193,7 @@
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
-            "javaVersion": "1.0.0.rc4",
+            "javaVersion": "1.0.0",
             "jsVersion": "1.0.3",
             "component": true
         },
@@ -255,7 +255,7 @@
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "3.0.0.rc5",
+            "javaVersion": "3.0.0",
             "jsVersion": "1.0.5",
             "component": true
         },
@@ -330,7 +330,7 @@
         },
         "vaadin-grid-pro": {
             "npmName": "@vaadin/vaadin-grid-pro",
-            "javaVersion": "2.0.0.rc4",
+            "javaVersion": "2.0.0",
             "jsVersion": "2.0.2",
             "component": true,
             "pro": true
