@@ -32,7 +32,7 @@
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "1.3.2",
-            "jsVersion": "2.2.8",
+            "jsVersion": "2.2.10",
             "component": true
         },
         "vaadin-combo-box": {
@@ -44,7 +44,7 @@
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "2.0.1",
-            "jsVersion": "4.3.7",
+            "jsVersion": "4.3.10",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -92,7 +92,7 @@
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
             "javaVersion": "1.3.1",
-            "jsVersion": "2.1.3",
+            "jsVersion": "2.1.4",
             "component": true
         },
         "vaadin-grid": {
@@ -170,13 +170,13 @@
         },
         "vaadin-item": {
             "npmName": "@vaadin/vaadin-item",
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.1.1",
             "component": true
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
             "javaVersion": "1.3.0",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.1.1",
             "component": true
         },
         "vaadin-list-mixin": {
@@ -210,7 +210,7 @@
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
             "javaVersion": "1.3.0",
-            "jsVersion": "1.1.0",
+            "jsVersion": "1.1.1",
             "component": true
         },
         "vaadin-radio-button": {
@@ -244,13 +244,13 @@
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
             "javaVersion": "1.3.0",
-            "jsVersion": "4.2.1",
+            "jsVersion": "4.2.2",
             "component": true
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
             "javaVersion": "2.0.2",
-            "jsVersion": "1.0.1",
+            "jsVersion": "1.0.6",
             "component": true
         },
         "vaadin-app-layout": {
@@ -332,7 +332,7 @@
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "javaVersion": "1.0.1",
-            "jsVersion": "1.0.2",
+            "jsVersion": "1.0.4",
             "component": true,
             "pro": true
         },
