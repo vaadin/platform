@@ -273,10 +273,10 @@
             "jsVersion": "2.0.4"
         },
         "mpr-v7": {
-            "javaVersion": "1.2.0"
+            "javaVersion": "1.2.1"
         },
         "mpr-v8": {
-            "javaVersion": "1.2.0"
+            "javaVersion": "1.2.1"
         },
         "gradle": {
             "javaVersion": "1.0.0.RC8"
