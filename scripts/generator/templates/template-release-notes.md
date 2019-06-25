@@ -109,6 +109,13 @@ Add the following dependency to dependencyManagement in pom.xml.
 </dependency>
 ```
 
+### Note
+If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following file when updating to 2.0.0 / 14.0.0.rc1 or higher:
+- webpack-config.js
+
+If you still have issues, try removing:
+- package.json & package-lock.json & node_modules
+
 # Supported Technologies
 ## Operating Systems
 Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/NPM as package manager) or Java 8
