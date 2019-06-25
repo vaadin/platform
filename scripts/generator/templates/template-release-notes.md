@@ -107,13 +107,14 @@ Add the following dependency to dependencyManagement in pom.xml.
     <type>pom</type>
     <scope>import</scope>
 </dependency>
+```
 
 ### Note
-if you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following file when updating to 2.0.0 / 14.0.0.rc1:
+If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following file when updating to 2.0.0 / 14.0.0.rc1 or higher:
 - webpack-config.js
 
-Optionally, if you still have issues, try removing:
-- package.json & package-lock.json & node_modules```
+If you still have issues, try removing:
+- package.json & package-lock.json & node_modules
 
 # Supported Technologies
 ## Operating Systems
