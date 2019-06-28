@@ -20,7 +20,7 @@
         "vaadin-accordion": {
             "npmName": "@vaadin/vaadin-accordion",
             "javaVersion": "1.0.3",
-            "jsVersion": "1.0.0",
+            "jsVersion": "1.0.1",
             "component": true
         },
         "vaadin-button": {
@@ -44,7 +44,7 @@
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
             "javaVersion": "2.0.1",
-            "jsVersion": "4.3.10",
+            "jsVersion": "4.3.11",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -65,7 +65,7 @@
         },
         "vaadin-development-mode-detector": {
             "npmName": "@vaadin/vaadin-development-mode-detector",
-            "jsVersion": "2.0.2"
+            "jsVersion": "2.0.4"
         },
         "vaadin-details": {
             "npmName": "@vaadin/vaadin-details",
@@ -210,7 +210,7 @@
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
             "javaVersion": "1.3.0",
-            "jsVersion": "1.1.1",
+            "jsVersion": "1.1.2",
             "component": true
         },
         "vaadin-radio-button": {
@@ -222,7 +222,7 @@
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
             "javaVersion": "1.3.1",
-            "jsVersion": "4.1.0",
+            "jsVersion": "4.1.1",
             "component": true
         },
         "vaadin-tabs": {
@@ -318,7 +318,7 @@
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
             "javaVersion": "1.1.1",
-            "jsVersion": "1.0.2",
+            "jsVersion": "1.0.3",
             "component": true,
             "pro": true
         },
