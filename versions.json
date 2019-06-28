@@ -109,7 +109,7 @@
         },
         "iron-a11y-announcer": {
             "npmName": "@polymer/iron-a11y-announcer",
-            "npmVersion": "3.0.1",
+            "npmVersion": "3.0.2",
             "jsVersion": "2.1.0"
         },
         "iron-a11y-keys-behavior": {
@@ -139,7 +139,7 @@
         },
         "iron-list": {
             "npmName": "@polymer/iron-list",
-            "npmVersion": "3.0.1",
+            "npmVersion": "3.0.2",
             "javaVersion": "2.0.0",
             "jsVersion": "2.0.19"
         },
