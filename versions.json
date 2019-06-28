@@ -53,7 +53,7 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "4.0.2",
             "component": true
         },
@@ -233,7 +233,7 @@
         },
         "vaadin-tabs": {
             "npmName": "@vaadin/vaadin-tabs",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "3.0.4",
             "component": true
         },
