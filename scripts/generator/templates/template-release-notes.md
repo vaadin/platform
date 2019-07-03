@@ -81,6 +81,7 @@ Development is supported with the following operating systems, for any OS versio
       - Pango 1.14 or higher
       - X.Org 1.0 or higher (1.7 or higher is recommended)
       - libstdc++ 4.6.1 or higher
+    - Note: Firefox ESR is not considered as evergreen and therefor is not officially supported.
   - Safari on macOS 10.9 (OS X Mavericks) or later
   - Edge on Windows 10 or later
 - Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
