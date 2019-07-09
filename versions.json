@@ -38,7 +38,7 @@
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "3.0.0",
-            "jsVersion": "5.0.3",
+            "jsVersion": "5.0.5",
             "component": true
         },
         "vaadin-context-menu": {
@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.1",
+            "javaVersion": "4.0.2",
             "jsVersion": "5.4.6",
             "component": true
         },
