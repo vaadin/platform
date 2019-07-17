@@ -239,8 +239,8 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.0.1",
-            "jsVersion": "2.4.7",
+            "javaVersion": "2.0.2",
+            "jsVersion": "2.4.8",
             "component": true
         },
         "vaadin-themable-mixin": {
