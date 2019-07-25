@@ -51,13 +51,13 @@
         </repository>
         <repository>
             <id>vaadin-prerelease</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>vaadin-prerelease</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
         <pluginRepository>
             <id>vaadin-snapshots</id>
