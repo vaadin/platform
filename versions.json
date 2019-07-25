@@ -25,8 +25,8 @@
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
-            "javaVersion": "2.0.0",
-            "jsVersion": "2.2.0",
+            "javaVersion": "2.0.1",
+            "jsVersion": "2.2.1",
             "component": true
         },
         "vaadin-checkbox": {
@@ -37,8 +37,8 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.1",
-            "jsVersion": "5.0.5",
+            "javaVersion": "3.0.2",
+            "jsVersion": "5.0.6",
             "component": true
         },
         "vaadin-context-menu": {
@@ -53,14 +53,14 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "2.0.1",
-            "jsVersion": "4.0.2",
+            "javaVersion": "2.0.2",
+            "jsVersion": "4.0.3",
             "component": true
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "javaVersion": "2.0.0",
-            "jsVersion": "2.0.1",
+            "javaVersion": "2.0.1",
+            "jsVersion": "2.0.2",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.2",
+            "javaVersion": "4.0.3",
             "jsVersion": "5.4.6",
             "component": true
         },
@@ -211,7 +211,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.12"
+            "jsVersion": "3.2.13"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
@@ -309,8 +309,8 @@
         },
         "vaadin-confirm-dialog": {
             "npmName": "@vaadin/vaadin-confirm-dialog",
-            "javaVersion": "2.0.0",
-            "jsVersion": "1.1.1",
+            "javaVersion": "2.0.1",
+            "jsVersion": "1.1.4",
             "component": true,
             "pro": true
         },
