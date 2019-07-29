@@ -35,7 +35,7 @@
             "jsVersion": "2.0.4"
         },
         "vaadin-date-picker": {
-            "javaVersion": "1.0.6",
+            "javaVersion": "1.0.7",
             "jsVersion": "3.0.3",
             "component": true
         },
