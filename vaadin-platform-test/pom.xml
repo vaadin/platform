@@ -38,11 +38,11 @@
     <pluginRepositories>
         <pluginRepository>
             <id>vaadin-pre-relase</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
         <pluginRepository>
             <id>vaadin-add-ons</id>
-            <url>http://vaadin.com/nexus/content/repositories/vaadin-addons/</url>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
     </pluginRepositories>
 
