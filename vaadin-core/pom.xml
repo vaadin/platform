@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-core)</name>
     <description>Vaadin Platform (vaadin-core)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
