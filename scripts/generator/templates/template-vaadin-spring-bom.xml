@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>Vaadin Spring (Bill of Materials)</name>
     <description>Vaadin Spring (Bill of Materials)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <properties>
 {{javadeps}}
@@ -80,6 +80,11 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-server-production-mode</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-server-compatibility-mode</artifactId>
                 <version>${flow.version}</version>
             </dependency>
             <dependency>

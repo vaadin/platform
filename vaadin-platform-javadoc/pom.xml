@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-platform-javadoc)</name>
     <description>Vaadin Platform (vaadin-platform-javadoc)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
