@@ -13,7 +13,7 @@
     <version>14.0-SNAPSHOT</version>
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
