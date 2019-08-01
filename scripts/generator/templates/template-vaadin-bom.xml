@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>Vaadin Platform (Bill of Materials)</name>
     <description>Vaadin Platform (Bill of Materials)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <properties>
 {{javadeps}}

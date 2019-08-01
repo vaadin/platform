@@ -11,7 +11,7 @@
     <packaging>war</packaging>
     <name>Vaadin Platform Tests in Bower Mode</name>
     <description>Vaadin Platform Tests in Bower Mode</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
