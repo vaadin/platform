@@ -276,7 +276,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.4"
+            "jsVersion": "2.0.5"
         },
         "mpr-v7": {
             "javaVersion": "2.0.0"
