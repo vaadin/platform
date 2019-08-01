@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.3",
+            "javaVersion": "4.0.4",
             "jsVersion": "5.4.6",
             "component": true
         },
