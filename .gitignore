@@ -8,13 +8,18 @@ error-screenshots/
 .settings
 tmp.*
 vaadin-maven-plugin/src/main
+vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
 .DS_Store
 .vscode
 
+node_modules/
 scripts/generator/results
-scripts/generator/node_modules
 scripts/generator/yarn-error.log
+vaadin-platform-test/package-lock.json
+vaadin-platform-test/package.json
+vaadin-platform-test/webpack.config.js
+vaadin-platform-test/webpack.generated.js
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
