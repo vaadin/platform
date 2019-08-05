@@ -57,7 +57,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>flow-server-compability-mode</artifactId>
+            <artifactId>flow-server-compatibility-mode</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
