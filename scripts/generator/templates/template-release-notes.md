@@ -196,6 +196,9 @@ This lists products that have breaking changes from V13
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
 
+# Migrating from Vaadin 10-13
+See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
+
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
