@@ -157,8 +157,9 @@ Any IDE or editor that works with the language of your choice should work well. 
 - Eclipse Java EE versions: Photon, 2018 and 2019.
 - JetBrains IntelliJ IDEA 2017, 2018 and 2019. Community or Ultimate edition.
 
-## Java Related Technologies and Tooling Support
-The included Java parts are compatible with Java 8 and newer.
+## Java
+
+The server-side parts of Vaadin support version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
 
 ## Application Servers
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
