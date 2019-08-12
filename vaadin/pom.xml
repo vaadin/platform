@@ -161,6 +161,8 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <includeDependencySources>false</includeDependencySources>
+                    <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
                     <quiet>true</quiet>
                     <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
