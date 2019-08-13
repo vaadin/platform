@@ -165,6 +165,17 @@ npm version 5.6.0 or greater.
 # Breaking changes
 This lists products that have breaking changes from V13
 
+### Flow
+- Flow needs you to explicitly enable compatibility mode to keep running as before.
+
+### App Layout 2
+- AbstractAppRouterLayout was removed. AppLayout itself now implements RouterLayout.
+- AppLayoutMenu and AppLayoutMenuItem were removed.
+Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/v14-migration/app-layout-v2-migration-guide.html)
+
+### ComboBox and Datepicker
+- The clear button is now hidden by default. To make it visible, use setClearButtonVisible(true). (Note: if the value of the combo box is empty, the clear button is always hidden.) 
+
 # Known Issues and Limitations
 
 ## Running V14 application fails if there are spaces in classpath jar locations
