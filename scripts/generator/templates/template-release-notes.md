@@ -15,6 +15,9 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 Here are the highlighted new and improved features in Vaadin 14. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
+### npm support
+Using Bower for frontend dependencies is currently discouraged (by the author), and npm has become the defacto standard. In Vaadin 14 npm is used as the front-end package manager. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14. Using npm is the recommended mode in Vaadin 14.
+
 ### Framework
 - Support for npm and ES6 modules
 - Support for Polymer 3 templates
