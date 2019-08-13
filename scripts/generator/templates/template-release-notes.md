@@ -1,13 +1,13 @@
 # Vaadin {{platform}}
 
-The Vaadin platform consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
+Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 With every major release, we will change and improve things based on your feedback. This may lead to breaking changes, which will be listed for each part of the platform in the breaking changes section.
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## Platform Support
-Vaadin 14 is an LTS (long term support) version, which will be supported at least for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+## Support
+Vaadin 14 is an LTS (long term support) version, which will be supported for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -16,11 +16,13 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 Here are the highlighted new and improved features in Vaadin 14. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
-- The possibility to use Polymer 3, npm and JavaScript Modules instead of Polymer 2, Bower and HTML Imports.
-- Adding @PreserveOnRefresh on a router layout or route will preserve the user edited component state when the user refreshes the page by reusing the component instances
+- Support for npm and ES6 modules
+- Support for Polymer 3 templates
+- Adding @PreserveOnRefresh on a router layout or route will preserve the user-edited component state when the user refreshes the page by reusing the component instances
 - Embedding Flow application is now possible by exporting it as a web component.
-- When executing JavaScript from the server side Java, it is possible to get the return value of the execution to the server side using Page.executeJs(String expression, Serializable... parameters)
-- It is possible to obtain details like screen width & height and time zone on the server side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
+- When executing JavaScript from the server-side Java, it is possible to get the return value of the execution to the server-side using Page.executeJs(String expression, Serializable... parameters)
+- It is possible to obtain details like screen width & height and time zone on the server-side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
+- Simplified styling of application and component with @CssImport
 
 ### Components
 - Grid rows drag and drop
@@ -33,8 +35,9 @@ Here are the highlighted new and improved features in Vaadin 14. To see the full
 - New theme variants for Notification
 
 {{changesSincePrevious}}
+
 ## Included Projects and Change Log
-The Vaadin platform includes the following projects. Release notes with detailed change logs for each project are linked below.
+Vaadin includes the following projects. Release notes with detailed change logs for each project are linked below.
 
 Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
 
@@ -54,22 +57,14 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 - Vaadin Multiplatform Runtime **(Prime)**
   - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
-  - Both versions work with previous platform versions.
 
 ### Tools
 - Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 - Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 
-### App Starters
-All app starters are available at https://vaadin.com/start
-
 # Getting Started with Vaadin 14
 ## App starters
-The best way to get started with Vaadin 14 is to go to https://vaadin.com/start and pick an app template for the technology stack you’re interested in. There are two types of app templates available.
-
-The **Project Bases** are for starting your project from scratch with only the necessary dependencies and a couple of placeholder files available.
-
-There are also full application examples available like **Bakery (Pro)** and **Beverage Buddy**. Those show you opinionated examples on how to build different types of applications, with optionally integrating to a backend.
+The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ## Maven Archetypes
 
@@ -87,16 +82,7 @@ mvn -B archetype:generate \
                 && mvn package jetty:run
 ```
 
-## Getting Started Manually
-
-For **frontend projects** you can get the dependencies with [Bower](https://bower.io) or [NPM](https://www.npmjs.com).
- - Bower by running `bower install vaadin#{{platform}}` or `bower install vaadin-core#{{platform}}`
- - NPM by running `npm install @vaadin/vaadin@{{platform}}` or `npm install @vaadin/vaadin-core@{{platform}}`
- - There are also version-locked (with [shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap.html)) NPM dependencies available from `@vaadin/vaadin-shrinkwrap#{{platform}}` and `@vaadin/vaadin-core-shrinkwrap#{{platform}}`.
-
-For **Java projects**, an example of the necessary setup can be found from the [Project Base](https://github.com/vaadin/skeleton-starter-flow/blob/1.0.0/pom.xml#L24..L73).
-
-### Manually changing Vaadin version for Java projects
+## Manually changing Vaadin version for Java projects
 
 Add the following dependency to dependencyManagement in pom.xml.
 ```
@@ -110,15 +96,15 @@ Add the following dependency to dependencyManagement in pom.xml.
 ```
 
 ### Note
-If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following file when updating to 2.0.0 / 14.0.0.rc1 or higher:
+If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following files and directories when updating to 14.0.0:
 - webpack-config.js
-
-If you still have issues, try removing:
-- package.json & package-lock.json & node_modules
+- package.json
+- package-lock.json
+- node_modules
 
 # Supported Technologies
 ## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/NPM as package manager) or Java 8
+Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/npm as package manager) or Java 8
 - Windows
 - Linux
 - macOS
@@ -138,12 +124,11 @@ Development is supported with the following operating systems, for any OS versio
       - Pango 1.14 or higher
       - X.Org 1.0 or higher (1.7 or higher is recommended)
       - libstdc++ 4.6.1 or higher
-    - Note: Firefox ESR is not considered as evergreen and therefore is not officially supported.
+    - Latest Firefox ESR is supported (starting from Firefox ESR 68)
   - Safari on macOS 10.9 (OS X Mavericks) or later
   - Edge on Windows 10 or later
 - Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
-  - (preliminary support, see _Known Issues and Limitations_ below)
-  - supported only in _production mode_. See [documentation](https://github.com/vaadin/flow-and-components-documentation/blob/master/documentation/production/tutorial-production-mode-basic.asciidoc) for more information.
+  - (see _Known Issues and Limitations_ below)  
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
@@ -180,8 +165,18 @@ npm version 5.6.0 or greater.
 # Breaking changes
 This lists products that have breaking changes from V13
 
-
 # Known Issues and Limitations
+
+## Running V14 application fails if there are spaces in classpath jar locations
+[We are working on a fix and it is scheduled for V14.0.1.](https://github.com/vaadin/flow/pull/6209)
+
+## PolymerTemplate instantiation is slow in dev mode because of missing caching
+[We are working with a fix and it is scheduled for V14.0.1.](https://github.com/vaadin/flow/issues/6191)
+
+## OSGi support
+- OSGi with npm does not work in V14.0.0. Earliest fix will be included in V14.1.X
+- OSGi with Bower has problems with V14.0.0 but we are working on a fix to be released in a maintenance version (V14.0.X)
+
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
