@@ -188,7 +188,7 @@ Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/
 [We are working with a fix and it is scheduled for V14.0.1.](https://github.com/vaadin/flow/issues/6191)
 
 ## OSGi support
-- OSGi with npm does not work in V14.0.0. Earliest fix will be included in V14.1.X
+- OSGi with npm does not work in V14.0.0. We are working on a fix for V14.x.
 - OSGi with Bower has problems with V14.0.0 but we are working on a fix to be released in a maintenance version (V14.0.X)
 
 
