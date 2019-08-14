@@ -169,7 +169,7 @@ npm version 5.6.0 or greater.
 This lists products that have breaking changes from V13
 
 ### Flow
-- Flow needs you to explicitly enable compatibility mode to keep running as before.
+- Flow needs you to explicitly enable compatibility mode to keep running as before. [You can read more about compatibility mode in 14 from the documentation.](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html#compatibility-mode)
 
 ### App Layout 2
 - AbstractAppRouterLayout was removed. AppLayout itself now implements RouterLayout.
