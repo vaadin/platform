@@ -80,8 +80,8 @@ mvn -B archetype:generate \
                 -DarchetypeVersion={{platform}}\
                 -DgroupId=org.test \
                 -DartifactId=vaadin-app \
-                -Dversion=1.0-SNAPSHOT
-                && cd vaadin-app
+                -Dversion=1.0-SNAPSHOT \
+                && cd vaadin-app \
                 && mvn package jetty:run
 ```
 
