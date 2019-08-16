@@ -7,7 +7,7 @@ With every major release, we will change and improve things based on your feedba
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Platform Support
-Vaadin 13 is supported for 4 months after GA (general availability). The latest LTS (long term support) version is Vaadin 10. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 13 is supported for one month after Vaadin 14 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
