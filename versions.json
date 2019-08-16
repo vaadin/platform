@@ -92,13 +92,13 @@
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
             "javaVersion": "2.0.0",
-            "jsVersion": "2.1.4",
+            "jsVersion": "2.1.5",
             "component": true
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
             "javaVersion": "4.0.4",
-            "jsVersion": "5.4.6",
+            "jsVersion": "5.4.7",
             "component": true
         },
         "vaadin-icons": {
@@ -240,7 +240,7 @@
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
             "javaVersion": "2.0.2",
-            "jsVersion": "2.4.8",
+            "jsVersion": "2.4.10",
             "component": true
         },
         "vaadin-themable-mixin": {
@@ -276,7 +276,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.4"
+            "jsVersion": "2.0.8"
         },
         "mpr-v7": {
             "javaVersion": "2.0.0"
