@@ -350,7 +350,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "jsVersion": "2.1.0"
+            "jsVersion": "2.1.1"
         }
     },
     "platform": "{{version}}"
