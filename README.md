@@ -114,8 +114,6 @@ For running the project, you need to execute the following script before any mav
 scripts/generateBoms.sh
 ```  
 
-
-
 ## License
 
 Apache License 2.0 or CVAL 3.0, depending on the product.
