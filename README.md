@@ -109,6 +109,13 @@ Refer to [the documentation site](https://vaadin.com/docs) or visit <https://vaa
 
 We would absolutely love to get the community involved, and we welcome any form of contributions – comments and questions on different communication channels, issues and pull request in the repositories, and anything that you build and share using our platform. If unsure, feel free to post an issue in this repository and we'll help you.
 
+For running the project, you need to execute the following script before any maven related commands:
+```
+scripts/generateBoms.sh
+```  
+
+
+
 ## License
 
 Apache License 2.0 or CVAL 3.0, depending on the product.
