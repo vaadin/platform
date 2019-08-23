@@ -6,7 +6,7 @@ describe('Version transformer', function () {
         const testVersions = {
             "foo-bar": {
                 "javaVersion": "2.22",
-                "jsVersion": "1.11"
+                "bowerVersion": "1.11"
             },
 
             "lorem": "{{version}}"
@@ -21,11 +21,11 @@ describe('Version transformer', function () {
         const testVersions = {
             "foo-bar": {
                 "javaVersion": "2.22",
-                "jsVersion": "1.11"
+                "bowerVersion": "1.11"
             },
             "bar-foo": {
                 "javaVersion": "4.3.beta2",
-                "jsVersion": "5.7.beta33"
+                "bowerVersion": "5.7.beta33"
             },
 
             "lorem": "{{version}}"
@@ -34,9 +34,9 @@ describe('Version transformer', function () {
         const result = transformer.transformVersions(testVersions, "1.2.3", true);
 
         expect(result['foo-bar'].javaVersion).to.equal("2.22-SNAPSHOT");
-        expect(result['foo-bar'].jsVersion).to.equal("1.11");
+        expect(result['foo-bar'].bowerVersion).to.equal("1.11");
         expect(result['bar-foo'].javaVersion).to.equal("4.3-SNAPSHOT");
-        expect(result['bar-foo'].jsVersion).to.equal("5.7.beta33");
+        expect(result['bar-foo'].bowerVersion).to.equal("5.7.beta33");
 
         expect(result.lorem).to.equal("1.2.3");
     });

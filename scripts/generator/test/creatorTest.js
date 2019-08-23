@@ -6,7 +6,7 @@ describe('Bower creator', function () {
         const testVersions = {
             "foo-bar": {
                 "javaVersion": "2.22",
-                "jsVersion": "1.11"
+                "bowerVersion": "1.11"
             }
         };
 
@@ -57,7 +57,7 @@ describe('Package json creator', function () {
                 "npmName": "@foo/foo-bar",
                 "npmVersion": "3.33",
                 "javaVersion": "2.22",
-                "jsVersion": "1.11"
+                "bowerVersion": "1.11"
             }
         };
 
@@ -82,7 +82,7 @@ describe('Package json creator', function () {
         const testVersions = {
             "bar-foo": {
                 "javaVersion": "2.22",
-                "jsVersion": "3.33"
+                "bowerVersion": "3.33"
             }
         };
 
@@ -101,12 +101,12 @@ describe('Package json creator', function () {
         expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
     });
 
-    it('should skip use jsVersion if npmVersion is not found', function () {
+    it('should skip use bowerVersion if npmVersion is not found', function () {
         const testVersions = {
             "bar-foo": {
                 "npmName": "@foo/bar-foo",
                 "javaVersion": "2.22",
-                "jsVersion": "3.33"
+                "bowerVersion": "3.33"
             }
         };
 
@@ -134,7 +134,7 @@ describe('Maven creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11"
+                    "bowerVersion": "1.11"
                 }
             }
         };
@@ -167,10 +167,10 @@ describe('Maven creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11"
+                    "bowerVersion": "1.11"
                 },
                 "bar-foo": {
-                    "jsVersion": "2.22"
+                    "bowerVersion": "2.22"
                 }
             }
         };
@@ -189,10 +189,10 @@ describe('Maven creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11"
+                    "bowerVersion": "1.11"
                 },
                 "bar-foo": {
-                    "jsVersion": "2.22",
+                    "bowerVersion": "2.22",
                     "javaVersion": "1.2.3"
                 }
             }
@@ -214,7 +214,7 @@ describe('Release notes creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11",
+                    "bowerVersion": "1.11",
                     "component": true,
                     "pro": true,
                 }
@@ -235,7 +235,7 @@ describe('Release notes creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11",
+                    "bowerVersion": "1.11",
                     "component": true
                 }
             }
@@ -254,7 +254,7 @@ describe('Release notes creator', function () {
         const testVersions = {
             "core": {
                 "foo-bar": {
-                    "jsVersion": "1.11",
+                    "bowerVersion": "1.11",
                     "component": true
                 }
             }
@@ -274,7 +274,7 @@ describe('Release notes creator', function () {
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
-                    "jsVersion": "1.11",
+                    "bowerVersion": "1.11",
                 }
             }
         };
@@ -292,11 +292,11 @@ describe('Release notes creator', function () {
         const previousVersions = {
             "foo-bar": {
                 "javaVersion": "2.22.2",
-                "jsVersion": "1.11.1",
+                "bowerVersion": "1.11.1",
                 "component": true
             },
             "bar-bar": {
-                "jsVersion": "1.11.1",
+                "bowerVersion": "1.11.1",
             },
             "vaadin-designer": {
                 "javaVersion": "4.0.0.alpha1"
@@ -309,11 +309,11 @@ describe('Release notes creator', function () {
         const currentVersions = {
             "foo-bar": {
                 "javaVersion": "2.22.3",
-                "jsVersion": "1.11.2",
+                "bowerVersion": "1.11.2",
                 "component": true
             },
             "bar-bar": {
-                "jsVersion": "1.11.1",
+                "bowerVersion": "1.11.1",
             },
             "vaadin-designer": {
                 "javaVersion": "4.0.0.alpha2"

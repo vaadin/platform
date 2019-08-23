@@ -83,263 +83,263 @@
               <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-flex-layout</artifactId>
-                <version>{{core.iron-flex-layout.jsVersion}}</version>
+                <version>{{core.iron-flex-layout.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-checkbox</artifactId>
-                <version>{{core.vaadin-checkbox.jsVersion}}</version>
+                <version>{{core.vaadin-checkbox.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-icons</artifactId>
-                <version>{{core.vaadin-icons.jsVersion}}</version>
+                <version>{{core.vaadin-icons.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-ordered-layout</artifactId>
-                <version>{{core.vaadin-ordered-layout.jsVersion}}</version>
+                <version>{{core.vaadin-ordered-layout.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-button</artifactId>
-                <version>{{core.vaadin-button.jsVersion}}</version>
+                <version>{{core.vaadin-button.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-text-field</artifactId>
-                <version>{{core.vaadin-text-field.jsVersion}}</version>
+                <version>{{core.vaadin-text-field.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-menu-bar</artifactId>
-                <version>{{core.vaadin-menu-bar.jsVersion}}</version>
+                <version>{{core.vaadin-menu-bar.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-date-picker</artifactId>
-                <version>{{core.vaadin-date-picker.jsVersion}}</version>
+                <version>{{core.vaadin-date-picker.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-dialog</artifactId>
-                <version>{{core.vaadin-dialog.jsVersion}}</version>
+                <version>{{core.vaadin-dialog.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-combo-box</artifactId>
-                <version>{{core.vaadin-combo-box.jsVersion}}</version>
+                <version>{{core.vaadin-combo-box.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-form-layout</artifactId>
-                <version>{{core.vaadin-form-layout.jsVersion}}</version>
+                <version>{{core.vaadin-form-layout.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-grid</artifactId>
-                <version>{{core.vaadin-grid.jsVersion}}</version>
+                <version>{{core.vaadin-grid.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-radio-button</artifactId>
-                <version>{{core.vaadin-radio-button.jsVersion}}</version>
+                <version>{{core.vaadin-radio-button.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-list-box</artifactId>
-                <version>{{core.vaadin-list-box.jsVersion}}</version>
+                <version>{{core.vaadin-list-box.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-notification</artifactId>
-                <version>{{core.vaadin-notification.jsVersion}}</version>
+                <version>{{core.vaadin-notification.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-progress-bar</artifactId>
-                <version>{{core.vaadin-progress-bar.jsVersion}}</version>
+                <version>{{core.vaadin-progress-bar.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-split-layout</artifactId>
-                <version>{{core.vaadin-split-layout.jsVersion}}</version>
+                <version>{{core.vaadin-split-layout.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-tabs</artifactId>
-                <version>{{core.vaadin-tabs.jsVersion}}</version>
+                <version>{{core.vaadin-tabs.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-upload</artifactId>
-                <version>{{core.vaadin-upload.jsVersion}}</version>
+                <version>{{core.vaadin-upload.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-context-menu</artifactId>
-                <version>{{core.vaadin-context-menu.jsVersion}}</version>
+                <version>{{core.vaadin-context-menu.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-time-picker</artifactId>
-                <version>{{core.vaadin-time-picker.jsVersion}}</version>
+                <version>{{core.vaadin-time-picker.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-select</artifactId>
-                <version>{{core.vaadin-select.jsVersion}}</version>
+                <version>{{core.vaadin-select.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-lumo-styles</artifactId>
-                <version>{{core.vaadin-lumo-styles.jsVersion}}</version>
+                <version>{{core.vaadin-lumo-styles.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-material-styles</artifactId>
-                <version>{{core.vaadin-material-styles.jsVersion}}</version>
+                <version>{{core.vaadin-material-styles.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-item</artifactId>
-                <version>{{core.vaadin-item.jsVersion}}</version>
+                <version>{{core.vaadin-item.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-overlay</artifactId>
-                <version>{{core.vaadin-overlay.jsVersion}}</version>
+                <version>{{core.vaadin-overlay.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-list-mixin</artifactId>
-                <version>{{core.vaadin-list-mixin.jsVersion}}</version>
+                <version>{{core.vaadin-list-mixin.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-element-mixin</artifactId>
-                <version>{{core.vaadin-element-mixin.jsVersion}}</version>
+                <version>{{core.vaadin-element-mixin.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-usage-statistics</artifactId>
-                <version>{{core.vaadin-usage-statistics.jsVersion}}</version>
+                <version>{{core.vaadin-usage-statistics.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-development-mode-detector</artifactId>
-                <version>{{core.vaadin-development-mode-detector.jsVersion}}</version>
+                <version>{{core.vaadin-development-mode-detector.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-themable-mixin</artifactId>
-                <version>{{core.vaadin-themable-mixin.jsVersion}}</version>
+                <version>{{core.vaadin-themable-mixin.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-control-state-mixin</artifactId>
-                <version>{{core.vaadin-control-state-mixin.jsVersion}}</version>
+                <version>{{core.vaadin-control-state-mixin.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-login</artifactId>
-                <version>{{core.vaadin-login.jsVersion}}</version>
+                <version>{{core.vaadin-login.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-accordion</artifactId>
-                <version>{{core.vaadin-accordion.jsVersion}}</version>
+                <version>{{core.vaadin-accordion.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-details</artifactId>
-                <version>{{core.vaadin-details.jsVersion}}</version>
+                <version>{{core.vaadin-details.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-custom-field</artifactId>
-                <version>{{core.vaadin-custom-field.jsVersion}}</version>
+                <version>{{core.vaadin-custom-field.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-grid-pro</artifactId>
-                <version>{{vaadin.vaadin-grid-pro.jsVersion}}</version>
+                <version>{{vaadin.vaadin-grid-pro.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-confirm-dialog</artifactId>
-                <version>{{vaadin.vaadin-confirm-dialog.jsVersion}}</version>
+                <version>{{vaadin.vaadin-confirm-dialog.bowerVersion}}</version>
             </dependency>
              <dependency>
                 <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-charts</artifactId>
-                <version>{{vaadin.vaadin-charts.jsVersion}}</version>
+                <version>{{vaadin.vaadin-charts.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-icon</artifactId>
-                <version>{{core.iron-icon.jsVersion}}</version>
+                <version>{{core.iron-icon.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-meta</artifactId>
-                <version>{{core.iron-meta.jsVersion}}</version>
+                <version>{{core.iron-meta.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-iconset-svg</artifactId>
-                <version>{{core.iron-iconset-svg.jsVersion}}</version>
+                <version>{{core.iron-iconset-svg.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-a11y-keys-behavior</artifactId>
-                <version>{{core.iron-a11y-keys-behavior.jsVersion}}</version>
+                <version>{{core.iron-a11y-keys-behavior.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-resizable-behavior</artifactId>
-                <version>{{core.iron-resizable-behavior.jsVersion}}</version>
+                <version>{{core.iron-resizable-behavior.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-a11y-announcer</artifactId>
-                <version>{{core.iron-a11y-announcer.jsVersion}}</version>
+                <version>{{core.iron-a11y-announcer.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-list</artifactId>
-                <version>{{core.iron-list.jsVersion}}</version>
+                <version>{{core.iron-list.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-scroll-target-behavior</artifactId>
-                <version>{{core.iron-scroll-target-behavior.jsVersion}}</version>
+                <version>{{core.iron-scroll-target-behavior.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-overlay-behavior</artifactId>
-                <version>{{core.iron-overlay-behavior.jsVersion}}</version>
+                <version>{{core.iron-overlay-behavior.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-fit-behavior</artifactId>
-                <version>{{core.iron-fit-behavior.jsVersion}}</version>
+                <version>{{core.iron-fit-behavior.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.polymerelements</groupId>
                 <artifactId>iron-media-query</artifactId>
-                <version>{{core.iron-media-query.jsVersion}}</version>
+                <version>{{core.iron-media-query.bowerVersion}}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.webjars.bowergithub.polymer</groupId>
                 <artifactId>polymer</artifactId>
-                <version>{{core.polymer.jsVersion}}</version>
+                <version>{{core.polymer.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.webcomponents</groupId>
                 <artifactId>webcomponentsjs</artifactId>
-                <version>{{core.webcomponentsjs.jsVersion}}</version>
+                <version>{{core.webcomponentsjs.bowerVersion}}</version>
             </dependency>
             <!-- Shadycss 1.8.0 is the latest bower based release for shadycss -->
             <dependency>
@@ -350,17 +350,17 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
-                <version>{{vaadin.vaadin-license-checker.jsVersion}}</version>
+                <version>{{vaadin.vaadin-license-checker.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-crud</artifactId>
-                <version>{{vaadin.vaadin-crud.jsVersion}}</version>
+                <version>{{vaadin.vaadin-crud.bowerVersion}}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.webjar</groupId>
                 <artifactId>vaadin-rich-text-editor</artifactId>
-                <version>{{vaadin.vaadin-rich-text-editor.jsVersion}}</version>
+                <version>{{vaadin.vaadin-rich-text-editor.bowerVersion}}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

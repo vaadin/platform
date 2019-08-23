@@ -67,7 +67,7 @@ const printChanges = async (previousVersion) => {
         }
 
         printChangesForProduct(key, 'javaVersion', previousVersions.core[key], value);
-        printChangesForProduct(key, 'jsVersion', previousVersions.core[key], value);
+        printChangesForProduct(key, 'bowerVersion', previousVersions.core[key], value);
     }
 
     for (let [key, value] of Object.entries(currentVersions.vaadin)) {
@@ -77,7 +77,7 @@ const printChanges = async (previousVersion) => {
         }
 
         printChangesForProduct(key, 'javaVersion', previousVersions.vaadin[key], value);
-        printChangesForProduct(key, 'jsVersion', previousVersions.vaadin[key], value);
+        printChangesForProduct(key, 'bowerVersion', previousVersions.vaadin[key], value);
     }
 }
 

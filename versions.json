@@ -10,35 +10,35 @@
             "javaVersion": "11.0.0"
         },
         "polymer": {
-            "jsVersion": "2.7.0"
+            "bowerVersion": "2.7.0"
         },
         "shadycss": {
             "npmName": "@webcomponents/shadycss",
             "npmVersion": "1.8.0",
-            "jsVersion": "1.8.0"
+            "bowerVersion": "1.8.0"
         },
         "vaadin-accordion": {
             "npmName": "@vaadin/vaadin-accordion",
             "javaVersion": "2.0.0",
-            "jsVersion": "1.0.1",
+            "bowerVersion": "1.0.1",
             "component": true
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
             "javaVersion": "2.0.1",
-            "jsVersion": "2.2.1",
+            "bowerVersion": "2.2.1",
             "component": true
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
             "javaVersion": "2.0.0",
-            "jsVersion": "2.2.10",
+            "bowerVersion": "2.2.10",
             "component": true
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "3.0.2",
-            "jsVersion": "5.0.6",
+            "bowerVersion": "5.0.6",
             "component": true
         },
         "vaadin-context-menu": {

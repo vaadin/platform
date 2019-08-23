@@ -9,8 +9,8 @@ const compareVersions = require('compare-versions');
 function createBower(versions, bowerTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
-        if (version.jsVersion) {
-            jsDeps[name] = `${name}#${version.jsVersion}`;
+        if (version.bowerVersion) {
+            jsDeps[name] = `${name}#${version.bowerVersion}`;
         }
     }
 
@@ -27,7 +27,7 @@ function createPackageJson(versions, packageJsonTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
         if (version.npmName) {
-            const npmVersion = version.npmVersion || version.jsVersion;
+            const npmVersion = version.npmVersion || version.bowerVersion;
             jsDeps[version.npmName] = "^" + npmVersion;
         }
     }
@@ -128,10 +128,10 @@ function generateChangesString(allVersions, allPreviousVersions) {
     let componentChangedSincePreviousText = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
-            const currentJSVersion = version.jsVersion;
+            const currentJSVersion = version.bowerVersion;
             const currentJavaVersion = toSemVer(version.javaVersion);
             const previousVersionComponent = allPreviousVersions[versionName];
-            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            const previousJSVersion = previousVersionComponent ? previousVersionComponent.bowerVersion : '0.0.0';
             const previousJavaVersion = previousVersionComponent ? toSemVer(previousVersionComponent.javaVersion) : '0.0.0';
             if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1 || compareVersions(currentJavaVersion, previousJavaVersion) === 1) {
                 const result = buildComponentReleaseString(versionName, version);
@@ -238,9 +238,9 @@ function buildComponentReleaseString(versionName, version) {
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
     result = result.concat(version.javaVersion ? `([Flow integration ${version.javaVersion}](https://github.com/vaadin/${versionName}-flow/releases/tag/${version.javaVersion})` : '');
-    result = result.concat((version.javaVersion && version.jsVersion) ? ', ' : '');
-    result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
-    result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
+    result = result.concat((version.javaVersion && version.bowerVersion) ? ', ' : '');
+    result = result.concat((!version.javaVersion && version.bowerVersion) ? '(' : '');
+    result = result.concat(version.bowerVersion ? `[web component v${version.bowerVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.bowerVersion}))` : '');
     result = result.concat('\n');
     return result;
 }

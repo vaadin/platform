@@ -48,8 +48,8 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 {{components}}
 
 ### Themes
-- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
-- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
+- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.bowerVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.bowerVersion}}))
+- Vaadin Material theme ([v{{core.vaadin-material-styles.bowerVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.bowerVersion}})).
 
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
