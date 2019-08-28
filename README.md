@@ -93,11 +93,7 @@ See https://vaadin.com/start for more information.
 ### Front-end
 | Starter | Repository |
 |---------|------------|
-| Angular | https://github.com/vaadin/base-starter-angular |
-| Polymer | https://github.com/vaadin/generator-polymer-init-vaadin-elements-app |
 | PWA | https://github.com/vaadin/expense-manager-demo |
-| React | https://github.com/vaadin/base-starter-react | 
-| Vue.js | https://github.com/vaadin/base-starter-vue |
 
 Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0. 
 
