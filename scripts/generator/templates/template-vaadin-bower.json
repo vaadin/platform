@@ -5,7 +5,7 @@
   "authors": [
     "Vaadin Ltd"
   ],
-  "main": "",
+  "main": "vaadin.html",
   "license": [
     "Apache-2.0",
     "https://vaadin.com/license/cval-3.0"
