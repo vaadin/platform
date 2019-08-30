@@ -99,7 +99,7 @@ Add the following dependency to dependencyManagement in pom.xml.
 ```
 
 ### Note
-If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following files and directories when updating to 14.0.0:
+If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following files and directories when updating to 14.X:
 - webpack-config.js
 - package.json
 - package-lock.json
