@@ -7,16 +7,17 @@ With every major release, we will change and improve things based on your feedba
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
-Vaadin 14 is an LTS (long term support) version, which will be supported for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
 
-Here are the highlighted new and improved features in Vaadin 14. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in Vaadin 15. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### npm support
-Using Bower for frontend dependencies is currently discouraged (by the author), and npm has become the defacto standard. In Vaadin 14 npm is used as the front-end package manager. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14. Using npm is the recommended mode in Vaadin 14.
+In Vaadin 15 npm is used as the front-end package manager. Bower (compatibility mode) support has been dropped from Vaadin 15.
+Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
 
 ### Framework
 - Support for npm and ES6 modules
@@ -65,9 +66,9 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 - Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 - Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 
-# Getting Started with Vaadin 14
+# Getting Started with Vaadin
 ## App starters
-The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ## Maven Archetypes
 
@@ -98,16 +99,9 @@ Add the following dependency to dependencyManagement in pom.xml.
 </dependency>
 ```
 
-### Note
-If you are using any pre-release version of Flow 2.0 / Vaadin 14 in your project, remove the following files and directories when updating to 14.0.0:
-- webpack-config.js
-- package.json
-- package-lock.json
-- node_modules
-
 # Supported Technologies
 ## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (Bower/npm as package manager) or Java 8
+Development is supported with the following operating systems, for any OS version that supports either frontend development (npm as package manager) or Java 8
 - Windows
 - Linux
 - macOS
@@ -166,25 +160,9 @@ Node.js version 10.x for the npm mode.
 npm version 5.6.0 or greater.
 
 # Breaking changes
-This lists products that have breaking changes from V13
-
-### Flow
-- Flow needs you to explicitly enable compatibility mode to keep running as before. [You can read more about compatibility mode in 14 from the documentation.](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html#compatibility-mode)
-
-### App Layout 2
-- AbstractAppRouterLayout was removed. AppLayout itself now implements RouterLayout.
-- AppLayoutMenu and AppLayoutMenuItem were removed.
-Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/v14-migration/app-layout-v2-migration-guide.html)
-
-### ComboBox and Datepicker
-- The clear button is now hidden by default. To make it visible, use setClearButtonVisible(true). (Note: if the value of the combo box is empty, the clear button is always hidden.) 
+This lists products that have breaking changes from V14
 
 # Known Issues and Limitations
-
-## OSGi support
-- OSGi with npm does not work in V14.0.0. We are working on a fix for V14.x.
-- OSGi with Bower has problems with V14.0.0 but we are working on a fix to be released in a maintenance version (V14.0.X)
-
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
@@ -200,7 +178,7 @@ Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
 
-# Migrating from Vaadin 10-13
+# Migrating from Vaadin 10-14
 See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
 
 # Reporting Issues
