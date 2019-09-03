@@ -5,7 +5,9 @@
   "author": "Vaadin Ltd",
   "license": "(Apache-2.0 OR SEE LICENSE IN https://vaadin.com/license/cval-3.0)",
   "dependencies": {},
-  "files": [],
+  "files": [
+    "vaadin.js"
+  ],
   "scripts": {
     "version": "node update-core-version.js && git add bower.json"
   },
