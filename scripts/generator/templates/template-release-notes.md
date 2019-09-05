@@ -16,7 +16,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 Here are the highlighted new and improved features in Vaadin 15. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Vaadin for TypeScript
-In Vaadin 15 we intruduce Vaadin for TypeScript (MVP);  
+In Vaadin 15 we introduce Vaadin for TypeScript (MVP);  
 When creating applications with Vaadin developers can write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked.
 
 ### npm support
