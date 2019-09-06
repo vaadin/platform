@@ -31,7 +31,7 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "2.2.10",
             "component": true
         },
@@ -211,7 +211,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.13"
+            "jsVersion": "3.2.14"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
@@ -276,7 +276,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.9"
+            "jsVersion": "2.0.10"
         },
         "mpr-v7": {
             "javaVersion": "2.0.0"
