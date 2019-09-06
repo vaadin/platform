@@ -15,28 +15,17 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 Here are the highlighted new and improved features in Vaadin 15. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
+### Vaadin for TypeScript
+In Vaadin 15 we introduce Vaadin for TypeScript (MVP);  
+When creating applications with Vaadin developers can write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked.
+
 ### npm support
 In Vaadin 15 npm is used as the front-end package manager. Bower (compatibility mode) support has been dropped from Vaadin 15.
 Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
 
 ### Framework
-- Support for npm and ES6 modules
-- Support for Polymer 3 templates
-- Adding @PreserveOnRefresh on a router layout or route will preserve the user-edited component state when the user refreshes the page by reusing the component instances
-- Embedding Flow application is now possible by exporting it as a web component.
-- When executing JavaScript from the server-side Java, it is possible to get the return value of the execution to the server-side using Page.executeJs(String expression, Serializable... parameters)
-- It is possible to obtain details like screen width & height and time zone on the server-side using Page.retrieveExtendedClientDetails( ExtendedClientDetailsReceiver receiver)
-- Simplified styling of application and component with @CssImport
 
 ### Components
-- Grid rows drag and drop
-- Grid columns auto-width
-- Customise value representation for Grid Pro
-- Menubar component added
-- App Layout with drawer
-- Clear button visibility APIs
-- Dropdown select value change without opening
-- New theme variants for Notification
 
 {{changesSincePrevious}}
 
@@ -69,6 +58,9 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 # Getting Started with Vaadin
 ## App starters
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+
+### Note
+Vaadin 15 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 
