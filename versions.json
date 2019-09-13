@@ -261,8 +261,8 @@
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.0.2",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.0.3",
             "component": true
         },
         "vaadin-login": {
