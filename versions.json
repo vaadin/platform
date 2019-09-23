@@ -53,13 +53,13 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "4.0.3",
             "component": true
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "2.0.2",
             "component": true
         },
@@ -75,7 +75,7 @@
         },
         "vaadin-dialog": {
             "npmName": "@vaadin/vaadin-dialog",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "2.2.1",
             "component": true
         },
@@ -97,7 +97,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.6",
+            "javaVersion": "4.0.7",
             "jsVersion": "5.4.8",
             "component": true
         },
@@ -239,7 +239,7 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.0.3",
+            "javaVersion": "2.0.4",
             "jsVersion": "2.4.11",
             "component": true
         },
