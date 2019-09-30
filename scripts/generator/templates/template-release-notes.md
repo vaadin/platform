@@ -19,6 +19,9 @@ Here are the highlighted new and improved features in Vaadin 15. To see the full
 In Vaadin 15 we introduce Vaadin for TypeScript (MVP);  
 When creating applications with Vaadin developers can write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked.
 
+### Client-side Router
+Vaadin 15 includes Vaadin Router, the client-side router for Web Components.
+
 ### npm support
 In Vaadin 15 npm is used as the front-end package manager. Bower (compatibility mode) support has been dropped from Vaadin 15.
 Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
@@ -50,6 +53,9 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 - Vaadin Multiplatform Runtime **(Prime)**
   - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+
+### Router
+- Vaadin Router ([v{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
 
 ### Tools
 - Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
