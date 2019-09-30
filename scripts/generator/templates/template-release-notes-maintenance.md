@@ -3,7 +3,7 @@
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 This is a maintenance release of Vaadin.
-For the full release notes go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.0.0).
+For the full release notes go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.1.0).
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
@@ -26,7 +26,7 @@ Here are the highlighted new and improved features in this maintenance release.
 ## App starters
 The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
-For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.0.0).
+For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.1.0).
 
 # Known Issues and Limitations
 
