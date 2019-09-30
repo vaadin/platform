@@ -193,7 +193,7 @@
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
-            "javaVersion": "1.0.1",
+            "javaVersion": "1.0.2",
             "jsVersion": "1.0.3",
             "component": true
         },
@@ -215,25 +215,25 @@
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "1.1.2",
             "component": true
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "1.2.3",
             "component": true
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "4.1.1",
             "component": true
         },
         "vaadin-tabs": {
             "npmName": "@vaadin/vaadin-tabs",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "3.0.4",
             "component": true
         },
@@ -249,7 +249,7 @@
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "4.2.2",
             "component": true
         },
