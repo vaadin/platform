@@ -22,17 +22,17 @@ Here are the highlighted new and improved features in this maintenance release.
 
 {{changesSincePrevious}}
 
-# Known Issues and Limitations
-
-## Flow
-
-## Components
-
 # Getting Started with Vaadin
 ## App starters
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/15.0.0.).
+
+# Known Issues and Limitations
+
+## Flow
+
+## Components
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
