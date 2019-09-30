@@ -22,9 +22,9 @@ For the full list of how to get started go to the [GitHub releases](https://gith
 
 Here are the highlighted new and improved features in this maintenance release.
 
-### Framework
+## Framework
 
-### Components
+## Components
 
 {{changesSincePrevious}}
 
