@@ -55,6 +55,9 @@ const mavenSpringBomResultFileName = getResultsFilePath('vaadin-spring-bom.xml')
 const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
 const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 
+const releaseNotesMaintenanceTemplateFileName = getTemplateFilePath('template-release-notes-maintenance.md');
+const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-maintenance.md');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -68,6 +71,7 @@ writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPa
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
+writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 const shrinkwrap = {};
