@@ -12,29 +12,29 @@ Vaadin 15 is supported for one month after Vaadin 16 has been released. The late
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-# Getting Started with Vaadin
-## App starters
+## Getting Started with Vaadin
+### App starters
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/15.0.0.).
 
-# New and Noteworthy
+## New and Noteworthy
 
 Here are the highlighted new and improved features in this maintenance release.
 
-## Framework
+### Framework
 
-## Components
+### Components
 
 {{changesSincePrevious}}
 
-# Known Issues and Limitations
+## Known Issues and Limitations
 
-## Flow
+### Flow
 
-## Components
+### Components
 
-# Reporting Issues
+## Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
 A few rules of thumb will help you and us in finding the correct repository for the issue:
