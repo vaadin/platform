@@ -286,6 +286,10 @@
         },
         "gradle": {
             "javaVersion": "1.2"
+        },
+        "vaadin-router": {
+          "npmName": "@vaadin/router",
+          "jsVersion": "1.4.3"
         }
     },
     "vaadin": {

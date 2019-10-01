@@ -64,6 +64,10 @@ These components provide a Java API for web components.
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
 
+## Vaadin Router
+
+[Vaadin Router](https://github.com/vaadin/vaadin-router) is a client-side router for Web Components.
+
 ## Themes
 | Theme | Repository |
 |-------|------------|

@@ -1,7 +1,7 @@
 {
   "name": "@vaadin/vaadin-core-shrinkwrap",
   "version": "15.0.0",
-  "description": "Vaadin Elements is an evolving set of open source custom HTML elements for building mobile and desktop web applications in modern browsers.",
+  "description": "Vaadin components is an evolving set of free, open sourced custom HTML elements for building mobile and desktop web applications in modern browsers.",
   "author": "Vaadin Ltd",
   "license": "Apache 2.0",
   "dependencies": {},
