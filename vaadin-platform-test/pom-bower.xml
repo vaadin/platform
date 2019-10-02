@@ -22,6 +22,7 @@
         <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
         <ui.jar.classes>${project.build.directory}/ui-jar</ui.jar.classes>
+        <vaadin.clientSideMode>false</vaadin.clientSideMode>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -146,6 +147,12 @@
                     <stopPort>9999</stopPort>
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>vaadin.clientSideMode</name>
+                            <value>${vaadin.clientSideMode}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
                 <executions>
                     <execution>
