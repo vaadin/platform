@@ -42,7 +42,7 @@
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
         <pluginRepository>
-            <id>vaadin-add-ons</id>
+            <id>vaadin-addons</id>
             <url>https://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
     </pluginRepositories>
