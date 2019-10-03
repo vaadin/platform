@@ -36,12 +36,20 @@
     </dependencyManagement>
 
     <pluginRepositories>
+        <!-- Main Maven repository -->
         <pluginRepository>
-            <id>vaadin-pre-relase</id>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-prerelase</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
         <pluginRepository>
-            <id>vaadin-add-ons</id>
+            <id>vaadin-addons</id>
             <url>https://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
     </pluginRepositories>
