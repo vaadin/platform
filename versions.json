@@ -289,7 +289,7 @@
         },
         "vaadin-router": {
           "npmName": "@vaadin/router",
-          "jsVersion": "1.4.3"
+          "jsVersion": "1.5.0"
         }
     },
     "vaadin": {
