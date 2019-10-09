@@ -10,8 +10,6 @@ matrix:
   include:
     - name: "NPM MODE"
       env: VAADIN_OPTS="-Dvaadin.bowerMode=false -Pnpm-it,!bower-it"
-    - name: "BOWER MODE"
-      env: VAADIN_OPTS="-Dvaadin.bowerMode=true -P!npm-it,bower-it"
 branches:
   only:
   - master
