@@ -37,13 +37,13 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.3",
-            "jsVersion": "5.0.6",
+            "javaVersion": "3.0.4",
+            "jsVersion": "5.0.8",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.0.3",
+            "javaVersion": "3.0.4",
             "jsVersion": "4.3.12",
             "component": true
         },
@@ -91,7 +91,7 @@
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "2.1.6",
             "component": true
         },
@@ -276,7 +276,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.10"
+            "jsVersion": "2.0.11"
         },
         "mpr-v7": {
             "javaVersion": "2.0.0"
