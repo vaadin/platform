@@ -73,6 +73,9 @@
         <repository>
             <id>vaadin-prerelease</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>vaadin-snapshots</id>
@@ -80,6 +83,9 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -94,6 +100,9 @@
         <pluginRepository>
             <id>vaadin-prerelease</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>vaadin-snapshots</id>
@@ -101,6 +110,9 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </pluginRepository>
     </pluginRepositories>
 
