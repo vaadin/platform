@@ -58,6 +58,9 @@ const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 const releaseNotesMaintenanceTemplateFileName = getTemplateFilePath('template-release-notes-maintenance.md');
 const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-maintenance.md');
 
+const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
+const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -72,6 +75,7 @@ writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
+writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 const shrinkwrap = {};
