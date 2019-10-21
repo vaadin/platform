@@ -103,7 +103,7 @@
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "4.3.1",
             "component": true
         },
@@ -239,7 +239,7 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.0.5",
+            "javaVersion": "2.0.6",
             "jsVersion": "2.4.12",
             "component": true
         },
