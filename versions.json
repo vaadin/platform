@@ -43,7 +43,7 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.0.4",
+            "javaVersion": "3.1.0.alpha1",
             "jsVersion": "4.3.12",
             "component": true
         },
@@ -97,13 +97,13 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.8",
-            "jsVersion": "5.4.9",
+            "javaVersion": "4.1.0.alpha3",
+            "jsVersion": "5.5.0",
             "component": true
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "2.0.0",
+            "javaVersion": "2.0.1",
             "jsVersion": "4.3.1",
             "component": true
         },
@@ -239,7 +239,7 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.0.5",
+            "javaVersion": "2.0.6",
             "jsVersion": "2.4.12",
             "component": true
         },
@@ -249,7 +249,7 @@
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.1.0.alpha2",
             "jsVersion": "4.2.2",
             "component": true
         },
