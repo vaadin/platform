@@ -24,11 +24,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -500,21 +498,10 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void contextMenuIsRenderedAndRecievesItemSelectionEvents() {
-        // store every click event in document.$myEvent
-        getCommandExecutor().executeScript(
-                "document.body.addEventListener('click', function(e){ document.$myEvent = e; });");
-
         TestBenchElement contextMenuTarget = $(TestBenchElement.class)
                 .id("context-menu-target");
 
-        new Actions(getDriver()).moveByOffset(10, 10).click().build().perform();
-
-        // emulate click on context menu target knowing how the context menu
-        // connector works.
-        getCommandExecutor().executeScript(
-                "arguments[0].$contextMenuConnector.openEvent= document.$myEvent;"
-                        + "arguments[0].dispatchEvent(new CustomEvent('vaadin-context-menu-before-open'));",
-                contextMenuTarget);
+        contextMenuTarget.click();
 
         // Check to see if the context-menu is there.
         // If not, a NoSuchElementException will be thrown
