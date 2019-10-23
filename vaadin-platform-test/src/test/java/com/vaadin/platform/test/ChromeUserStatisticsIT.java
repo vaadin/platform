@@ -43,11 +43,11 @@ public class ChromeUserStatisticsIT extends ParallelTest {
 
         Thread.sleep(10000);
         button.click();
-        assertLog("Print button clicked");
-        assertLogEntries();
+        assertLog("button clicked");
+        assertLocalStorage();
     }
 
-    private void assertLogEntries() {
+    private void assertLocalStorage() {
         String item = new LocalStorage(driver).getItemFromLocalStorage("vaadin.statistics.basket");
 
         Assert.assertTrue("Under production mode, the local storage should be empty", (item == null || item.length()==0));

@@ -15,7 +15,6 @@
  */
 package com.vaadin.platform.test;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -31,18 +30,16 @@ public class UserStatisticsView extends VerticalLayout {
 
     public UserStatisticsView() {
         log = new Log();
-        Button print = new Button("Print usage statistics to the console", e -> {
-            log.log("Print button clicked");
-            UI.getCurrent().getPage().executeJs(
-                    "var basket = localStorage.getItem('vaadin.statistics.basket'); " +
-                    "console.warn(basket)");
+        //for this case, the UI needs at least one Vaadin Component
+        Button button = new Button("click me", e -> {
+            log.log("button clicked");
         });
-        print.setId("print");
+        button.setId("button");
 
         VerticalLayout components = new VerticalLayout();
         add(log);
         add(new HorizontalLayout(components));
 
-        components.add(print);
+        components.add(button);
     }
 }
