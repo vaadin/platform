@@ -39,7 +39,7 @@ public class ChromeUserStatisticsIT extends ParallelTest {
 
     @Test
     public void BrowserConsoleLogCorrectInfo() throws InterruptedException {
-        ButtonElement button = $(ButtonElement.class).id("print");
+        ButtonElement button = $(ButtonElement.class).id("button");
 
         Thread.sleep(10000);
         button.click();
