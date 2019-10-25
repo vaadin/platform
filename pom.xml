@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -9,10 +10,10 @@
     </parent>
     <artifactId>vaadin-platform-parent</artifactId>
     <packaging>pom</packaging>
-    <version>13.0-SNAPSHOT</version>
+    <version>15.0-SNAPSHOT</version>
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
@@ -26,13 +27,23 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
-        <module>vaadin-platform-test</module>
-        <module>vaadin-testbench</module>
         <module>vaadin-maven-plugin</module>
+        <module>vaadin-testbench</module>
+        <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>
-
+    <profiles>
+        <profile>
+            <id>npm-it</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vaadin-platform-test</module>
+            </modules>
+        </profile>        
+    </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
@@ -40,29 +51,59 @@
     </scm>
 
     <repositories>
+        <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
+
+        <!-- Main Maven repository -->
         <repository>
-            <id>vaadin-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>vaadin-prerelease</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
     <pluginRepositories>
+        <!-- Main Maven repository -->
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
         <pluginRepository>
             <id>vaadin-prerelease</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>vaadin-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </pluginRepository>
     </pluginRepositories>
 
@@ -70,20 +111,49 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.commonjava.maven.plugins</groupId>
+                    <artifactId>directory-maven-plugin</artifactId>
+                    <version>0.1</version>
+                    <executions>
+                        <execution>
+                            <id>set-root-dir-for-common-lifecycle</id>
+                            <goals>
+                                <goal>highest-basedir</goal>
+                            </goals>
+                            <phase>initialize</phase>
+                            <configuration>
+                                <property>project.rootdir</property>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>set-root-dir-for-clean-lifecycle</id>
+                            <goals>
+                                <goal>highest-basedir</goal>
+                            </goals>
+                            <phase>pre-clean</phase>
+                            <configuration>
+                                <property>project.rootdir</property>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.0.0</version>
                     <configuration>
                         <includeDependencySources>true</includeDependencySources>
                         <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
-                            <!-- Exclude client engine since it is not user facing API -->
+                            <!-- Exclude client engine since it is not user
+                                facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
                             <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
                         </dependencySourceExcludes>
                         <dependencySourceIncludes>
                             <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
                         </dependencySourceIncludes>
-                        <!-- Don't fail on doclint errors for missing servlet artifact -->
+                        <!-- Don't fail on doclint errors for missing servlet
+                            artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
                     </configuration>

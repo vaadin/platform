@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>13.0-SNAPSHOT</version>
+        <version>15.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-platform-javadoc</artifactId>
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-platform-javadoc)</name>
     <description>Vaadin Platform (vaadin-platform-javadoc)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
@@ -18,6 +18,18 @@
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
         </repository>
     </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>

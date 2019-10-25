@@ -27,6 +27,7 @@ These components provide a Java API for web components.
 
 | Component | Repository |
 |-----------|------------|
+| Accordion | https://github.com/vaadin/vaadin-accordion-flow | 
 | AppLayout | https://github.com/vaadin/vaadin-app-layout-flow | 
 | Board* | https://github.com/vaadin/vaadin-board-flow | 
 | Button | https://github.com/vaadin/vaadin-button-flow |
@@ -34,25 +35,38 @@ These components provide a Java API for web components.
 | Checkbox | https://github.com/vaadin/vaadin-checkbox-flow |
 | ComboBox | https://github.com/vaadin/vaadin-combo-box-flow |
 | ConfirmDialog* | https://github.com/vaadin/vaadin-confirm-dialog-flow |
+| ContextMenu | https://github.com/vaadin/vaadin-context-menu-flow |
 | CookieConsent* | https://github.com/vaadin/vaadin-cookie-consent-flow |
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
+| Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
+| Details | https://github.com/vaadin/vaadin-details-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
 | Grid | https://github.com/vaadin/vaadin-grid-flow |
+| Grid Pro* | https://github.com/vaadin/vaadin-grid-pro-flow |
 | Icons | https://github.com/vaadin/vaadin-icons-flow |
 | IronList | https://github.com/vaadin/vaadin-iron-list-flow |
 | ListBox | https://github.com/vaadin/vaadin-list-box-flow |
+| Login | https://github.com/vaadin/vaadin-login-flow |
+| MenuBar | https://github.com/vaadin/vaadin-menu-bar-flow |
 | Notification | https://github.com/vaadin/vaadin-notification-flow |
 | OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
 | ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |
 | RadioButton | https://github.com/vaadin/vaadin-radio-button-flow | 
+| Rich Text Editor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
+| Select | https://github.com/vaadin/vaadin-select-flow |
 | SplitLayout | https://github.com/vaadin/vaadin-split-layout-flow |
 | Tabs | https://github.com/vaadin/vaadin-tabs-flow |
 | TextField | https://github.com/vaadin/vaadin-text-field-flow |
+| TimePicker | https://github.com/vaadin/vaadin-time-picker-flow |
 | Upload | https://github.com/vaadin/vaadin-upload-flow |
 
 Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
+
+## Vaadin Router
+
+[Vaadin Router](https://github.com/vaadin/vaadin-router) is a client-side router for Web Components.
 
 ## Themes
 | Theme | Repository |
@@ -83,11 +97,7 @@ See https://vaadin.com/start for more information.
 ### Front-end
 | Starter | Repository |
 |---------|------------|
-| Angular | https://github.com/vaadin/base-starter-angular |
-| Polymer | https://github.com/vaadin/generator-polymer-init-vaadin-elements-app |
 | PWA | https://github.com/vaadin/expense-manager-demo |
-| React | https://github.com/vaadin/base-starter-react | 
-| Vue.js | https://github.com/vaadin/base-starter-vue |
 
 Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0. 
 
@@ -98,6 +108,11 @@ Refer to [the documentation site](https://vaadin.com/docs) or visit <https://vaa
 ## Contributing
 
 We would absolutely love to get the community involved, and we welcome any form of contributions – comments and questions on different communication channels, issues and pull request in the repositories, and anything that you build and share using our platform. If unsure, feel free to post an issue in this repository and we'll help you.
+
+For running the project, you need to execute the following script before any maven related commands:
+```
+scripts/generateBoms.sh
+```  
 
 ## License
 

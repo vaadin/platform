@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>13.0-SNAPSHOT</version>
+        <version>15.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-core</artifactId>
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-core)</name>
     <description>Vaadin Platform (vaadin-core)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <distributionManagement>
         <repository>
@@ -55,6 +55,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>flow-dnd</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-lumo-theme</artifactId>
         </dependency>
         <dependency>
@@ -62,6 +66,10 @@
             <artifactId>vaadin-material-theme</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-accordion-flow</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-flow</artifactId>
@@ -76,7 +84,23 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-custom-field-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-date-picker-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-details-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-time-picker-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-select-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -101,6 +125,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-list-box-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-login-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -142,5 +170,124 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-context-menu-flow</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-menu-bar-flow</artifactId>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <!-- compute shrink version -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>regex-property</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>shrink.version</name>
+                            <value>${project.version}</value>
+                            <!-- change `.suffix1` by `-suffix1` -->
+                            <regex>\.([A-z]\w+)$</regex>
+                            <replacement>-$1</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeDependencySources>false</includeDependencySources>
+                    <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
+                    <quiet>true</quiet>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>shrinkWrap</id>
+            <activation>
+                <property>
+                    <name>shrinkWrap</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/templates</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>add-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${basedir}/target/generated-sources</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

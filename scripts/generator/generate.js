@@ -40,6 +40,12 @@ const vaadinBowerResultFileName = getResultsFilePath('vaadin-bower.json');
 const vaadinPackageTemplateFileName = getTemplateFilePath('template-vaadin-package.json');
 const vaadinPackageResultFileName = getResultsFilePath('vaadin-package.json');
 
+const coreShrinkwrapTemplateFileName = getTemplateFilePath('template-vaadin-core-shrinkwrap-package.json');
+const coreShrinkwrapResultFileName = getResultsFilePath('vaadin-core-shrinkwrap-package.json');
+
+const vaadinShrinkwrapTemplateFileName = getTemplateFilePath('template-vaadin-shrinkwrap-package.json');
+const vaadinShrinkwrapResultFileName = getResultsFilePath('vaadin-shrinkwrap-package.json');
+
 const mavenBomTemplateFileName = getTemplateFilePath('template-vaadin-bom.xml');
 const mavenBomResultFileName = getResultsFilePath('vaadin-bom.xml');
 
@@ -48,6 +54,12 @@ const mavenSpringBomResultFileName = getResultsFilePath('vaadin-spring-bom.xml')
 
 const releaseNotesTemplateFileName = getTemplateFilePath('template-release-notes.md');
 const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
+
+const releaseNotesMaintenanceTemplateFileName = getTemplateFilePath('template-release-notes-maintenance.md');
+const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-maintenance.md');
+
+const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
+const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
 
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
@@ -62,3 +74,12 @@ writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPa
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
+writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
+writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
+
+writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
+const shrinkwrap = {};
+Object.assign(shrinkwrap, versions.core);
+Object.assign(shrinkwrap, versions.vaadin);
+delete shrinkwrap['vaadin-core'];
+writer.writePackageJson(shrinkwrap, vaadinShrinkwrapTemplateFileName, vaadinShrinkwrapResultFileName);

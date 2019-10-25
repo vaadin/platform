@@ -1,16 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>13.0-SNAPSHOT</version>
+        <version>15.0-SNAPSHOT</version>
     </parent>
-    <artifactId>vaadin-platform-test</artifactId>
+    <artifactId>vaadin-platform-test-npm-mode</artifactId>
     <packaging>war</packaging>
-    <name>Vaadin Platform Tests</name>
-    <description>Vaadin Platform Tests</description>
-    <url>http://vaadin.com</url>
+    <name>Vaadin Platform Tests in NPM mode</name>
+    <description>Vaadin Platform Tests in NPM mode</description>
+    <url>https://vaadin.com</url>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -18,7 +19,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <ui.jar.classes>${project.build.directory}/ui-jar</ui.jar.classes>
+        <vaadin.clientSideMode>false</vaadin.clientSideMode>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -33,9 +37,21 @@
     </dependencyManagement>
 
     <pluginRepositories>
+        <!-- Main Maven repository -->
         <pluginRepository>
-            <id>vaadin-pre-relase</id>
-            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-prerelase</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-addons</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -64,21 +80,87 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${project.version}</version>
                 <executions>
                     <execution>
+                        <id>war-frontend-resources</id>
                         <goals>
-                            <goal>copy-production-files</goal>
-                            <goal>package-for-production</goal>
+                            <goal>prepare-frontend</goal>
+                            <goal>build-frontend</goal>
                         </goals>
                     </execution>
+
                 </executions>
+                <configuration>
+                    <productionMode>true</productionMode>
+                    <clientSideMode>${vaadin.clientSideMode}</clientSideMode>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -88,6 +170,12 @@
                     <stopPort>9999</stopPort>
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>clientSideMode</name>
+                            <value>${vaadin.clientSideMode}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
                 <executions>
                     <execution>
@@ -109,6 +197,29 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.20</version>
+                <dependencies>
+                    <!--The following dependencies are needed for Java 10+ support -->
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.2.11</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.sun.xml.bind</groupId>
+                        <artifactId>jaxb-core</artifactId>
+                        <version>2.2.11</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.sun.xml.bind</groupId>
+                        <artifactId>jaxb-impl</artifactId>
+                        <version>2.2.11</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.activation</groupId>
+                        <artifactId>activation</artifactId>
+                        <version>1.1.1</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <goals>
@@ -129,16 +240,21 @@
             <plugin>
                 <groupId>com.saucelabs.maven.plugin</groupId>
                 <artifactId>sauce-connect-plugin</artifactId>
-                <version>2.1.23</version>
+                <version>2.1.25</version>
+                <configuration>
+                    <sauceUsername>${sauce.user}</sauceUsername>
+                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                    <options>${sauce.options}</options>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.saucelabs</groupId>
                         <artifactId>ci-sauce</artifactId>
-                        <version>1.132</version>
+                        <version>1.138</version>
                     </dependency>
                 </dependencies>
                 <executions>
-                    <!-- Start Sauce Connect prior to running the integration 
+                    <!-- Start Sauce Connect prior to running the integration
                         tests -->
                     <execution>
                         <id>start-sauceconnect</id>
@@ -147,7 +263,7 @@
                             <goal>start-sauceconnect</goal>
                         </goals>
                     </execution>
-                    <!-- Stop the Sauce Connect process after the integration 
+                    <!-- Stop the Sauce Connect process after the integration
                         tests have finished -->
                     <execution>
                         <id>stop-sauceconnect</id>
@@ -193,7 +309,75 @@
                 <configuration>
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
-           </plugin>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        <index>false</index>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>ui-tests</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>ui</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${ui.jar.classes}</classesDirectory>
+                            <classifier>ui</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>clean-ui-classes</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="${ui.jar.classes}"></delete>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>ui-jar-classes</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${ui.jar.classes}/frontend">
+                                    <fileset dir="${project.build.directory}/frontend" />
+                                </copy>
+                                <copy todir="${ui.jar.classes}">
+                                    <fileset dir="${project.build.outputDirectory}" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

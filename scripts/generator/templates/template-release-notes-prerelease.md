@@ -68,99 +68,40 @@ The best way to get started with Vaadin is to go to [https://vaadin.com/start](h
 ### Note
 Vaadin 15 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
-## Maven Archetypes
-
-Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE. There is currently one Maven archetype available, the `vaadin-archetype-application` which corresponds to the project base for Flow. The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
-
-```
-mvn -B archetype:generate \
-                -DarchetypeGroupId=com.vaadin \
-                -DarchetypeArtifactId=vaadin-archetype-application \
-                -DarchetypeVersion={{platform}}\
-                -DgroupId=org.test \
-                -DartifactId=vaadin-app \
-                -Dversion=1.0-SNAPSHOT \
-                && cd vaadin-app \
-                && mvn package jetty:run
-```
-
 ## Manually changing Vaadin version for Java projects
 
-Add the following dependency to dependencyManagement in pom.xml.
+Add the following contents to your project pom.xml.
 ```
-<dependency>
-    <groupId>com.vaadin</groupId>
-    <artifactId>vaadin-bom</artifactId>
-    <version>{{platform}}</version>
-    <type>pom</type>
-    <scope>import</scope>
-</dependency>
+<dependencyManagement>
+    ...
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <version>{{platform}}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+    ...
+</dependencyManagement>
+
+<repositories>
+    <repository>
+        <id>vaadin-prerelease</id>
+        <url>https://maven.vaadin.com/vaadin-prereleases</url>
+    </repository>
+</repositories>
+
+<pluginRepositories>
+    <pluginRepository>
+        <id>vaadin-prerelease</id>
+        <url>https://maven.vaadin.com/vaadin-prereleases</url>
+    </pluginRepository>
+</pluginRepositories>
 ```
-
-# Supported Technologies
-## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (npm as package manager) or Java 8
-- Windows
-- Linux
-- macOS
-
-## Desktop Browsers
-- Evergreen versions of the following browsers on :
-  - Chrome on these operating systems:
-    - Windows 7, Windows 8.1, Windows 10 or later
-    - macOS 10.9 (OS X Mavericks) or later
-    - 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
-  - Firefox on these operating systems
-    - Windows 7, Windows 8.1, Windows 10 or later
-    - macOS 10.9  (OS X Mavericks) or later
-    - Any Linux with the following packages:
-      - GTK+ 3.4 or higher
-      - GLib 2.22 or higher
-      - Pango 1.14 or higher
-      - X.Org 1.0 or higher (1.7 or higher is recommended)
-      - libstdc++ 4.6.1 or higher
-    - Latest Firefox ESR is supported (starting from Firefox ESR 68)
-  - Safari on macOS 10.9 (OS X Mavericks) or later
-  - Edge on Windows 10 or later
-- Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
-  - (see _Known Issues and Limitations_ below)  
-
-## Mobile Browsers
-The following built-in browsers in the following mobile operating systems:
-- Safari starting from iOS 9
-- Google Chrome evergreen on Android (requiring Android 4.4 or newer)
-
-## Development environments
-Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, Atom and Visual Studio Code among others (including Emacs and Vim).
-
-**Vaadin Designer** supports the following IDEs:
-- Eclipse Java EE versions: Photon, 2018 and 2019.
-- JetBrains IntelliJ IDEA 2017, 2018 and 2019. Community or Ultimate edition.
-
-## Java
-
-The server-side parts of Vaadin support version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
-
-## Application Servers
-Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
-- Apache Tomcat 8.0.x, 8.5, 9
-- Apache TomEE 7.0.4->
-- Oracle WebLogic Server 12.2.1
-- IBM WebSphere Application Server 8.5 Liberty Profile and 9
-- RedHat JBoss EAP 7
-- WildFly 14, 15, 16
-- Jetty 9.4
-- Payara Server
-- Payara Micro
-
-## Supported Node.js and npm versions
-Node.js version 10.x for the npm mode.
-npm version 5.6.0 or greater.
-
-# Breaking changes
-This lists products that have breaking changes from V14
 
 # Known Issues and Limitations
+
+This is the prerelease version of Vaadin 15 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)

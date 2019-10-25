@@ -1,8 +1,6 @@
 package com.vaadin.platform.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
 import com.vaadin.flow.component.board.testbench.RowElement;
@@ -13,16 +11,23 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
 import com.vaadin.flow.component.crud.testbench.CrudElement;
+import com.vaadin.flow.component.customfield.testbench.CustomFieldElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
+import com.vaadin.flow.component.details.testbench.DetailsElement;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.gridpro.testbench.GridProElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
+import com.vaadin.flow.component.login.testbench.LoginFormElement;
+import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
 import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
+import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
+import com.vaadin.flow.component.select.testbench.SelectElement;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.tabs.testbench.TabElement;
 import com.vaadin.flow.component.tabs.testbench.TabsElement;
@@ -33,17 +38,24 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ComponentsIT extends ParallelTest {
 
     static {
         Parameters.setGridBrowsers(
-                "ie11,firefox,chrome,safari-9,safari-10,safari,edge");
+                "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge");
+    }
+
+    @Before
+    public void setUp() {
+        getDriver().get("http://localhost:8080/prod-mode/");
     }
 
     @Test
     public void appWorks() throws Exception {
-        getDriver().get("http://localhost:8080/");
         checkCustomElement($(NotificationElement.class).waitForFirst());
         checkCustomElement($(DialogElement.class).first());
 
@@ -53,14 +65,24 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(ChartElement.class).first());
         checkCustomElement($(ConfirmDialogElement.class).first());
         checkCustomElement($(CookieConsentElement.class).first());
+        checkCustomElement($(AccordionElement.class).first());
         checkCustomElement($(AppLayoutElement.class).first());
         checkCustomElement($(CrudElement.class).first());
+        checkCustomElement($(GridProElement.class).first());
+        checkCustomElement($(RichTextEditorElement.class).first());
+        checkCustomElement($(CustomFieldElement.class).first());
         checkCustomElement($(CheckboxElement.class).first());
+        checkCustomElement($("vaadin-checkbox-group").first());
         checkCustomElement($(ComboBoxElement.class).first());
         checkCustomElement($(DatePickerElement.class).first());
+        checkCustomElement($("vaadin-time-picker").first());
+        checkCustomElement($(DetailsElement.class).first());
         checkCustomElement($(FormLayoutElement.class).first());
         checkCustomElement($(GridElement.class).first());
+        checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).first());
+        checkCustomElement($("vaadin-list-box").first());
+        checkCustomElement($(LoginFormElement.class).first());
         checkCustomElement($(HorizontalLayoutElement.class).first());
         checkCustomElement($(VerticalLayoutElement.class).first());
         checkCustomElement($(ProgressBarElement.class).first());
@@ -71,8 +93,9 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(PasswordFieldElement.class).first());
         checkCustomElement($(TextAreaElement.class).first());
         checkCustomElement($(TextFieldElement.class).first());
+        checkCustomElement($(MenuBarElement.class).first());
         checkCustomElement($(UploadElement.class).first());
-
+        checkCustomElement($(SelectElement.class).first());
     }
 
     private void checkCustomElement(TestBenchElement element) {
@@ -83,4 +106,5 @@ public class ComponentsIT extends ParallelTest {
         Assert.assertTrue((Boolean) executeScript(
                 "return !!window.customElements.get(arguments[0])", tagName));
     }
+
 }

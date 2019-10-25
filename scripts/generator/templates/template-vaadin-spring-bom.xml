@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>Vaadin Spring (Bill of Materials)</name>
     <description>Vaadin Spring (Bill of Materials)</description>
-    <url>http://vaadin.com</url>
+    <url>https://vaadin.com</url>
 
     <properties>
 {{javadeps}}
@@ -69,6 +69,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>flow-dnd</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-lumo-theme</artifactId>
                 <version>${flow.version}</version>
             </dependency>
@@ -80,6 +85,11 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-server-production-mode</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-server-compatibility-mode</artifactId>
                 <version>${flow.version}</version>
             </dependency>
             <dependency>
@@ -107,6 +117,11 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-accordion-flow</artifactId>
+                <version>${vaadin.accordion.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-button-flow</artifactId>
                 <version>${vaadin.button.version}</version>
             </dependency>
@@ -127,8 +142,23 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-time-picker-flow</artifactId>
+                <version>${vaadin.time.picker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-select-flow</artifactId>
+                <version>${vaadin.select.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-dialog-flow</artifactId>
                 <version>${vaadin.dialog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-flow</artifactId>
+                <version>${vaadin.details.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -192,6 +222,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-menu-bar-flow</artifactId>
+                <version>${vaadin.menu.bar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-upload-flow</artifactId>
                 <version>${vaadin.upload.version}</version>
             </dependency>
@@ -213,22 +248,11 @@
                 <version>${flow.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!-- Component Testbench API -->
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-components-testbench</artifactId>
-                <version>${vaadin.testbench.components.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-charts-testbench</artifactId>
-                <version>${vaadin.charts.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-confirm-dialog-testbench</artifactId>
-                <version>${vaadin.confirm.dialog.version}</version>
+                <artifactId>vaadin-accordion-testbench</artifactId>
+                <version>${vaadin.accordion.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -239,8 +263,44 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-crud-testbench</artifactId>
-                <version>${vaadin.crud.version}</version>
+                <artifactId>vaadin-board-testbench</artifactId>
+                <version>${vaadin.board.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-button-testbench</artifactId>
+                <version>${vaadin.button.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-charts-testbench</artifactId>
+                <version>${vaadin.charts.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-checkbox-testbench</artifactId>
+                <version>${vaadin.checkbox.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-combo-box-testbench</artifactId>
+                <version>${vaadin.combo.box.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-confirm-dialog-testbench</artifactId>
+                <version>${vaadin.confirm.dialog.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-context-menu-testbench</artifactId>
+                <version>${vaadin.context.menu.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -251,8 +311,146 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-board-testbench</artifactId>
-                <version>${vaadin.board.version}</version>
+                <artifactId>vaadin-crud-testbench</artifactId>
+                <version>${vaadin.crud.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-custom-field-testbench</artifactId>
+                <version>${vaadin.custom.field.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-date-picker-testbench</artifactId>
+                <version>${vaadin.date.picker.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-details-testbench</artifactId>
+                <version>${vaadin.details.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-dialog-testbench</artifactId>
+                <version>${vaadin.dialog.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-form-layout-testbench</artifactId>
+                <version>${vaadin.form.layout.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-grid-testbench</artifactId>
+                <version>${vaadin.grid.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-grid-pro-testbench</artifactId>
+                <version>${vaadin.grid.pro.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-icons-testbench</artifactId>
+                <version>${vaadin.icons.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-iron-list-testbench</artifactId>
+                <version>${iron.list.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-list-box-testbench</artifactId>
+                <version>${vaadin.list.box.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-login-testbench</artifactId>
+                <version>${vaadin.login.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-menu-bar-testbench</artifactId>
+                <version>${vaadin.menu.bar.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                 <groupId>com.vaadin</groupId>
+                 <artifactId>vaadin-notification-testbench</artifactId>
+                 <version>${vaadin.notification.version}</version>
+                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-ordered-layout-testbench</artifactId>
+                <version>${vaadin.ordered.layout.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-progress-bar-testbench</artifactId>
+                <version>${vaadin.progress.bar.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-radio-button-testbench</artifactId>
+                <version>${vaadin.radio.button.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-rich-text-editor-testbench</artifactId>
+                <version>${vaadin.rich.text.editor.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-select-testbench</artifactId>
+                <version>${vaadin.select.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-split-layout-testbench</artifactId>
+                <version>${vaadin.split.layout.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-tabs-testbench</artifactId>
+                <version>${vaadin.tabs.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-text-field-testbench</artifactId>
+                <version>${vaadin.text.field.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-time-picker-testbench</artifactId>
+                <version>${vaadin.time.picker.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-upload-testbench</artifactId>
+                <version>${vaadin.upload.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -265,13 +463,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-confirm-dialog-flow</artifactId>
                 <version>${vaadin.confirm.dialog.version}</version>
-                <exclusions>
-                    <!--TODO fix this in the actual component-->
-                    <exclusion>
-                        <groupId>org.webjars.bowergithub.vaadin</groupId>
-                        <artifactId>vaadin-dialog</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -280,8 +471,28 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-login-flow</artifactId>
+                <version>${vaadin.login.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-crud-flow</artifactId>
                 <version>${vaadin.crud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-custom-field-flow</artifactId>
+                <version>${vaadin.custom.field.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-grid-pro-flow</artifactId>
+                <version>${vaadin.grid.pro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-rich-text-editor-flow</artifactId>
+                <version>${vaadin.rich.text.editor.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -293,7 +504,6 @@
                 <artifactId>vaadin-board-flow</artifactId>
                 <version>${vaadin.board.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>mpr-v7</artifactId>
