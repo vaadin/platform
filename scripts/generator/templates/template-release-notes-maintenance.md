@@ -30,9 +30,20 @@ For the full list of how to get started go to the [GitHub releases](https://gith
 
 # Known Issues and Limitations
 
+## OSGi support
+- OSGi with npm does not work in V14.0.0. We are working on a fix for V14.x.
+- OSGi with Bower has problems with V14.0.0 but we are working on a fix to be released in a maintenance version (V14.0.X)
+
 ## Flow
+- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
+- There are [some issues](https://github.com/vaadin/flow/issues/5146) in using Web Sockets as the Push channel in certain OSGi environments, but long polling works.
 
 ## Components
+- The dark theme preset does not work in IE11 when applied to the `<html>` element.
+
+## Designer
+- External preview doesn't work in IE11.
+- Horizontal scrolling using the trackpad doesn't work Eclipse.
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
