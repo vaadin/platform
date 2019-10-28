@@ -81,8 +81,8 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "javaVersion": "2.0.1",
-            "jsVersion": "2.1.5",
+            "javaVersion": "2.0.2",
+            "jsVersion": "2.1.6",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -97,8 +97,8 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.8",
-            "jsVersion": "5.4.9",
+            "javaVersion": "4.0.9",
+            "jsVersion": "5.4.11",
             "component": true
         },
         "vaadin-icons": {
