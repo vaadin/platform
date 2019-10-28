@@ -41,10 +41,6 @@ For the full list of how to get started go to the [GitHub releases](https://gith
 ## Components
 - The dark theme preset does not work in IE11 when applied to the `<html>` element.
 
-## Designer
-- External preview doesn't work in IE11.
-- Horizontal scrolling using the trackpad doesn't work Eclipse.
-
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
