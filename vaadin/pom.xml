@@ -98,18 +98,6 @@
                             </rules>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <dependencyConvergence />
-                                <requireUpperBoundDeps />
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
                 </executions>
             </plugin>
             <!-- compute shrink version -->
