@@ -246,7 +246,7 @@
             "javaVersion": "2.0.5",
             "jsVersion": "2.4.12",
             "component": true,
-            "components": ["Text Field", "Text Area", "Password Field"]
+            "components": ["Text Field", "Text Area", "Password Field", "Big Decimal Field", "Email Field", "Integer Field", "Number Field"]
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
