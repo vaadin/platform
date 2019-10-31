@@ -66,7 +66,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/");
+        getDriver().get("http://localhost:8080/prod-mode/");
     }
 
     @Test
