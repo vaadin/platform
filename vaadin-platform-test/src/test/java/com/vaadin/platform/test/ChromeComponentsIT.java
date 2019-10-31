@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -67,7 +66,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+        getDriver().get("http://localhost:8080/");
     }
 
     @Test
