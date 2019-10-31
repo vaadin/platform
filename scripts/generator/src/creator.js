@@ -242,6 +242,13 @@ function buildComponentReleaseString(versionName, version) {
     result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
     result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
+    
+    if(version.components){
+        const componentsString = version.components.map(c => `  - ${c}`)
+                                                   .join('\n');
+        result = result.concat(componentsString);
+        result = result.concat('\n');
+    }
     return result;
 }
 
