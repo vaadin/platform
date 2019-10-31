@@ -24,7 +24,7 @@ install:
 - npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
-- mvn clean verify $VAADIN_OPTS -B -Pproduction
+- mvn clean verify $VAADIN_OPTS -B
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
