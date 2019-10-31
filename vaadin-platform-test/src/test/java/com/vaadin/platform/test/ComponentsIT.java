@@ -1,5 +1,9 @@
 package com.vaadin.platform.test;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
@@ -38,9 +42,6 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ComponentsIT extends ParallelTest {
 
@@ -51,7 +52,7 @@ public class ComponentsIT extends ParallelTest {
 
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+        getDriver().get("http://localhost:8080/");
     }
 
     @Test
