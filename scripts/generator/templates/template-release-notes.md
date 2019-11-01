@@ -193,10 +193,6 @@ Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/
 ## Components
 - The dark theme preset does not work in IE11 when applied to the `<html>` element.
 
-## Designer
-- External preview doesn't work in IE11.
-- Horizontal scrolling using the trackpad doesn't work Eclipse.
-
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
 
