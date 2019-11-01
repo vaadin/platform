@@ -34,11 +34,14 @@
             "javaVersion": "2.0.1",
             "jsVersion": "2.2.10",
             "component": true,
-            "components": ["Checkbox", "Checkbox Group"]
+            "components": [
+                "Checkbox",
+                "Checkbox Group"
+            ]
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.4",
+            "javaVersion": "3.0.5",
             "jsVersion": "5.0.8",
             "component": true
         },
@@ -98,10 +101,14 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.9",
+            "javaVersion": "4.0.10",
             "jsVersion": "5.4.11",
             "component": true,
-            "components": ["Grid", "Tree Grid", "Grid Context Menu"]
+            "components": [
+                "Grid",
+                "Tree Grid",
+                "Grid Context Menu"
+            ]
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
@@ -210,7 +217,11 @@
             "javaVersion": "2.0.0",
             "jsVersion": "1.1.0",
             "component": true,
-            "components": ["Horizontal Layout", "Vertical Layout", "Flex Layout"]
+            "components": [
+                "Horizontal Layout",
+                "Vertical Layout",
+                "Flex Layout"
+            ]
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
@@ -227,11 +238,14 @@
             "javaVersion": "2.0.1",
             "jsVersion": "1.2.3",
             "component": true,
-            "components": ["Radio Button", "Radio Button Group"]
+            "components": [
+                "Radio Button",
+                "Radio Button Group"
+            ]
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "4.1.1",
             "component": true
         },
@@ -246,7 +260,13 @@
             "javaVersion": "2.0.7",
             "jsVersion": "2.4.13",
             "component": true,
-            "components": ["Text Field", "Text Area", "Password Field", "Email Field", "Number Field"]
+            "components": [
+                "Text Field",
+                "Text Area",
+                "Password Field",
+                "Email Field",
+                "Number Field"
+            ]
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
