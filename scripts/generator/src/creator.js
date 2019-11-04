@@ -87,7 +87,6 @@ function computeUsedProperties(mavenTemplate) {
 */
 function createReleaseNotes(versions, releaseNoteTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
-
     let componentVersions = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
@@ -95,12 +94,41 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
             componentVersions = componentVersions.concat(result);
         }
     }
-
+    
     const changed = getChangedSincePrevious(versions);
 
     const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
 
     return render(releaseNoteTemplate, releaseNoteData);
+}
+
+/**
+@param {Object} versions data object for product versions.
+@param {String} modulesReleaseNoteTemplate template string to replace versions in.
+*/
+function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
+    const allVersions = Object.assign({}, versions.core, versions.vaadin);
+    let componentVersions = '';
+    for (let [versionName, version] of Object.entries(allVersions)) {
+        
+        if (version.component) {
+            const result = buildComponentReleaseNoteString(versionName, version);
+            componentVersions = componentVersions.concat(result);
+        }
+    }
+    
+    const changed = getChangedReleaseNotesSincePrevious(versions);
+
+    var splittedChanged = changed.split("\n");
+    const splittedChangedUpper = splittedChanged.map((split) =>
+        //requestGH(split)
+        split.substring(0, 1) == '#' || split == '' ? split : requestGH(split)['body']
+    );
+    //console.log(splittedChangedUpper);
+    //const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: changed });
+    const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: splittedChangedUpper.toString() });
+    
+    return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
 }
 
 function getChangedSincePrevious(versions) {
@@ -115,6 +143,26 @@ function getChangedSincePrevious(versions) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
     const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
     const changesString = generateChangesString(allVersions, allPreviousVersions);
+    let result = '';
+    if (changesString) {
+        result = result.concat(`## Changes since [${previousVersion}](https://github.com/vaadin/platform/releases/tag/${previousVersion})\n`);
+        result = result.concat(changesString);
+    }
+    return result;
+}
+
+function getChangedReleaseNotesSincePrevious(versions) {
+    const previousVersion = calculatePreviousVersion(versions.platform);
+    if (!previousVersion) {
+        return '';
+    }
+    const previousVersionsJson = requestGH(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`);
+    if (!previousVersionsJson) {
+        return '';
+    }
+    const allVersions = Object.assign({}, versions.core, versions.vaadin);
+    const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
+    const changesString = getReleaseNotesForChanged(allVersions, allPreviousVersions);
     let result = '';
     if (changesString) {
         result = result.concat(`## Changes since [${previousVersion}](https://github.com/vaadin/platform/releases/tag/${previousVersion})\n`);
@@ -151,6 +199,35 @@ function generateChangesString(allVersions, allPreviousVersions) {
     return result;
 }
 
+function getReleaseNotesForChanged(allVersions, allPreviousVersions) {
+    let javaChangedSincePreviousText = '';
+    let componentChangedSincePreviousText = '';
+    for (let [versionName, version] of Object.entries(allVersions)) {
+        if (version.component) {
+            const currentJSVersion = version.jsVersion;
+            const currentJavaVersion = toSemVer(version.javaVersion);
+            const previousVersionComponent = allPreviousVersions[versionName];
+            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            const previousJavaVersion = previousVersionComponent ? toSemVer(previousVersionComponent.javaVersion) : '0.0.0';
+            if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1 || compareVersions(currentJavaVersion, previousJavaVersion) === 1) {
+                const result = buildComponentReleaseNoteString(versionName, version);
+                componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
+            }
+        } else if (version.javaVersion) {
+            const previousVersion = allPreviousVersions[versionName] ? allPreviousVersions[versionName].javaVersion : '0.0.0';
+            const result = compareAndBuildJavaComponentReleaseNoteString(versionName, version.javaVersion, previousVersion);
+            javaChangedSincePreviousText = javaChangedSincePreviousText.concat(result);
+        }
+    }
+    let result = '';
+    if (javaChangedSincePreviousText || componentChangedSincePreviousText) {
+        result = result.concat(javaChangedSincePreviousText);
+        result = result.concat(componentChangedSincePreviousText);
+    }
+    return result;
+}
+
+
 function calculatePreviousVersion(platformVersion) {
     const versionRegex = /((\d+\.\d+)\.(\d+))((\.(alpha|beta|rc))(\d+))?/g;
     const versionMatch = versionRegex.exec(platformVersion);
@@ -175,6 +252,16 @@ function compareAndBuildJavaComponentReleaseString(versionName, currentVersion, 
     const previousVersionSemver = toSemVer(previousVersion);
     if (compareVersions(currentVersionSemver, previousVersionSemver) === 1) {
         result = getReleaseNoteLink(versionName, currentVersion);
+    }
+    return result;
+}
+
+function compareAndBuildJavaComponentReleaseNoteString(versionName, currentVersion, previousVersion) {
+    let result = '';
+    const currentVersionSemver = toSemVer(currentVersion);
+    const previousVersionSemver = toSemVer(previousVersion);
+    if (compareVersions(currentVersionSemver, previousVersionSemver) === 1) {
+        result = getModulesReleaseNoteLink(versionName, currentVersion);
     }
     return result;
 }
@@ -229,11 +316,42 @@ function getReleaseNoteLink(name, version) {
     return title ? `- ${title} ([${version}](${releaseNoteLink}${version}))\n` : '';
 }
 
+function getModulesReleaseNoteLink(name, version) {
+    let releaseNoteLink = '';
+    let title = '';
+    switch (name) {
+        case 'flow':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/flow/releases/tags/';
+            break;
+        case 'flow-spring':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/spring/releases/tags/';
+            break;
+        case 'flow-cdi':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/cdi/releases/tags/';
+            break;
+        case 'mpr-v7':
+        case 'mpr-v8':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/cdi/releases/tags/';
+            break;
+        case 'vaadin-designer':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/designer/releases/tags/';
+            break;
+        case 'vaadin-testbench':
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/testbench/releases/tags/';
+            break;
+        case 'gradle':
+            releaseNoteLink = 'https://github.com/devsoap/gradle-vaadin-flow/releases/tag/';
+            break;
+        default:
+            break;
+    }
+    return `${releaseNoteLink}${version}\n`;
+}
+
 function buildComponentReleaseString(versionName, version) {
     const name = versionName
                 .replace(/-/g, ' ')
-                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
-
+                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});    
     //separated for readability
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
@@ -242,6 +360,26 @@ function buildComponentReleaseString(versionName, version) {
     result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
     result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
+    
+    if(version.components){
+        const componentsString = version.components.map(c => `  - ${c}`)
+                                                   .join('\n');
+        result = result.concat(componentsString);
+        result = result.concat('\n');
+    }
+    return result;
+}
+
+function buildComponentReleaseNoteString(versionName, version) {
+    const name = versionName
+                .replace(/-/g, ' ')
+                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});    
+    //separated for readability
+    //let result = `- ${name} `;
+    let result = '';
+    //result = result.concat(version.pro ? '**(PRO)** ' : '');
+    result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
+    result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
     
     if(version.components){
         const componentsString = version.components.map(c => `  - ${c}`)
@@ -272,3 +410,4 @@ exports.createReleaseNotes = createReleaseNotes;
 // export for testing purpose
 exports.generateChangesString = generateChangesString;
 exports.calculatePreviousVersion = calculatePreviousVersion;
+exports.createModulesReleaseNotes = createModulesReleaseNotes;
