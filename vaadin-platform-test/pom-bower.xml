@@ -348,7 +348,7 @@
     </build>
     <profiles>
         <profile>
-            <id>production-mode</id>
+            <id>production</id>
             <activation>
                 <property>
                     <name>vaadin.productionMode</name>
