@@ -101,7 +101,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.1.0.alpha3",
+            "javaVersion": "4.1.0.beta1",
             "jsVersion": "5.5.0",
             "component": true,
             "components": [
@@ -350,7 +350,7 @@
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "2.1.0.alpha1",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
