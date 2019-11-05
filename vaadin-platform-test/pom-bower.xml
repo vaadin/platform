@@ -61,6 +61,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-production-mode</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>flow-server-compatibility-mode</artifactId>
         </dependency>
         <dependency>
@@ -124,6 +128,20 @@
                     <execution>
                         <goals>
                             <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>war-frontend-resources</id>
+                        <goals>
+                            <goal>copy-production-files</goal>
+                            <goal>package-for-production</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -346,42 +364,4 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>production</id>
-            <activation>
-                <property>
-                    <name>vaadin.productionMode</name>
-                </property>
-            </activation>
-            <properties>
-                <vaadin.productionMode>true</vaadin.productionMode>
-            </properties>
-
-            <dependencies>
-                <dependency>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>flow-server-production-mode</artifactId>
-                </dependency>
-            </dependencies>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>vaadin-maven-plugin</artifactId>
-                        <version>${project.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>copy-production-files</goal>
-                                    <goal>package-for-production</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
