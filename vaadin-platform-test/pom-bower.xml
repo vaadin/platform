@@ -196,25 +196,25 @@
                    </systemPropertyVariables>
                    <trimStackTrace>false</trimStackTrace>
                </configuration>
-           </plugin>
-           <plugin>
-               <groupId>com.saucelabs.maven.plugin</groupId>
-               <artifactId>sauce-connect-plugin</artifactId>
-               <version>2.1.25</version>
-               <configuration>
-                   <sauceUsername>${sauce.user}</sauceUsername>
-                   <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
-                   <options>${sauce.options}</options>
-               </configuration>
-               <dependencies>
-                   <dependency>
-                       <groupId>com.saucelabs</groupId>
-                       <artifactId>ci-sauce</artifactId>
-                       <version>1.138</version>
-                   </dependency>
-               </dependencies>
-               <executions>
-                   <!-- Start Sauce Connect prior to running the integration
+            </plugin>
+            <plugin>
+                <groupId>com.saucelabs.maven.plugin</groupId>
+                <artifactId>sauce-connect-plugin</artifactId>
+                <version>2.1.25</version>
+                <configuration>
+                    <sauceUsername>${sauce.user}</sauceUsername>
+                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                    <options>${sauce.options}</options>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.saucelabs</groupId>
+                        <artifactId>ci-sauce</artifactId>
+                        <version>1.138</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <!-- Start Sauce Connect prior to running the integration
                        tests -->
                     <execution>
                         <id>start-sauceconnect</id>
@@ -301,59 +301,12 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>clean-ui-classes</id>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <tasks>
-                                <delete dir="${ui.jar.classes}"></delete>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ui-jar-classes</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="${ui.jar.classes}/frontend"></mkdir>
-                                <copy todir="${ui.jar.classes}/frontend/bower_components">
-                                    <fileset dir="${project.build.directory}/frontend/bower_components" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}/frontend-es5">
-                                    <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}/frontend-es6">
-                                    <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}">
-                                    <fileset dir="${project.build.outputDirectory}" />
-                                </copy>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
     <profiles>
         <profile>
             <id>production</id>
-            <activation>
-                <property>
-                    <name>vaadin.productionMode</name>
-                </property>
-            </activation>
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
@@ -376,6 +329,51 @@
                                 <goals>
                                     <goal>copy-production-files</goal>
                                     <goal>package-for-production</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- prepare files for OSGi tests -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>clean-ui-classes</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <tasks>
+                                        <delete dir="${ui.jar.classes}"></delete>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>ui-jar-classes</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${ui.jar.classes}/frontend"></mkdir>
+                                        <copy todir="${ui.jar.classes}/frontend/bower_components">
+                                            <fileset dir="${project.build.directory}/frontend/bower_components" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}/frontend-es5">
+                                            <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es5" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}/frontend-es6">
+                                            <fileset dir="${project.build.directory}/${project.build.finalName}/frontend-es6" />
+                                        </copy>
+                                        <copy todir="${ui.jar.classes}">
+                                            <fileset dir="${project.build.outputDirectory}" />
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
                                 </goals>
                             </execution>
                         </executions>
