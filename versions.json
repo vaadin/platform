@@ -34,17 +34,20 @@
             "javaVersion": "2.0.1",
             "jsVersion": "2.2.10",
             "component": true,
-            "components": ["Checkbox", "Checkbox Group"]
+            "components": [
+                "Checkbox",
+                "Checkbox Group"
+            ]
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.4",
+            "javaVersion": "3.0.5",
             "jsVersion": "5.0.8",
             "component": true
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.1.0.alpha1",
+            "javaVersion": "3.1.0.beta1",
             "jsVersion": "4.3.12",
             "component": true
         },
@@ -98,10 +101,14 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.1.0.alpha3",
+            "javaVersion": "4.1.0.beta1",
             "jsVersion": "5.5.0",
             "component": true,
-            "components": ["Grid", "Tree Grid", "Grid Context Menu"]
+            "components": [
+                "Grid",
+                "Tree Grid",
+                "Grid Context Menu"
+            ]
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
@@ -210,7 +217,11 @@
             "javaVersion": "2.0.0",
             "jsVersion": "1.1.0",
             "component": true,
-            "components": ["Horizontal Layout", "Vertical Layout", "Flex Layout"]
+            "components": [
+                "Horizontal Layout",
+                "Vertical Layout",
+                "Flex Layout"
+            ]
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
@@ -227,11 +238,14 @@
             "javaVersion": "2.0.1",
             "jsVersion": "1.2.3",
             "component": true,
-            "components": ["Radio Button", "Radio Button Group"]
+            "components": [
+                "Radio Button",
+                "Radio Button Group"
+            ]
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "4.1.1",
             "component": true
         },
@@ -243,18 +257,26 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.1.0.alpha3",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "2.5.0",
             "component": true,
-            "components": ["Text Field", "Text Area", "Password Field", "Big Decimal Field", "Email Field", "Integer Field", "Number Field"]
+            "components": [
+                "Text Field",
+                "Text Area",
+                "Password Field",
+                "Big Decimal Field",
+                "Email Field",
+                "Integer Field",
+                "Number Field"
+            ]
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.5.1"
+            "jsVersion": "1.5.2"
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "2.1.0.alpha2",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "4.2.2",
             "component": true
         },
@@ -328,8 +350,8 @@
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "2.1.0.alpha1",
-            "jsVersion": "1.1.0-alpha5",
+            "javaVersion": "2.1.0.beta1",
+            "jsVersion": "1.1.0-beta1",
             "component": true,
             "pro": true
         },
