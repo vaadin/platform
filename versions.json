@@ -189,7 +189,7 @@
             "component": true,
             "components": [
                 "List Box",
-                "Multi Select List Box",
+                "Multi Select List Box"
             ]
         },
         "vaadin-list-mixin": {
