@@ -119,14 +119,12 @@ function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
     
     const changed = getChangedReleaseNotesSincePrevious(versions);
 
-    var splittedChanged = changed.split("\n");
-    const splittedChangedUpper = splittedChanged.map((split) =>
-        //requestGH(split)
-        split.substring(0, 1) == '#' || split == '' ? split : requestGH(split)['body']
-    );
-    //console.log(splittedChangedUpper);
-    //const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: changed });
-    const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: splittedChangedUpper.toString() });
+    let modulesReleaseNotes = '';
+    changed.split("\n").forEach((split) => {
+        modulesReleaseNotes += split.substring(0, 1) == '#' || split == '' ? split+'\n\n' : '## '+requestGH(split)['name']+'\n\n'+requestGH(split)['body']+'\n\n';
+    });
+    
+    const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
     
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
 }
@@ -321,31 +319,39 @@ function getModulesReleaseNoteLink(name, version) {
     let title = '';
     switch (name) {
         case 'flow':
+            title = 'Vaadin Flow';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/flow/releases/tags/';
             break;
         case 'flow-spring':
+            title = 'Vaadin Spring Addon';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/spring/releases/tags/';
             break;
         case 'flow-cdi':
+            title = 'Vaadin CDI Addon';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/cdi/releases/tags/';
             break;
         case 'mpr-v7':
         case 'mpr-v8':
+            title = 'Vaadin Multiplatform Runtime **(Prime)** for Framework ' + name[name.length - 1];
             releaseNoteLink = 'https://api.github.com/repos/vaadin/cdi/releases/tags/';
             break;
         case 'vaadin-designer':
+            title = 'Vaadin Designer **(Pro)**';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/designer/releases/tags/';
             break;
         case 'vaadin-testbench':
+            title = 'Vaadin TestBench **(Pro)**';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/testbench/releases/tags/';
             break;
         case 'gradle':
-            releaseNoteLink = 'https://github.com/devsoap/gradle-vaadin-flow/releases/tag/';
+            title = 'Gradle plugin for Flow';
+            releaseNoteLink = 'https://api.github.com/repos/devsoap/gradle-vaadin-flow/releases/tags/';
             break;
         default:
             break;
     }
-    return `${releaseNoteLink}${version}\n`;
+    // return `${releaseNoteLink}${version}\n`;
+    return title ? `# ${title}\n${releaseNoteLink}${version}\n` : '';
 }
 
 function buildComponentReleaseString(versionName, version) {
@@ -375,10 +381,12 @@ function buildComponentReleaseNoteString(versionName, version) {
                 .replace(/-/g, ' ')
                 .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});    
     //separated for readability
-    //let result = `- ${name} `;
-    let result = '';
+    let result = `# ${name}\n`;
+    //let result = '';
     //result = result.concat(version.pro ? '**(PRO)** ' : '');
+    result = result.concat(`#-# Java: ${version.javaVersion}\n`);
     result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
+    result = result.concat(`#-# WebComponent: ${version.jsVersion}\n`);
     result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
     
     if(version.components){
@@ -400,7 +408,13 @@ function requestGH(path) {
     if (res.statusCode != 200) {
         return '';
     }
-    return JSON.parse(res.getBody('utf8'));
+    let retValue = '';
+    try {        
+        retValue = JSON.parse(res.getBody('utf8'));
+    } catch (error) {
+        retValue = error;     
+    }
+    return retValue
 }
 
 exports.createBower = createBower;
