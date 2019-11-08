@@ -92,6 +92,11 @@
                                     <groupId>com.vaadin</groupId>
                                     <artifactId>flow-maven-plugin</artifactId>
                                     <excludes>**/*.class,META-INF/**</excludes>
+                                    <outputDirectory>src/main/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.vaadin</groupId>
+                                    <artifactId>flow-maven-plugin</artifactId>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
