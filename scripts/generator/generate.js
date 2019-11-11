@@ -61,6 +61,9 @@ const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-
 const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
 const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
 
+const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
+const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -78,6 +81,9 @@ writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, rele
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
+
+writer.writeModulesReleaseNotes(versions, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
+
 const shrinkwrap = {};
 Object.assign(shrinkwrap, versions.core);
 Object.assign(shrinkwrap, versions.vaadin);
