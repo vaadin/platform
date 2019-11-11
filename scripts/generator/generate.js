@@ -58,9 +58,6 @@ const releaseNotesResultFileName = getResultsFilePath('release-notes.md');
 const releaseNotesMaintenanceTemplateFileName = getTemplateFilePath('template-release-notes-maintenance.md');
 const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-maintenance.md');
 
-const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
-const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
-
 const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
 const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
 
