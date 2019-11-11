@@ -384,9 +384,9 @@ function buildComponentReleaseNoteString(versionName, version) {
     let result = `# ${name}\n`;
     //let result = '';
     //result = result.concat(version.pro ? '**(PRO)** ' : '');
-    result = result.concat(`#-# Java: ${version.javaVersion}\n`);
+    result = result.concat(`## Java: ${version.javaVersion}\n`);
     result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
-    result = result.concat(`#-# WebComponent: ${version.jsVersion}\n`);
+    result = result.concat(`## WebComponent: ${version.jsVersion}\n`);
     result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
     
     if(version.components){
