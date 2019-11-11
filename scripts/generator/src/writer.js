@@ -50,10 +50,22 @@ function writeMaven(versions, templateFileName, outputFileName) {
 */
 function writeReleaseNotes(versions, templateFileName, outputFileName) {
     const releaseNoteTemplate = fs.readFileSync(templateFileName, 'utf8');
-
     const releaseNotes = creator.createReleaseNotes(versions, releaseNoteTemplate);
 
     fs.writeFileSync(outputFileName, releaseNotes);
+    console.log(`Wrote ${outputFileName}`);
+}
+
+/**
+@param {Object} versions data object for product versions.
+@param {String} templateFileName absolute path to template file
+@param {String} outputFileName absolute path to output file
+*/
+function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
+    const modulesReleaseNoteTemplate = fs.readFileSync(templateFileName, 'utf8');
+    const modulesReleaseNotes = creator.createModulesReleaseNotes(versions, modulesReleaseNoteTemplate);
+
+    fs.writeFileSync(outputFileName, modulesReleaseNotes);
     console.log(`Wrote ${outputFileName}`);
 }
 
@@ -61,3 +73,4 @@ exports.writeBower = writeBower;
 exports.writePackageJson = writePackageJson;
 exports.writeMaven = writeMaven;
 exports.writeReleaseNotes = writeReleaseNotes;
+exports.writeModulesReleaseNotes = writeModulesReleaseNotes;
