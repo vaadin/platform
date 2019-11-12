@@ -26,6 +26,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.WrapsElement;
@@ -548,7 +549,7 @@ public class ChromeComponentsIT extends ParallelTest {
         // wait 5 seconds for collecting values in local storage	
         Thread.sleep(5000);	
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;	
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         Object mode = js.executeScript("return Vaadin.developmentMode");	
 
         String item = (String) js.executeScript(	
