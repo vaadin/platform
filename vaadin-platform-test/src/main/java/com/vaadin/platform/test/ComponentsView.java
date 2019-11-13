@@ -111,7 +111,7 @@ public class ComponentsView extends VerticalLayout {
         checkboxGroup.addValueChangeListener(event -> log
                 .log("CheckboxGroup value changed from '" + event.getOldValue()
                         + "' to '" + event.getValue() + "'"));
-        checkboxGroup.setId("checkbox-group");
+        checkboxGroup.setId("checkboxgroup");
 
         ComboBox<String> combobox = new ComboBox<>("ComboBox label");
         combobox.setItems("First", "Second", "Third");
@@ -202,7 +202,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("RadioButtonGroup value changed from " + e.getOldValue()
                     + " to " + e.getValue());
         });
-        radioButtons.setId("radiobuttons");
+        radioButtons.setId("radiobuttongroup");
 
         TextField textField = new TextField();
         textField.setValueChangeMode(ValueChangeMode.EAGER);

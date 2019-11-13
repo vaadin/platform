@@ -212,7 +212,7 @@ public class ChromeComponentsIT extends ParallelTest {
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
                 By.tagName("vaadin-context-menu-overlay")));
         TestBenchElement contextMenuItem = $("vaadin-context-menu-overlay")
-                .id("gridcontextmenu").$("vaadin-context-menu-item").first();
+                .first().$("vaadin-context-menu-item").first();
         Assert.assertEquals("foo", contextMenuItem.getText());
 
         contextMenuItem.click();
@@ -416,7 +416,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void splitLayoutIsRendered() {
         SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
-                .id("splitlayout");
+                .id("splithorizontal");
 
         assertElementRendered(splitLayoutElement);
 

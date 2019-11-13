@@ -64,7 +64,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(RowElement.class).id("row"));
         checkCustomElement($(ButtonElement.class).id("button"));
         checkCustomElement($(ChartElement.class).id("chart"));
-        checkCustomElement($(ConfirmDialogElement.class).id("chart"));
+        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
         checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
         checkCustomElement($(AccordionElement.class).id("accordion"));
         checkCustomElement($(AppLayoutElement.class).id("applayout"));
