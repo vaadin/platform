@@ -80,7 +80,7 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(DetailsElement.class).id("details"));
         checkCustomElement($(FormLayoutElement.class).id("formlayout"));
         checkCustomElement($(GridElement.class).id("grid"));
-        checkCustomElement($("iron-icon").id(""));
+        checkCustomElement($("iron-icon").first());
         checkCustomElement($(IronListElement.class).id("ironlist"));
         checkCustomElement($("vaadin-list-box").id("listbox"));
         checkCustomElement($(LoginFormElement.class).id("loginform"));
