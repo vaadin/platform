@@ -326,7 +326,7 @@ public class ComponentsView extends VerticalLayout {
         confirmDialog.setText("Your next meeting starts in 5 minutes");
         confirmDialog.setConfirmText("OK");
         confirmDialog.open();
-        confirmDialog.setId("comfirmdialog");
+        confirmDialog.setId("confirmdialog");
 
         CookieConsent cookieConsent = new CookieConsent();
         cookieConsent.setId("cookieconsent");
