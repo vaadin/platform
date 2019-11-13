@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.apache.commons.io.IOUtils;
+
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
@@ -82,7 +84,6 @@ import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import org.apache.commons.io.IOUtils;
 
 @Route("")
 @Theme(Lumo.class)
@@ -95,6 +96,7 @@ public class ComponentsView extends VerticalLayout {
         Button button = new Button("Button text", e -> {
             log.log("Clicked button");
         });
+        button.setId("button");
 
         Checkbox checkbox = new Checkbox("Checkbox label");
         log.log("Checkbox default is " + checkbox.getValue());
@@ -102,12 +104,14 @@ public class ComponentsView extends VerticalLayout {
             log.log("Checkbox value changed from '" + e.getOldValue() + "' to '"
                     + e.getValue() + "'");
         });
+        checkbox.setId("checkbox");
 
         CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
         checkboxGroup.setItems("foo", "bar");
         checkboxGroup.addValueChangeListener(event -> log
                 .log("CheckboxGroup value changed from '" + event.getOldValue()
                         + "' to '" + event.getValue() + "'"));
+        checkboxGroup.setId("checkboxgroup");
 
         ComboBox<String> combobox = new ComboBox<>("ComboBox label");
         combobox.setItems("First", "Second", "Third");
@@ -115,6 +119,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("ComboBox value changed from '" + e.getOldValue() + "' to '"
                     + e.getValue() + "'");
         });
+        combobox.setId("combobox");
 
         DatePicker datePicker = new DatePicker();
         log.log("DatePicker default is " + datePicker.getValue());
@@ -122,6 +127,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("DatePicker value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
+        datePicker.setId("datepicker");
 
         TimePicker timePicker = new TimePicker();
         log.log("TimePicker default is " + timePicker.getValue());
@@ -129,6 +135,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("TimePicker value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
+        timePicker.setId("timepicker");
 
         Select<String> select = new Select<>();
         select.setItems("Spring", "Summer", "Autumn", "Winter");
@@ -137,6 +144,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("Select value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
+        select.setId("select");
 
         Grid<Map<String, String>> grid = new Grid<>();
         grid.setWidth("100%");
@@ -151,12 +159,14 @@ public class ComponentsView extends VerticalLayout {
         gridItems.add(map("Some", "Data"));
         gridItems.add(map("Second", "Row"));
         grid.setItems(gridItems);
+        grid.setId("grid");
 
         GridContextMenu<Map<String, String>> gridContextMenu = grid
                 .addContextMenu();
         gridContextMenu.addItem("foo", e -> e.getItem().ifPresent(
                 item -> log.log("GridContextMenu on item " + item.get("foo"))));
         gridContextMenu.setOpenOnClick(true);
+        gridContextMenu.setId("gridcontextmenu");
 
         HorizontalLayout icons = new HorizontalLayout(
                 new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
@@ -166,6 +176,7 @@ public class ComponentsView extends VerticalLayout {
         Stream<String> items = IntStream.range(0, 100)
                 .mapToObj(i -> ("Item " + i));
         ironList.setItems(items);
+        ironList.setId("ironlist");
 
         ListBox<String> listBox = new ListBox<>();
         listBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)));
@@ -176,10 +187,12 @@ public class ComponentsView extends VerticalLayout {
                 .log("ListBox value changed from '" + event.getOldValue()
                         + "' to '" + event.getValue() + "'"));
         listBox.add(listBoxComponent);
+        listBox.setId("listbox");
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
         progressBar.setValue(0.7);
+        progressBar.setId("progressbar");
 
         RadioButtonGroup<String> radioButtons = new RadioButtonGroup<>();
         log.log("RadioButtonGroup default is " + radioButtons.getValue());
@@ -189,6 +202,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("RadioButtonGroup value changed from " + e.getOldValue()
                     + " to " + e.getValue());
         });
+        radioButtons.setId("radiobuttongroup");
 
         TextField textField = new TextField();
         textField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -197,6 +211,8 @@ public class ComponentsView extends VerticalLayout {
             log.log("TextField value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
+        textField.setId("textfield");
+
         PasswordField passwordField = new PasswordField();
         passwordField.setValueChangeMode(ValueChangeMode.EAGER);
         log.log("PasswordField default is " + passwordField.getValue());
@@ -204,6 +220,7 @@ public class ComponentsView extends VerticalLayout {
             log.log("PasswordField value changed from " + e.getOldValue()
                     + " to " + e.getValue());
         });
+        passwordField.setId("passwordfield");
 
         TextArea textArea = new TextArea();
         textArea.setValueChangeMode(ValueChangeMode.EAGER);
@@ -212,16 +229,19 @@ public class ComponentsView extends VerticalLayout {
             log.log("TextArea value changed from " + e.getOldValue() + " to "
                     + e.getValue());
         });
+        textArea.setId("textarea");
 
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
         upload.addSucceededListener(
                 event -> handleUploadedFile(event.getMIMEType(),
                         event.getMIMEType(), buffer.getInputStream()));
+        upload.setId("upload");
 
         Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
         dialog.open();
+        dialog.setId("dialog");
 
         Notification.show("Hello", 2000000, Position.TOP_CENTER);
 
@@ -231,29 +251,34 @@ public class ComponentsView extends VerticalLayout {
         IntStream.range(0, 6).forEach(i -> {
             formLayout.add(new TextField("FormLayout field " + i));
         });
+        formLayout.setId("formlayout");
 
         VerticalLayout verticalLayout = new VerticalLayout();
-        verticalLayout.setId("test-vertical-layout");
+        verticalLayout.setId("verticallayout");
         IntStream.range(0, 3).forEach(i -> verticalLayout
                 .add(new Button("VerticalLayout Button " + i)));
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.setId("test-horizontal-layout");
+        horizontalLayout.setId("horizontallayout");
         IntStream.range(0, 3).forEach(i -> horizontalLayout
                 .add(new Label("HorizontalLayout Label " + i)));
 
         SplitLayout splitHorizontal = new SplitLayout(new Button("Left"),
                 new Button("Right"));
         splitHorizontal.getStyle().set("flex", "none");
+        splitHorizontal.setId("splithorizontal");
+
         SplitLayout splitVertical = new SplitLayout(new Button("Top"),
                 new Button("Bottom"));
         splitVertical.setOrientation(Orientation.VERTICAL);
         splitVertical.getStyle().set("flex", "none");
+        splitVertical.setId("splitvertical");
 
         Tabs tabs = new Tabs();
         tabs.add(new Tab("foo"), new Tab("bar"));
         tabs.addSelectedChangeListener(event -> log.log(
                 "Tabs selected index changed to " + tabs.getSelectedIndex()));
+        tabs.setId("tabs");
 
         Div contextMenuTarget = new Div();
         contextMenuTarget.setText("Context Menu Target");
@@ -268,14 +293,17 @@ public class ComponentsView extends VerticalLayout {
         add(log);
 
         Board board = new Board();
+        board.setId("board");
         Label header = new Label("This is a board");
         header.getElement().getStyle().set("background-color", "lightblue");
         header.getElement().getStyle().set("text-align", "center");
         header.setWidth("100%");
         Row row = new Row(header);
         row.setComponentSpan(header, 4);
+        row.setId("row");
 
         Chart lineChart = new Chart(ChartType.LINE);
+        lineChart.setId("chart");
         lineChart.getElement().getStyle().set("height", "100px");
         lineChart.getConfiguration()
                 .addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
@@ -298,20 +326,27 @@ public class ComponentsView extends VerticalLayout {
         confirmDialog.setText("Your next meeting starts in 5 minutes");
         confirmDialog.setConfirmText("OK");
         confirmDialog.open();
+        confirmDialog.setId("confirmdialog");
 
         CookieConsent cookieConsent = new CookieConsent();
+        cookieConsent.setId("cookieconsent");
 
         AppLayout appLayout = new AppLayout();
+        appLayout.setId("applayout");
 
         Crud<Entity> crud = new Crud<>(Entity.class, new BinderCrudEditor<>(
                 new Binder<>(Entity.class), new HorizontalLayout()));
+        crud.setId("crud");
 
         GridPro<Entity> gridPro = new GridPro<>();
+        gridPro.setId("gridpro");
 
         MenuBar menuBar = new MenuBar();
         menuBar.addItem("foo");
+        menuBar.setId("menubar");
 
         RichTextEditor richTextEditor = new RichTextEditor();
+        richTextEditor.setId("richtexteditor");
 
         final TextField wrappedField = new TextField();
         CustomField<String> customField = new CustomField<String>() {
@@ -330,16 +365,20 @@ public class ComponentsView extends VerticalLayout {
                 wrappedField.setValue(newPresentationValue);
             }
         };
+        customField.setId("customfield");
 
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
 
         LoginForm loginForm = new LoginForm();
+        loginForm.setId("loginform");
 
         Details details = new Details("Summary", new Span("Content"));
+        details.setId("details");
 
         Accordion accordion = new Accordion();
         accordion.add("Title", new Paragraph("Content"));
+        accordion.setId("accordion");
 
         add(new HorizontalLayout(components, layouts));
 
