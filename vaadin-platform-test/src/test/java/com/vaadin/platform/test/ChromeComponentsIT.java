@@ -72,7 +72,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void buttonIsRenderedAndRecievesClicks() {
-        ButtonElement button = $(ButtonElement.class).first();
+        ButtonElement button = $(ButtonElement.class).id("button");
 
         TestBenchElement htmlButton = button.$(TestBenchElement.class)
                 .id("button");
@@ -85,7 +85,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void checkboxIsRenderedAndRecievesValueChangeEvent() {
-        CheckboxElement checkbox = $(CheckboxElement.class).first();
+        CheckboxElement checkbox = $(CheckboxElement.class).id("checkbox");
 
         TestBenchElement htmlButton = checkbox.$("input")
                 .attribute("type", "checkbox").first();
@@ -98,7 +98,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void checkboxGroupIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement checkboxGroup = $("vaadin-checkbox-group").first();
+        TestBenchElement checkboxGroup = $("vaadin-checkbox-group").id("checkboxgroup");
 
         TestBenchElement groupField = checkboxGroup.$("div")
                 .attribute("part", "group-field").first();
@@ -111,7 +111,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
-        ComboBoxElement comboBox = $(ComboBoxElement.class).first();
+        ComboBoxElement comboBox = $(ComboBoxElement.class).id("combobox");
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
@@ -130,7 +130,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
-        DatePickerElement datePicker = $(DatePickerElement.class).first();
+        DatePickerElement datePicker = $(DatePickerElement.class).id("datepicker");
 
         TextFieldElement textField = datePicker.$(TextFieldElement.class)
                 .id("input");
@@ -150,7 +150,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void timePickerIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement timePicker = $("vaadin-time-picker").first();
+        TestBenchElement timePicker = $("vaadin-time-picker").id("timepicker");
 
         TestBenchElement textField = timePicker
                 .$("vaadin-time-picker-text-field").first();
@@ -170,7 +170,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void selectIsRenderedAndReceivesValueChangeEvent() {
-        SelectElement select = $(SelectElement.class).first();
+        SelectElement select = $(SelectElement.class).id("select");
 
         select.$("div").attribute("part", "toggle-button").first().click();
 
@@ -185,7 +185,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void gridIsRenderedAndRecievesSelectionEvents() {
-        GridElement grid = $(GridElement.class).first();
+        GridElement grid = $(GridElement.class).id("grid");
 
         assertElementRendered(grid);
 
@@ -206,13 +206,13 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void gridContextMenuRenderedAndReceivesTargetItem() {
-        GridElement grid = $(GridElement.class).first();
+        GridElement grid = $(GridElement.class).id("grid");
         grid.getCell(1, 0).click();
 
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
                 By.tagName("vaadin-context-menu-overlay")));
         TestBenchElement contextMenuItem = $("vaadin-context-menu-overlay")
-                .first().$("vaadin-context-menu-item").first();
+                .id("gridcontextmenu").$("vaadin-context-menu-item").first();
         Assert.assertEquals("foo", contextMenuItem.getText());
 
         contextMenuItem.click();
@@ -236,7 +236,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void ironListIsRendered() {
-        IronListElement ironList = $(IronListElement.class).first();
+        IronListElement ironList = $(IronListElement.class).id("ironlist");
 
         TestBenchElement itemsContainer = ironList.$("div").id("items");
         assertElementRendered(itemsContainer);
@@ -252,7 +252,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void progressBarIsRendered() {
-        ProgressBarElement ironList = $(ProgressBarElement.class).first();
+        ProgressBarElement ironList = $(ProgressBarElement.class).id("progressbar");
 
         TestBenchElement bar = ironList.$("div").attribute("part", "bar")
                 .first();
@@ -270,7 +270,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void radioButtonGroupIsRenderedAndRecievesValueChangeEvents() {
         RadioButtonGroupElement radioButtonGroup = $(
-                RadioButtonGroupElement.class).first();
+                RadioButtonGroupElement.class).id("radiobuttongroup");
 
         TestBenchElement groupField = radioButtonGroup.$("div")
                 .attribute("part", "group-field").first();
@@ -293,25 +293,25 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void textFieldIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(TextFieldElement.class).first(), "input",
+        assertTextComponent($(TextFieldElement.class).id("textfield"), "input",
                 "TextField value changed from to foo");
     }
 
     @Test
     public void passwordFieldIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(PasswordFieldElement.class).first(), "input",
+        assertTextComponent($(PasswordFieldElement.class).id("passwordfield"), "input",
                 "PasswordField value changed from to foo");
     }
 
     @Test
     public void textAreaIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(TextAreaElement.class).first(), "textarea",
+        assertTextComponent($(TextAreaElement.class).id("textarea"), "textarea",
                 "TextArea value changed from to foo");
     }
 
     @Test
     public void uploadIsRenderedAndUploadFile() throws IOException {
-        UploadElement upload = $(UploadElement.class).first();
+        UploadElement upload = $(UploadElement.class).id("upload");
 
         ButtonElement uploadButton = upload.$(ButtonElement.class).first();
         assertElementRendered(uploadButton);
@@ -358,7 +358,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void formLayoutIsRendered() {
         FormLayoutElement formLayoutElement = $(FormLayoutElement.class)
-                .first();
+                .id("formlayout");
 
         TestBenchElement layoutElement = formLayoutElement
                 .$(TestBenchElement.class).id("layout");
@@ -380,7 +380,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void verticalLayoutIsRendered() {
         VerticalLayoutElement verticalLayoutElement = $(
-                VerticalLayoutElement.class).id("test-vertical-layout");
+                VerticalLayoutElement.class).id("verticallayout");
 
         assertElementRendered(verticalLayoutElement);
 
@@ -398,7 +398,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void horizontalLayoutIsRendered() {
         HorizontalLayoutElement horizontalLayoutElement = $(
-                HorizontalLayoutElement.class).id("test-horizontal-layout");
+                HorizontalLayoutElement.class).id("horizontallayout");
 
         assertElementRendered(horizontalLayoutElement);
 
@@ -416,7 +416,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void splitLayoutIsRendered() {
         SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
-                .first();
+                .id("splitlayout");
 
         assertElementRendered(splitLayoutElement);
 
@@ -435,7 +435,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void menuBarIsRendered() {
-        MenuBarElement menuBarElement = $(MenuBarElement.class).first();
+        MenuBarElement menuBarElement = $(MenuBarElement.class).id("menubar");
 
         assertElementRendered(menuBarElement);
 
@@ -447,7 +447,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void tabsIsRenderedAndRecievesSelectionEvents() {
-        TabsElement tabsElement = $(TabsElement.class).first();
+        TabsElement tabsElement = $(TabsElement.class).id("tabs");
 
         assertElementRendered(tabsElement.$("div").id("scroll"));
 
@@ -468,7 +468,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void listBoxIsRenderedAndRecievesValueChangeEvents() {
-        TestBenchElement listBoxElement = $("vaadin-list-box").first();
+        TestBenchElement listBoxElement = $("vaadin-list-box").id("listbox");
 
         TestBenchElement itemsContainer = listBoxElement.$("div")
                 .attribute("part", "items").first();
@@ -605,7 +605,7 @@ public class ChromeComponentsIT extends ParallelTest {
     private void fillPathToUploadInput(String tempFileName) {
         // create a valid path in upload input element. Instead of selecting a
         // file by some file browsing dialog, we use the local path directly.
-        WebElement input = $(UploadElement.class).first()
+        WebElement input = $(UploadElement.class).id("upload")
                 .$(TestBenchElement.class).id("fileInput");
         setLocalFileDetector(input);
         input.sendKeys(tempFileName);
