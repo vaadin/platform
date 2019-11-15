@@ -199,11 +199,13 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.5.0"
+            "jsVersion": "1.5.0",
+            "releasenotes" : true            
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
-            "jsVersion": "1.2.3"
+            "jsVersion": "1.2.3",
+            "releasenotes" : true
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
@@ -275,7 +277,8 @@
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.4.4"
+            "jsVersion": "1.4.4",
+            "releasenotes" : true
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
