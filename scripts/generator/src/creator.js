@@ -140,7 +140,7 @@ function getChangedSincePrevious(versions) {
     }
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
     const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
-    const changesString = generateChangesString(allVersions, allPreviousVersions);
+    const changesString = generateChangesString(allVersions, allPreviousVersions);    
     let result = '';
     if (changesString) {
         result = result.concat(`## Changes since [${previousVersion}](https://github.com/vaadin/platform/releases/tag/${previousVersion})\n`);
@@ -187,6 +187,14 @@ function generateChangesString(allVersions, allPreviousVersions) {
             const previousVersion = allPreviousVersions[versionName] ? allPreviousVersions[versionName].javaVersion : '0.0.0';
             const result = compareAndBuildJavaComponentReleaseString(versionName, version.javaVersion, previousVersion);
             javaChangedSincePreviousText = javaChangedSincePreviousText.concat(result);
+        } else if (version.releasenotes && version.jsVersion) {
+            const currentJSVersion = version.jsVersion;
+            const previousVersionComponent = allPreviousVersions[versionName];
+            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1) {
+                const result = buildComponentReleaseString(versionName, version);
+                componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
+            }            
         }
     }
     let result = '';
@@ -215,6 +223,14 @@ function getReleaseNotesForChanged(allVersions, allPreviousVersions) {
             const previousVersion = allPreviousVersions[versionName] ? allPreviousVersions[versionName].javaVersion : '0.0.0';
             const result = compareAndBuildJavaComponentReleaseNoteString(versionName, version.javaVersion, previousVersion);
             javaChangedSincePreviousText = javaChangedSincePreviousText.concat(result);
+        } else if (version.releasenotes && version.jsVersion) {
+            const currentJSVersion = version.jsVersion;
+            const previousVersionComponent = allPreviousVersions[versionName];
+            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1) {
+                const result = buildComponentReleaseNoteString(versionName, version);
+                componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
+            }            
         }
     }
     let result = '';
@@ -293,7 +309,7 @@ function getReleaseNoteLink(name, version) {
         case 'mpr-v7':
         case 'mpr-v8':
             title = 'Vaadin Multiplatform Runtime **(Prime)** for Framework ' + name[name.length - 1];
-            releaseNoteLink = 'https://github.com/vaadin/cdi/releases/tag/';
+            releaseNoteLink = 'https://github.com/vaadin/multiplatform-runtime/releases/tag/';
             break;
         case 'vaadin-designer':
             title = 'Vaadin Designer **(Pro)**';
@@ -333,7 +349,7 @@ function getModulesReleaseNoteLink(name, version) {
         case 'mpr-v7':
         case 'mpr-v8':
             title = 'Vaadin Multiplatform Runtime **(Prime)** for Framework ' + name[name.length - 1];
-            releaseNoteLink = 'https://api.github.com/repos/vaadin/cdi/releases/tags/';
+            releaseNoteLink = 'https://api.github.com/repos/vaadin/multiplatform-runtime/releases/tags/';
             break;
         case 'vaadin-designer':
             title = 'Vaadin Designer **(Pro)**';
@@ -384,10 +400,13 @@ function buildComponentReleaseNoteString(versionName, version) {
     let result = `# ${name}\n`;
     //let result = '';
     //result = result.concat(version.pro ? '**(PRO)** ' : '');
-    result = result.concat(`## Java: ${version.javaVersion}\n`);
+    
+    result = result.concat(version.javaVersion ? `## Java: ${version.javaVersion}\n` : '');
     result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
-    result = result.concat(`## WebComponent: ${version.jsVersion}\n`);
+    
+    result = result.concat(version.jsVersion ? `## WebComponent: ${version.jsVersion}\n` : '');
     result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
+    
     
     if(version.components){
         const componentsString = version.components.map(c => `  - ${c}`)

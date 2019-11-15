@@ -324,7 +324,7 @@ describe('Release notes creator', function () {
         };
 
         const expectedResult = '- Vaadin Designer **(Pro)** ([4.0.0.alpha2](https://github.com/vaadin/designer/releases/tag/4.0.0.alpha2))\n'
-        + '- Vaadin Multiplatform Runtime **(Prime)** for Framework 7 ([2.22.4.alpha1](https://github.com/vaadin/cdi/releases/tag/2.22.4.alpha1))\n'
+        + '- Vaadin Multiplatform Runtime **(Prime)** for Framework 7 ([2.22.4.alpha1](https://github.com/vaadin/multiplatform-runtime/releases/tag/2.22.4.alpha1))\n'
         + '- Foo Bar ([Flow integration 2.22.3](https://github.com/vaadin/foo-bar-flow/releases/tag/2.22.3), [web component v1.11.2](https://github.com/vaadin/foo-bar/releases/tag/v1.11.2))\n';
 
         const result = creator.generateChangesString(currentVersions, previousVersions);
