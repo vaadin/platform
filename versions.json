@@ -44,7 +44,7 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.0.4",
+            "javaVersion": "3.1.0.beta1",
             "jsVersion": "4.3.12",
             "component": true
         },
@@ -187,11 +187,13 @@
         },
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
-            "jsVersion": "1.5.0"
+            "jsVersion": "1.5.0",
+            "releasenotes" : true            
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
-            "jsVersion": "1.2.3"
+            "jsVersion": "1.2.3",
+            "releasenotes" : true
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
@@ -250,7 +252,8 @@
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.5.2"
+            "jsVersion": "1.5.1",
+            "releasenotes" : true
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
@@ -294,7 +297,8 @@
         },
         "vaadin-router": {
           "npmName": "@vaadin/router",
-          "jsVersion": "1.5.2"
+          "jsVersion": "1.5.2",
+          "releasenotes" : true
         }
     },
     "vaadin": {
