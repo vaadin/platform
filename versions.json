@@ -17,11 +17,6 @@
             "npmVersion": "1.8.0",
             "jsVersion": "1.8.0"
         },
-        "cookieconsent": {
-            "npmName": "cookieconsent",
-            "npmVersion": "3.1.0",
-            "jsVersion": "3.1.0"
-        },
         "vaadin-accordion": {
             "npmName": "@vaadin/vaadin-accordion",
             "javaVersion": "2.0.0",
@@ -200,7 +195,7 @@
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
             "jsVersion": "1.5.0",
-            "releasenotes" : true            
+            "releasenotes" : true
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
@@ -384,6 +379,9 @@
         },
         "vaadin-license-checker": {
             "jsVersion": "2.1.1"
+        },
+        "cookieconsent": {
+            "jsVersion": "3.1.0"
         }
     },
     "platform": "{{version}}"
