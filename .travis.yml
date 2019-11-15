@@ -1,7 +1,8 @@
 sudo: false
 dist: trusty
 language: java
-node_js: 8.11.1
+node_js: 
+  - "12.13.0"
 cache:
   directories:
   - "$HOME/.m2"
