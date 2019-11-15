@@ -365,7 +365,7 @@
             <dependency>
                 <groupId>org.webjars.bowergithub.osano</groupId>
                 <artifactId>cookieconsent</artifactId>
-                <version>{{core.cookieconsent.jsVersion}}</version>
+                <version>{{vaadin.cookieconsent.jsVersion}}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
