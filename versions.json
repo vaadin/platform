@@ -259,8 +259,8 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.0.7",
-            "jsVersion": "2.4.13",
+            "javaVersion": "2.0.8",
+            "jsVersion": "2.4.14",
             "component": true,
             "components": [
                 "Text Field",
