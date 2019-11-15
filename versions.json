@@ -98,8 +98,8 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.8",
-            "jsVersion": "5.4.9",
+            "javaVersion": "4.1.0.alpha3",
+            "jsVersion": "5.5.0",
             "component": true,
             "components": ["Grid", "Tree Grid", "Grid Context Menu"]
         },
