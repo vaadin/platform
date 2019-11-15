@@ -101,8 +101,8 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.0.10",
-            "jsVersion": "5.4.11",
+            "javaVersion": "4.0.11",
+            "jsVersion": "5.4.12",
             "component": true,
             "components": [
                 "Grid",
@@ -195,12 +195,12 @@
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
             "jsVersion": "1.5.0",
-            "releasenotes" : true
+            "releasenotes": true
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
             "jsVersion": "1.2.3",
-            "releasenotes" : true
+            "releasenotes": true
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
@@ -227,7 +227,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.14"
+            "jsVersion": "3.2.15"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
@@ -273,7 +273,7 @@
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
             "jsVersion": "1.4.4",
-            "releasenotes" : true
+            "releasenotes": true
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
