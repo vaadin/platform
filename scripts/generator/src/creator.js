@@ -395,7 +395,7 @@ function buildComponentReleaseString(versionName, version) {
 function buildComponentReleaseNoteString(versionName, version) {
     const name = versionName
                 .replace(/-/g, ' ')
-                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});    
+                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
     //separated for readability
     let result = `# ${name}\n`;
     //let result = '';
@@ -406,14 +406,7 @@ function buildComponentReleaseNoteString(versionName, version) {
     
     result = result.concat(version.jsVersion ? `## WebComponent: ${version.jsVersion}\n` : '');
     result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
-    
-    
-    if(version.components){
-        const componentsString = version.components.map(c => `  - ${c}`)
-                                                   .join('\n');
-        result = result.concat(componentsString);
-        result = result.concat('\n');
-    }
+
     return result;
 }
 
