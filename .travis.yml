@@ -1,7 +1,8 @@
 sudo: false
 dist: trusty
 language: java
-node_js: 8.11.1
+node_js: 
+  - "10.17.0"
 cache:
   directories:
   - "$HOME/.m2"
@@ -14,6 +15,8 @@ branches:
   only:
   - master
   - /^\d\d\.0$/
+before_install:
+  - nvm install 10.17.0
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
