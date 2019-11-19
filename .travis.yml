@@ -17,6 +17,7 @@ branches:
   only:
   - master
   - /^\d\d\.0$/
+  - 14.1
 
 before_install:
   - nvm install 10.17.0
