@@ -91,7 +91,7 @@
         },
         "vaadin-element-mixin": {
             "npmName": "@vaadin/vaadin-element-mixin",
-            "jsVersion": "2.1.4"
+            "jsVersion": "2.1.5"
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
