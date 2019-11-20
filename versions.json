@@ -91,7 +91,7 @@
         },
         "vaadin-element-mixin": {
             "npmName": "@vaadin/vaadin-element-mixin",
-            "jsVersion": "2.1.4"
+            "jsVersion": "2.2.0"
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
@@ -310,7 +310,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.11"
+            "jsVersion": "2.1.0"
         },
         "mpr-v7": {
             "javaVersion": "2.0.1"
