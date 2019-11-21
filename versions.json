@@ -283,14 +283,14 @@
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "3.0.1",
-            "jsVersion": "1.0.6",
+            "javaVersion": "3.0.2",
+            "jsVersion": "1.0.9",
             "component": true
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.0.3",
+            "javaVersion": "2.0.4",
+            "jsVersion": "2.0.4",
             "component": true
         },
         "vaadin-login": {
