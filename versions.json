@@ -47,8 +47,8 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.1.0.beta1",
-            "jsVersion": "4.3.12",
+            "javaVersion": "3.1.0",
+            "jsVersion": "4.3.13",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -101,7 +101,7 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.1.0.beta2",
+            "javaVersion": "4.1.0",
             "jsVersion": "5.5.0",
             "component": true,
             "components": [
@@ -184,7 +184,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "1.2.0",
             "component": true,
             "components": [
@@ -263,7 +263,7 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "2.5.3",
             "component": true,
             "components": [
@@ -283,20 +283,20 @@
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "2.1.0.beta1",
+            "javaVersion": "2.1.0",
             "jsVersion": "4.2.2",
             "component": true
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "3.0.1",
-            "jsVersion": "1.0.6",
+            "javaVersion": "3.0.2",
+            "jsVersion": "1.0.9",
             "component": true
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.0.3",
+            "javaVersion": "2.0.4",
+            "jsVersion": "2.0.4",
             "component": true
         },
         "vaadin-login": {
@@ -357,7 +357,7 @@
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
@@ -371,7 +371,7 @@
         },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "javaVersion": "2.1.0",
+            "javaVersion": "2.1.1",
             "jsVersion": "1.1.1",
             "component": true,
             "pro": true
