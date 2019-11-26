@@ -34,7 +34,10 @@
             "javaVersion": "2.0.1",
             "jsVersion": "2.2.10",
             "component": true,
-            "components": ["Checkbox", "Checkbox Group"]
+            "components": [
+                "Checkbox",
+                "Checkbox Group"
+            ]
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
@@ -44,8 +47,8 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.1.0.beta1",
-            "jsVersion": "4.3.12",
+            "javaVersion": "3.1.0",
+            "jsVersion": "4.3.13",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -88,7 +91,7 @@
         },
         "vaadin-element-mixin": {
             "npmName": "@vaadin/vaadin-element-mixin",
-            "jsVersion": "2.1.4"
+            "jsVersion": "2.2.0"
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
@@ -98,10 +101,14 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.1.0.alpha3",
+            "javaVersion": "4.1.0",
             "jsVersion": "5.5.0",
             "component": true,
-            "components": ["Grid", "Tree Grid", "Grid Context Menu"]
+            "components": [
+                "Grid",
+                "Tree Grid",
+                "Grid Context Menu"
+            ]
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
@@ -177,7 +184,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "1.2.0",
             "component": true
         },
@@ -188,12 +195,12 @@
         "vaadin-lumo-styles": {
             "npmName": "@vaadin/vaadin-lumo-styles",
             "jsVersion": "1.5.0",
-            "releasenotes" : true
+            "releasenotes": true
         },
         "vaadin-material-styles": {
             "npmName": "@vaadin/vaadin-material-styles",
             "jsVersion": "1.2.3",
-            "releasenotes" : true
+            "releasenotes": true
         },
         "vaadin-menu-bar": {
             "npmName": "@vaadin/vaadin-menu-bar",
@@ -212,7 +219,11 @@
             "javaVersion": "2.0.0",
             "jsVersion": "1.1.0",
             "component": true,
-            "components": ["Horizontal Layout", "Vertical Layout", "Flex Layout"]
+            "components": [
+                "Horizontal Layout",
+                "Vertical Layout",
+                "Flex Layout"
+            ]
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
@@ -229,7 +240,10 @@
             "javaVersion": "2.0.1",
             "jsVersion": "1.2.3",
             "component": true,
-            "components": ["Radio Button", "Radio Button Group"]
+            "components": [
+                "Radio Button",
+                "Radio Button Group"
+            ]
         },
         "vaadin-split-layout": {
             "npmName": "@vaadin/vaadin-split-layout",
@@ -245,32 +259,40 @@
         },
         "vaadin-text-field": {
             "npmName": "@vaadin/vaadin-text-field",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "2.5.3",
             "component": true,
-            "components": ["Text Field", "Text Area", "Password Field", "Big Decimal Field", "Email Field", "Integer Field", "Number Field"]
+            "components": [
+                "Text Field",
+                "Text Area",
+                "Password Field",
+                "Big Decimal Field",
+                "Email Field",
+                "Integer Field",
+                "Number Field"
+            ]
         },
         "vaadin-themable-mixin": {
             "npmName": "@vaadin/vaadin-themable-mixin",
-            "jsVersion": "1.5.1",
-            "releasenotes" : true
+            "jsVersion": "1.5.2",
+            "releasenotes": true
         },
         "vaadin-upload": {
             "npmName": "@vaadin/vaadin-upload",
-            "javaVersion": "2.1.0.beta1",
+            "javaVersion": "2.1.0",
             "jsVersion": "4.2.2",
             "component": true
         },
         "vaadin-custom-field": {
             "npmName": "@vaadin/vaadin-custom-field",
-            "javaVersion": "3.0.1",
-            "jsVersion": "1.0.6",
+            "javaVersion": "3.0.2",
+            "jsVersion": "1.0.9",
             "component": true
         },
         "vaadin-app-layout": {
             "npmName": "@vaadin/vaadin-app-layout",
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.0.3",
+            "javaVersion": "2.0.4",
+            "jsVersion": "2.0.4",
             "component": true
         },
         "vaadin-login": {
@@ -284,7 +306,7 @@
         },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
-            "jsVersion": "2.0.11"
+            "jsVersion": "2.1.0"
         },
         "mpr-v7": {
             "javaVersion": "2.0.1"
@@ -296,9 +318,9 @@
             "javaVersion": "1.2"
         },
         "vaadin-router": {
-          "npmName": "@vaadin/router",
-          "jsVersion": "1.5.2",
-          "releasenotes" : true
+            "npmName": "@vaadin/router",
+            "jsVersion": "1.5.2",
+            "releasenotes": true
         }
     },
     "vaadin": {
@@ -336,7 +358,7 @@
         },
         "vaadin-crud": {
             "npmName": "@vaadin/vaadin-crud",
-            "javaVersion": "2.1.0.beta2",
+            "javaVersion": "2.1.0",
             "jsVersion": "1.1.0",
             "component": true,
             "pro": true
@@ -350,7 +372,7 @@
         },
         "vaadin-rich-text-editor": {
             "npmName": "@vaadin/vaadin-rich-text-editor",
-            "javaVersion": "2.1.0",
+            "javaVersion": "2.1.1",
             "jsVersion": "1.1.1",
             "component": true,
             "pro": true
