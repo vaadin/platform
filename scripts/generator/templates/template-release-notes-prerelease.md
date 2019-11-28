@@ -103,9 +103,8 @@ Add the following contents to your project pom.xml.
 This is the prerelease version of Vaadin 14.x for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## OSGi support
-- OSGi with npm does not work in V14.0.0. We are working on a fix for V14.x.
-- OSGi with Bower has problems with V14.0.0 but we are working on a fix to be released in a maintenance version (V14.0.X)
-
+- OSGi with npm does not work in V14.0.0-V14.1.0. We are working on a fix for V14.x.
+- OSGi with Bower has problems with V14.0.0-V14.1.0
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
