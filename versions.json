@@ -7,7 +7,7 @@
             "javaVersion": "13.0.0.alpha1"
         },
         "flow-cdi": {
-            "javaVersion": "11.0.0"
+            "javaVersion": "11.2.0.alpha1"
         },
         "polymer": {
             "jsVersion": "2.7.0"
