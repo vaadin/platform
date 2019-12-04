@@ -4,7 +4,7 @@
             "javaVersion": "2.1.0"
         },
         "flow-spring": {
-            "javaVersion": "12.1.0"
+            "javaVersion": "12.1.1"
         },
         "flow-cdi": {
             "javaVersion": "11.0.0"
