@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.1.1"
+            "javaVersion": "2.2.0.alpha6"
         },
         "flow-spring": {
             "javaVersion": "12.1.1"
         },
         "flow-cdi": {
-            "javaVersion": "11.0.0"
+            "javaVersion": "11.2.0.alpha1"
         },
         "polymer": {
             "jsVersion": "2.7.0"
