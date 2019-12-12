@@ -116,9 +116,8 @@ public class ChromeComponentsIT extends ParallelTest {
                 .id("input");
         assertElementRendered(textField);
 
-        comboBox.$(TestBenchElement.class).id("toggleButton").click();
+        textField.$(TestBenchElement.class).id("toggleButton").click();
 
-        waitUntil(driver -> $("vaadin-combo-box-overlay").id("overlay").isDisplayed());
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
 
         assertElementRendered(dropDown);
