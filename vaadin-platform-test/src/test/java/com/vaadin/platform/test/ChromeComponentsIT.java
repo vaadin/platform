@@ -62,6 +62,8 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
 
+import static java.lang.Thread.sleep;
+
 public class ChromeComponentsIT extends ParallelTest {
 
     @Before
@@ -109,16 +111,17 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
-    public void comboboxIsRenderedAndRecievesValueChangeEvent() {
+    public void comboboxIsRenderedAndRecievesValueChangeEvent() throws InterruptedException {
         ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
         assertElementRendered(textField);
-        
-        comboBox.setProperty("opened", "true");
 
-        WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
+        comboBox.setProperty("opened", "true");
+        sleep(100);
+
+        WebElement dropDown =$("vaadin-combo-box-overlay").id("overlay");
 
         assertElementRendered(dropDown);
 
@@ -535,7 +538,7 @@ public class ChromeComponentsIT extends ParallelTest {
     public void usageStatisticIsLogged() throws InterruptedException {	
         Assert.assertTrue($(ButtonElement.class).exists());	
         // wait 5 seconds for collecting values in local storage	
-        Thread.sleep(5000);	
+        sleep(5000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Object mode = js.executeScript("return Vaadin.developmentMode");	
