@@ -117,12 +117,12 @@ public class ChromeComponentsIT extends ParallelTest {
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
         assertElementRendered(textField);
-        comboBox.focus();
 
-        comboBox.$(TestBenchElement.class).id("toggleButton").click();
+        TestBenchElement popupButton = comboBox.$(TestBenchElement.class).id("toggleButton");
+
+        getCommandExecutor().executeScript("arguments[0].click()", popupButton);
 
         // this is a workaround: for unknown reason, overlay cannot be found
-        sleep(500);
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
         assertElementRendered(dropDown);
 
