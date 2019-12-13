@@ -27,9 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -70,10 +68,6 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Before
     public void setUp() {
-        MutableCapabilities sauceOptions = new MutableCapabilities();
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setCapability("browserVersion", "78.0");
-        browserOptions.setCapability("sauce:options", sauceOptions);
         getDriver().get("http://localhost:8080/prod-mode/");
     }
 
@@ -117,7 +111,7 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
-    public void comboboxIsRenderedAndRecievesValueChangeEvent() {
+    public void comboboxIsRenderedAndRecievesValueChangeEvent() throws InterruptedException {
         ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
@@ -127,6 +121,7 @@ public class ChromeComponentsIT extends ParallelTest {
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
         // this is a workaround: for unknown reason, overlay cannot be found
+        sleep(500);
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
         assertElementRendered(dropDown);
 
