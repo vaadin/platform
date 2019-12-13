@@ -68,16 +68,12 @@ import static java.lang.Thread.sleep;
 
 public class ChromeComponentsIT extends ParallelTest {
 
-    static {
+    @Before
+    public void setUp() {
         MutableCapabilities sauceOptions = new MutableCapabilities();
-
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setCapability("browserVersion", "78.0");
         browserOptions.setCapability("sauce:options", sauceOptions);
-    }
-
-    @Before
-    public void setUp() {
         getDriver().get("http://localhost:8080/prod-mode/");
     }
 
