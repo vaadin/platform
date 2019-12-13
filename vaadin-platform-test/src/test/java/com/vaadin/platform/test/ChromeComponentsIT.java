@@ -111,14 +111,14 @@ public class ChromeComponentsIT extends ParallelTest {
     }
 
     @Test
-    public void comboboxIsRenderedAndRecievesValueChangeEvent() throws InterruptedException {
+    public void comboboxIsRenderedAndRecievesValueChangeEvent() {
         ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
         assertElementRendered(textField);
 
-        TestBenchElement popupButton = comboBox.$(TestBenchElement.class).id("toggleButton");
+        TestBenchElement popupButton = comboBox.$("div").attribute("part", "toggle-button").id("toggleButton");
 
         getCommandExecutor().executeScript("arguments[0].click()", popupButton);
 
