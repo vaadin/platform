@@ -118,9 +118,9 @@ public class ChromeComponentsIT extends ParallelTest {
                 .id("input");
         assertElementRendered(textField);
 
-        getCommandExecutor().executeScript("arguments[0].opened='true'", comboBox);
+        comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
-        WebElement dropDown = $("vaadin-combo-box-overlay").first();
+        WebElement dropDown =$("vaadin-combo-box-overlay").id("overlay");
 
         assertElementRendered(dropDown);
 
