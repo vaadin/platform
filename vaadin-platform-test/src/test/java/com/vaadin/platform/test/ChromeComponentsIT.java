@@ -117,6 +117,7 @@ public class ChromeComponentsIT extends ParallelTest {
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
         assertElementRendered(textField);
+        comboBox.focus();
 
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
