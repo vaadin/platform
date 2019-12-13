@@ -120,7 +120,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
         getCommandExecutor().executeScript("arguments[0].opened='true'", comboBox);
 
-        WebElement dropDown =$("vaadin-combo-box-overlay").id("overlay");
+        WebElement dropDown = $("vaadin-combo-box-overlay").first();
 
         assertElementRendered(dropDown);
 
