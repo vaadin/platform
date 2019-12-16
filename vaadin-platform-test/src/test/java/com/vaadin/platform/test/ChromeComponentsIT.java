@@ -108,7 +108,7 @@ public class ChromeComponentsIT extends ParallelTest {
         assertLog("CheckboxGroup value changed from '[]' to '[foo]'");
     }
 
-    @Test
+    // @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
         ComboBoxElement comboBox = $(ComboBoxElement.class).id("combobox");
 
