@@ -47,8 +47,7 @@ public class ComponentsIT extends ParallelTest {
 
     static {
         Parameters.setGridBrowsers(
-                  "firefox,chrome,safari-11");
-        //        "firefox,chrome,safari-11,edge");
+                "firefox,chrome,safari-11,edge");
     }
 
     @Before
