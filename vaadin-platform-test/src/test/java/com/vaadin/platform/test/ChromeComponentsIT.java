@@ -108,7 +108,7 @@ public class ChromeComponentsIT extends ParallelTest {
         assertLog("CheckboxGroup value changed from '[]' to '[foo]'");
     }
 
-    // @Test
+    @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
         ComboBoxElement comboBox = $(ComboBoxElement.class).id("combobox");
 
@@ -328,6 +328,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void dialogIsRendered() {
+        $(ButtonElement.class).id("open-dialog").click();
         TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
                 .id("overlay");
 
