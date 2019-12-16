@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.apache.commons.io.IOUtils;
+
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.board.Board;
@@ -82,7 +84,6 @@ import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import org.apache.commons.io.IOUtils;
 
 @Route("")
 @Theme(Lumo.class)
@@ -271,6 +272,7 @@ public class ComponentsView extends VerticalLayout {
         add(log);
 
         Board board = new Board();
+        board.setId("board");
         Label header = new Label("This is a board");
         header.getElement().getStyle().set("background-color", "lightblue");
         header.getElement().getStyle().set("text-align", "center");
