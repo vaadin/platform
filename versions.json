@@ -47,8 +47,8 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.1.0",
-            "jsVersion": "4.3.13",
+            "javaVersion": "3.1.2",
+            "jsVersion": "4.3.15",
             "component": true
         },
         "vaadin-control-state-mixin": {
@@ -227,7 +227,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.15"
+            "jsVersion": "3.2.16"
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
