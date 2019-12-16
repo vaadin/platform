@@ -382,7 +382,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void verticalLayoutIsRendered() {
         VerticalLayoutElement verticalLayoutElement = $(
-                VerticalLayoutElement.class).id("test-vertical-layout");
+                VerticalLayoutElement.class).id("verticallayout");
 
         assertElementRendered(verticalLayoutElement);
 
@@ -400,7 +400,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void horizontalLayoutIsRendered() {
         HorizontalLayoutElement horizontalLayoutElement = $(
-                HorizontalLayoutElement.class).id("test-horizontal-layout");
+                HorizontalLayoutElement.class).id("horizontallayout");
 
         assertElementRendered(horizontalLayoutElement);
 
@@ -418,7 +418,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void splitLayoutIsRendered() {
         SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
-                .first();
+                .id("splithorizontal");
 
         assertElementRendered(splitLayoutElement);
 
@@ -437,7 +437,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void menuBarIsRendered() {
-        MenuBarElement menuBarElement = $(MenuBarElement.class).first();
+        MenuBarElement menuBarElement = $(MenuBarElement.class).id("menubar");
 
         assertElementRendered(menuBarElement);
 
@@ -449,7 +449,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void tabsIsRenderedAndRecievesSelectionEvents() {
-        TabsElement tabsElement = $(TabsElement.class).first();
+        TabsElement tabsElement = $(TabsElement.class).id("tabs");
 
         assertElementRendered(tabsElement.$("div").id("scroll"));
 
@@ -470,7 +470,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void listBoxIsRenderedAndRecievesValueChangeEvents() {
-        TestBenchElement listBoxElement = $("vaadin-list-box").first();
+        TestBenchElement listBoxElement = $("vaadin-list-box").id("listbox");
 
         TestBenchElement itemsContainer = listBoxElement.$("div")
                 .attribute("part", "items").first();
@@ -502,10 +502,11 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void contextMenuIsRenderedAndRecievesItemSelectionEvents() {
+
         TestBenchElement contextMenuTarget = $(TestBenchElement.class)
                 .id("context-menu-target");
 
-        contextMenuTarget.click();
+       contextMenuTarget.click();
 
         // Check to see if the context-menu is there.
         // If not, a NoSuchElementException will be thrown
@@ -596,7 +597,7 @@ public class ChromeComponentsIT extends ParallelTest {
     private void fillPathToUploadInput(String tempFileName) {
         // create a valid path in upload input element. Instead of selecting a
         // file by some file browsing dialog, we use the local path directly.
-        WebElement input = $(UploadElement.class).first()
+        WebElement input = $(UploadElement.class).id("upload")
                 .$(TestBenchElement.class).id("fileInput");
         setLocalFileDetector(input);
         input.sendKeys(tempFileName);
