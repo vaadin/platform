@@ -47,7 +47,7 @@
         },
         "vaadin-context-menu": {
             "npmName": "@vaadin/vaadin-context-menu",
-            "javaVersion": "3.1.1",
+            "javaVersion": "3.1.2",
             "jsVersion": "4.3.15",
             "component": true
         },
