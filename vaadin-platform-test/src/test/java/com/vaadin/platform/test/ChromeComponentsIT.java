@@ -343,6 +343,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     // @Test
     public void dialogIsRendered() {
+        $(ButtonElement.class).id("open-dialog").click();
         TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
                 .id("overlay");
 
