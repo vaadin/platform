@@ -57,6 +57,7 @@ import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
@@ -65,6 +66,11 @@ import com.vaadin.testbench.parallel.ParallelTest;
 import static java.lang.Thread.sleep;
 
 public class ChromeComponentsIT extends ParallelTest {
+
+    static {
+        Parameters.setGridBrowsers(
+                "chrome-78");
+    }
 
     @Before
     public void setUp() {
@@ -113,17 +119,15 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
 
-        closeDialog($("vaadin-dialog-overlay").get(1));
-        closeDialog($("vaadin-dialog-overlay").get(0));
-
         ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
         assertElementRendered(textField);
 
-        comboBox.openPopup();
+        comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
+        // waitUntil(ExpectedConditions.invisibilityOfElementLocated(By.tagName("vaadin-combo-box-overlay")));
         // this is a workaround: for unknown reason, overlay cannot be found
         WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
         assertElementRendered(dropDown);
@@ -133,6 +137,7 @@ public class ChromeComponentsIT extends ParallelTest {
         assertLog("ComboBox value changed from 'null' to 'First'");
     }
 
+    // temporaryly
     private void closeDialog(TestBenchElement dialogOverlayElement) {
         getCommandExecutor().executeScript("arguments[0].close()", dialogOverlayElement);
     }
