@@ -1,5 +1,9 @@
 package com.vaadin.platform.test;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
@@ -38,9 +42,6 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ComponentsIT extends ParallelTest {
 
@@ -57,7 +58,6 @@ public class ComponentsIT extends ParallelTest {
     @Test
     public void appWorks() throws Exception {
         checkCustomElement($(NotificationElement.class).waitForFirst());
-
         checkCustomElement($(BoardElement.class).id("board"));
         checkCustomElement($(RowElement.class).id("row"));
         checkCustomElement($(ButtonElement.class).id("button"));
@@ -78,16 +78,15 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(FormLayoutElement.class).id("formlayout"));
         checkCustomElement($(GridElement.class).id("grid"));
         checkCustomElement($("iron-icon").first());
-        checkCustomElement($(IronListElement.class).first());
-        checkCustomElement($("vaadin-list-box").first());
-        checkCustomElement($(LoginFormElement.class).first());
-        checkCustomElement($(HorizontalLayoutElement.class).first());
-        checkCustomElement($(VerticalLayoutElement.class).first());
-        checkCustomElement($(ProgressBarElement.class).first());
-        checkCustomElement($(RadioButtonGroupElement.class).first());
-        checkCustomElement($(SplitLayoutElement.class).first());
+        checkCustomElement($(IronListElement.class).id("ironlist"));
+        checkCustomElement($("vaadin-list-box").id("listbox"));
+        checkCustomElement($(LoginFormElement.class).id("loginform"));
+        checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
+        checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
+        checkCustomElement($(ProgressBarElement.class).id("progressbar"));
+        checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
+        checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
         checkCustomElement($(TabElement.class).first());
-
         checkCustomElement($(TabsElement.class).id("tabs"));
         checkCustomElement($(PasswordFieldElement.class).id("passwordfield"));
         checkCustomElement($(TextAreaElement.class).id("textarea"));
@@ -105,6 +104,7 @@ public class ComponentsIT extends ParallelTest {
 
     private void checkCustomElement(TestBenchElement element) {
         Assert.assertNotNull(element);
+
         String tagName = element.getTagName().toLowerCase();
         Assert.assertTrue(tagName.contains("-"));
         // Check that the custom element has been registered
