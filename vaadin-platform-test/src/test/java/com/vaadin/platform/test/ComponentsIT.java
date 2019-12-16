@@ -59,13 +59,10 @@ public class ComponentsIT extends ParallelTest {
     @Test
     public void appWorks() throws Exception {
         checkCustomElement($(NotificationElement.class).waitForFirst());
-        checkCustomElement($(DialogElement.class).id("dialog"));
-
         checkCustomElement($(BoardElement.class).id("board"));
         checkCustomElement($(RowElement.class).id("row"));
         checkCustomElement($(ButtonElement.class).id("button"));
         checkCustomElement($(ChartElement.class).id("chart"));
-        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
         checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
         checkCustomElement($(AccordionElement.class).id("accordion"));
         checkCustomElement($(AppLayoutElement.class).id("applayout"));
@@ -98,6 +95,12 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(MenuBarElement.class).id("menubar"));
         checkCustomElement($(UploadElement.class).id("upload"));
         checkCustomElement($(SelectElement.class).id("select"));
+
+        $(ButtonElement.class).id("open-dialog").click();
+        checkCustomElement($(DialogElement.class).id("dialog"));
+        $(ButtonElement.class).id("open-confirm-dialog").click();
+        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
+
     }
 
     private void checkCustomElement(TestBenchElement element) {

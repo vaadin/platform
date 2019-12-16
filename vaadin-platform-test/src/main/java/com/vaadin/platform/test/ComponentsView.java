@@ -240,7 +240,8 @@ public class ComponentsView extends VerticalLayout {
 
         Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
-        dialog.open();
+        Button dialogButton = new Button("open Dialog", event -> dialog.open());
+        dialogButton.setId("open-dialog");
         dialog.setId("dialog");
 
         Notification.show("Hello", 2000000, Position.TOP_CENTER);
@@ -325,7 +326,8 @@ public class ComponentsView extends VerticalLayout {
         confirmDialog.setHeader("Meeting starting");
         confirmDialog.setText("Your next meeting starts in 5 minutes");
         confirmDialog.setConfirmText("OK");
-        confirmDialog.open();
+        Button confirmDialogButton = new Button("open confirm Dialog", event -> confirmDialog.open());
+        confirmDialogButton.setId("open-confirm-dialog");
         confirmDialog.setId("confirmdialog");
 
         CookieConsent cookieConsent = new CookieConsent();
@@ -386,6 +388,8 @@ public class ComponentsView extends VerticalLayout {
         components.add(checkbox);
         components.add(checkboxGroup);
         components.add(combobox);
+        components.add(dialogButton);
+        components.add(confirmDialogButton);
         components.add(datePicker);
         components.add(timePicker);
         components.add(select);
