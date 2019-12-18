@@ -231,7 +231,8 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.17"
+            "jsVersion": "3.2.17",
+            "releasenotes": true
         },
         "vaadin-progress-bar": {
             "npmName": "@vaadin/vaadin-progress-bar",
