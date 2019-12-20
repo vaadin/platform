@@ -1,5 +1,9 @@
 package com.vaadin.platform.test;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 import com.vaadin.flow.component.board.testbench.BoardElement;
@@ -38,9 +42,6 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ComponentsIT extends ParallelTest {
 
@@ -57,49 +58,53 @@ public class ComponentsIT extends ParallelTest {
     @Test
     public void appWorks() throws Exception {
         checkCustomElement($(NotificationElement.class).waitForFirst());
-        checkCustomElement($(DialogElement.class).first());
-
-        checkCustomElement($(BoardElement.class).first());
-        checkCustomElement($(RowElement.class).first());
-        checkCustomElement($(ButtonElement.class).first());
-        checkCustomElement($(ChartElement.class).first());
-        checkCustomElement($(ConfirmDialogElement.class).first());
-        checkCustomElement($(CookieConsentElement.class).first());
-        checkCustomElement($(AccordionElement.class).first());
-        checkCustomElement($(AppLayoutElement.class).first());
-        checkCustomElement($(CrudElement.class).first());
-        checkCustomElement($(GridProElement.class).first());
-        checkCustomElement($(RichTextEditorElement.class).first());
-        checkCustomElement($(CustomFieldElement.class).first());
-        checkCustomElement($(CheckboxElement.class).first());
-        checkCustomElement($("vaadin-checkbox-group").first());
-        checkCustomElement($(ComboBoxElement.class).first());
-        checkCustomElement($(DatePickerElement.class).first());
-        checkCustomElement($("vaadin-time-picker").first());
-        checkCustomElement($(DetailsElement.class).first());
-        checkCustomElement($(FormLayoutElement.class).first());
-        checkCustomElement($(GridElement.class).first());
+        checkCustomElement($(BoardElement.class).id("board"));
+        checkCustomElement($(RowElement.class).id("row"));
+        checkCustomElement($(ButtonElement.class).id("button"));
+        checkCustomElement($(ChartElement.class).id("chart"));
+        checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
+        checkCustomElement($(AccordionElement.class).id("accordion"));
+        checkCustomElement($(AppLayoutElement.class).id("applayout"));
+        checkCustomElement($(CrudElement.class).id("crud"));
+        checkCustomElement($(GridProElement.class).id("gridpro"));
+        checkCustomElement($(RichTextEditorElement.class).id("richtexteditor"));
+        checkCustomElement($(CustomFieldElement.class).id("customfield"));
+        checkCustomElement($(CheckboxElement.class).id("checkbox"));
+        checkCustomElement($("vaadin-checkbox-group").id("checkboxgroup"));
+        checkCustomElement($(ComboBoxElement.class).id("combobox"));
+        checkCustomElement($(DatePickerElement.class).id("datepicker"));
+        checkCustomElement($("vaadin-time-picker").id("timepicker"));
+        checkCustomElement($(DetailsElement.class).id("details"));
+        checkCustomElement($(FormLayoutElement.class).id("formlayout"));
+        checkCustomElement($(GridElement.class).id("grid"));
         checkCustomElement($("iron-icon").first());
-        checkCustomElement($(IronListElement.class).first());
-        checkCustomElement($("vaadin-list-box").first());
-        checkCustomElement($(LoginFormElement.class).first());
-        checkCustomElement($(HorizontalLayoutElement.class).first());
-        checkCustomElement($(VerticalLayoutElement.class).first());
-        checkCustomElement($(ProgressBarElement.class).first());
-        checkCustomElement($(RadioButtonGroupElement.class).first());
-        checkCustomElement($(SplitLayoutElement.class).first());
+        checkCustomElement($(IronListElement.class).id("ironlist"));
+        checkCustomElement($("vaadin-list-box").id("listbox"));
+        checkCustomElement($(LoginFormElement.class).id("loginform"));
+        checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
+        checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
+        checkCustomElement($(ProgressBarElement.class).id("progressbar"));
+        checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
+        checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
         checkCustomElement($(TabElement.class).first());
-        checkCustomElement($(TabsElement.class).first());
-        checkCustomElement($(PasswordFieldElement.class).first());
-        checkCustomElement($(TextAreaElement.class).first());
-        checkCustomElement($(TextFieldElement.class).first());
-        checkCustomElement($(MenuBarElement.class).first());
-        checkCustomElement($(UploadElement.class).first());
-        checkCustomElement($(SelectElement.class).first());
+        checkCustomElement($(TabsElement.class).id("tabs"));
+        checkCustomElement($(PasswordFieldElement.class).id("passwordfield"));
+        checkCustomElement($(TextAreaElement.class).id("textarea"));
+        checkCustomElement($(TextFieldElement.class).id("textfield"));
+        checkCustomElement($(MenuBarElement.class).id("menubar"));
+        checkCustomElement($(UploadElement.class).id("upload"));
+        checkCustomElement($(SelectElement.class).id("select"));
+
+        $(ButtonElement.class).id("open-dialog").click();
+        checkCustomElement($(DialogElement.class).id("dialog"));
+        $(ButtonElement.class).id("open-confirm-dialog").click();
+        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
+
     }
 
     private void checkCustomElement(TestBenchElement element) {
         Assert.assertNotNull(element);
+
         String tagName = element.getTagName().toLowerCase();
         Assert.assertTrue(tagName.contains("-"));
         // Check that the custom element has been registered
