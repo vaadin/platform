@@ -86,14 +86,14 @@ Add the following contents to your project pom.xml.
 
 <repositories>
     <repository>
-        <id>vaadin-prerelease</id>
+        <id>vaadin-prereleases</id>
         <url>https://maven.vaadin.com/vaadin-prereleases</url>
     </repository>
 </repositories>
 
 <pluginRepositories>
     <pluginRepository>
-        <id>vaadin-prerelease</id>
+        <id>vaadin-prereleases</id>
         <url>https://maven.vaadin.com/vaadin-prereleases</url>
     </pluginRepository>
 </pluginRepositories>
