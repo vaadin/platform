@@ -184,7 +184,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "2.1.0",
+            "javaVersion": "2.1.1",
             "jsVersion": "1.2.0",
             "component": true,
             "components": [
