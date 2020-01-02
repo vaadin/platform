@@ -15,6 +15,14 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 Here are the highlighted new and improved features in Vaadin 14. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
+### Faster and more reliable frontend dependency management by using `pnpm`
+- Faster recurring builds in comparison to `npm` ([benchmarks](https://www.npmjs.com/package/pnpm#benchmark))
+- Packages are by default cached locally and linked instead of downloaded for every project
+- More reliable build when updating Vaadin version
+- Only one `package.json` file used, reducing complexity (previously another file was in `/target`)
+- **No migration needed**, see [differences here](https://github.com/vaadin/flow-and-components-documentation/blob/master/documentation/advanced/tutorial-switch-npm-pnpm.asciidoc) for more information about what has changed
+- For running `pnpm` on a CI server, please see details [here](https://pnpm.js.org/en/continuous-integration)
+
 ### npm support
 Using Bower for frontend dependencies is currently discouraged (by the author), and npm has become the defacto standard. In Vaadin 14 npm is used as the front-end package manager. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14. Using npm is the recommended mode in Vaadin 14.
 
