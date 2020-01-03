@@ -21,7 +21,6 @@ branches:
 
 before_install:
   - nvm install 10.17.0
-  - npm install -g pnpm
   
 install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
