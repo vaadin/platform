@@ -536,8 +536,8 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test	
     public void usageStatisticIsLogged() throws InterruptedException {	
         Assert.assertTrue($(ButtonElement.class).exists());	
-        // wait 5 seconds for collecting values in local storage	
-        Thread.sleep(5000);	
+        // wait 10 seconds for collecting values in local storage	
+        Thread.sleep(10000);	
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Object mode = js.executeScript("return Vaadin.developmentMode");	
