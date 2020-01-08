@@ -536,7 +536,7 @@ public class ChromeComponentsIT extends ParallelTest {
     @Test	
     public void usageStatisticIsLogged() throws InterruptedException {	
         Assert.assertTrue($(ButtonElement.class).exists());	
-        // wait 10 seconds for collecting values in local storage	
+        // wait for collecting values in local storage	
         Thread.sleep(10000);	
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -544,7 +544,8 @@ public class ChromeComponentsIT extends ParallelTest {
 
         String item = (String) js.executeScript(	
                 "return window.localStorage.getItem('vaadin.statistics.basket');");	
-
+        // ignore the case
+        item = item.toLowerCase();
         if(Boolean.TRUE.equals(mode)){	
             Assert.assertTrue("Under development mode, the checked usage statistics are not found",	
                     item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));	
