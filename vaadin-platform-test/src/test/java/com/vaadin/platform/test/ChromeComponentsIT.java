@@ -545,8 +545,8 @@ public class ChromeComponentsIT extends ParallelTest {
         Object mode = js.executeScript("return Vaadin.developmentMode");	
 
         String item = (String) js.executeScript(	
-                "return window.localStorage.getItem('vaadin.statistics.basket');");	
-
+                "return window.localStorage.getItem('vaadin.statistics.basket');");
+        item = item.toLowerCase();
         if(Boolean.TRUE.equals(mode)){	
             Assert.assertTrue("Under development mode, the checked usage statistics are not found",	
                     item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));	
