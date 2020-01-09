@@ -53,7 +53,7 @@ public class ComponentsIT extends ParallelTest {
 
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+        getDriver().get("http://localhost:8080/");
     }
 
     @Test
