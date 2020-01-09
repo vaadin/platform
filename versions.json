@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.2.0.alpha8"
+            "javaVersion": "2.2.0.alpha9"
         },
         "flow-spring": {
             "javaVersion": "12.2.0.alpha1"
