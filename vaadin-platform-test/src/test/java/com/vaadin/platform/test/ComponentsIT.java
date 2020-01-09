@@ -3,6 +3,7 @@ package com.vaadin.platform.test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
 
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
 import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
@@ -47,7 +48,7 @@ public class ComponentsIT extends ParallelTest {
 
     static {
         Parameters.setGridBrowsers(
-                "ie11,firefox,chrome,safari-9,safari,safari-11,edge");
+                "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge");
     }
 
     @Before
@@ -56,50 +57,55 @@ public class ComponentsIT extends ParallelTest {
     }
 
     @Test
-    public void appWorks() throws Exception {
-        checkCustomElement($(NotificationElement.class).waitForFirst());
-        checkCustomElement($(BoardElement.class).id("board"));
-        checkCustomElement($(RowElement.class).id("row"));
-        checkCustomElement($(ButtonElement.class).id("button"));
-        checkCustomElement($(ChartElement.class).id("chart"));
-        checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
-        checkCustomElement($(AccordionElement.class).id("accordion"));
-        checkCustomElement($(AppLayoutElement.class).id("applayout"));
-        checkCustomElement($(CrudElement.class).id("crud"));
-        checkCustomElement($(GridProElement.class).id("gridpro"));
-        checkCustomElement($(RichTextEditorElement.class).id("richtexteditor"));
-        checkCustomElement($(CustomFieldElement.class).id("customfield"));
-        checkCustomElement($(CheckboxElement.class).id("checkbox"));
-        checkCustomElement($("vaadin-checkbox-group").id("checkboxgroup"));
-        checkCustomElement($(ComboBoxElement.class).id("combobox"));
-        checkCustomElement($(DatePickerElement.class).id("datepicker"));
-        checkCustomElement($("vaadin-time-picker").id("timepicker"));
-        checkCustomElement($(DetailsElement.class).id("details"));
-        checkCustomElement($(FormLayoutElement.class).id("formlayout"));
-        checkCustomElement($(GridElement.class).id("grid"));
-        checkCustomElement($("iron-icon").first());
-        checkCustomElement($(IronListElement.class).id("ironlist"));
-        checkCustomElement($("vaadin-list-box").id("listbox"));
-        checkCustomElement($(LoginFormElement.class).id("loginform"));
-        checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
-        checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
-        checkCustomElement($(ProgressBarElement.class).id("progressbar"));
-        checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
-        checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
-        checkCustomElement($(TabElement.class).first());
-        checkCustomElement($(TabsElement.class).id("tabs"));
-        checkCustomElement($(PasswordFieldElement.class).id("passwordfield"));
-        checkCustomElement($(TextAreaElement.class).id("textarea"));
-        checkCustomElement($(TextFieldElement.class).id("textfield"));
-        checkCustomElement($(MenuBarElement.class).id("menubar"));
-        checkCustomElement($(UploadElement.class).id("upload"));
-        checkCustomElement($(SelectElement.class).id("select"));
+    public void appWorks() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Object mode = js.executeScript("return Vaadin.developmentMode");
+        if(Boolean.TRUE.equals(mode)){
+            Assert.assertTrue("under development model, browser tests are skipped", true);
+        } else {
+            checkCustomElement($(NotificationElement.class).waitForFirst());
+            checkCustomElement($(BoardElement.class).id("board"));
+            checkCustomElement($(RowElement.class).id("row"));
+            checkCustomElement($(ButtonElement.class).id("button"));
+            checkCustomElement($(ChartElement.class).id("chart"));
+            checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
+            checkCustomElement($(AccordionElement.class).id("accordion"));
+            checkCustomElement($(AppLayoutElement.class).id("applayout"));
+            checkCustomElement($(CrudElement.class).id("crud"));
+            checkCustomElement($(GridProElement.class).id("gridpro"));
+            checkCustomElement($(RichTextEditorElement.class).id("richtexteditor"));
+            checkCustomElement($(CustomFieldElement.class).id("customfield"));
+            checkCustomElement($(CheckboxElement.class).id("checkbox"));
+            checkCustomElement($("vaadin-checkbox-group").id("checkboxgroup"));
+            checkCustomElement($(ComboBoxElement.class).id("combobox"));
+            checkCustomElement($(DatePickerElement.class).id("datepicker"));
+            checkCustomElement($("vaadin-time-picker").id("timepicker"));
+            checkCustomElement($(DetailsElement.class).id("details"));
+            checkCustomElement($(FormLayoutElement.class).id("formlayout"));
+            checkCustomElement($(GridElement.class).id("grid"));
+            checkCustomElement($("iron-icon").first());
+            checkCustomElement($(IronListElement.class).id("ironlist"));
+            checkCustomElement($("vaadin-list-box").id("listbox"));
+            checkCustomElement($(LoginFormElement.class).id("loginform"));
+            checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
+            checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
+            checkCustomElement($(ProgressBarElement.class).id("progressbar"));
+            checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
+            checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
+            checkCustomElement($(TabElement.class).first());
+            checkCustomElement($(TabsElement.class).id("tabs"));
+            checkCustomElement($(PasswordFieldElement.class).id("passwordfield"));
+            checkCustomElement($(TextAreaElement.class).id("textarea"));
+            checkCustomElement($(TextFieldElement.class).id("textfield"));
+            checkCustomElement($(MenuBarElement.class).id("menubar"));
+            checkCustomElement($(UploadElement.class).id("upload"));
+            checkCustomElement($(SelectElement.class).id("select"));
 
-        $(ButtonElement.class).id("open-dialog").click();
-        checkCustomElement($(DialogElement.class).id("dialog"));
-        $(ButtonElement.class).id("open-confirm-dialog").click();
-        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
-
+            $(ButtonElement.class).id("open-dialog").click();
+            checkCustomElement($(DialogElement.class).id("dialog"));
+            $(ButtonElement.class).id("open-confirm-dialog").click();
+            checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
+        }
     }
 
     private void checkCustomElement(TestBenchElement element) {
