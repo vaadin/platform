@@ -597,7 +597,10 @@ public class ChromeComponentsIT extends ParallelTest {
                         .intValue())
                 // exclude the favicon error
                 .filter(logEntry -> !logEntry.getMessage()
-                        .contains("favicon.ico"))
+                        .contains("favicon.ico") &&
+                        //exclude the ironListStyles.css
+                        //flow ticket :https://github.com/vaadin/flow/issues/6948
+                        !logEntry.getMessage().contains("ironListStyles.css"))
                 .collect(Collectors.toList());
     }
 
