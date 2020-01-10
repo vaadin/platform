@@ -25,8 +25,8 @@
         },
         "vaadin-button": {
             "npmName": "@vaadin/vaadin-button",
-            "javaVersion": "2.0.1",
-            "jsVersion": "2.2.1",
+            "javaVersion": "2.0.2",
+            "jsVersion": "2.2.2",
             "component": true
         },
         "vaadin-checkbox": {
@@ -184,7 +184,7 @@
         },
         "vaadin-list-box": {
             "npmName": "@vaadin/vaadin-list-box",
-            "javaVersion": "2.1.0",
+            "javaVersion": "2.1.1",
             "jsVersion": "1.2.0",
             "component": true,
             "components": [
@@ -231,7 +231,7 @@
         },
         "vaadin-overlay": {
             "npmName": "@vaadin/vaadin-overlay",
-            "jsVersion": "3.2.17",
+            "jsVersion": "3.2.18",
             "releasenotes": true
         },
         "vaadin-progress-bar": {
