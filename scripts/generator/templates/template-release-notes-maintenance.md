@@ -30,9 +30,7 @@ For the full list of how to get started go to the [GitHub releases](https://gith
 
 # Known Issues and Limitations
 
-## Flow
-
-## Components
+More info can be found from [Here](https://github.com/vaadin/platform/releases/tag/14.1.0)
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
