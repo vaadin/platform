@@ -21,6 +21,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,10 +32,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.checkbox.testbench.CheckboxElement;
@@ -69,6 +75,12 @@ public class ChromeComponentsIT extends ParallelTest {
     @Before
     public void setUp() {
         getDriver().get("http://localhost:8080/prod-mode/");
+    }
+
+    @Test
+    public void openPageNoClientSideError() {
+        checkLogsForErrors();
+        Assert.assertTrue("There are unexpected errors in the browser console", getLogEntries(Level.SEVERE).isEmpty());
     }
 
     @Test
@@ -561,6 +573,37 @@ public class ChromeComponentsIT extends ParallelTest {
     public List<DesiredCapabilities> getBrowserConfiguration() {
         return Collections
                 .singletonList(Browser.CHROME.getDesiredCapabilities());
+    }
+
+    private void checkLogsForErrors() {
+        getLogEntries(Level.WARNING).forEach(logEntry -> {
+            if ((Objects.equals(logEntry.getLevel(), Level.SEVERE)
+                    || logEntry.getMessage().contains("404"))){
+                throw new AssertionError(String.format(
+                        "Received error message in browser log console right after opening the page, message: %s",
+                        logEntry));
+            } else {
+                LoggerFactory.getLogger(ChromeComponentsIT.class.getName()).warn(
+                        "This message in browser log console may be a potential error: '{}'",
+                        logEntry);
+            }
+        });
+    }
+
+    private List<LogEntry> getLogEntries(Level level) {
+        // https://github.com/vaadin/testbench/issues/1233
+        getCommandExecutor().waitForVaadin();
+
+        return driver.manage().logs().get(LogType.BROWSER).getAll().stream()
+                .filter(logEntry -> logEntry.getLevel().intValue() >= level
+                        .intValue())
+                // exclude the favicon error
+                .filter(logEntry -> !logEntry.getMessage()
+                        .contains("favicon.ico") &&
+                        //exclude the ironListStyles.css
+                        //flow ticket :https://github.com/vaadin/flow/issues/6948
+                        !logEntry.getMessage().contains("ironListStyles.css"))
+                .collect(Collectors.toList());
     }
 
     private void assertTextComponent(TestBenchElement element,
