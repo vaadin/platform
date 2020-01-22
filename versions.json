@@ -31,8 +31,8 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.2.11",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.2.12",
             "component": true,
             "components": [
                 "Checkbox",
@@ -85,8 +85,8 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.1.6",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-element-mixin": {
