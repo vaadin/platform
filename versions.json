@@ -31,8 +31,8 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "2.0.1",
-            "jsVersion": "2.2.10",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.2.12",
             "component": true,
             "components": [
                 "Checkbox",
@@ -57,8 +57,8 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "2.0.5",
-            "jsVersion": "4.0.5",
+            "javaVersion": "2.0.6",
+            "jsVersion": "4.0.6",
             "component": true
         },
         "vaadin-time-picker": {
@@ -85,8 +85,8 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.1.6",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -242,8 +242,8 @@
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "2.0.1",
-            "jsVersion": "1.2.3",
+            "javaVersion": "2.0.2",
+            "jsVersion": "1.2.4",
             "component": true,
             "components": [
                 "Radio Button",
