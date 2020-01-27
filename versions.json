@@ -14,8 +14,8 @@
         },
         "shadycss": {
             "npmName": "@webcomponents/shadycss",
-            "npmVersion": "1.8.0",
-            "jsVersion": "1.8.0"
+            "npmVersion": "1.9.4",
+            "jsVersion": "1.9.4"
         },
         "vaadin-accordion": {
             "npmName": "@vaadin/vaadin-accordion",
@@ -128,7 +128,7 @@
         },
         "iron-fit-behavior": {
             "npmName": "@polymer/iron-fit-behavior",
-            "npmVersion": "3.0.1",
+            "npmVersion": "3.0.2",
             "jsVersion": "2.2.1"
         },
         "iron-flex-layout": {
@@ -164,7 +164,7 @@
         },
         "iron-overlay-behavior": {
             "npmName": "@polymer/iron-overlay-behavior",
-            "npmVersion": "3.0.2",
+            "npmVersion": "3.0.3",
             "jsVersion": "2.3.4"
         },
         "iron-resizable-behavior": {
