@@ -58,7 +58,7 @@
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
             "javaVersion": "3.0.0.alpha2",
-            "jsVersion": "4.0.5",
+            "jsVersion": "4.0.6",
             "component": true
         },
         "vaadin-time-picker": {
@@ -86,7 +86,7 @@
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
             "javaVersion": "3.0.0.alpha2",
-            "jsVersion": "2.1.6",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -239,7 +239,7 @@
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
             "javaVersion": "3.0.0.alpha2",
-            "jsVersion": "1.2.3",
+            "jsVersion": "1.2.4",
             "component": true,
             "components": [
                 "Radio Button",
