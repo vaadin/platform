@@ -41,8 +41,8 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "4.0.0.alpha1",
-            "jsVersion": "5.0.9",
+            "javaVersion": "4.0.0.alpha2",
+            "jsVersion": "5.0.10",
             "component": true
         },
         "vaadin-context-menu": {
@@ -57,14 +57,14 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "3.0.0.alpha1",
-            "jsVersion": "4.0.5",
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "4.0.6",
             "component": true
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "javaVersion": "3.0.0.alpha1",
-            "jsVersion": "2.0.4",
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "2.0.5",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -85,8 +85,8 @@
         },
         "vaadin-select": {
             "npmName": "@vaadin/vaadin-select",
-            "javaVersion": "3.0.0.alpha1",
-            "jsVersion": "2.1.6",
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-element-mixin": {
@@ -238,8 +238,8 @@
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "3.0.0.alpha1",
-            "jsVersion": "1.2.3",
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "1.2.4",
             "component": true,
             "components": [
                 "Radio Button",
