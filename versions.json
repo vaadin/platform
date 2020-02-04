@@ -302,9 +302,6 @@
             "jsVersion": "1.0.1",
             "component": true
         },
-        "webcomponentsjs": {
-            "jsVersion": "1.2.6"
-        },
         "vaadin-usage-statistics": {
             "npmName": "@vaadin/vaadin-usage-statistics",
             "jsVersion": "2.1.0"
