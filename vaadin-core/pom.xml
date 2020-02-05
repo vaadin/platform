@@ -174,6 +174,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-menu-bar-flow</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -213,7 +220,26 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <!-- Copy versions file to classpath, so that Flow can
+                   use it to pin versions for pnpm. -->
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-and-rename-file</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>../versions.json</sourceFile>
+                            <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <executions>
