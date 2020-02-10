@@ -1,10 +1,10 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.2.0.alpha12"
+            "javaVersion": "2.2.0.alpha13"
         },
         "flow-spring": {
-            "javaVersion": "12.2.0.alpha2"
+            "javaVersion": "12.2.0.alpha3"
         },
         "flow-cdi": {
             "javaVersion": "11.2.0.alpha1"
