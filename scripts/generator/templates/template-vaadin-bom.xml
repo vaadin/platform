@@ -336,11 +336,6 @@
                 <artifactId>polymer</artifactId>
                 <version>{{core.polymer.jsVersion}}</version>
             </dependency>
-            <dependency>
-                <groupId>org.webjars.bowergithub.webcomponents</groupId>
-                <artifactId>webcomponentsjs</artifactId>
-                <version>{{core.webcomponentsjs.jsVersion}}</version>
-            </dependency>
             <!-- Shadycss 1.8.0 is the latest bower based release for shadycss -->
             <dependency>
                 <groupId>org.webjars.bowergithub.webcomponents</groupId>
