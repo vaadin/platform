@@ -220,7 +220,7 @@
         },
         "vaadin-ordered-layout": {
             "npmName": "@vaadin/vaadin-ordered-layout",
-            "javaVersion": "2.1.0.alpha2",
+            "javaVersion": "2.1.0.alpha3",
             "jsVersion": "1.2.0-alpha2",
             "component": true,
             "components": [
