@@ -101,8 +101,8 @@
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "5.0.0.beta1",
-            "jsVersion": "5.5.0",
+            "javaVersion": "5.0.0.beta2",
+            "jsVersion": "5.5.1",
             "component": true,
             "components": [
                 "Grid",
