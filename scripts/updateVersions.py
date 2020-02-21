@@ -19,5 +19,5 @@ versions["core"][originRepo]["javaVersion"]=newVersion
 print(versions["core"][originRepo]["javaVersion"])
 
 with open('../versions.json','w') as data:
-    json.dump(versions,data,sort_keys=False, indent=4)
+    json.dump(versions,data,sort_keys=True, indent=4)
     data.write('\n')
