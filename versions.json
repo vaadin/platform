@@ -370,7 +370,7 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "3.0.0.beta1",
+            "javaVersion": "3.0.0",
             "jsVersion": "2.0.6",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
