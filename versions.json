@@ -262,7 +262,7 @@
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-router": {
-            "jsVersion": "1.7.0",
+            "jsVersion": "1.7.1",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
