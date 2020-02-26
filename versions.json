@@ -31,7 +31,7 @@
         },
         "vaadin-checkbox": {
             "npmName": "@vaadin/vaadin-checkbox",
-            "javaVersion": "2.0.3",
+            "javaVersion": "2.0.4",
             "jsVersion": "2.2.12",
             "component": true,
             "components": [
@@ -57,14 +57,14 @@
         },
         "vaadin-date-picker": {
             "npmName": "@vaadin/vaadin-date-picker",
-            "javaVersion": "2.0.6",
-            "jsVersion": "4.0.6",
+            "javaVersion": "2.0.7",
+            "jsVersion": "4.0.7",
             "component": true
         },
         "vaadin-time-picker": {
             "npmName": "@vaadin/vaadin-time-picker",
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.0.4",
+            "javaVersion": "2.0.5",
+            "jsVersion": "2.0.6",
             "component": true
         },
         "vaadin-development-mode-detector": {
@@ -95,14 +95,14 @@
         },
         "vaadin-form-layout": {
             "npmName": "@vaadin/vaadin-form-layout",
-            "javaVersion": "2.0.2",
-            "jsVersion": "2.1.6",
+            "javaVersion": "2.0.3",
+            "jsVersion": "2.1.7",
             "component": true
         },
         "vaadin-grid": {
             "npmName": "@vaadin/vaadin-grid",
-            "javaVersion": "4.1.2",
-            "jsVersion": "5.5.1",
+            "javaVersion": "4.1.3",
+            "jsVersion": "5.5.2",
             "component": true,
             "components": [
                 "Grid",
@@ -112,7 +112,7 @@
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "2.0.1",
+            "javaVersion": "2.0.2",
             "jsVersion": "4.3.1",
             "component": true
         },
