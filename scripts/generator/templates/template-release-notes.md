@@ -185,6 +185,10 @@ Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/
 - OSGi with npm does not work in V14.0.0-V14.1.0. We are working on a fix for V14.x.
 - OSGi with Bower has problems with V14.0.0-V14.1.0
 
+## Performance
+
+- Due to the limitation of web components polyfills, component rendering on IE11 and EdgeHTML can be upto 5-10 times slower than on other browsers
+
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
