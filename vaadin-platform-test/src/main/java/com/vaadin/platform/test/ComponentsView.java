@@ -63,6 +63,7 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -264,6 +265,13 @@ public class ComponentsView extends VerticalLayout {
         IntStream.range(0, 3).forEach(i -> horizontalLayout
                 .add(new Label("HorizontalLayout Label " + i)));
 
+        Scroller scroller = new Scroller();
+        scroller.setId("scroller");
+        HorizontalLayout content = new HorizontalLayout();
+        IntStream.range(0, 3).forEach(i -> content
+                .add(new Label("Scroller Label " + i)));
+        scroller.setContent(content);
+
         SplitLayout splitHorizontal = new SplitLayout(new Button("Left"),
                 new Button("Right"));
         splitHorizontal.getStyle().set("flex", "none");
@@ -416,6 +424,7 @@ public class ComponentsView extends VerticalLayout {
         layouts.add(formLayout);
         layouts.add(verticalLayout);
         layouts.add(horizontalLayout);
+        layouts.add(scroller);
         layouts.add(splitHorizontal);
         layouts.add(splitVertical);
         layouts.add(tabs);
