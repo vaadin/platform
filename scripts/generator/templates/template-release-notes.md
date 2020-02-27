@@ -7,24 +7,13 @@ With every major release, we will change and improve things based on your feedba
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
-Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 16 is supported for one month after Vaadin 17 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
 
-Here are the highlighted new and improved features in Vaadin 15. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
-
-### Vaadin for TypeScript
-In Vaadin 15 we introduce Vaadin for TypeScript (MVP);  
-When creating applications with Vaadin developers can write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked.
-
-### Client-side Router
-Vaadin 15 includes Vaadin Router, the client-side router for Web Components.
-
-### npm support
-In Vaadin 15 npm is used as the front-end package manager. Bower (compatibility mode) support has been dropped from Vaadin 15.
-Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
+Here are the highlighted new and improved features in Vaadin 16. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
 
@@ -66,7 +55,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 15 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 16 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 
