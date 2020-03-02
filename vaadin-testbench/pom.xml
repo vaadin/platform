@@ -14,7 +14,7 @@
 
     <distributionManagement>
         <repository>
-            <id>Vaadin pre releases</id>
+            <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
         </repository>
     </distributionManagement>

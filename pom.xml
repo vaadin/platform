@@ -22,7 +22,7 @@
 
     <distributionManagement>
         <repository>
-            <id>flow-internal-release</id>
+            <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
         </repository>
     </distributionManagement>
@@ -67,7 +67,7 @@
             </snapshots>
         </repository>
         <repository>
-            <id>vaadin-prerelease</id>
+            <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
             <snapshots>
                 <enabled>false</enabled>
@@ -94,7 +94,7 @@
             </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>vaadin-prerelease</id>
+            <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
             <snapshots>
                 <enabled>false</enabled>
