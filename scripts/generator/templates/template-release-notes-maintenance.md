@@ -7,11 +7,6 @@ See the full release notes for Vaadin 15.0 in [GitHub releases](https://github.c
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## Support
-Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
-
-Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
-
 ## New and Noteworthy
 
 Here are the highlighted new and improved features in this maintenance release.
@@ -21,6 +16,11 @@ Here are the highlighted new and improved features in this maintenance release.
 ### Components
 
 {{changesSincePrevious}}
+
+## Support
+Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+
+Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 # Getting Started with Vaadin
 ## App starters
