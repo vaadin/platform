@@ -154,15 +154,15 @@ Node.js version 10.x for the npm mode.
 # Breaking changes
 This lists products that have breaking changes from V14
 
+##  Bower support dropped
+Bower (compatibility mode) support has been dropped from Vaadin 15. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
+
 # Known Issues and Limitations
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
 - There are [some issues](https://github.com/vaadin/flow/issues/5146) in using Web Sockets as the Push channel in certain OSGi environments, but long polling works.
 - Links matching the context do not result in browser page load by default, instead they are handled with application routing. To opt-out, set the `router-ignore` attribute on the anchor element. This opt-out is needed for cases when native browser navigation is necessary, e. g., when [using `Anchor` to link a `StreamResource` download](https://github.com/vaadin/flow/issues/7623).
-
-##  Bower support dropped
-Bower (compatibility mode) support has been dropped from Vaadin 15. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
 
 ## Vaadin Gradle Plugin
 - Vaadin Gradle Plugin does not currently work with Vaadin 15.
