@@ -41,8 +41,8 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.6",
-            "jsVersion": "5.0.9",
+            "javaVersion": "3.0.7",
+            "jsVersion": "5.0.10",
             "component": true
         },
         "vaadin-context-menu": {
@@ -242,8 +242,8 @@
         },
         "vaadin-radio-button": {
             "npmName": "@vaadin/vaadin-radio-button",
-            "javaVersion": "2.0.2",
-            "jsVersion": "1.2.4",
+            "javaVersion": "2.0.3",
+            "jsVersion": "1.2.5",
             "component": true,
             "components": [
                 "Radio Button",
