@@ -2,29 +2,21 @@
 
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
-With every major release, we will change and improve things based on your feedback. This may lead to breaking changes, which will be listed for each part of the platform in the breaking changes section.
-
 Visit [vaadin.com](https://vaadin.com/) to get started.
-
-## Support
-Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
-
-Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
 
 Here are the highlighted new and improved features in Vaadin 15. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Vaadin for TypeScript
-In Vaadin 15 we introduce Vaadin for TypeScript (MVP);  
-When creating applications with Vaadin developers can write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked.
+In Vaadin 15 we introduce Vaadin for TypeScript as an alternative to Java;  
+When creating applications with Vaadin, developers can choose to write client-side code in TypeScript so that they can stay close to the target platform (the browser), it is easy to use any of the native Web platform features directly (including Service Workers and offline support), and the code is automatically type-checked. Vaadin 15 also provides a type-safe and secure way to access data from backend. See quick start guide from [vaadin.com](https://vaadin.com/docs/v15/flow/typescript/quick-start-guide.html)
 
 ### Client-side Router
-Vaadin 15 includes Vaadin Router, the client-side router for Web Components.
+Vaadin 15 includes Vaadin Router, the client-side router for Web Components.Vaadin Router is in use by default for all apps. See more from [vaadin.com](https://vaadin.com/router).
 
-### npm support
-In Vaadin 15 npm is used as the front-end package manager. Bower (compatibility mode) support has been dropped from Vaadin 15.
-Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
+### Faster and more reliable frontend dependency management by using pnpm
+Faster and more reliable builds when updating the platform version. Biggest effect is when there are frontend dependency changes and when multiple projects/modules are updated. Vaadin 15 has npm in use by default and pnpm can be taken into use optionally. See instructions from [vaadin.com](https://vaadin.com/docs/v15/flow/advanced/tutorial-switch-npm-pnpm.html).
 
 ### Framework
 
@@ -32,17 +24,15 @@ Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (L
 
 {{changesSincePrevious}}
 
+## Support
+Vaadin 15 is supported for one month after Vaadin 16 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+
+Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
+
 ## Included Projects and Change Log
 Vaadin includes the following projects. Release notes with detailed change logs for each project are linked below.
 
 Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
-
-### Components
-{{components}}
-
-### Themes
-- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
-- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
 
 ### Java Web Framework
 - Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
@@ -54,6 +44,13 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
   - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
 
+### Components
+{{components}}
+
+### Themes
+- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
+- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
+
 ### Router
 - Vaadin Router ([v{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
 
@@ -64,9 +61,6 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 # Getting Started with Vaadin
 ## App starters
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
-
-### Note
-Vaadin 15 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 
@@ -96,10 +90,13 @@ Add the following dependency to dependencyManagement in pom.xml.
     <scope>import</scope>
 </dependency>
 ```
+Read more about upgrading to Vaadin 15 from vaadin.com.
+
+Note: Vaadin 15 is compatible with Spring 5.2.0 or newer, and Spring Boot 2.2.0 or newer. See more info from [vaadin.com](https://vaadin.com/docs/v15/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
 # Supported Technologies
 ## Operating Systems
-Development is supported with the following operating systems, for any OS version that supports either frontend development (npm as package manager) or Java 8
+Development is supported with the following operating systems:
 - Windows
 - Linux
 - macOS
@@ -121,7 +118,7 @@ Development is supported with the following operating systems, for any OS versio
       - libstdc++ 4.6.1 or higher
     - Latest Firefox ESR is supported (starting from Firefox ESR 68)
   - Safari on macOS 10.15 or later (starting from Safari 13, available also for macOS 10.14.5 and 10.13.6)
-  - Edge on Windows 10 or later
+  - Edge on Windows 10 or later. Note: Vaadin 15 supports only Edge Chromium and does not provide support for EdgeHTML. 
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
@@ -137,7 +134,7 @@ Any IDE or editor that works with the language of your choice should work well. 
 
 ## Java
 
-The server-side parts of Vaadin support version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
+Vaadin supports version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
 
 ## Application Servers
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
@@ -153,10 +150,12 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Supported Node.js and npm versions
 Node.js version 10.x for the npm mode.
-npm version 5.6.0 or greater.
 
 # Breaking changes
 This lists products that have breaking changes from V14
+
+##  Bower support dropped
+Bower (compatibility mode) support has been dropped from Vaadin 15. Bower (compatibility mode) and WebJars are still fully supported in Vaadin 14 (LTS).
 
 # Known Issues and Limitations
 
@@ -165,8 +164,11 @@ This lists products that have breaking changes from V14
 - There are [some issues](https://github.com/vaadin/flow/issues/5146) in using Web Sockets as the Push channel in certain OSGi environments, but long polling works.
 - Links matching the context do not result in browser page load by default, instead they are handled with application routing. To opt-out, set the `router-ignore` attribute on the anchor element. This opt-out is needed for cases when native browser navigation is necessary, e. g., when [using `Anchor` to link a `StreamResource` download](https://github.com/vaadin/flow/issues/7623).
 
-## Components
-- The dark theme preset does not work in IE11 when applied to the `<html>` element.
+## Vaadin Gradle Plugin
+- Vaadin Gradle Plugin does not currently work with Vaadin 15.
+
+## OSGi support
+OSGi does not work in V15.
 
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
