@@ -261,8 +261,8 @@
                 "Radio Button",
                 "Radio Button Group"
             ],
-            "javaVersion": "2.0.3",
-            "jsVersion": "1.2.5",
+            "javaVersion": "2.0.4",
+            "jsVersion": "1.2.6",
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-select": {
