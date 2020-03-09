@@ -112,7 +112,7 @@
         },
         "vaadin-icons": {
             "npmName": "@vaadin/vaadin-icons",
-            "javaVersion": "2.0.2",
+            "javaVersion": "2.0.3",
             "jsVersion": "4.3.1",
             "component": true
         },
