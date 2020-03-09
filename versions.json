@@ -159,12 +159,6 @@
             "jsVersion": "2.3.0-alpha2",
             "component": true
         },
-        "vaadin-select": {
-            "npmName": "@vaadin/vaadin-select",
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.1.7",
-            "component": true
-        },
         "vaadin-element-mixin": {
             "jsVersion": "2.2.0",
             "npmName": "@vaadin/vaadin-element-mixin"
