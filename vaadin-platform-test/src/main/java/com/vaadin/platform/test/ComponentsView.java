@@ -84,11 +84,9 @@ import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.mpr.core.MprTheme;
 
 @Route("")
 @Theme(Lumo.class)
-@MprTheme
 public class ComponentsView extends VerticalLayout {
 
     private Log log;
