@@ -62,6 +62,11 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>mpr-v8</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
         </dependency>
         <dependency>
