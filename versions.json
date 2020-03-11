@@ -117,8 +117,8 @@
         },
         "vaadin-combo-box": {
             "npmName": "@vaadin/vaadin-combo-box",
-            "javaVersion": "3.0.7",
-            "jsVersion": "5.0.10",
+            "javaVersion": "3.0.8",
+            "jsVersion": "5.0.11",
             "component": true
         },
         "vaadin-context-menu": {
@@ -139,8 +139,8 @@
         },
         "vaadin-date-picker": {
             "component": true,
-            "javaVersion": "2.0.7",
-            "jsVersion": "4.0.7",
+            "javaVersion": "2.0.8",
+            "jsVersion": "4.0.8",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-details": {
