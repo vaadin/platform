@@ -139,8 +139,8 @@
         },
         "vaadin-date-picker": {
             "component": true,
-            "javaVersion": "3.0.0",
-            "jsVersion": "4.0.7",
+            "javaVersion": "3.0.1",
+            "jsVersion": "4.0.8",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-details": {
