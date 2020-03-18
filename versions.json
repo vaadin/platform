@@ -344,8 +344,8 @@
         },
         "vaadin-confirm-dialog": {
             "component": true,
-            "javaVersion": "2.0.2",
-            "jsVersion": "1.1.5",
+            "javaVersion": "2.0.3",
+            "jsVersion": "1.1.6",
             "npmName": "@vaadin/vaadin-confirm-dialog",
             "pro": true
         },
