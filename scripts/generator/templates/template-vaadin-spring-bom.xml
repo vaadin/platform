@@ -334,6 +334,12 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-date-time-picker-testbench</artifactId>
+                <version>${vaadin.date.time.picker.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-details-testbench</artifactId>
                 <version>${vaadin.details.version}</version>
                 <scope>test</scope>
