@@ -122,6 +122,11 @@
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-date-time-picker</artifactId>
+                <version>{{core.vaadin-date-time-picker.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-dialog</artifactId>
                 <version>{{core.vaadin-dialog.jsVersion}}</version>
             </dependency>
