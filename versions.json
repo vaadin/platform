@@ -246,7 +246,7 @@
                 "Vertical Layout",
                 "Flex Layout"
             ],
-            "javaVersion": "2.1.0.alpha4",
+            "javaVersion": "2.1.0.alpha5",
             "jsVersion": "1.2.0-alpha3",
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
