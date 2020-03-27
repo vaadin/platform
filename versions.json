@@ -145,7 +145,7 @@
         },
         "vaadin-date-time-picker": {
             "component": true,
-            "javaVersion": "1.0.0.alpha1",
+            "javaVersion": "1.0.0.alpha2",
             "jsVersion": "1.0.0-alpha6",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
@@ -311,8 +311,8 @@
         },
         "vaadin-time-picker": {
             "component": true,
-            "javaVersion": "2.0.5",
-            "jsVersion": "2.0.6",
+            "javaVersion": "2.0.6",
+            "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-time-picker"
         },
         "vaadin-upload": {
@@ -378,8 +378,8 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "2.0.3",
-            "jsVersion": "2.0.5",
+            "javaVersion": "2.0.4",
+            "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
