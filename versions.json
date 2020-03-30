@@ -111,8 +111,8 @@
                 "Checkbox",
                 "Checkbox Group"
             ],
-            "javaVersion": "3.0.0",
-            "jsVersion": "2.2.12",
+            "javaVersion": "3.0.1",
+            "jsVersion": "2.2.13",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
@@ -295,8 +295,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "3.0.0",
-            "jsVersion": "2.5.4",
+            "javaVersion": "3.0.1",
+            "jsVersion": "2.5.5",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
