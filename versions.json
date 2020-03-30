@@ -111,8 +111,8 @@
                 "Checkbox",
                 "Checkbox Group"
             ],
-            "javaVersion": "2.0.4",
-            "jsVersion": "2.2.12",
+            "javaVersion": "2.0.5",
+            "jsVersion": "2.2.13",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
@@ -300,8 +300,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "2.1.0",
-            "jsVersion": "2.5.3",
+            "javaVersion": "2.1.1",
+            "jsVersion": "2.5.5",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
@@ -311,7 +311,7 @@
         },
         "vaadin-time-picker": {
             "component": true,
-            "javaVersion": "2.0.6",
+            "javaVersion": "2.1.0.alpha1",
             "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-time-picker"
         },
