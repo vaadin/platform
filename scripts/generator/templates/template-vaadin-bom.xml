@@ -46,11 +46,6 @@
                 <artifactId>vaadin-cdi</artifactId>
                 <version>${flow.cdi.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-osgi</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
 
             <!-- SLF4J -->
             <dependency>
