@@ -117,8 +117,8 @@
         },
         "vaadin-combo-box": {
             "component": true,
-            "javaVersion": "4.0.0",
-            "jsVersion": "5.0.10",
+            "javaVersion": "4.0.1",
+            "jsVersion": "5.0.11",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
@@ -306,8 +306,8 @@
         },
         "vaadin-time-picker": {
             "component": true,
-            "javaVersion": "3.0.0",
-            "jsVersion": "2.0.6",
+            "javaVersion": "3.0.1",
+            "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-time-picker"
         },
         "vaadin-upload": {
@@ -370,8 +370,8 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "3.0.0",
-            "jsVersion": "2.0.6",
+            "javaVersion": "3.0.1",
+            "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
