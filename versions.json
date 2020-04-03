@@ -116,8 +116,8 @@
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
-            "component": true,
-            "javaVersion": "3.0.8",
+            "npmName": "@vaadin/vaadin-combo-box",
+            "javaVersion": "3.0.9",
             "jsVersion": "5.0.11",
             "npmName": "@vaadin/vaadin-combo-box"
         },
@@ -160,10 +160,10 @@
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "vaadin-dialog": {
-            "component": true,
-            "javaVersion": "2.1.0.alpha3",
-            "jsVersion": "2.3.0-alpha4",
-            "npmName": "@vaadin/vaadin-dialog"
+            "npmName": "@vaadin/vaadin-dialog",
+            "javaVersion": "2.1.0.alpha4",
+            "jsVersion": "2.3.0",
+            "component": true
         },
         "vaadin-element-mixin": {
             "jsVersion": "2.2.0",
@@ -246,8 +246,8 @@
                 "Vertical Layout",
                 "Flex Layout"
             ],
-            "javaVersion": "2.1.0.alpha5",
-            "jsVersion": "1.2.0-alpha3",
+            "javaVersion": "2.1.0.alpha6",
+            "jsVersion": "1.2.0",
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
         "vaadin-overlay": {
