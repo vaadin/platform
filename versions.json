@@ -119,7 +119,7 @@
             "npmName": "@vaadin/vaadin-combo-box",
             "javaVersion": "3.0.9",
             "jsVersion": "5.0.11",
-            "npmName": "@vaadin/vaadin-combo-box"
+            "component": true
         },
         "vaadin-context-menu": {
             "component": true,
