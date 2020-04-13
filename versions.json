@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.2.0.alpha16"
+            "javaVersion": "2.2.0.beta1"
         },
         "flow-cdi": {
             "javaVersion": "11.2.0.alpha1"
@@ -116,10 +116,10 @@
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
-            "npmName": "@vaadin/vaadin-combo-box",
+            "component": true,
             "javaVersion": "3.0.9",
             "jsVersion": "5.0.11",
-            "component": true
+            "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
             "component": true,
@@ -160,10 +160,10 @@
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "vaadin-dialog": {
-            "npmName": "@vaadin/vaadin-dialog",
+            "component": true,
             "javaVersion": "2.1.0.alpha4",
             "jsVersion": "2.3.0",
-            "component": true
+            "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
             "jsVersion": "2.2.0",
