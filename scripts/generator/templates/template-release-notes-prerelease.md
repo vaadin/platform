@@ -123,6 +123,9 @@ Add the following contents to your project pom.xml.
 
 This is the prerelease version of Vaadin 14.x for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
+### NOTE: Manual deletion is needed when downgrade version to 14.1
+- please remove the following files/fold when downgrade your vaadin version from 14.2 to 14.1: `node_modules`, `target`, `package.json`, `pnpm-lock.yaml`, `pnpmfile.js`
+
 ## OSGi support
 - OSGi with npm does not work in V14.0.0-V14.1.0. We are working on a fix for V14.x.
 - OSGi with Bower has problems with V14.0.0-V14.1.0
