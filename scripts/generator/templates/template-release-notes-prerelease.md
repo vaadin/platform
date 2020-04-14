@@ -56,6 +56,7 @@ Before this change, all routing components were created eagerly, and events were
 - `vaadin-ordered-layout`: add support for flexLayout feature and `Scroller` for scrolling overflowing content
 - `vaadin-time-picker`: New max and min time API
 
+Previous features in Vaadin 14 can be found from [14.1 release note](https://github.com/vaadin/platform/releases/tag/14.1.0)
 
 {{changesSincePrevious}}
 
