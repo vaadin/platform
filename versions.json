@@ -145,8 +145,8 @@
         },
         "vaadin-date-time-picker": {
             "component": true,
-            "javaVersion": "1.0.0.alpha2",
-            "jsVersion": "1.0.0-alpha6",
+            "javaVersion": "1.0.0.beta1",
+            "jsVersion": "1.0.0-beta1",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
         "vaadin-details": {
@@ -161,7 +161,7 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "2.1.0.alpha4",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "2.3.0",
             "npmName": "@vaadin/vaadin-dialog"
         },
@@ -246,7 +246,7 @@
                 "Vertical Layout",
                 "Flex Layout"
             ],
-            "javaVersion": "2.1.0.alpha6",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "1.2.0",
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
@@ -311,7 +311,7 @@
         },
         "vaadin-time-picker": {
             "component": true,
-            "javaVersion": "2.1.0.alpha1",
+            "javaVersion": "2.1.0.beta1",
             "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-time-picker"
         },
