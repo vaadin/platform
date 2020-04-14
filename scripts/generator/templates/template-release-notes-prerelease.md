@@ -33,6 +33,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 - For running pnpm on a CI server, please see details [here](https://pnpm.js.org/en/continuous-integration)
 
 **NOTE: npm is still used by default, so you need to explicitly enable pnpm**
+See instructions from [vaadin.com/docs/](https://vaadin.com/docs/v15/flow/advanced/tutorial-switch-npm-pnpm.html).
 
 ### Fire routing life-cycle `BeforeEnterEvent` from parent -> child order
 This change affects the ordering of routing events and the timeline when routing components are created.
