@@ -8,6 +8,26 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 
 Here are the highlighted new and improved features in Vaadin 16. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
+### Automatic `Node` installation
+- Available from Vaadin versions 16
+- If no global or local Node installation is found Node will be automatically installed to `~/.vaadin`
+  - Only requires the first project to install as later can use the same installation
+  - No need to have Node installed for CI
+- Uses proxy data from 
+  - System properties
+  - {project}/.npmrc
+  - ~/.npmrc
+  - Environment variables
+### `pnpm` is the default frontend package manager
+- Now pnpm is used by default instead of npm
+  - npm was still default in Vaadin 14.2 and 15
+- No migration needed - pnpm is installed once to /.vaadin inside home folder. See [differences here](https://github.com/vaadin/flow-and-components-documentation/blob/V14-next/documentation/advanced/tutorial-switch-npm-pnpm.asciidoc) for more information about what has changed
+
+### `Devmode` is run as a separate thread to speed up server startup
+- Allows server to continue startup parallel to Flow development mode process which runs pnpm/npm and webpack build
+- The browser shows a white page that is automatically refreshed to open app once devmode process has finished
+- As server is started up faster, there is no timeout from "run from IDE" or from server plugins
+
 ### Framework
 
 ### Components
