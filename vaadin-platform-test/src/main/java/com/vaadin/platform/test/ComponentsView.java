@@ -44,6 +44,7 @@ import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -128,6 +129,14 @@ public class ComponentsView extends VerticalLayout {
                     + e.getValue());
         });
         datePicker.setId("datepicker");
+
+        DateTimePicker dateTimePicker = new DateTimePicker();
+        log.log("DateTimePicker default is " + dateTimePicker.getValue());
+        dateTimePicker.addValueChangeListener(e -> {
+            log.log("DateTimePicker value changed from " + e.getOldValue() + " to "
+                    + e.getValue());
+        });
+        dateTimePicker.setId("dateTimePicker");
 
         TimePicker timePicker = new TimePicker();
         log.log("TimePicker default is " + timePicker.getValue());
@@ -391,6 +400,7 @@ public class ComponentsView extends VerticalLayout {
         components.add(dialogButton);
         components.add(confirmDialogButton);
         components.add(datePicker);
+        components.add(dateTimePicker);
         components.add(timePicker);
         components.add(select);
         components.add(details);
