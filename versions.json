@@ -200,7 +200,7 @@
         "vaadin-list-box": {
             "component": true,
             "javaVersion": "3.1.0.alpha1",
-            "jsVersion": "1.3.0-alpha1",
+            "jsVersion": "1.3.0-alpha3",
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
@@ -242,8 +242,8 @@
                 "Vertical Layout",
                 "Flex Layout"
             ],
-            "javaVersion": "3.1.0.alpha1",
-            "jsVersion": "1.2.0-alpha3",
+            "javaVersion": "3.1.0.alpha2",
+            "jsVersion": "1.3.0-alpha1",
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
         "vaadin-overlay": {
