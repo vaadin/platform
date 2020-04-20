@@ -6,27 +6,7 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## New and Noteworthy
 
-Here are the highlighted new and improved features in Vaadin 16. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
-
-### Automatic `Node` installation
-- Available from Vaadin versions 16
-- If no global or local Node installation is found Node will be automatically installed to `~/.vaadin`
-  - Only requires the first project to install as later can use the same installation
-  - No need to have Node installed for CI
-- Uses proxy data from 
-  - System properties
-  - {project}/.npmrc
-  - ~/.npmrc
-  - Environment variables
-### `pnpm` is the default frontend package manager
-- Now pnpm is used by default instead of npm
-  - npm was still default in Vaadin 14.2 and 15
-- No migration needed - pnpm is installed once to /.vaadin inside home folder. See [differences here](https://github.com/vaadin/flow-and-components-documentation/blob/V14-next/documentation/advanced/tutorial-switch-npm-pnpm.asciidoc) for more information about what has changed
-
-### `Devmode` is run as a separate thread to speed up server startup
-- Allows server to continue startup parallel to Flow development mode process which runs pnpm/npm and webpack build
-- The browser shows a white page that is automatically refreshed to open app once devmode process has finished
-- As server is started up faster, there is no timeout from "run from IDE" or from server plugins
+Here are the highlighted new and improved features in vaadin 17. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
 
@@ -35,7 +15,7 @@ Here are the highlighted new and improved features in Vaadin 16. To see the full
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 16 is supported for one month after Vaadin 17 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -73,7 +53,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 16 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+vaadin 17 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
@@ -108,7 +88,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of Vaadin 16 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of vaadin 17 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
