@@ -223,8 +223,8 @@
         },
         "vaadin-menu-bar": {
             "component": true,
-            "javaVersion": "1.0.2",
-            "jsVersion": "1.0.3",
+            "javaVersion": "1.0.3",
+            "jsVersion": "1.0.5",
             "npmName": "@vaadin/vaadin-menu-bar"
         },
         "vaadin-notification": {
