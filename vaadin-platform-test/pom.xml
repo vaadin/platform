@@ -45,7 +45,7 @@
             </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>vaadin-prerelase</id>
+            <id>vaadin-prerelases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
         <pluginRepository>
