@@ -28,6 +28,16 @@ Here are the highlighted new and improved features in Vaadin 16. To see the full
 - The browser shows a white page that is automatically refreshed to open app once devmode process has finished
 - As server is started up faster, there is no timeout from "run from IDE" or from server plugins
 
+### RTL Language Support
+
+All components have full support for right-to-left languages (e.g. arabic, hebrew) so that they render correctly when the UI is in RTL mode.
+
+### Hierarchy column renderer 
+Component renderer can be used in TreeGrid hierarchy column.
+
+### Grid hidden columns performance fix
+Hidden columns are no longer rendered to the DOM, which improves Grid/TreeGrid/GridPro performance with a large number of hidden columns.
+
 ### Framework
 
 ### Components
