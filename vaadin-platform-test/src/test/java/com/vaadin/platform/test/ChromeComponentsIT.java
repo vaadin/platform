@@ -141,7 +141,7 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
-        DatePickerElement datePicker = $(DatePickerElement.class).id("datepicker");
+        DatePickerElement datePicker = $("vaadin-date-picker-text-field").id("datepicker");
 
         TextFieldElement textField = datePicker.$(TextFieldElement.class)
                 .id("input");
