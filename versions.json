@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "3.0.6"
+            "javaVersion": "3.0.7"
         },
         "flow-cdi": {
             "javaVersion": "12.0.0"
@@ -262,7 +262,7 @@
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-router": {
-            "jsVersion": "1.7.1",
+            "jsVersion": "1.7.2",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
