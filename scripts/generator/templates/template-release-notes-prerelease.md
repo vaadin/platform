@@ -38,6 +38,12 @@ Component renderer can be used in TreeGrid hierarchy column.
 ### Grid hidden columns performance fix
 Hidden columns are no longer rendered to the DOM, which improves Grid/TreeGrid/GridPro performance with a large number of hidden columns.
 
+### Components
+- New component: `Vaadin DateTimePicker`
+- Draggable, Resizable and Modal configuration for `Dialog`
+- `vaadin-ordered-layout`: support for more flexbox features in FlexLayout and `Scroller` for scrolling overflowing content
+- `vaadin-time-picker`: New max and min time API
+
 ### Framework
 
 ### Components
