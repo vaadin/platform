@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.repo_greeting }}
+        issue-message: 'Thanks for using Vaadin Platform, we appreciate your help and are going to take care of this as soon as possible. '' first issue'
+        pr-message: 'Thanks for your contribution, you are going to make Vaadin Platform better.'' first pr'
