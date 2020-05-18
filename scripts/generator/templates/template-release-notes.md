@@ -47,10 +47,6 @@ Before this change, all routing components were created eagerly, and events were
 **This change fixes a design flaw and prevents developers from accidentally compromising application security when routing components are not created if the end-user does not have access to them**. 
 **In case this change would break your existing Vaadin 10+ project, please [open an issue](https://github.com/vaadin/flow/issues).**
 
-### Portlet 3.0 support for Pluto portal
-- Enabled by using an [add-on](https://github.com/vaadin/portlet)
-- [Documentation](https://github.com/vaadin/flow-and-components-documentation/blob/V14-next/documentation/portlet-support/portlet-01-overview.asciidoc) and [demo](https://github.com/vaadin/addressbook-portlet)
-
 ### Components
 - New component: `Vaadin DateTimePicker`
 - Draggable, Resizable and Modal configuration for `Dialog`
