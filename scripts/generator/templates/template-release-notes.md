@@ -12,7 +12,7 @@ Here are the highlighted new and improved features in Vaadin 16. To see the full
 - Available from Vaadin versions 16
 - If no global or local Node installation is found Node will be automatically installed to `~/.vaadin`
   - Only requires the first project to install as later can use the same installation
-  - No need to have Node installed for CI
+  - No need to have Node installed globally for CI
 - Uses proxy data from 
   - System properties
   - {project}/.npmrc
