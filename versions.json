@@ -7,7 +7,7 @@
             "javaVersion": "11.2.0"
         },
         "flow-spring": {
-            "javaVersion": "12.2.0.beta1"
+            "javaVersion": "12.2.0"
         },
         "gradle": {
             "javaVersion": "1.2"
