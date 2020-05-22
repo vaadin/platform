@@ -11,51 +11,17 @@ Vaadin 14 is an LTS (long term support) version, which will be supported for 5 y
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-## New and Noteworthy Since 14.1
+## New and Noteworthy Since 14.2
 
-### Automatic Node and npm installation
-- If no global or local Node installation is found Node will be automatically installed to ~/.vaadin
-  - Only requires the first project to install as later can use the same installation
-  - No need to have Node installed for CI
-- Uses proxy data from 
-  - System properties
-  - {project}/.npmrc
-  - ~/.npmrc
-  - Environment variables
+### RTL (right-to-left)
 
-### Better frontend dependency management by using _pnpm_ AKA _performant npm_
-- Packages are by default cached locally and linked instead of downloaded for every project
--> Faster recurring builds in comparison to _npm_ ([benchmarks](https://www.npmjs.com/package/pnpm#benchmark))
-- Only one `package.json` file used, reducing complexity (previously another file was in `/target`)
--> More reliable build when updating Vaadin version
--> This change applies also for npm since 14.0 or 14.1
-- **No migration needed**, see [differences here](https://github.com/vaadin/flow-and-components-documentation/blob/V14-next/documentation/advanced/tutorial-switch-npm-pnpm.asciidoc) for more information about what has changed
-- For running pnpm on a CI server, please see details [here](https://pnpm.js.org/en/continuous-integration)
+All components have full support for RTL languages (e.g. arabic, hebrew) so that they render correctly when the UI is in RTL mode.
 
-**NOTE: npm is still used by default, so you need to explicitly enable pnpm**
-See instructions from [vaadin.com/docs/](https://vaadin.com/docs/v15/flow/advanced/tutorial-switch-npm-pnpm.html).
+### Minor improvements in Components
 
-### Fire routing life-cycle `BeforeEnterEvent` from parent -> child order
-This change affects the ordering of routing events and the timeline when routing components are created.
-After this change, routing events are fired in the following order:
-1) Global routing handlers are invoked
-2) `setParameter` is invoked for the topmost navigation layer (main layout)
-3) `BeforeEnterHandler` handler is invoked for the topmost navigation layer (main layout) if implemented
-4) Next level component instances are created, and steps 2-3 triggered for that layer
-
-Before this change, all routing components were created eagerly, and events were fired from child->parent order with first `setParameter` invoked, then global handlers and last `BeforeEnterHandler`s.
-**This change fixes a design flaw and prevents developers from accidentally compromising application security when routing components are not created if the end-user does not have access to them**. 
-**In case this change would break your existing Vaadin 10+ project, please [open an issue](https://github.com/vaadin/flow/issues).**
-
-### Portlet 3.0 support for Pluto portal
-- Enabled by using an [add-on](https://github.com/vaadin/portlet)
-- [Documentation](https://github.com/vaadin/flow-and-components-documentation/blob/V14-next/documentation/portlet-support/portlet-01-overview.asciidoc) and [demo](https://github.com/vaadin/addressbook-portlet)
-
-### Components
-- New component: `Vaadin DateTimePicker`
-- Draggable, Resizable and Modal configuration for `Dialog`
-- `vaadin-ordered-layout`: add support for flexLayout feature and `Scroller` for scrolling overflowing content
-- `vaadin-time-picker`: New max and min time API
+- Hierarchy column renderer - component renderer can be used in TreeGrid hierarchy column
+- Grid hidden columns performance fix - hidden columns are no longer rendered to the DOM, which improves Grid/TreeGrid/GridPro performance with a large number of hidden columns
+- AutoOpenDisabled - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus.
 
 {{changesSincePrevious}}
 
@@ -87,7 +53,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 
 # Getting Started with Vaadin 14
 ## App starters
-The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in.
 
 ## Maven Archetypes
 
@@ -151,7 +117,7 @@ Development is supported with the following operating systems, for any OS versio
   - Safari on macOS 10.9 (OS X Mavericks) or later
   - Edge on Windows 10 or later
 - Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
-  - (see _Known Issues and Limitations_ below)  
+  - (see _Known Issues and Limitations_ below)
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
@@ -197,7 +163,7 @@ This lists products that have breaking changes from V13
 Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/v14-migration/app-layout-v2-migration-guide.html)
 
 ### ComboBox and Datepicker
-- The clear button is now hidden by default. To make it visible, use setClearButtonVisible(true). (Note: if the value of the combo box is empty, the clear button is always hidden.) 
+- The clear button is now hidden by default. To make it visible, use setClearButtonVisible(true). (Note: if the value of the combo box is empty, the clear button is always hidden.)
 
 # Known Issues and Limitations
 
