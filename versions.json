@@ -89,7 +89,7 @@
         },
         "vaadin-accordion": {
             "component": true,
-            "javaVersion": "2.1.0.alpha1",
+            "javaVersion": "2.1.0.alpha2",
             "jsVersion": "1.1.0",
             "npmName": "@vaadin/vaadin-accordion"
         },
