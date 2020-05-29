@@ -241,7 +241,7 @@
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
         "vaadin-overlay": {
-            "jsVersion": "3.2.19",
+            "jsVersion": "3.2.20",
             "npmName": "@vaadin/vaadin-overlay",
             "releasenotes": true
         },
