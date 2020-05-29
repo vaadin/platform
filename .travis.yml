@@ -29,6 +29,7 @@ install:
 script:
 - cd scripts/generator && npm test && cd ../../
 - mvn clean verify $VAADIN_OPTS -B -Pproduction
+- scripts/validateVersions.js
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
