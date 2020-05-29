@@ -13,15 +13,12 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy Since 14.2
 
-### RTL (right-to-left)
+### Live browser reload when using Java hot-swap tools
+When using HotswapAgent, Spring Boot Devtools or JRebel, the browser is now automatically refreshed as soon as the Java changes have been compiled.
+
+### RTL (right-to-left) Support
 
 All components have full support for RTL languages (e.g. arabic, hebrew) so that they render correctly when the UI is in RTL mode.
-
-### Minor improvements in Components
-
-- Hierarchy column renderer - component renderer can be used in TreeGrid hierarchy column
-- Grid hidden columns performance fix - hidden columns are no longer rendered to the DOM, which improves Grid/TreeGrid/GridPro performance with a large number of hidden columns
-- AutoOpenDisabled - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening
 
 Previous features in Vaadin 14 can be found from [14.2 release note](https://github.com/vaadin/platform/releases/tag/14.2.0)
 
