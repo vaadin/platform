@@ -22,6 +22,7 @@ install:
 - mkdir -p ~/.vaadin && echo '{"username":"'$VAADIN_PRO_KEY_USER'","proKey":"'$VAADIN_PRO_KEY_KEY'"}"' > ~/.vaadin/proKey
 - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESS_KEY" >> local.properties
 - scripts/generateBoms.sh
+- scripts/validateVersions.js
 - mvn install $VAADIN_OPTS -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
 - mvn package $VAADIN_OPTS -Pjavadocs -DskipTests
@@ -29,7 +30,6 @@ install:
 script:
 - cd scripts/generator && npm test && cd ../../
 - mvn clean verify $VAADIN_OPTS -B -Pproduction
-- scripts/validateVersions.js
 - scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh

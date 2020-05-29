@@ -2,23 +2,14 @@
 console.log('NPM dependency tree validation');
 
 const fs = require('fs');
+const path = require('path');
+
 const asyncExec = require('util').promisify(require('child_process').exec);
 async function run(cmd) {
   const {stdout} = await asyncExec(cmd);
   return stdout;
 }
 
-function clean() {
-  try {
-    fs.unlinkSync('package.json')
-  } catch (error) {
-  }
-  try {
-    fs.unlinkSync('package-lock.json')
-  } catch (error) {
-  }
-  fs.rmdirSync('node_modules', { recursive: true })
-}
 
 const versions = require('../versions.json');
 const pkg = {
@@ -43,15 +34,22 @@ Object.entries(versions.vaadin)
     return p;
   }, pkg.dependencies);
 
+const curDir = process.cwd();
+const tmpDir = path.resolve('target/validate-version');
+fs.mkdirSync(tmpDir, { recursive: true });
+process.chdir(tmpDir);
 
-clean();
 fs.writeFileSync('package.json', JSON.stringify(pkg, null, 1));
+if (fs.existsSync('package-lock.json')){
+  fs.unlinkSync('package-lock.json');
+} 
 
 console.log('Running npm install ...');
 run('npm install')
 .then(() => console.log("Running npm ls ..."))
 .then(() => run('npm ls'))
 .then(out => {
+  process.cwd(curDir);
   const packages = {};
   out.split(/\n[^@\w]+/)
   .forEach(l => {
@@ -74,5 +72,4 @@ run('npm install')
     }
   });
   console.log("NPM dependency tree is OK");
-  clean();
 });
