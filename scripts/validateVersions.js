@@ -51,25 +51,30 @@ run('npm install')
 .then(out => {
   process.cwd(curDir);
   const packages = {};
+  const errors = [];
   out.split(/\n[^@\w]+/)
   .forEach(l => {
     const r = /^(.+)@(\d[^ ]+)/.exec(l);
     if (r) {
       if (packages[r[1]] && packages[r[1]] !== r[2]) {
-        console.log(out);
-        console.error(`
-        !!!!!!!!!!!!!
-        >> ERROR found duplicated dependency ${r[1]} ${packages[r[1]]} !== ${r[2]}
-
-        TIP: next commands might help to fix the issue:
-        npm ls | grep "${r[1]}"
-        npm dist-tag add ${r[1]}@x.x.x latest
-        !!!!!!!!!!!!!\n`)
-        process.exit(1);
+        errors.push(`>> ERROR found duplicated dependency ${r[1]} ${packages[r[1]]} !== ${r[2]}`);
       } else {
         packages[r[1]] = r[2];
       }
     }
   });
+  return errors;
+}).then(errors => {
+  if (errors.length) {
+    console.error(`
+    !!!!!!!!!!!!!
+     ${errors.join('\n     ')}
+
+    TIP: next commands might help to fix the issue:
+    npm ls | grep "package_name"
+    npm dist-tag add package_name@x.x.x latest
+    !!!!!!!!!!!!!\n`);
+    process.exit(1);
+  }
   console.log("NPM dependency tree is OK");
 });
