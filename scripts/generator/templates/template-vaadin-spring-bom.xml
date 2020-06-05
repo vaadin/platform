@@ -525,6 +525,11 @@
                 <artifactId>mpr-v8</artifactId>
                 <version>${mpr.v8.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>${vaadin.license.checker.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
