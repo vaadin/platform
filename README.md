@@ -40,6 +40,7 @@ These components provide a Java API for web components.
 | Crud* | https://github.com/vaadin/vaadin-crud-flow |
 | Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
 | DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
+| DateTimePicker | https://github.com/vaadin/vaadin-date-time-picker-flow |
 | Details | https://github.com/vaadin/vaadin-details-flow |
 | Dialog | https://github.com/vaadin/vaadin-dialog-flow |
 | FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
