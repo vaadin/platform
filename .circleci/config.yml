@@ -10,10 +10,10 @@ workflows:
       - maven/test # checkout, build, test, and upload test results
   shellcheck:
     jobs:
-        - shellcheck/check:
-            pre-steps:
-              - run:
-                  name: "Install git and SSH client"
-                  command: | scripts/generateBoms.sh
+      - shellcheck/check:
+        pre-steps:
+          - run:
+            name: "Install git and SSH client"
+            command: | scripts/generateBoms.sh
           
 
