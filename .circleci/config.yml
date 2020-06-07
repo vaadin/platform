@@ -1,19 +1,24 @@
-version: 2.1
-
-orbs:
-  shellcheck: circleci/shellcheck@1.3.16
-  maven: circleci/maven@0.0.12
-
-workflows:
-  shellcheck:
-    jobs:
-      - shellcheck/check:
-        pre-steps:
-          - run:
-            name: "Generate Boms"
-            command: |
-              scripts/generateBoms.sh          
-  maven_test:
-    jobs:
-      - maven/test # checkout, build, test, and upload test results
-
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    steps: # a collection of executable commands
+      - checkout # check out source code to working directory
+      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+          key: platform-{{ checksum "versions.json" }}
+      - run: scripts/generateBoms.sh
+      - run: scripts/validateVersions.js
+      - run: mvn install -Dvaadin.bowerMode=false -Pnpm-it,!bower-it -DskipTests
+      - run: scripts/checkForNonPinnedDependencies.sh
+      - run: mvn package -Dvaadin.bowerMode=false  -Pjavadocs -DskipTests
+      - run: npm install -g bower
+      - run: cd scripts/generator && npm test && cd ../../
+      - run: mvn clean verify -Dvaadin.bowerMode=false  -B -Pproduction
+      - run: scripts/verifyBowerDependencies.sh
+      - run: scripts/verifyNpmDependencies.sh
+      - run: scripts/npmShrinkwrap.sh      
+      - save_cache: # saves the project dependencies
+          paths:
+            - ~/.m2
+            - ~/.npm 
+          key: circleci-demo-java-spring-{{ checksum "versions.xml" }}
+      
