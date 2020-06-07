@@ -16,7 +16,7 @@ jobs: # a collection of steps
       - run: mvn package -Dvaadin.bowerMode=false  -Pjavadocs -DskipTests
       - run: npm install bower
       - run: cd scripts/generator && npm test && cd ../../
-      - run: echo mvn verify -Dvaadin.bowerMode=false  -B -Pproduction
+      - run: mvn clean verify -Dvaadin.bowerMode=false  -B -Pproduction
       - run: scripts/verifyBowerDependencies.sh
       - run: scripts/verifyNpmDependencies.sh
       - run: scripts/npmShrinkwrap.sh      
