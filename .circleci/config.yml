@@ -12,7 +12,7 @@ jobs: # a collection of steps
       - run: mvn install -Dvaadin.bowerMode=false -Pnpm-it,!bower-it -DskipTests
       - run: scripts/checkForNonPinnedDependencies.sh
       - run: mvn package -Dvaadin.bowerMode=false  -Pjavadocs -DskipTests
-      - run: npm install -g bower
+      - run: npm install bower
       - run: cd scripts/generator && npm test && cd ../../
       - run: mvn clean verify -Dvaadin.bowerMode=false  -B -Pproduction
       - run: scripts/verifyBowerDependencies.sh
