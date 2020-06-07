@@ -10,7 +10,7 @@ workflows:
       - shellcheck/check:
         pre-steps:
           - run:
-            name: "Install git and SSH client"
+            name: "Generate Boms"
             command: |
               scripts/generateBoms.sh          
   maven_test:
