@@ -24,5 +24,5 @@ jobs: # a collection of steps
           paths:
             - ~/.m2
             - ~/.npm 
-          key: circleci-demo-java-spring-{{ checksum "versions.json" }}
+          key: platform-{{ checksum "versions.json" }}
       
