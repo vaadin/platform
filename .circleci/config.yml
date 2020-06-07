@@ -8,7 +8,7 @@ jobs: # a collection of steps
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           key: platform-{{ checksum "versions.json" }}
       - run: mkdir -p $HOME/.vaadin    
-      - run: echo '{"username":"manolo@vaadin.com","proKey":"'$PROKEY'"}' > $HOME/.vaadin
+      - run: echo '{"username":"manolo@vaadin.com","proKey":"'$PROKEY'"}' > $HOME/.vaadin/proKey
       - run: scripts/generateBoms.sh
       - run: scripts/validateVersions.js
       - run: mvn install -Dvaadin.bowerMode=false -Pnpm-it,!bower-it -DskipTests
