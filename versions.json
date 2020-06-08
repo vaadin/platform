@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "3.2.0.alpha4"
+            "javaVersion": "3.2.0.alpha6"
         },
         "flow-cdi": {
             "javaVersion": "12.0.0"
@@ -382,6 +382,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
+            "javaVersion": "1.0.5",
             "jsVersion": "2.1.2"
         },
         "vaadin-rich-text-editor": {
