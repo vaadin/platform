@@ -117,7 +117,7 @@
         },
         "vaadin-combo-box": {
             "component": true,
-            "javaVersion": "3.0.9",
+            "javaVersion": "3.0.10",
             "jsVersion": "5.0.11",
             "npmName": "@vaadin/vaadin-combo-box"
         },
