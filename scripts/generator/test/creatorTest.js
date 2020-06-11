@@ -1,55 +1,6 @@
 const expect = require('chai').expect;
 const creator = require('../src/creator.js');
 
-describe('Bower creator', function () {
-    it('should replace dependencies with a valid object of Javascript versions', function () {
-        const testVersions = {
-            "foo-bar": {
-                "javaVersion": "2.22",
-                "jsVersion": "1.11"
-            }
-        };
-
-        const testTemplate = {
-            foo: "bar",
-            dependencies: "removed"
-        };
-
-        const expectedResult = {
-            foo: "bar",
-            dependencies: {
-                "foo-bar": "foo-bar#1.11",
-            }
-        };
-
-        const result = creator.createBower(testVersions, testTemplate);
-
-        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
-    });
-
-    it('should skip pure java dependencies', function () {
-        const testVersions = {
-            "bar-foo": {
-                "javaVersion": "2.22"
-            }
-        };
-
-        const testTemplate = {
-            foo: "bar",
-            dependencies: "removed"
-        };
-
-        const expectedResult = {
-            foo: "bar",
-            dependencies: {}
-        };
-
-        const result = creator.createBower(testVersions, testTemplate);
-
-        expect(result).to.equal(JSON.stringify(expectedResult, null, 2));
-    });
-});
-
 describe('Package json creator', function () {
     it('should replace dependencies with a valid npmName of npmVersions', function () {
         const testVersions = {

@@ -4,23 +4,6 @@ const compareVersions = require('compare-versions');
 
 /**
 @param {Object} versions data object for product versions.
-@param {Object} bowerTemplate template data object to put versions to.
-*/
-function createBower(versions, bowerTemplate) {
-    let jsDeps = {};
-    for (let [name, version] of Object.entries(versions)) {
-        if (version.jsVersion) {
-            jsDeps[name] = `${name}#${version.jsVersion}`;
-        }
-    }
-
-    bowerTemplate.dependencies = jsDeps;
-
-    return JSON.stringify(bowerTemplate, null, 2);
-}
-
-/**
-@param {Object} versions data object for product versions.
 @param {Object} packageJsonTemplate template data object to put versions to.
 */
 function createPackageJson(versions, packageJsonTemplate) {
@@ -94,7 +77,7 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
             componentVersions = componentVersions.concat(result);
         }
     }
-    
+
     const changed = getChangedSincePrevious(versions);
 
     const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
@@ -110,22 +93,22 @@ function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
     let componentVersions = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
-        
+
         if (version.component) {
             const result = buildComponentReleaseNoteString(versionName, version);
             componentVersions = componentVersions.concat(result);
         }
     }
-    
+
     const changed = getChangedReleaseNotesSincePrevious(versions);
 
     let modulesReleaseNotes = '';
     changed.split("\n").forEach((split) => {
         modulesReleaseNotes += split.substring(0, 1) == '#' || split == '' ? split+'\n\n' : '## '+requestGH(split)['name']+'\n\n'+requestGH(split)['body']+'\n\n';
     });
-    
+
     const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
-    
+
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
 }
 
@@ -140,7 +123,7 @@ function getChangedSincePrevious(versions) {
     }
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
     const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
-    const changesString = generateChangesString(allVersions, allPreviousVersions);    
+    const changesString = generateChangesString(allVersions, allPreviousVersions);
     let result = '';
     if (changesString) {
         result = result.concat(`## Changes since [${previousVersion}](https://github.com/vaadin/platform/releases/tag/${previousVersion})\n`);
@@ -194,7 +177,7 @@ function generateChangesString(allVersions, allPreviousVersions) {
             if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1) {
                 const result = buildComponentReleaseString(versionName, version);
                 componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
-            }            
+            }
         }
     }
     let result = '';
@@ -230,7 +213,7 @@ function getReleaseNotesForChanged(allVersions, allPreviousVersions) {
             if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1) {
                 const result = buildComponentReleaseNoteString(versionName, version);
                 componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
-            }            
+            }
         }
     }
     let result = '';
@@ -373,7 +356,7 @@ function getModulesReleaseNoteLink(name, version) {
 function buildComponentReleaseString(versionName, version) {
     const name = versionName
                 .replace(/-/g, ' ')
-                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});    
+                .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
     //separated for readability
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
@@ -382,7 +365,7 @@ function buildComponentReleaseString(versionName, version) {
     result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
     result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
-    
+
     if(version.components){
         const componentsString = version.components.map(c => `  - ${c}`)
                                                    .join('\n');
@@ -400,10 +383,10 @@ function buildComponentReleaseNoteString(versionName, version) {
     let result = `# ${name}\n`;
     //let result = '';
     //result = result.concat(version.pro ? '**(PRO)** ' : '');
-    
+
     result = result.concat(version.javaVersion ? `## Java: ${version.javaVersion}\n` : '');
     result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
-    
+
     result = result.concat(version.jsVersion ? `## WebComponent: ${version.jsVersion}\n` : '');
     result = result.concat(version.jsVersion ? `https://api.github.com/repos/vaadin/${versionName}/releases/tags/v${version.jsVersion}\n` : '');
 
@@ -421,15 +404,14 @@ function requestGH(path) {
         return '';
     }
     let retValue = '';
-    try {        
+    try {
         retValue = JSON.parse(res.getBody('utf8'));
     } catch (error) {
-        retValue = error;     
+        retValue = error;
     }
     return retValue
 }
 
-exports.createBower = createBower;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;

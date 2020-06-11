@@ -1,7 +1,7 @@
 sudo: false
 dist: trusty
 language: java
-node_js: 
+node_js:
   - "10.17.0"
 cache:
   directories:
@@ -10,7 +10,7 @@ cache:
 matrix:
   include:
     - name: "NPM MODE"
-      env: VAADIN_OPTS="-Dvaadin.bowerMode=false -Pnpm-it,!bower-it"
+      env: VAADIN_OPTS="-Pnpm-it"
 branches:
   only:
   - master
@@ -26,11 +26,9 @@ install:
 - mvn install $VAADIN_OPTS -DskipTests
 - scripts/checkForNonPinnedDependencies.sh
 - mvn package $VAADIN_OPTS -Pjavadocs -DskipTests
-- npm install -g bower
 script:
 - cd scripts/generator && npm test && cd ../../
 - mvn clean verify $VAADIN_OPTS -B -Pproduction
-- scripts/verifyBowerDependencies.sh
 - scripts/verifyNpmDependencies.sh
 - scripts/npmShrinkwrap.sh
 env:
