@@ -143,7 +143,7 @@ public class ChromeComponentsIT extends ParallelTest {
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
         DatePickerElement datePicker = $(DatePickerElement.class).id("datepicker");
 
-        TextFieldElement textField = datePicker.$(TextFieldElement.class)
+        TestBenchElement textField = datePicker.$("vaadin-date-picker-text-field")
                 .id("input");
         assertElementRendered(textField);
 
@@ -544,26 +544,26 @@ public class ChromeComponentsIT extends ParallelTest {
 
         assertLog("Context menu Item 0 is clicked");
     }
-    
-    @Test	
-    public void usageStatisticIsLogged() throws InterruptedException {	
-        Assert.assertTrue($(ButtonElement.class).exists());	
-        // wait 5 seconds for collecting values in local storage	
-        Thread.sleep(5000);	
+
+    @Test
+    public void usageStatisticIsLogged() throws InterruptedException {
+        Assert.assertTrue($(ButtonElement.class).exists());
+        // wait 5 seconds for collecting values in local storage
+        Thread.sleep(5000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object mode = js.executeScript("return Vaadin.developmentMode");	
+        Object mode = js.executeScript("return Vaadin.developmentMode");
 
-        String item = (String) js.executeScript(	
-                "return window.localStorage.getItem('vaadin.statistics.basket');");	
+        String item = (String) js.executeScript(
+                "return window.localStorage.getItem('vaadin.statistics.basket');");
 
-        if(Boolean.TRUE.equals(mode)){	
-            Assert.assertTrue("Under development mode, the checked usage statistics are not found",	
-                    item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));	
-        } else {	
-            Assert.assertTrue("Under production mode, the usage statistics info should be empty",	
-                    (item == null || item.length() == 0));	
-        }	
+        if(Boolean.TRUE.equals(mode)){
+            Assert.assertTrue("Under development mode, the checked usage statistics are not found",
+                    item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));
+        } else {
+            Assert.assertTrue("Under production mode, the usage statistics info should be empty",
+                    (item == null || item.length() == 0));
+        }
 
     }
 
