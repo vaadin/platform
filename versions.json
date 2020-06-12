@@ -274,8 +274,8 @@
         },
         "vaadin-select": {
             "component": true,
-            "javaVersion": "3.2.0.alpha1",
-            "jsVersion": "2.3.0-alpha1",
+            "javaVersion": "3.2.0.alpha2",
+            "jsVersion": "2.3.0-alpha3",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
@@ -341,8 +341,8 @@
         },
         "vaadin-charts": {
             "component": true,
-            "javaVersion": "8.1.0.alpha1",
-            "jsVersion": "6.2.4",
+            "javaVersion": "9.0.0.alpha1",
+            "jsVersion": "7.0.0-alpha3",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
