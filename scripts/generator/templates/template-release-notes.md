@@ -4,11 +4,22 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy
+## New and Noteworthy Since Vaadin 16
 
 Here are the highlighted new and improved features in vaadin 17. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
+#### Features
+- A new client forms API for TypeScript (TS) views
+  - New Binder API to associate a UI Field with a Model property.
+  - Java Generator now produces Form Models for TS to make easy bind it to the UI elments.
+  - Bean Validators in client side able to reuse Java Bean annotations, and to add custom validations
+- Live Reload in browser
+- Support for Url template
+
+#### Breaking changes
+- Removed the PWA install popup. Because `beforeInstallPrompt` was removed from browsers specs
+- Throwing instead of Warning when configuration annotations like `@Push` or `@BodySize` are not in the `AppShell`class
 
 ### Components
 
