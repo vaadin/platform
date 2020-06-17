@@ -43,10 +43,10 @@
             "npmVersion": "3.0.1"
         },
         "iron-list": {
-            "javaVersion": "2.0.0",
-            "jsVersion": "2.0.19",
+            "javaVersion": "2.1.0.beta2",
+            "jsVersion": "2.0.20",
             "npmName": "@polymer/iron-list",
-            "npmVersion": "3.0.2"
+            "npmVersion": "3.1.0"
         },
         "iron-media-query": {
             "jsVersion": "2.1.0",
