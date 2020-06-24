@@ -95,8 +95,8 @@
         },
         "vaadin-app-layout": {
             "component": true,
-            "javaVersion": "2.0.5",
-            "jsVersion": "2.0.5",
+            "javaVersion": "2.0.6",
+            "jsVersion": "2.0.6",
             "npmName": "@vaadin/vaadin-app-layout"
         },
         "vaadin-button": {
@@ -139,8 +139,8 @@
         },
         "vaadin-date-picker": {
             "component": true,
-            "javaVersion": "2.0.8",
-            "jsVersion": "4.0.8",
+            "javaVersion": "2.0.9",
+            "jsVersion": "4.0.9",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
@@ -161,8 +161,8 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "2.1.0",
-            "jsVersion": "2.3.0",
+            "javaVersion": "2.1.1",
+            "jsVersion": "2.3.1",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.1.4",
-            "jsVersion": "5.5.3",
+            "javaVersion": "4.1.5",
+            "jsVersion": "5.5.6",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -208,7 +208,7 @@
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
-            "jsVersion": "2.3.1",
+            "jsVersion": "2.3.2",
             "npmName": "@vaadin/vaadin-list-mixin"
         },
         "vaadin-login": {
@@ -300,8 +300,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "2.1.1",
-            "jsVersion": "2.5.5",
+            "javaVersion": "2.1.2",
+            "jsVersion": "2.5.6",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
