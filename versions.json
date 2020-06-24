@@ -117,14 +117,14 @@
         },
         "vaadin-combo-box": {
             "component": true,
-            "javaVersion": "4.2.0.alpha1",
-            "jsVersion": "5.3.0-alpha3",
+            "javaVersion": "4.2.0.alpha2",
+            "jsVersion": "5.3.0-alpha4",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
             "component": true,
-            "javaVersion": "4.2.0.alpha1",
-            "jsVersion": "4.5.0-alpha1",
+            "javaVersion": "4.2.0.alpha2",
+            "jsVersion": "4.5.0-alpha2",
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
@@ -161,8 +161,8 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "3.2.0.alpha1",
-            "jsVersion": "2.5.0-alpha1",
+            "javaVersion": "3.2.0.alpha3",
+            "jsVersion": "2.5.0-alpha4",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "5.2.0.alpha1",
-            "jsVersion": "5.7.0-alpha2",
+            "javaVersion": "5.2.0.alpha2",
+            "jsVersion": "5.7.0-alpha4",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -231,8 +231,8 @@
         },
         "vaadin-notification": {
             "component": true,
-            "javaVersion": "3.2.0.alpha1",
-            "jsVersion": "1.6.0-alpha1",
+            "javaVersion": "3.2.0.alpha2",
+            "jsVersion": "1.6.0-alpha2",
             "npmName": "@vaadin/vaadin-notification"
         },
         "vaadin-ordered-layout": {
@@ -274,8 +274,8 @@
         },
         "vaadin-select": {
             "component": true,
-            "javaVersion": "3.2.0.alpha2",
-            "jsVersion": "2.3.0-alpha3",
+            "javaVersion": "3.2.0.alpha3",
+            "jsVersion": "2.3.0-alpha4",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
@@ -301,8 +301,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "3.2.0.alpha1",
-            "jsVersion": "2.7.0-alpha4",
+            "javaVersion": "3.2.0.alpha2",
+            "jsVersion": "2.7.0-alpha5",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
@@ -376,8 +376,8 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "3.2.0.alpha1",
-            "jsVersion": "2.2.0-alpha1",
+            "javaVersion": "3.2.0.alpha2",
+            "jsVersion": "2.2.0-alpha3",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
