@@ -7,12 +7,20 @@ For running the project, you need to execute the following script before any mav
 scripts/generateBoms.sh
 ```
 
+Probably want to make platform depend on other vaadin products snapshots like Flow, then add the following flag to the script
+```
+scripts/generateBoms.sh --useSnapshots
+```
+
+
 ## Installing in local repo
 
-You can install the platform artifacts in your local maven cache by running the following command
+You can install the platform artifacts in your local maven cache by running the following command.
 ```
 mvn clean install -DskipTests -Dnpm-it=false
 ````
+
+Note that unit and integration tests are skipped because they take a while and needs some preparation as it's indicated in the following section.
 
 ## Running tests
 
@@ -42,7 +50,7 @@ Note that the number of test in parallel can be increased if your computer has e
 ```
 mvn verify \
    -Dwebdriver.chrome.driver=../chromedriver \
-   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
+   -Dcom.vaadin.testbench.Parameters.testsInParallel=1 \
    -Dit.test=ComponentsIT
 ```
 
