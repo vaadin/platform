@@ -29,4 +29,4 @@ _remember to remove those that are not applicable_
 Under constrution (would be used instead of User Value document - in the 2nd iteration of the template):  
 - [ ] Documentation: [here link to the documentation]
 - [ ] How to test? [here link to the GH issue or some external document with the test scenario]
-- [ ] Known issues: [here list of issues, preferably links to GH issues]
+- [ ] Limitations: [here list of limitations, preferably links to GH issues]
