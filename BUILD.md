@@ -17,7 +17,7 @@ scripts/generateBoms.sh --useSnapshots
 
 You can install the platform artifacts in your local maven cache by running the following command.
 ```
-mvn clean install -DskipTests -Dnpm-it=false
+mvn clean install -DskipTests -DskipITs
 ````
 
 Note that unit and integration tests are skipped because they take a while and needs some preparation as it's indicated in the following section.
