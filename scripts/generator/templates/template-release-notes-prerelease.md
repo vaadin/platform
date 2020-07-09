@@ -11,16 +11,11 @@ Vaadin 14 is an LTS (long term support) version, which will be supported for 5 y
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-## New and Noteworthy Since 14.2
+## New and Noteworthy Since 14.3
 
 ### Live browser reload when using Java hot-swap tools
 When using HotswapAgent, Spring Boot Devtools or JRebel, the browser is now automatically refreshed as soon as the Java changes have been compiled.
 
-### RTL (right-to-left) Support
-
-All components have full support for RTL languages (e.g. arabic, hebrew) so that they render correctly when the UI is in RTL mode.
-
-Previous features in Vaadin 14 can be found from [14.2 release note](https://github.com/vaadin/platform/releases/tag/14.2.0)
 
 {{changesSincePrevious}}
 
@@ -89,7 +84,7 @@ This is the prerelease version of Vaadin 14.x for evaluating a number of new fea
 
 ## OSGi support
 - OSGi with npm does not work in V14.0.0-V14.2.0. We are working on a fix for V14.x.
-- OSGi with Bower has problems with V14.0.0-V14.2.0
+- OSGi with Bower has problems with V14.0.0-V14.3.0
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
