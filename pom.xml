@@ -14,7 +14,7 @@
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
     <url>https://vaadin.com</url>
-    
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -37,18 +37,8 @@
         <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
+        <module>vaadin-platform-test</module>
     </modules>
-    <profiles>
-        <profile>
-            <id>npm-it</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>vaadin-platform-test</module>
-            </modules>
-        </profile>        
-    </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
