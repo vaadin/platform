@@ -13,16 +13,6 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy Since 14.3
 
-### RTL (right-to-left)
-
-All components have full support for RTL languages (e.g. arabic, hebrew) so that they render correctly when the UI is in RTL mode.
-
-### Minor improvements in Components
-
-- Hierarchy column renderer - component renderer can be used in TreeGrid hierarchy column
-- Grid hidden columns performance fix - hidden columns are no longer rendered to the DOM, which improves Grid/TreeGrid/GridPro performance with a large number of hidden columns
-- AutoOpenDisabled - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus.
-
 {{changesSincePrevious}}
 
 ## Included Projects and Change Log

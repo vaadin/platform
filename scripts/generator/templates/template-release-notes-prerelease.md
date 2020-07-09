@@ -13,10 +13,6 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 ## New and Noteworthy Since 14.3
 
-### Live browser reload when using Java hot-swap tools
-When using HotswapAgent, Spring Boot Devtools or JRebel, the browser is now automatically refreshed as soon as the Java changes have been compiled.
-
-
 {{changesSincePrevious}}
 
 ## Included Projects and Change Log
