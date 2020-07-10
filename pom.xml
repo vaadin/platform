@@ -37,8 +37,20 @@
         <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
-        <module>vaadin-platform-test</module>
     </modules>
+
+    <profiles>
+        <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
+        <profile>
+            <id>npm-it</id>	
+            <activation>	
+                <activeByDefault>true</activeByDefault>	
+            </activation>	
+            <modules>	
+                <module>vaadin-platform-test</module>	
+            </modules>	
+        </profile>        	
+    </profiles>    
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
