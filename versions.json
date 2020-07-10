@@ -111,7 +111,7 @@
                 "Checkbox",
                 "Checkbox Group"
             ],
-            "javaVersion": "3.2.0.alpha1",
+            "javaVersion": "4.0.0.alpha1",
             "jsVersion": "2.4.0-alpha3",
             "npmName": "@vaadin/vaadin-checkbox"
         },
@@ -274,7 +274,7 @@
         },
         "vaadin-select": {
             "component": true,
-            "javaVersion": "3.2.0.alpha3",
+            "javaVersion": "4.0.0.alpha1",
             "jsVersion": "2.3.0-alpha4",
             "npmName": "@vaadin/vaadin-select"
         },
