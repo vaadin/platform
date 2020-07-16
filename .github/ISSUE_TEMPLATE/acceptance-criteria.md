@@ -22,7 +22,7 @@ So that I can *expected results (e.g. free resources immediately)*
 _remember to remove those that are not applicable_
 - [ ] APIs reviewed [here link to API review documentation, if any]
 - [ ] Performance [here link to the requirement or tests, if any]
-- [ ] UX/DX tests in Alpha [here link to issue with a description of UX/DC test, if any]
+- [ ] UX/DX tests in Alpha [here link(s) to issue(s) with the description of UX/DX tests, if any]
 - [ ] Design [here link to e.g. issue with design specification, a mockup, Figma specs] 
 
 #### **Do NOT use these just yet**
