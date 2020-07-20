@@ -20,13 +20,13 @@ So that I can *expected results (e.g. free resources immediately)*
 - [ ] Case-specific critterion 4
 ## General criteria
 _remember to remove those that are not applicable_
-- [ ] APIs reviewed
-- [ ] Performance
-- [ ] UX/DX tests in Alpha
-- [ ] Design  
+- [ ] APIs reviewed [here link to API review documentation, if any]
+- [ ] Performance [here link to the requirement or tests, if any]
+- [ ] UX/DX tests in Alpha [here link(s) to issue(s) with the description of UX/DX tests, if any]
+- [ ] Design [here link to e.g. issue with design specification, a mockup, Figma specs] 
 
 #### **Do NOT use these just yet**
 Under constrution (would be used instead of User Value document - in the 2nd iteration of the template):  
 - [ ] Documentation: [here link to the documentation]
 - [ ] How to test? [here link to the GH issue or some external document with the test scenario]
-- [ ] Known issues: [here list of issues, preferably links to GH issues]
+- [ ] Limitations: [here list of limitations, preferably links to GH issues]
