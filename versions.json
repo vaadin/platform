@@ -161,8 +161,8 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "2.2.0",
-            "jsVersion": "2.4.2",
+            "javaVersion": "2.2.1",
+            "jsVersion": "2.4.3",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
@@ -343,8 +343,8 @@
         },
         "vaadin-charts": {
             "component": true,
-            "javaVersion": "7.1.0",
-            "jsVersion": "6.3.0",
+            "javaVersion": "7.1.1",
+            "jsVersion": "6.3.1",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
@@ -389,8 +389,8 @@
         },
         "vaadin-rich-text-editor": {
             "component": true,
-            "javaVersion": "2.2.0",
-            "jsVersion": "1.2.0",
+            "javaVersion": "2.2.2",
+            "jsVersion": "1.2.2",
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "pro": true
         },
