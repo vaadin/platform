@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.2.0",
+            "javaVersion": "4.2.1",
             "jsVersion": "5.6.6",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -208,7 +208,7 @@
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
-            "jsVersion": "2.4.0",
+            "jsVersion": "2.4.1",
             "npmName": "@vaadin/vaadin-list-mixin"
         },
         "vaadin-login": {
@@ -317,7 +317,7 @@
         },
         "vaadin-upload": {
             "component": true,
-            "javaVersion": "2.2.0",
+            "javaVersion": "2.2.1",
             "jsVersion": "4.3.0",
             "npmName": "@vaadin/vaadin-upload"
         },
