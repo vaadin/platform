@@ -22,6 +22,16 @@ Here are the highlighted new and improved features in vaadin 17. To see the full
 - Throwing instead of Warning when configuration annotations like `@Push` or `@BodySize` are not in the `AppShell`class
 
 ### Components
+#### TypeScript definitions for all components
+In Vaadin 17, Vaadin components come with TypeScript definitions helping to use web components in TypeScript views. Depending on the IDE you use, TypeScript definitions can also give additional benefits like better code completion and auto import.
+
+#### New features with Vaadin Charts
+- Add new Java styling APIs
+- Support 4 new chart types (Org Chart, Timeline, X-Range, Bullet)
+
+#### Known issues
+
+Due to the [identified bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1111723) with latest Chrome(version: 84.0.4147.105), Vaadin components with popup (like ComboBox, Select, DatePicker) may cause Chrome to freeze in layouts with several nested Divs.
 
 {{changesSincePrevious}}
 
