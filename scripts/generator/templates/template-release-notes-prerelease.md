@@ -15,7 +15,7 @@ Here are the highlighted new and improved features in vaadin 17. To see the full
   - Java Generator now produces Form Models for TS to make easy bind it to the UI elments.
   - Bean Validators in client side able to reuse Java Bean annotations, and to add custom validations
 - Live Reload in browser
-- Support for Url template
+- Extended URL parameters support with routing
 
 #### Breaking changes
 - Removed the PWA install popup. Because `beforeInstallPrompt` was removed from browsers specs
