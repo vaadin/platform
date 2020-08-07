@@ -16,6 +16,7 @@ Here are the highlighted new and improved features in vaadin 17. To see the full
   - Bean Validators in client side able to reuse Java Bean annotations, and to add custom validations
 - Live Reload in browser
 - Extended URL parameters support with routing
+- Basic LitTemplate support based on LitElement for Java UIs
 
 #### Breaking changes
 - Removed the PWA install popup. Because `beforeInstallPrompt` was removed from browsers specs
