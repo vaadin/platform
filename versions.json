@@ -145,7 +145,7 @@
         },
         "vaadin-date-time-picker": {
             "component": true,
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.1.1",
             "jsVersion": "1.2.0",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.2.1",
-            "jsVersion": "5.6.6",
+            "javaVersion": "4.2.2",
+            "jsVersion": "5.6.7",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
