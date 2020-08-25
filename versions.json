@@ -111,7 +111,7 @@
                 "Checkbox",
                 "Checkbox Group"
             ],
-            "javaVersion": "4.0.0.beta1",
+            "javaVersion": "4.0.0.beta2",
             "jsVersion": "2.4.0-beta1",
             "npmName": "@vaadin/vaadin-checkbox"
         },
@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.0.beta1",
+            "javaVersion": "6.0.0.beta2",
             "jsVersion": "5.7.0-beta1",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -274,7 +274,7 @@
         },
         "vaadin-select": {
             "component": true,
-            "javaVersion": "4.0.0.beta1",
+            "javaVersion": "4.0.0.beta2",
             "jsVersion": "2.3.0-beta1",
             "npmName": "@vaadin/vaadin-select"
         },
