@@ -44,7 +44,7 @@ Due to the [identified bug](https://bugs.chromium.org/p/chromium/issues/detail?i
 {{changesSincePrevious}}
 
 ## Support
-vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -82,7 +82,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-vaadin 17 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 17 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
