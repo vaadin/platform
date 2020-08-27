@@ -18,7 +18,7 @@ Here are the highlighted new and improved features in this maintenance release.
 {{changesSincePrevious}}
 
 ## Support
-vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
