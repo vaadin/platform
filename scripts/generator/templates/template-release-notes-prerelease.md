@@ -4,47 +4,19 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 16
+## New and Noteworthy Since Vaadin 17
 
-Here are the highlighted new and improved features in vaadin 17. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in Vaadin 18. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
 #### Features
-- A new client forms API for TypeScript (TS) views
-  - New Binder API to associate a UI Field with a Model property.
-  - Java Generator now produces Form Models for TS to make easy bind it to the UI elments.
-  - Bean Validators in client side able to reuse Java Bean annotations, and to add custom validations
-- New data binding API for components
-  - Component's are now have an API for getting and manipulating of the in-memory data, such as exporting data, traversing between items, add/remove operations, and more 
-  - Lazy data loading components have now an ability to set only a data fetch callback with no knowledge of item count, as well as an API for lazy loading customisation 
-- Live Reload in browser
-- Extended URL parameters support with routing
-- Basic LitTemplate support based on LitElement for Java UIs
-
-#### Breaking changes
-- Removed the PWA install popup. Because `beforeInstallPrompt` was removed from browsers specs
-- Throwing instead of Warning when configuration annotations like `@Push` or `@BodySize` are not in the `AppShell`class
-- Due to the new data binding API: 
-  - Using of `HasItems` interface has been replaced by new `HasListDataView`, `HasLazyDataView` and `HasDataView` interfaces
-  - Using of `HasDataProvider::setDataProvider` is deprecated and new `HasListDataView`, `HasLazyDataView` and `HasDataView` interfaces API are recommended to use.
-  - These changes have been updated in components(*Grid*, *Select*, *CheckBoxGroup*), too
   
 ### Components
-#### TypeScript definitions for all components
-In Vaadin 17, Vaadin components come with TypeScript definitions helping to use web components in TypeScript views. Depending on the IDE you use, TypeScript definitions can also give additional benefits like better code completion and auto import.
-
-#### New features with Vaadin Charts
-- Add new Java styling APIs
-- Support 4 new chart types (Org Chart, Timeline, X-Range, Bullet)
-
-#### Known issues
-
-Due to the [identified bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1111723) with latest Chrome(version: 84.0.4147.105), Vaadin components with popup (like ComboBox, Select, DatePicker) may cause Chrome to freeze in layouts with several nested Divs.
 
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 18 is supported for one month after Vaadin 19 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -82,7 +54,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 17 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 18 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
@@ -117,7 +89,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of vaadin 17 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of Vaadin 18 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)

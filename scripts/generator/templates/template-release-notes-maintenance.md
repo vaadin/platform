@@ -3,7 +3,7 @@
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 This is a maintenance release of Vaadin.
-See the full release notes for vaadin 17.0 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/17.0.0), including new features, getting started, supported browsers and other technologies, and migration notes.
+See the full release notes for vaadin 18.0 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/18.0.0), including new features, getting started, supported browsers and other technologies, and migration notes.
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
@@ -18,7 +18,7 @@ Here are the highlighted new and improved features in this maintenance release.
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 17 is supported for one month after Vaadin 18 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 18 is supported for one month after Vaadin 19 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -26,7 +26,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 ## App starters
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
-For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/17.0.0).
+For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/18.0.0).
 
 # Known Issues and Limitations
 
