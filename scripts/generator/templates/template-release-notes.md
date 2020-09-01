@@ -14,25 +14,32 @@ Here are the highlighted new and improved features in vaadin 17. To see the full
   - New Binder API to associate a UI Field with a Model property.
   - Java Generator now produces Form Models for TS to make easy bind it to the UI elments.
   - Bean Validators in client side able to reuse Java Bean annotations, and to add custom validations
+- New data binding API for components
+  -  Components now have an API to get and manipulate the in-memory data, such as exporting data, traversing between items, add/remove operations, and more
+  - Lazy data loading components have now an ability to set only a data fetch callback with no knowledge of item count, as well as an API for lazy loading customisation 
 - Live Reload in browser
-- Support for Url template
+- Extended URL parameters support with routing
+- Basic LitTemplate support based on LitElement for Java UIs
+- - More new feature descriptions in the framework can be found from [here](https://github.com/vaadin/flow/releases/tag/4.0.0)
 
 #### Breaking changes
 - Removed the PWA install popup. Because `beforeInstallPrompt` was removed from browsers specs
 - Throwing instead of Warning when configuration annotations like `@Push` or `@BodySize` are not in the `AppShell`class
+- Due to the new data binding API: 
+  - Using of `HasItems` interface has been replaced by new `HasListDataView`, `HasLazyDataView` and `HasDataView` interfaces
+  - Using of `HasDataProvider::setDataProvider` is deprecated and new `HasListDataView`, `HasLazyDataView` and `HasDataView` interfaces API are recommended to use.
+  - These changes have been updated in components(*Grid*, *Select*, *CheckBoxGroup*), too
+- More Deprecations and Incompatible Changes in the framework can be found from [here](https://github.com/vaadin/flow/releases/tag/4.0.0)
 
 ### Components
 #### TypeScript definitions for all components
 In Vaadin 17, Vaadin components come with TypeScript definitions helping to use web components in TypeScript views. Depending on the IDE you use, TypeScript definitions can also give additional benefits like better code completion and auto import.
 
 #### New features with Vaadin Charts
-- Add new Java styling APIs
+- Java API for global options (Lang and Theme)
+- Java API for theming configuration
+- Java API for lazy drilldown
 - Support 4 new chart types (Org Chart, Timeline, X-Range, Bullet)
-
-#### Known issues
-
-Due to the [identified bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1111723) with latest Chrome(version: 84.0.4147.105), Vaadin components with popup (like ComboBox, Select, DatePicker) may cause Chrome to freeze in layouts with several nested Divs.
-
 
 {{changesSincePrevious}}
 
