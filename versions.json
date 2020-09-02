@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.3.0"
+            "javaVersion": "2.3.4"
         },
         "flow-cdi": {
             "javaVersion": "11.2.1"
         },
         "flow-spring": {
-            "javaVersion": "12.3.0"
+            "javaVersion": "12.3.1"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -74,10 +74,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "2.0.3"
+            "javaVersion": "2.0.5"
         },
         "mpr-v8": {
-            "javaVersion": "2.0.3"
+            "javaVersion": "2.0.5"
         },
         "polymer": {
             "jsVersion": "2.7.0"
@@ -145,7 +145,7 @@
         },
         "vaadin-date-time-picker": {
             "component": true,
-            "javaVersion": "1.1.0",
+            "javaVersion": "1.1.1",
             "jsVersion": "1.2.0",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
@@ -161,8 +161,8 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "2.2.0",
-            "jsVersion": "2.4.2",
+            "javaVersion": "2.2.1",
+            "jsVersion": "2.4.3",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.2.0",
-            "jsVersion": "5.6.6",
+            "javaVersion": "4.2.2",
+            "jsVersion": "5.6.7",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -208,7 +208,7 @@
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
-            "jsVersion": "2.4.0",
+            "jsVersion": "2.4.1",
             "npmName": "@vaadin/vaadin-list-mixin"
         },
         "vaadin-login": {
@@ -317,7 +317,7 @@
         },
         "vaadin-upload": {
             "component": true,
-            "javaVersion": "2.2.0",
+            "javaVersion": "2.2.1",
             "jsVersion": "4.3.0",
             "npmName": "@vaadin/vaadin-upload"
         },
@@ -343,8 +343,8 @@
         },
         "vaadin-charts": {
             "component": true,
-            "javaVersion": "7.1.0",
-            "jsVersion": "6.3.0",
+            "javaVersion": "7.1.1",
+            "jsVersion": "6.3.1",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
@@ -389,8 +389,8 @@
         },
         "vaadin-rich-text-editor": {
             "component": true,
-            "javaVersion": "2.2.0",
-            "jsVersion": "1.2.0",
+            "javaVersion": "2.2.2",
+            "jsVersion": "1.2.2",
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "pro": true
         },
