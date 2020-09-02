@@ -12,6 +12,10 @@ Vaadin 14 is an LTS (long term support) version, which will be supported for 5 y
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy Since 14.3
+- Field helpers
+  - Slot below/above input fields for supplying additional information or content related to the field.
+- Parallelized dev-mode startup
+  - Dev mode initialization and webpack build is run in a separate thread and a temporary page telling front-end build is ongoing is shown until compilation is done. This speeds up the deployment time (as Java services like Hibernate can start in parallel) and fixes deployment timeout issues in IDEs 
 
 {{changesSincePrevious}}
 
