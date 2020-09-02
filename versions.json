@@ -382,7 +382,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "18.0-SNAPSHOT",
+            "javaVersion": "1.0.5",
             "jsVersion": "2.1.2"
         },
         "vaadin-rich-text-editor": {
