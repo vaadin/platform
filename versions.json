@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.0",
+            "javaVersion": "6.0.1",
             "jsVersion": "5.7.0",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -301,8 +301,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "4.0.0",
-            "jsVersion": "2.7.0",
+            "javaVersion": "4.0.1",
+            "jsVersion": "2.7.1",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
@@ -376,8 +376,8 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "4.0.0",
-            "jsVersion": "2.2.0",
+            "javaVersion": "4.0.1",
+            "jsVersion": "2.2.1",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
