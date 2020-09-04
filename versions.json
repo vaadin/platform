@@ -300,8 +300,8 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "2.2.0",
-            "jsVersion": "2.6.2",
+            "javaVersion": "2.2.1",
+            "jsVersion": "2.6.3",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
