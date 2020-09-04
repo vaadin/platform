@@ -203,8 +203,8 @@
                 "List Box",
                 "Multi Select List Box"
             ],
-            "javaVersion": "2.2.0",
-            "jsVersion": "1.3.0",
+            "javaVersion": "2.3.0.alpha1",
+            "jsVersion": "1.4.0",
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
