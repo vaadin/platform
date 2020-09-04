@@ -101,8 +101,8 @@
         },
         "vaadin-button": {
             "component": true,
-            "javaVersion": "2.1.0",
-            "jsVersion": "2.3.0",
+            "javaVersion": "2.2.0.alpha1",
+            "jsVersion": "2.4.0",
             "npmName": "@vaadin/vaadin-button"
         },
         "vaadin-checkbox": {
