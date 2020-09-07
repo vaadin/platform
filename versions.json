@@ -43,7 +43,7 @@
             "npmVersion": "3.0.1"
         },
         "iron-list": {
-            "javaVersion": "4.0.0",
+            "javaVersion": "{{version}}",
             "jsVersion": "2.0.20",
             "npmName": "@polymer/iron-list",
             "npmVersion": "3.1.0"
