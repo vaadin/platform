@@ -161,12 +161,12 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "4.0.0",
-            "jsVersion": "2.5.0",
+            "javaVersion": "4.0.1",
+            "jsVersion": "2.5.1",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
-            "jsVersion": "2.4.1",
+            "jsVersion": "2.4.2",
             "npmName": "@vaadin/vaadin-element-mixin"
         },
         "vaadin-form-layout": {
