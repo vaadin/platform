@@ -166,7 +166,7 @@
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
-            "jsVersion": "2.4.1",
+            "jsVersion": "2.4.2",
             "npmName": "@vaadin/vaadin-element-mixin"
         },
         "vaadin-form-layout": {
