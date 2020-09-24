@@ -17,6 +17,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 Here are the highlighted new and improved features in this maintenance release.
 
+<Mark the BFP fixes with **[Warranty fix](https://vaadin.com/support/for-business#warranty)** >
 ### Framework
 
 ### Components
