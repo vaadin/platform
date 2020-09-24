@@ -17,12 +17,11 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 Here are the highlighted new and improved features in this maintenance release.
 
+<Mark the BFP fixes with **[Warranty fix](https://vaadin.com/support/for-business#warranty)** >
 ### Framework
-- Parallelized dev-mode startup
-  - Dev mode initialization and webpack build is run in a separate thread and a temporary page telling front-end build is ongoing is shown until compilation is done. This speeds up the deployment time (as Java services like Hibernate can start in parallel) and fixes deployment timeout issues in IDEs 
+
 ### Components
-- Field helpers
-  - Slot below/above input fields for supplying additional information or content related to the field.
+
 
 {{changesSincePrevious}}
 
