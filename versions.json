@@ -128,7 +128,7 @@
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.2.3",
+            "jsVersion": "2.2.4",
             "npmName": "@vaadin/vaadin-control-state-mixin"
         },
         "vaadin-custom-field": {
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.3.0.beta1",
-            "jsVersion": "5.7.1",
+            "javaVersion": "4.3.0.beta2",
+            "jsVersion": "5.7.4",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
