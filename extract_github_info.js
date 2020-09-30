@@ -45,9 +45,9 @@ async function getRequestIssue(pullNumber){
 } 
 
 async function main(){
-	pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
+	//pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
 	//console.log(pulls);
-	//pulls = [100, 1000, 8765];
+	pulls = [100, 1000, 8765];
 	for(j=0;j<pulls.length;j++){
 		let records = [];
 	    data = await getRequest(pulls[j]);
