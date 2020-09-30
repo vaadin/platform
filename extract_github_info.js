@@ -16,12 +16,12 @@ const csvWriter = createCsvWriter({
 		]
 });
 
-async function getRequest(pullNumber){
+async function getRequest(pullNumber, auth){
 	url='https://api.github.com/repos/vaadin/flow/pulls/'+pullNumber+'/comments'
 	let res = await axios.get(url, {
 		headers: {
 			'User-Agent': 'flowinfo',
-			'Authorization': 'token ec513899d7feabc2b0a33e6819ebb253deaee35e'
+			'Authorization': 'token '+auth
 		}
 	});
 	
@@ -30,12 +30,12 @@ async function getRequest(pullNumber){
 	return data
 } 
 
-async function getRequestIssue(pullNumber){
+async function getRequestIssue(pullNumber, auth2){
 	url='https://api.github.com/repos/vaadin/flow/issues/'+pullNumber+'/comments'
 	let res = await axios.get(url, {
 		headers: {
 			'User-Agent': 'flowinfo',
-			'Authorization': 'token ff897368e21b17607b3e726482a8e22ab6df2c16'
+			'Authorization': 'token '+auth2
 		}
 	});
 	
@@ -45,12 +45,16 @@ async function getRequestIssue(pullNumber){
 } 
 
 async function main(){
-	//pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
+	if (process.argv.length = 4) {
+		auth = process.argv[2];
+		auth2 = process.argv[3];
+    }
+	pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
 	//console.log(pulls);
-	pulls = [100, 1000, 8765];
+	//pulls = [100, 1000, 8765];
 	for(j=0;j<pulls.length;j++){
 		let records = [];
-	    data = await getRequest(pulls[j]);
+	    data = await getRequest(pulls[j],auth);
 	
         for(i=0; i < data.length;i++){
 		    //console.log(data[i].author_association);
@@ -70,7 +74,7 @@ async function main(){
 			}
 	    }
 		
-		issueData = await getRequestIssue(pulls[j]);
+		issueData = await getRequestIssue(pulls[j],auth2);
 		
 		for(k=0; k<issueData.length;k++){
 			if(issueData[k].author_association!='MEMBER' && issueData[k].author_association!='OWNER'){
