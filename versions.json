@@ -128,7 +128,7 @@
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.2.3",
+            "jsVersion": "2.2.4",
             "npmName": "@vaadin/vaadin-control-state-mixin"
         },
         "vaadin-custom-field": {
@@ -182,8 +182,8 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.2",
-            "jsVersion": "5.7.0",
+            "javaVersion": "6.0.3",
+            "jsVersion": "5.7.4",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -376,8 +376,8 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "4.0.1",
-            "jsVersion": "2.2.1",
+            "javaVersion": "4.0.2",
+            "jsVersion": "2.2.2",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
