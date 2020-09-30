@@ -2,10 +2,6 @@
 
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
-This is a maintenance release of Vaadin.
-See the full release notes for Vaadin 14.4 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.4.0), including new features, getting started, supported browsers and other technologies, and migration notes.
-
-
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
