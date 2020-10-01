@@ -54,6 +54,16 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>flow-lit-template</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-polymer-template</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>flow-push</artifactId>
                 <version>${flow.version}</version>
             </dependency>
