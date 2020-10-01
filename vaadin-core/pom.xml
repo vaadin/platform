@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>16.0-SNAPSHOT</version>
+        <version>18.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-core</artifactId>
     <packaging>jar</packaging>
@@ -97,6 +97,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-date-picker-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-date-time-picker-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>

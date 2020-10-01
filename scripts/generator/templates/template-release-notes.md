@@ -4,18 +4,22 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy
+## New and Noteworthy Since Vaadin 18
 
-Here are the highlighted new and improved features in Vaadin 16. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in Vaadin 18. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Framework
+#### Features
+
+#### Breaking changes
 
 ### Components
+
 
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 16 is supported for one month after Vaadin 17 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 18 is supported for one month after Vaadin 19 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -53,7 +57,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 16 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 18 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 
@@ -84,7 +88,7 @@ Add the following dependency to dependencyManagement in pom.xml.
 </dependency>
 ```
 
-Read more about upgrading to Vaadin 16 from [vaadin.com](https://vaadin.com/docs/v16/flow/typescript/upgrading-from-vaadin14.html#step-1b).
+Read more about upgrading to Vaadin 18 from [vaadin.com](https://vaadin.com/docs/v16/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
 Note: Vaadin 15 is compatible with Spring 5.2.0 or newer, and Spring Boot 2.2.0 or newer. See more info from [vaadin.com](https://vaadin.com/docs/v15/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 

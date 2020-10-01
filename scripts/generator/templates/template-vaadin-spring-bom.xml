@@ -142,6 +142,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-date-time-picker-flow</artifactId>
+                <version>${vaadin.date.time.picker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-time-picker-flow</artifactId>
                 <version>${vaadin.time.picker.version}</version>
             </dependency>
@@ -325,6 +330,12 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-date-picker-testbench</artifactId>
                 <version>${vaadin.date.picker.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-date-time-picker-testbench</artifactId>
+                <version>${vaadin.date.time.picker.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -513,6 +524,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>mpr-v8</artifactId>
                 <version>${mpr.v8.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>${vaadin.license.checker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
