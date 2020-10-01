@@ -161,7 +161,7 @@
         },
         "vaadin-dialog": {
             "component": true,
-            "javaVersion": "4.0.2",
+            "javaVersion": "4.0.3",
             "jsVersion": "2.5.2",
             "npmName": "@vaadin/vaadin-dialog"
         },
@@ -199,7 +199,7 @@
         },
         "vaadin-list-box": {
             "component": true,
-            "javaVersion": "4.0.0",
+            "javaVersion": "4.0.1",
             "jsVersion": "1.4.0",
             "npmName": "@vaadin/vaadin-list-box"
         },
