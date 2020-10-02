@@ -2,8 +2,6 @@
 
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
-With every major release, we will change and improve things based on your feedback. This may lead to breaking changes, which will be listed for each part of the platform in the breaking changes section.
-
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
