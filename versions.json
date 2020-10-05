@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.3",
+            "javaVersion": "6.0.4",
             "jsVersion": "5.7.4",
             "npmName": "@vaadin/vaadin-grid"
         },
