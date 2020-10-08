@@ -118,7 +118,7 @@
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "5.4.0",
+            "jsVersion": "5.4.1",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
