@@ -99,6 +99,12 @@
             "jsVersion": "2.2.0",
             "npmName": "@vaadin/vaadin-app-layout"
         },
+        "vaadin-avatar": {
+            "component": true,
+            "javaVersion": "{{version}}",
+            "jsVersion": "1.0.3",
+            "npmName": "@vaadin/vaadin-avatar"
+        },
         "vaadin-button": {
             "component": true,
             "javaVersion": "{{version}}",

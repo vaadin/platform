@@ -122,6 +122,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-avatar-flow</artifactId>
+                <version>${vaadin.avatar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-button-flow</artifactId>
                 <version>${vaadin.button.version}</version>
             </dependency>
@@ -265,6 +270,11 @@
                 <artifactId>vaadin-app-layout-testbench</artifactId>
                 <version>${vaadin.app.layout.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-avatar-testbench</artifactId>
+                <version>${vaadin.avatar.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>

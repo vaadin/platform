@@ -257,6 +257,11 @@
             </dependency>
             <dependency>
                 <groupId>org.webjars.bowergithub.vaadin</groupId>
+                <artifactId>vaadin-avatar</artifactId>
+                <version>{{core.vaadin-avatar.jsVersion}}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.vaadin</groupId>
                 <artifactId>vaadin-details</artifactId>
                 <version>{{core.vaadin-details.jsVersion}}</version>
             </dependency>
