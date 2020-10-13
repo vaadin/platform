@@ -264,7 +264,7 @@
                 "Radio Button Group"
             ],
             "javaVersion": "4.0.0",
-            "jsVersion": "1.4.0",
+            "jsVersion": "1.4.1",
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-router": {
