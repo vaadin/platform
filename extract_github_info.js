@@ -10,9 +10,12 @@ const csvWriter = createCsvWriter({
     header: [
 	    {id: 'pullNumber', title: 'Pull Request'},
 		{id: 'commitId', title: 'Commit ID'},
+		{id: 'committerId', title: 'Committer ID'},
 		{id: 'userName', title: 'User Name'},
 	    {id: 'user', title:'User'},
-		{id: 'comment', title:'Comment'}
+		{id: 'comment', title:'Comment'},
+		{id: 'commentDate', title:'Date'},
+		{id: 'commentTime', title:'Time'}
 		]
 });
 
@@ -64,12 +67,18 @@ async function main(){
 			    user = 'internal';
 		    }
 			userName =  data[i].user.login;
-			if(userName!="vaadin-bot"){
+			if(userName!="vaadin-bot" && userName!="CLAassistant" && userName!="vaadin-tc"){
 				commitId = data[i].commit_id;
-		
+		        committerId = data[i].user.id;
+				committerId = require('crypto').createHash('md5').update(committerId+'').digest("hex");
 				comment = data[i].body.trim();
+				
+				commentDateTime = data[i].created_at;
+				dateTimeArray = commentDateTime.split('T');
+				commentDate = dateTimeArray[0];
+				commentTime = dateTimeArray[1].replace('Z','');
 				//console.log(user, comment);
-				record = {pullNumber: pulls[j], commitId: commitId, userName:userName, user: user, comment: comment};
+				record = {pullNumber: pulls[j], commitId: commitId, committerId: committerId, userName:userName, user: user, comment: comment, commentDate: commentDate, commentTime: commentTime};
 				records.push(record);
 			}
 	    }
@@ -84,12 +93,18 @@ async function main(){
 		    }
 			
 			userName =  issueData[k].user.login;
-			if(userName!="vaadin-bot"){
+			if(userName!="vaadin-bot" && userName!="CLAassistant" && userName!="vaadin-tc"){
 				commitId = "";
-		
+		        committerId = issueData[k].user.id;
+				committerId = require('crypto').createHash('md5').update(committerId+'').digest("hex");
 				comment = issueData[k].body.trim();
+				
+				commentDateTime = issueData[k].created_at;
+				dateTimeArray = commentDateTime.split('T');
+				commentDate = dateTimeArray[0];
+				commentTime = dateTimeArray[1].replace('Z','');
 				//console.log(user, comment);
-				record = {pullNumber: pulls[j], commitId: commitId, userName:userName, user: user, comment: comment};
+				record = {pullNumber: pulls[j], commitId: commitId, committerId: committerId, userName:userName, user: user, comment: comment, commentDate: commentDate, commentTime: commentTime};
 				records.push(record);
 			}
 		}
@@ -104,3 +119,4 @@ async function main(){
 }
 
 main();
+//git ls-remote origin 'pull/*/head' | cut -d/ -f3 > pull_number.txt
