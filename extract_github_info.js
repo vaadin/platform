@@ -52,9 +52,9 @@ async function main(){
 		auth = process.argv[2];
 		auth2 = process.argv[3];
     }
-	pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
+	//pulls = fs.readFileSync('pull_number.txt').toString().split("\n");
 	//console.log(pulls);
-	//pulls = [100, 1000, 8765];
+	pulls = [100, 1000, 8765];
 	for(j=0;j<pulls.length;j++){
 		let records = [];
 	    data = await getRequest(pulls[j],auth);
