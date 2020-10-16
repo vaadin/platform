@@ -140,7 +140,7 @@
         "vaadin-date-picker": {
             "component": true,
             "javaVersion": "2.2.0",
-            "jsVersion": "4.4.0",
+            "jsVersion": "4.4.1",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
@@ -301,7 +301,7 @@
                 "Number Field"
             ],
             "javaVersion": "2.3.0",
-            "jsVersion": "2.8.0",
+            "jsVersion": "2.8.1",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
