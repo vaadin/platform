@@ -117,7 +117,7 @@
         },
         "vaadin-combo-box": {
             "component": true,
-            "javaVersion": "3.2.1",
+            "javaVersion": "3.2.2",
             "jsVersion": "5.4.1",
             "npmName": "@vaadin/vaadin-combo-box"
         },
@@ -139,7 +139,7 @@
         },
         "vaadin-date-picker": {
             "component": true,
-            "javaVersion": "2.2.0",
+            "javaVersion": "2.2.1",
             "jsVersion": "4.4.1",
             "npmName": "@vaadin/vaadin-date-picker"
         },
@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.3.0",
+            "javaVersion": "4.3.1",
             "jsVersion": "5.7.4",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -300,7 +300,7 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "2.3.0",
+            "javaVersion": "2.3.1",
             "jsVersion": "2.8.1",
             "npmName": "@vaadin/vaadin-text-field"
         },
