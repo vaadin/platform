@@ -218,7 +218,7 @@
             "npmName": "@vaadin/vaadin-login"
         },
         "vaadin-lumo-styles": {
-            "jsVersion": "1.6.0",
+            "jsVersion": "1.6.1",
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
