@@ -10,8 +10,19 @@ Here are the highlighted new and improved features in Vaadin 18. To see the full
 
 ### Framework
 #### Features
+- LitElement support
+  - There is a new default template format people should use instead of Polymer when using Java UI logic. Featureset is bit more limited than before, and the template format users shouldn’t mix client and server side logic (but to choose either TS development model or pure server side UI logic).
+- Improved lazy data binding for ComboBox
+  - No count query needed anymore, API simplified similarly as for Grid in V17
   
 ### Components
+- Field helpers
+  - Slot below/above input fields for supplying additional information or content related to the field. 
+- AutoOpenDisabled
+  - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus
+- new component: vaadin-avatar 
+  - Avatar and AvatarGroup components. Being able to show users with name, abbreviations and image. AvatarGroup is a collection of Avatars with the possibility to truncate it to a certain number of visible avatars.
+- Flow components versioning has changed, now all components are released at once with Vaadin Platform sharing the same version.
 
 {{changesSincePrevious}}
 
