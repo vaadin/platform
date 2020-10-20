@@ -162,7 +162,7 @@ describe('Maven creator', function () {
 describe('Release notes creator', function () {
     it('should add valid component descriptions for pro components', function() {
         const testVersions = {
-            "platform": "18.0.0.alpha1",
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
@@ -184,7 +184,7 @@ describe('Release notes creator', function () {
 
     it('should add valid component descriptions for core components', function() {
         const testVersions = {
-            "platform": "18.0.0.alpha1",
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
@@ -205,7 +205,7 @@ describe('Release notes creator', function () {
 
     it('should add valid component descriptions for javascript components', function() {
         const testVersions = {
-            "platform": "18.0.0.alpha1",
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "jsVersion": "1.11",
@@ -225,7 +225,7 @@ describe('Release notes creator', function () {
 
     it('should skip non-components', function() {
         const testVersions = {
-            "platform": "18.0.0.alpha1",
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",

@@ -78,11 +78,15 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
         }
     }
 
-    const componentNote = getComponentReleaseNote(versions.platform);
-
     const changed = getChangedSincePrevious(versions);
-
-    const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed }, { componentNote: componentNote });
+    console.log(versions.platform);
+    let releaseNoteData;
+    if(!versions.platform.includes("SNAPSHOT")){
+        const componentNote = getComponentReleaseNote(versions.platform);
+        releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed }, { componentNote: componentNote });
+    } else {
+        releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
+    }
 
     return render(releaseNoteTemplate, releaseNoteData);
 }
