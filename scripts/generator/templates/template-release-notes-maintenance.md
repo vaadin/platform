@@ -15,7 +15,7 @@ Here are the highlighted new and improved features in this maintenance release.
 ### Framework
 
 ### Components
-
+{{componentNote}}
 {{changesSincePrevious}}
 
 ## Support

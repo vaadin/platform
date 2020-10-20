@@ -78,9 +78,11 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
         }
     }
 
+    const componentNote = getComponentReleaseNote(versions.platform);
+
     const changed = getChangedSincePrevious(versions);
 
-    const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
+    const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed }, { componentNote: componentNote });
 
     return render(releaseNoteTemplate, releaseNoteData);
 }
@@ -110,6 +112,20 @@ function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
     const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
 
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+}
+
+/**
+Get the release note from vaadin-flow-components repo for current platform version
+@param {version} platform version
+*/
+function getComponentReleaseNote(version){
+   const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
+   const fullNoteBody = fullNote.body;
+
+   let result = fullNoteBody.substring(
+   fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
+   fullNoteBody.lastIndexOf("###"));
+   return result;
 }
 
 function getChangedSincePrevious(versions) {

@@ -12,7 +12,7 @@ Here are the highlighted new and improved features in Vaadin 18. To see the full
 #### Features
   
 ### Components
-
+{{componentNote}}
 {{changesSincePrevious}}
 
 ## Support
