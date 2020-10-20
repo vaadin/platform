@@ -360,10 +360,7 @@ function buildComponentReleaseString(versionName, version) {
     //separated for readability
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
-    result = result.concat(version.javaVersion ? `([Flow integration ${version.javaVersion}](https://github.com/vaadin/${versionName}-flow/releases/tag/${version.javaVersion})` : '');
-    result = result.concat((version.javaVersion && version.jsVersion) ? ', ' : '');
-    result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
-    result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
+    result = result.concat(version.jsVersion ? `([web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
 
     if(version.components){
