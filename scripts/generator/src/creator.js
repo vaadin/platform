@@ -79,7 +79,7 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
     }
 
     const changed = getChangedSincePrevious(versions);
-    console.log(versions.platform);
+    //console.log(versions.platform);
     let releaseNoteData;
     if(!versions.platform.includes("SNAPSHOT")){
         const componentNote = getComponentReleaseNote(versions.platform);
