@@ -99,8 +99,14 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
     }
     
     const changed = getChangedSincePrevious(versions);
-
-    const releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
+    //console.log(versions.platform);
+    let releaseNoteData;
+    if(!versions.platform.includes("SNAPSHOT")){
+        const componentNote = getComponentReleaseNote(versions.platform);
+        releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed }, { componentNote: componentNote });
+    } else {
+        releaseNoteData = Object.assign(versions, { components: componentVersions }, { changesSincePrevious: changed });
+    }
 
     return render(releaseNoteTemplate, releaseNoteData);
 }
@@ -130,6 +136,20 @@ function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
     const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
     
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+}
+
+/**
+Get the release note from vaadin-flow-components repo for current platform version
+@param {version} platform version
+*/
+function getComponentReleaseNote(version){
+   const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
+   const fullNoteBody = fullNote.body;
+
+   let result = fullNoteBody.substring(
+   fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
+   fullNoteBody.lastIndexOf("###"));
+   return result;
 }
 
 function getChangedSincePrevious(versions) {
@@ -380,10 +400,7 @@ function buildComponentReleaseString(versionName, version) {
     //separated for readability
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
-    result = result.concat(version.javaVersion ? `([Flow integration ${version.javaVersion}](https://github.com/vaadin/${versionName}-flow/releases/tag/${version.javaVersion})` : '');
-    result = result.concat((version.javaVersion && version.jsVersion) ? ', ' : '');
-    result = result.concat((!version.javaVersion && version.jsVersion) ? '(' : '');
-    result = result.concat(version.jsVersion ? `[web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
+    result = result.concat(version.jsVersion ? `([web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
     
     if(version.components){
