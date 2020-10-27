@@ -24,7 +24,7 @@ Here are the highlighted new and improved features in Vaadin 18. To see the full
   - Avatar and AvatarGroup components. Being able to show users with name, abbreviations and image. AvatarGroup is a collection of Avatars with the possibility to truncate it to a certain number of visible avatars.
 - Flow components versioning has changed, now all components are released at once with Vaadin Platform sharing the same version.
 
-
+{{componentNote}}
 {{changesSincePrevious}}
 
 ## Support
@@ -48,6 +48,8 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
   
 ### Components
+To simplify the version schema, since Vaadin 18, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
+
 {{components}}
 
 ### Themes
@@ -180,8 +182,8 @@ See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-mig
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
 A few rules of thumb will help you and us in finding the correct repository for the issue:
-1) If you encounter an issue when using the HTML/JS API of a component or the component renders incorrectly, the problem is likely in the web component. The web component repositories are named like https://github.com/vaadin/vaadin-button
-2) If you encounter an issue when using the Java API of a component, the problem is likely in the Flow integration of the web component. The Flow component integration repositories are named like https://github.com/vaadin/vaadin-button-flow
+1) Bug tickets and enhancement requests that are specific to a certain Vaadin component should be posted in the component's Web Component repostory (e.g. https://github.com/vaadin/vaadin-button for Button).
+2) Issues that are not component-specific (e.g. requests for new components) or encompass multiple components should be posted in [vaadin-flow-components](https://github.com/vaadin/vaadin-flow-components) repository. 
 3) If you encounter an issue with Flow which does not seem to be related to a specific component, the problem is likely in Flow itself. The Flow repository is https://github.com/vaadin/flow
 4) If you encounter an issue with Designer, the repository is https://github.com/vaadin/designer
 5) If you encounter an issue with TestBench, the repository is https://github.com/vaadin/testbench
