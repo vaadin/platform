@@ -40,7 +40,7 @@ In Vaadin 17, Vaadin components come with TypeScript definitions helping to use 
 - Java API for theming configuration
 - Java API for lazy drilldown
 - Support 4 new chart types (Org Chart, Timeline, X-Range, Bullet)
-
+{{componentNote}}
 {{changesSincePrevious}}
 
 ## Support
