@@ -143,13 +143,14 @@ Get the release note from vaadin-flow-components repo for current platform versi
 @param {version} platform version
 */
 function getComponentReleaseNote(version){
-   const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
-   const fullNoteBody = fullNote.body;
+    version = version.replace("-",".");
+    const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
+    const fullNoteBody = fullNote.body;
 
-   let result = fullNoteBody.substring(
-   fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
-   fullNoteBody.lastIndexOf("###"));
-   return result;
+    let result = fullNoteBody.substring(
+    fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
+    fullNoteBody.lastIndexOf("###"));
+    return result;
 }
 
 function getChangedSincePrevious(versions) {
