@@ -7,12 +7,6 @@ For running the project, you need to execute the following script before any mav
 scripts/generateBoms.sh
 ```
 
-Probably want to make platform depend on other vaadin products snapshots like Flow, then add the following flag to the script
-```
-scripts/generateBoms.sh --useSnapshots
-```
-
-
 ## Installing in local repo
 
 You can install the platform artifacts in your local maven cache by running the following command.
