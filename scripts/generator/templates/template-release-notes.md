@@ -89,8 +89,9 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
   
 ### Components
-To simplify the version schema, since Vaadin 18, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
-
+#### Vaadin flow components
+All listed components' Java integration follow the Vaadin version [{{platform}})}(https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
+#### Vaadin Web Components
 {{components}}
 
 ### Themes
@@ -218,6 +219,10 @@ See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating
 
 # Migrating from Vaadin 10-14
 See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
+
+# Migrating from Vaadin 17
+Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
+In addition, in the case of using the now deprecated PolymerTemplate in views, we encourage to migrate to LitTemplate.
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
