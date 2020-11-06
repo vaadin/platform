@@ -9,11 +9,8 @@ Vaadin 14 is an LTS (long term support) version, which will be supported for 5 y
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-## New and Noteworthy Since 14.3
-- Field helpers
-  - Slot below/above input fields for supplying additional information or content related to the field.
-- Parallelized dev-mode startup
-  - Dev mode initialization and webpack build is run in a separate thread and a temporary page telling front-end build is ongoing is shown until compilation is done. This speeds up the deployment time (as Java services like Hibernate can start in parallel) and fixes deployment timeout issues in IDEs 
+## New and Noteworthy Since 14.4
+- 
 
 {{changesSincePrevious}}
 
@@ -23,6 +20,8 @@ Vaadin includes the following projects. Release notes with detailed change logs 
 Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
 
 ### Components
+To simplify the version schema, since Vaadin 14.5, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
+
 {{components}}
 
 ### Themes
@@ -101,8 +100,8 @@ See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-mig
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
 A few rules of thumb will help you and us in finding the correct repository for the issue:
-1) If you encounter an issue when using the HTML/JS API of a component or the component renders incorrectly, the problem is likely in the web component. The web component repositories are named like https://github.com/vaadin/vaadin-button
-2) If you encounter an issue when using the Java API of a component, the problem is likely in the Flow integration of the web component. The Flow component integration repositories are named like https://github.com/vaadin/vaadin-button-flow
+1) Bug tickets and enhancement requests that are specific to a certain Vaadin component should be posted in the component's Web Component repostory (e.g. https://github.com/vaadin/vaadin-button for Button).
+2) Issues that are not component-specific (e.g. requests for new components) or encompass multiple components should be posted in [vaadin-flow-components](https://github.com/vaadin/vaadin-flow-components) repository. 
 3) If you encounter an issue with Flow which does not seem to be related to a specific component, the problem is likely in Flow itself. The Flow repository is https://github.com/vaadin/flow
 4) If you encounter an issue with Designer, the repository is https://github.com/vaadin/designer
 5) If you encounter an issue with TestBench, the repository is https://github.com/vaadin/testbench

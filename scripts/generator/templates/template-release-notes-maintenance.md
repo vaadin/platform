@@ -3,7 +3,7 @@
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 This is a maintenance release of Vaadin.
-See the full release notes for Vaadin 14.4 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.4.0), including new features, getting started, supported browsers and other technologies, and migration notes.
+See the full release notes for Vaadin 14.5 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.5.0), including new features, getting started, supported browsers and other technologies, and migration notes.
 
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
@@ -22,14 +22,14 @@ Here are the highlighted new and improved features in this maintenance release.
 
 ### Components
 
-
+{{componentNote}}
 {{changesSincePrevious}}
 
 # Getting Started with Vaadin 14
 ## App starters
 The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in.
 
-For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.4.0).
+For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.5.0).
 
 # Known Issues and Limitations
 
@@ -41,8 +41,8 @@ For the full list of how to get started go to the [GitHub releases](https://gith
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
 
 A few rules of thumb will help you and us in finding the correct repository for the issue:
-1) If you encounter an issue when using the HTML/JS API of a component or the component renders incorrectly, the problem is likely in the web component. The web component repositories are named like https://github.com/vaadin/vaadin-button
-2) If you encounter an issue when using the Java API of a component, the problem is likely in the Flow integration of the web component. The Flow component integration repositories are named like https://github.com/vaadin/vaadin-button-flow
+1) Bug tickets and enhancement requests that are specific to a certain Vaadin component should be posted in the component's Web Component repostory (e.g. https://github.com/vaadin/vaadin-button for Button).
+2) Issues that are not component-specific (e.g. requests for new components) or encompass multiple components should be posted in [vaadin-flow-components](https://github.com/vaadin/vaadin-flow-components) repository. 
 3) If you encounter an issue with Flow which does not seem to be related to a specific component, the problem is likely in Flow itself. The Flow repository is https://github.com/vaadin/flow
 4) If you encounter an issue with Designer, the repository is https://github.com/vaadin/designer
 5) If you encounter an issue with TestBench, the repository is https://github.com/vaadin/testbench
