@@ -126,7 +126,9 @@ function getComponentReleaseNote(version){
    version = version.replace("-",".");
    const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
    const fullNoteBody = fullNote.body;
-
+   if (!fullNoteBody) {
+       return '';
+   }
    let result = fullNoteBody.substring(
    fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
    fullNoteBody.lastIndexOf("###"));
