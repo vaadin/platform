@@ -7,11 +7,16 @@ For running the project, you need to execute the following script before any mav
 scripts/generateBoms.sh
 ```
 
-Probably want to make platform depend on other vaadin products snapshots like Flow, then add the following flag to the script
-```
-scripts/generateBoms.sh --useSnapshots
-```
+## Release process
 
+For releasing a new platform from CI servers the workflow should be:
+ 1. set the version to release in pom.xml file by running `mvn versions:set -DnewVersion=n.n.n`
+ 2. generate and update other pom.xml files by running `./scripts/generateBoms.sh` script.
+ 3. package  `mvn package -Pjavadocs,!bower-it,!npm-it -DskipTests`
+ 4. deploy `mvn deploy -Pproduction,release,javadocs,!bower-it,!npm-it,flatten-pom -DskipTests -DshrinkWrap`
+ 5. generate release notes `node scripts/generator/generate.js --platform=n.n.n --versions=versions.json`
+
+NOTE: that deploy needs to correctly set the credentials and target maven repo
 
 ## Installing in local repo
 
