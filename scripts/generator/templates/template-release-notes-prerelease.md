@@ -8,21 +8,64 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 
 Here are the highlighted new and improved features in Vaadin 18. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
-### Framework
+### Flow
 #### Features
-- LitElement support
-  - There is a new default template format people should use instead of Polymer when using Java UI logic. Featureset is bit more limited than before, and the template format users shouldn’t mix client and server side logic (but to choose either TS development model or pure server side UI logic).
-- Improved lazy data binding for ComboBox
-  - No count query needed anymore, API simplified similarly as for Grid in V17
+- Improved LitTemplate support
+Using `LitTemplate` is recommended over deprecated `PolymerTemplate` for doing layouts with HTML and UI logic in Java. It is recommended to use TypeScript for the template and this has been updated to the examples in the [documentation](https://github.com/vaadin/flow-and-components-documentation/tree/master/documentation/polymer-templates). Starting from Vaadin 18, the initial attribute values in the template are reflected to the server side state when `@Id` mapping components. This applies to `PolymerTemplate` too. More information on the template support [in the blog](https://vaadin.com/blog/future-of-html-templates-in-vaadin).
+
+-  Add HasHelper interface 
+A new `HasHelper` interface has been added to be used for field components that have a "helper" feature (such as TextField), i.e. a slot below/above input fields for supplying additional information or content related to the field.
+
+- Supporting undefined item count for `ComboBox` and delaying count call until dropdown is opened
+Starting from V18, `ComboBox` works without defining a item count query, or it can delay the count query until the drop down is opened due to changes in `DataCommunicator`. 
+
+#### Breaking Changes
+- Template support 
+Future of template support is described here: https://vaadin.com/blog/future-of-html-templates-in-vaadin
+**The changes in Flow 5.0 do not require changing existing `LitTemplate` or `PolymerTemplate` based components. In case you have existing workaround placed for handling the initial attribute values for template-mapped-components, those workarounds should not be needed anymore.**
+  - `PolymerTemplate` related classes are now deprecated and moved from `flow-server` to `flow-polymer-template` artifact.
+  - `LitTemplate` related classes are now moved from `flow-server` to `flow-lit-template` artifact.
+  - `Uses` annotation is now deprecated, because Polymer template support is deprecated.
+
+- `AppShellRegistry` method `getTitle()` is removed 
+It was broken and could not work. Instead, if needed, use `getUI().getUIInternals().getAppShellTitle()`. 
+
+### Fusion
+#### Features
+- Client-side Spring Security based authentication helpers  
+Add `Spring Security` based authentication helpers `login`, `logout`, and an `InvalidSessionMiddleWare` for handling session expiration. This feature makes it easier to write a single-page application (SPA) with a custom login view.
+
+- Support TypeScript form binding with optional fields and objects 
+When binding to an optional object field, the TypeScript form binder will not initialize the field with an empty value and leave it as `undefined` unless there are bindings to the nested fields. This feature is necessary when e.g., binding an object field to a Combobox.
+
+- Simpler CSS import for TypeScript views and CSS `@import` support 
+This feature gives us a nice DX of importing styles to TS views like:
+```ts
+import styles from './list-view.css';
+
+@customElement('list-view')
+export class ListView extends LitElement {
+  static styles = [Lumo, styles];
+```
+#### Breaking Changes
+
+- Optional type for value property of BinderNode 
+The `value` property of `BinderNode` now has optionally `undefined` type for non-initialised optional fields.
+
   
 ### Components
+
+#### Features
 - Field helpers
   - Slot below/above input fields for supplying additional information or content related to the field. 
 - AutoOpenDisabled
   - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus
 - new component: vaadin-avatar 
   - Avatar and AvatarGroup components. Being able to show users with name, abbreviations and image. AvatarGroup is a collection of Avatars with the possibility to truncate it to a certain number of visible avatars.
+
+#### Breaking Changes
 - Flow components versioning has changed, now all components are released at once with Vaadin Platform sharing the same version.
+
 
 {{changesSincePrevious}}
 
@@ -47,8 +90,9 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
 
 ### Components
-To simplify the version schema, since Vaadin 18, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
-
+#### Vaadin flow components
+All listed components' Java integration follow the Vaadin version [{{platform}})}(https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
+#### Vaadin Web Components
 {{components}}
 
 ### Themes
@@ -113,6 +157,10 @@ See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating
 
 # Migrating from Vaadin 10-14
 See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
+
+# Migrating from Vaadin 17
+Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
+In addition, in the case of using the now deprecated PolymerTemplate in views, we encourage to migrate to LitTemplate.
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
