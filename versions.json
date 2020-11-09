@@ -118,7 +118,7 @@
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "3.2.3",
-            "jsVersion": "5.4.3",
+            "jsVersion": "5.4.6",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
@@ -318,7 +318,7 @@
         "vaadin-upload": {
             "component": true,
             "javaVersion": "2.3.0",
-            "jsVersion": "4.4.0",
+            "jsVersion": "4.4.1",
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
