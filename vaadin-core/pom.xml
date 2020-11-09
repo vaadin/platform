@@ -65,6 +65,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>flow-dnd</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-dev-deps</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-lumo-theme</artifactId>
