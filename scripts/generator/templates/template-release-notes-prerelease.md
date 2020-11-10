@@ -91,7 +91,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 
 ### Components
 #### Vaadin flow components
-All listed components' Java integration follow the Vaadin version [{{platform}})}(https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
+All listed components' Java integration follow the Vaadin version [{{platform}}](https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
 #### Vaadin Web Components
 {{components}}
 
