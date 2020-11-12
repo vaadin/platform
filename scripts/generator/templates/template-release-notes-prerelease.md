@@ -4,9 +4,9 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 17
+## New and Noteworthy Since Vaadin 18
 
-Here are the highlighted new and improved features in Vaadin 18. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in Vaadin 19. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Flow
 #### Features
@@ -70,7 +70,7 @@ The `value` property of `BinderNode` now has optionally `undefined` type for non
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 18 is supported for one month after Vaadin 19 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 19 is supported for one month after Vaadin 20 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -111,7 +111,7 @@ All listed components' Java integration follow the Vaadin version [{{platform}}]
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 18 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 19 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
@@ -146,7 +146,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of Vaadin 18 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of Vaadin 19 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
