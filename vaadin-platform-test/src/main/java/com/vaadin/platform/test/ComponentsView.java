@@ -87,7 +87,6 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 @Route("")
-@Theme(Lumo.class)
 public class ComponentsView extends VerticalLayout {
 
     private Log log;
