@@ -6,20 +6,6 @@ const fs = require('fs');
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
 */
-function writeBower(versions, templateFileName, outputFileName) {
-    const bowerTemplate = require(templateFileName);
-
-    const bowerResult = creator.createBower(versions, bowerTemplate);
-
-    fs.writeFileSync(outputFileName, bowerResult);
-    console.log(`Wrote ${outputFileName}`);
-}
-
-/**
-@param {Object} versions data object for product versions.
-@param {String} templateFileName absolute path to template file
-@param {String} outputFileName absolute path to output file
-*/
 function writePackageJson(versions, templateFileName, outputFileName) {
     const packageJsonTemplate = require(templateFileName);
 
@@ -69,7 +55,6 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
     console.log(`Wrote ${outputFileName}`);
 }
 
-exports.writeBower = writeBower;
 exports.writePackageJson = writePackageJson;
 exports.writeMaven = writeMaven;
 exports.writeReleaseNotes = writeReleaseNotes;

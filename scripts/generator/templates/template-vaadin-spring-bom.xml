@@ -54,6 +54,16 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>flow-lit-template</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-polymer-template</artifactId>
+                <version>${flow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>flow-push</artifactId>
                 <version>${flow.version}</version>
             </dependency>
@@ -119,6 +129,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-accordion-flow</artifactId>
                 <version>${vaadin.accordion.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-avatar-flow</artifactId>
+                <version>${vaadin.avatar.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -265,6 +280,11 @@
                 <artifactId>vaadin-app-layout-testbench</artifactId>
                 <version>${vaadin.app.layout.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-avatar-testbench</artifactId>
+                <version>${vaadin.avatar.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -524,6 +544,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>mpr-v8</artifactId>
                 <version>${mpr.v8.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>${vaadin.license.checker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

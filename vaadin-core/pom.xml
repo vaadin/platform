@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>17.0-SNAPSHOT</version>
+        <version>19.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-core</artifactId>
     <packaging>jar</packaging>
@@ -39,6 +39,14 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>flow-lit-template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-polymer-template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>flow-push</artifactId>
         </dependency>
         <dependency>
@@ -69,6 +77,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-accordion-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-avatar-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -182,7 +194,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
