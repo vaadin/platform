@@ -150,8 +150,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <!-- https://github.com/jeremylong/DependencyCheck/issues/2455 -->
-                <version>5.2.2</version>
+                <version>6.0.3</version>
                 <!-- generate report firstly and validate this later
                 <configuration>
                     <failBuildOnCVSS>8</failBuildOnCVSS>
