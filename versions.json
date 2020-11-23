@@ -183,7 +183,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "6.0.7",
-            "jsVersion": "5.7.6",
+            "jsVersion": "5.7.7",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
