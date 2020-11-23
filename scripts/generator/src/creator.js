@@ -140,7 +140,9 @@ function getChangedSincePrevious(versions) {
     if (!previousVersion) {
         return '';
     }
-    const previousVersionsJson = requestGH(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`);
+    let previousVersionsJson = requestGH(`https://raw.githubusercontent.com/vaadin/platform/${previousVersion}/versions.json`);
+    let previousVersionString = JSON.stringify(previousVersionsJson).replace(/{{version}}/g, `${previousVersion}`);
+    previousVersionsJson = JSON.parse(previousVersionString);
     if (!previousVersionsJson) {
         return '';
     }
@@ -165,7 +167,10 @@ function getChangedReleaseNotesSincePrevious(versions) {
         return '';
     }
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
-    const allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
+    let allPreviousVersions = Object.assign({}, previousVersionsJson.core, previousVersionsJson.vaadin, previousVersionsJson.community);
+    let allPreviousVersionsString = JSON.stringify(allPreviousVersions).replace(/{{version}}/g, `${previousVersion}`);
+    allPreviousVersions = JSON.parse(allPreviousVersionsString);
+
     const changesString = getReleaseNotesForChanged(allVersions, allPreviousVersions);
     let result = '';
     if (changesString) {
