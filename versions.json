@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.6",
+            "javaVersion": "6.0.7",
             "jsVersion": "5.7.6",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -318,7 +318,7 @@
         },
         "vaadin-upload": {
             "component": true,
-            "javaVersion": "4.0.0",
+            "javaVersion": "4.0.1",
             "jsVersion": "4.4.1",
             "npmName": "@vaadin/vaadin-upload"
         },
@@ -334,28 +334,28 @@
         },
         "vaadin-board": {
             "component": true,
-            "javaVersion": "5.0.2",
+            "javaVersion": "5.0.3",
             "jsVersion": "2.2.0",
             "npmName": "@vaadin/vaadin-board",
             "pro": true
         },
         "vaadin-charts": {
             "component": true,
-            "javaVersion": "9.0.1",
+            "javaVersion": "9.0.2",
             "jsVersion": "7.0.0",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
         "vaadin-confirm-dialog": {
             "component": true,
-            "javaVersion": "4.0.1",
+            "javaVersion": "4.0.2",
             "jsVersion": "1.3.0",
             "npmName": "@vaadin/vaadin-confirm-dialog",
             "pro": true
         },
         "vaadin-cookie-consent": {
             "component": true,
-            "javaVersion": "4.0.1",
+            "javaVersion": "4.0.2",
             "jsVersion": "1.2.0",
             "npmName": "@vaadin/vaadin-cookie-consent",
             "pro": true
@@ -366,7 +366,7 @@
         },
         "vaadin-crud": {
             "component": true,
-            "javaVersion": "4.0.1",
+            "javaVersion": "4.0.2",
             "jsVersion": "1.3.0",
             "npmName": "@vaadin/vaadin-crud",
             "pro": true
@@ -376,7 +376,7 @@
         },
         "vaadin-grid-pro": {
             "component": true,
-            "javaVersion": "4.0.4",
+            "javaVersion": "4.0.5",
             "jsVersion": "2.2.2",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
@@ -387,7 +387,7 @@
         },
         "vaadin-rich-text-editor": {
             "component": true,
-            "javaVersion": "4.0.2",
+            "javaVersion": "4.0.3",
             "jsVersion": "1.3.0",
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "pro": true
