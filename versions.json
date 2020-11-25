@@ -9,6 +9,9 @@
         "flow-spring": {
             "javaVersion": "16.0-SNAPSHOT"
         },
+        "flow-osgi": {
+            "javaVersion": "6.0-SNAPSHOT"
+        },
         "gradle": {
             "javaVersion": "1.2"
         },
