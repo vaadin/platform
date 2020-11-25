@@ -305,7 +305,7 @@
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
-            "jsVersion": "1.6.1",
+            "jsVersion": "1.6.2",
             "npmName": "@vaadin/vaadin-themable-mixin",
             "releasenotes": true
         },
