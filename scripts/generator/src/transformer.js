@@ -3,9 +3,9 @@
 @param {String} platformVersion template data object to put versions to.
 @param {Boolean} useSnapshots transform all Java versions to snapshots
 */
-function transformVersions(versions, platformVersion, useSnapshots) {
+function transformVersions(versions, platformVersion, useSnapshots, componentVersion) {
     if (!useSnapshots) {
-        return transformPlatformVersion(versions, platformVersion);
+        return transformPlatformVersion(versions, platformVersion, componentVersion);
     }
 
     const withPlatformVersion = transformPlatformVersion(versions, platformVersion);
@@ -14,10 +14,10 @@ function transformVersions(versions, platformVersion, useSnapshots) {
     return withSnapshots;
 }
 
-function transformPlatformVersion(versions, platformVersion) {
+function transformPlatformVersion(versions, platformVersion, componentVersion) {
     const platformVersionVisitor = (key, value, parent) => {
         if (value === '{{version}}') {
-            parent[key] = platformVersion;
+            parent[key] = componentVersion && parent.component ? componentVersion : platformVersion;
         }
     };
     const transformedVersions = Object.assign({}, versions);

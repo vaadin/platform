@@ -58,7 +58,7 @@ const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-p
 const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
 const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
 
-const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
+const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots'], argv['componentVersion']);
 
 if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);

@@ -9,7 +9,7 @@ expr "$version" : '[0-9]*.[0-9]*-SNAPSHOT' >/dev/null && snapshot=--useSnapshots
 [ ! -d scripts/generator/node_modules ] && (cd scripts/generator && npm install)
 
 # run the generator
-cmd="node scripts/generator/generate.js --platform=$version --versions=versions.json $snapshot"
+cmd="node scripts/generator/generate.js --platform=$version --versions=versions.json $snapshot $*"
 echo Running: "$cmd"
 $cmd || exit 1
 
