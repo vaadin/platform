@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "6.0.7",
+            "javaVersion": "6.0.8",
             "jsVersion": "5.7.7",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -301,7 +301,7 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "4.0.2",
+            "javaVersion": "4.0.3",
             "jsVersion": "2.7.2",
             "npmName": "@vaadin/vaadin-text-field"
         },
