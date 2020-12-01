@@ -211,6 +211,7 @@ describe('Maven creator', function () {
 describe('Release notes creator', function () {
     it('should add valid component descriptions for pro components', function() {
         const testVersions = {
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
@@ -223,7 +224,7 @@ describe('Release notes creator', function () {
 
         const testTemplate = "{{components}}";
 
-        const expectedResult = '- Foo Bar **(PRO)** ([Flow integration 2.22](https://github.com/vaadin/foo-bar-flow/releases/tag/2.22), [web component v1.11](https://github.com/vaadin/foo-bar/releases/tag/v1.11))\n';
+        const expectedResult = '- Foo Bar **(PRO)** ([Flow integration 2.22](https://github.com/vaadin/vaadin-flow-components/releases/tag/11.0-SNAPSHOT), [web component v1.11](https://github.com/vaadin/foo-bar/releases/tag/v1.11))\n';
 
         const result = creator.createReleaseNotes(testVersions, testTemplate);
 
@@ -232,6 +233,7 @@ describe('Release notes creator', function () {
 
     it('should add valid component descriptions for core components', function() {
         const testVersions = {
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
@@ -243,7 +245,7 @@ describe('Release notes creator', function () {
 
         const testTemplate = "{{components}}";
 
-        const expectedResult = '- Foo Bar ([Flow integration 2.22](https://github.com/vaadin/foo-bar-flow/releases/tag/2.22), [web component v1.11](https://github.com/vaadin/foo-bar/releases/tag/v1.11))\n';
+        const expectedResult = '- Foo Bar ([Flow integration 2.22](https://github.com/vaadin/vaadin-flow-components/releases/tag/11.0-SNAPSHOT), [web component v1.11](https://github.com/vaadin/foo-bar/releases/tag/v1.11))\n';
 
         const result = creator.createReleaseNotes(testVersions, testTemplate);
 
@@ -252,6 +254,7 @@ describe('Release notes creator', function () {
 
     it('should add valid component descriptions for javascript components', function() {
         const testVersions = {
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "jsVersion": "1.11",
@@ -271,6 +274,7 @@ describe('Release notes creator', function () {
 
     it('should skip non-components', function() {
         const testVersions = {
+            "platform": "11.0-SNAPSHOT",
             "core": {
                 "foo-bar": {
                     "javaVersion": "2.22",
@@ -290,6 +294,7 @@ describe('Release notes creator', function () {
 
     it('should generate changes string for changed dependencies', function() {
         const previousVersions = {
+            "platform": "11.0.0",
             "foo-bar": {
                 "javaVersion": "2.22.2",
                 "jsVersion": "1.11.1",
@@ -307,6 +312,7 @@ describe('Release notes creator', function () {
         };
 
         const currentVersions = {
+            "platform": "11.0.1",
             "foo-bar": {
                 "javaVersion": "2.22.3",
                 "jsVersion": "1.11.2",
@@ -325,9 +331,9 @@ describe('Release notes creator', function () {
 
         const expectedResult = '- Vaadin Designer **(Pro)** ([4.0.0.alpha2](https://github.com/vaadin/designer/releases/tag/4.0.0.alpha2))\n'
         + '- Vaadin Multiplatform Runtime **(Prime)** for Framework 7 ([2.22.4.alpha1](https://github.com/vaadin/multiplatform-runtime/releases/tag/2.22.4.alpha1))\n'
-        + '- Foo Bar ([Flow integration 2.22.3](https://github.com/vaadin/foo-bar-flow/releases/tag/2.22.3), [web component v1.11.2](https://github.com/vaadin/foo-bar/releases/tag/v1.11.2))\n';
+        + '- Foo Bar ([Flow integration 2.22.3](https://github.com/vaadin/vaadin-flow-components/releases/tag/11.0.1), [web component v1.11.2](https://github.com/vaadin/foo-bar/releases/tag/v1.11.2))\n';
 
-        const result = creator.generateChangesString(currentVersions, previousVersions);
+        const result = creator.generateChangesString(currentVersions, previousVersions, currentVersions);
 
         expect(result).to.equal(expectedResult);
     });
