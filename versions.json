@@ -105,7 +105,7 @@
         "vaadin-avatar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "1.0.1",
+            "jsVersion": "1.0.2",
             "npmName": "@vaadin/vaadin-avatar"
         },
         "vaadin-button": {
@@ -198,7 +198,7 @@
         "vaadin-icons": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "4.3.1",
+            "jsVersion": "4.3.2",
             "npmName": "@vaadin/vaadin-icons"
         },
         "vaadin-item": {
