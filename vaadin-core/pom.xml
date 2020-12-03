@@ -39,6 +39,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>fusion-endpoint</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>flow-lit-template</artifactId>
         </dependency>
         <dependency>
