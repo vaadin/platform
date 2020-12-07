@@ -23,9 +23,9 @@
             "npmVersion": "3.0.1"
         },
         "iron-fit-behavior": {
-            "jsVersion": "2.2.1",
+            "jsVersion": "3.0.2",
             "npmName": "@polymer/iron-fit-behavior",
-            "npmVersion": "3.0.1"
+            "npmVersion": "3.0.2"
         },
         "iron-flex-layout": {
             "jsVersion": "2.0.3",
@@ -59,9 +59,9 @@
             "npmVersion": "3.0.1"
         },
         "iron-overlay-behavior": {
-            "jsVersion": "2.3.4",
+            "jsVersion": "3.0.3",
             "npmName": "@polymer/iron-overlay-behavior",
-            "npmVersion": "3.0.2"
+            "npmVersion": "3.0.3"
         },
         "iron-resizable-behavior": {
             "jsVersion": "2.1.1",
