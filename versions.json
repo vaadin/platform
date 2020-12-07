@@ -86,9 +86,9 @@
             "jsVersion": "2.7.0"
         },
         "shadycss": {
-            "jsVersion": "1.9.4",
+            "jsVersion": "1.9.6",
             "npmName": "@webcomponents/shadycss",
-            "npmVersion": "1.9.4"
+            "npmVersion": "1.9.6"
         },
         "vaadin-accordion": {
             "component": true,
