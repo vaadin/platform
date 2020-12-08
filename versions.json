@@ -86,7 +86,7 @@
             "jsVersion": "2.7.0"
         },
         "shadycss": {
-            "jsVersion": "1.9.6",
+            "jsVersion": "1.9.1",
             "npmName": "@webcomponents/shadycss",
             "npmVersion": "1.9.6"
         },
