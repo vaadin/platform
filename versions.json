@@ -86,9 +86,9 @@
             "jsVersion": "2.7.0"
         },
         "shadycss": {
-            "jsVersion": "1.9.4",
+            "jsVersion": "1.9.1",
             "npmName": "@webcomponents/shadycss",
-            "npmVersion": "1.9.4"
+            "npmVersion": "1.9.6"
         },
         "vaadin-accordion": {
             "component": true,
@@ -137,7 +137,7 @@
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.2.3",
+            "jsVersion": "2.2.4",
             "npmName": "@vaadin/vaadin-control-state-mixin"
         },
         "vaadin-custom-field": {
@@ -175,7 +175,7 @@
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
-            "jsVersion": "2.4.1",
+            "jsVersion": "2.4.2",
             "npmName": "@vaadin/vaadin-element-mixin"
         },
         "vaadin-form-layout": {
@@ -223,7 +223,7 @@
             "npmName": "@vaadin/vaadin-login"
         },
         "vaadin-lumo-styles": {
-            "jsVersion": "1.6.0",
+            "jsVersion": "1.6.1",
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
