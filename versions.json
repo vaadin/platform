@@ -10,7 +10,7 @@
             "javaVersion": "6.0.0.alpha1"
         },
         "flow-spring": {
-            "javaVersion": "16.0-SNAPSHOT"
+            "javaVersion": "16.0.0.alpha1"
         },
         "gradle": {
             "javaVersion": "1.2"
