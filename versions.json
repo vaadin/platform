@@ -404,6 +404,9 @@
         "vaadin-testbench": {
             "javaVersion": "6.4.0",
             "pro": true
+        },
+        "vaadin-collaboration-engine": {
+            "javaVersion": "3.0.0.beta1"
         }
     }
 }
