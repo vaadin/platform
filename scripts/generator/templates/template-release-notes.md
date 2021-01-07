@@ -4,67 +4,35 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 17
+## New and Noteworthy Since Vaadin 18
 
 Here are the highlighted new and improved features in vaadin 19. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Flow
 #### Features
-- Improved LitTemplate support
-Using `LitTemplate` is recommended over deprecated `PolymerTemplate` for doing layouts with HTML and UI logic in Java. It is recommended to use TypeScript for the template and this has been updated to the examples in the [documentation](https://github.com/vaadin/flow-and-components-documentation/tree/master/documentation/polymer-templates). Starting from Vaadin 18, the initial attribute values in the template are reflected to the server side state when `@Id` mapping components. This applies to `PolymerTemplate` too. More information on the template support [in the blog](https://vaadin.com/blog/future-of-html-templates-in-vaadin).
+- Application Theme
+A simpler, language-agnostic way to define a custom theme that can be packaged and reused as a dependency. [Documentation](https://vaadin.com/docs-beta/latest/theming/application-theme/)
 
--  Add HasHelper interface 
-A new `HasHelper` interface has been added to be used for field components that have a "helper" feature (such as TextField), i.e. a slot below/above input fields for supplying additional information or content related to the field.
+- npm build compatibility for OSGi applications
+Flow developers can use npm based build and deploy their applications in production mode. [Documentation](https://vaadin.com/docs-beta/latest/flow/advanced/osgi-basic/)
 
-- Supporting undefined item count for `ComboBox` and delaying count call until dropdown is opened
-Starting from V18, `ComboBox` works without defining a item count query, or it can delay the count query until the drop down is opened due to changes in `DataCommunicator`. 
-
-#### Breaking Changes
-- Template support 
-Future of template support is described here: https://vaadin.com/blog/future-of-html-templates-in-vaadin
-**The changes in Flow 5.0 do not require changing existing `LitTemplate` or `PolymerTemplate` based components. In case you have existing workaround placed for handling the initial attribute values for template-mapped-components, those workarounds should not be needed anymore.**
-  - `PolymerTemplate` related classes are now deprecated and moved from `flow-server` to `flow-polymer-template` artifact.
-  - `LitTemplate` related classes are now moved from `flow-server` to `flow-lit-template` artifact.
-  - `Uses` annotation is now deprecated, because Polymer template support is deprecated.
-
-- `AppShellRegistry` method `getTitle()` is removed 
-It was broken and could not work. Instead, if needed, use `getUI().getUIInternals().getAppShellTitle()`. 
 
 ### Fusion
 #### Features
-- Client-side Spring Security based authentication helpers  
-Add `Spring Security` based authentication helpers `login`, `logout`, and an `InvalidSessionMiddleWare` for handling session expiration. This feature makes it easier to write a single-page application (SPA) with a custom login view.
+- Offline start and navigation  
+The `@PWA` annotation became more powerful in Vaadin 19. It enables starting the app and navigating between client-side routes offline, much easier customizations to the Service Worker, and an update to the loading indicator / reconnect dialog to add a clear indication to the users when the app is offline.
 
-- Support TypeScript form binding with optional fields and objects 
-When binding to an optional object field, the TypeScript form binder will not initialize the field with an empty value and leave it as `undefined` unless there are bindings to the nested fields. This feature is necessary when e.g., binding an object field to a Combobox.
+- TypeScript type definitions for component events
+Typed events in most Vaadin components allow using code-completion in IDEs and build time TS compiler checks when creating event listeners for Vaadin components.
 
-- Simpler CSS import for TypeScript views and CSS `@import` support 
-This feature gives us a nice DX of importing styles to TS views like:
-```ts
-import styles from './list-view.css';
-
-@customElement('list-view')
-export class ListView extends LitElement {
-  static styles = [Lumo, styles];
-```
-#### Breaking Changes
-
-- Optional type for value property of BinderNode 
-The `value` property of `BinderNode` now has optionally `undefined` type for non-initialised optional fields.
-
+### Collaboration Engine
+Collaboration Engine is now part of the Vaadin platform. Collaboration Engine enables you to build real-time collaboration into your Vaadin apps with a few lines of Java code. This version allows end-users to see who else is looking at the same data as them with `CollaborationAvatarGroup`. It enables them to edit forms together with `CollaborationBinder`, which highlights when any user focuses a field and shares the fields' values with all users. Learn more at the [Collaboration Engine web page](https://vaadin.com/collaboration).
   
 ### Components
 
 #### Features
-- Field helpers
-  - Slot below/above input fields for supplying additional information or content related to the field. 
-- AutoOpenDisabled
-  - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus
-- new component: vaadin-avatar 
-  - Avatar and AvatarGroup components. Being able to show users with name, abbreviations and image. AvatarGroup is a collection of Avatars with the possibility to truncate it to a certain number of visible avatars.
-
-#### Breaking Changes
-- Flow components versioning has changed, now all components are released at once with Vaadin Platform sharing the same version.
+- Single-click editing in `GridPro`
+  - enter edit mode with single click 
 
 {{changesSincePrevious}}
 
