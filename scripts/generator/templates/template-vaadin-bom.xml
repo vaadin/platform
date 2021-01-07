@@ -52,6 +52,12 @@
                 <artifactId>flow-osgi</artifactId>
                 <version>${flow.osgi.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>collaboration-engine</artifactId>
+                <version>${vaadin.collaboration.engine.version}</version>
+            </dependency>
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
