@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "6.0.0.alpha3"
+            "javaVersion": "6.0.0.alpha4"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "16.0.0.alpha2"
+            "javaVersion": "16.0.0.alpha3"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -355,6 +355,9 @@
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
+        "vaadin-collaboration-engine": {
+            "javaVersion": "3.0.0.beta1"
+        },
         "vaadin-confirm-dialog": {
             "component": true,
             "javaVersion": "{{version}}",
@@ -404,9 +407,6 @@
         "vaadin-testbench": {
             "javaVersion": "6.4.0",
             "pro": true
-        },
-        "vaadin-collaboration-engine": {
-            "javaVersion": "3.0.0.beta1"
         }
     }
 }
