@@ -139,13 +139,13 @@
         },
         "vaadin-date-picker": {
             "component": true,
-            "javaVersion": "2.2.3",
+            "javaVersion": "2.2.4",
             "jsVersion": "4.4.1",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
             "component": true,
-            "javaVersion": "1.2.4",
+            "javaVersion": "1.2.5",
             "jsVersion": "1.4.0",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
@@ -182,7 +182,7 @@
                 "Tree Grid",
                 "Grid Context Menu"
             ],
-            "javaVersion": "4.3.5",
+            "javaVersion": "4.3.6",
             "jsVersion": "5.7.7",
             "npmName": "@vaadin/vaadin-grid"
         },
@@ -267,7 +267,7 @@
                 "Radio Button",
                 "Radio Button Group"
             ],
-            "javaVersion": "2.2.4",
+            "javaVersion": "2.2.5",
             "jsVersion": "1.5.1",
             "npmName": "@vaadin/vaadin-radio-button"
         },
@@ -300,7 +300,7 @@
                 "Integer Field",
                 "Number Field"
             ],
-            "javaVersion": "2.3.3",
+            "javaVersion": "2.3.4",
             "jsVersion": "2.8.2",
             "npmName": "@vaadin/vaadin-text-field"
         },
@@ -311,7 +311,7 @@
         },
         "vaadin-time-picker": {
             "component": true,
-            "javaVersion": "2.3.4",
+            "javaVersion": "2.3.5",
             "jsVersion": "2.4.0",
             "npmName": "@vaadin/vaadin-time-picker"
         },
