@@ -21,6 +21,7 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <skipTests>true</skipTests>
     </properties>
     <dependencyManagement>
         <dependencies>

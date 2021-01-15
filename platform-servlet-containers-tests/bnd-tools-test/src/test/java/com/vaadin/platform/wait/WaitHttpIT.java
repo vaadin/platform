@@ -23,6 +23,9 @@ import org.junit.Test;
 
 public class WaitHttpIT {
 
+    public static final int SERVER_PORT = Integer
+            .parseInt(System.getProperty("serverPort", "8080"));
+
     @Test
     public void waitForHttp()
             throws MalformedURLException, InterruptedException {
@@ -36,22 +39,22 @@ public class WaitHttpIT {
         // As a result IT tests starts immediately and this workaround is used
         // to wait when HTTP server starts to handle HTTP requests.
         // It's executed before any other IT test.
-        waitViewUrl(60);
+        waitRootUrl(60);
     }
 
-    private void waitViewUrl(int count)
+    private void waitRootUrl(int count)
             throws MalformedURLException, InterruptedException {
-        String viewUrl = "http://localhost:8080/";
+        String viewUrl = "http://localhost:+" + SERVER_PORT + "/";
         if (count == 0) {
             throw new IllegalStateException(
                     "URL '" + viewUrl + "' is not avialable");
         }
         URL url = new URL(viewUrl);
         try {
-            url.openConnection();
+            url.openConnection().connect();
         } catch (IOException exception) {
             Thread.sleep(1000);
-            waitViewUrl(count - 1);
+            waitRootUrl(count - 1);
         }
     }
 

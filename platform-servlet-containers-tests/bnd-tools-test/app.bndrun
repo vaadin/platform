@@ -5,7 +5,7 @@
 -runvm: ${def;argLine}
 
 -runproperties: \
-        org.osgi.service.http.port=9898,\
+        org.osgi.service.http.port=8080,\
         org.osgi.framework.bootdelegation=sun.reflect,\
         osgi.console=
 
