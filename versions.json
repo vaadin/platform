@@ -339,7 +339,7 @@
             "jsVersion": "3.1.0"
         },
         "flow-osgi": {
-            "javaVersion": "6.0.0.alpha1"
+            "javaVersion": "6.0.0.alpha2"
         },
         "vaadin-board": {
             "component": true,
@@ -394,7 +394,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.0.5",
+            "javaVersion": "1.1.1",
             "jsVersion": "2.1.2"
         },
         "vaadin-rich-text-editor": {
