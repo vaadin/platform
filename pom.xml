@@ -34,7 +34,6 @@
         <module>vaadin-core</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
-        <module>platform-servlet-containers-tests</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>

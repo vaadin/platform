@@ -41,11 +41,9 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!--
     <modules>
         <module>bnd-tools-test</module>
     </modules>
-    -->
 
     <build>
         <plugins>
