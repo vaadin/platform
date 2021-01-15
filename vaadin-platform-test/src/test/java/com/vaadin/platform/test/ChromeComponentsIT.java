@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -66,19 +65,19 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
-import com.vaadin.testbench.parallel.ParallelTest;
 
-public class ChromeComponentsIT extends ParallelTest {
+public class ChromeComponentsIT extends AbstractPlatformTest {
 
-    @Before
-    public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+    @Override
+    protected String getTestPath() {
+        return "/prod-mode/";
     }
 
     @Test
     public void openPageNoClientSideError() {
         checkLogsForErrors();
-        Assert.assertTrue("There are unexpected errors in the browser console", getLogEntries(Level.SEVERE).isEmpty());
+        Assert.assertTrue("There are unexpected errors in the browser console",
+                getLogEntries(Level.SEVERE).isEmpty());
     }
 
     @Test
@@ -109,7 +108,8 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void checkboxGroupIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement checkboxGroup = $("vaadin-checkbox-group").id("checkboxgroup");
+        TestBenchElement checkboxGroup = $("vaadin-checkbox-group")
+                .id("checkboxgroup");
 
         TestBenchElement groupField = checkboxGroup.$("div")
                 .attribute("part", "group-field").first();
@@ -141,10 +141,11 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
-        DatePickerElement datePicker = $(DatePickerElement.class).id("datepicker");
+        DatePickerElement datePicker = $(DatePickerElement.class)
+                .id("datepicker");
 
-        TestBenchElement textField = datePicker.$("vaadin-date-picker-text-field")
-                .id("input");
+        TestBenchElement textField = datePicker
+                .$("vaadin-date-picker-text-field").id("input");
         assertElementRendered(textField);
 
         datePicker.$("div").attribute("part", "toggle-button").first().click();
@@ -263,7 +264,8 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void progressBarIsRendered() {
-        ProgressBarElement ironList = $(ProgressBarElement.class).id("progressbar");
+        ProgressBarElement ironList = $(ProgressBarElement.class)
+                .id("progressbar");
 
         TestBenchElement bar = ironList.$("div").attribute("part", "bar")
                 .first();
@@ -310,8 +312,8 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void passwordFieldIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(PasswordFieldElement.class).id("passwordfield"), "input",
-                "PasswordField value changed from to foo");
+        assertTextComponent($(PasswordFieldElement.class).id("passwordfield"),
+                "input", "PasswordField value changed from to foo");
     }
 
     @Test
@@ -516,7 +518,7 @@ public class ChromeComponentsIT extends ParallelTest {
         TestBenchElement contextMenuTarget = $(TestBenchElement.class)
                 .id("context-menu-target");
 
-       contextMenuTarget.click();
+        contextMenuTarget.click();
 
         // Check to see if the context-menu is there.
         // If not, a NoSuchElementException will be thrown
@@ -557,11 +559,14 @@ public class ChromeComponentsIT extends ParallelTest {
         String item = (String) js.executeScript(
                 "return window.localStorage.getItem('vaadin.statistics.basket');");
 
-        if(Boolean.TRUE.equals(mode)){
-            Assert.assertTrue("Under development mode, the checked usage statistics are not found",
-                    item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));
+        if (Boolean.TRUE.equals(mode)) {
+            Assert.assertTrue(
+                    "Under development mode, the checked usage statistics are not found",
+                    item.contains("flow") && item.contains("java")
+                            && item.contains("vaadin-button"));
         } else {
-            Assert.assertTrue("Under production mode, the usage statistics info should be empty",
+            Assert.assertTrue(
+                    "Under production mode, the usage statistics info should be empty",
                     (item == null || item.length() == 0));
         }
 
@@ -576,14 +581,14 @@ public class ChromeComponentsIT extends ParallelTest {
     private void checkLogsForErrors() {
         getLogEntries(Level.WARNING).forEach(logEntry -> {
             if ((Objects.equals(logEntry.getLevel(), Level.SEVERE)
-                    || logEntry.getMessage().contains("404"))){
+                    || logEntry.getMessage().contains("404"))) {
                 throw new AssertionError(String.format(
                         "Received error message in browser log console right after opening the page, message: %s",
                         logEntry));
             } else {
-                LoggerFactory.getLogger(ChromeComponentsIT.class.getName()).warn(
-                        "This message in browser log console may be a potential error: '{}'",
-                        logEntry);
+                LoggerFactory.getLogger(ChromeComponentsIT.class.getName())
+                        .warn("This message in browser log console may be a potential error: '{}'",
+                                logEntry);
             }
         });
     }
