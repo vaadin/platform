@@ -73,7 +73,7 @@
             <modules>
                <module>bnd-tools-test</module>
             </modules>
-        <profile>
+        </profile>
     </profiles>
 
 </project>
