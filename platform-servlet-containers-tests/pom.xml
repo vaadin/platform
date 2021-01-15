@@ -41,10 +41,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <modules>
-        <module>bnd-tools-test</module>
-    </modules>
-
     <build>
         <plugins>
             <plugin>
@@ -65,6 +61,21 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>run-tests</id>
+            <activation>
+                <property>
+                    <name>!skipTests</name>
+                </property>
+            </activation>
+        <profile>
+        <modules>
+            <module>bnd-tools-test</module>
+        </modules>
+    <profiles>
+
 
 </project>
 
