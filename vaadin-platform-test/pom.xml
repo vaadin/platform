@@ -21,7 +21,6 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
-        <ui.jar.classes>${project.build.directory}/ui-jar</ui.jar.classes>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -78,15 +77,15 @@
 
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>6.0.0</version>
+            <artifactId>osgi.cmpn</artifactId>
+            <version>7.0.0</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>osgi.cmpn</artifactId>
-            <version>6.0.0</version>
+            <artifactId>osgi.core</artifactId>
+            <version>7.0.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -129,7 +128,7 @@
             <plugin>
                 <groupId>biz.aQute.bnd</groupId>
                 <artifactId>bnd-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -142,7 +141,8 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.20</version>
                 <dependencies>
-                    <!--The following dependencies are needed for Java 10+ support -->
+                    <!--The following dependencies are needed for Java 10+ 
+                        support -->
                     <dependency>
                         <groupId>javax.xml.bind</groupId>
                         <artifactId>jaxb-api</artifactId>
@@ -198,7 +198,7 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <!-- Start Sauce Connect prior to running the integration
+                    <!-- Start Sauce Connect prior to running the integration 
                         tests -->
                     <execution>
                         <id>start-sauceconnect</id>
@@ -207,7 +207,7 @@
                             <goal>start-sauceconnect</goal>
                         </goals>
                     </execution>
-                    <!-- Stop the Sauce Connect process after the integration
+                    <!-- Stop the Sauce Connect process after the integration 
                         tests have finished -->
                     <execution>
                         <id>stop-sauceconnect</id>
@@ -262,76 +262,6 @@
                     <execution>
                         <goals>
                             <goal>prepare-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- The following plugins are needed for OSGi tests in platform-servlet-containers-tests module -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <archive>
-                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        <index>false</index>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>ui-tests</id>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ui</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classesDirectory>${ui.jar.classes}</classesDirectory>
-                            <classifier>ui</classifier>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>clean-ui-classes</id>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <tasks>
-                                <delete dir="${ui.jar.classes}"></delete>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ui-jar-classes</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <copy todir="${ui.jar.classes}/frontend">
-                                    <fileset dir="${project.build.directory}/frontend" />
-                                </copy>
-                                <copy todir="${ui.jar.classes}">
-                                    <fileset dir="${project.build.outputDirectory}" />
-                                </copy>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -410,6 +340,39 @@
                         <configuration>
                             <productionMode>true</productionMode>
                         </configuration>
+                    </plugin>
+                    <!-- The following plugins are needed for OSGi tests 
+                        in platform-servlet-containers-tests module -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.1.2</version>
+                        <configuration>
+                            <archive>
+                                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                                <index>false</index>
+                                <manifest>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>ui-tests</id>
+                                <goals>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>ui</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <classifier>ui</classifier>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

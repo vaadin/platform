@@ -1,0 +1,423 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.vaadin</groupId>
+        <artifactId>platform-servlet-containers-tests</artifactId>
+        <version>19.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>platform-test-bnd</artifactId>
+    <name>Vaadin Plarform OSGi tests using bnd tools</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <bnd.version>5.2.0</bnd.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-platform-test</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+            <classifier>ui</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-platform-test</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.10.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>license-checker</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <version>6.0.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.16.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr</artifactId>
+            <version>2.1.24</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.configadmin</artifactId>
+            <version>1.9.18</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
+            <version>1.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.compat</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.servlet-api</artifactId>
+            <version>1.1.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.jetty</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.webconsole</artifactId>
+            <version>4.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.servicemix.specs</groupId>
+            <artifactId>org.apache.servicemix.specs.jaxb-api-2.2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.servicemix.specs</groupId>
+            <artifactId>org.apache.servicemix.specs.jaxb-api-2.2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!-- Those dependencies are need for OSGi container where this bundle 
+            will be deployed. -->
+
+        <dependency>
+            <groupId>org.apache.aries.spifly</groupId>
+            <artifactId>org.apache.aries.spifly.static.bundle</artifactId>
+            <version>1.3.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.aries.spifly</groupId>
+            <artifactId>org.apache.aries.spifly.static.tool</artifactId>
+            <version>1.3.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.aries.spifly</groupId>
+            <artifactId>org.apache.aries.spifly.core-internal</artifactId>
+            <version>1.3.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.aries.spifly</groupId>
+            <artifactId>org.apache.aries.spifly.weaver-internal</artifactId>
+            <version>1.3.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.aries</groupId>
+            <artifactId>org.apache.aries.util</artifactId>
+            <version>1.1.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.aries.spifly</groupId>
+            <artifactId>org.apache.aries.spifly.dynamic.bundle</artifactId>
+            <version>1.3.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Start Gogo Shell -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.shell</artifactId>
+            <version>1.1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.runtime</artifactId>
+            <version>1.1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.jline</artifactId>
+            <version>1.1.6</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.command</artifactId>
+            <version>1.1.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- End Gogo Shell -->
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <!-- This profile is in sync with profile in vaadin-platform-test -->
+            <id>production</id>
+            <build>
+                <plugins>
+                    <!-- This dynamically calculates all the things we need 
+                        to run our code. -->
+                    <plugin>
+                        <groupId>biz.aQute.bnd</groupId>
+                        <artifactId>bnd-resolver-maven-plugin</artifactId>
+                        <version>${bnd.version}</version>
+                        <configuration>
+                            <bndruns>
+                                <bndrun>app.bndrun</bndrun>
+                            </bndruns>
+                            <failOnChanges>false</failOnChanges>
+                            <useMavenDependencies>true</useMavenDependencies>
+                            <includeDependencyManagement>true</includeDependencyManagement>
+                            <reportOptional>false</reportOptional>
+                            <scopes>
+                                <scope>compile</scope>
+                                <scope>runtime</scope>
+                                <scope>test</scope>
+                            </scopes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resolve</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>biz.aQute.bnd</groupId>
+                        <artifactId>bnd-run-maven-plugin</artifactId>
+                        <version>${bnd.version}</version>
+                        <configuration>
+                            <bndrun>app.bndrun</bndrun>
+                            <includeDependencyManagement>true</includeDependencyManagement>
+                            <scopes>
+                                <scope>compile</scope>
+                                <scope>runtime</scope>
+                                <scope>test</scope>
+                            </scopes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>biz.aQute.bnd</groupId>
+                        <artifactId>bnd-export-maven-plugin</artifactId>
+                        <version>${bnd.version}</version>
+                        <configuration>
+                            <resolve>true</resolve>
+                            <failOnChanges>false</failOnChanges>
+                            <includeDependencyManagement>true</includeDependencyManagement>
+                            <bndruns>
+                                <bndrun>app.bndrun</bndrun>
+                            </bndruns>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>read-local-properties-if-present</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>read-project-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <files>
+                                        <file>../../local.properties</file>
+                                    </files>
+                                    <quiet>true</quiet>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.saucelabs.maven.plugin</groupId>
+                        <artifactId>sauce-connect-plugin</artifactId>
+                        <version>2.1.25</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.saucelabs</groupId>
+                                <artifactId>ci-sauce</artifactId>
+                                <version>1.144</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <!-- Start Sauce Connect prior to running the 
+                                integration tests -->
+                            <execution>
+                                <id>start-sauceconnect</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start-sauceconnect</goal>
+                                </goals>
+                            </execution>
+                            <!-- Stop the Sauce Connect process after the 
+                                integration tests have finished -->
+                            <execution>
+                                <id>stop-sauceconnect</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop-sauceconnect</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <sauceUsername>${sauce.user}</sauceUsername>
+                            <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                            <options>${sauce.options}</options>
+                        </configuration>
+                    </plugin>
+
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <async>true</async>
+                                    <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-jar</argument>
+                                        <argument>app.jar</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.0.0-M3</version>
+                        <executions>
+                            <execution>
+                                <id>test-wait-http</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                                <configuration>
+                                    <test>WaitHttpIT</test>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/WaitHttpIT.java</exclude>
+                            </excludes>
+                            <dependenciesToScan>
+                                <dependency>${project.groupId}:vaadin-platform-test</dependency>
+                            </dependenciesToScan>
+                            <systemPropertyVariables>
+                                <!-- use a custom 'serverPort' for ITs since 
+                                    OSGi container won't stop until Maven exits -->
+                                <serverPort>9898</serverPort>
+                                <sauce.user>${sauce.user}</sauce.user>
+                                <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
+                                <sauce.options>${sauce.options}</sauce.options>
+                            </systemPropertyVariables>
+                            <trimStackTrace>false</trimStackTrace>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
+

@@ -48,6 +48,7 @@
             </activation>	
             <modules>	
                 <module>vaadin-platform-test</module>	
+                <module>platform-servlet-containers-tests</module>	
             </modules>	
         </profile>        	
     </profiles>    

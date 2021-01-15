@@ -43,7 +43,7 @@
 
     <!--
     <modules>
-        <module>felix-jetty</module>
+        <module>bnd-tools-test</module>
     </modules>
     -->
 
