@@ -70,12 +70,11 @@
                     <name>!skipTests</name>
                 </property>
             </activation>
+            <modules>
+               <module>bnd-tools-test</module>
+            </modules>
         <profile>
-        <modules>
-            <module>bnd-tools-test</module>
-        </modules>
-    <profiles>
-
+    </profiles>
 
 </project>
 
