@@ -404,9 +404,6 @@
                                 <dependency>${project.groupId}:vaadin-platform-test</dependency>
                             </dependenciesToScan>
                             <systemPropertyVariables>
-                                <!-- use a custom 'serverPort' for ITs since 
-                                    OSGi container won't stop until Maven exits -->
-                                <serverPort>8080</serverPort>
                                 <sauce.user>${sauce.user}</sauce.user>
                                 <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
                                 <sauce.options>${sauce.options}</sauce.options>

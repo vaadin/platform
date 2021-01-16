@@ -71,6 +71,8 @@
                 </property>
             </activation>
             <modules>
+               <!-- this module has to be the last one since it occupies HTTP 
+                    server port until maven exits -->
                <module>bnd-tools-test</module>
             </modules>
         </profile>
