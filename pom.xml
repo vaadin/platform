@@ -47,9 +47,11 @@
             </activation>	
             <modules>	
                 <module>vaadin-platform-test</module>	
-                <!-- this module with its platform-test-bnd child module have 
-                    to be the last one since platform-test-bnd  occupies HTTP  
-                    server port until maven exits -->
+            </modules>	
+        </profile>        	
+        <profile>
+            <id>npm-it-servlet-containers</id>	
+            <modules>	
                 <module>platform-servlet-containers-tests</module>	
             </modules>	
         </profile>        	
