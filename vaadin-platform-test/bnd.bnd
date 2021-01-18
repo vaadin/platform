@@ -1,3 +1,4 @@
+-fixupmessages:
 Bundle-SymbolicName: ${project.groupId}.platform-test
 Bundle-Name: Vaadin Platform Server Tests
 Bundle-Version: ${osgi.bundle.version}
@@ -6,5 +7,4 @@ Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
 Import-Package: *
 Export-Package: com.vaadin.platform.test*;-noimport:=true
 Vaadin-OSGi-Extender: true
-Bundle-Activator: com.vaadin.platform.test.osgi.Activator
 

@@ -1,0 +1,39 @@
+-runstartlevel: \
+    order=sortbynameversion,\
+    begin=-1
+
+-runvm: ${def;argLine}
+
+-runproperties: \
+        org.osgi.service.http.port=8080,\
+        org.osgi.framework.bootdelegation=sun.reflect,\
+        osgi.console=
+
+-runblacklist: \
+        bnd.identity;id='osgi.core',\
+        bnd.identity;id='osgi.cmpn',\
+        bnd.identity;id='org.apache.tomcat-embed-core'
+
+-runsystempackages: \
+        org.slf4j;version=1.7.25,\
+        org.slf4j.helpers;version=1.7.25,\
+        org.slf4j.spi;version=1.7.25
+
+-runpath: \
+        slf4j.api,\
+        slf4j.simple;version=1.7.25
+
+
+-runee: JavaSE-11
+
+-runfw: org.apache.felix.framework
+-runrequires: bnd.identity;id='com.vaadin.platform-test'
+
+
+-runrequires.flow: \
+    bnd.identity;version='6.0';id='com.vaadin.flow.client',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.data',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.html.components',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.push',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.osgi',\
+    bnd.identity;version='1.1.1';id='com.vaadin.license-checker'

@@ -1,7 +1,6 @@
 package com.vaadin.platform.test;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.flow.component.accordion.testbench.AccordionElement;
@@ -42,18 +41,16 @@ import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
-import com.vaadin.testbench.parallel.ParallelTest;
 
-public class ComponentsIT extends ParallelTest {
+public class ComponentsIT extends AbstractPlatformTest {
 
     static {
-        Parameters.setGridBrowsers(
-                "firefox,chrome,safari-13,edge");
+        Parameters.setGridBrowsers("firefox,chrome,safari-13,edge");
     }
 
-    @Before
-    public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+    @Override
+    protected String getTestPath() {
+        return "/prod-mode/";
     }
 
     @Test
@@ -83,10 +80,12 @@ public class ComponentsIT extends ParallelTest {
         checkCustomElement($(IronListElement.class).id("ironlist"));
         checkCustomElement($("vaadin-list-box").id("listbox"));
         checkCustomElement($(LoginFormElement.class).id("loginform"));
-        checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
+        checkCustomElement(
+                $(HorizontalLayoutElement.class).id("horizontallayout"));
         checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
         checkCustomElement($(ProgressBarElement.class).id("progressbar"));
-        checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
+        checkCustomElement(
+                $(RadioButtonGroupElement.class).id("radiobuttongroup"));
         checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
         checkCustomElement($(TabElement.class).first());
         checkCustomElement($(TabsElement.class).id("tabs"));

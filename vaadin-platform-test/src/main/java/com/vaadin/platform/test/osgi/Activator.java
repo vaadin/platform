@@ -15,24 +15,24 @@
  */
 package com.vaadin.platform.test.osgi;
 
-import java.util.Hashtable;
-
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.osgi.service.http.HttpService;
-import org.osgi.service.http.NamespaceException;
-import org.osgi.util.tracker.ServiceTracker;
+import java.util.Hashtable;
 
-import com.vaadin.flow.server.Constants;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.http.NamespaceException;
+import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
+
+import com.vaadin.flow.server.InitParameters;
 import com.vaadin.flow.server.VaadinServlet;
 
-public class Activator implements BundleActivator {
-
-    private ServiceTracker<HttpService, HttpService> httpTracker;
+@Component(immediate = true)
+public class Activator {
 
     private static class FixedVaadinServlet extends VaadinServlet {
         @Override
@@ -43,51 +43,30 @@ public class Activator implements BundleActivator {
         }
     }
 
-    @Override
-    public void start(BundleContext context) throws Exception {
-        httpTracker = new ServiceTracker<HttpService, HttpService>(context,
-                HttpService.class.getName(), null) {
-            @Override
-            public void removedService(ServiceReference<HttpService> reference,
-                    HttpService service) {
-                // HTTP service is no longer available, unregister our
-                // servlet...
-                service.unregister("/*");
-                service.unregister("/prod-mode/*");
-            }
+    @Activate
+    void activate() throws NamespaceException {
+        BundleContext context = FrameworkUtil.getBundle(Activator.class)
+                .getBundleContext();
 
-            @Override
-            public HttpService addingService(
-                    ServiceReference<HttpService> reference) {
-                registerServlet(context, reference, "/*", false);
-                return registerServlet(context, reference, "/prod-mode/*",
-                        true);
-            }
-        };
-        // start tracking all HTTP services...
-        httpTracker.open();
+        context.registerService(Servlet.class, new FixedVaadinServlet(),
+                createProperties("/*", false));
+        context.registerService(Servlet.class, new FixedVaadinServlet(),
+                createProperties("/prod-mode/*", true));
     }
 
-    private HttpService registerServlet(BundleContext context,
-            ServiceReference<HttpService> reference, String mapping,
-            boolean productionMode) {
-        // HTTP service is available, register our servlet...
-        HttpService httpService = context.getService(reference);
-        Hashtable<String, String> params = new Hashtable<>();
-        params.put(Constants.SERVLET_PARAMETER_PRODUCTION_MODE,
-                Boolean.toString(productionMode));
-        try {
-            httpService.registerServlet(mapping, new FixedVaadinServlet(),
-                    params, null);
-        } catch (ServletException | NamespaceException exception) {
-            throw new RuntimeException(exception);
-        }
-        return httpService;
+    private Hashtable<String, Object> createProperties(String mapping,
+            Boolean isProductionMode) {
+        Hashtable<String, Object> properties = new Hashtable<>();
+        properties.put(
+                HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_INIT_PARAM_PREFIX
+                        + InitParameters.SERVLET_PARAMETER_PRODUCTION_MODE,
+                isProductionMode.toString());
+        properties.put(
+                HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_ASYNC_SUPPORTED,
+                true);
+        properties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
+                mapping);
+        return properties;
     }
 
-    @Override
-    public void stop(BundleContext context) throws Exception {
-        // stop tracking all HTTP services...
-        httpTracker.close();
-    }
 }

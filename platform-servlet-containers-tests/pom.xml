@@ -41,12 +41,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!--
-    <modules>
-        <module>felix-jetty</module>
-    </modules>
-    -->
-
     <build>
         <plugins>
             <plugin>
@@ -67,6 +61,22 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>run-tests</id>
+            <activation>
+                <property>
+                    <name>!skipTests</name>
+                </property>
+            </activation>
+            <modules>
+               <!-- this module has to be the last one since it occupies HTTP 
+                    server port until maven exits -->
+               <module>bnd-tools-test</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
 
