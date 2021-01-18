@@ -9,62 +9,36 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 Here are the highlighted new and improved features in Vaadin 19. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 ### Flow
-#### Features
-- Improved LitTemplate support
-Using `LitTemplate` is recommended over deprecated `PolymerTemplate` for doing layouts with HTML and UI logic in Java. It is recommended to use TypeScript for the template and this has been updated to the examples in the [documentation](https://github.com/vaadin/flow-and-components-documentation/tree/master/documentation/polymer-templates). Starting from Vaadin 18, the initial attribute values in the template are reflected to the server side state when `@Id` mapping components. This applies to `PolymerTemplate` too. More information on the template support [in the blog](https://vaadin.com/blog/future-of-html-templates-in-vaadin).
+#### Application Theme 
+The application theme is a simplified theming system that works for all Vaadin applications and can be packaged into a reusable dependency. [Documentation](https://vaadin.com/docs-beta/latest/theming/application-theme/)
 
--  Add HasHelper interface 
-A new `HasHelper` interface has been added to be used for field components that have a "helper" feature (such as TextField), i.e. a slot below/above input fields for supplying additional information or content related to the field.
-
-- Supporting undefined item count for `ComboBox` and delaying count call until dropdown is opened
-Starting from V18, `ComboBox` works without defining a item count query, or it can delay the count query until the drop down is opened due to changes in `DataCommunicator`. 
+#### npm build compatibility for OSGi applications
+Flow developers can use npm based build and deploy their applications in production mode.
 
 #### Breaking Changes
-- Template support 
-Future of template support is described here: https://vaadin.com/blog/future-of-html-templates-in-vaadin
-**The changes in Flow 5.0 do not require changing existing `LitTemplate` or `PolymerTemplate` based components. In case you have existing workaround placed for handling the initial attribute values for template-mapped-components, those workarounds should not be needed anymore.**
-  - `PolymerTemplate` related classes are now deprecated and moved from `flow-server` to `flow-polymer-template` artifact.
-  - `LitTemplate` related classes are now moved from `flow-server` to `flow-lit-template` artifact.
-  - `Uses` annotation is now deprecated, because Polymer template support is deprecated.
-
-- `AppShellRegistry` method `getTitle()` is removed 
-It was broken and could not work. Instead, if needed, use `getUI().getUIInternals().getAppShellTitle()`. 
+- Use data view filter and sorting only to that component (`vaadin-checkbox-flow` `vaadin-combo-box-flow` `vaadin-grid-flow` `vaadin-list-box-flow` `vaadin-radio-button-flow` `vaadin-select-flow`)
+In-memory filtering and sorting are now stored directly in component, which gives an opportunity to change it through the data view API for a certain component separately from other components bound to the same data provider.
 
 ### Fusion
-#### Features
-- Client-side Spring Security based authentication helpers  
-Add `Spring Security` based authentication helpers `login`, `logout`, and an `InvalidSessionMiddleWare` for handling session expiration. This feature makes it easier to write a single-page application (SPA) with a custom login view.
 
-- Support TypeScript form binding with optional fields and objects 
-When binding to an optional object field, the TypeScript form binder will not initialize the field with an empty value and leave it as `undefined` unless there are bindings to the nested fields. This feature is necessary when e.g., binding an object field to a Combobox.
+####  Offline start and navigation
+The @PWA annotation became more powerful in Vaadin 19. It enables starting the app and navigating between client-side routes offline, much easier customizations to the Service Worker, and an update to the loading indicator / reconnect dialog to add a clear indication to the users when the app is offline. [Documentation](https://vaadin.com/docs-beta/latest/flow/pwa/pwa-offline/#offline-typescript-views) 
 
-- Simpler CSS import for TypeScript views and CSS `@import` support 
-This feature gives us a nice DX of importing styles to TS views like:
-```ts
-import styles from './list-view.css';
+### Collaboration Engine
 
-@customElement('list-view')
-export class ListView extends LitElement {
-  static styles = [Lumo, styles];
-```
-#### Breaking Changes
-
-- Optional type for value property of BinderNode 
-The `value` property of `BinderNode` now has optionally `undefined` type for non-initialised optional fields.
-
+The Collaboration Engine ([Documentation](https://vaadin.com/docs-beta/latest/ce/overview/)) is included in Vaadin platform for the first time. It enables end-users to see who else is present in the same view, and edit forms together in real-time.
   
 ### Components
 
-#### Features
-- Field helpers
-  - Slot below/above input fields for supplying additional information or content related to the field. 
-- AutoOpenDisabled
-  - mode for ComboBox, DatePicker, TimePicker, DateTimePicker that prevents dropdown from opening automatically on focus
-- new component: vaadin-avatar 
-  - Avatar and AvatarGroup components. Being able to show users with name, abbreviations and image. AvatarGroup is a collection of Avatars with the possibility to truncate it to a certain number of visible avatars.
+#### Changes in 20 of 35 components
 
-#### Breaking Changes
-- Flow components versioning has changed, now all components are released at once with Vaadin Platform sharing the same version.
+ - TypeScript type definitions for component events
+Typed events in all Vaadin components allow using code-completion in IDEs and build time TS compiler checks when creating event listeners for Vaadin components
+
+#### Changes in `vaadin-grid-pro-flow`
+
+ - [⧉](https://github.com/vaadin/vaadin-flow-components/commit/cda6c84) Add EditOnClick feature. **PR:**[480](https://github.com/vaadin/vaadin-flow-components/pull/480). **Ticket:**[73](https://github.com/vaadin/vaadin-grid-pro/issues/73)
+  _Add API to enable edit mode to Grid Pro with a single click on the cell._
 
 
 {{changesSincePrevious}}
