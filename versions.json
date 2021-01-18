@@ -238,7 +238,7 @@
         "vaadin-notification": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "1.6.0",
+            "jsVersion": "1.6.1",
             "npmName": "@vaadin/vaadin-notification"
         },
         "vaadin-ordered-layout": {
