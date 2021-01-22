@@ -356,7 +356,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "3.0.0.beta1"
+            "javaVersion": "3.0.0"
         },
         "vaadin-confirm-dialog": {
             "component": true,
