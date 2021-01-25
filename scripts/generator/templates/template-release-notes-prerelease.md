@@ -62,6 +62,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 - Vaadin Multiplatform Runtime **(Prime)**
   - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+- Vaadin Collaboration Engine ([{{vaadin.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{vaadin.vaadin-collaboration-engine.javaVersion}})) 
 
 ### Components
 #### Vaadin flow components
