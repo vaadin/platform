@@ -2,8 +2,8 @@
 
 # use platform version  from the root pom.xml
 version=`mvn -N help:evaluate -Dexpression=project.version -q -DforceStdout`
-# if platform version is a SNAPSHOT, use SNAPSHOTS for other dependencies
-expr "$version" : '[0-9]*.[0-9]*-SNAPSHOT' >/dev/null && snapshot=--useSnapshots
+
+snapshot=$1
 
 # install npm deps needed for the generator node script
 [ ! -d scripts/generator/node_modules ] && (cd scripts/generator && npm install)
