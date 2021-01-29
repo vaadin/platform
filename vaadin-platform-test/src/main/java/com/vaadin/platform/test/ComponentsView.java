@@ -55,7 +55,6 @@ import com.vaadin.flow.component.crud.CrudGrid;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
-import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -198,8 +197,10 @@ public class ComponentsView extends AppLayout {
 
         Emphasis emphasis = new Emphasis("enphasis");
         Footer footer = new Footer(new Span("Footer"));
-        IFrame iFrame = new IFrame("./no-route");
-        Image image = new Image("broken-image", "image");
+        IFrame iFrame = new IFrame("");
+        Image image = new Image("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==", "image");
+        image.setWidth("20px");
+        image.getElement().getStyle().set("background", "blue");
         Input input = new Input();
         Label label = new Label("label");
         NativeButton nativeButton = new NativeButton("nativeButton");
@@ -273,18 +274,13 @@ public class ComponentsView extends AppLayout {
         });
         select.setId("select");
 
-
-        GridSelectionColumn gridSelectionColumn = new GridSelectionColumn(() ->  {} , () -> {});
-
+        GridSelectionColumn gridSelectionColumn = new GridSelectionColumn(() -> log.log("select-all"), () -> {});
         Grid<Map<String, String>> grid = new Grid<>();
         grid.setWidth("100%");
         grid.getElement().insertChild(0, gridSelectionColumn.getElement());
         grid.addColumn(map -> map.get("foo")).setHeader("Foo-Header");
         grid.addColumn(map -> map.get("bar")).setHeader("Bar-Header");
-        grid.addSelectionListener(e -> {
-            log.log("Grid selection changed to '" + e.getFirstSelectedItem() + "'");
-        });
-
+        grid.addSelectionListener(e -> log.log("Grid selection changed to '" + e.getFirstSelectedItem() + "'"));
 
         List<Map<String, String>> gridItems = new ArrayList<>();
         gridItems.add(map("Some", "Data"));
@@ -308,7 +304,6 @@ public class ComponentsView extends AppLayout {
                 return query.getParent() == null ? entities.stream() : query.getParent().getEntities().stream();
             }
         };
-
         TreeGrid<Entity> treeGrid = new TreeGrid<>();
         treeGrid.addHierarchyColumn(Entity::getName).setHeader("Name");
         treeGrid.addColumn(e -> e.getEntities().size()).setHeader("child count");

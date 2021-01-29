@@ -141,7 +141,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.20</version>
                 <dependencies>
-                    <!--The following dependencies are needed for Java 10+ 
+                    <!--The following dependencies are needed for Java 10+
                         support -->
                     <dependency>
                         <groupId>javax.xml.bind</groupId>
@@ -260,7 +260,7 @@
                             </dependency>
                         </dependencies>
                         <executions>
-                            <!-- Start Sauce Connect prior to running the 
+                            <!-- Start Sauce Connect prior to running the
                                 integration tests -->
                             <execution>
                                 <id>start-sauceconnect</id>
@@ -269,7 +269,7 @@
                                     <goal>start-sauceconnect</goal>
                                 </goals>
                             </execution>
-                            <!-- Stop the Sauce Connect process after the 
+                            <!-- Stop the Sauce Connect process after the
                                 integration tests have finished -->
                             <execution>
                                 <id>stop-sauceconnect</id>
@@ -288,6 +288,7 @@
                             <stopPort>9999</stopPort>
                             <stopWait>5</stopWait>
                             <stopKey>foo</stopKey>
+                            <scanIntervalSeconds>1</scanIntervalSeconds>
                         </configuration>
                         <executions>
                             <execution>
@@ -341,7 +342,7 @@
                             <productionMode>true</productionMode>
                         </configuration>
                     </plugin>
-                    <!-- The following plugins are needed for OSGi tests 
+                    <!-- The following plugins are needed for OSGi tests
                         in platform-servlet-containers-tests module -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

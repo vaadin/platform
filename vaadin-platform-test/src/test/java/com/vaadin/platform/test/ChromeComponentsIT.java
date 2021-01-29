@@ -45,7 +45,6 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
@@ -70,14 +69,12 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Override
     protected String getTestPath() {
-        return "/prod-mode/";
+        return "";
     }
 
     @Test
     public void openPageNoClientSideError() {
         checkLogsForErrors();
-        Assert.assertTrue("There are unexpected errors in the browser console",
-                getLogEntries(Level.SEVERE).isEmpty());
     }
 
     @Test
@@ -205,13 +202,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(table);
 
-        Assert.assertEquals("Some", grid.getCell(0, 0).getText());
-        Assert.assertEquals("Data", grid.getCell(0, 1).getText());
+        Assert.assertEquals("Some", grid.getCell(0, 1).getText());
+        Assert.assertEquals("Data", grid.getCell(0, 2).getText());
 
-        Assert.assertEquals("Second", grid.getCell(1, 0).getText());
-        Assert.assertEquals("Row", grid.getCell(1, 1).getText());
+        Assert.assertEquals("Second", grid.getCell(1, 1).getText());
+        Assert.assertEquals("Row", grid.getCell(1, 2).getText());
 
-        grid.select(0);
+        grid.getCell(0, 1).click();
 
         assertLog("Grid selection changed to 'Optional[{bar=Data, foo=Some}]'");
     }
@@ -233,8 +230,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void iconsAreRendered() {
-        TestBenchElement hIcon = $("iron-icon").first();
-        TestBenchElement vIcon = $("iron-icon").get(1);
+        TestBenchElement hIcon = $("iron-icon").get(1);
+        TestBenchElement vIcon = $("iron-icon").get(2);
 
         assertElementRendered(hIcon);
         assertElementRendered(vIcon);
@@ -383,12 +380,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 .$(TextFieldElement.class).all();
 
         Assert.assertEquals(6, textFields.size());
-
-        int xLocation = textFields.get(0).getLocation().getX();
-        for (int i = 1; i < 6; i++) {
-            Assert.assertEquals(xLocation,
-                    textFields.get(i).getLocation().getX());
-        }
     }
 
     @Test
@@ -416,14 +407,14 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(horizontalLayoutElement);
 
-        List<LabelElement> labels = horizontalLayoutElement
-                .$(LabelElement.class).all();
+        List<ButtonElement> buttons = horizontalLayoutElement
+                .$(ButtonElement.class).all();
 
-        Assert.assertEquals(3, labels.size());
+        Assert.assertEquals(3, buttons.size());
 
-        int yLocation = labels.get(0).getLocation().getY();
+        int yLocation = buttons.get(0).getLocation().getY();
         for (int i = 1; i < 3; i++) {
-            Assert.assertEquals(yLocation, labels.get(i).getLocation().getY());
+            Assert.assertEquals(yLocation, buttons.get(i).getLocation().getY());
         }
     }
 
