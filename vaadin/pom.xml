@@ -160,6 +160,16 @@
                     <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <configuration>
+                    <includeProjectArtifact>false</includeProjectArtifact>
+                    <excludedArtifactIds>vaadin-core</excludedArtifactIds>
+                    <includeTransitiveDependency>false</includeTransitiveDependency>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>

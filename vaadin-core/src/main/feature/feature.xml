@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="vaadin-core">
+   
+    <repository>mvn:com.vaadin/flow/${com.vaadin:flow-server:jar.version}/xml/features</repository>
+    <repository>mvn:com.vaadin/vaadin-grid-flow/${com.vaadin:vaadin-grid-flow:jar.version}/xml/features</repository>
+    
+    <feature name="vaadin-core" description="Vaadin Core" version="${project.version}">
+        <details>Vaadin Core feature</details>
+        <feature>flow</feature>
+        <feature>vaadin-grid-flow</feature>
+    </feature>
+</features>
