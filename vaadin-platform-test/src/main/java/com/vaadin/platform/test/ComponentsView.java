@@ -209,6 +209,7 @@ public class ComponentsView extends AppLayout {
         Pre pre = new Pre("pre");
         Component sel = new HtmlComponent("select");
         NativeDetails nativeDetails = new NativeDetails(new Span("native details"));
+        nativeDetails.setContent(new Span("content"));
 
 
         // Using full qualified name since in parent class there is a Section Enum

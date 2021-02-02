@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -21,13 +20,10 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -70,28 +66,29 @@ public class ComponentUsageTest {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private <T> List<Class<? extends T>> filterByType(Collection<Class<?>> list, Class<T> type) {
+        return (List)list
+                .stream().filter(clz ->
+                    type.isAssignableFrom(clz) &&
+                    !clz.getName().contains("$") &&
+                    Modifier.isPublic(clz.getModifiers()) &&
+                    !Modifier.isAbstract(clz.getModifiers()))
+                .collect(Collectors.toList());
+    }
+
     private final Collection<TestComponent> testComponents = new ArrayList<>();
 
     public Collection<TestComponent> getTestComponents() {
         return testComponents;
     }
 
-    private <T> List<Class<? extends T>> filterVaadinClasses(Collection<Class<? extends T>> list) {
-        return list.stream().filter(c -> !c.getName().contains("$") && Modifier.isPublic(c.getModifiers()) && !Modifier.isAbstract(c.getModifiers())).collect(Collectors.toList());
-    }
-
-    public ComponentUsageTest() {
-        List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
-        classLoadersList.add(ClasspathHelper.contextClassLoader());
-        classLoadersList.add(ClasspathHelper.staticClassLoader());
-
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-            .setScanners(new SubTypesScanner(false), new ResourcesScanner())
-            .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-            .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.vaadin.flow.component"))));
-
-        List<Class<? extends Component>> allComponentClasses = filterVaadinClasses(reflections.getSubTypesOf(Component.class));
-        List<Class<? extends TestBenchElement>> allTBElementClasses = filterVaadinClasses(reflections.getSubTypesOf(TestBenchElement.class));
+    public ComponentUsageTest() throws Exception {
+        ClassLoader cl = getClass().getClassLoader();
+        ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl).getTopLevelClassesRecursive("com.vaadin.flow.component");
+        List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> ci.load()).collect(Collectors.toList());
+        List<Class<? extends Component>> allComponentClasses = filterByType(vaadinClasses, Component.class);
+        List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses, TestBenchElement.class);
 
         List<String> allComponentNames = allComponentClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
         List<String> allTBElementNames = allTBElementClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
