@@ -59,9 +59,9 @@ public class ComponentsIT extends AbstractPlatformTest {
             $ = $(tag);
         }
         if (($  == null || !$.exists())) {
-            System.err.println("NOOO " + testComponent);
+            System.err.println(">>> Component not found in the View" + testComponent);
+            return;
         }
-
         checkElement($);
     }
 
