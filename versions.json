@@ -7,7 +7,7 @@
             "javaVersion": "11.2.1"
         },
         "flow-spring": {
-            "javaVersion": "12.3.1"
+            "javaVersion": "12.3.2"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -74,10 +74,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "2.0.5"
+            "javaVersion": "2.0.6"
         },
         "mpr-v8": {
-            "javaVersion": "2.0.5"
+            "javaVersion": "2.0.6"
         },
         "polymer": {
             "jsVersion": "2.7.0"
