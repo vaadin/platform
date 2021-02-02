@@ -56,7 +56,9 @@ public class ComponentUsageTest {
         public List<String> imports;
         public String tag;
         public String tbEquivalentName;
-        public TestComponent(Class<? extends Component> component, Class<? extends TestBenchElement> tbElement, String tbEquivalentName, String localName, List<String> imports, String tag) {
+
+        public TestComponent(Class<? extends Component> component, Class<? extends TestBenchElement> tbElement,
+                String tbEquivalentName, String localName, List<String> imports, String tag) {
             this.component = component;
             this.tbElement = tbElement;
             this.localName = localName;
@@ -64,6 +66,7 @@ public class ComponentUsageTest {
             this.tbEquivalentName = tbEquivalentName;
             this.tag = tag;
         }
+
         @Override
         public String toString() {
             return "   " + (component == null ? "" : component.getName()) + "\n   "
@@ -76,15 +79,6 @@ public class ComponentUsageTest {
 
     public Collection<TestComponent> getTestComponents() {
         return testComponents;
-    }
-
-    private static class AnnotatedClasses {
-        Set<Class<?>> classes = new HashSet<>();
-        Set<String> values = new HashSet<>();
-        Set<String> filter(String regex) {
-            return values.stream().filter(v -> v.matches(regex)).map(s -> s.replaceFirst(regex, "$1")).sorted()
-                    .collect(Collectors.toSet());
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -110,7 +104,7 @@ public class ComponentUsageTest {
         List<String> allComponentNames = allComponentClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
         List<String> allTBElementNames = allTBElementClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
         List<List<String>> allJsImports = allComponentClasses.stream().map(
-                c -> getValues(c, JsModule.class).stream().filter(s -> s.matches("^@.*")).collect(Collectors.toList()))
+                c -> getValues(c, JsModule.class).stream().collect(Collectors.toList()))
                 .collect(Collectors.toList());
         List<String> allComponentTags = allComponentClasses.stream().map(c -> getValue(c, Tag.class)).collect(Collectors.toList());
         List<String> allTBElementTags = allTBElementClasses.stream().map(c -> getValue(c, Element.class)).collect(Collectors.toList());
@@ -189,7 +183,7 @@ public class ComponentUsageTest {
 
     @Test
     public void testComponentUsage() throws Exception {
-        List<Class<Component>> allClasses = getAllComponentClasses();
+        List<Class<? extends Component>> allClasses = testComponents.stream().filter(tc -> tc.component != null).map(tc -> tc.component).collect(Collectors.toList());
 
         List<String> javaImportRegexs = allClasses.stream().map(c -> ".*[^\\w](" + c.getName() + ")[^\\w].*")
                 .collect(Collectors.toList());
@@ -200,8 +194,6 @@ public class ComponentUsageTest {
         List<String> javaVars = allClasses.stream()
                 .map(c -> c.getSimpleName() + " " + StringUtils.uncapitalize(c.getSimpleName()) + " =")
                 .collect(Collectors.toList());
-
-        AnnotatedClasses annotatedClasses = getAnnotatedClasses(allClasses, JsModule.class);
 
         File javaViewFile = new File(JAVA_VIEW);
         assertTrue("Java File Unavailable " + javaViewFile.getName(), javaViewFile.canRead());
@@ -225,17 +217,26 @@ public class ComponentUsageTest {
         }
 
         if (runTs) {
-            File tsViewFile = new File(TS_VIEW);
-            assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
-            List<String> tsLines = FileUtils.readLines(tsViewFile, "UTF-8");
-            Set<String> vaadinImports = annotatedClasses.filter("^(@vaadin/vaadin-.*/[\\w-]+)\\.js$");
+
+            Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
+                    .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
+                    .map(s -> s.replaceFirst(".js$", ""))
+                    .collect(Collectors.toSet());
+
+
             List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'" + s + "'; *")
                     .collect(Collectors.toList());
             List<String> jsImports = vaadinImports.stream().map(s -> "import '" + s + "';").collect(Collectors.toList());
-            Set<String> vaadinComponents = annotatedClasses.filter("^@vaadin/vaadin-.*/([\\w-]+)\\.js$");
+            Set<String> vaadinComponents = vaadinImports.stream()
+                    .map(s -> s.replaceFirst("^@vaadin/vaadin-.*/([\\w-]+)$", "$1")).collect(Collectors.toSet());
             List<String> jsRenderRegexs = vaadinComponents.stream().map(s -> "^.*</?" + s + ">.*")
                     .collect(Collectors.toList());
             List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + ">").collect(Collectors.toList());
+
+            File tsViewFile = new File(TS_VIEW);
+            assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
+            List<String> tsLines = FileUtils.readLines(tsViewFile, "UTF-8");
+
             checkedList = checkLines(tsLines, jsImportRegexs, jsImports);
             if (!checkedList.isEmpty()) {
                 fail = true;
@@ -274,7 +275,7 @@ public class ComponentUsageTest {
         return classFiles;
     }
 
-    static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, Class<?> interfaceOrSuperclass) {
+    private static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, Class<?> interfaceOrSuperclass) {
         return classes.stream()
                 .filter(c -> !c.getName().contains("$") && interfaceOrSuperclass.isAssignableFrom(c)
                         && (c.getName().matches(ADD_CLASSES)
@@ -282,27 +283,31 @@ public class ComponentUsageTest {
                 .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Class::getName))));
     }
 
-    static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, String regex) {
+    private static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, String regex) {
         return classes.stream().filter(c -> c.getName().matches(regex))
                 .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Class::getName))));
     }
 
 
-    static String getValue(Class<?> claz, Class<? extends Annotation> annotation) {
+    private static String getValue(Class<?> claz, Class<? extends Annotation> annotation) {
         List<String> values = getValues(claz, annotation);
         return values.size() > 0 ? values.get(0) : null;
     }
 
-    static List<String> getValues(Class<?> claz, Class<? extends Annotation> annotation) {
+    private static List<String> getValues(Class<?> claz, Class<? extends Annotation> annotation) {
         List<String> wcs = new ArrayList<>();
         Annotation[] anns = claz.getAnnotationsByType(annotation);
         for (Annotation ann : anns) {
             wcs.addAll(getValues(ann));
         }
+        Annotation ann = claz.getAnnotation(annotation);
+        if (ann != null) {
+            wcs.addAll(getValues(ann));
+        }
         return wcs;
     }
 
-    static Set<String> getValues(Annotation ann) {
+    private static Set<String> getValues(Annotation ann) {
         Set<String> values = new HashSet<>();
         if (ann != null) {
             Class<? extends Annotation> type = ann.annotationType();
@@ -314,26 +319,6 @@ public class ComponentUsageTest {
             }
         }
         return values;
-    }
-
-    static AnnotatedClasses getAnnotatedClasses(List<Class<Component>> classes,
-            Class<? extends Annotation> interfaceOrSuperclass) {
-        AnnotatedClasses wcs = new AnnotatedClasses();
-        for (Class<?> claz : classes) {
-            Annotation[] anns = claz.getAnnotationsByType(interfaceOrSuperclass);
-            if (anns.length > 0) {
-                for (Annotation ann : anns) {
-                    wcs.values.addAll(getValues(ann));
-                }
-                wcs.classes.add(claz);
-            }
-            Annotation ann = claz.getAnnotation(interfaceOrSuperclass);
-            if (ann != null) {
-                wcs.values.addAll(getValues(ann));
-                wcs.classes.add(claz);
-            }
-        }
-        return wcs;
     }
 
     private Collection<Class<?>> getClassesFromPath(File path) {
