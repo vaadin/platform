@@ -4,29 +4,29 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
@@ -41,13 +41,8 @@ public class ComponentUsageTest {
     // TODO: remove this when Fusion tests are on place
     private static final boolean runTs = new File(TS_VIEW).canRead();
 
-    // BeanUtil generates noise to the standard error
-    // NativeDetails is not in all branches
-    // JavaScriptBootstrapUI|WebComponentUI|WebComponentWrapper are internal components
-    private static final String SKIP_CLASSES = ".*\\.(BeanUtil\\$Lazy.+|NativeDetails|JavaScriptBootstrapUI|WebComponentUI|WebComponentWrapper)$";
     // CustomField is abstract
     // RadioButton is not public
-    private static final String ADD_CLASSES = ".*\\.(CustomField)$";
 
     public static class TestComponent {
         public Class<? extends Component> component;
@@ -75,32 +70,29 @@ public class ComponentUsageTest {
         }
     }
 
-    private final Collection<TestComponent> testComponents;
+    private final Collection<TestComponent> testComponents = new ArrayList<>();
 
     public Collection<TestComponent> getTestComponents() {
         return testComponents;
     }
 
-    @SuppressWarnings("unchecked")
-    public  <T extends TestBenchElement> List<Class<T>> getAllTBElementClasses() {
-        Set<Class<?>> allClasses = getAllKnownClasses();
-        allClasses = getMatchingClasses(allClasses, TestBenchElement.class);
-        allClasses = getMatchingClasses(allClasses, "^com\\.vaadin\\.flow\\.component\\.\\w+\\..*$");
-        return allClasses.stream().map(c -> (Class<T>)c).collect(Collectors.toList());
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T extends Component> List<Class<T>> getAllComponentClasses() {
-        Set<Class<?>> allClasses = getAllKnownClasses();
-        allClasses = getMatchingClasses(allClasses, Component.class);
-        allClasses = getMatchingClasses(allClasses, "^com\\.vaadin\\.flow\\.component\\.\\w+\\..*$");
-        return allClasses.stream().map(c -> (Class<T>)c).collect(Collectors.toList());
+    private <T> List<Class<? extends T>> filterVaadinClasses(Collection<Class<? extends T>> list) {
+        return list.stream().filter(c -> !c.getName().contains("$") && Modifier.isPublic(c.getModifiers()) && !Modifier.isAbstract(c.getModifiers())).collect(Collectors.toList());
     }
 
     public ComponentUsageTest() {
-        testComponents = new ArrayList<ComponentUsageTest.TestComponent>();
-        List<Class<Component>> allComponentClasses = getAllComponentClasses();
-        List<Class<TestBenchElement>> allTBElementClasses = getAllTBElementClasses();
+        List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
+        classLoadersList.add(ClasspathHelper.contextClassLoader());
+        classLoadersList.add(ClasspathHelper.staticClassLoader());
+
+        Reflections reflections = new Reflections(new ConfigurationBuilder()
+            .setScanners(new SubTypesScanner(false), new ResourcesScanner())
+            .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
+            .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.vaadin.flow.component"))));
+
+        List<Class<? extends Component>> allComponentClasses = filterVaadinClasses(reflections.getSubTypesOf(Component.class));
+        List<Class<? extends TestBenchElement>> allTBElementClasses = filterVaadinClasses(reflections.getSubTypesOf(TestBenchElement.class));
+
         List<String> allComponentNames = allComponentClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
         List<String> allTBElementNames = allTBElementClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
         List<List<String>> allJsImports = allComponentClasses.stream().map(
@@ -114,14 +106,17 @@ public class ComponentUsageTest {
         HashMap<String, TestComponent> byTag = new HashMap<>();
 
         for (int i = 0; i < allComponentClasses.size(); i++) {
-            Class<Component> component = allComponentClasses.get(i);
+            Class<? extends Component> component = allComponentClasses.get(i);
             String componentName = allComponentNames.get(i);
             String componentTag = allComponentTags.get(i);
             List<String> imports = allJsImports.get(i);
+            if (componentTag == null) {
+                continue;
+            }
 
             String equivalent = component.getName().replaceFirst("(.*)\\.(.*)", "$1.testbench.$2Element");
 
-            Class<TestBenchElement> tbElement = null;
+            Class<? extends TestBenchElement> tbElement = null;
             String tbElementTag = null;
 
             int j = allTBElementNames.indexOf(equivalent);
@@ -139,7 +134,7 @@ public class ComponentUsageTest {
         }
 
         for (int i = 0; i < allTBElementClasses.size(); i++) {
-            Class<TestBenchElement> tbElement = allTBElementClasses.get(i);
+            Class<? extends TestBenchElement> tbElement = allTBElementClasses.get(i);
             String tbElementName = allTBElementNames.get(i);
             if (byTbElement.containsKey(tbElementName)) {
                 continue;
@@ -159,6 +154,7 @@ public class ComponentUsageTest {
             testComponents.add(new TestComponent(null, tbElement, null, null, Collections.emptyList(), tbTag));
         }
     }
+
 
     @Test
     public void verifyComponents() throws Exception {
@@ -222,8 +218,6 @@ public class ComponentUsageTest {
                     .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
                     .map(s -> s.replaceFirst(".js$", ""))
                     .collect(Collectors.toSet());
-
-
             List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'" + s + "'; *")
                     .collect(Collectors.toList());
             List<String> jsImports = vaadinImports.stream().map(s -> "import '" + s + "';").collect(Collectors.toList());
@@ -262,32 +256,6 @@ public class ComponentUsageTest {
         }).filter(s -> s != null).collect(Collectors.toList());
     }
 
-    private static Set<Class<?>> classFiles;
-    private Set<Class<?>> getAllKnownClasses() {
-        if (classFiles == null) {
-            System.out.println("Visiting all classes in the classPath ...");
-            classFiles = new HashSet<>();
-            for (File file : getClassLocationsForCurrentClasspath()) {
-                classFiles.addAll(getClassesFromPath(file));
-            }
-            System.out.printf("Found %s classes.\n", classFiles.size());
-        }
-        return classFiles;
-    }
-
-    private static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, Class<?> interfaceOrSuperclass) {
-        return classes.stream()
-                .filter(c -> !c.getName().contains("$") && interfaceOrSuperclass.isAssignableFrom(c)
-                        && (c.getName().matches(ADD_CLASSES)
-                                || Modifier.isPublic(c.getModifiers()) && !Modifier.isAbstract(c.getModifiers())))
-                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Class::getName))));
-    }
-
-    private static Set<Class<?>> getMatchingClasses(final Set<Class<?>> classes, String regex) {
-        return classes.stream().filter(c -> c.getName().matches(regex))
-                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Class::getName))));
-    }
-
 
     private static String getValue(Class<?> claz, Class<? extends Annotation> annotation) {
         List<String> values = getValues(claz, annotation);
@@ -320,106 +288,4 @@ public class ComponentUsageTest {
         }
         return values;
     }
-
-    private Collection<Class<?>> getClassesFromPath(File path) {
-        if (path.isDirectory()) {
-            return getClassesFromDirectory(path);
-        } else {
-            return getClassesFromJarFile(path);
-        }
-    }
-
-    private String fromFileToClassName(final String fileName) {
-        return fileName.substring(0, fileName.length() - 6).replaceAll("/|\\\\", "\\.");
-    }
-
-    private Set<Class<?>> getClassesFromJarFile(File path) {
-        Set<Class<?>> components = new HashSet<>();
-        if (path.canRead()) {
-            JarFile jar;
-            try {
-                jar = new JarFile(path);
-                Enumeration<JarEntry> en = jar.entries();
-                while (en.hasMoreElements()) {
-                    JarEntry entry = en.nextElement();
-                    if (entry.getName().endsWith("class")) {
-                        String className = fromFileToClassName(entry.getName());
-                        if (className.matches(SKIP_CLASSES)) {
-                            continue;
-                        }
-                        try {
-                            Class<?> claz = Class.forName(className);
-                            components.add(claz);
-                        } catch (Throwable ignore) {
-                        }
-                    }
-                }
-                jar.close();
-            } catch (IOException ignore) {
-            }
-        }
-        return components;
-    }
-
-    private Set<Class<?>> getClassesFromDirectory(File path) {
-        Set<Class<?>> classes = new HashSet<>();
-
-        // get jar files from top-level directory
-        Set<File> jarFiles = listFiles(path, new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".jar");
-            }
-        }, false);
-        for (File file : jarFiles) {
-            classes.addAll(getClassesFromJarFile(file));
-        }
-
-        // get all class-files
-        Set<File> classFiles = listFiles(path, new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".class");
-            }
-        }, true);
-
-        int substringBeginIndex = path.getAbsolutePath().length() + 1;
-        for (File classfile : classFiles) {
-            String className = classfile.getAbsolutePath().substring(substringBeginIndex);
-            className = fromFileToClassName(className);
-            try {
-                classes.add(Class.forName(className));
-            } catch (Throwable ignore) {
-            }
-
-        }
-        return classes;
-    }
-
-    private Set<File> listFiles(File directory, FilenameFilter filter, boolean recurse) {
-        Set<File> files = new HashSet<>();
-        File[] entries = directory.listFiles();
-
-        for (File entry : entries) {
-            if (filter == null || filter.accept(directory, entry.getName())) {
-                files.add(entry);
-            }
-            if (recurse && entry.isDirectory()) {
-                files.addAll(listFiles(entry, filter, recurse));
-            }
-        }
-        return files;
-    }
-
-    private Set<File> getClassLocationsForCurrentClasspath() {
-        Set<File> urls = new HashSet<>();
-        String javaClassPath = System.getProperty("java.class.path");
-        if (javaClassPath != null) {
-            for (String path : javaClassPath.split(File.pathSeparator)) {
-                urls.add(new File(path));
-            }
-        }
-        return urls;
-    }
-
 }
