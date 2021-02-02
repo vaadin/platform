@@ -28,6 +28,8 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -157,7 +159,6 @@ public class ComponentsView extends AppLayout {
         AppLayout appLayout = this;
         DrawerToggle drawerToggle = new DrawerToggle();
         appLayout.addToNavbar(drawerToggle);
-        appLayout.setId("applayout");
         VerticalLayout components = new VerticalLayout();
         VerticalLayout layouts = new VerticalLayout();
         Hr hr = new Hr();
@@ -205,6 +206,9 @@ public class ComponentsView extends AppLayout {
         Label label = new Label("label");
         NativeButton nativeButton = new NativeButton("nativeButton");
         Pre pre = new Pre("pre");
+        Component sel = new HtmlComponent("select");
+        Component det = new HtmlComponent("details");
+
 
         // Using full qualified name since in parent class there is a Section Enum
         com.vaadin.flow.component.html.Section section =
@@ -213,7 +217,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller);
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, det);
 
         IronIcon ironIcon = new IronIcon("communication", "email");
 
@@ -223,48 +227,41 @@ public class ComponentsView extends AppLayout {
             log.log("Clicked button");
         });
         button.setIcon(icon);
-        button.setId("button");
 
         Checkbox checkbox = new Checkbox("Checkbox label");
         log.log("Checkbox default is " + checkbox.getValue());
         checkbox.addValueChangeListener(e -> {
             log.log("Checkbox value changed from '" + e.getOldValue() + "' to '" + e.getValue() + "'");
         });
-        checkbox.setId("checkbox");
 
         CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
         checkboxGroup.setItems("foo", "bar");
         checkboxGroup.addValueChangeListener(event -> log
                 .log("CheckboxGroup value changed from '" + event.getOldValue() + "' to '" + event.getValue() + "'"));
-        checkboxGroup.setId("checkboxgroup");
 
         ComboBox<String> comboBox = new ComboBox<>("ComboBox label");
         comboBox.setItems("First", "Second", "Third");
         comboBox.addValueChangeListener(e -> {
             log.log("ComboBox value changed from '" + e.getOldValue() + "' to '" + e.getValue() + "'");
         });
-        comboBox.setId("combobox");
 
         DatePicker datePicker = new DatePicker();
         log.log("DatePicker default is " + datePicker.getValue());
         datePicker.addValueChangeListener(e -> {
             log.log("DatePicker value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        datePicker.setId("datepicker");
 
         DateTimePicker dateTimePicker = new DateTimePicker();
         log.log("DateTimePicker default is " + dateTimePicker.getValue());
         dateTimePicker.addValueChangeListener(e -> {
             log.log("DateTimePicker value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        dateTimePicker.setId("dateTimePicker");
 
         TimePicker timePicker = new TimePicker();
         log.log("TimePicker default is " + timePicker.getValue());
         timePicker.addValueChangeListener(e -> {
             log.log("TimePicker value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        timePicker.setId("timepicker");
 
         Select<String> select = new Select<>();
         select.setItems("Spring", "Summer", "Autumn", "Winter");
@@ -272,7 +269,6 @@ public class ComponentsView extends AppLayout {
         select.addValueChangeListener(e -> {
             log.log("Select value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        select.setId("select");
 
         GridSelectionColumn gridSelectionColumn = new GridSelectionColumn(() -> log.log("select-all"), () -> {});
         Grid<Map<String, String>> grid = new Grid<>();
@@ -286,7 +282,15 @@ public class ComponentsView extends AppLayout {
         gridItems.add(map("Some", "Data"));
         gridItems.add(map("Second", "Row"));
         grid.setItems(gridItems);
-        grid.setId("grid");
+
+        GridContextMenu<Map<String, String>> gridContextMenu = grid.addContextMenu();
+        gridContextMenu.addItem("foo",
+                e -> e.getItem().ifPresent(item -> log.log("GridContextMenu on item " + item.get("foo"))));
+        gridContextMenu.setOpenOnClick(true);
+        gridContextMenu.setId("gridcontextmenu");
+
+        GridMenuItem<Map<String, String>> gridMenuItem = new GridMenuItem<>(gridContextMenu, () -> {});
+
 
         HierarchicalDataProvider<Entity, Void> hierarchicalDataProvider = new AbstractBackEndHierarchicalDataProvider<Entity, Void>() {
             private static final long serialVersionUID = 1L;
@@ -310,22 +314,12 @@ public class ComponentsView extends AppLayout {
         treeGrid.setDataProvider(hierarchicalDataProvider);
 
 
-        GridContextMenu<Map<String, String>> gridContextMenu = grid.addContextMenu();
-        gridContextMenu.addItem("foo",
-                e -> e.getItem().ifPresent(item -> log.log("GridContextMenu on item " + item.get("foo"))));
-        gridContextMenu.setOpenOnClick(true);
-        gridContextMenu.setId("gridcontextmenu");
-
-        GridMenuItem<Map<String, String>> gridMenuItem = new GridMenuItem<>(gridContextMenu, () -> {});
-
-
         HorizontalLayout icons = new HorizontalLayout(new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
 
         IronList<String> ironList = new IronList<>();
         ironList.setHeight("50px");
         Stream<String> items = IntStream.range(0, 100).mapToObj(i -> ("Item " + i));
         ironList.setItems(items);
-        ironList.setId("ironlist");
 
         ListBox<String> listBox = new ListBox<>();
         listBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)).collect(Collectors.toList()));
@@ -335,18 +329,15 @@ public class ComponentsView extends AppLayout {
         listBox.addValueChangeListener(event -> log
                 .log("ListBox value changed from '" + event.getOldValue() + "' to '" + event.getValue() + "'"));
         listBox.add(listBoxComponent);
-        listBox.setId("listbox");
 
         MultiSelectListBox<String> multiSelectListBox = new MultiSelectListBox<>();
         multiSelectListBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)).collect(Collectors.toList()));
         multiSelectListBox.addValueChangeListener(event -> log
                 .log("MultiSelectListBox value changed from '" + event.getOldValue() + "' to '" + event.getValue() + "'"));
-        multiSelectListBox.setId("multiSelectListBox");
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setWidth("100%");
         progressBar.setValue(0.7);
-        progressBar.setId("progressbar");
 
         RadioButtonGroup<String> radioButtonGroup = new RadioButtonGroup<>();
         log.log("RadioButtonGroup default is " + radioButtonGroup.getValue());
@@ -354,7 +345,6 @@ public class ComponentsView extends AppLayout {
         radioButtonGroup.addValueChangeListener(e -> {
             log.log("RadioButtonGroup value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        radioButtonGroup.setId("radiobuttongroup");
 
         TextField textField = new TextField();
         textField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -362,7 +352,6 @@ public class ComponentsView extends AppLayout {
         textField.addValueChangeListener(e -> {
             log.log("TextField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        textField.setId("textfield");
 
         PasswordField passwordField = new PasswordField();
         passwordField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -370,7 +359,6 @@ public class ComponentsView extends AppLayout {
         passwordField.addValueChangeListener(e -> {
             log.log("PasswordField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        passwordField.setId("passwordfield");
 
         BigDecimalField bigDecimalField = new BigDecimalField();
         bigDecimalField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -378,7 +366,6 @@ public class ComponentsView extends AppLayout {
         bigDecimalField.addValueChangeListener(e -> {
             log.log("bigDecimalField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        bigDecimalField.setId("bigDecimalField");
 
         NumberField numberField = new NumberField();
         numberField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -386,7 +373,6 @@ public class ComponentsView extends AppLayout {
         numberField.addValueChangeListener(e -> {
             log.log("numberField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        numberField.setId("numberField");
 
         EmailField emailField = new EmailField();
         emailField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -394,7 +380,6 @@ public class ComponentsView extends AppLayout {
         emailField.addValueChangeListener(e -> {
             log.log("emailField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        emailField.setId("emailField");
 
         IntegerField integerField = new IntegerField();
         integerField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -402,7 +387,6 @@ public class ComponentsView extends AppLayout {
         integerField.addValueChangeListener(e -> {
             log.log("integerField value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        integerField.setId("integerField");
 
         TextArea textArea = new TextArea();
         textArea.setValueChangeMode(ValueChangeMode.EAGER);
@@ -410,19 +394,16 @@ public class ComponentsView extends AppLayout {
         textArea.addValueChangeListener(e -> {
             log.log("TextArea value changed from " + e.getOldValue() + " to " + e.getValue());
         });
-        textArea.setId("textarea");
 
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
         upload.addSucceededListener(
                 event -> handleUploadedFile(event.getMIMEType(), event.getMIMEType(), buffer.getInputStream()));
-        upload.setId("upload");
 
         Dialog dialog = new Dialog();
         dialog.add(new Label("This is the contents of the dialog"));
         Button dialogButton = new Button("open Dialog", event -> dialog.open());
         dialogButton.setId("open-dialog");
-        dialog.setId("dialog");
 
         Notification notification = new Notification("Hello", 2000000, Position.TOP_CENTER);
         notification.open();
@@ -432,7 +413,6 @@ public class ComponentsView extends AppLayout {
         IntStream.range(0, 6).forEach(i -> {
             formLayout.add(new TextField("FormLayout field " + i));
         });
-        formLayout.setId("formlayout");
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.setId("verticallayout");
@@ -453,13 +433,11 @@ public class ComponentsView extends AppLayout {
         SplitLayout splitVertical = new SplitLayout(new Button("Button Top"), new Button("Button Bottom"));
         splitVertical.setOrientation(Orientation.VERTICAL);
         splitVertical.getStyle().set("flex", "none");
-        splitVertical.setId("splitvertical");
 
         Tabs tabs = new Tabs();
         Tab tab = new Tab("foo");
         tabs.add(tab, new Tab("bar"));
         tabs.addSelectedChangeListener(event -> log.log("Tabs selected index changed to " + tabs.getSelectedIndex()));
-        tabs.setId("tabs");
 
         Div contextMenuTarget = new Div();
         contextMenuTarget.setText("Context Menu Target");
@@ -479,7 +457,6 @@ public class ComponentsView extends AppLayout {
         aheader.setWidth("100%");
         Row row = new Row(aheader);
         row.setComponentSpan(aheader, 4);
-        row.setId("row");
 
         Chart chart = new Chart(ChartType.LINE);
         chart.setId("chart");
@@ -504,10 +481,8 @@ public class ComponentsView extends AppLayout {
         confirmDialog.setConfirmText("OK");
         Button confirmDialogButton = new Button("open confirm Dialog", event -> confirmDialog.open());
         confirmDialogButton.setId("open-confirm-dialog");
-        confirmDialog.setId("confirmdialog");
 
         CookieConsent cookieConsent = new CookieConsent();
-        cookieConsent.setId("cookieconsent");
 
         AbstractBackEndDataProvider<Entity, CrudFilter> crudProvider = new AbstractBackEndDataProvider<Entity, CrudFilter>() {
             private static final long serialVersionUID = 1L;
@@ -529,7 +504,6 @@ public class ComponentsView extends AppLayout {
         BinderCrudEditor<Entity> binderCrudEditor = new BinderCrudEditor<>(crudBinder, nameField);
         CrudGrid<Entity> crudGrid = new CrudGrid<>(Entity.class, true);
         Crud<Entity> crud = new Crud<>(Entity.class, crudGrid, binderCrudEditor);
-        crud.setId("crud");
         crud.setDataProvider(crudProvider);
 
         GridPro<Entity> gridPro = new GridPro<>();
@@ -545,18 +519,15 @@ public class ComponentsView extends AppLayout {
         final TextField wrappedField = new TextField();
         CustomField<String> customField = new CustomField<String>() {
             private static final long serialVersionUID = 1L;
-
             {
                 add(wrappedField);
                 setLabel("Name");
                 setId("customfield");
             }
-
             @Override
             protected String generateModelValue() {
                 return wrappedField.getValue();
             }
-
             @Override
             protected void setPresentationValue(String newPresentationValue) {
                 wrappedField.setValue(newPresentationValue);
@@ -564,24 +535,20 @@ public class ComponentsView extends AppLayout {
         };
 
         LoginForm loginForm = new LoginForm();
-        loginForm.setId("loginform");
-
 
         LoginOverlay loginOverlay = new LoginOverlay();
         loginOverlay.addLoginListener(e -> loginOverlay.close());
         loginOverlay.addForgotPasswordListener(e -> loginOverlay.close());
         Button openLoginOverlay = new Button("open Login Overlay", e -> loginOverlay.setOpened(true));
+        openLoginOverlay.setId("open-login-overlay");
 
         Details details = new Details("Details", new Span("Content"));
-        details.setId("details");
 
         Accordion accordion = new Accordion();
         Paragraph paragraph = new Paragraph("content");
         accordion.add("Accordion", paragraph);
-        accordion.setId("accordion");
 
         AccordionPanel accordionPanel = new AccordionPanel("AccordionPanel", new Span("Content"));
-        accordionPanel.setId("accordionPanel");
 
         Avatar avatar = new Avatar("Donald");
         AvatarGroup avatarGroup = new AvatarGroup(new AvatarGroupItem("Pluto"), new AvatarGroupItem("Mickey"));
@@ -613,6 +580,10 @@ public class ComponentsView extends AppLayout {
         components.add(radioButtonGroup);
         components.add(textField);
         components.add(passwordField);
+        components.add(emailField);
+        components.add(bigDecimalField);
+        components.add(numberField);
+        components.add(integerField);
         components.add(textArea);
         components.add(upload);
         components.add(cookieConsent);

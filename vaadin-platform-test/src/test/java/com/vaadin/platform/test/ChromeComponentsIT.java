@@ -45,6 +45,7 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
@@ -69,7 +70,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Override
     protected String getTestPath() {
-        return "";
+        return "/prod-mode/";
     }
 
     @Test
@@ -79,21 +80,15 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void buttonIsRenderedAndRecievesClicks() {
-        ButtonElement button = $(ButtonElement.class).id("button");
-
-        TestBenchElement htmlButton = button.$(TestBenchElement.class)
-                .id("button");
-        assertElementRendered(htmlButton);
-
+        ButtonElement button = $(ButtonElement.class).first();
+        assertElementRendered(button);
         button.click();
-
         assertLog("Clicked button");
     }
 
     @Test
     public void checkboxIsRenderedAndRecievesValueChangeEvent() {
-        CheckboxElement checkbox = $(CheckboxElement.class).id("checkbox");
-
+        CheckboxElement checkbox = $(CheckboxElement.class).first();
         TestBenchElement htmlButton = checkbox.$("input")
                 .attribute("type", "checkbox").first();
         assertElementRendered(htmlButton);
@@ -105,10 +100,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void checkboxGroupIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement checkboxGroup = $("vaadin-checkbox-group")
-                .id("checkboxgroup");
+        TestBenchElement checkboxGroup = $("vaadin-checkbox-group").first();
 
-        TestBenchElement groupField = checkboxGroup.$("div")
+        TestBenchElement groupField = checkboxGroup.$(DivElement.class)
                 .attribute("part", "group-field").first();
         assertElementRendered(groupField);
 
@@ -119,7 +113,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
-        ComboBoxElement comboBox = $(ComboBoxElement.class).id("combobox");
+        ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
         TextFieldElement textField = comboBox.$(TextFieldElement.class)
                 .id("input");
@@ -138,14 +132,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
-        DatePickerElement datePicker = $(DatePickerElement.class)
-                .id("datepicker");
+        DatePickerElement datePicker = $(DatePickerElement.class).first();
 
         TestBenchElement textField = datePicker
                 .$("vaadin-date-picker-text-field").id("input");
         assertElementRendered(textField);
 
-        datePicker.$("div").attribute("part", "toggle-button").first().click();
+        datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
 
         WebElement dropDown = $("vaadin-date-picker-overlay").id("overlay");
 
@@ -159,7 +152,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void timePickerIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement timePicker = $("vaadin-time-picker").id("timepicker");
+        TestBenchElement timePicker = $("vaadin-time-picker").first();
 
         TestBenchElement textField = timePicker
                 .$("vaadin-time-picker-text-field").first();
@@ -167,7 +160,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         timePicker.$("span").attribute("part", "toggle-button").first().click();
 
-        WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
+        WebElement dropDown = $("vaadin-combo-box-overlay").first();
 
         assertElementRendered(dropDown);
 
@@ -179,9 +172,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void selectIsRenderedAndReceivesValueChangeEvent() {
-        SelectElement select = $(SelectElement.class).id("select");
+        SelectElement select = $(SelectElement.class).first();
 
-        select.$("div").attribute("part", "toggle-button").first().click();
+        select.$(DivElement.class).attribute("part", "toggle-button").first().click();
 
         WebElement dropDown = $("vaadin-select-overlay").first();
 
@@ -194,7 +187,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void gridIsRenderedAndRecievesSelectionEvents() {
-        GridElement grid = $(GridElement.class).id("grid");
+        GridElement grid = $(GridElement.class).first();
 
         assertElementRendered(grid);
 
@@ -215,7 +208,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void gridContextMenuRenderedAndReceivesTargetItem() {
-        GridElement grid = $(GridElement.class).id("grid");
+        GridElement grid = $(GridElement.class).first();
         grid.getCell(1, 0).click();
 
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
@@ -245,9 +238,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void ironListIsRendered() {
-        IronListElement ironList = $(IronListElement.class).id("ironlist");
+        IronListElement ironList = $(IronListElement.class).first();
 
-        TestBenchElement itemsContainer = ironList.$("div").id("items");
+        TestBenchElement itemsContainer = ironList.$(DivElement.class).id("items");
         assertElementRendered(itemsContainer);
 
         List<TestBenchElement> items = ironList.$("span").all();
@@ -261,14 +254,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void progressBarIsRendered() {
-        ProgressBarElement ironList = $(ProgressBarElement.class)
-                .id("progressbar");
+        ProgressBarElement ironList = $(ProgressBarElement.class).first();
 
-        TestBenchElement bar = ironList.$("div").attribute("part", "bar")
+        TestBenchElement bar = ironList.$(DivElement.class).attribute("part", "bar")
                 .first();
         assertElementRendered(bar);
 
-        TestBenchElement value = bar.$("div").attribute("part", "value")
+        TestBenchElement value = bar.$(DivElement.class).attribute("part", "value")
                 .first();
 
         assertElementRendered(value);
@@ -280,9 +272,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     @Test
     public void radioButtonGroupIsRenderedAndRecievesValueChangeEvents() {
         RadioButtonGroupElement radioButtonGroup = $(
-                RadioButtonGroupElement.class).id("radiobuttongroup");
+                RadioButtonGroupElement.class).first();
 
-        TestBenchElement groupField = radioButtonGroup.$("div")
+        TestBenchElement groupField = radioButtonGroup.$(DivElement.class)
                 .attribute("part", "group-field").first();
         assertElementRendered(groupField);
 
@@ -303,25 +295,25 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void textFieldIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(TextFieldElement.class).id("textfield"), "input",
+        assertTextComponent($(TextFieldElement.class).first(), "input",
                 "TextField value changed from to foo");
     }
 
     @Test
     public void passwordFieldIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(PasswordFieldElement.class).id("passwordfield"),
+        assertTextComponent($(PasswordFieldElement.class).first(),
                 "input", "PasswordField value changed from to foo");
     }
 
     @Test
     public void textAreaIsRenderedAndRecievesValueChangeEvents() {
-        assertTextComponent($(TextAreaElement.class).id("textarea"), "textarea",
+        assertTextComponent($(TextAreaElement.class).first(), "textarea",
                 "TextArea value changed from to foo");
     }
 
     @Test
     public void uploadIsRenderedAndUploadFile() throws IOException {
-        UploadElement upload = $(UploadElement.class).id("upload");
+        UploadElement upload = $(UploadElement.class).first();
 
         ButtonElement uploadButton = upload.$(ButtonElement.class).first();
         assertElementRendered(uploadButton);
@@ -349,7 +341,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertElementRendered(content);
 
         TestBenchElement contentComponent = dialogOverlay
-                .$("flow-component-renderer").first().$("div").first();
+                .$("flow-component-renderer").first().$(DivElement.class).first();
 
         Assert.assertEquals("This is the contents of the dialog",
                 contentComponent.getText());
@@ -368,8 +360,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void formLayoutIsRendered() {
-        FormLayoutElement formLayoutElement = $(FormLayoutElement.class)
-                .id("formlayout");
+        FormLayoutElement formLayoutElement = $(FormLayoutElement.class).first();
 
         TestBenchElement layoutElement = formLayoutElement
                 .$(TestBenchElement.class).id("layout");
@@ -425,7 +416,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(splitLayoutElement);
 
-        TestBenchElement splitter = splitLayoutElement.$("div").id("splitter");
+        TestBenchElement splitter = splitLayoutElement.$(DivElement.class).id("splitter");
 
         assertElementRendered(splitter);
 
@@ -452,9 +443,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void tabsIsRenderedAndRecievesSelectionEvents() {
-        TabsElement tabsElement = $(TabsElement.class).id("tabs");
+        TabsElement tabsElement = $(TabsElement.class).first();
 
-        assertElementRendered(tabsElement.$("div").id("scroll"));
+        assertElementRendered(tabsElement.$(DivElement.class).id("scroll"));
 
         List<TabElement> tabs = tabsElement.$(TabElement.class).all();
 
@@ -473,9 +464,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void listBoxIsRenderedAndRecievesValueChangeEvents() {
-        TestBenchElement listBoxElement = $("vaadin-list-box").id("listbox");
+        TestBenchElement listBoxElement = $("vaadin-list-box").first();
 
-        TestBenchElement itemsContainer = listBoxElement.$("div")
+        TestBenchElement itemsContainer = listBoxElement.$(DivElement.class)
                 .attribute("part", "items").first();
 
         assertElementRendered(itemsContainer);
@@ -490,7 +481,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
             Assert.assertEquals("Item " + i, items.get(i).getText());
         }
 
-        TestBenchElement listBoxInnerComponent = listBoxElement.$("div")
+        TestBenchElement listBoxInnerComponent = listBoxElement.$(DivElement.class)
                 .id("list-box-component");
 
         assertElementRendered(listBoxInnerComponent);
@@ -513,14 +504,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         // Check to see if the context-menu is there.
         // If not, a NoSuchElementException will be thrown
-        $("vaadin-context-menu").id("the-context-menu");
+        $("vaadin-context-menu").first();
 
-        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay")
-                .id("overlay");
+        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay").id("overlay");
 
         assertElementRendered(contextMenuOverlay);
 
-        assertElementRendered(contextMenuOverlay.$("div").id("overlay"));
+        assertElementRendered(contextMenuOverlay.$(DivElement.class).id("overlay"));
 
         List<TestBenchElement> items = contextMenuOverlay
                 .$("vaadin-context-menu-item").all();
@@ -528,7 +518,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         for (int i = 0; i < 2; i++) {
             assertElementRendered(
-                    items.get(0).$("div").attribute("part", "content").first());
+                    items.get(0).$(DivElement.class).attribute("part", "content").first());
             Assert.assertEquals("Item " + i, items.get(i).getText());
         }
 
@@ -631,7 +621,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     private void fillPathToUploadInput(String tempFileName) {
         // create a valid path in upload input element. Instead of selecting a
         // file by some file browsing dialog, we use the local path directly.
-        WebElement input = $(UploadElement.class).id("upload")
+        WebElement input = $(UploadElement.class).first()
                 .$(TestBenchElement.class).id("fileInput");
         setLocalFileDetector(input);
         input.sendKeys(tempFileName);
