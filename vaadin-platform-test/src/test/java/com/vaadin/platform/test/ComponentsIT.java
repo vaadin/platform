@@ -33,6 +33,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
             put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
             put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
             put("vaadin-grid-context-menu", () -> $(GridElement.class).first().getCell(1, 0).click());
         }
     };
@@ -60,7 +61,6 @@ public class ComponentsIT extends AbstractPlatformTest {
         }
         if (($  == null || !$.exists())) {
             System.err.println(">>> Component not found in the View" + testComponent);
-            return;
         }
         checkElement($);
     }
