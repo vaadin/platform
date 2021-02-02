@@ -7,6 +7,7 @@
     <feature name="vaadin-core" description="Vaadin Core" version="${project.version}">
         <details>Vaadin Core feature</details>
         <feature>flow</feature>
+        <bundle>mvn:com.vaadin/flow-osgi/${com.vaadin:flow-osgi:jar.version}</bundle>
         <feature>vaadin-grid-flow</feature>
     </feature>
 </features>

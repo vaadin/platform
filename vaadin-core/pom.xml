@@ -202,6 +202,15 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        
+        <!--  This dependency is needed to calculate its version 
+              in the generated Karaf feature.xml. Its scope is "test" though it's 
+              not needed for anything except populating version property via dependencyversion-maven-plugin-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-osgi</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
