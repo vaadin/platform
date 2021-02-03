@@ -3,11 +3,12 @@
    
     <repository>mvn:com.vaadin/flow/${com.vaadin:flow-server:jar.version}/xml/features</repository>
     <repository>mvn:com.vaadin/vaadin-grid-flow/${com.vaadin:vaadin-grid-flow:jar.version}/xml/features</repository>
+    <repository>mvn:com.vaadin/flow-osgi/${com.vaadin:flow-osgi:jar.version}/xml/features</repository>
     
     <feature name="vaadin-core" description="Vaadin Core" version="${project.version}">
         <details>Vaadin Core feature</details>
         <feature>flow</feature>
-        <bundle>mvn:com.vaadin/flow-osgi/${com.vaadin:flow-osgi:jar.version}</bundle>
+        <feature>flow-osgi</feature>
         <feature>vaadin-grid-flow</feature>
     </feature>
 </features>
