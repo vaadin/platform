@@ -102,7 +102,7 @@
         "vaadin-avatar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-avatar"
         },
         "vaadin-button": {
@@ -118,7 +118,7 @@
                 "Checkbox Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
@@ -130,7 +130,7 @@
         "vaadin-context-menu": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "5.0.0-alpha2",
+            "jsVersion": "5.0.0",
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "6.0.0-alpha1",
+            "jsVersion": "6.0.0",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -200,13 +200,13 @@
         },
         "vaadin-item": {
             "component": true,
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-item"
         },
         "vaadin-list-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
@@ -293,7 +293,7 @@
         "vaadin-tabs": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "4.0.0-alpha4",
+            "jsVersion": "4.0.0",
             "npmName": "@vaadin/vaadin-tabs"
         },
         "vaadin-text-field": {
@@ -308,7 +308,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
