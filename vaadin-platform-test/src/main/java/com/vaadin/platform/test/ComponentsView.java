@@ -87,7 +87,6 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
-import com.vaadin.flow.component.html.NativeDetails;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
@@ -211,9 +210,6 @@ public class ComponentsView extends AppLayout {
         NativeButton nativeButton = new NativeButton("nativeButton");
         Pre pre = new Pre("pre");
         Component sel = new HtmlComponent("select");
-        NativeDetails nativeDetails = new NativeDetails(new Span("native details"));
-        nativeDetails.setContent(new Span("content"));
-
 
         // Using full qualified name since in parent class there is a Section Enum
         com.vaadin.flow.component.html.Section section =
@@ -222,7 +218,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails);
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel);
 
         IronIcon ironIcon = new IronIcon("communication", "email");
 
