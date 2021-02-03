@@ -308,7 +308,19 @@
                 <artifactId>karaf-maven-plugin</artifactId>
                 <configuration>
                     <includeProjectArtifact>false</includeProjectArtifact>
-                    <excludedArtifactIds>flow-server,flow-data,flow-lit-template,flow-polymer-template,flow-push,flow-client,flow-html-components,flow-dnd,fusion-endpoint,slf4j-api,vaadin-grid-flow</excludedArtifactIds>
+                    <excludedArtifactIds>
+                        <excludedArtifactId>flow-server</excludedArtifactId>
+                        <excludedArtifactId>flow-data</excludedArtifactId>
+                        <excludedArtifactId>flow-lit-template</excludedArtifactId>
+                        <excludedArtifactId>flow-polymer-template</excludedArtifactId>
+                        <excludedArtifactId>flow-push</excludedArtifactId>
+                        <excludedArtifactId>flow-client</excludedArtifactId>
+                        <excludedArtifactId>flow-html-components</excludedArtifactId>
+                        <excludedArtifactId>flow-dnd</excludedArtifactId>
+                        <excludedArtifactId>fusion-endpoint</excludedArtifactId>
+                        <excludedArtifactId>slf4j-api</excludedArtifactId>
+                        <excludedArtifactId>vaadin-grid-flow</excludedArtifactId>
+                    </excludedArtifactIds>
                     <includeTransitiveDependency>false</includeTransitiveDependency>
                 </configuration>
             </plugin>

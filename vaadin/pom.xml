@@ -166,7 +166,9 @@
                 <artifactId>karaf-maven-plugin</artifactId>
                 <configuration>
                     <includeProjectArtifact>false</includeProjectArtifact>
-                    <excludedArtifactIds>vaadin-core</excludedArtifactIds>
+                    <excludedArtifactIds>
+                        <excludedArtifactId>vaadin-core</excludedArtifactId>
+                    </excludedArtifactIds>
                     <includeTransitiveDependency>false</includeTransitiveDependency>
                 </configuration>
             </plugin>
