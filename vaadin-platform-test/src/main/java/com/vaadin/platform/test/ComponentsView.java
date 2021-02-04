@@ -571,8 +571,10 @@ public class ComponentsView extends AppLayout {
         // Tests for collaboration engine
         CollaborationAvatarGroup collaborationAvatarGroup =
                 new CollaborationAvatarGroup(new UserInfo("foo", "foo"), "topic-id");
+        collaborationAvatarGroup.setId("collab-avatar-group-1");
         CollaborationAvatarGroup collaborationAvatarGroup2 =
                 new CollaborationAvatarGroup(new UserInfo("bar", "bar"), "topic-id");
+        collaborationAvatarGroup2.setId("collab-avatar-group-2");
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;

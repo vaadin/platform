@@ -15,12 +15,11 @@
  */
 package com.vaadin.platform.test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -533,15 +532,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void collaborationAvatarGroupIsRendered() {
-        AvatarGroupElement group = $(AvatarGroupElement.class).get(1);
-        assertElementRendered(group);
-        assertEquals("foo", group.getAvatarElement(0).getPropertyString("name"));
-        assertEquals("bar", group.getAvatarElement(1).getPropertyString("name"));
-
-        group = $(AvatarGroupElement.class).get(2);
-        assertElementRendered(group);
-        assertEquals("bar", group.getAvatarElement(0).getPropertyString("name"));
-        assertEquals("foo", group.getAvatarElement(1).getPropertyString("name"));
+        AvatarGroupElement group1 = $(AvatarGroupElement.class).id("collab-avatar-group-1");
+        AvatarGroupElement group2 = $(AvatarGroupElement.class).id("collab-avatar-group-2");
+        for (AvatarGroupElement group : Arrays.asList(group1, group2)) {
+            assertElementRendered(group);
+            Assert.assertEquals("bar", group.getAvatarElement(0).getPropertyString("name"));
+            Assert.assertEquals("foo", group.getAvatarElement(1).getPropertyString("name"));
+        }
     }
 
     @Test
