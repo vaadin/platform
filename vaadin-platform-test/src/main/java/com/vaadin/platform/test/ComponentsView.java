@@ -27,6 +27,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.vaadin.collaborationengine.CollaborationAvatarGroup;
+import com.vaadin.collaborationengine.CollaborationEngine;
+import com.vaadin.collaborationengine.CollaborationEngineConfiguration;
 import com.vaadin.collaborationengine.UserInfo;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HtmlComponent;
@@ -140,11 +142,19 @@ import com.vaadin.flow.data.provider.hierarchy.HierarchicalQuery;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
 
 import org.apache.commons.io.IOUtils;
 
 @Route("")
 public class ComponentsView extends AppLayout {
+
+    static {
+        CollaborationEngine.configure(VaadinService.getCurrent(),
+                new CollaborationEngineConfiguration(e -> {
+                    // no-op
+                }));
+    }
 
     private static final long serialVersionUID = 1L;
 
