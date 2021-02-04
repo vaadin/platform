@@ -124,7 +124,7 @@
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "6.0.0-alpha1",
+            "jsVersion": "6.0.0",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
@@ -140,19 +140,19 @@
         "vaadin-custom-field": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-custom-field"
         },
         "vaadin-date-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "5.0.0-alpha1",
+            "jsVersion": "5.0.0",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
         "vaadin-details": {
@@ -216,7 +216,7 @@
         "vaadin-login": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-login"
         },
         "vaadin-lumo-styles": {
@@ -232,7 +232,7 @@
         "vaadin-menu-bar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha1",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-menu-bar"
         },
         "vaadin-notification": {
@@ -281,7 +281,7 @@
         "vaadin-select": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
@@ -319,13 +319,13 @@
         "vaadin-time-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-time-picker"
         },
         "vaadin-upload": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "5.0.0-alpha1",
+            "jsVersion": "5.0.0",
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
