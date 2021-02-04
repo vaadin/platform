@@ -169,6 +169,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Jetty 9.4
 - Payara Server
 - Payara Micro
+- Karaf (4.2+)
 
 ## Supported Node.js and npm versions
 Node.js version 10.x for the npm mode.
