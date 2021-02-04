@@ -379,7 +379,7 @@
         "vaadin-crud": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha2",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-crud",
             "pro": true
         },
@@ -389,7 +389,7 @@
         "vaadin-grid-pro": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0-alpha1",
+            "jsVersion": "3.0.0",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
@@ -400,7 +400,7 @@
         "vaadin-rich-text-editor": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0-alpha2",
+            "jsVersion": "2.0.0",
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "pro": true
         },
