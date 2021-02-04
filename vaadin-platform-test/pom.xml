@@ -236,7 +236,7 @@
                   <execution>
                     <phase>compile</phase>
                     <configuration>
-                      <target><echo file="collaborationEngineDataDir/ce-license.json">${ce.license}</echo></target>
+                      <target><echo file="${project.build.directory}/ce-license.json">${ce.license}</echo></target>
                     </configuration>
                     <goals>
                       <goal>run</goal>
@@ -306,7 +306,7 @@
                             <systemProperties>
                                 <systemProperty>
                                     <name>vaadin.ce.dataDir</name>
-                                    <value>${project.basedir}/collaborationEngineDataDir</value>
+                                    <value>${project.build.directory}</value>
                                 </systemProperty>
                             </systemProperties>
                         </configuration>
