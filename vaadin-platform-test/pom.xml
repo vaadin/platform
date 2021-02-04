@@ -235,6 +235,33 @@
 
     <profiles>
         <profile>
+            <id></id>
+            <activation>
+                <property>
+                    <name>ce.license</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                      <artifactId>maven-antrun-plugin</artifactId>
+                      <version>3.0.0</version>
+                      <executions>
+                        <execution>
+                          <phase>compile</phase>
+                          <configuration>
+                            <target><echo file="collaborationEngineDataDir/ce-license.json">${ce.license}</echo></target>
+                          </configuration>
+                          <goals>
+                            <goal>run</goal>
+                          </goals>
+                        </execution>
+                      </executions>
+                    </plugin>
+                  </plugins>                
+            </build>
+        </profile>
+        <profile>
             <id>ITs</id>
             <activation>
                 <property>
