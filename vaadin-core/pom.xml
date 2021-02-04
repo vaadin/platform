@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
@@ -201,9 +202,32 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        
+        <!--  This dependency is needed to calculate its version 
+              in the generated Karaf feature.xml. Its scope is "test" though it's 
+              not needed for anything except populating version property via dependencyversion-maven-plugin-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-osgi</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>io.reformanda.semper</groupId>
+                <artifactId>dependencyversion-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>set-all</id>
+                        <goals>
+                            <goal>set-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- compute shrink version -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -241,8 +265,8 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Copy versions file to classpath, so that Flow can
-                   use it to pin versions for pnpm. -->
+                <!-- Copy versions file to classpath, so that Flow can use 
+                    it to pin versions for pnpm. -->
                 <groupId>com.coderplus.maven.plugins</groupId>
                 <artifactId>copy-rename-maven-plugin</artifactId>
                 <version>1.0</version>
@@ -276,6 +300,28 @@
                     <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
                     <quiet>true</quiet>
                     <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <configuration>
+                    <includeProjectArtifact>false</includeProjectArtifact>
+                    <excludedArtifactIds>
+                        <excludedArtifactId>flow-server</excludedArtifactId>
+                        <excludedArtifactId>flow-data</excludedArtifactId>
+                        <excludedArtifactId>flow-lit-template</excludedArtifactId>
+                        <excludedArtifactId>flow-polymer-template</excludedArtifactId>
+                        <excludedArtifactId>flow-push</excludedArtifactId>
+                        <excludedArtifactId>flow-client</excludedArtifactId>
+                        <excludedArtifactId>flow-html-components</excludedArtifactId>
+                        <excludedArtifactId>flow-dnd</excludedArtifactId>
+                        <excludedArtifactId>fusion-endpoint</excludedArtifactId>
+                        <excludedArtifactId>slf4j-api</excludedArtifactId>
+                        <excludedArtifactId>vaadin-grid-flow</excludedArtifactId>
+                    </excludedArtifactIds>
+                    <includeTransitiveDependency>false</includeTransitiveDependency>
                 </configuration>
             </plugin>
 
