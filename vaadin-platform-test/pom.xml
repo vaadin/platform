@@ -142,7 +142,8 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.20</version>
                 <dependencies>
-                    <!--The following dependencies are needed for Java 10+ support -->
+                    <!--The following dependencies are needed for Java 10+
+                        support -->
                     <dependency>
                         <groupId>javax.xml.bind</groupId>
                         <artifactId>jaxb-api</artifactId>
@@ -353,11 +354,12 @@
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
-                        <version>9.4.11.v20180605</version>
+                        <version>9.4.36.v20210114</version>
                         <configuration>
                             <stopPort>9999</stopPort>
                             <stopWait>5</stopWait>
                             <stopKey>foo</stopKey>
+                            <scanIntervalSeconds>1</scanIntervalSeconds>
                         </configuration>
                         <executions>
                             <execution>

@@ -12,7 +12,6 @@ public class Log extends Div {
         setWidth("100%");
         setHeight("5em");
         getElement().getStyle().set("overflow", "auto");
-
         logMsg.setId("log");
         add(logMsg);
     }
@@ -20,7 +19,7 @@ public class Log extends Div {
     public void log(String message) {
         Div row = new Div();
         row.setText(nr++ + ". " + message);
-        getElement().insertChild(0, row.getElement());
+        getElement().appendChild(row.getElement());
         logMsg.setText(message);
     }
 
