@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.IOUtils;
-
+import com.vaadin.collaborationengine.CollaborationAvatarGroup;
+import com.vaadin.collaborationengine.UserInfo;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.accordion.Accordion;
@@ -140,6 +140,8 @@ import com.vaadin.flow.data.provider.hierarchy.HierarchicalQuery;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
+
+import org.apache.commons.io.IOUtils;
 
 @Route("")
 public class ComponentsView extends AppLayout {
@@ -552,9 +554,15 @@ public class ComponentsView extends AppLayout {
 
         AccordionPanel accordionPanel = new AccordionPanel("AccordionPanel", new Span("Content"));
 
+        // Test for avatar components
         Avatar avatar = new Avatar("Donald");
         AvatarGroup avatarGroup = new AvatarGroup(new AvatarGroupItem("Pluto"), new AvatarGroupItem("Mickey"));
 
+        // Tests for collaboration engine
+        CollaborationAvatarGroup collaborationAvatarGroup =
+                new CollaborationAvatarGroup(new UserInfo("foo", "foo"), "topic-id");
+        CollaborationAvatarGroup collaborationAvatarGroup2 =
+                new CollaborationAvatarGroup(new UserInfo("bar", "bar"), "topic-id");
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;
@@ -598,6 +606,7 @@ public class ComponentsView extends AppLayout {
         components.add(menuBar);
         components.add(avatar);
         components.add(avatarGroup);
+        components.add(collaborationAvatarGroup, collaborationAvatarGroup2);
         components.add(main);
 
         layouts.add(formLayout);
