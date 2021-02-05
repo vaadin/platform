@@ -65,11 +65,11 @@ public class ComponentsIT extends ParallelTest {
         if (($  == null || !$.exists())) {
             System.err.println(">>> Component not found in the View" + testComponent);
         }
-        checkElement($);
+        checkElement($, tag);
     }
 
-    private <T extends TestBenchElement> void checkElement(ElementQuery<T> $) {
-        assertTrue($.exists());
+    private <T extends TestBenchElement> void checkElement(ElementQuery<T> $, String tag) {
+        assertTrue(tag + " not found.",  $.exists());
         String tagName = $.first().getTagName().toLowerCase();
         if (tagName.contains("-")) {
             assertTrue((Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));

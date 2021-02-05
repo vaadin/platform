@@ -86,7 +86,14 @@ public class ComponentUsageTest {
     public ComponentUsageTest() throws Exception {
         ClassLoader cl = getClass().getClassLoader();
         ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl).getTopLevelClassesRecursive("com.vaadin.flow.component");
-        List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> ci.load()).collect(Collectors.toList());
+        List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> {
+            try {
+                return ci.load();
+            } catch (NoClassDefFoundError e) {
+                System.err.printf("Class not found %s when loading %s\n", e.getMessage().replace('/', '.'), ci.getName());
+                return null;
+            }
+        }).filter(c -> c != null).collect(Collectors.toList());
         List<Class<? extends Component>> allComponentClasses = filterByType(vaadinClasses, Component.class);
         List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses, TestBenchElement.class);
 
