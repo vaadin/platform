@@ -18,7 +18,10 @@ import com.vaadin.testbench.TestBenchElement;
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
-        Parameters.setGridBrowsers("firefox,chrome,safari-13,edge");
+        String sauceUser = System.getProperty("sauce.user");
+        if (sauceUser != null && !sauceUser.isEmpty()) {
+            Parameters.setGridBrowsers(System.getProperty("grid.browsers", "firefox,chrome,safari-13,edge"));
+        }
     }
 
     @Override
