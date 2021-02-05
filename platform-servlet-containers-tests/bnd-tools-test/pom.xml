@@ -149,7 +149,7 @@
             <version>2.8.0</version>
         </dependency>
 
-        <!-- Those dependencies are need for OSGi container where this bundle 
+        <!-- Those dependencies are need for OSGi container where this bundle
             will be deployed. -->
 
         <dependency>
@@ -229,7 +229,7 @@
             <id>production</id>
             <build>
                 <plugins>
-                    <!-- This dynamically calculates all the things we need 
+                    <!-- This dynamically calculates all the things we need
                         to run our code. -->
                     <plugin>
                         <groupId>biz.aQute.bnd</groupId>
@@ -324,7 +324,7 @@
                             </dependency>
                         </dependencies>
                         <executions>
-                            <!-- Start Sauce Connect prior to running the 
+                            <!-- Start Sauce Connect prior to running the
                                 integration tests -->
                             <execution>
                                 <id>start-sauceconnect</id>
@@ -333,7 +333,7 @@
                                     <goal>start-sauceconnect</goal>
                                 </goals>
                             </execution>
-                            <!-- Stop the Sauce Connect process after the 
+                            <!-- Stop the Sauce Connect process after the
                                 integration tests have finished -->
                             <execution>
                                 <id>stop-sauceconnect</id>
@@ -349,8 +349,6 @@
                             <options>${sauce.options}</options>
                         </configuration>
                     </plugin>
-
-
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -367,6 +365,7 @@
                                     <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <arguments>
+                                        <argument>-Dvaadin.ce.dataDir=${project.build.directory}</argument>
                                         <argument>-jar</argument>
                                         <argument>app.jar</argument>
                                     </arguments>
@@ -411,10 +410,24 @@
                             <trimStackTrace>false</trimStackTrace>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                            <version>3.0.0</version>
+                            <executions>
+                                <execution>
+                                    <phase>compile</phase>
+                                    <configuration>
+                                        <target><echo file="${project.build.directory}/ce-license.json">${ce.license}</echo></target>
+                                    </configuration>
+                                    <goals>
+                                        <goal>run</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                      </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
 
 </project>
-

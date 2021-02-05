@@ -229,7 +229,21 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                  <execution>
+                    <phase>compile</phase>
+                    <configuration>
+                      <target><echo file="${project.build.directory}/ce-license.json">${ce.license}</echo></target>
+                    </configuration>
+                    <goals>
+                      <goal>run</goal>
+                    </goals>
+                  </execution>
+                </executions>
+              </plugin>
         </plugins>
     </build>
 
@@ -289,6 +303,12 @@
                             <stopWait>5</stopWait>
                             <stopKey>foo</stopKey>
                             <scanIntervalSeconds>1</scanIntervalSeconds>
+                            <systemProperties>
+                                <systemProperty>
+                                    <name>vaadin.ce.dataDir</name>
+                                    <value>${project.build.directory}</value>
+                                </systemProperty>
+                            </systemProperties>
                         </configuration>
                         <executions>
                             <execution>

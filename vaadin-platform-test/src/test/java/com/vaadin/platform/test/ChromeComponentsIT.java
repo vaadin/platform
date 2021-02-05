@@ -19,26 +19,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.LocalFileDetector;
-import org.openqa.selenium.remote.RemoteWebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.slf4j.LoggerFactory;
-
+import com.vaadin.flow.component.avatar.testbench.AvatarGroupElement;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.checkbox.testbench.CheckboxElement;
 import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
@@ -65,6 +53,20 @@ import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.LoggerFactory;
 
 public class ChromeComponentsIT extends AbstractPlatformTest {
 
@@ -526,6 +528,17 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 items.get(0));
 
         assertLog("Context menu Item 0 is clicked");
+    }
+
+    @Test
+    public void collaborationAvatarGroupIsRendered() {
+        AvatarGroupElement group1 = $(AvatarGroupElement.class).id("collab-avatar-group-1");
+        AvatarGroupElement group2 = $(AvatarGroupElement.class).id("collab-avatar-group-2");
+        for (AvatarGroupElement group : Arrays.asList(group1, group2)) {
+            assertElementRendered(group);
+            Assert.assertEquals("bar", group.getAvatarElement(0).getPropertyString("name"));
+            Assert.assertEquals("foo", group.getAvatarElement(1).getPropertyString("name"));
+        }
     }
 
     @Test
