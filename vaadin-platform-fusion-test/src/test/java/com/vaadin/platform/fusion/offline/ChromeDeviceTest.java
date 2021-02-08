@@ -105,24 +105,18 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                 mobileEmulationParams);
         chromeOptions.setCapability("networkConnectionEnabled", true);
 
-        if (getDeploymentHostname().equals("localhost")) {
-            // Use headless Chrome for running locally
-            if (!isJavaInDebugMode()) {
-                chromeOptions.addArguments("--headless", "--disable-gpu");
-            }
-        } else {
-            // Enable service workers over http remote connection
-            chromeOptions.addArguments(String.format(
-                    "--unsafely-treat-insecure-origin-as-secure=%s",
-                    getRootURL()));
+        
+        // Enable service workers over http remote connection
+        chromeOptions.addArguments(String.format(
+                "--unsafely-treat-insecure-origin-as-secure=%s",
+                getRootURL()));
 
-            // NOTE: this flag is not supported in headless Chrome, see
-            // https://crbug.com/814146
+        // NOTE: this flag is not supported in headless Chrome, see
+        // https://crbug.com/814146
 
-            // For test stability on Linux when not running headless.
-            // https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
-            chromeOptions.addArguments("--disable-dev-shm-usage");
-        }
+        // For test stability on Linux when not running headless.
+        // https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
+        chromeOptions.addArguments("--disable-dev-shm-usage");
 
         return chromeOptions;
     }
