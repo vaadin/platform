@@ -37,10 +37,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.Response;
 
-import com.vaadin.platform.fusion.AbstractPlatformTest;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchDriverProxy;
 import com.vaadin.testbench.parallel.Browser;
+import com.vaadin.testbench.parallel.ParallelTest;
 
 /**
  * Base class for TestBench tests to run in Chrome with customized options,
@@ -59,7 +59,9 @@ import com.vaadin.testbench.parallel.Browser;
  * @since 1.0
  *
  */
-public abstract class ChromeDeviceTest extends AbstractPlatformTest {
+public abstract class ChromeDeviceTest extends ParallelTest {
+    public static final int SERVER_PORT = Integer
+            .parseInt(System.getProperty("serverPort", "8080"));
 
     static boolean isJavaInDebugMode() {
         return ManagementFactory.getRuntimeMXBean().getInputArguments()
@@ -67,11 +69,12 @@ public abstract class ChromeDeviceTest extends AbstractPlatformTest {
     }
 
     @Before
+    @Override
     public void setup() throws Exception {
         ChromeOptions chromeOptions =
                 customizeChromeOptions(new ChromeOptions());
 
-        WebDriver driver;
+        WebDriver driver = new ChromeDriver(chromeOptions);
         if (Browser.CHROME == getRunLocallyBrowser()) {
             driver = new ChromeDriver(chromeOptions);
         } else {
@@ -79,6 +82,8 @@ public abstract class ChromeDeviceTest extends AbstractPlatformTest {
         }
 
         setDriver(TestBench.createDriver(driver));
+
+        super.setup();
     }
 
     /**
@@ -164,8 +169,38 @@ public abstract class ChromeDeviceTest extends AbstractPlatformTest {
                                 + ".then(result => done(!!result));"));
     }
 
-    @Override
-    protected String getTestPath() {
-        return "/";
+    /**
+     * Gets the absolute path to the test, starting with a "/".
+     * 
+     * @return he path to the test, appended to {@link #getRootURL()} for the
+     *         full test URL.
+     */
+    protected abstract String getTestPath();
+
+    /**
+     * Returns the URL to the root of the server, e.g. "http://localhost:8888".
+     * 
+     * @return the URL to the root
+     */
+    protected String getRootURL() {
+        return "http://" + getDeploymentHostname() + ":" + getDeploymentPort();
+    }
+
+    /**
+     * Used to determine what port the test is running on.
+     * 
+     * @return The port the test is running on, by default 8080
+     */
+    protected int getDeploymentPort() {
+        return SERVER_PORT;
+    }
+
+    /**
+     * Used to determine what URL to initially open for the test.
+     * 
+     * @return the host name of development server
+     */
+    protected String getDeploymentHostname() {
+        return "localhost";
     }
 }

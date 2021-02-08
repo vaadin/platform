@@ -49,4 +49,9 @@ public class OfflineIT extends ChromeDeviceTest {
           setConnectionType(NetworkConnection.ConnectionType.ALL);
       }
   }
+
+  @Override
+  protected String getTestPath() {
+    return "/";
+  }
 }
