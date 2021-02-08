@@ -572,6 +572,7 @@ public class ComponentsView extends AppLayout {
         components.add(dialogButton);
         components.add(confirmDialogButton);
         components.add(datePicker);
+        components.add(dateTimePicker);
         components.add(timePicker);
         components.add(select);
         components.add(grid);
