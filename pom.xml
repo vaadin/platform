@@ -47,6 +47,7 @@
             </activation>	
             <modules>	
                 <module>vaadin-platform-test</module>	
+                <module>vaadin-platform-fusion-test</module>	
             </modules>	
         </profile>        	
         <profile>
