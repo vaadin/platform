@@ -13,7 +13,7 @@ public class OfflineIT extends ChromeDeviceTest {
   @Test
   public void offlineRoot_reload_viewReloaded() throws IOException {
       getDriver().get(getRootURL() + "/");
-      // waitForDevServer();
+      waitForDevServer();
       waitForServiceWorkerReady();
 
       // Confirm that app shell is loaded

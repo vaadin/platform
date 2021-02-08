@@ -195,4 +195,17 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     protected String getDeploymentHostname() {
         return "localhost";
     }
+
+    /**
+     * If dev server start in progress wait until it's started. Otherwise return
+     * immidiately.
+     */
+    protected void waitForDevServer() {
+        Object result;
+        do {
+            getCommandExecutor().waitForVaadin();
+            result = getCommandExecutor().executeScript(
+                    "return window.Vaadin && window.Vaadin.Flow && window.Vaadin.Flow.devServerIsNotLoaded;");
+        } while (Boolean.TRUE.equals(result));
+    }
 }
