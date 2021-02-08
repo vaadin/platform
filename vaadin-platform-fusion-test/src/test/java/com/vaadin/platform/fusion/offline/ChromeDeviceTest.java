@@ -74,7 +74,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         ChromeOptions chromeOptions =
                 customizeChromeOptions(new ChromeOptions());
 
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriver driver;
         if (Browser.CHROME == getRunLocallyBrowser()) {
             driver = new ChromeDriver(chromeOptions);
         } else {
@@ -82,8 +82,6 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         }
 
         setDriver(TestBench.createDriver(driver));
-
-        super.setup();
     }
 
     /**
