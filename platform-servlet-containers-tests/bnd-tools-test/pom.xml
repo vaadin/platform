@@ -29,7 +29,23 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-platform-fusion-test</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+            <classifier>ui</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-platform-test</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-platform-fusion-test</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
@@ -401,6 +417,7 @@
                             </excludes>
                             <dependenciesToScan>
                                 <dependency>${project.groupId}:vaadin-platform-test</dependency>
+                                <dependency>${project.groupId}:vaadin-platform-fusion-test</dependency>
                             </dependenciesToScan>
                             <systemPropertyVariables>
                                 <sauce.user>${sauce.user}</sauce.user>

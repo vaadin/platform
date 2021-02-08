@@ -14,7 +14,7 @@ public class OfflineIT extends ChromeDeviceTest {
   public void offlineRoot_reload_viewReloaded() throws IOException {
       getDriver().get(getRootURL() + "/");
       waitForDevServer();
-      // waitForServiceWorkerReady();
+      waitForServiceWorkerReady();
 
       // Confirm that app shell is loaded
       Assert.assertNotNull("Should have outlet when loaded online",
