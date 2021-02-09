@@ -25,6 +25,7 @@ vaadin-platform-fusion-test/package-lock.json
 vaadin-platform-fusion-test/package.json
 vaadin-platform-fusion-test/webpack.config.js
 vaadin-platform-fusion-test/webpack.generated.js
+vaadin-platform-fusion-test/frontend/generated/
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
