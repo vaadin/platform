@@ -1,4 +1,3 @@
-import '!style-loader!css-loader!./hello-world-ts-view.css';
 import { showNotification } from '@vaadin/flow-frontend/a-notification';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-text-field';
