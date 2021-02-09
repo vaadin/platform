@@ -249,10 +249,10 @@
                         </goals>
                         <phase>compile</phase>
                     </execution>
-                    <configuration>
-                        <productionMode>true</productionMode>
-                    </configuration>
                 </executions>
+                <configuration>
+                    <productionMode>true</productionMode>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
