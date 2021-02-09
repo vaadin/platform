@@ -1,1 +1,0 @@
-import '../../target/index';
