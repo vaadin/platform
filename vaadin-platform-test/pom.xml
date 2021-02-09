@@ -160,6 +160,12 @@
                     <stopWait>5</stopWait>
                     <stopKey>foo</stopKey>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>vaadin.productionMode</name>
+                            <value>${vaadin.productionMode}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
                 <executions>
                     <execution>
@@ -380,7 +386,6 @@
                     <artifactId>flow-server-production-mode</artifactId>
                 </dependency>
             </dependencies>
-
             <build>
                 <plugins>
                     <plugin>

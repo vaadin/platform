@@ -1,10 +1,10 @@
 package com.vaadin.platform.test;
 
-import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
@@ -43,14 +43,16 @@ public class ComponentsIT extends ParallelTest {
 
     @Test
     public void appWorks() throws Exception {
-
-        $(NotificationElement.class).waitForFirst();
+        System.err.println(">> Running component tests for: " + " " + getDesiredCapabilities().getBrowserName() + " " + getDesiredCapabilities().getVersion());
+        $(NotificationElement.class).waitForFirst(60);
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
+        System.err.println(">> Tests succeed for: " + " " + getDesiredCapabilities().getBrowserName() + " " + getDesiredCapabilities().getVersion());
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+        System.err.println("  >> Running test for: " + tag);
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
         }
