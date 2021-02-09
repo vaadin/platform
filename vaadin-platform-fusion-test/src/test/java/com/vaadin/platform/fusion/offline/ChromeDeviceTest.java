@@ -16,18 +16,20 @@
 package com.vaadin.platform.fusion.offline;
 
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
+import com.vaadin.testbench.TestBench;
+import com.vaadin.testbench.TestBenchDriverProxy;
+import com.vaadin.testbench.annotations.BrowserConfiguration;
+import com.vaadin.testbench.parallel.Browser;
+import com.vaadin.testbench.parallel.ParallelTest;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.experimental.categories.Category;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,14 +39,6 @@ import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.Response;
-
-import com.vaadin.testbench.TestBench;
-import com.vaadin.testbench.TestBenchDriverProxy;
-import com.vaadin.testbench.annotations.BrowserConfiguration;
-import com.vaadin.testbench.parallel.Browser;
-import com.vaadin.testbench.parallel.ParallelTest;
-import com.vaadin.testbench.parallel.SauceLabsIntegration;
-import com.vaadin.testbench.parallel.setup.RemoteDriver;
 
 /**
  * Base class for TestBench tests to run in Chrome with customized options,
@@ -67,11 +61,21 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
 
-    static boolean isJavaInDebugMode() {
-        return ManagementFactory.getRuntimeMXBean().getInputArguments()
-                .toString().contains("jdwp");
-    }
+    @Before
+    @Override
+    public void setup() throws Exception {
+        ChromeOptions chromeOptions =
+                customizeChromeOptions(new ChromeOptions());
 
+        WebDriver driver;
+        if (Browser.CHROME == getRunLocallyBrowser()) {
+            driver = new ChromeDriver(chromeOptions);
+        } else {
+            driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions.merge(getDesiredCapabilities()));
+        }
+
+        setDriver(TestBench.createDriver(driver));
+    }
     /**
      * Customizes given Chrome options to enable network connection emulation.
      *
@@ -195,14 +199,6 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             result = getCommandExecutor().executeScript(
                     "return window.Vaadin && window.Vaadin.Flow && window.Vaadin.Flow.devServerIsNotLoaded;");
         } while (Boolean.TRUE.equals(result));
-    }
-
-    @Override
-    protected DesiredCapabilities getDesiredCapabilities() {
-        DesiredCapabilities desiredCapabilities = super.getDesiredCapabilities();
-        ChromeOptions chromeOptions =
-                customizeChromeOptions(new ChromeOptions());
-        return desiredCapabilities.merge(chromeOptions);
     }
 
     @BrowserConfiguration
