@@ -55,6 +55,10 @@ public class ComponentsIT extends ParallelTest {
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
+        if ("safari-10".equals(currentBrowser())) {
+            return;
+        }
+
         if ("safari-9".equals(currentBrowser()) && GridSelectionColumn.class.equals(testComponent.component)) {
             return;
         }
