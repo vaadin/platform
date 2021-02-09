@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.grid.GridSelectionColumn;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
@@ -41,18 +42,24 @@ public class ComponentsIT extends ParallelTest {
         }
     };
 
+    private String currentBrowser() {
+        return getDesiredCapabilities().getBrowserName() + "-" + getDesiredCapabilities().getVersion();
+    }
+
     @Test
     public void appWorks() throws Exception {
-        System.err.println(">> Running component tests for: " + " " + getDesiredCapabilities().getBrowserName() + " " + getDesiredCapabilities().getVersion());
-        $(NotificationElement.class).waitForFirst(60);
-
+        System.err.println(">> Running component tests for: " + currentBrowser());
+        $(NotificationElement.class).waitForFirst(120);
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
-        System.err.println(">> Tests succeed for: " + " " + getDesiredCapabilities().getBrowserName() + " " + getDesiredCapabilities().getVersion());
+        System.err.println(">> Tests succeed for: " + currentBrowser());
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
+        if ("safari-9".equals(currentBrowser()) && GridSelectionColumn.class.equals(testComponent.component)) {
+            return;
+        }
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
-        System.err.println("  >> Running test for: " + tag);
+        System.err.println("  >> Running test for: " + tag + " " + currentBrowser());
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
         }
@@ -65,7 +72,7 @@ public class ComponentsIT extends ParallelTest {
             $ = $(tag);
         }
         if (($  == null || !$.exists())) {
-            System.err.println(">>> Component not found in the View" + testComponent);
+            System.err.println(" >> Component not found in the View" + testComponent + " " + currentBrowser());
         }
         checkElement($, tag);
     }
