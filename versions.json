@@ -274,7 +274,7 @@
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-router": {
-            "jsVersion": "1.7.2",
+            "jsVersion": "1.7.3",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
@@ -308,7 +308,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.8.2",
+            "jsVersion": "2.8.3",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
