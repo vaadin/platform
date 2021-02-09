@@ -18,6 +18,7 @@ package com.vaadin.platform.fusion.offline;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ import org.openqa.selenium.remote.Response;
 
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchDriverProxy;
+import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
 import com.vaadin.testbench.parallel.SauceLabsIntegration;
@@ -201,5 +203,11 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         ChromeOptions chromeOptions =
                 customizeChromeOptions(new ChromeOptions());
         return desiredCapabilities.merge(chromeOptions);
+    }
+
+    @BrowserConfiguration
+    public List<DesiredCapabilities> getBrowserConfiguration() {
+        return Collections
+                .singletonList(Browser.CHROME.getDesiredCapabilities());
     }
 }
