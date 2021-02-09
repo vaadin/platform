@@ -41,6 +41,7 @@ import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchDriverProxy;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import com.vaadin.testbench.parallel.setup.RemoteDriver;
 
 /**
@@ -67,22 +68,6 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     static boolean isJavaInDebugMode() {
         return ManagementFactory.getRuntimeMXBean().getInputArguments()
                 .toString().contains("jdwp");
-    }
-
-    @Before
-    @Override
-    public void setup() throws Exception {
-        ChromeOptions chromeOptions =
-                customizeChromeOptions(new ChromeOptions());
-
-        WebDriver driver;
-        if (Browser.CHROME == getRunLocallyBrowser()) {
-            driver = new ChromeDriver(chromeOptions);
-        } else {
-            driver = new RemoteDriver().createDriver(getHubURL(), getDesiredCapabilities().merge(chromeOptions));
-        }
-
-        setDriver(TestBench.createDriver(driver));
     }
 
     /**
@@ -208,5 +193,13 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             result = getCommandExecutor().executeScript(
                     "return window.Vaadin && window.Vaadin.Flow && window.Vaadin.Flow.devServerIsNotLoaded;");
         } while (Boolean.TRUE.equals(result));
+    }
+
+    @Override
+    protected DesiredCapabilities getDesiredCapabilities() {
+        DesiredCapabilities desiredCapabilities = super.getDesiredCapabilities();
+        ChromeOptions chromeOptions =
+                customizeChromeOptions(new ChromeOptions());
+        return desiredCapabilities.merge(chromeOptions);
     }
 }
