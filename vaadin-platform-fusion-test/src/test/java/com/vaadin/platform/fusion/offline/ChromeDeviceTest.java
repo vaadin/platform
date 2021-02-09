@@ -68,21 +68,21 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                 .toString().contains("jdwp");
     }
 
-    @Before
-    @Override
-    public void setup() throws Exception {
-        ChromeOptions chromeOptions =
-                customizeChromeOptions(new ChromeOptions());
+    // @Before
+    // @Override
+    // public void setup() throws Exception {
+    //     ChromeOptions chromeOptions =
+    //             customizeChromeOptions(new ChromeOptions());
 
-        WebDriver driver;
-        if (Browser.CHROME == getRunLocallyBrowser()) {
-            driver = new ChromeDriver(chromeOptions);
-        } else {
-            driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions);
-        }
+    //     WebDriver driver;
+    //     if (Browser.CHROME == getRunLocallyBrowser()) {
+    //         driver = new ChromeDriver(chromeOptions);
+    //     } else {
+    //         driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions);
+    //     }
 
-        setDriver(TestBench.createDriver(driver));
-    }
+    //     setDriver(TestBench.createDriver(driver));
+    // }
 
     /**
      * Customizes given Chrome options to enable network connection emulation.
