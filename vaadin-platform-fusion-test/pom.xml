@@ -336,6 +336,12 @@
                         </executions>
                         <configuration>
                             <mainClass>com.vaadin.platform.fusion.test.Application</mainClass>
+                            <configuration>
+                                <systemPropertyVariables>
+                                  <vaadin.devmodeGizmoEnabled>false</vaadin.devmodeGizmoEnabled>
+                                  <vaadin.devmode.liveReload.enabled>false</vaadin.devmode.liveReload.enabled>
+                                </systemPropertyVariables>
+                              </configuration>
                         </configuration>
                     </plugin>
                 </plugins>
