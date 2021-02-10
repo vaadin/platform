@@ -8,7 +8,7 @@
         <version>19.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-platform-fusion-test</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Vaadin Platform Fusion Tests (Dev Mode)</name>
     <description>Vaadin Platform Fusion Tests (Dev Mode)</description>
     <url>https://vaadin.com</url>
