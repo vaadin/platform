@@ -22,11 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchDriverProxy;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,12 +68,21 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public void setup() throws Exception {
         ChromeOptions chromeOptions =
                 customizeChromeOptions(new ChromeOptions());
-
         WebDriver driver;
-        if (Browser.CHROME == getRunLocallyBrowser()) {
+        // Always give priority to @RunLocally annotation
+        if ((getRunLocallyBrowser() != null)) {
             driver = new ChromeDriver(chromeOptions);
+        } else if (Parameters.isLocalWebDriverUsed()) {
+            driver = new ChromeDriver(chromeOptions);
+        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
+            driver = new RemoteWebDriver(new URL(getHubURL()), 
+                chromeOptions.merge(getDesiredCapabilities()));
+        } else if (getRunOnHub(getClass()) != null
+                || Parameters.getHubHostname() != null) {
+            driver = new RemoteWebDriver(new URL(getHubURL()), 
+            chromeOptions.merge(getDesiredCapabilities()));
         } else {
-            driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions.merge(getDesiredCapabilities()));
+            driver = new ChromeDriver(chromeOptions);
         }
 
         setDriver(TestBench.createDriver(driver));
