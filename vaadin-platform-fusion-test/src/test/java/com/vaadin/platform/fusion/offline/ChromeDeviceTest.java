@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchDriverProxy;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
@@ -68,7 +69,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                 customizeChromeOptions(new ChromeOptions());
 
         WebDriver driver;
-        if (Browser.CHROME == getRunLocallyBrowser()) {
+        if (getRunLocallyBrowser() != null || Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
         } else {
             driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions.merge(getDesiredCapabilities()));
@@ -97,7 +98,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                 mobileEmulationParams);
         chromeOptions.setCapability("networkConnectionEnabled", true);
 
-        
+
         // Enable service workers over http remote connection
         chromeOptions.addArguments(String.format(
                 "--unsafely-treat-insecure-origin-as-secure=%s",
@@ -155,7 +156,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     /**
      * Returns the URL to the root of the server, e.g. "http://localhost:8888".
-     * 
+     *
      * @return the URL to the root
      */
     protected String getRootURL() {
@@ -164,7 +165,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     /**
      * Used to determine what port the test is running on.
-     * 
+     *
      * @return The port the test is running on, by default 8080
      */
     protected int getDeploymentPort() {
@@ -173,7 +174,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     /**
      * Used to determine what URL to initially open for the test.
-     * 
+     *
      * @return the host name of development server
      */
     protected String getDeploymentHostname() {
