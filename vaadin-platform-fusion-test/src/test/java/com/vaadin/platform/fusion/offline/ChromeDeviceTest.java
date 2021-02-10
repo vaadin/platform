@@ -154,14 +154,6 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     }
 
     /**
-     * Gets the absolute path to the test, starting with a "/".
-     * 
-     * @return he path to the test, appended to {@link #getRootURL()} for the
-     *         full test URL.
-     */
-    protected abstract String getTestPath();
-
-    /**
      * Returns the URL to the root of the server, e.g. "http://localhost:8888".
      * 
      * @return the URL to the root

@@ -29,7 +29,6 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
   public void offlineRoot_reload_viewReloaded() throws IOException {
       getDriver().get(getRootURL() + "/");
       waitForDevServer();
-      waitForServiceWorkerReady();
 
       // Confirm that app shell is loaded
       Assert.assertNotNull("Should have outlet when loaded online",
@@ -38,6 +37,8 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
       // Confirm that client side view is loaded
       Assert.assertNotNull("Should have <hello-world-ts-view> in DOM when loaded online",
               findElement(By.tagName("hello-world-ts-view")));
+
+      waitForServiceWorkerReady();
 
       // Set offline network conditions in ChromeDriver
       setConnectionType(NetworkConnection.ConnectionType.AIRPLANE_MODE);
@@ -65,8 +66,4 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
       }
   }
 
-  @Override
-  protected String getTestPath() {
-    return "/";
-  }
 }
