@@ -67,6 +67,6 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
 
   @Override
   protected String getTestPath() {
-    return "/prod-mode/";
+    return "/";
   }
 }
