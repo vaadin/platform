@@ -21,9 +21,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.mobile.NetworkConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChromeOfflineIT extends ChromeDeviceTest {
+
+  protected Logger getLogger() {
+    return LoggerFactory.getLogger(this.getClass().getSimpleName());
+  }
 
   @Test
   public void offlineRoot_reload_viewReloaded() throws IOException {
@@ -37,6 +44,10 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
       // Confirm that client side view is loaded
       Assert.assertNotNull("Should have <hello-world-ts-view> in DOM when loaded online",
               findElement(By.tagName("hello-world-ts-view")));
+
+      // Print in logger the browser console log
+      driver.manage().logs().get(LogType.BROWSER).getAll().stream()
+          .forEach(c -> getLogger().warn("Console - {} {}", c.getLevel(), c.getMessage()));
 
       waitForServiceWorkerReady();
 
