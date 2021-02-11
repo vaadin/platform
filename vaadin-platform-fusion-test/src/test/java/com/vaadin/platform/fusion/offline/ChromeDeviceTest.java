@@ -67,12 +67,21 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public void setup() throws Exception {
         ChromeOptions chromeOptions =
                 customizeChromeOptions(new ChromeOptions());
-
         WebDriver driver;
-        if (getRunLocallyBrowser() != null || Parameters.isLocalWebDriverUsed()) {
+        // Always give priority to @RunLocally annotation
+        if ((getRunLocallyBrowser() != null)) {
             driver = new ChromeDriver(chromeOptions);
+        } else if (Parameters.isLocalWebDriverUsed()) {
+            driver = new ChromeDriver(chromeOptions);
+        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
+            driver = new RemoteWebDriver(new URL(getHubURL()), 
+                chromeOptions.merge(getDesiredCapabilities()));
+        } else if (getRunOnHub(getClass()) != null
+                || Parameters.getHubHostname() != null) {
+            driver = new RemoteWebDriver(new URL(getHubURL()), 
+            chromeOptions.merge(getDesiredCapabilities()));
         } else {
-            driver = new RemoteWebDriver(new URL(getHubURL()), chromeOptions.merge(getDesiredCapabilities()));
+            driver = new ChromeDriver(chromeOptions);
         }
 
         setDriver(TestBench.createDriver(driver));
