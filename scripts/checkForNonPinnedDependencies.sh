@@ -7,5 +7,5 @@ do
         echo "Run mvn:dependency-tree to see all dependencies, including the ones marked as 'selected from constraint'"
         exit 1
     fi
-done < <(mvn dependency:tree)
+done < <(mvn -B dependency:tree)
 echo "OK: No non-pinned dependencies"

@@ -1,5 +1,6 @@
 package com.vaadin.platform.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
@@ -9,12 +10,14 @@ import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.grid.GridSelectionColumn;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
+import com.vaadin.flow.server.Version;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
@@ -24,9 +27,14 @@ import com.vaadin.testbench.parallel.ParallelTest;
 
 public class ComponentsIT extends ParallelTest {
 
+    private static Logger log = LoggerFactory.getLogger(ComponentsIT.class);
+
     static {
-        Parameters.setGridBrowsers(
-                "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge,edge-18");
+        String sauceUser = System.getProperty("sauce.user");
+        if (sauceUser != null && !sauceUser.isEmpty()) {
+            Parameters.setGridBrowsers(System.getProperty("grid.browsers",
+                    "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge,edge-18"));
+        }
     }
 
     @Before
@@ -46,42 +54,43 @@ public class ComponentsIT extends ParallelTest {
         }
     };
 
+    private Boolean isBower = false;
+    private Boolean isOldBrowser = false;
     @Test
     @SuppressWarnings("unchecked")
     public void appWorks() throws Exception {
-        System.err.println(">> Running component tests for: " + currentBrowser());
-
         // wait until notification is available
         $(NotificationElement.class).waitForFirst(120);
 
         TestBenchCommandExecutor executor = $("html").first().getCommandExecutor();
-        Boolean isBower = (Boolean) executor.executeScript("return !!window.Vaadin.Lumo");
-        List<String> registered = (List<String>) executor.executeScript("return Vaadin.registrations.map(c => c.is)");
+        List<String> registered = (List<String>) executor.executeScript("return Vaadin.registrations.map(function(c) {return c.is});");
+
+        isBower = (Boolean) executor.executeScript("return !!window.Vaadin.Lumo");
+        Boolean isLTS = Version.getMajorVersion() < 15;
+        isOldBrowser = currentBrowser().matches("safari-9|safari-10|ie11.*");
 
         Collection<TestComponent> allComponents = new ComponentUsageTest().getTestComponents();
         Collection<TestComponent> registeredComponents = allComponents.stream().filter(c -> registered.contains(c.localName)).collect(Collectors.toList());
-        if (isBower) {
+
+        log.info("Running component test for browser={}, bower={}, lts={}, oldBrowser={}", currentBrowser(), isBower, isLTS, isOldBrowser);
+        if (isOldBrowser && (isBower || isLTS)) {
             registeredComponents.forEach(this::checkElement);
         } else {
-            allComponents.forEach(this::checkElement);
+            allComponents.stream().filter(c ->
+              // TODO: investigate why when `vaadin-grid-flow-selection-column` fails in IE11 and safari
+              isOldBrowser && c.localName.matches("vaadin-grid-flow-selection-column")
+            ).forEach(this::checkElement);
         }
-        System.err.println(">> Tests succeed for: " + currentBrowser());
+        log.info("Tests succeed for={}, bower={}, lts={}, oldBrowser=", currentBrowser(), isBower, isLTS, isOldBrowser);
     }
 
     String currentBrowser() {
-        return getDesiredCapabilities().getBrowserName() + "-" + getDesiredCapabilities().getVersion();
+        String v = getDesiredCapabilities().getVersion();
+        return getDesiredCapabilities().getBrowserName() + (v != null && !v.isEmpty() ? "-" + v : "");
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
-        if ("safari-10".equals(currentBrowser())) {
-            return;
-        }
-
-        if ("safari-9".equals(currentBrowser()) && GridSelectionColumn.class.equals(testComponent.component)) {
-            return;
-        }
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
-        System.err.println("  >> Running test for: " + tag + " " + currentBrowser());
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
         }
@@ -93,17 +102,23 @@ public class ComponentsIT extends ParallelTest {
         if (($  == null || !$.exists()) && tag != null) {
             $ = $(tag);
         }
-        if (($  == null || !$.exists())) {
-            System.err.println(" >> Component not found in the View" + testComponent + " " + currentBrowser());
-        }
+
         checkElement($, tag);
     }
 
     private <T extends TestBenchElement> void checkElement(ElementQuery<T> $, String tag) {
-        assertTrue(tag + " not found.",  $.exists());
-        String tagName = $.first().getTagName().toLowerCase();
-        if (tagName.contains("-")) {
-            assertTrue((Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
-        }
+
+        assertTrue(tag + " not found in the view for " + currentBrowser(), $ != null && $.exists());
+
+        assertNotNull(tag + " first is null " + currentBrowser(), $.first());
+
+        String tagName = $.first().getTagName();;
+        assertNotNull(tag + " getTagName is null " + currentBrowser(), tagName);
+
+        assertTrue(tag + " not equal to " + tagName + " " + currentBrowser(),
+                tagName != null && tag.equals(tagName.toLowerCase()));
+
+        assertTrue(tag + " customElement not registered for " + currentBrowser(), !tag.contains("-")
+                || (Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
     }
 }
