@@ -2,7 +2,10 @@ package com.vaadin.platform.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +19,7 @@ import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
+import com.vaadin.testbench.commands.TestBenchCommandExecutor;
 import com.vaadin.testbench.parallel.ParallelTest;
 
 public class ComponentsIT extends ParallelTest {
@@ -30,7 +34,7 @@ public class ComponentsIT extends ParallelTest {
         getDriver().get("http://localhost:8080/prod-mode/");
     }
 
-    HashMap<String, Runnable> beforeRuns = new HashMap<String, Runnable>() {
+    private HashMap<String, Runnable> beforeRuns = new HashMap<String, Runnable>() {
         private static final long serialVersionUID = 1L;
         {
             put("vaadin-confirm-dialog", () -> $(ButtonElement.class).id("open-confirm-dialog").click());
@@ -42,16 +46,30 @@ public class ComponentsIT extends ParallelTest {
         }
     };
 
-    private String currentBrowser() {
-        return getDesiredCapabilities().getBrowserName() + "-" + getDesiredCapabilities().getVersion();
-    }
-
     @Test
+    @SuppressWarnings("unchecked")
     public void appWorks() throws Exception {
         System.err.println(">> Running component tests for: " + currentBrowser());
+
+        // wait until notification is available
         $(NotificationElement.class).waitForFirst(120);
-        new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
+
+        TestBenchCommandExecutor executor = $("html").first().getCommandExecutor();
+        Boolean isBower = (Boolean) executor.executeScript("return !!window.Vaadin.Lumo");
+        List<String> registered = (List<String>) executor.executeScript("return Vaadin.registrations.map(c => c.is)");
+
+        Collection<TestComponent> allComponents = new ComponentUsageTest().getTestComponents();
+        Collection<TestComponent> registeredComponents = allComponents.stream().filter(c -> registered.contains(c.localName)).collect(Collectors.toList());
+        if (isBower) {
+            registeredComponents.forEach(this::checkElement);
+        } else {
+            allComponents.forEach(this::checkElement);
+        }
         System.err.println(">> Tests succeed for: " + currentBrowser());
+    }
+
+    String currentBrowser() {
+        return getDesiredCapabilities().getBrowserName() + "-" + getDesiredCapabilities().getVersion();
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {

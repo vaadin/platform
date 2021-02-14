@@ -159,7 +159,6 @@ public class ComponentUsageTest {
         }
     }
 
-
     @Test
     public void verifyComponents() throws Exception {
         testComponents.forEach(c -> {
