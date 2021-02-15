@@ -71,6 +71,10 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
           // Confirm that client side view is loaded
           Assert.assertNotNull("Should have <hello-world-ts-view> in DOM when loaded offline",
                   findElement(By.tagName("hello-world-ts-view")));
+
+          // Confirm that connection lost indicator is visible
+          Assert.assertNotNull("Should have outlet when loaded offline",
+                  findElement(By.tagName("vaadin-connection-indicator")).getAttribute("offline"));
       } finally {
           // Reset network conditions back
           setConnectionType(NetworkConnection.ConnectionType.ALL);
