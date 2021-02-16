@@ -46,9 +46,8 @@
                 <activeByDefault>true</activeByDefault>	
             </activation>	
             <modules>	
-                <module>vaadin-platform-test</module>	
-                <module>vaadin-platform-fusion-test/pom-production.xml</module>
-                <module>vaadin-platform-fusion-test</module>
+                <module>vaadin-platform-test</module>
+                <module>vaadin-platform-hybrid-test</module>
             </modules>	
         </profile>        	
         <profile>
