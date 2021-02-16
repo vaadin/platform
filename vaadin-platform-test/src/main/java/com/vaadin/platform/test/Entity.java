@@ -1,20 +1,44 @@
 package com.vaadin.platform.test;
 
-class Entity {
-	private String field;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
-	Entity() {
-	}
+public class Entity {
+    private String name;
+    private List<Entity> entities = Collections.emptyList();
 
-	Entity(String field) {
-		this.field = field;
-	}
+    public Entity() {
+    }
 
-	String getField() {
-		return field;
-	}
+    public Entity(String name) {
+        this.name = name;
+    }
 
-	void setField(String field) {
-		this.field = field;
-	}
+    public Entity(String name, Entity... entity) {
+        this.name = name;
+        this.entities = Arrays.asList(entity);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    public void setEntities(List<Entity> entities) {
+        this.entities = entities;
+    }
+    
+    @Override
+    public String toString() {
+        return name + " " + String.join(" ", entities.stream().map(Entity::getName).collect(Collectors.toList()));
+    }
 }

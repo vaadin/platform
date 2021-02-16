@@ -24,8 +24,8 @@ mavenTemp="$scriptDir"/tmp.maven-deps
 bowerTemp="$scriptDir"/tmp.bower-deps
 
 pushd "$scriptDir/$vaadinMavenDir"
-mvn dependency:tree|grep 'org\.webjars\.bowergithub' | cut -d: -f2,4 > "$mavenTemp"
-mvn dependency:tree|grep 'com\.vaadin\.webjar:' | cut -d: -f2,4 >> "$mavenTemp"
+mvn -B dependency:tree|grep 'org\.webjars\.bowergithub' | cut -d: -f2,4 > "$mavenTemp"
+mvn -B dependency:tree|grep 'com\.vaadin\.webjar:' | cut -d: -f2,4 >> "$mavenTemp"
 popd
 
 pushd "$vaadinCoreBowerDir"

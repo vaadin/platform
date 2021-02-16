@@ -1,56 +1,40 @@
 package com.vaadin.platform.test;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.vaadin.flow.component.accordion.testbench.AccordionElement;
-import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
-import com.vaadin.flow.component.board.testbench.BoardElement;
-import com.vaadin.flow.component.board.testbench.RowElement;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.charts.testbench.ChartElement;
-import com.vaadin.flow.component.checkbox.testbench.CheckboxElement;
-import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
-import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
-import com.vaadin.flow.component.cookieconsent.testbench.CookieConsentElement;
-import com.vaadin.flow.component.crud.testbench.CrudElement;
-import com.vaadin.flow.component.customfield.testbench.CustomFieldElement;
-import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
-import com.vaadin.flow.component.details.testbench.DetailsElement;
-import com.vaadin.flow.component.dialog.testbench.DialogElement;
-import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.gridpro.testbench.GridProElement;
-import com.vaadin.flow.component.ironlist.testbench.IronListElement;
-import com.vaadin.flow.component.listbox.testbench.ListBoxElement;
-import com.vaadin.flow.component.login.testbench.LoginFormElement;
-import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
+import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
-import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
-import com.vaadin.flow.component.orderedlayout.testbench.ScrollerElement;
-import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
-import com.vaadin.flow.component.progressbar.testbench.ProgressBarElement;
-import com.vaadin.flow.component.radiobutton.testbench.RadioButtonGroupElement;
-import com.vaadin.flow.component.richtexteditor.testbench.RichTextEditorElement;
-import com.vaadin.flow.component.select.testbench.SelectElement;
-import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
-import com.vaadin.flow.component.tabs.testbench.TabElement;
-import com.vaadin.flow.component.tabs.testbench.TabsElement;
-import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
-import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
-import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
-import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
-import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.flow.server.Version;
+import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
+import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
+import com.vaadin.testbench.commands.TestBenchCommandExecutor;
 import com.vaadin.testbench.parallel.ParallelTest;
 
 public class ComponentsIT extends ParallelTest {
 
+    private static Logger log = LoggerFactory.getLogger(ComponentsIT.class);
+
     static {
-        Parameters.setGridBrowsers(
-                "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge,edge-18");
+        String sauceUser = System.getProperty("sauce.user");
+        if (sauceUser != null && !sauceUser.isEmpty()) {
+            Parameters.setGridBrowsers(System.getProperty("grid.browsers",
+                    "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge,edge-18"));
+        }
     }
 
     @Before
@@ -58,62 +42,83 @@ public class ComponentsIT extends ParallelTest {
         getDriver().get("http://localhost:8080/prod-mode/");
     }
 
+    private HashMap<String, Runnable> beforeRuns = new HashMap<String, Runnable>() {
+        private static final long serialVersionUID = 1L;
+        {
+            put("vaadin-confirm-dialog", () -> $(ButtonElement.class).id("open-confirm-dialog").click());
+            put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
+            put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
+            put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-grid-context-menu", () -> $(GridElement.class).first().getCell(1, 0).click());
+        }
+    };
+
+    private Boolean isBower = false;
+    private Boolean isOldBrowser = false;
     @Test
+    @SuppressWarnings("unchecked")
     public void appWorks() throws Exception {
-        checkCustomElement($(NotificationElement.class).waitForFirst());
-        checkCustomElement($(BoardElement.class).id("board"));
-        checkCustomElement($(RowElement.class).id("row"));
-        checkCustomElement($(ButtonElement.class).id("button"));
-        checkCustomElement($(ChartElement.class).id("chart"));
-        checkCustomElement($(CookieConsentElement.class).id("cookieconsent"));
-        checkCustomElement($(AccordionElement.class).id("accordion"));
-        checkCustomElement($(AppLayoutElement.class).id("applayout"));
-        checkCustomElement($(CrudElement.class).id("crud"));
-        checkCustomElement($(GridProElement.class).id("gridpro"));
-        checkCustomElement($(RichTextEditorElement.class).id("richtexteditor"));
-        checkCustomElement($(CustomFieldElement.class).id("customfield"));
-        checkCustomElement($(CheckboxElement.class).id("checkbox"));
-        checkCustomElement($("vaadin-checkbox-group").id("checkboxgroup"));
-        checkCustomElement($(ComboBoxElement.class).id("combobox"));
-        checkCustomElement($(DatePickerElement.class).id("datepicker"));
-        checkCustomElement($(TimePickerElement.class).id("timepicker"));
-        checkCustomElement($(DetailsElement.class).id("details"));
-        checkCustomElement($(FormLayoutElement.class).id("formlayout"));
-        checkCustomElement($(GridElement.class).id("grid"));
-        checkCustomElement($("iron-icon").first());
-        checkCustomElement($(IronListElement.class).id("ironlist"));
-        checkCustomElement($(ListBoxElement.class).id("listbox"));
-        checkCustomElement($(LoginFormElement.class).id("loginform"));
-        checkCustomElement($(HorizontalLayoutElement.class).id("horizontallayout"));
-        checkCustomElement($(VerticalLayoutElement.class).id("verticallayout"));
-        checkCustomElement($(ScrollerElement.class).id("scroller"));
-        checkCustomElement($(ProgressBarElement.class).id("progressbar"));
-        checkCustomElement($(RadioButtonGroupElement.class).id("radiobuttongroup"));
-        checkCustomElement($(SplitLayoutElement.class).id("splithorizontal"));
-        checkCustomElement($(TabElement.class).first());
-        checkCustomElement($(TabsElement.class).id("tabs"));
-        checkCustomElement($(PasswordFieldElement.class).id("passwordfield"));
-        checkCustomElement($(TextAreaElement.class).id("textarea"));
-        checkCustomElement($(TextFieldElement.class).id("textfield"));
-        checkCustomElement($(MenuBarElement.class).id("menubar"));
-        checkCustomElement($(UploadElement.class).id("upload"));
-        checkCustomElement($(SelectElement.class).id("select"));
+        // wait until notification is available
+        $(NotificationElement.class).waitForFirst(120);
 
-        $(ButtonElement.class).id("open-dialog").click();
-        checkCustomElement($(DialogElement.class).id("dialog"));
-        $(ButtonElement.class).id("open-confirm-dialog").click();
-        checkCustomElement($(ConfirmDialogElement.class).id("confirmdialog"));
+        TestBenchCommandExecutor executor = $("html").first().getCommandExecutor();
+        List<String> registered = (List<String>) executor.executeScript("return Vaadin.registrations.map(function(c) {return c.is});");
 
+        isBower = (Boolean) executor.executeScript("return !!window.Vaadin.Lumo");
+        Boolean isLTS = Version.getMajorVersion() < 15;
+        isOldBrowser = currentBrowser().matches("safari-9|safari-10|ie11.*");
+
+        Collection<TestComponent> allComponents = new ComponentUsageTest().getTestComponents();
+        Collection<TestComponent> registeredComponents = allComponents.stream().filter(c -> registered.contains(c.localName)).collect(Collectors.toList());
+
+        log.info("Running component test for browser={}, bower={}, lts={}, oldBrowser={}", currentBrowser(), isBower, isLTS, isOldBrowser);
+        if (isOldBrowser && (isBower || isLTS)) {
+            registeredComponents.forEach(this::checkElement);
+        } else {
+            allComponents.stream().filter(c ->
+              // TODO: investigate why when `vaadin-grid-flow-selection-column` fails in IE11 and safari
+              isOldBrowser && c.localName.matches("vaadin-grid-flow-selection-column")
+            ).forEach(this::checkElement);
+        }
+        log.info("Tests succeed for={}, bower={}, lts={}, oldBrowser=", currentBrowser(), isBower, isLTS, isOldBrowser);
     }
 
-    private void checkCustomElement(TestBenchElement element) {
-        Assert.assertNotNull(element);
-
-        String tagName = element.getTagName().toLowerCase();
-        Assert.assertTrue(tagName.contains("-"));
-        // Check that the custom element has been registered
-        Assert.assertTrue((Boolean) executeScript(
-                "return !!window.customElements.get(arguments[0])", tagName));
+    String currentBrowser() {
+        String v = getDesiredCapabilities().getVersion();
+        return getDesiredCapabilities().getBrowserName() + (v != null && !v.isEmpty() ? "-" + v : "");
     }
 
+    private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
+        String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+        if (beforeRuns.containsKey(tag)) {
+            beforeRuns.get(tag).run();
+        }
+
+        ElementQuery<? extends TestBenchElement> $ = null;
+        if (testComponent.tbElement != null) {
+            $ = $(testComponent.tbElement);
+        }
+        if (($  == null || !$.exists()) && tag != null) {
+            $ = $(tag);
+        }
+
+        checkElement($, tag);
+    }
+
+    private <T extends TestBenchElement> void checkElement(ElementQuery<T> $, String tag) {
+
+        assertTrue(tag + " not found in the view for " + currentBrowser(), $ != null && $.exists());
+
+        assertNotNull(tag + " first is null " + currentBrowser(), $.first());
+
+        String tagName = $.first().getTagName();;
+        assertNotNull(tag + " getTagName is null " + currentBrowser(), tagName);
+
+        assertTrue(tag + " not equal to " + tagName + " " + currentBrowser(),
+                tagName != null && tag.equals(tagName.toLowerCase()));
+
+        assertTrue(tag + " customElement not registered for " + currentBrowser(), !tag.contains("-")
+                || (Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
+    }
 }
