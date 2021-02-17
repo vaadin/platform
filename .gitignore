@@ -17,10 +17,16 @@ node_modules/
 package-lock.json
 scripts/generator/results
 scripts/generator/yarn-error.log
-vaadin-platform-test/package-lock.json
-vaadin-platform-test/package.json
-vaadin-platform-test/webpack.config.js
-vaadin-platform-test/webpack.generated.js
+**/package-lock.json
+**/package.json
+**/webpack.config.js
+**/frontend/generated/
+**/*.generated.js
+**/pnpm-lock.yaml
+**/pnpmfile.js
+**/tsconfig.json
+**/types.d.ts
+**/.npmrc
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
