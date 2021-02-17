@@ -41,22 +41,24 @@
     <profiles>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
-            <id>npm-it</id>	
-            <activation>	
-                <activeByDefault>true</activeByDefault>	
-            </activation>	
-            <modules>	
+            <id>npm-it</id>
+            <modules>
                 <module>vaadin-platform-test</module>
-                <module>vaadin-platform-hybrid-test</module>
-            </modules>	
-        </profile>        	
+            </modules>
+        </profile>
         <profile>
-            <id>npm-it-servlet-containers</id>	
-            <modules>	
-                <module>platform-servlet-containers-tests</module>	
-            </modules>	
-        </profile>        	
-    </profiles>    
+            <id>npm-it-servlet-containers</id>
+            <modules>
+                <module>platform-servlet-containers-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>fusion-hybrid</id>
+            <modules>
+                <module>vaadin-platform-hybrid-test</module>
+            </modules>
+        </profile>
+    </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
         <connection>scm:git:https://github.com/vaadin/platform.git</connection>
