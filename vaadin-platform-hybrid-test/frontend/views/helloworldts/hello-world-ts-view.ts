@@ -2,7 +2,7 @@ import { showNotification } from '@vaadin/flow-frontend/a-notification';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-text-field';
 import { customElement, html } from 'lit-element';
-import { View } from '../../views/view';
+import { View } from '../view';
 
 @customElement('hello-world-ts-view')
 export class HelloWorldTSView extends View {
