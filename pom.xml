@@ -41,18 +41,12 @@
     <profiles>
         <profile>
             <id>npm-it</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <modules>
                 <module>vaadin-platform-test</module>
             </modules>
         </profile>
         <profile>
             <id>bower-it</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <modules>
                 <module>vaadin-platform-test/pom-bower.xml</module>
             </modules>
