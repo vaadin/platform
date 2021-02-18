@@ -43,9 +43,6 @@
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
             <id>npm-it</id>	
-            <activation>	
-                <activeByDefault>true</activeByDefault>	
-            </activation>	
             <modules>	
                 <module>vaadin-platform-test</module>	
             </modules>	
