@@ -11,6 +11,7 @@ export class HelloWorldTSView extends View {
 
   render() {
     return html`
+      <div>Hello World</div>
       <vaadin-text-field label="Your name" @value-changed="${this.nameChanged}"></vaadin-text-field>
       <vaadin-button @click="${this.sayHello}">Say hello</vaadin-button>
     `;
