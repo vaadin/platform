@@ -4,42 +4,9 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 18
+## New and Noteworthy Since Vaadin 19
 
-Here are the highlighted new and improved features in Vaadin 19. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
-
-### Flow
-#### Application Theme 
-The application theme is a simplified theming system that works for all Vaadin applications and can be packaged into a reusable dependency. [Documentation](https://vaadin.com/docs-beta/latest/theming/application-theme/)
-
-#### npm build compatibility for OSGi applications
-Flow developers can use npm based build and deploy their applications in production mode.
-
-#### Breaking Changes
-- Use data view filter and sorting only to that component (`vaadin-checkbox-flow` `vaadin-combo-box-flow` `vaadin-grid-flow` `vaadin-list-box-flow` `vaadin-radio-button-flow` `vaadin-select-flow`)
-In-memory filtering and sorting are now stored directly in component, which gives an opportunity to change it through the data view API for a certain component separately from other components bound to the same data provider.
-
-### Fusion
-
-####  Offline start and navigation
-The @PWA annotation became more powerful in Vaadin 19. It enables starting the app and navigating between client-side routes offline, much easier customizations to the Service Worker, and an update to the loading indicator / reconnect dialog to add a clear indication to the users when the app is offline. [Documentation](https://vaadin.com/docs-beta/latest/flow/pwa/pwa-offline/#offline-typescript-views) 
-
-### Collaboration Engine
-
-The Collaboration Engine ([Documentation](https://vaadin.com/docs-beta/latest/ce/overview/)) is included in Vaadin platform for the first time. It enables end-users to see who else is present in the same view, and edit forms together in real-time.
-  
-### Components
-
-#### Changes in 20 of 35 components
-
- - TypeScript type definitions for component events
-Typed events in all Vaadin components allow using code-completion in IDEs and build time TS compiler checks when creating event listeners for Vaadin components
-
-#### Changes in `vaadin-grid-pro-flow`
-
- - [⧉](https://github.com/vaadin/vaadin-flow-components/commit/cda6c84) Add EditOnClick feature. **PR:**[480](https://github.com/vaadin/vaadin-flow-components/pull/480). **Ticket:**[73](https://github.com/vaadin/vaadin-grid-pro/issues/73)
-  _Add API to enable edit mode to Grid Pro with a single click on the cell._
-
+Here are the highlighted new and improved features in Vaadin 20. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 {{changesSincePrevious}}
 
@@ -88,7 +55,7 @@ All listed components' Java integration follow the Vaadin version [{{platform}}]
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 19 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 20 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
@@ -123,7 +90,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of Vaadin 19 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of Vaadin 20 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
