@@ -25,8 +25,6 @@ _remember to remove those that are not applicable_
 - [ ] UX/DX tests in Alpha [here link(s) to issue(s) with the description of UX/DX tests, if any]
 - [ ] Design [here link to e.g. issue with design specification, a mockup, Figma specs] 
 
-#### **Do NOT use these just yet**
-Under construction (would be used instead of User Value document - in the 2nd iteration of the template):  
 - [ ] Documentation: [here link to the documentation]
 - [ ] How to test? [here link to the GH issue or some external document with the test scenario]
 - [ ] Limitations: [here list of limitations, preferably links to GH issues]
