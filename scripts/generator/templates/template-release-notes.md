@@ -4,40 +4,15 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 18
+## New and Noteworthy Since Vaadin 20
 
-Here are the highlighted new and improved features in vaadin 19. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in vaadin 20. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
-### Flow
-#### Features
-- Application Theme
-A simpler, language-agnostic way to define a custom theme that can be packaged and reused as a dependency. [Documentation](https://vaadin.com/docs-beta/latest/theming/application-theme/)
-
-- npm build compatibility for OSGi applications
-Flow developers can use npm based build and deploy their applications in production mode. [Documentation](https://vaadin.com/docs-beta/latest/flow/advanced/osgi-basic/)
-
-
-### Fusion
-#### Features
-- Offline start and navigation  
-The `@PWA` annotation became more powerful in Vaadin 19. It enables starting the app and navigating between client-side routes offline, much easier customizations to the Service Worker, and an update to the loading indicator / reconnect dialog to add a clear indication to the users when the app is offline.
-
-- TypeScript type definitions for component events
-Typed events in most Vaadin components allow using code-completion in IDEs and build time TS compiler checks when creating event listeners for Vaadin components.
-
-### Collaboration Engine
-Collaboration Engine is now part of the Vaadin platform. Collaboration Engine enables you to build real-time collaboration into your Vaadin apps with a few lines of Java code. This version allows end-users to see who else is looking at the same data as them with `CollaborationAvatarGroup`. It enables them to edit forms together with `CollaborationBinder`, which highlights when any user focuses a field and shares the fields' values with all users. Learn more at the [Collaboration Engine web page](https://vaadin.com/collaboration).
-  
-### Components
-
-#### Features
-- Single-click editing in `GridPro`
-  - enter edit mode with single click 
 
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 19 is supported for one month after Vaadin 20 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 20 is supported for one month after Vaadin 21 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -81,7 +56,7 @@ All listed components' Java integration follow the Vaadin version [{{platform}}]
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 19 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 20 starters are not available just yet in vaadin.com. You can use Vaadin 19 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 
@@ -112,7 +87,7 @@ Add the following dependency to dependencyManagement in pom.xml.
 </dependency>
 ```
 
-Read more about upgrading to Vaadin 19 from [vaadin.com](https://vaadin.com/docs/v16/flow/typescript/upgrading-from-vaadin14.html#step-1b).
+Read more about upgrading to Vaadin 20 from [vaadin.com](https://vaadin.com/docs/v16/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
 Note: Vaadin 15 is compatible with Spring 5.2.0 or newer, and Spring Boot 2.2.0 or newer. See more info from [vaadin.com](https://vaadin.com/docs/v15/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
