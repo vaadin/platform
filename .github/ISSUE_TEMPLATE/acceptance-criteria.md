@@ -7,8 +7,6 @@ assignees: ''
 
 ---
 
-**Note: this template is under construction.**  
-
 As a *user role (e.g. developer)*
 I want to *do action (e.g. be notified about closing browser)*  
 So that I can *expected results (e.g. free resources immediately)*  
@@ -18,13 +16,30 @@ So that I can *expected results (e.g. free resources immediately)*
 - [ ] Case-specific criterion 2
 - [ ] Case-specific criterion 3
 - [ ] Case-specific criterion 4
-## General criteria
-_remember to remove those that are not applicable_
-- [ ] APIs reviewed [here link to API review documentation, if any]
-- [ ] Performance [here link to the requirement or tests, if any]
-- [ ] UX/DX tests in Alpha [here link(s) to issue(s) with the description of UX/DX tests, if any]
-- [ ] Design [here link to e.g. issue with design specification, a mockup, Figma specs] 
 
-- [ ] Documentation: [here link to the documentation]
-- [ ] How to test? [here link to the GH issue or some external document with the test scenario]
-- [ ] Limitations: [here list of limitations, preferably links to GH issues]
+## General criteria
+<!--remember to remove those that are not applicable-->
+
+- [ ] APIs reviewed 
+<!--here link to API review documentation, if any-->
+
+- [ ] Design 
+<!--here link to e.g. issue with design specification, a mockup, Figma specs-->
+
+- [ ] Performance 
+<!--here link to the requirements or tests, if any-->
+
+- [ ] UX/DX tests in Alpha 
+<!--here link(s) to issue(s) with the description of UX/DX tests, if any; note: not the test results-->
+
+- [ ] Documentation: 
+<!--here link to the documentation-->
+
+- [ ] How to test? 
+<!--here link to the GH issue with PiT instructions or some external document with the test scenario; note: not the test results-->
+
+- [ ] Limitations: 
+<!--here list of limitations, preferably links to GH issues or Epic that specifies them-->
+
+## Description
+<!--here a human-readable description of the value that this feature brings to the users (no geeky language)-->
