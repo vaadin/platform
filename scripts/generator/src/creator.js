@@ -117,15 +117,15 @@ Get the release note from vaadin-flow-components repo for current platform versi
 function getComponentReleaseNote(version){
    const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
    const fullNoteBody = fullNote.body;
-
-   if(fullNoteBody.length != 0){
-       let result = fullNoteBody.substring(
-       fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
-       fullNoteBody.lastIndexOf("###"));
-       return result;
-   } else {
-       return "";
+    
+   if (!fullNoteBody) {
+       return '';
    }
+
+   let result = fullNoteBody.substring(
+   fullNoteBody.lastIndexOf("### Changes in Components") + "### Changes in Components".length,
+   fullNoteBody.lastIndexOf("###"));
+   return result;
 }
 
 /**
