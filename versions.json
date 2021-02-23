@@ -405,7 +405,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "7.0.0.beta1",
+            "javaVersion": "7.0.0",
             "pro": true
         }
     }
