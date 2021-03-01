@@ -36,6 +36,8 @@ import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
+import com.vaadin.flow.component.messages.testbench.MessageElement;
+import com.vaadin.flow.component.messages.testbench.MessageListElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
@@ -539,6 +541,18 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
             Assert.assertEquals("bar", group.getAvatarElement(0).getPropertyString("name"));
             Assert.assertEquals("foo", group.getAvatarElement(1).getPropertyString("name"));
         }
+    }
+
+    @Test
+    public void messageListIsRendered() {
+        MessageListElement messageList = $(MessageListElement.class).first();
+        List<MessageElement> messages = messageList.getMessageElements();
+        Assert.assertEquals("Number of messages rendered in MessageList",
+                2, messages.size());
+        Assert.assertEquals("Text content of the first message of MessageList",
+                "foo", messages.get(0).getText());
+        Assert.assertEquals("Text content of the second message of MessageList",
+                "bar", messages.get(1).getText());
     }
 
     @Test
