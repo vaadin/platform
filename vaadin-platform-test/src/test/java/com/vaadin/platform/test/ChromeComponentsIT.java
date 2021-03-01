@@ -37,6 +37,7 @@ import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.messages.testbench.MessageElement;
+import com.vaadin.flow.component.messages.testbench.MessageInputElement;
 import com.vaadin.flow.component.messages.testbench.MessageListElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
@@ -553,6 +554,13 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 "foo", messages.get(0).getText());
         Assert.assertEquals("Text content of the second message of MessageList",
                 "bar", messages.get(1).getText());
+    }
+
+    @Test
+    public void messageInputIsRenderedAndFiresSubmitEvent() {
+        MessageInputElement messageInput = $(MessageInputElement.class).first();
+        messageInput.submit("foo");
+        assertLog("foo");
     }
 
     @Test

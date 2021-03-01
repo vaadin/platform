@@ -106,6 +106,7 @@ import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageList;
 import com.vaadin.flow.component.messages.MessageListItem;
 import com.vaadin.flow.component.notification.Notification;
@@ -581,6 +582,9 @@ public class ComponentsView extends AppLayout {
         MessageList messageList = new MessageList();
         messageList.setItems(new MessageListItem("foo"), new MessageListItem("bar"));
 
+        MessageInput messageInput = new MessageInput();
+        messageInput.addSubmitListener(e -> log.log(e.getValue()));
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;
         WebComponentUI webComponentUI;
@@ -625,6 +629,7 @@ public class ComponentsView extends AppLayout {
         components.add(avatarGroup);
         components.add(collaborationAvatarGroup, collaborationAvatarGroup2);
         components.add(messageList);
+        components.add(messageInput);
         components.add(main);
 
         layouts.add(formLayout);
