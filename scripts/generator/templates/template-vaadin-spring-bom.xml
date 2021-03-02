@@ -117,11 +117,6 @@
                 <artifactId>vaadin-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-maven-plugin</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
 
             <!-- Free Components -->
             <dependency>
@@ -209,6 +204,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-list-box-flow</artifactId>
                 <version>${vaadin.list.box.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-messages-flow</artifactId>
+                <version>${vaadin.messages.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -421,6 +421,12 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-menu-bar-testbench</artifactId>
                 <version>${vaadin.menu.bar.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-messages-testbench</artifactId>
+                <version>${vaadin.messages.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

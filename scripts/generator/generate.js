@@ -58,6 +58,9 @@ const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-p
 const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
 const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
 
+const mavenPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-maven-plugin-pom.xml');
+const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom.xml');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -75,6 +78,7 @@ writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, relea
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 
 writer.writeModulesReleaseNotes(versions, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
+writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 
 const shrinkwrap = {};
 Object.assign(shrinkwrap, versions.core);
