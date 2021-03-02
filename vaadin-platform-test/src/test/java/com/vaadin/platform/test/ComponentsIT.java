@@ -2,7 +2,9 @@ package com.vaadin.platform.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -41,9 +43,11 @@ public class ComponentsIT extends AbstractPlatformTest {
         }
     };
 
+    List<String> excludeComponents = Arrays.asList("vaadin-message");
+
+
     @Test
     public void appWorks() throws Exception {
-
         $(NotificationElement.class).waitForFirst();
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
@@ -53,6 +57,10 @@ public class ComponentsIT extends AbstractPlatformTest {
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
+        }
+
+        if (excludeComponents.contains(tag)) {
+          return;
         }
 
         ElementQuery<? extends TestBenchElement> $ = null;
