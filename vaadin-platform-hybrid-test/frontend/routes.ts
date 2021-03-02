@@ -14,14 +14,14 @@ export const routes = [
     },
     children: [
       {
-        path: '',
-        component: 'hello-world-ts-view',
+        path: 'components',
+        component: 'components-view',
         action: async () => {
-          await import('./views/helloworldts/hello-world-ts-view');
+          await import('./views/components/components-view');
         },
       },
       {
-        path: 'hello-ts',
+        path: '(hello-ts|)',
         component: 'hello-world-ts-view',
         action: async () => {
           await import('./views/helloworldts/hello-world-ts-view');

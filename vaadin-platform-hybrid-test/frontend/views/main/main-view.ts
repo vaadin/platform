@@ -20,6 +20,7 @@ export class MainView extends LitElement {
   @property({ type: Array }) menuTabs: MenuTab[] = [
     { route: 'hello-ts', name: 'Hello World TS' },
     { route: 'hello-world', name: 'Hello World' },
+    { route: 'components', name: 'Components' },
   ];
 
   @property({ type: String }) projectName = 'fusion-test';
@@ -33,6 +34,7 @@ export class MainView extends LitElement {
         :host {
           display: block;
           height: 100%;
+          margin: 1em;
         }
 
         header {
