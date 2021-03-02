@@ -45,6 +45,32 @@ function createMaven(versions, mavenTemplate) {
 }
 
 /**
+@param {Object} versions data object for product version.
+@param {String} module for the version.
+@param {String} mavenTemplate template string to replace versions in.
+*/
+function addProperty(versions, module, mavenTemplate) {
+    const allVersions = Object.assign({}, versions.core, versions.vaadin);
+
+    const property = computeUsedProperties(mavenTemplate);
+    let mavenDeps = '';
+    for (let [dependencyName, dependency] of Object.entries(allVersions)) {
+        const propertyName = module.replace(/-/g, '.') + '.version';
+
+        if (dependency.javaVersion && dependencyName === module){
+            const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
+            mavenDeps = mavenDeps.concat(mavenDependency);
+        }
+    }
+
+    const mavenData = Object.assign(versions, { javadeps: mavenDeps });
+
+    const mavenBom = render(mavenTemplate, mavenData);
+
+    return mavenBom;
+}
+
+/**
  * @param {string} mavenTemplate template string
  * @returns {Set<string>} a set containing all maven properties used in the maven template
  */
@@ -440,6 +466,7 @@ function requestGH(path) {
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;
+exports.addProperty = addProperty;
 // export for testing purpose
 exports.generateChangesString = generateChangesString;
 exports.calculatePreviousVersion = calculatePreviousVersion;

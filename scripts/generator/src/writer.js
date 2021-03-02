@@ -31,6 +31,21 @@ function writeMaven(versions, templateFileName, outputFileName) {
 
 /**
 @param {Object} versions data object for product versions.
+@param {String} the module name for this property
+@param {String} templateFileName absolute path to template file
+@param {String} outputFileName absolute path to output file
+*/
+function writeProperty(versions, module, templateFileName, outputFileName) {
+    const mavenTemplate = fs.readFileSync(templateFileName, 'utf8');
+
+    const mavenBom = creator.addProperty(versions, module, mavenTemplate);
+
+    fs.writeFileSync(outputFileName, mavenBom);
+    console.log(`Wrote ${outputFileName}`);
+}
+
+/**
+@param {Object} versions data object for product versions.
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
 */
@@ -57,5 +72,6 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
 
 exports.writePackageJson = writePackageJson;
 exports.writeMaven = writeMaven;
+exports.writeProperty = writeProperty;
 exports.writeReleaseNotes = writeReleaseNotes;
 exports.writeModulesReleaseNotes = writeModulesReleaseNotes;
