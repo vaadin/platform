@@ -7,7 +7,7 @@
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "16.0.0.rc1"
+            "javaVersion": "16.0.0"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -394,7 +394,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.1.2",
+            "javaVersion": "1.2.0",
             "jsVersion": "2.1.2"
         },
         "vaadin-rich-text-editor": {

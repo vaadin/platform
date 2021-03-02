@@ -114,4 +114,4 @@ For running the project, read the [Building Vaadin Platform](BUILD.md) article.
 
 ## License
 
-Apache License 2.0 or CVAL 3.0, depending on the product.
+Apache License 2.0 or CVDL 4.0, depending on the product.
