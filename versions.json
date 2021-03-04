@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "5.0.3"
+            "javaVersion": "5.0.4"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
