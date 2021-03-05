@@ -33,9 +33,7 @@ import com.vaadin.testbench.elementsbase.Element;
 public class ComponentUsageTest {
 
     private static final String JAVA_VIEW = "src/main/java/com/vaadin/platform/test/ComponentsView.java";
-    private static final String TS_VIEW = "frontend/views/components-view.ts";
-    // TODO: remove this when Fusion tests are on place
-    private static final boolean runTs = new File(TS_VIEW).canRead();
+    private static final String TS_VIEW = "../vaadin-platform-hybrid-test/frontend/views/components/components-view.ts";
 
     // CustomField is abstract
     // RadioButton is not public
@@ -209,38 +207,36 @@ public class ComponentUsageTest {
                     javaViewFile.getName(), String.join("\n   ", checkedList));
         }
 
-        if (runTs) {
 
-            Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
-                    .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
-                    .map(s -> s.replaceFirst(".js$", ""))
-                    .collect(Collectors.toSet());
-            List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'" + s + "'; *")
-                    .collect(Collectors.toList());
-            List<String> jsImports = vaadinImports.stream().map(s -> "import '" + s + "';").collect(Collectors.toList());
-            Set<String> vaadinComponents = vaadinImports.stream()
-                    .map(s -> s.replaceFirst("^@vaadin/vaadin-.*/([\\w-]+)$", "$1")).collect(Collectors.toSet());
-            List<String> jsRenderRegexs = vaadinComponents.stream().map(s -> "^.*</?" + s + ">.*")
-                    .collect(Collectors.toList());
-            List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + ">").collect(Collectors.toList());
+        Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
+                .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
+                .map(s -> s.replaceFirst(".*/(.*)\\.js$", "$1"))
+                .collect(Collectors.toSet());
+        List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'@vaadin/.*" + s + "'; *")
+                .collect(Collectors.toList());
+        List<String> jsImports = vaadinImports.stream().map(s -> "import '@vaadin/" + s + "/" + s + "';").collect(Collectors.toList());
+        Set<String> vaadinComponents = vaadinImports.stream()
+                .map(s -> s.replaceFirst("^@vaadin/vaadin-.*/([\\w-]+)$", "$1")).collect(Collectors.toSet());
+        List<String> jsRenderRegexs = vaadinComponents.stream().map(s -> "^.*</?" + s + ">.*")
+                .collect(Collectors.toList());
+        List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + "></" + s + ">").collect(Collectors.toList());
 
-            File tsViewFile = new File(TS_VIEW);
-            assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
-            List<String> tsLines = FileUtils.readLines(tsViewFile, "UTF-8");
+        File tsViewFile = new File(TS_VIEW);
+        assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
+        List<String> tsLines = FileUtils.readLines(tsViewFile, "UTF-8");
 
-            checkedList = checkLines(tsLines, jsImportRegexs, jsImports);
-            if (!checkedList.isEmpty()) {
-                fail = true;
-                System.out.printf("\n>>> There are %s web-components imports missing in %s\n   %s\n", checkedList.size(),
-                        javaViewFile.getName(), String.join("\n   ", checkedList));
-            }
+        checkedList = checkLines(tsLines, jsImportRegexs, jsImports);
+        if (!checkedList.isEmpty()) {
+            fail = true;
+            System.out.printf("\n>>> There are %s web-components imports missing in %s\n   %s\n", checkedList.size(),
+                    javaViewFile.getName(), String.join("\n   ", checkedList));
+        }
 
-            checkedList = checkLines(tsLines, jsRenderRegexs, jsComponents);
-            if (!checkedList.isEmpty()) {
-                fail = true;
-                System.out.printf("\n>>> There are %s web-components not rendered in %s\n   %s\n", checkedList.size(),
-                        javaViewFile.getName(), String.join("\n   ", checkedList));
-            }
+        checkedList = checkLines(tsLines, jsRenderRegexs, jsComponents);
+        if (!checkedList.isEmpty()) {
+            fail = true;
+            System.out.printf("\n>>> There are %s web-components not rendered in %s\n   %s\n", checkedList.size(),
+                    javaViewFile.getName(), String.join("\n   ", checkedList));
         }
 
         assertFalse("There are missing components in the smoke tests", fail);
@@ -248,9 +244,11 @@ public class ComponentUsageTest {
 
     private List<String> checkLines(List<String> fileContent, List<String> regexs, List<String> source) {
         return regexs.stream().map(regex -> {
-            Optional<String> line = fileContent.stream().filter(l -> l.matches(regex)).findFirst();
+            Optional<String> line = fileContent.stream().filter(l -> {
+                 return l.matches(regex);
+              }).findFirst();
             return !line.isPresent() ? source.get(regexs.indexOf(regex)) : null;
-        }).filter(s -> s != null).collect(Collectors.toList());
+        }).filter(s -> s != null).sorted().collect(Collectors.toList());
     }
 
 

@@ -27,6 +27,7 @@ scripts/generator/yarn-error.log
 **/tsconfig.json
 **/types.d.ts
 **/.npmrc
+**/types.d.ts
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
