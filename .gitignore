@@ -31,3 +31,4 @@ scripts/generator/yarn-error.log
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
+vaadin-maven-plugin/pom.xml
