@@ -49,9 +49,6 @@ import '@vaadin/vaadin-text-field/vaadin-email-field';
 import '@vaadin/vaadin-upload/vaadin-upload';
 import '@vaadin/vaadin-list-box/vaadin-list-box';
 import '@vaadin/vaadin-notification/vaadin-notification';
-import '@vaadin/vaadin-messages/vaadin-message';
-import '@vaadin/vaadin-messages/vaadin-message-list';
-import '@vaadin/vaadin-messages/vaadin-message-input';
 
 import { customElement, html, css, query } from 'lit-element';
 import { View } from '../view';
@@ -234,10 +231,6 @@ export class ComponentsView extends View {
         </vaadin-tabs>
 
         <vaadin-upload></vaadin-upload>
-
-        <vaadin-message foo="bar"></vaadin-message>
-        <vaadin-message-input></vaadin-message-input>
-        <vaadin-message-list></vaadin-message-list>
 
         <div>-</div>
       </vaadin-app-layout>
