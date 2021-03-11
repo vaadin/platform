@@ -102,7 +102,7 @@
         "vaadin-avatar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0",
+            "jsVersion": "2.0.2",
             "npmName": "@vaadin/vaadin-avatar"
         },
         "vaadin-button": {
@@ -124,7 +124,7 @@
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "6.0.0",
+            "jsVersion": "6.0.1",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "6.0.0",
+            "jsVersion": "6.0.1",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -314,7 +314,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.1",
+            "jsVersion": "3.0.2",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
@@ -357,7 +357,7 @@
         "vaadin-charts": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "8.0.1",
+            "jsVersion": "8.0.2",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
@@ -385,7 +385,7 @@
         "vaadin-crud": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.0.0",
+            "jsVersion": "2.0.1",
             "npmName": "@vaadin/vaadin-crud",
             "pro": true
         },
@@ -395,7 +395,7 @@
         "vaadin-grid-pro": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "3.0.0",
+            "jsVersion": "3.0.1",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
