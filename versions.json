@@ -236,7 +236,7 @@
         "vaadin-menu-bar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "1.2.1",
+            "jsVersion": "1.2.2",
             "npmName": "@vaadin/vaadin-menu-bar"
         },
         "vaadin-notification": {
@@ -307,7 +307,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.8.3",
+            "jsVersion": "2.8.4",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
