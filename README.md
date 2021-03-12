@@ -2,13 +2,16 @@
 
 [Vaadin platform](https://vaadin.com/) consists of a set of web components, a Java web framework called Vaadin Flow, configurable themes, tools and a set of opinionated app starters. Platform releases gather all products in to a single package every quarter. The product versions included in a platform release are not necessarily the latest released versions, but are hand picked so that they work well together.
 
-Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin. 
+Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin.
 
 Use GitHub projects to open issues, propose new features, and contribute code. Below you can see links to different modules. If you don't know to which repository you should file your issue, just use this repository.
 
-## Vaadin Components - building blocks for your web app
+## Vaadin components - building blocks for your web app
 
-Vaadin web components are listed in https://github.com/vaadin/vaadin.
+| Part | Repository |
+|------|------------|
+| Vaadin web components and themes | https://github.com/vaadin/vaadin-web-components |
+| Java APIs for Vaadin components | https://github.com/vaadin/vaadin-flow-components |
 
 ## Vaadin Flow - Java framework to simplify web development
 
@@ -21,65 +24,16 @@ Vaadin Flow is a Java web framework that abstracts client-server communication a
 
 Flow is licensed under the Apache License 2.0.
 
-## Java APIs for Vaadin components
-
-These components provide a Java API for web components.
-
-| Component | Repository |
-|-----------|------------|
-| Accordion | https://github.com/vaadin/vaadin-accordion-flow | 
-| AppLayout | https://github.com/vaadin/vaadin-app-layout-flow | 
-| Board* | https://github.com/vaadin/vaadin-board-flow | 
-| Button | https://github.com/vaadin/vaadin-button-flow |
-| Charts* | https://github.com/vaadin/vaadin-charts-flow |
-| Checkbox | https://github.com/vaadin/vaadin-checkbox-flow |
-| ComboBox | https://github.com/vaadin/vaadin-combo-box-flow |
-| ConfirmDialog* | https://github.com/vaadin/vaadin-confirm-dialog-flow |
-| ContextMenu | https://github.com/vaadin/vaadin-context-menu-flow |
-| CookieConsent* | https://github.com/vaadin/vaadin-cookie-consent-flow |
-| Crud* | https://github.com/vaadin/vaadin-crud-flow |
-| Custom Field | https://github.com/vaadin/vaadin-custom-field-flow |
-| DatePicker | https://github.com/vaadin/vaadin-date-picker-flow |
-| DateTimePicker | https://github.com/vaadin/vaadin-date-time-picker-flow |
-| Details | https://github.com/vaadin/vaadin-details-flow |
-| Dialog | https://github.com/vaadin/vaadin-dialog-flow |
-| FormLayout | https://github.com/vaadin/vaadin-form-layout-flow | 
-| Grid | https://github.com/vaadin/vaadin-grid-flow |
-| Grid Pro* | https://github.com/vaadin/vaadin-grid-pro-flow |
-| Icons | https://github.com/vaadin/vaadin-icons-flow |
-| IronList | https://github.com/vaadin/vaadin-iron-list-flow |
-| ListBox | https://github.com/vaadin/vaadin-list-box-flow |
-| Login | https://github.com/vaadin/vaadin-login-flow |
-| MenuBar | https://github.com/vaadin/vaadin-menu-bar-flow |
-| Notification | https://github.com/vaadin/vaadin-notification-flow |
-| OrderedLayout | https://github.com/vaadin/vaadin-ordered-layout-flow | 
-| ProgressBar | https://github.com/vaadin/vaadin-progress-bar-flow |
-| RadioButton | https://github.com/vaadin/vaadin-radio-button-flow | 
-| Rich Text Editor* | https://github.com/vaadin/vaadin-rich-text-editor-flow |
-| Select | https://github.com/vaadin/vaadin-select-flow |
-| SplitLayout | https://github.com/vaadin/vaadin-split-layout-flow |
-| Tabs | https://github.com/vaadin/vaadin-tabs-flow |
-| TextField | https://github.com/vaadin/vaadin-text-field-flow |
-| TimePicker | https://github.com/vaadin/vaadin-time-picker-flow |
-| Upload | https://github.com/vaadin/vaadin-upload-flow |
-
-Components marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other components are licensed under the Apache License 2.0. 
-
 ## Vaadin Router
 
 [Vaadin Router](https://github.com/vaadin/vaadin-router) is a client-side router for Web Components.
 
-## Themes
-| Theme | Repository |
-|-------|------------|
-| Lumo | https://github.com/vaadin/vaadin-lumo-styles |
-| Material | https://github.com/vaadin/vaadin-material-styles |
-
 ## Tools
+
 | Tool | Repository |
 |------|------------|
-| Designer | https://github.com/vaadin/designer | 
-| TestBench | https://github.com/vaadin/testbench | 
+| Designer | https://github.com/vaadin/designer |
+| TestBench | https://github.com/vaadin/testbench |
 
 All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
@@ -87,7 +41,6 @@ All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
 See https://vaadin.com/start for more information.
 
-### Java
 | Starter | Repository |
 |---------|------------|
 | Full stack app* | https://github.com/vaadin/bakery-app-starter-issues |
@@ -95,12 +48,8 @@ See https://vaadin.com/start for more information.
 | Project skeleton | https://github.com/vaadin/skeleton-starter-flow |
 | Project skeleton (Spring) | https://github.com/vaadin/skeleton-starter-flow-spring |
 
-### Front-end
-| Starter | Repository |
-|---------|------------|
-| PWA | https://github.com/vaadin/expense-manager-demo |
 
-Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0. 
+Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0.
 
 ## Getting started
 
