@@ -53,7 +53,7 @@ All listed components' Java integration follow the Vaadin version [{{platform}}]
 
 # Getting Started with Vaadin
 ## App starters
-The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
 ### Note
 Vaadin 20 starters are not available just yet in vaadin.com. You can use Vaadin 19 starter and manually change Vaadin version (see instructions below).
@@ -89,7 +89,6 @@ Add the following dependency to dependencyManagement in pom.xml.
 
 Read more about upgrading to Vaadin 20 from [vaadin.com](https://vaadin.com/docs/v16/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
-Note: Vaadin 15 is compatible with Spring 5.2.0 or newer, and Spring Boot 2.2.0 or newer. See more info from [vaadin.com](https://vaadin.com/docs/v15/flow/typescript/upgrading-from-vaadin14.html#step-1b).
 
 # Supported Technologies
 ## Operating Systems
@@ -147,7 +146,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Karaf (4.2+)
 
 ## Supported Node.js and npm versions
-Node.js version 10.x for the npm mode.
+A [supported version](https://nodejs.org/en/about/releases/) of Node.js: 10.x, 12.x, 14.x or newer.
 
 # Breaking changes
 This lists products that have breaking changes from V14
@@ -162,14 +161,13 @@ This lists products that have breaking changes from V14
 OSGi does not work in V15.
 
 # Migrating from Vaadin 8
-See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
+See [the migration guide]( https://vaadin.com/docs-beta/v14/guide/upgrading/v8/)
 
 # Migrating from Vaadin 10-14
-See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
+See [the migration guide]( https://vaadin.com/docs-beta/v14/guide/upgrading/v10-13/)
 
-# Migrating from Vaadin 17
-Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
-In addition, in the case of using the now deprecated PolymerTemplate in views, we encourage to migrate to LitTemplate.
+# Migrating from Vaadin 15
+See [the migration guide](https://vaadin.com/docs-beta/latest/guide/upgrading)
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
