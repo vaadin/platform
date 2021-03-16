@@ -25,7 +25,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 
 # Getting Started with Vaadin
 ## App starters
-The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
 For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/20.0.0).
 
