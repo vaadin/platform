@@ -106,6 +106,15 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                     <artifactId>maven-war-plugin</artifactId>
+                     <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                     <groupId>com.vaadin</groupId>
+                     <artifactId>vaadin-maven-plugin</artifactId>
+                     <version>${project.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.commonjava.maven.plugins</groupId>
                     <artifactId>directory-maven-plugin</artifactId>
                     <version>0.1</version>
