@@ -4,10 +4,10 @@
             "javaVersion": "2.6-SNAPSHOT"
         },
         "flow-cdi": {
-            "javaVersion": "11.2.1"
+            "javaVersion": "11.3-SNAPSHOT"
         },
         "flow-spring": {
-            "javaVersion": "12.3.3"
+            "javaVersion": "12.4-SNAPSHOT"
         },
         "gradle": {
             "javaVersion": "1.2"
