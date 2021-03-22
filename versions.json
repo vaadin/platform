@@ -74,10 +74,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "2.0.6"
+            "javaVersion": "2.1.0"
         },
         "mpr-v8": {
-            "javaVersion": "2.0.6"
+            "javaVersion": "2.1.0"
         },
         "polymer": {
             "jsVersion": "2.7.0"
