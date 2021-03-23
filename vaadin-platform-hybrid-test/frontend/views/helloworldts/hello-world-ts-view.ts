@@ -1,4 +1,4 @@
-import { showNotification } from '@vaadin/flow-frontend/a-notification';
+import { showNotification } from '../../utils/a-notification';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-text-field';
 import { customElement, html } from 'lit-element';

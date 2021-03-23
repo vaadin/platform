@@ -1,4 +1,4 @@
-import { CSSModule } from '@vaadin/flow-frontend/css-utils';
+import { CSSModule } from '../../utils/css-utils';
 import { AppLayoutElement } from '@vaadin/vaadin-app-layout/src/vaadin-app-layout';
 import '@vaadin/vaadin-app-layout/theme/lumo/vaadin-app-layout';
 import '@vaadin/vaadin-app-layout/vaadin-drawer-toggle';
