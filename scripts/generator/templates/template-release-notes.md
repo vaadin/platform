@@ -32,14 +32,18 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
   - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
   
 ### Components
-#### Vaadin flow components
-All listed components' Java integration follow the Vaadin version [{{platform}}](https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
 #### Vaadin Web Components
+All listed Vaadin web components' version are using [{{platformWebComponentVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-accordion.jsVersion}})
+
+#### Vaadin flow components
+All listed Vaadin components' Java integration follows the Vaadin version [{{platform}}](https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
+
 {{components}}
 
 ### Themes
-- Vaadin Lumo theme ([v{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-lumo-styles/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}}))
-- Vaadin Material theme ([v{{core.vaadin-material-styles.jsVersion}}](https://github.com/vaadin/vaadin-material-styles/releases/tag/v{{core.vaadin-material-styles.jsVersion}})).
+All listed Vaadin themes' version are sharing [{{platformWebComponentVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-lumo-styles.jsVersion}})
+- Vaadin Lumo theme
+- Vaadin Material theme
 
 ### Router
 - Vaadin Router ([v{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
