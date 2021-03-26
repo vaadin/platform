@@ -32,7 +32,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 
 ### Components
 #### Vaadin Web Components
-All listed Vaadin web components' version are using [{{platformWebComponentVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-accordion.jsVersion}})
+All listed Vaadin web components' version are using [{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-accordion.jsVersion}})
 
 #### Vaadin flow components
 All listed Vaadin components' Java integration follows the Vaadin version [{{platform}}](https://github.com/vaadin/vaadin-flow-components/releases/tag/{{platform}})
@@ -40,7 +40,7 @@ All listed Vaadin components' Java integration follows the Vaadin version [{{pla
 {{components}}
 
 ### Themes
-All listed Vaadin themes' version are sharing [{{platformWebComponentVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-lumo-styles.jsVersion}})
+All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/vaadin-web-components/releases/tag/{{core.vaadin-lumo-styles.jsVersion}})
 - Vaadin Lumo theme
 - Vaadin Material theme
 
