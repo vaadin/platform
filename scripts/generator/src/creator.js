@@ -414,7 +414,6 @@ function buildComponentReleaseString(versionName, version) {
     //separated for readability
     let result = `- ${name} `;
     result = result.concat(version.pro ? '**(PRO)** ' : '');
-    result = result.concat(version.jsVersion ? `([web component v${version.jsVersion}](https://github.com/vaadin/${versionName}/releases/tag/v${version.jsVersion}))` : '');
     result = result.concat('\n');
 
     if(version.components){
@@ -432,8 +431,6 @@ function buildComponentReleaseNoteString(versionName, version) {
                 .replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
     //separated for readability
     let result = `# ${name}\n`;
-    //let result = '';
-    //result = result.concat(version.pro ? '**(PRO)** ' : '');
 
     result = result.concat(version.javaVersion ? `## Java: ${version.javaVersion}\n` : '');
     result = result.concat(version.javaVersion ? `https://api.github.com/repos/vaadin/${versionName}-flow/releases/tags/${version.javaVersion}\n` : '');
