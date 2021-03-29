@@ -145,12 +145,12 @@ function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
 }
 
 /**
-Get the release note from vaadin-flow-components repo for current platform version
+Get the release note from flow-components repo for current platform version
 @param {version} platform version
 */
 function getComponentReleaseNote(version){
    version = version.replace("-",".");
-   const fullNote = requestGH(`https://api.github.com/repos/vaadin/vaadin-flow-components/releases/tags/${version}`);
+   const fullNote = requestGH(`https://api.github.com/repos/vaadin/flow-components/releases/tags/${version}`);
    const fullNoteBody = fullNote.body;
    if (!fullNoteBody) {
        return '';
