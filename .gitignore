@@ -10,6 +10,8 @@ tmp.*
 vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
+vaadin-gradle-plugin/build
+vaadin-gradle-plugin/.gradle
 .DS_Store
 .vscode
 
@@ -32,3 +34,4 @@ scripts/generator/yarn-error.log
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
 vaadin-maven-plugin/pom.xml
+vaadin-gradle-plugin/pom.xml
