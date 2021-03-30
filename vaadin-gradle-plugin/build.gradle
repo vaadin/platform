@@ -36,6 +36,7 @@ plugins {
  **********************************************************************************************************************/
 
 def pom = new XmlSlurper().parse(rootProject.file('pom.xml'))
+def pluginPom = new XmlSlurper().parse(project.file('pom.xml'))
 defaultTasks 'jar'
 group pom.parent.groupId
 version = project.hasProperty('vaadin.version') ? project.getProperty('vaadin.version') : pom.parent.version
@@ -79,7 +80,7 @@ repositories {
 dependencies {
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31")
 
-    compile("com.vaadin:flow-plugin-base:${pom.flow.version}")
+    compile("com.vaadin:flow-plugin-base:${pluginPom.flow.version}")
 
     testCompile("junit:junit:4.12")
     testCompile("org.jetbrains.kotlin:kotlin-test:1.4.31")
