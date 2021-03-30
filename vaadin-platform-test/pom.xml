@@ -96,6 +96,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>LATEST</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

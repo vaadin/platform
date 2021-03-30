@@ -18,11 +18,18 @@ package com.vaadin.platform.test;
 import org.junit.Before;
 
 import com.vaadin.testbench.parallel.ParallelTest;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.BeforeClass;
 
 public abstract class AbstractPlatformTest extends ParallelTest {
 
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
+
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @Before
     public void setUp() {
