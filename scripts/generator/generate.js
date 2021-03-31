@@ -61,6 +61,9 @@ const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-no
 const mavenPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-maven-plugin-pom.xml');
 const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom.xml');
 
+const gradlePluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-pom.xml');
+const gradlePluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-pom.xml');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -79,6 +82,7 @@ writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrin
 
 writer.writeModulesReleaseNotes(versions, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
+writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 
 const shrinkwrap = {};
 Object.assign(shrinkwrap, versions.core);
