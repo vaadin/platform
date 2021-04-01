@@ -229,6 +229,12 @@
             "npmName": "@vaadin/vaadin-material-styles",
             "releasenotes": true
         },
+        "vaadin-lumo-theme": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-material-theme": {
+            "javaVersion": "{{version}}"
+        },
         "vaadin-menu-bar": {
             "component": true,
             "javaVersion": "{{version}}",
