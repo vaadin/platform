@@ -166,7 +166,8 @@ gradlePlugin {
 pluginBundle {
     website = 'https://github.com/vaadin/flow'
     vcsUrl = 'https://github.com/vaadin/flow'
-    description = 'Build Vaadin applications with Gradle. Please follow the link below to learn which Plugin version to use with particular Vaadin version. Vaadin recommends using the latest Vaadin LTS version.'
+    description = 'Build Vaadin applications with Gradle. As of Vaadin 20+, the gradle plugin is released as part of the Vaadin Platform with the same version. ' +
+            'For older versions, please follow the link below to learn which Plugin version to use with particular Vaadin version. Vaadin recommends using the latest Vaadin LTS version.'
     tags = ['vaadin']
     plugins {
         vaadinPlugin {
