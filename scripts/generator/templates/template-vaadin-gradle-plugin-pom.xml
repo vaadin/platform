@@ -117,7 +117,7 @@
                                     <artifactId>flow-gradle-plugin</artifactId>
                                     <version>${flow.version}</version>
                                     <classifier>sources</classifier>
-                                    <includes>**/*.java</includes>
+                                    <includes>**/*.kt</includes>
                                     <outputDirectory>src/main/kotlin</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
