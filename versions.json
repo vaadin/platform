@@ -4,10 +4,10 @@
             "javaVersion": "2.6.0.beta1"
         },
         "flow-cdi": {
-            "javaVersion": "11.3.0.alpha1"
+            "javaVersion": "11.3.0.beta1"
         },
         "flow-spring": {
-            "javaVersion": "12.4.0.alpha1"
+            "javaVersion": "12.4.0.beta1"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -74,10 +74,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "2.2.0.alpha1"
+            "javaVersion": "2.2.0.beta1"
         },
         "mpr-v8": {
-            "javaVersion": "2.2.0.alpha1"
+            "javaVersion": "2.2.0.beta1"
         },
         "polymer": {
             "jsVersion": "2.7.0"
