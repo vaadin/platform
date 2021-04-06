@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "7.0.gradle-SNAPSHOT"
+            "javaVersion": "7.0-SNAPSHOT"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
