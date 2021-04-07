@@ -31,6 +31,8 @@ import com.vaadin.testbench.parallel.ParallelTest;
 
 import org.junit.Assert;
 import org.junit.Before;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,6 +63,11 @@ import org.openqa.selenium.remote.Response;
 public abstract class ChromeDeviceTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
+
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @Before
     @Override
