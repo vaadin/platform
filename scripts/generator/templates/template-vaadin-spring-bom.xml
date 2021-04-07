@@ -90,12 +90,12 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-lumo-theme</artifactId>
-                <version>${project.version}</version>
+                <version>${vaadin.lumo.theme.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-material-theme</artifactId>
-                <version>${project.version}</version>
+                <version>${vaadin.material.theme.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>

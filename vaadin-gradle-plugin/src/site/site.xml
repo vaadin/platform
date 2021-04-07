@@ -1,0 +1,6 @@
+<project name="Vaadin Plugin">
+  <bannerLeft>
+    <name>Vaadin Gradle Plugin</name>
+    <href>https://vaadin.com/</href>
+  </bannerLeft>
+</project>

@@ -26,7 +26,7 @@ function transformPlatformVersion(versions, platformVersion) {
 }
 
 function transformJavaSnapshots(versions) {
-    const majorMinorVersions = /(\d*?\.\d*).*/;
+    const majorMinorVersions = /(\d*?\.\d*(?:\.[a-z]+)?).*/;
     const snapshotVersionVisitor = (key, value, parent) => {
         if (key === 'javaVersion') {
             parent[key] = value.replace(majorMinorVersions, "$1-SNAPSHOT");

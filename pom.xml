@@ -32,6 +32,7 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
+        <module>vaadin-gradle-plugin</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
