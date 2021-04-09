@@ -7,7 +7,7 @@
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "17.0.0.alpha1"
+            "javaVersion": "17.0.0.alpha2"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -224,13 +224,13 @@
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
+        "vaadin-lumo-theme": {
+            "javaVersion": "{{version}}"
+        },
         "vaadin-material-styles": {
             "jsVersion": "20.0.0-alpha3",
             "npmName": "@vaadin/vaadin-material-styles",
             "releasenotes": true
-        },
-        "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
         },
         "vaadin-material-theme": {
             "javaVersion": "{{version}}"
