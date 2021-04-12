@@ -7,7 +7,7 @@
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "17.0.0.alpha1"
+            "javaVersion": "17.0.0.alpha2"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -368,7 +368,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "3.1.0.alpha6"
+            "javaVersion": "3.1.0.alpha7"
         },
         "vaadin-confirm-dialog": {
             "component": true,
