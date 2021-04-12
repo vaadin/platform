@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "7.0.0.alpha4"
+            "javaVersion": "7.0.0.alpha5"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "17.0.0.alpha1"
+            "javaVersion": "17.0.0.alpha2"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -224,13 +224,13 @@
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
+        "vaadin-lumo-theme": {
+            "javaVersion": "{{version}}"
+        },
         "vaadin-material-styles": {
             "jsVersion": "20.0.0-alpha4",
             "npmName": "@vaadin/vaadin-material-styles",
             "releasenotes": true
-        },
-        "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
         },
         "vaadin-material-theme": {
             "javaVersion": "{{version}}"
@@ -368,7 +368,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "3.1.0.alpha6"
+            "javaVersion": "3.1.0.alpha7"
         },
         "vaadin-confirm-dialog": {
             "component": true,
