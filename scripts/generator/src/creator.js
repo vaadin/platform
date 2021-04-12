@@ -10,11 +10,18 @@ function createBower(versions, bowerTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
         if (version.jsVersion) {
-            // We should exclude new vaadin components that are not bower compliant
+            // Non-vaadin components like iron elements
+            if (!/vaadin-/.test(name)) {
+                jsDeps[name] = `${name}#${version.jsVersion}`;
+            } else
+            // Exclude new vaadin components that are not bower compliant
             if (!/vaadin-messages/.test(name)) {
                 // prefixing all package always with vaadin to avoid trip to
                 // bower register, which is deprecated
-                jsDeps[name] = `vaadin/${name}#${version.jsVersion}`;
+                jsDeps[name] = `vaadin/${
+                    // license-checker is a special case
+                    /vaadin-license-checker/.test(name) ? 'license-checker' : name
+                }#${version.jsVersion}`;
             }
         }
     }
