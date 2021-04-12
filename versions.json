@@ -351,7 +351,7 @@
             "jsVersion": "3.1.0"
         },
         "flow-osgi": {
-            "javaVersion": "6.0.0"
+            "javaVersion": "7.0-SNAPSHOT"
         },
         "vaadin-board": {
             "component": true,
