@@ -7,6 +7,11 @@ assignees: ''
 
 ---
 
+
+## Description
+<!--here a human-readable description of the value that this feature brings to the users (no geeky language)-->
+
+## Use cases
 As a *user role (e.g. developer)*
 I want to *do action (e.g. be notified about closing browser)*  
 So that I can *expected results (e.g. free resources immediately)*  
@@ -40,6 +45,3 @@ So that I can *expected results (e.g. free resources immediately)*
 
 - [ ] Limitations: 
 <!--here list of limitations, preferably links to GH issues or Epic that specifies them-->
-
-## Description
-<!--here a human-readable description of the value that this feature brings to the users (no geeky language)-->
