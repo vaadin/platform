@@ -10,10 +10,12 @@ function createBower(versions, bowerTemplate) {
     let jsDeps = {};
     for (let [name, version] of Object.entries(versions)) {
         if (version.jsVersion) {
-            // Workaround for https://github.com/bower/bower/issues/2558 
-            // Registering bower package names is not supported anymore.
-            let orgPrefix = name === 'vaadin-date-time-picker' ? 'vaadin/' : '';
-            jsDeps[name] = `${orgPrefix}${name}#${version.jsVersion}`;
+            // We should exclude new vaadin components that are not bower compliant
+            if (!/vaadin-messages/.test(name)) {
+                // prefixing all package always with vaadin to avoid trip to
+                // bower register, which is deprecated
+                jsDeps[name] = `vaadin/${name}#${version.jsVersion}`;
+            }
         }
     }
 
