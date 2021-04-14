@@ -1,0 +1,79 @@
+buildscript {
+    repositories {
+        maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+    }
+    dependencies {
+        classpath group: 'com.vaadin',
+                name: 'vaadin-gradle-plugin',
+                version: "$pluginVersion"
+    }
+}
+
+plugins {
+    id 'war'
+    id 'org.gretty' version '3.0.4'
+}
+
+apply plugin: "com.vaadin"
+
+defaultTasks("clean", "build")
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+}
+
+gretty {
+    contextPath = "/"
+    httpPort = 9998
+    servletContainer = "jetty9.4"
+    integrationTestTask = 'integrationTest'
+}
+
+dependencies {
+    // Vaadin
+    implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
+    implementation "com.vaadin:vaadin-core"
+    testImplementation "com.vaadin:vaadin-testbench"
+
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+
+    // logging
+    // currently we are logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties file for the logger configuration
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    // Set the correct chrome driver version here for local run
+    // systemProperties 'driver.version' : '89.0.4389.23'
+    systemProperties 'test.use.hub' :  project.hasProperty('test.use.hub') ? project.getProperty('test.use.hub') : 'false'
+
+    if(project.hasProperty('vaadin.testbench.developer.license')) {
+        systemProperties 'vaadin.testbench.developer.license' : project.getProperty('vaadin.testbench.developer.license')
+    }
+    if(project.hasProperty('com.vaadin.testbench.Parameters.hubHostname')) {
+        systemProperties 'com.vaadin.testbench.Parameters.hubHostname' : project.getProperty('com.vaadin.testbench.Parameters.hubHostname')
+    }
+
+    useJUnit()
+
+    maxHeapSize = '1G'
+    filter {
+        includeTestsMatching('*IT*')
+    }
+
+    mustRunAfter test
+
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+check.dependsOn integrationTest

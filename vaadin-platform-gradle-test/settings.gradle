@@ -1,0 +1,6 @@
+pluginManagement {
+    repositories {
+        maven { url = 'https://maven.vaadin.com/vaadin-prereleases' }
+        gradlePluginPortal()
+    }
+}

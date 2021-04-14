@@ -11,7 +11,9 @@ vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
 vaadin-gradle-plugin/build
+vaadin-platform-gradle-test/build
 vaadin-gradle-plugin/.gradle
+vaadin-platform-gradle-test/.gradle
 .DS_Store
 .vscode
 
@@ -29,7 +31,6 @@ scripts/generator/yarn-error.log
 **/tsconfig.json
 **/types.d.ts
 **/.npmrc
-**/types.d.ts
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
