@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
     }
     dependencies {
@@ -19,9 +20,10 @@ apply plugin: "com.vaadin"
 defaultTasks("clean", "build")
 
 repositories {
+    mavenLocal()
+    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
     mavenCentral()
     jcenter()
-    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
 }
 
 gretty {
