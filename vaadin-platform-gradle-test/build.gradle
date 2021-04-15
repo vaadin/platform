@@ -45,14 +45,14 @@ dependencies {
 
     testImplementation 'junit:junit:4.13'
     testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
+    // Download automatically chrome driver when running tests in local
+    testImplementation 'io.github.bonigarcia:webdrivermanager:LATEST'
 }
 
 task integrationTest(type: Test) {
     description = 'Runs integration tests.'
     group = 'verification'
 
-    // Set the correct chrome driver version here for local run
-    // systemProperties 'driver.version' : '89.0.4389.23'
     systemProperties 'test.use.hub' :  project.hasProperty('test.use.hub') ? project.getProperty('test.use.hub') : 'false'
 
     if(project.hasProperty('vaadin.testbench.developer.license')) {

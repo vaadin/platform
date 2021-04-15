@@ -1,10 +1,7 @@
 package com.vaadin.platform.gradle.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import static com.vaadin.platform.gradle.test.views.helloview.HelloVaadinerView.FONT_AWESOME_ID;
+import static com.vaadin.platform.gradle.test.views.helloview.HelloVaadinerView.TEXT_FIELD_ID;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
@@ -16,10 +13,21 @@ import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.testbench.TestBenchElement;
 
-import static com.vaadin.platform.gradle.test.views.helloview.HelloVaadinerView.FONT_AWESOME_ID;
-import static com.vaadin.platform.gradle.test.views.helloview.HelloVaadinerView.TEXT_FIELD_ID;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class HelloVaadinerIT extends AbstractViewTest {
+
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @Test
     public void clickingButton_showsNotification() {
