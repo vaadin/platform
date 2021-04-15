@@ -1,22 +1,33 @@
 package com.vaadin.platform.gradle.test;
 
-import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
-import com.vaadin.flow.theme.AbstractTheme;
-import com.vaadin.testbench.ScreenshotOnFailureRule;
-import com.vaadin.testbench.TestBench;
-import com.vaadin.testbench.TestBenchTestCase;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
+import com.vaadin.flow.theme.AbstractTheme;
+
+import com.vaadin.platform.gradle.test.utility.SauceLabsHelper;
+import com.vaadin.testbench.Parameters;
+import com.vaadin.testbench.ScreenshotOnFailureRule;
+import com.vaadin.testbench.TestBench;
+import com.vaadin.testbench.parallel.ParallelTest;
+
 
 /**
  * Base class for TestBench IntegrationTests on chrome.
@@ -32,7 +43,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * To learn more about TestBench, visit
  * <a href="https://vaadin.com/docs/testbench/testbench-overview.html">Vaadin TestBench</a>.
  */
-public abstract class AbstractViewTest extends TestBenchTestCase {
+public abstract class AbstractViewTest extends ParallelTest {
     private static final int SERVER_PORT = 9998;
 
     private final String route;
@@ -57,13 +68,35 @@ public abstract class AbstractViewTest extends TestBenchTestCase {
     }
 
     @Before
-    public void setup() {
-        setDriver(TestBench.createDriver(new ChromeDriver()));
+    public void setup() throws MalformedURLException {
+
+        ChromeOptions chromeOptions =
+                customizeChromeOptions(new ChromeOptions());
+        WebDriver driver;
+        // Always give priority to @RunLocally annotation
+        if ((getRunLocallyBrowser() != null)) {
+            driver = new ChromeDriver(chromeOptions);
+        } else if (Parameters.isLocalWebDriverUsed()) {
+            driver = new ChromeDriver(chromeOptions);
+        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
+            driver = new RemoteWebDriver(new URL(getHubURL()),
+                    chromeOptions.merge(getDesiredCapabilities()));
+        } else if (getRunOnHub(getClass()) != null
+                || Parameters.getHubHostname() != null) {
+            driver = new RemoteWebDriver(new URL(getHubURL()),
+                    chromeOptions.merge(getDesiredCapabilities()));
+        } else {
+            driver = new ChromeDriver(chromeOptions);
+        }
+
+        setDriver(TestBench.createDriver(driver));
+
+        // setDriver(TestBench.createDriver(new ChromeDriver()));
 
         getDriver().get(getURL(route));
         waitForDevServer();
-        waitUntil(driver -> $(ButtonElement.class).all().size() > 0, 30);
-        waitUntil(driver -> $(TextFieldElement.class).all().size() > 0, 30);
+        waitUntil(drv -> $(ButtonElement.class).all().size() > 0, 30);
+        waitUntil(drv -> $(TextFieldElement.class).all().size() > 0, 30);
     }
 
     /**
@@ -161,5 +194,42 @@ public abstract class AbstractViewTest extends TestBenchTestCase {
 
     protected int getDeploymentPort() {
         return SERVER_PORT;
+    }
+
+    /**
+     * Customizes given Chrome options to enable network connection emulation.
+     *
+     * @param chromeOptions Chrome options to customize
+     * @return customized Chrome options instance
+     */
+    protected ChromeOptions customizeChromeOptions(ChromeOptions chromeOptions) {
+        // Unfortunately using offline emulation ("setNetworkConnection"
+        // session command) in Chrome requires the "networkConnectionEnabled"
+        // capability, which is:
+        //   - Not W3C WebDriver API compliant, so we disable W3C protocol
+        //   - device mode: mobileEmulation option with some device settings
+
+        final Map<String, Object> mobileEmulationParams = new HashMap<>();
+        mobileEmulationParams.put("deviceName", "Laptop with touch");
+
+        chromeOptions.setExperimentalOption("w3c", false);
+        chromeOptions.setExperimentalOption("mobileEmulation",
+                mobileEmulationParams);
+        chromeOptions.setCapability("networkConnectionEnabled", true);
+
+
+        // Enable service workers over http remote connection
+        chromeOptions.addArguments(String.format(
+                "--unsafely-treat-insecure-origin-as-secure=%s",
+                getRootURL()));
+
+        // NOTE: this flag is not supported in headless Chrome, see
+        // https://crbug.com/814146
+
+        // For test stability on Linux when not running headless.
+        // https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+
+        return chromeOptions;
     }
 }

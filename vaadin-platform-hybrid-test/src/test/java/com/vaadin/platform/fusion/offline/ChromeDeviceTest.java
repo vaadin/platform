@@ -93,6 +93,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
         setDriver(TestBench.createDriver(driver));
     }
+
     /**
      * Customizes given Chrome options to enable network connection emulation.
      *
