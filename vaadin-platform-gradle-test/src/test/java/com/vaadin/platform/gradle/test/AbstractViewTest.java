@@ -218,7 +218,7 @@ public abstract class AbstractViewTest extends ParallelTest {
         // chromeOptions.setCapability("networkConnectionEnabled", true);
 
         chromeOptions.addArguments("--no-sandbox"); // MUST BE THE VERY FIRST OPTION
-        chromeOptions.addArguments("--headless");
+        // chromeOptions.addArguments("--headless");
 
         // Enable service workers over http remote connection
         chromeOptions.addArguments(String.format(
