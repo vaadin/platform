@@ -209,14 +209,16 @@ public abstract class AbstractViewTest extends ParallelTest {
         //   - Not W3C WebDriver API compliant, so we disable W3C protocol
         //   - device mode: mobileEmulation option with some device settings
 
-        final Map<String, Object> mobileEmulationParams = new HashMap<>();
-        mobileEmulationParams.put("deviceName", "Laptop with touch");
+        // final Map<String, Object> mobileEmulationParams = new HashMap<>();
+        // mobileEmulationParams.put("deviceName", "Laptop with touch");
 
-        chromeOptions.setExperimentalOption("w3c", false);
-        chromeOptions.setExperimentalOption("mobileEmulation",
-                mobileEmulationParams);
-        chromeOptions.setCapability("networkConnectionEnabled", true);
+        // chromeOptions.setExperimentalOption("w3c", false);
+        // chromeOptions.setExperimentalOption("mobileEmulation",
+        //        mobileEmulationParams);
+        // chromeOptions.setCapability("networkConnectionEnabled", true);
 
+        chromeOptions.addArguments("--no-sandbox"); // MUST BE THE VERY FIRST OPTION
+        chromeOptions.addArguments("--headless");
 
         // Enable service workers over http remote connection
         chromeOptions.addArguments(String.format(
