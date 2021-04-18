@@ -24,6 +24,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class HelloVaadinerIT extends AbstractViewTest {
 
+    /**
+     * Gets the absolute path to the test, starting with a "/".
+     *
+     * @return he path to the test, appended to {@link #getRootURL()} for the
+     * full test URL.
+     */
+    @Override
+    protected String getTestPath() {
+        return "/hello";
+    }
+
     @BeforeClass
     public static void setupClass() {
         WebDriverManager.chromedriver().setup();

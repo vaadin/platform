@@ -7,15 +7,19 @@ buildscript {
         classpath group: 'com.vaadin',
                 name: 'vaadin-gradle-plugin',
                 version: "$pluginVersion"
+
+        classpath 'org.gebish:geb-gradle:5.0-milestone-2'
     }
 }
 
 plugins {
     id 'war'
     id 'org.gretty' version '3.0.4'
+    id "com.saucelabs.SauceConnectPlugin" version "0.0.12"
 }
 
 apply plugin: "com.vaadin"
+apply plugin: "geb-saucelabs"
 
 defaultTasks("clean", "build")
 
@@ -26,11 +30,13 @@ repositories {
     jcenter()
 }
 
+def enableSauce = project.hasProperty('enableSauce')
+
 gretty {
     contextPath = "/"
     httpPort = 9998
     servletContainer = "jetty9.4"
-    integrationTestTask = 'integrationTest'
+    integrationTestTask = enableSauce ? 'integrationTestSauce' : 'integrationTest'
 }
 
 dependencies {
@@ -49,11 +55,17 @@ dependencies {
     testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
     // Download automatically chrome driver when running tests in local
     testImplementation 'io.github.bonigarcia:webdrivermanager:LATEST'
+
+    sauceConnect "com.saucelabs:ci-sauce:1.151"
 }
 
+def testsInParallel = project.hasProperty('testsInParallel') ? project.getProperty('testsInParallel') : 1
+
 task integrationTest(type: Test) {
-    description = 'Runs integration tests.'
+    description = 'Runs Integration Tests.'
     group = 'verification'
+
+    systemProperties 'com.vaadin.testbench.Parameters.testsInParallel' : "$testsInParallel"
 
     systemProperties 'test.use.hub' :  project.hasProperty('test.use.hub') ? project.getProperty('test.use.hub') : 'false'
 
@@ -78,4 +90,61 @@ task integrationTest(type: Test) {
     }
 }
 
-check.dependsOn integrationTest
+sauceAuth {
+    username = enableSauce ? "${System.env.SAUCE_USERNAME}" : ""
+    key = enableSauce ? "$System.env.SAUCE_ACCESS_KEY" : ""
+}
+
+def timestamp = System.currentTimeMillis()
+
+def sauce = [
+        username: sauceAuth.username,
+        key     : sauceAuth.key,
+        options : "--tunnel-identifier $timestamp"
+]
+
+sauceLabs {
+    account {
+        username = sauce.username
+        accessKey = sauce.key
+    }
+}
+
+task integrationTestSauce(dependsOn: startSauceConnect, type: Test) {
+    description = 'Runs Integration Tests.'
+    group = 'verification'
+
+    systemProperties 'com.vaadin.testbench.Parameters.testsInParallel' : "$testsInParallel"
+    // systemProperties 'enforcer.skip' : 'true'
+
+    systemProperties 'test.use.hub' :  project.hasProperty('test.use.hub') ? project.getProperty('test.use.hub') : 'false'
+
+    if(project.hasProperty('vaadin.testbench.developer.license')) {
+        systemProperties 'vaadin.testbench.developer.license' : project.getProperty('vaadin.testbench.developer.license')
+    }
+    if(project.hasProperty('com.vaadin.testbench.Parameters.hubHostname')) {
+        systemProperties 'com.vaadin.testbench.Parameters.hubHostname' : project.getProperty('com.vaadin.testbench.Parameters.hubHostname')
+    }
+
+    useJUnit()
+
+    maxHeapSize = '1G'
+    filter {
+        includeTestsMatching('*IT*')
+    }
+
+    systemProperties 'sauce.user' : sauce.username
+    systemProperties 'sauce.sauceAccessKey' : sauce.key
+    systemProperties 'sauce.options' : sauce.options
+    systemProperties 'testDriver' : 'sauce'
+    systemProperties 'java.net.preferIPv4Stack' : 'true'
+
+    mustRunAfter test
+
+    testLogging {
+        showStandardStreams = true
+    }
+}
+integrationTestSauce.finalizedBy stopSauceConnect
+
+check.dependsOn project.hasProperty('enableSauce') ? integrationTestSauce : integrationTest
