@@ -1,31 +1,17 @@
 package com.vaadin.platform.gradle.test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.theme.AbstractTheme;
-
-import com.vaadin.platform.gradle.test.utility.SauceLabsHelper;
-import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
-import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.parallel.ParallelTest;
 
 
@@ -46,21 +32,9 @@ import com.vaadin.testbench.parallel.ParallelTest;
 public abstract class AbstractViewTest extends ParallelTest {
     private static final int SERVER_PORT = 9998;
 
-    private final String route;
-    private final By rootSelector;
-
     @Rule
     public ScreenshotOnFailureRule rule = new ScreenshotOnFailureRule(this,
             false);
-
-    public AbstractViewTest() {
-        this("hello", By.tagName("body"));
-    }
-
-    protected AbstractViewTest(String route, By rootSelector) {
-        this.route = route;
-        this.rootSelector = rootSelector;
-    }
 
     @BeforeClass
     public static void setupClass() {
@@ -68,46 +42,21 @@ public abstract class AbstractViewTest extends ParallelTest {
     }
 
     @Before
-    public void setup() throws MalformedURLException {
-
-        ChromeOptions chromeOptions =
-                customizeChromeOptions(new ChromeOptions());
-        WebDriver driver;
-        // Always give priority to @RunLocally annotation
-        if ((getRunLocallyBrowser() != null)) {
-            driver = new ChromeDriver(chromeOptions);
-        } else if (Parameters.isLocalWebDriverUsed()) {
-            driver = new ChromeDriver(chromeOptions);
-        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
-            driver = new RemoteWebDriver(new URL(getHubURL()),
-                    chromeOptions.merge(getDesiredCapabilities()));
-        } else if (getRunOnHub(getClass()) != null
-                || Parameters.getHubHostname() != null) {
-            driver = new RemoteWebDriver(new URL(getHubURL()),
-                    chromeOptions.merge(getDesiredCapabilities()));
-        } else {
-            driver = new ChromeDriver(chromeOptions);
-        }
-
-        setDriver(TestBench.createDriver(driver));
-
-        // setDriver(TestBench.createDriver(new ChromeDriver()));
-
-        getDriver().get(getURL(route));
+    public void setup() throws Exception {
+        super.setup();
+        getDriver().get(getRootURL() + getTestPath());
         waitForDevServer();
         waitUntil(drv -> $(ButtonElement.class).all().size() > 0, 30);
         waitUntil(drv -> $(TextFieldElement.class).all().size() > 0, 30);
     }
 
     /**
-     * Convenience method for getting the root element of the view based on
-     * the selector passed to the constructor.
+     * Gets the absolute path to the test, starting with a "/".
      *
-     * @return the root element
+     * @return he path to the test, appended to {@link #getRootURL()} for the
+     *         full test URL.
      */
-    protected WebElement getRootElement() {
-        return findElement(rootSelector);
-    }
+    protected abstract String getTestPath();
 
     /**
      * Asserts that the given {@code element} is rendered using a theme
@@ -133,39 +82,30 @@ public abstract class AbstractViewTest extends ParallelTest {
     }
 
     /**
-     * Property set to true when running on a test hub.
-     */
-    private static final String USE_HUB_PROPERTY = "test.use.hub";
-
-    /**
-     * Returns deployment host name concatenated with route.
+     * Returns the URL to the root of the server, e.g. "http://localhost:8888".
      *
-     * @return URL to route
+     * @return the URL to the root
      */
-    private static String getURL(String route) {
-        return String.format("http://%s:%d/%s", getDeploymentHostname(),
-                SERVER_PORT, route);
+    protected String getRootURL() {
+        return "http://" + getDeploymentHostname() + ":" + getDeploymentPort();
     }
 
     /**
-     * Returns whether we are using a test hub. This means that the starter
-     * is running tests in Vaadin's CI environment, and uses TestBench to
-     * connect to the testing hub.
+     * Used to determine what port the test is running on.
      *
-     * @return whether we are using a test hub
+     * @return The port the test is running on, by default 8080
      */
-    private static boolean isUsingHub() {
-        return Boolean.TRUE.toString().equals(
-                System.getProperty(USE_HUB_PROPERTY));
+    protected int getDeploymentPort() {
+        return SERVER_PORT;
     }
 
     /**
-     * If running on CI, get the host name from environment variable HOSTNAME
+     * Used to determine what URL to initially open for the test.
      *
-     * @return the host name
+     * @return the host name of development server
      */
-    private static String getDeploymentHostname() {
-        return isUsingHub() ? System.getenv("HOSTNAME") : "localhost";
+    protected String getDeploymentHostname() {
+        return "localhost";
     }
 
     /**
@@ -186,52 +126,5 @@ public abstract class AbstractViewTest extends ParallelTest {
         if(driver != null) {
             driver.quit();
         }
-    }
-
-    protected String getRootURL() {
-        return "http://" + getDeploymentHostname() + ":" + getDeploymentPort();
-    }
-
-    protected int getDeploymentPort() {
-        return SERVER_PORT;
-    }
-
-    /**
-     * Customizes given Chrome options to enable network connection emulation.
-     *
-     * @param chromeOptions Chrome options to customize
-     * @return customized Chrome options instance
-     */
-    protected ChromeOptions customizeChromeOptions(ChromeOptions chromeOptions) {
-        // Unfortunately using offline emulation ("setNetworkConnection"
-        // session command) in Chrome requires the "networkConnectionEnabled"
-        // capability, which is:
-        //   - Not W3C WebDriver API compliant, so we disable W3C protocol
-        //   - device mode: mobileEmulation option with some device settings
-
-        // final Map<String, Object> mobileEmulationParams = new HashMap<>();
-        // mobileEmulationParams.put("deviceName", "Laptop with touch");
-
-        // chromeOptions.setExperimentalOption("w3c", false);
-        // chromeOptions.setExperimentalOption("mobileEmulation",
-        //        mobileEmulationParams);
-        // chromeOptions.setCapability("networkConnectionEnabled", true);
-
-        chromeOptions.addArguments("--no-sandbox"); // MUST BE THE VERY FIRST OPTION
-        chromeOptions.addArguments("--headless");
-
-        // Enable service workers over http remote connection
-        chromeOptions.addArguments(String.format(
-                "--unsafely-treat-insecure-origin-as-secure=%s",
-                getRootURL()));
-
-        // NOTE: this flag is not supported in headless Chrome, see
-        // https://crbug.com/814146
-
-        // For test stability on Linux when not running headless.
-        // https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
-        chromeOptions.addArguments("--disable-dev-shm-usage");
-
-        return chromeOptions;
     }
 }
