@@ -10,6 +10,7 @@ import com.vaadin.flow.component.html.testbench.SpanElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
+import com.vaadin.flow.theme.AbstractTheme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.testbench.TestBenchElement;
 
@@ -22,7 +23,7 @@ import org.openqa.selenium.WebElement;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class HelloVaadinerIT extends AbstractViewTest {
+public class HelloVaadinerIT extends AbstractPlatformTest {
 
     /**
      * Gets the absolute path to the test, starting with a "/".
@@ -34,12 +35,12 @@ public class HelloVaadinerIT extends AbstractViewTest {
     protected String getTestPath() {
         return "/hello";
     }
-
+    
     @BeforeClass
     public static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-
+    
     @Test
     public void clickingButton_showsNotification() {
         Assert.assertFalse($(NotificationElement.class).exists());
@@ -143,5 +144,42 @@ public class HelloVaadinerIT extends AbstractViewTest {
                 + ", arguments[1]).content";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return (String) js.executeScript(script, elementId, pseudoElement);
+    }
+    
+    /**
+     * Asserts that the given {@code element} is rendered using a theme
+     * identified by {@code themeClass}. If the the is not found, JUnit
+     * assert will fail the test case.
+     *
+     * @param element       web element to check for the theme
+     * @param themeClass    theme class (such as {@code Lumo.class}
+     */
+    private void assertThemePresentOnElement(
+            WebElement element, Class<? extends AbstractTheme> themeClass) {
+        String themeName = themeClass.getSimpleName().toLowerCase();
+        Boolean hasStyle = (Boolean) executeScript("" +
+                "var styles = Array.from(arguments[0]._template.content" +
+                ".querySelectorAll('style'))" +
+                ".filter(style => style.textContent.indexOf('" +
+                themeName + "') > -1);" +
+                "return styles.length > 0;", element);
+
+        Assert.assertTrue("Element '" + element.getTagName() + "' should have" +
+                        " had theme '" + themeClass.getSimpleName() + "'.",
+                hasStyle);
+    }
+    
+    
+    /**
+     * If dev server start in progress wait until it's started. Otherwise return
+     * immidiately.
+     */
+    protected void waitForDevServer() {
+        Object result;
+        do {
+            getCommandExecutor().waitForVaadin();
+            result = getCommandExecutor().executeScript(
+                    "return window.Vaadin && window.Vaadin.Flow && window.Vaadin.Flow.devServerIsNotLoaded;");
+        } while (Boolean.TRUE.equals(result));
     }
 }
