@@ -34,7 +34,7 @@ def enableSauce = project.hasProperty('enableSauce')
 
 gretty {
     contextPath = "/"
-    httpPort = 9998
+    httpPort = 8080
     servletContainer = "jetty9.4"
     integrationTestTask = enableSauce ? 'integrationTestSauce' : 'integrationTest'
 }
@@ -68,6 +68,8 @@ task integrationTest(type: Test) {
     systemProperties 'com.vaadin.testbench.Parameters.testsInParallel' : "$testsInParallel"
 
     systemProperties 'test.use.hub' :  project.hasProperty('test.use.hub') ? project.getProperty('test.use.hub') : 'false'
+
+    systemProperties 'java.net.preferIPv4Stack' : 'true'
 
     if(project.hasProperty('vaadin.testbench.developer.license')) {
         systemProperties 'vaadin.testbench.developer.license' : project.getProperty('vaadin.testbench.developer.license')
@@ -109,6 +111,13 @@ sauceLabs {
         accessKey = sauce.key
     }
 }
+
+ test {
+     filter {
+        excludeTestsMatching "*IT"
+        setFailOnNoMatchingTests(false)
+     }
+ }
 
 task integrationTestSauce(dependsOn: startSauceConnect, type: Test) {
     description = 'Runs Integration Tests.'
