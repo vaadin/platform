@@ -8,18 +8,18 @@ buildscript {
                 name: 'vaadin-gradle-plugin',
                 version: "$pluginVersion"
 
-        classpath 'org.gebish:geb-gradle:5.0-milestone-2'
+        classpath "gradle.plugin.SauceConnectPlugin:Gradle-Sauce-Connect-Plugin-johnroach.io:0.0.35"
     }
 }
 
 plugins {
     id 'war'
     id 'org.gretty' version '3.0.4'
-    id "com.saucelabs.SauceConnectPlugin" version "0.0.12"
+    id "io.johnroach.SauceConnectPlugin" version "0.0.35"
 }
 
 apply plugin: "com.vaadin"
-apply plugin: "geb-saucelabs"
+apply plugin: "io.johnroach.SauceConnectPlugin"
 
 defaultTasks("clean", "build")
 
@@ -53,10 +53,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.13'
     testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
-    // Download automatically chrome driver when running tests in local
-    testImplementation 'io.github.bonigarcia:webdrivermanager:LATEST'
-
-    sauceConnect "com.saucelabs:ci-sauce:1.151"
 }
 
 def testsInParallel = project.hasProperty('testsInParallel') ? project.getProperty('testsInParallel') : 1
@@ -92,27 +88,16 @@ task integrationTest(type: Test) {
     }
 }
 
-sauceAuth {
-    username = enableSauce ? "${System.env.SAUCE_USERNAME}" : ""
-    key = enableSauce ? "$System.env.SAUCE_ACCESS_KEY" : ""
-}
 
 def timestamp = System.currentTimeMillis()
 
-def sauce = [
-        username: sauceAuth.username,
-        key     : sauceAuth.key,
-        options : "--tunnel-identifier $timestamp"
-]
-
-sauceLabs {
-    account {
-        username = sauce.username
-        accessKey = sauce.key
-    }
+sauceconnect {
+    username = enableSauce ? "${System.env.SAUCE_USERNAME}" : ""
+    key = enableSauce ? "${System.env.SAUCE_ACCESS_KEY}" : ""
+    options = "-P 4445"
 }
 
- test {
+test {
      filter {
         excludeTestsMatching "*IT"
         setFailOnNoMatchingTests(false)
@@ -142,9 +127,6 @@ task integrationTestSauce(dependsOn: startSauceConnect, type: Test) {
         includeTestsMatching('*IT*')
     }
 
-    systemProperties 'sauce.user' : sauce.username
-    systemProperties 'sauce.sauceAccessKey' : sauce.key
-    systemProperties 'sauce.options' : sauce.options
     systemProperties 'testDriver' : 'sauce'
     systemProperties 'java.net.preferIPv4Stack' : 'true'
 
