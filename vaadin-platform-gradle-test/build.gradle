@@ -82,9 +82,14 @@ task integrationTest(type: Test) {
         systemProperties 'sauce.options' : sauceIdentifier
     }
 
-    ['com.vaadin.testbench.Parameters.testsInParallel', 'test.use.hub',
-     'vaadin.testbench.developer.license', 'com.vaadin.testbench.Parameters.hubHostname'
-    ].each {if (System.hasProperty(it)) systemProperties System.getProperty(it)}
+    systemProperties 'com.vaadin.testbench.Parameters.testsInParallel' : System.getProperty('com.vaadin.testbench.Parameters.testsInParallel')
+    systemProperties 'test.use.hub' : System.getProperty('test.use.hub')
+    if (System.getProperty('vaadin.testbench.developer.license') != null) {
+        systemProperties 'vaadin.testbench.developer.license' : System.getProperty('vaadin.testbench.developer.license')
+    }
+    if (System.getProperty('com.vaadin.testbench.Parameters.hubHostname') != null) {
+        systemProperties 'com.vaadin.testbench.Parameters.hubHostname' : System.getProperty('com.vaadin.testbench.Parameters.hubHostname')
+    }
 
     useJUnit()
 
