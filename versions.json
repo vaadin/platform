@@ -102,7 +102,7 @@
         "vaadin-avatar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "20.0.0-alpha4",
+            "jsVersion": "20.0.0-alpha5",
             "npmName": "@vaadin/vaadin-avatar"
         },
         "vaadin-button": {
