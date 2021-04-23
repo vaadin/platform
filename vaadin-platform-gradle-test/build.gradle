@@ -1,0 +1,108 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+    }
+    dependencies {
+        classpath group: 'com.vaadin',
+                name: 'vaadin-gradle-plugin',
+                version: "$pluginVersion"
+
+        classpath 'gradle.plugin.SauceConnectPlugin:Gradle-Sauce-Connect-Plugin-johnroach.io:0.0.35'
+    }
+}
+
+plugins {
+    id 'war'
+    id 'org.gretty' version '3.0.4'
+    id 'io.johnroach.SauceConnectPlugin' version '0.0.35'
+}
+
+apply plugin: 'com.vaadin'
+apply plugin: 'io.johnroach.SauceConnectPlugin'
+
+repositories {
+    mavenLocal()
+    maven { setUrl('https://maven.vaadin.com/vaadin-prereleases') }
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    // Vaadin
+    implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
+    implementation 'com.vaadin:vaadin-core'
+
+    testImplementation 'com.vaadin:vaadin-testbench'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    // logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties for logger configuration
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
+}
+
+defaultTasks('clean', 'build')
+
+test {
+    filter {
+        excludeTestsMatching '*IT'
+        setFailOnNoMatchingTests(false)
+    }
+}
+
+gretty {
+    contextPath = '/'
+    httpPort = 8080
+    servletContainer = 'jetty9.4'
+    integrationTestTask = 'integrationTest'
+}
+
+def sauceUser = System.getProperty('sauce.user')
+def sauceKey = System.getProperty('sauce.sauceAccessKey')
+def sauceIdentifier = '--tunnel-identifier ' + System.currentTimeMillis()
+sauceconnect {
+    username = sauceUser
+    key = sauceKey
+    options = '-P 4445 ' + sauceIdentifier;
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs Integration Tests.'
+    group = 'verification'
+
+    if (sauceUser != null) {
+        integrationTest.dependsOn startSauceConnect
+        integrationTest.finalizedBy stopSauceConnect
+
+        systemProperties 'testDriver' : 'sauce'
+        systemProperties 'sauce.user' : sauceUser
+        systemProperties 'sauce.sauceAccessKey' : sauceKey
+        systemProperties 'sauce.options' : sauceIdentifier
+    }
+
+    systemProperties 'com.vaadin.testbench.Parameters.testsInParallel' : System.getProperty('com.vaadin.testbench.Parameters.testsInParallel')
+    systemProperties 'test.use.hub' : System.getProperty('test.use.hub')
+    if (System.getProperty('vaadin.testbench.developer.license') != null) {
+        systemProperties 'vaadin.testbench.developer.license' : System.getProperty('vaadin.testbench.developer.license')
+    }
+    if (System.getProperty('com.vaadin.testbench.Parameters.hubHostname') != null) {
+        systemProperties 'com.vaadin.testbench.Parameters.hubHostname' : System.getProperty('com.vaadin.testbench.Parameters.hubHostname')
+    }
+
+    useJUnit()
+
+    maxHeapSize = '1G'
+    filter {
+        includeTestsMatching('*IT*')
+    }
+
+    mustRunAfter test
+
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+check.dependsOn integrationTest

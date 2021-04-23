@@ -1,0 +1,4 @@
+[part="input-field"] {
+    box-shadow: inset 0 0 0 1px var(--lumo-contrast-30pct);
+    background-color: orange;
+}
