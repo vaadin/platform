@@ -60,6 +60,13 @@ mvn verify -Pproduction,fusion-hybrid -Dsauce.user=your_username -Dsauce.sauceAc
 mvn install -Pproduction,npm-it -DskipTests
 mvn verify -Pproduction,platform-servlet-containers-tests -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
 ```
+4. For gradle module tests
+```
+cd vaadin-platform-gradle-test
+./gradlew clean build \
+  -Pvaadin.productionMode \
+  -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key
+```
 
 ### Running Integration Tests in local computer
 
@@ -80,7 +87,7 @@ mvn verify -Pproduction,fusion-hybrid \
 
 First compile e install smoke tests if not done already:
 ```
-mvn install -DskipTests -Pproduction,npm-it 
+mvn install -DskipTests -Pproduction,npm-it
 ```
 
 Then run the tests:
@@ -89,8 +96,13 @@ mvn verify -Pproduction,platform-servlet-containers-tests \
   -Dce.license=your_ce_license \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
-
-
+4. For running gradle module tests
+```
+cd vaadin-platform-gradle-test
+./gradlew clean build \
+  -Pvaadin.productionMode \
+  -Dcom.vaadin.testbench.Parameters.testsInParallel=1
+```
 
 ## Running the test application
 
@@ -98,7 +110,9 @@ mvn verify -Pproduction,platform-servlet-containers-tests \
 
 When in the `vaadin-platform-test` folder run `mvn jetty:run`, then connect to the `http://localhost:8080` URL.
 
-Or in the `vaadin-platform-hybrid-test` run `mvn spring-boot:run`, then point your browser to `http://localhost:8080`.
+In the `vaadin-platform-hybrid-test` run `mvn spring-boot:run`, then point your browser to `http://localhost:8080`.
+
+In the `vaadin-platform-gradle-test` run `./gradlew appRun`, then go to `http://localhost:8080`.
 
 
 
