@@ -206,16 +206,16 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
-        
-        <!--  This dependency is needed to calculate its version 
-              in the generated Karaf feature.xml. Its scope is "test" though it's 
+
+        <!--  This dependency is needed to calculate its version
+              in the generated Karaf feature.xml. Its scope is "test" though it's
               not needed for anything except populating version property via dependencyversion-maven-plugin-->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-osgi</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
     <build>
         <plugins>
@@ -269,7 +269,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Copy versions file to classpath, so that Flow can use 
+                <!-- Copy versions file to classpath, so that Flow can use
                     it to pin versions for pnpm. -->
                 <groupId>com.coderplus.maven.plugins</groupId>
                 <artifactId>copy-rename-maven-plugin</artifactId>
@@ -285,6 +285,24 @@
                             <sourceFile>../versions.json</sourceFile>
                             <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+                                <replace token= "{{version}}" value="${version}" dir="target/classes">
+                                    <include name="vaadin_versions.json"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
