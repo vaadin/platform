@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "7.0.0.alpha6"
+            "javaVersion": "7.0.0.alpha7"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "17.0.0.alpha4"
+            "javaVersion": "17.0.0.alpha5"
         },
         "gradle": {
             "javaVersion": "1.2"
