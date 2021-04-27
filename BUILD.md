@@ -77,6 +77,7 @@ mvn verify -Pproduction,npm-it \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
 Note that the number of test in parallel can be increased if your computer has enough resources.
+
 2. For Fusion Integration Tests run:
 ```
 mvn verify -Pproduction,fusion-hybrid \
