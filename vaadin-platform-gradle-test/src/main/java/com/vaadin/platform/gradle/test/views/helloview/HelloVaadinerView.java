@@ -8,6 +8,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -23,6 +24,9 @@ public class HelloVaadinerView extends VerticalLayout {
     public HelloVaadinerView() {
         TextField textField = new TextField("Your name");
         textField.setId(TEXT_FIELD_ID);
+
+        Notification notification = new Notification(
+                new GreetService().greet(textField.getValue()), 10000, Position.BOTTOM_START);
 
         Button button = new Button("Say hello",
                 e -> Notification.show(new GreetService().greet(textField.getValue())));
