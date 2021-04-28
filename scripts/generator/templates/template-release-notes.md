@@ -12,7 +12,7 @@ Here are the highlighted new and improved features in vaadin 20. To see the full
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 20 is supported for one month after Vaadin 21 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 21 is supported for one month after Vaadin 22 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -60,7 +60,7 @@ All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersi
 The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
 ### Note
-Vaadin 20 starters are not available just yet in vaadin.com. You can use Vaadin 19 starter and manually change Vaadin version (see instructions below).
+Vaadin 21 starters are not available just yet in vaadin.com. You can use Vaadin 20 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
 

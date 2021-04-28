@@ -4,14 +4,14 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 19
+## New and Noteworthy Since Vaadin 1
 
 Here are the highlighted new and improved features in Vaadin 20. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 {{changesSincePrevious}}
 
 ## Support
-Vaadin 19 is supported for one month after Vaadin 20 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+vaadin 21 is supported for one month after Vaadin 22 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -59,7 +59,7 @@ All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersi
 The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
 
 ### Note
-Vaadin 20 starters are not available just yet in vaadin.com. You can use Vaadin 14 starter and manually change Vaadin version (see instructions below).
+Vaadin 21 starters are not available just yet in vaadin.com. You can use Vaadin 20 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
