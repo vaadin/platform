@@ -3,7 +3,7 @@
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 This is a maintenance release of Vaadin.
-See the full release notes for vaadin 20.0 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/20.0.0), including new features, getting started, supported browsers and other technologies, and migration notes.
+See the full release notes for vaadin 21.0 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/21.0.0), including new features, getting started, supported browsers and other technologies, and migration notes.
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
@@ -27,7 +27,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/suppor
 ## App starters
 The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
-For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/20.0.0).
+For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/21.0.0).
 
 # Known Issues and Limitations
 

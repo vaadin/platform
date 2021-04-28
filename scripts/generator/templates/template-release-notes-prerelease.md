@@ -6,7 +6,7 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## New and Noteworthy Since Vaadin 1
 
-Here are the highlighted new and improved features in Vaadin 20. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in Vaadin 21. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 {{changesSincePrevious}}
 
@@ -94,7 +94,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of Vaadin 20 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of Vaadin 21 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
