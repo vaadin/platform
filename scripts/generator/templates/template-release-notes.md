@@ -6,7 +6,7 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## New and Noteworthy Since Vaadin 20
 
-Here are the highlighted new and improved features in vaadin 20. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in vaadin 21. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 
 {{changesSincePrevious}}
