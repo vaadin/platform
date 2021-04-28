@@ -13,6 +13,7 @@ vaadin-maven-plugin/.factorypath
 vaadin-gradle-plugin/build
 vaadin-platform-gradle-test/build
 vaadin-gradle-plugin/.gradle
+vaadin-gradle-plugin/src/main
 vaadin-platform-gradle-test/.gradle
 .DS_Store
 .vscode
