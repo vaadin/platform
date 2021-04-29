@@ -190,9 +190,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -233,8 +234,8 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Copy versions file to classpath, so that Flow can
-                   use it to pin versions for pnpm. -->
+                <!-- Copy versions file to classpath, so that Flow can use
+                    it to pin versions for pnpm. -->
                 <groupId>com.coderplus.maven.plugins</groupId>
                 <artifactId>copy-rename-maven-plugin</artifactId>
                 <version>1.0</version>
@@ -249,6 +250,24 @@
                             <sourceFile>../versions.json</sourceFile>
                             <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+                                <replace token= "{{version}}" value="${version}" dir="target/classes">
+                                    <include name="vaadin_versions.json"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
