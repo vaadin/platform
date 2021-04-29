@@ -75,6 +75,14 @@
                     server port until maven exits -->
                <module>bnd-tools-test</module>
             </modules>
+            <dependencies>
+                <dependency>
+                    <groupId>io.github.bonigarcia</groupId>
+                    <artifactId>webdrivermanager</artifactId>
+                    <version>LATEST</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
