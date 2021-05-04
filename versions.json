@@ -4,10 +4,10 @@
             "javaVersion": "2.6.0.rc1"
         },
         "flow-cdi": {
-            "javaVersion": "11.3.0.beta1"
+            "javaVersion": "11.3.0.rc1"
         },
         "flow-spring": {
-            "javaVersion": "12.4.0.beta1"
+            "javaVersion": "12.4.0.rc1"
         },
         "gradle": {
             "javaVersion": "1.2"
