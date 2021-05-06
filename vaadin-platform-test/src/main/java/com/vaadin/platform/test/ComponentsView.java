@@ -103,6 +103,9 @@ import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.messages.MessageInput;
+import com.vaadin.flow.component.messages.MessageList;
+import com.vaadin.flow.component.messages.MessageListItem;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
@@ -559,6 +562,11 @@ public class ComponentsView extends AppLayout {
         Avatar avatar = new Avatar("Donald");
         AvatarGroup avatarGroup = new AvatarGroup(new AvatarGroupItem("Pluto"), new AvatarGroupItem("Mickey"));
 
+        MessageList messageList = new MessageList();
+        messageList.setItems(new MessageListItem("foo"), new MessageListItem("bar"));
+
+        MessageInput messageInput = new MessageInput();
+        messageInput.addSubmitListener(e -> log.log(e.getValue()));
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
@@ -601,6 +609,8 @@ public class ComponentsView extends AppLayout {
         components.add(menuBar);
         components.add(avatar);
         components.add(avatarGroup);
+        components.add(messageList);
+        components.add(messageInput);
         components.add(main);
 
         layouts.add(formLayout);
