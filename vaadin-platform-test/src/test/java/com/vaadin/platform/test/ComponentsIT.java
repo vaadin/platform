@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +55,8 @@ public class ComponentsIT extends ParallelTest {
         }
     };
 
+    List<String> excludeComponents = Arrays.asList("vaadin-message");
+
     private Boolean isBower = false;
     private Boolean isOldBrowser = false;
     @Test
@@ -93,6 +96,10 @@ public class ComponentsIT extends ParallelTest {
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
+        }
+
+        if (excludeComponents.contains(tag)) {
+            return;
         }
 
         ElementQuery<? extends TestBenchElement> $ = null;

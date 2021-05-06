@@ -49,6 +49,9 @@ import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
+import com.vaadin.flow.component.messages.testbench.MessageElement;
+import com.vaadin.flow.component.messages.testbench.MessageInputElement;
+import com.vaadin.flow.component.messages.testbench.MessageListElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
@@ -535,7 +538,26 @@ public class ChromeComponentsIT extends ParallelTest {
 
         assertLog("Context menu Item 0 is clicked");
     }
-    
+
+    @Test
+    public void messageListIsRendered() {
+        MessageListElement messageList = $(MessageListElement.class).first();
+        List<MessageElement> messages = messageList.getMessageElements();
+        Assert.assertEquals("Number of messages rendered in MessageList",
+                2, messages.size());
+        Assert.assertEquals("Text content of the first message of MessageList",
+                "foo", messages.get(0).getText());
+        Assert.assertEquals("Text content of the second message of MessageList",
+                "bar", messages.get(1).getText());
+    }
+
+    @Test
+    public void messageInputIsRenderedAndFiresSubmitEvent() {
+        MessageInputElement messageInput = $(MessageInputElement.class).first();
+        messageInput.submit("foo");
+        assertLog("foo");
+    }
+
     @Test
     public void usageStatisticIsLogged() throws InterruptedException {	
         Assert.assertTrue($(ButtonElement.class).exists());	
