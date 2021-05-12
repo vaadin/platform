@@ -308,6 +308,10 @@
             "jsVersion": "21.0.0-alpha1",
             "npmName": "@vaadin/vaadin-tabs"
         },
+        "vaadin-template-renderer": {
+            "jsVersion": "21.0.0-alpha1",
+            "npmName": "@vaadin/vaadin-template-renderer"
+        },
         "vaadin-text-field": {
             "component": true,
             "components": [
@@ -343,6 +347,11 @@
         "vaadin-usage-statistics": {
             "jsVersion": "2.1.0",
             "npmName": "@vaadin/vaadin-usage-statistics"
+        },
+        "vaadin-virtual-list": {
+            "jsVersion": "21.0.0-alpha1",
+            "npmName": "@vaadin/vaadin-virtual-list",
+            "releasenotes": true
         }
     },
     "platform": "{{version}}",
