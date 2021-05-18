@@ -45,7 +45,6 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     List<String> excludeComponents = Arrays.asList("vaadin-message");
 
-
     @Test
     public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();

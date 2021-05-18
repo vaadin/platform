@@ -229,14 +229,14 @@ public class ComponentUsageTest {
         if (!checkedList.isEmpty()) {
             fail = true;
             System.out.printf("\n>>> There are %s web-components imports missing in %s\n   %s\n", checkedList.size(),
-                    javaViewFile.getName(), String.join("\n   ", checkedList));
+                    tsViewFile.getName(), String.join("\n   ", checkedList));
         }
 
         checkedList = checkLines(tsLines, jsRenderRegexs, jsComponents);
         if (!checkedList.isEmpty()) {
             fail = true;
             System.out.printf("\n>>> There are %s web-components not rendered in %s\n   %s\n", checkedList.size(),
-                    javaViewFile.getName(), String.join("\n   ", checkedList));
+                    tsViewFile.getName(), String.join("\n   ", checkedList));
         }
 
         assertFalse("There are missing components in the smoke tests", fail);

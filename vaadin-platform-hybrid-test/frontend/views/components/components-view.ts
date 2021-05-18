@@ -52,6 +52,7 @@ import '@vaadin/vaadin-notification/vaadin-notification';
 import '@vaadin/vaadin-messages/vaadin-message';
 import '@vaadin/vaadin-messages/vaadin-message-list';
 import '@vaadin/vaadin-messages/vaadin-message-input';
+import '@vaadin/vaadin-template-renderer/vaadin-template-renderer';
 
 import { customElement, html, css, query } from 'lit-element';
 import { View } from '../view';
@@ -250,6 +251,8 @@ export class ComponentsView extends View {
           </div>
         </template>
       </vaadin-notification>
+
+      <vaadin-template-renderer></vaadin-template-renderer>
     `;
   }
 
