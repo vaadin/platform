@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "2.6.0.rc1"
+            "javaVersion": "2.7.0.alpha1"
         },
         "flow-cdi": {
             "javaVersion": "11.3.0.rc1"
@@ -391,7 +391,7 @@
         "vaadin-grid-pro": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.3.0-rc1",
+            "jsVersion": "2.3.0",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
