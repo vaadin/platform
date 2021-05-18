@@ -15,6 +15,8 @@
  */
 package com.vaadin.platform.test;
 
+import static java.lang.Thread.sleep;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -70,8 +72,6 @@ import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
-
-import static java.lang.Thread.sleep;
 
 public class ChromeComponentsIT extends ParallelTest {
 
@@ -539,8 +539,15 @@ public class ChromeComponentsIT extends ParallelTest {
         assertLog("Context menu Item 0 is clicked");
     }
 
+    private boolean isBower() {
+            return (Boolean) $("html").first().getCommandExecutor().executeScript("return !!window.Vaadin.Lumo");
+    }
+
     @Test
     public void messageListIsRendered() {
+        if (isBower()) {
+            return;
+        }
         MessageListElement messageList = $(MessageListElement.class).first();
         List<MessageElement> messages = messageList.getMessageElements();
         Assert.assertEquals("Number of messages rendered in MessageList",
@@ -553,6 +560,9 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void messageInputIsRenderedAndFiresSubmitEvent() {
+        if (isBower()) {
+            return;
+        }
         MessageInputElement messageInput = $(MessageInputElement.class).first();
         messageInput.submit("foo");
         assertLog("foo");
