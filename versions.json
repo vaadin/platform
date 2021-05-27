@@ -360,7 +360,7 @@
             "jsVersion": "3.1.0"
         },
         "flow-osgi": {
-            "javaVersion": "7.0.0.alpha1"
+            "javaVersion": "7.0.0.rc1"
         },
         "vaadin-board": {
             "component": true,
@@ -377,7 +377,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "3.1.0.beta2"
+            "javaVersion": "3.1.0"
         },
         "vaadin-confirm-dialog": {
             "component": true,
