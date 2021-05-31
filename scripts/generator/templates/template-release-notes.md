@@ -136,6 +136,10 @@ Any IDE or editor that works with the language of your choice should work well. 
 
 Vaadin supports version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
 
+## Maven and Gradle
+- Maven: vaadin supports Maven 3.5 or newer versions
+- Gradle: vaadin supports Gradle 5.0 or newer versions
+
 ## Application Servers
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 - Apache Tomcat 8.0.x, 8.5, 9
@@ -151,9 +155,6 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
 
 ## Supported Node.js and npm versions
 A [supported version](https://nodejs.org/en/about/releases/) of Node.js: 10.x, 12.x, 14.x or newer.
-
-# Breaking changes
-This lists products that have breaking changes from V14
 
 # Known Issues and Limitations
 
