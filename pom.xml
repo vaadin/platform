@@ -32,7 +32,6 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
-        <module>vaadin-gradle-plugin</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
@@ -40,6 +39,15 @@
     </modules>
 
     <profiles>
+        <profile>
+            <id>gradle</id>
+            <activation>
+                <jdk>(,16]</jdk>
+            </activation>
+            <modules>
+                <module>vaadin-gradle-plugin</module>
+            </modules>
+        </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
             <id>npm-it</id>
