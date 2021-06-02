@@ -42,7 +42,7 @@
         <profile>
             <id>gradle</id>
             <activation>
-                <jdk>(,16]</jdk>
+                <jdk>(,15]</jdk>
             </activation>
             <modules>
                 <module>vaadin-gradle-plugin</module>
