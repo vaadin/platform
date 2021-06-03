@@ -9,9 +9,6 @@
         "flow-spring": {
             "javaVersion": "17.0.0"
         },
-        "gradle": {
-            "javaVersion": "1.2"
-        },
         "iron-a11y-announcer": {
             "jsVersion": "2.1.0",
             "npmName": "@polymer/iron-a11y-announcer",
