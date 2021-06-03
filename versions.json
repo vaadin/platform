@@ -1,13 +1,13 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "7.0.0.rc1"
+            "javaVersion": "7.0.1"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
         },
         "flow-spring": {
-            "javaVersion": "17.0.0.rc1"
+            "javaVersion": "17.0.0"
         },
         "gradle": {
             "javaVersion": "1.2"
@@ -351,7 +351,7 @@
             "jsVersion": "3.1.0"
         },
         "flow-osgi": {
-            "javaVersion": "7.0.0.rc1"
+            "javaVersion": "7.0.0"
         },
         "vaadin-board": {
             "component": true,
