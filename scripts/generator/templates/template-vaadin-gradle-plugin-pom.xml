@@ -170,6 +170,11 @@
                                     <type>jar</type>
                                     <classifier>sources</classifier>
                                 </artifact>
+                                <artifact>
+                                    <file>target/${project.artifactId}-${project.version}-javadoc.jar</file>
+                                    <type>jar</type>
+                                    <classifier>javadoc</classifier>
+                                </artifact>
                             </artifacts>
                         </configuration>
                     </execution>
@@ -215,6 +220,7 @@
                                     <arguments>
                                         <argument>clean</argument>
                                         <argument>build</argument>
+                                        <argument>javadocJar</argument>
                                         <argument>-x</argument>
                                         <argument>functionalTest</argument>
                                         <argument>-S</argument>
