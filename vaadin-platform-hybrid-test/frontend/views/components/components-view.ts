@@ -53,6 +53,11 @@ import '@vaadin/vaadin-messages/vaadin-message';
 import '@vaadin/vaadin-messages/vaadin-message-list';
 import '@vaadin/vaadin-messages/vaadin-message-input';
 import '@vaadin/vaadin-template-renderer/vaadin-template-renderer';
+import '@vaadin/vaadin-virtual-list/vaadin-virtual-list';
+import type {
+  VirtualListElement,
+  VirtualListItemModel,
+} from '@vaadin/vaadin-virtual-list/vaadin-virtual-list';
 
 import { customElement, html, css, query } from 'lit-element';
 import { View } from '../view';
@@ -253,6 +258,16 @@ export class ComponentsView extends View {
       </vaadin-notification>
 
       <vaadin-template-renderer></vaadin-template-renderer>
+
+      <vaadin-virtual-list
+        .items="${[{ name: 'Juan' }, { name: 'John' }]}"
+        .renderer="${(
+          root: HTMLElement,
+          _list: VirtualListElement,
+          model: VirtualListItemModel
+        ) => (root.textContent = `Name: ${(model.item as any).name}`)}"
+      >
+      </vaadin-virtual-list>
     `;
   }
 
