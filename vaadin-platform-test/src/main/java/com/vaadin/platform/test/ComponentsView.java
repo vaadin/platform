@@ -101,6 +101,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.component.ironlist.IronList;
+import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
@@ -337,6 +338,11 @@ public class ComponentsView extends AppLayout {
         ironList.setHeight("50px");
         Stream<String> items = IntStream.range(0, 100).mapToObj(i -> ("Item " + i));
         ironList.setItems(items);
+
+        VirtualList<String> virtualList = new VirtualList<>();
+        virtualList.setHeight("50px");
+        Stream<String> virtualListItems = IntStream.range(0, 100).mapToObj(i -> ("Item " + i));
+        virtualList.setItems(virtualListItems);
 
         ListBox<String> listBox = new ListBox<>();
         listBox.setItems(IntStream.range(0, 7).mapToObj(i -> ("Item " + i)).collect(Collectors.toList()));
@@ -605,6 +611,7 @@ public class ComponentsView extends AppLayout {
         components.add(treeGrid);
         components.add(icons);
         components.add(ironList);
+        components.add(virtualList);
         components.add(listBox);
         components.add(multiSelectListBox);
         components.add(progressBar);

@@ -346,6 +346,8 @@
             "npmName": "@vaadin/vaadin-usage-statistics"
         },
         "vaadin-virtual-list": {
+            "component": true,
+            "javaVersion": "{{version}}",
             "jsVersion": "21.0.0-alpha5",
             "npmName": "@vaadin/vaadin-virtual-list",
             "releasenotes": true

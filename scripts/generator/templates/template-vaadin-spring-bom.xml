@@ -202,6 +202,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-virtual-list-flow</artifactId>
+                <version>${vaadin.virtual.list.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-list-box-flow</artifactId>
                 <version>${vaadin.list.box.version}</version>
             </dependency>
@@ -403,6 +408,12 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-iron-list-testbench</artifactId>
                 <version>${iron.list.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-virtual-list-testbench</artifactId>
+                <version>${vaadin.virtual.list.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
