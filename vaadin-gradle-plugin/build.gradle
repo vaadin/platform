@@ -95,7 +95,6 @@ jar {
                 'Implementation-Vendor': 'Vaadin Ltd',
         )
     }
-    from 'gradle.properties'
 }
 
 /**
