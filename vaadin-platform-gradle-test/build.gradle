@@ -7,19 +7,17 @@ buildscript {
         classpath group: 'com.vaadin',
                 name: 'vaadin-gradle-plugin',
                 version: "$pluginVersion"
-
-        classpath 'gradle.plugin.SauceConnectPlugin:Gradle-Sauce-Connect-Plugin-johnroach.io:0.0.35'
     }
 }
 
 plugins {
     id 'war'
     id 'org.gretty' version '3.0.4'
-    id 'io.johnroach.SauceConnectPlugin' version '0.0.35'
+    id 'com.vaadin.plugin.sauce.SauceConnectPlugin' version '0.0.15'
 }
 
 apply plugin: 'com.vaadin'
-apply plugin: 'io.johnroach.SauceConnectPlugin'
+apply plugin: 'com.vaadin.plugin.sauce.SauceConnectPlugin'
 
 repositories {
     mavenLocal()
