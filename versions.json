@@ -71,10 +71,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "5.0.2"
+            "javaVersion": "5.0.3"
         },
         "mpr-v8": {
-            "javaVersion": "5.0.2"
+            "javaVersion": "5.0.3"
         },
         "polymer": {
             "jsVersion": "2.7.0"
