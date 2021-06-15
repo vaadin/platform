@@ -29,6 +29,8 @@ import '@vaadin/vaadin-ordered-layout/vaadin-vertical-layout';
 import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
 import '@vaadin/vaadin-ordered-layout/vaadin-scroller';
 import '@vaadin/vaadin-icons/vaadin-icons';
+import '@vaadin/vaadin-icon/vaadin-icon';
+import '@vaadin/vaadin-iconset/vaadin-iconset';
 import '@vaadin/vaadin-list-box/vaadin-list-box';
 import '@vaadin/vaadin-login/vaadin-login-form';
 import '@vaadin/vaadin-login/vaadin-login-overlay';
@@ -117,6 +119,8 @@ export class ComponentsView extends View {
 
         <vaadin-icons></vaadin-icons>
         <iron-icon icon="vaadin:airplane"></iron-icon>
+        <vaadin-icon></vaadin-icon>
+        <vaadin-iconset></vaadin-iconset>
 
         <vaadin-chart type="pie">
         <vaadin-chart-series .values="${[
