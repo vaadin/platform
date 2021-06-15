@@ -555,11 +555,14 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void collaborationAvatarGroupIsRendered() {
         AvatarGroupElement group1 = $(AvatarGroupElement.class).id("collab-avatar-group-1");
         AvatarGroupElement group2 = $(AvatarGroupElement.class).id("collab-avatar-group-2");
-        for (AvatarGroupElement group : Arrays.asList(group1, group2)) {
-            assertElementRendered(group);
-            Assert.assertEquals("bar", group.getAvatarElement(0).getPropertyString("name"));
-            Assert.assertEquals("foo", group.getAvatarElement(1).getPropertyString("name"));
-        }
+
+        assertElementRendered(group1);
+        Assert.assertEquals("bar", group1.getAvatarElement(0).getPropertyString("name"));
+        Assert.assertEquals("foo", group1.getAvatarElement(1).getPropertyString("name"));
+
+        assertElementRendered(group2);
+        Assert.assertEquals("foo", group2.getAvatarElement(0).getPropertyString("name"));
+        Assert.assertEquals("bar", group2.getAvatarElement(1).getPropertyString("name"));
     }
 
     @Test
