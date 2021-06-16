@@ -641,9 +641,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         return driver.manage().logs().get(LogType.BROWSER).getAll().stream()
                 .filter(logEntry -> logEntry.getLevel().intValue() >= level
                         .intValue())
-                // exclude the favicon error
-                .filter(logEntry -> !logEntry.getMessage()
-                        .contains("favicon.ico"))
+                // exclude some known errors
+                .filter(logEntry -> !logEntry.getMessage().matches(".*(favicon.ico|ws://).*"))
                 .collect(Collectors.toList());
     }
 
