@@ -36,6 +36,8 @@
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
+        <module>vaadin-jandex</module>
+        <module>vaadin-core-jandex</module>
     </modules>
 
     <profiles>
