@@ -154,10 +154,10 @@ import org.apache.commons.io.IOUtils;
 public class ComponentsView extends AppLayout {
 
     static {
-        CollaborationEngine.configure(VaadinService.getCurrent(),
-                new CollaborationEngineConfiguration(e -> {
-                    // no-op
-                }));
+        CollaborationEngineConfiguration cfg = new CollaborationEngineConfiguration(e -> {/* NO-OP */});
+        // Deactivate Push (https://github.com/vaadin/collaboration-engine-internal/issues/615)
+        cfg.setAutomaticallyActivatePush(false);
+        CollaborationEngine.configure(VaadinService.getCurrent(), cfg);
     }
 
     private static final long serialVersionUID = 1L;
