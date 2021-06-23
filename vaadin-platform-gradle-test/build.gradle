@@ -30,7 +30,7 @@ dependencies {
     // Vaadin
     implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
     implementation 'com.vaadin:vaadin-core'
-
+    
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'
     testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'

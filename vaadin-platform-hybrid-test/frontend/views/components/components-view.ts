@@ -267,13 +267,14 @@ export class ComponentsView extends View {
       </vaadin-notification>
 
       <vaadin-template-renderer></vaadin-template-renderer>
+      
 
       <vaadin-virtual-list
         .items="${[{ name: 'Juan' }, { name: 'John' }]}"
         .renderer="${(
           root: HTMLElement,
-          _list: VirtualListElement,
-          model: VirtualListItemModel
+          _list: VirtualListElement<string>,
+          model: VirtualListItemModel<string>
         ) => (root.textContent = `Name: ${(model.item as any).name}`)}"
       >
       </vaadin-virtual-list>
