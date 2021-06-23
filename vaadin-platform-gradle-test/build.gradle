@@ -30,7 +30,7 @@ dependencies {
     // Vaadin
     implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
     implementation 'com.vaadin:vaadin-core'
-    implementation 'org.reflections:reflections:0.9.11'
+    implementation 'org.reflections:reflections:0.9.12'
     
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'

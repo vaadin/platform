@@ -67,7 +67,7 @@ repositories {
 dependencies {
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31")
     compile("com.vaadin:flow-plugin-base:${pom.properties.getAt('flow.version')}")
-    compile("org.reflections:reflections:0.9.11")
+    compile("org.reflections:reflections:0.9.12")
     testCompile("junit:junit:4.12")
     testCompile("org.jetbrains.kotlin:kotlin-test:1.4.31")
 }
