@@ -64,6 +64,10 @@ import { customElement, html, css, query } from 'lit-element';
 import { View } from '../view';
 import { LoginOverlayElement } from '@vaadin/vaadin-login';
 
+type Person = {
+  name: string;
+};
+
 @customElement('components-view')
 export class ComponentsView extends View {
   static get styles() {
@@ -273,9 +277,9 @@ export class ComponentsView extends View {
         .items="${[{ name: 'Juan' }, { name: 'John' }]}"
         .renderer="${(
           root: HTMLElement,
-          _list: VirtualListElement<string>,
-          model: VirtualListItemModel<string>
-        ) => (root.textContent = `Name: ${(model.item as any).name}`)}"
+          _list: VirtualListElement<Person>,
+          model: VirtualListItemModel<Person>
+        ) => (root.textContent = `Name: ${model.item.name}`)}"
       >
       </vaadin-virtual-list>
     `;
