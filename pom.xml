@@ -36,8 +36,6 @@
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
-        <module>vaadin-jandex</module>
-        <module>vaadin-core-jandex</module>
     </modules>
 
     <profiles>
@@ -48,6 +46,13 @@
             </activation>
             <modules>
                 <module>vaadin-gradle-plugin</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jandex</id>
+            <modules>
+                <module>vaadin-jandex</module>
+                <module>vaadin-core-jandex</module>
             </modules>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
