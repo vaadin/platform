@@ -11,7 +11,11 @@ function createPackageJson(versions, packageJsonTemplate) {
     for (let [name, version] of Object.entries(versions)) {
         if (version.npmName) {
             const npmVersion = version.npmVersion || version.jsVersion;
-            jsDeps[version.npmName] = "^" + npmVersion;
+            if (version.npmName.startsWith("@vaadin")) {
+                jsDeps[version.npmName] = npmVersion;
+            } else {
+                jsDeps[version.npmName] = "^" + npmVersion;
+            }
         }
     }
 
