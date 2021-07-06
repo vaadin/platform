@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
 
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
@@ -66,7 +67,14 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        String hubHost = System.getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        if ((sauceKey == null || sauceKey.isEmpty()) && (hubHost == null || hubHost.isEmpty())) {
+            String driver = System.getProperty("webdriver.chrome.driver");
+            if (driver == null || !new File(driver).exists()) {
+                WebDriverManager.chromedriver().setup();
+            }
+        }
     }
 
     @Before
@@ -81,11 +89,11 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         } else if (Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
         } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
-            driver = new RemoteWebDriver(new URL(getHubURL()), 
+            driver = new RemoteWebDriver(new URL(getHubURL()),
                 chromeOptions.merge(getDesiredCapabilities()));
         } else if (getRunOnHub(getClass()) != null
                 || Parameters.getHubHostname() != null) {
-            driver = new RemoteWebDriver(new URL(getHubURL()), 
+            driver = new RemoteWebDriver(new URL(getHubURL()),
             chromeOptions.merge(getDesiredCapabilities()));
         } else {
             driver = new ChromeDriver(chromeOptions);
