@@ -21,8 +21,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 public class HelloVaadinerIT extends AbstractPlatformTest {
 
     /**
@@ -35,12 +33,7 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
     protected String getTestPath() {
         return "/hello";
     }
-    
-    @BeforeClass
-    public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-    
+
     @Test
     public void clickingButton_showsNotification() {
         Assert.assertFalse($(NotificationElement.class).exists());
@@ -145,7 +138,7 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return (String) js.executeScript(script, elementId, pseudoElement);
     }
-    
+
     /**
      * Asserts that the given {@code element} is rendered using a theme
      * identified by {@code themeClass}. If the the is not found, JUnit
@@ -168,8 +161,8 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
                         " had theme '" + themeClass.getSimpleName() + "'.",
                 hasStyle);
     }
-    
-    
+
+
     /**
      * If dev server start in progress wait until it's started. Otherwise return
      * immidiately.
