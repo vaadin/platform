@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # use platform version  from the root pom.xml
-version=`mvn -N help:evaluate -Dexpression=project.version -q -DforceStdout`
+version=`mvn -N help:evaluate -Dexpression=project.version -q -DforceStdout | grep "^[0-9]"`
 
 snapshot=$1
 
