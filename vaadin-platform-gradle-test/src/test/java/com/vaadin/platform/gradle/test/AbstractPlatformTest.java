@@ -20,6 +20,7 @@ import org.junit.Before;
 import com.vaadin.testbench.parallel.ParallelTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.BeforeClass;
+import java.io.File;
 
 public abstract class AbstractPlatformTest extends ParallelTest {
 
@@ -28,7 +29,14 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        String hubHost = System.getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        if ((sauceKey == null || sauceKey.isEmpty()) && (hubHost == null || hubHost.isEmpty())) {
+            String driver = System.getProperty("webdriver.chrome.driver");
+            if (driver == null || !new File(driver).exists()) {
+                WebDriverManager.chromedriver().setup();
+            }
+        }
     }
 
     @Before
@@ -38,7 +46,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     /**
      * Gets the absolute path to the test, starting with a "/".
-     * 
+     *
      * @return he path to the test, appended to {@link #getRootURL()} for the
      *         full test URL.
      */
@@ -46,7 +54,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     /**
      * Returns the URL to the root of the server, e.g. "http://localhost:8888".
-     * 
+     *
      * @return the URL to the root
      */
     protected String getRootURL() {
@@ -55,7 +63,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     /**
      * Used to determine what port the test is running on.
-     * 
+     *
      * @return The port the test is running on, by default 8080
      */
     protected int getDeploymentPort() {
@@ -64,7 +72,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     /**
      * Used to determine what URL to initially open for the test.
-     * 
+     *
      * @return the host name of development server
      */
     protected String getDeploymentHostname() {

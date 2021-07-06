@@ -310,6 +310,11 @@
         </profile>
         <profile>
             <id>production</id>
+            <activation>
+                <property>
+                    <name>vaadin.productionMode</name>
+                </property>
+            </activation>
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
