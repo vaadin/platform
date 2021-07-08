@@ -55,9 +55,10 @@ All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
 ## Getting started
 
-Refer to [the documentation site](https://vaadin.com/docs/latest/guide/start) or visit https://start.vaadin.com/ to generate your Vaadin application. Set up your views, entities, styles, and the technology stack you’re interested in.
+The best way to get started with Vaadin is to go to https://start.vaadin.com and configure your new application using [Spring Boot](https://spring.io/projects/spring-boot) by setting up your views, entities and styles that you’re interested in.
 
-For other stacks, see https://vaadin.com/start.
+Read [the documentation site](https://vaadin.com/docs/latest/guide/start) for more ways to generate your starter project. Besides we also offer you other examples based on different technology stacks, click [here](https://vaadin.com/start)
+
 
 ## Contributing
 
