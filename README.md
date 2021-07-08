@@ -37,23 +37,11 @@ Flow is licensed under the Apache License 2.0.
 
 All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
 
-## Starters - project templates for your next Vaadin app
-
-See https://vaadin.com/start for more information.
-
-| Starter | Repository |
-|---------|------------|
-| Full stack app* | https://github.com/vaadin/bakery-app-starter-issues |
-| Simple example app | https://github.com/vaadin/beverage-starter-flow |
-| Project skeleton | https://github.com/vaadin/skeleton-starter-flow |
-| Project skeleton (Spring) | https://github.com/vaadin/skeleton-starter-flow-spring |
-
-
-Starters marked with a `*` are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing), other starters are licensed under the Apache License 2.0.
-
 ## Getting started
 
-Refer to [the documentation site](https://vaadin.com/docs) or visit <https://vaadin.com/start> to create a project.
+Refer to [the documentation site](https://vaadin.com/docs/latest/guide/start) or visit https://start.vaadin.com/ to generate your Vaadin application. Set up your views, entities, styles, and the technology stack you’re interested in.
+
+For other stacks, see https://vaadin.com/start.
 
 ## Contributing
 
