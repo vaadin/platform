@@ -29,8 +29,8 @@ Flow is licensed under the Apache License 2.0.
 
 | Part | Repository |
 |------|------------|
-| Vaadin web components and themes | https://github.com/vaadin/vaadin-web-components |
-| Java APIs for Vaadin components | https://github.com/vaadin/vaadin-flow-components |
+| Vaadin web components and themes | https://github.com/vaadin/web-components |
+| Java APIs for Vaadin components | https://github.com/vaadin/flow-components |
 
 ## Vaadin Collaboration Engine 
 
