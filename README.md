@@ -6,12 +6,6 @@ Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin.
 
 Use GitHub projects to open issues, propose new features, and contribute code. Below you can see links to different modules. If you don't know to which repository you should file your issue, just use this repository.
 
-## Vaadin components - building blocks for your web app
-
-| Part | Repository |
-|------|------------|
-| Vaadin web components and themes | https://github.com/vaadin/vaadin-web-components |
-| Java APIs for Vaadin components | https://github.com/vaadin/vaadin-flow-components |
 
 ## Vaadin Flow - Java framework to simplify web development
 
@@ -23,6 +17,28 @@ Vaadin Flow is a Java web framework that abstracts client-server communication a
 | Flow Spring integration | https://github.com/vaadin/spring |
 
 Flow is licensed under the Apache License 2.0.
+
+## Vaadin Fusion - Build secure and scalable web apps with TypeScript
+[Vaadin Fusion](https://vaadin.com/fusion) is a TypeScript and Java web framework for building modern web applications. You can create UIs in TypeScript and connect to any backend through endpoints written in Java.
+
+| Part | Repository |
+|------|------------|
+| Fusion | https://github.com/vaadin/fusion |
+
+## Vaadin components - building blocks for your web app
+
+| Part | Repository |
+|------|------------|
+| Vaadin web components and themes | https://github.com/vaadin/vaadin-web-components |
+| Java APIs for Vaadin components | https://github.com/vaadin/vaadin-flow-components |
+
+## Vaadin Collaboration Engine 
+
+The simplest way to build real-time collaboration into web apps, [check more details](https://vaadin.com/collaboration)
+
+| Part | Repository |
+|------|------------|
+| Collaboration-engine | https://github.com/vaadin/collaboration-engine |
 
 ## Vaadin Router
 
