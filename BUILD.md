@@ -58,7 +58,7 @@ mvn verify -Pproduction,fusion-hybrid -Dsauce.user=your_username -Dsauce.sauceAc
 3. For Servlet Contaner Integration Tests need to run:
 ```
 mvn install -Pproduction,npm-it -DskipTests
-mvn verify -Pproduction,platform-servlet-containers-tests -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
+mvn verify -Pproduction,npm-it-servlet-containers -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
 ```
 4. For gradle module tests
 ```
@@ -93,7 +93,7 @@ mvn install -DskipTests -Pproduction,npm-it
 
 Then run the tests:
 ```
-mvn verify -Pproduction,platform-servlet-containers-tests \
+mvn verify -Pproduction,npm-it-servlet-containers \
   -Dce.license=your_ce_license \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
