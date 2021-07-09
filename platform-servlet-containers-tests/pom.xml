@@ -7,7 +7,7 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>21.0-SNAPSHOT</version>
     </parent>
-    <artifactId>platform-servlet-containers-tests</artifactId>
+    <artifactId>vaadin-platform-servlet-containers-tests</artifactId>
     <packaging>pom</packaging>
     <name>Vaadin Platform Servlet Containers Tests</name>
     <description>Vaadin Platform Servlet Containers Tests</description>

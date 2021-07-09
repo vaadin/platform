@@ -360,7 +360,7 @@
                         </executions>
                     </plugin>
                     <!-- The following plugins are needed for OSGi tests
-                        in platform-servlet-containers-tests module -->
+                        in vaadin-platform-servlet-containers-tests module -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
