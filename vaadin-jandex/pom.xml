@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>21.0-SNAPSHOT</version>
+        <version>22.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>vaadin-jandex</artifactId>
