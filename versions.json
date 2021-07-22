@@ -118,7 +118,7 @@
                 "Checkbox Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.5.0",
+            "jsVersion": "2.5.1",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
@@ -140,7 +140,7 @@
         "vaadin-custom-field": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "1.3.0",
+            "jsVersion": "1.3.1",
             "npmName": "@vaadin/vaadin-custom-field"
         },
         "vaadin-date-picker": {
@@ -280,13 +280,13 @@
                 "Radio Button Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "1.5.1",
+            "jsVersion": "1.5.2",
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-select": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.4.0",
+            "jsVersion": "2.4.1",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
@@ -313,7 +313,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.8.4",
+            "jsVersion": "2.8.5",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
