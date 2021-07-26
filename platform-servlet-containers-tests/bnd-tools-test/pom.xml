@@ -320,7 +320,7 @@
                             <dependency>
                                 <groupId>com.saucelabs</groupId>
                                 <artifactId>ci-sauce</artifactId>
-                                <version>1.144</version>
+                                <version>1.151</version>
                             </dependency>
                         </dependencies>
                         <executions>
