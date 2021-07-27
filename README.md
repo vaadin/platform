@@ -4,7 +4,6 @@
 
 Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin. 
 
-Use GitHub projects to open issues, propose new features, and contribute code. Below you can see links to different modules. If you don't know to which repository you should file your issue, just use this repository.
 
 ## Vaadin Components - building blocks for your web app
 
