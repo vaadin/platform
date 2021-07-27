@@ -21,7 +21,6 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
-        <grid.browsers>${grid.browsers}</grid.browsers>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -231,6 +230,7 @@
                                 <sauce.user>${sauce.user}</sauce.user>
                                 <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
                                 <sauce.options>${sauce.options}</sauce.options>
+                                <grid.browsers>${grid.browsers}</grid.browsers>
                             </systemPropertyVariables>
                             <trimStackTrace>false</trimStackTrace>
                         </configuration>
