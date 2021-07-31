@@ -63,7 +63,6 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -82,15 +81,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     @Override
     protected String getTestPath() {
         return "/prod-mode/";
-    }
-
-    @Before
-    public void loadingPage() {
-        // wait for the loading
-        WebElement loadingIndicator = findElement(
-                By.className("v-loading-indicator"));
-        waitUntil(driver -> loadingIndicator.isDisplayed());
-        waitUntil(driver -> !loadingIndicator.isDisplayed());
     }
 
     @Test

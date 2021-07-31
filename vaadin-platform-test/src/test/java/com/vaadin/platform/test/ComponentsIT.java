@@ -1,12 +1,12 @@
 package com.vaadin.platform.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
@@ -16,8 +16,6 @@ import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
-
-import static org.junit.Assert.assertTrue;
 
 public class ComponentsIT extends AbstractPlatformTest {
 
@@ -54,11 +52,6 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void appWorks() throws Exception {
-        // wait for the loading
-        WebElement loadingIndicator = findElement(
-                By.className("v-loading-indicator"));
-        waitUntil(driver -> loadingIndicator.isDisplayed());
-        waitUntil(driver -> !loadingIndicator.isDisplayed());
         $(NotificationElement.class).waitForFirst();
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
