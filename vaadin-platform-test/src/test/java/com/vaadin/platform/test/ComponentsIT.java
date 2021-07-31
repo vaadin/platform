@@ -58,7 +58,7 @@ public class ComponentsIT extends AbstractPlatformTest {
         WebElement loadingIndicator = findElement(
                 By.className("v-loading-indicator"));
         waitUntil(driver -> loadingIndicator.isDisplayed());
-        waitUntil(driver -> !loadingIndicator.isDisplayed(), 20);
+        waitUntil(driver -> !loadingIndicator.isDisplayed());
         $(NotificationElement.class).waitForFirst();
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);

@@ -90,7 +90,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         WebElement loadingIndicator = findElement(
                 By.className("v-loading-indicator"));
         waitUntil(driver -> loadingIndicator.isDisplayed());
-        waitUntil(driver -> !loadingIndicator.isDisplayed(), 20);
+        waitUntil(driver -> !loadingIndicator.isDisplayed());
     }
 
     @Test
