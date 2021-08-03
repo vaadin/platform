@@ -220,6 +220,19 @@
         </dependency>
         <!-- End Gogo Shell -->
 
+        <!-- explicitly include transitice dependency of JSON 1.4 to be able to activate the bundle -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.14.1</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
