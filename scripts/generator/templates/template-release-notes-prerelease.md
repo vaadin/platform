@@ -56,7 +56,7 @@ All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersi
 
 # Getting Started with Vaadin
 ## App starters
-The best way to get started with Vaadin is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in. 
+The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
 ### Note
 Vaadin 22 starters are not available just yet in vaadin.com. You can use Vaadin 21 starter and manually change Vaadin version (see instructions below).
