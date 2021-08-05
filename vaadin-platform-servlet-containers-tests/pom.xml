@@ -40,6 +40,13 @@
             <url>https://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
     </pluginRepositories>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
