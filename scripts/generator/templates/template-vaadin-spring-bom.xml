@@ -247,6 +247,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-renderer-flow</artifactId>
+                <version>${vaadin.renderer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-split-layout-flow</artifactId>
                 <version>${vaadin.split.layout.version}</version>
             </dependency>
