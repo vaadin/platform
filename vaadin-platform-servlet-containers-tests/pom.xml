@@ -50,6 +50,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>flow-data</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-renderer-flow</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
