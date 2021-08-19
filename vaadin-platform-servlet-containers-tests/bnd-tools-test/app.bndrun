@@ -31,9 +31,9 @@
 
 
 -runrequires.flow: \
-    bnd.identity;version='9.0';id='com.vaadin.flow.client',\
-    bnd.identity;version='9.0';id='com.vaadin.flow.data',\
-    bnd.identity;version='9.0';id='com.vaadin.flow.html.components',\
-    bnd.identity;version='9.0';id='com.vaadin.flow.push',\
-    bnd.identity;version='9.0';id='com.vaadin.flow.osgi',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.client',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.data',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.html.components',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.push',\
+    bnd.identity;version='6.0';id='com.vaadin.flow.osgi',\
     bnd.identity;version='1.1.1';id='com.vaadin.license-checker'
