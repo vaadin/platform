@@ -4,7 +4,7 @@
             "javaVersion": "9.0.0.alpha2"
         },
         "flow-cdi": {
-            "javaVersion": "13.0.0.alpha1"
+            "javaVersion": "13.0.0"
         },
         "flow-spring": {
             "javaVersion": "19.0-SNAPSHOT"
@@ -282,6 +282,10 @@
             "jsVersion": "22.0.0-alpha1",
             "npmName": "@vaadin/vaadin-radio-button"
         },
+        "vaadin-renderer": {
+            "component": true,
+            "javaVersion": "{{version}}"
+        },
         "vaadin-router": {
             "jsVersion": "1.7.4",
             "npmName": "@vaadin/router",
@@ -351,10 +355,6 @@
             "jsVersion": "22.0.0-alpha1",
             "npmName": "@vaadin/vaadin-virtual-list",
             "releasenotes": true
-        },
-        "vaadin-renderer": {
-            "component": true,
-            "javaVersion": "{{version}}"
         }
     },
     "platform": "{{version}}",
