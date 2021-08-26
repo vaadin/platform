@@ -20,7 +20,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
-        //this version is needed for app.bndrun file
+        <!-- this version is needed for app.bndrun file -->
         {{javadeps}}
     </properties>
 
