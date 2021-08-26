@@ -58,7 +58,7 @@
         <profile>
             <id>npm-it-servlet-containers</id>
             <modules>
-                <module>platform-servlet-containers-tests</module>
+                <module>vaadin-platform-servlet-containers-tests</module>
             </modules>
         </profile>
         <profile>
