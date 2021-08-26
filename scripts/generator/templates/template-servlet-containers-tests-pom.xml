@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>20.0-SNAPSHOT</version>
+        <version>{{platform}}</version>
     </parent>
     <artifactId>platform-servlet-containers-tests</artifactId>
     <packaging>pom</packaging>
@@ -20,6 +20,8 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <!-- this version is needed for app.bndrun file -->
+        {{javadeps}}
     </properties>
 
     <dependencyManagement>
