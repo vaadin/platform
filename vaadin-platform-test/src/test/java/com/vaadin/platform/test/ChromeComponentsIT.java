@@ -649,8 +649,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     private void assertTextComponent(TestBenchElement element,
             String mainhtmlTag, String msg) {
-        TestBenchElement input = element.$(mainhtmlTag)
-                .attribute("part", "value").first();
+        TestBenchElement input = element.$(mainhtmlTag).first();
 
         assertElementRendered(input);
 
