@@ -189,6 +189,10 @@
             "jsVersion": "21.0.0",
             "npmName": "@vaadin/vaadin-grid"
         },
+        "vaadin-icon": {
+            "jsVersion": "21.0.0",
+            "npmName": "@vaadin/vaadin-icon"
+        },
         "vaadin-icons": {
             "component": true,
             "javaVersion": "{{version}}",
