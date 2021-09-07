@@ -184,7 +184,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void selectIsRenderedAndReceivesValueChangeEvent() {
         SelectElement select = $(SelectElement.class).first();
 
-        select.$(DivElement.class).attribute("part", "input-field").first().click();
+        select.$("vaadin-input-container").attribute("part", "input-field").first().click();
 
         WebElement dropDown = $("vaadin-select-overlay").first();
 
