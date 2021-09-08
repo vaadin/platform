@@ -215,11 +215,12 @@ function generateChangesString(allVersions, allPreviousVersions) {
     let componentChangedSincePreviousText = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
-            const currentJSVersion = version.jsVersion;
+            const currentJSVersion = version.jsVersion == undefined ? '0.0.0' : version.jsVersion;
             const currentJavaVersion = toSemVer(version.javaVersion);
             const previousVersionComponent = allPreviousVersions[versionName];
-            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            const previousJSVersion = previousVersionComponent ? (previousVersionComponent.jsVersion == undefined ? '0.0.0' : previousVersionComponent.jsVersion) : '0.0.0';
             const previousJavaVersion = previousVersionComponent ? toSemVer(previousVersionComponent.javaVersion) : '0.0.0';
+
             if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1 || compareVersions(currentJavaVersion, previousJavaVersion) === 1) {
                 const result = buildComponentReleaseString(versionName, version);
                 componentChangedSincePreviousText = componentChangedSincePreviousText.concat(result);
@@ -251,10 +252,10 @@ function getReleaseNotesForChanged(allVersions, allPreviousVersions) {
     let componentChangedSincePreviousText = '';
     for (let [versionName, version] of Object.entries(allVersions)) {
         if (version.component) {
-            const currentJSVersion = version.jsVersion;
+            const currentJSVersion = version.jsVersion == undefined ? '0.0.0' : version.jsVersion;
             const currentJavaVersion = toSemVer(version.javaVersion);
             const previousVersionComponent = allPreviousVersions[versionName];
-            const previousJSVersion = previousVersionComponent ? previousVersionComponent.jsVersion : '0.0.0';
+            const previousJSVersion = previousVersionComponent ? (previousVersionComponent.jsVersion == undefined ? '0.0.0' : previousVersionComponent.jsVersion) : '0.0.0';
             const previousJavaVersion = previousVersionComponent ? toSemVer(previousVersionComponent.javaVersion) : '0.0.0';
             if (!previousVersionComponent || compareVersions(currentJSVersion, previousJSVersion) === 1 || compareVersions(currentJavaVersion, previousJavaVersion) === 1) {
                 const result = buildComponentReleaseNoteString(versionName, version);

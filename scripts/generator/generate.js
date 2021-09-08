@@ -55,9 +55,6 @@ const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-
 const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
 const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
 
-const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
-const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
-
 const mavenPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-maven-plugin-pom.xml');
 const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom.xml');
 
@@ -83,7 +80,6 @@ writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, relea
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 
-writer.writeModulesReleaseNotes(versions, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", servletContainersTestsPomFileName, servletContainersTestsResultPomFileName);
