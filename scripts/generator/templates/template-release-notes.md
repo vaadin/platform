@@ -115,9 +115,9 @@ Development is supported with the following operating systems:
 - macOS
 
 ## Desktop Browsers
-- Evergreen versions of the following browsers on :
+- Evergreen versions of the following browsers :
 - Chrome on the operating systems [supported](https://support.google.com/chrome/a/answer/7100626?hl=en) by the product.
-- Firefox on the [supported](https://www.mozilla.org/en-US/firefox/91.0.1/system-requirements/) platforms
+- Firefox on the [supported](https://www.mozilla.org/en-US/firefox/92.0/system-requirements/) platforms
 - Safari on [macOS](https://support.apple.com/en-us/HT201260) 10.15 or later
 - Edge Chromium on the systems [supported](https://docs.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems) by the vendor.
 
