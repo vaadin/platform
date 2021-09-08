@@ -83,7 +83,7 @@ mvn -B archetype:generate \
 mvn -B archetype:generate \
                 -DarchetypeGroupId=com.vaadin \
                 -DarchetypeArtifactId=vaadin-archetype-spring-application \
-                -DarchetypeVersion=21.0.0 \
+                -DarchetypeVersion={{platform}}\
                 -DgroupId=org.test \
                 -DartifactId=vaadin-app \
                 -Dversion=1.0-SNAPSHOT \
