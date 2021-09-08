@@ -359,6 +359,58 @@
             "jsVersion": "22.0.0-alpha5",
             "npmName": "@vaadin/vaadin-virtual-list",
             "releasenotes": true
+        },
+        "button": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/button"
+        },
+        "checkbox": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/checkbox"
+        },
+        "checkbox-group": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/checkbox-group"
+        },
+        "email-field": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/email-field"
+        },
+        "field-base": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/field-base"
+        },
+        "input-container": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/input-container"
+        },
+        "integer-field": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/integer-field"
+        },
+        "number-field": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/number-field"
+        },
+        "password-field": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/password-field"
+        },
+        "radio-group": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/radio-group"
+        },
+        "select": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/select"
+        },
+        "text-area": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/text-area"
+        },
+        "text-field": {
+            "jsVersion": "22.0.0-alpha5",
+            "npmName": "@vaadin/text-field"
         }
     },
     "platform": "{{version}}",
