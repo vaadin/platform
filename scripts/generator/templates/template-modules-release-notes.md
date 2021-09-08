@@ -1,3 +1,0 @@
-# Vaadin {{platform}}
-
-{{modulesReleaseNotes}}
