@@ -63,8 +63,9 @@ The best way to get started with Vaadin is to go to [https://start.vaadin.com](h
 Vaadin 22 starters are not available just yet in vaadin.com. You can use Vaadin 21 starter and manually change Vaadin version (see instructions below).
 
 ## Maven Archetypes
-
-Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE. There is currently one Maven archetype available, the `vaadin-archetype-application` which corresponds to the project base for Flow. The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
+Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE.
+There are currently two Maven archetypes available, the `vaadin-archetype-application` which corresponds to the project base for Flow and the corresponding `vaadin-archetype-spring-application` if you prefer use Flow with [Spring](https://spring.io/).
+The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
 
 ```
 mvn -B archetype:generate \
@@ -76,6 +77,18 @@ mvn -B archetype:generate \
                 -Dversion=1.0-SNAPSHOT \
                 && cd vaadin-app \
                 && mvn package jetty:run
+```
+
+```
+mvn -B archetype:generate \
+                -DarchetypeGroupId=com.vaadin \
+                -DarchetypeArtifactId=vaadin-archetype-spring-application \
+                -DarchetypeVersion={{platform}}\
+                -DgroupId=org.test \
+                -DartifactId=vaadin-app \
+                -Dversion=1.0-SNAPSHOT \
+                && cd vaadin-app \
+                && mvn
 ```
 
 ## Manually changing Vaadin version for Java projects
@@ -102,23 +115,11 @@ Development is supported with the following operating systems:
 - macOS
 
 ## Desktop Browsers
-- Evergreen versions of the following browsers on :
-  - Chrome on these operating systems:
-    - Windows 7, Windows 8.1, Windows 10 or later
-    - macOS 10.9 (OS X Mavericks) or later
-    - 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
-  - Firefox on these operating systems
-    - Windows 7, Windows 8.1, Windows 10 or later
-    - macOS 10.9  (OS X Mavericks) or later
-    - Any Linux with the following packages:
-      - GTK+ 3.4 or higher
-      - GLib 2.22 or higher
-      - Pango 1.14 or higher
-      - X.Org 1.0 or higher (1.7 or higher is recommended)
-      - libstdc++ 4.6.1 or higher
-    - Latest Firefox ESR is supported (starting from Firefox ESR 68)
-  - Safari on macOS 10.15 or later (starting from Safari 13, available also for macOS 10.14.5 and 10.13.6)
-  - Edge on Windows 10 or later. Note: Vaadin 15 supports only Edge Chromium and does not provide support for EdgeHTML. 
+- Evergreen versions of the following browsers :
+- Chrome on the operating systems [supported](https://support.google.com/chrome/a/answer/7100626?hl=en) by the product.
+- Firefox on the [supported](https://www.mozilla.org/en-US/firefox/92.0/system-requirements/) platforms
+- Safari on [macOS](https://support.apple.com/en-us/HT201260) 10.15 or later
+- Edge Chromium on the systems [supported](https://docs.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems) by the vendor.
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
