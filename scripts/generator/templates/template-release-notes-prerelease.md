@@ -20,7 +20,7 @@ Vaadin includes the following projects. Release notes with detailed change logs 
 Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
 
 ### Components
-To simplify the version schema, since Vaadin 14.7, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
+To simplify the version schema, all listed components' flow integration versions are following the Vaadin version, e.g. Vaadin Button's flow integration version in this release is {{platform}}.
 
 {{components}}
 
