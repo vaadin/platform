@@ -166,13 +166,13 @@ A [supported version](https://nodejs.org/en/about/releases/) of Node.js: 10.x, 1
 OSGi does not work in V15.
 
 # Migrating from Vaadin 8
-See [the migration guide]( https://vaadin.com/docs-beta/v14/guide/upgrading/v8/)
+See [the migration guide]( https://vaadin.com/docs/v14/guide/upgrading/v8/)
 
 # Migrating from Vaadin 10-14
-See [the migration guide]( https://vaadin.com/docs-beta/v14/guide/upgrading/v10-13/)
+See [the migration guide]( https://vaadin.com/docs/v14/guide/upgrading/v10-13/)
 
 # Migrating from Vaadin 15
-See [the migration guide](https://vaadin.com/docs-beta/latest/guide/upgrading)
+See [the migration guide](https://vaadin.com/docs/latest/flow/guide/upgrading)
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
