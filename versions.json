@@ -12,6 +12,10 @@
             "jsVersion": "22.0.0-alpha6",
             "npmName": "@vaadin/checkbox-group"
         },
+        "component-base": {
+            "jsVersion": "22.0.0-alpha6",
+            "npmName": "@vaadin/component-base"
+        },
         "email-field": {
             "jsVersion": "22.0.0-alpha6",
             "npmName": "@vaadin/email-field"
