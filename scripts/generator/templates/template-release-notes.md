@@ -135,7 +135,7 @@ Any IDE or editor that works with the language of your choice should work well. 
 
 ## Java
 
-Vaadin supports version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
+Vaadin supports version 8, 11 and 17 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
 
 ## Maven and Gradle
 - Maven: vaadin supports Maven 3.5 or newer versions
