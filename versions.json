@@ -33,6 +33,9 @@
         "flow-spring": {
             "javaVersion": "19.0.0.alpha1"
         },
+        "flow-legacy-components": {
+            "javaVersion": "1.0.0.alpha"
+        },
         "input-container": {
             "jsVersion": "22.0.0-alpha6",
             "npmName": "@vaadin/input-container"
