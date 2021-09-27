@@ -52,6 +52,12 @@
                 <artifactId>flow-osgi</artifactId>
                 <version>${flow.osgi.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-legacy-components-flow</artifactId>
+                <version>${flow.legacy.components.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>
