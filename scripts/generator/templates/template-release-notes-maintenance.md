@@ -12,7 +12,7 @@ Visit [vaadin.com](https://vaadin.com/) to get started.
 Here are the highlighted new and improved features in this maintenance release.
 
 ### Flow [{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})
-### Vaadin Web Components [{{core.button.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.button.jsVersion}})
+### Vaadin Web Components [{{core.vaadin-button.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-button.jsVersion}})
 ### Vaadin Flow Components [{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}})
 
 {{changesSincePrevious}}
