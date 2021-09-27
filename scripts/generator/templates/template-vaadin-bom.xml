@@ -56,7 +56,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-legacy-components-flow</artifactId>
-                <version>${flow.legacy.components}</version>
+                <version>${flow.legacy.components.version}</version>
             </dependency>
 
             <dependency>
