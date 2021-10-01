@@ -82,6 +82,7 @@ import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.html.HtmlObject;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Input;
@@ -93,6 +94,7 @@ import com.vaadin.flow.component.html.NativeDetails;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.Param;
 import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
@@ -226,6 +228,8 @@ public class ComponentsView extends AppLayout {
         Component sel = new HtmlComponent("select");
         NativeDetails nativeDetails = new NativeDetails(new Span("native details"));
         nativeDetails.setContent(new Span("content"));
+        HtmlObject htmlObject = new HtmlObject();
+        Param param = new Param();
 
 
         // Using full qualified name since in parent class there is a Section Enum
@@ -235,7 +239,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails);
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param);
 
         IronIcon ironIcon = new IronIcon("communication", "email");
 
