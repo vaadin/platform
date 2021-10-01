@@ -129,7 +129,7 @@ Any IDE or editor that works with the language of your choice should work well. 
 
 ## Java
 
-The server-side parts of Vaadin support version 8 and 11 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
+The server-side parts of Vaadin support version 8, 11 and 17 of any JDK or JREs. More about Java support in [FAQ](https://vaadin.com/faq).
 
 ## Application Servers
 Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
