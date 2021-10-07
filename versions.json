@@ -1,7 +1,7 @@
 {
     "core": {
         "flow": {
-            "javaVersion": "7.0.8"
+            "javaVersion": "7.0.9"
         },
         "flow-cdi": {
             "javaVersion": "12.0.1"
@@ -71,10 +71,10 @@
             "npmVersion": "3.0.1"
         },
         "mpr-v7": {
-            "javaVersion": "5.0.4"
+            "javaVersion": "5.0.5"
         },
         "mpr-v8": {
-            "javaVersion": "5.0.4"
+            "javaVersion": "5.0.5"
         },
         "polymer": {
             "jsVersion": "2.7.0"
