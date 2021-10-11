@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import org.junit.Ignore;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -152,6 +153,7 @@ public class ComponentUsageTest {
 
 
     @Test
+    @Ignore
     public void verifyComponents() throws Exception {
         testComponents.forEach(c -> {
             if (c.component == null) {
@@ -173,6 +175,7 @@ public class ComponentUsageTest {
     }
 
     @Test
+    @Ignore
     public void testComponentUsage() throws Exception {
         List<Class<? extends Component>> allClasses = testComponents.stream().filter(tc -> tc.component != null).map(tc -> tc.component).collect(Collectors.toList());
 
