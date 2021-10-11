@@ -125,7 +125,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
         ComboBoxElement comboBox = $(ComboBoxElement.class).first();
 
-        TextFieldElement textField = comboBox.$("input");
+        TestBenchElement textField = comboBox.$("input").first();
         assertElementRendered(textField);
 
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
@@ -143,7 +143,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void datePickerIsRenderedAndRecievesValueChangeEvent() {
         DatePickerElement datePicker = $(DatePickerElement.class).first();
 
-        TestBenchElement textField = datePicker.$("input");
+        TestBenchElement textField = datePicker.$("input").first();
         assertElementRendered(textField);
 
         datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
@@ -162,7 +162,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void timePickerIsRenderedAndRecievesValueChangeEvent() {
         TestBenchElement timePicker = $("vaadin-time-picker").first();
 
-        TestBenchElement textField = timePicker.$("input");
+        TestBenchElement textField = timePicker.$("input").first();
         assertElementRendered(textField);
 
         timePicker.$("span").attribute("part", "toggle-button").first().click();
