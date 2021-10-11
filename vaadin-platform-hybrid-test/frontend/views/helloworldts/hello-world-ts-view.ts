@@ -1,7 +1,8 @@
-import { showNotification } from '../../utils/a-notification';
-import '@vaadin/vaadin-button';
-import '@vaadin/vaadin-text-field';
-import { customElement, html } from 'lit-element';
+import { Notification } from '@vaadin/notification';
+import '@vaadin/button';
+import '@vaadin/text-field';
+import { html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { View } from '../view';
 
 @customElement('hello-world-ts-view')
@@ -19,6 +20,6 @@ export class HelloWorldTSView extends View {
   }
 
   sayHello() {
-    showNotification('Hello ' + this.name);
+    Notification.show('Hello ' + this.name);
   }
 }
