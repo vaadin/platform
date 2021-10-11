@@ -95,9 +95,7 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
     @Test
     public void verifyComponentStylesAppliedFromTheme() {
         TestBenchElement myField = $(TestBenchElement.class).id(TEXT_FIELD_ID);
-        TestBenchElement input = myField.$(DivElement.class)
-                .attribute("class", "vaadin-text-field-container").first()
-                .$(DivElement.class).attribute("part", "input-field").first();
+        TestBenchElement input = myField.$("vaadin-text-field-container").attribute("part", "input-field").first();
         Assert.assertEquals("rgba(255, 165, 0, 1)", input.getCssValue("background-color"));
     }
 
