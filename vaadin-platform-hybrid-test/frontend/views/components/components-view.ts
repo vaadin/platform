@@ -1,68 +1,65 @@
 
-import '@vaadin/vaadin-accordion/vaadin-accordion';
-import '@vaadin/vaadin-app-layout/vaadin-app-layout';
-import '@vaadin/vaadin-app-layout/vaadin-drawer-toggle';
-import '@vaadin/vaadin-avatar/vaadin-avatar';
-import '@vaadin/vaadin-avatar/vaadin-avatar-group';
-import '@vaadin/vaadin-board/vaadin-board';
-import '@vaadin/vaadin-board/vaadin-board-row';
-import '@vaadin/vaadin-button/vaadin-button';
-import '@vaadin/vaadin-charts/vaadin-chart';
-import '@vaadin/vaadin-checkbox/vaadin-checkbox';
-import '@vaadin/vaadin-checkbox/vaadin-checkbox-group';
-import '@vaadin/vaadin-combo-box/vaadin-combo-box';
-import '@vaadin/vaadin-confirm-dialog/vaadin-confirm-dialog';
-import '@vaadin/vaadin-context-menu/vaadin-context-menu';
-import '@vaadin/vaadin-cookie-consent/vaadin-cookie-consent';
-import '@vaadin/vaadin-crud/vaadin-crud';
-import '@vaadin/vaadin-crud/src/vaadin-crud-edit-column';
-import '@vaadin/vaadin-date-time-picker/vaadin-date-time-picker';
-import '@vaadin/vaadin-details/vaadin-details';
-import '@vaadin/vaadin-form-layout/vaadin-form-layout';
-import '@vaadin/vaadin-grid/vaadin-grid';
-import '@vaadin/vaadin-grid/vaadin-grid-sorter';
-import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle';
-import '@vaadin/vaadin-grid/vaadin-grid-column';
-import '@vaadin/vaadin-grid-pro/vaadin-grid-pro';
-import '@vaadin/vaadin-grid-pro/vaadin-grid-pro-edit-column';
-import '@vaadin/vaadin-ordered-layout/vaadin-vertical-layout';
-import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
-import '@vaadin/vaadin-ordered-layout/vaadin-scroller';
-import '@vaadin/vaadin-icon/vaadin-icon';
-import '@vaadin/vaadin-icons/vaadin-iconset';
-import '@vaadin/vaadin-list-box/vaadin-list-box';
-import '@vaadin/vaadin-login/vaadin-login-form';
-import '@vaadin/vaadin-login/vaadin-login-overlay';
-import '@vaadin/vaadin-menu-bar/vaadin-menu-bar';
-import '@vaadin/vaadin-progress-bar/vaadin-progress-bar';
-import '@vaadin/vaadin-radio-button/vaadin-radio-group';
-import '@vaadin/vaadin-radio-button/vaadin-radio-button';
-import '@vaadin/vaadin-rich-text-editor/vaadin-rich-text-editor';
-import '@vaadin/vaadin-split-layout/vaadin-split-layout';
-import '@vaadin/vaadin-tabs/vaadin-tab';
-import '@vaadin/vaadin-tabs/vaadin-tabs';
-import '@vaadin/vaadin-text-field/vaadin-text-field';
-import '@vaadin/vaadin-text-field/vaadin-integer-field';
-import '@vaadin/vaadin-text-field/vaadin-text-area';
-import '@vaadin/vaadin-text-field/vaadin-number-field';
-import '@vaadin/vaadin-text-field/vaadin-password-field';
-import '@vaadin/vaadin-text-field/vaadin-email-field';
-import '@vaadin/vaadin-upload/vaadin-upload';
-import '@vaadin/vaadin-list-box/vaadin-list-box';
-import '@vaadin/vaadin-notification/vaadin-notification';
-import '@vaadin/vaadin-messages/vaadin-message';
-import '@vaadin/vaadin-messages/vaadin-message-list';
-import '@vaadin/vaadin-messages/vaadin-message-input';
-import '@vaadin/vaadin-template-renderer/vaadin-template-renderer';
-import '@vaadin/vaadin-virtual-list/vaadin-virtual-list';
+import '@vaadin/accordion';
+import '@vaadin/app-layout/vaadin-app-layout';
+import '@vaadin/app-layout/vaadin-drawer-toggle';
+import '@vaadin/avatar';
+import '@vaadin/avatar';
+import '@vaadin/board';
+import '@vaadin/board/vaadin-board-row';
+import '@vaadin/button';
+import '@vaadin/charts';
+import '@vaadin/checkbox';
+import '@vaadin/checkbox-group';
+import '@vaadin/combo-box';
+import '@vaadin/confirm-dialog';
+import '@vaadin/context-menu';
+import '@vaadin/cookie-consent';
+import '@vaadin/crud';
+import '@vaadin/crud/src/vaadin-crud-edit-column';
+import '@vaadin/date-time-picker';
+import '@vaadin/details';
+import '@vaadin/form-layout';
+import '@vaadin/grid/vaadin-grid';
+import '@vaadin/grid/vaadin-grid-sorter';
+import '@vaadin/grid/vaadin-grid-tree-toggle';
+import '@vaadin/grid/vaadin-grid-column';
+import '@vaadin/grid-pro/vaadin-grid-pro';
+import '@vaadin/grid-pro/vaadin-grid-pro-edit-column';
+import '@vaadin/vertical-layout';
+import '@vaadin/horizontal-layout';
+import '@vaadin/scroller';
+import '@vaadin/icon';
+import '@vaadin/icons/vaadin-iconset';
+import '@vaadin/list-box';
+import '@vaadin/login/vaadin-login-form';
+import '@vaadin/login/vaadin-login-overlay';
+import '@vaadin/menu-bar';
+import '@vaadin/progress-bar';
+import '@vaadin/radio-group';
+import '@vaadin/rich-text-editor';
+import '@vaadin/split-layout';
+import '@vaadin/tabs';
+import '@vaadin/text-field';
+import '@vaadin/integer-field';
+import '@vaadin/text-area';
+import '@vaadin/number-field';
+import '@vaadin/password-field';
+import '@vaadin/email-field';
+import '@vaadin/upload';
+import '@vaadin/list-box';
+import '@vaadin/notification';
+import '@vaadin/message-list';
+import '@vaadin/message-input';
+import '@vaadin/polymer-legacy-adapter/template-renderer.js';
+import '@vaadin/virtual-list/';
 import type {
-  VirtualListElement,
+  VirtualList,
   VirtualListItemModel,
-} from '@vaadin/vaadin-virtual-list/vaadin-virtual-list';
-
-import { customElement, html, css, query } from 'lit-element';
+} from '@vaadin/virtual-list';
+import { html, css, } from 'lit-element';
+import { customElement, query} from 'lit/decorators.js';
 import { View } from '../view';
-import { LoginOverlayElement } from '@vaadin/vaadin-login';
+import { LoginOverlay } from '@vaadin/login';
 
 type Person = {
   name: string;
@@ -76,7 +73,7 @@ export class ComponentsView extends View {
   }
 
   @query('vaadin-login-overlay')
-  loginOverlay!: LoginOverlayElement;
+  loginOverlay!: LoginOverlay;
 
   render() {
     return html`
@@ -271,13 +268,13 @@ export class ComponentsView extends View {
       </vaadin-notification>
 
       <vaadin-template-renderer></vaadin-template-renderer>
-      
+
 
       <vaadin-virtual-list
         .items="${[{ name: 'Juan' }, { name: 'John' }]}"
         .renderer="${(
           root: HTMLElement,
-          _list: VirtualListElement<Person>,
+          _list: VirtualList<Person>,
           model: VirtualListItemModel<Person>
         ) => (root.textContent = `Name: ${model.item.name}`)}"
       >
