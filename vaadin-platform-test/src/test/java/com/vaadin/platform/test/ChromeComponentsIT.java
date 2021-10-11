@@ -165,7 +165,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         TestBenchElement textField = timePicker.$("input").first();
         assertElementRendered(textField);
 
-        timePicker.$("span").attribute("part", "toggle-button").first().click();
+        timePicker.$("div").attribute("part", "toggle-button").first().click();
 
         WebElement dropDown = $("vaadin-combo-box-overlay").first();
 
