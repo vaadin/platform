@@ -120,11 +120,6 @@
             "npmName": "@polymer/iron-fit-behavior",
             "npmVersion": "3.0.2"
         },
-        "iron-flex-layout": {
-            "jsVersion": "2.0.3",
-            "npmName": "@polymer/iron-flex-layout",
-            "npmVersion": "3.0.1"
-        },
         "iron-icon": {
             "jsVersion": "2.1.0",
             "npmName": "@polymer/iron-icon",
