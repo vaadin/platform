@@ -115,11 +115,6 @@
             "npmName": "@polymer/iron-a11y-keys-behavior",
             "npmVersion": "3.0.1"
         },
-        "iron-fit-behavior": {
-            "jsVersion": "2.2.1",
-            "npmName": "@polymer/iron-fit-behavior",
-            "npmVersion": "3.0.2"
-        },
         "iron-icon": {
             "jsVersion": "2.1.0",
             "npmName": "@polymer/iron-icon",
@@ -149,11 +144,6 @@
         "iron-resizable-behavior": {
             "jsVersion": "2.1.1",
             "npmName": "@polymer/iron-resizable-behavior",
-            "npmVersion": "3.0.1"
-        },
-        "iron-scroll-target-behavior": {
-            "jsVersion": "2.1.1",
-            "npmName": "@polymer/iron-scroll-target-behavior",
             "npmVersion": "3.0.1"
         },
         "item": {
