@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Vaadin discord chat
+    url: https://discord.com/channels/732335336448852018
+    about: You can ask question for fast responds here.
+  - name: Vaadin Official website
+    url: https://www.vaadin.com/
+    about: Vaadin Official website
