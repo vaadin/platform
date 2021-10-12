@@ -1,11 +1,11 @@
 import { CSSModule } from '../../utils/css-utils';
-import { AppLayoutElement } from '@vaadin/vaadin-app-layout/src/vaadin-app-layout';
-import '@vaadin/vaadin-app-layout/theme/lumo/vaadin-app-layout';
-import '@vaadin/vaadin-app-layout/vaadin-drawer-toggle';
-import '@vaadin/vaadin-avatar/vaadin-avatar';
-import '@vaadin/vaadin-tabs/theme/lumo/vaadin-tab';
-import '@vaadin/vaadin-tabs/theme/lumo/vaadin-tabs';
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { AppLayout } from '@vaadin/app-layout';
+import '@vaadin/app-layout';
+import '@vaadin/app-layout/vaadin-drawer-toggle';
+import '@vaadin/avatar';
+import '@vaadin/tabs';
+import { css, html, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js'
 import { router } from '../../index';
 
 interface MenuTab {
@@ -132,7 +132,7 @@ export class MainView extends LitElement {
   }
 
   private _routerLocationChanged() {
-    AppLayoutElement.dispatchCloseOverlayDrawerEvent();
+    AppLayout.dispatchCloseOverlayDrawerEvent();
   }
 
   connectedCallback() {
