@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Vaadin discord chat
-    url: https://discord.com/channels/732335336448852018
+    url: https://discord.gg/vaadin
     about: You can ask question for fast responds here.
-  - name: Vaadin Official website
-    url: https://www.vaadin.com/
-    about: Vaadin Official website
+  - name: Report a security vulnerability
+    url: https://github.com/vaadin/platform/security/policy
+    about: Please review our security policy for more details
