@@ -18,7 +18,7 @@ body:
     id: expected-behavior
     attributes:
       label: Expected-behavior
-      description: Descript what the expected behavior you think, and we will validate on our designs. 
+      description: Describe what the expected behavior you think, and we will validate on our designs. 
       placeholder: expected behavior
   - type: textarea
     id: reproduction
