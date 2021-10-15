@@ -8,13 +8,13 @@
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/app-layout"
         },
-        "avatar-group": {
-            "jsVersion": "22.0.0-alpha10",
-            "npmName": "@vaadin/avatar-group"
-        },
         "avatar": {
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/avatar"
+        },
+        "avatar-group": {
+            "jsVersion": "22.0.0-alpha10",
+            "npmName": "@vaadin/avatar-group"
         },
         "button": {
             "jsVersion": "22.0.0-alpha10",
@@ -75,7 +75,7 @@
             "javaVersion": "13.0.0"
         },
         "flow-spring": {
-            "javaVersion": "19.0.0.alpha3"
+            "javaVersion": "19.0.0.alpha4"
         },
         "form-layout": {
             "jsVersion": "22.0.0-alpha10",
@@ -162,12 +162,6 @@
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/menu-bar"
         },
-        "mpr-v7": {
-            "javaVersion": "5.0.5"
-        },
-        "mpr-v8": {
-            "javaVersion": "5.0.5"
-        },
         "message-input": {
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/message-input"
@@ -175,6 +169,12 @@
         "message-list": {
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/message-list"
+        },
+        "mpr-v7": {
+            "javaVersion": "5.0.5"
+        },
+        "mpr-v8": {
+            "javaVersion": "5.0.5"
         },
         "notification": {
             "jsVersion": "22.0.0-alpha10",
@@ -534,12 +534,12 @@
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/confirm-dialog"
         },
-        "cookieconsent": {
-            "jsVersion": "3.1.0"
-        },
         "cookie-consent": {
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/cookie-consent"
+        },
+        "cookieconsent": {
+            "jsVersion": "3.1.0"
         },
         "crud": {
             "jsVersion": "22.0.0-alpha10",
