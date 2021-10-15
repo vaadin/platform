@@ -424,6 +424,9 @@
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/vaadin-progress-bar"
         },
+        "vaadin-quarkus": {
+            "javaVersion": "1.0.0.alpha1"
+        },
         "vaadin-radio-button": {
             "component": true,
             "components": [
