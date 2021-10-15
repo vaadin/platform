@@ -69,7 +69,7 @@
             "npmName": "@vaadin/field-base"
         },
         "flow": {
-            "javaVersion": "9.0.0.alpha9"
+            "javaVersion": "9.0.0.alpha10"
         },
         "flow-cdi": {
             "javaVersion": "13.0.0"
@@ -423,6 +423,9 @@
             "javaVersion": "{{version}}",
             "jsVersion": "22.0.0-alpha10",
             "npmName": "@vaadin/vaadin-progress-bar"
+        },
+        "vaadin-quarkus": {
+            "javaVersion": "1.0.0.alpha2"
         },
         "vaadin-radio-button": {
             "component": true,
