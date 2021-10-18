@@ -27,6 +27,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
+import org.junit.Assume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -545,9 +546,9 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void messageListIsRendered() {
-        if (isBower()) {
-            return;
-        }
+        //skip this test under bowermode
+        Assume.assumeFalse(isBower());
+        
         MessageListElement messageList = $(MessageListElement.class).first();
         List<MessageElement> messages = messageList.getMessageElements();
         Assert.assertEquals("Number of messages rendered in MessageList",
@@ -560,9 +561,9 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void messageInputIsRenderedAndFiresSubmitEvent() {
-        if (isBower()) {
-            return;
-        }
+        //skip this test under bowermode
+        Assume.assumeFalse(isBower());
+        
         MessageInputElement messageInput = $(MessageInputElement.class).first();
         messageInput.submit("foo");
         assertLog("foo");
