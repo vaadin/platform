@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import org.junit.Ignore;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -153,7 +152,6 @@ public class ComponentUsageTest {
 
 
     @Test
-    @Ignore
     public void verifyComponents() throws Exception {
         testComponents.forEach(c -> {
             if (c.component == null) {
@@ -175,7 +173,6 @@ public class ComponentUsageTest {
     }
 
     @Test
-    @Ignore
     public void testComponentUsage() throws Exception {
         List<Class<? extends Component>> allClasses = testComponents.stream().filter(tc -> tc.component != null).map(tc -> tc.component).collect(Collectors.toList());
 
@@ -203,6 +200,7 @@ public class ComponentUsageTest {
                     javaViewFile.getName(), String.join("\n   ", checkedList));
         }
 
+
         checkedList = checkLines(javaLines, javaVarRegexs, javaVars);
         if (!checkedList.isEmpty()) {
             fail = true;
@@ -211,15 +209,19 @@ public class ComponentUsageTest {
         }
 
 
-        Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
+        Set<String> vaadinComponents = testComponents.stream().filter(tc -> tc.imports.size() > 0)
                 .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
                 .map(s -> s.replaceFirst(".*/(.*)\\.js$", "$1"))
                 .collect(Collectors.toSet());
-        List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'@vaadin/.*" + s + "'; *")
+
+        Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
+                .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
+                .map(s -> s.replaceFirst("/src/", "/").replaceFirst(".[tj]s$", "").replaceFirst("/vaadin-", "/"))
+                .collect(Collectors.toSet());
+
+        List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'" + s + "'; *")
                 .collect(Collectors.toList());
-        List<String> jsImports = vaadinImports.stream().map(s -> "import '@vaadin/" + s + "/" + s + "';").collect(Collectors.toList());
-        Set<String> vaadinComponents = vaadinImports.stream()
-                .map(s -> s.replaceFirst("^@vaadin/vaadin-.*/([\\w-]+)$", "$1")).collect(Collectors.toSet());
+        List<String> jsImports = vaadinImports.stream().map(s -> "import '"+ s + "';").collect(Collectors.toList());
         List<String> jsRenderRegexs = vaadinComponents.stream().map(s -> "^.*</?" + s + ">.*")
                 .collect(Collectors.toList());
         List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + "></" + s + ">").collect(Collectors.toList());
@@ -250,7 +252,7 @@ public class ComponentUsageTest {
             Optional<String> line = fileContent.stream().filter(l -> {
                  return l.matches(regex);
               }).findFirst();
-            return !line.isPresent() ? source.get(regexs.indexOf(regex)) : null;
+            return !line.isPresent() ? (source.get(regexs.indexOf(regex))) : null;
         }).filter(s -> s != null).sorted().collect(Collectors.toList());
     }
 
