@@ -344,6 +344,10 @@ function getReleaseNoteLink(name, version) {
             title = 'Vaadin Spring Addon';
             releaseNoteLink = 'https://github.com/vaadin/spring/releases/tag/';
             break;
+        case 'vaadin-quarkus':
+            title = 'Vaadin Quarkus';
+            releaseNoteLink = 'https://github.com/vaadin/quarkus/releases/tag/';
+            break;
         case 'flow-cdi':
             title = 'Vaadin CDI Addon';
             releaseNoteLink = 'https://github.com/vaadin/cdi/releases/tag/';
@@ -383,6 +387,10 @@ function getModulesReleaseNoteLink(name, version) {
         case 'flow-spring':
             title = 'Vaadin Spring Addon';
             releaseNoteLink = 'https://api.github.com/repos/vaadin/spring/releases/tags/';
+            break;
+        case 'vaadin-quarkus':
+            title = 'Vaadin Quarkus';
+            releaseNoteLink = 'https://github.com/vaadin/quarkus/releases/tag/';
             break;
         case 'flow-cdi':
             title = 'Vaadin CDI Addon';
