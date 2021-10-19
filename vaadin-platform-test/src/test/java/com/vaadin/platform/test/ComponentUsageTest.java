@@ -66,12 +66,9 @@ public class ComponentUsageTest {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private <T> List<Class<? extends T>> filterByType(Collection<Class<?>> list, Class<T> type) {
-        return (List)list
-                .stream().filter(clz ->
-                    type.isAssignableFrom(clz) &&
-                    !clz.getName().contains("$") &&
-                    Modifier.isPublic(clz.getModifiers()) &&
-                    !Modifier.isAbstract(clz.getModifiers()))
+        return (List) list.stream()
+                .filter(clz -> type.isAssignableFrom(clz) && !clz.getName().contains("$")
+                        && Modifier.isPublic(clz.getModifiers()) && !Modifier.isAbstract(clz.getModifiers()))
                 .collect(Collectors.toList());
     }
 
@@ -83,18 +80,24 @@ public class ComponentUsageTest {
 
     public ComponentUsageTest() throws Exception {
         ClassLoader cl = getClass().getClassLoader();
-        ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl).getTopLevelClassesRecursive("com.vaadin.flow.component");
+        ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl)
+                .getTopLevelClassesRecursive("com.vaadin.flow.component");
         List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> ci.load()).collect(Collectors.toList());
         List<Class<? extends Component>> allComponentClasses = filterByType(vaadinClasses, Component.class);
-        List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses, TestBenchElement.class);
+        List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses,
+                TestBenchElement.class);
 
-        List<String> allComponentNames = allComponentClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
-        List<String> allTBElementNames = allTBElementClasses.stream().map(c -> c.getName()).collect(Collectors.toList());
-        List<List<String>> allJsImports = allComponentClasses.stream().map(
-                c -> getValues(c, JsModule.class).stream().collect(Collectors.toList()))
+        List<String> allComponentNames = allComponentClasses.stream().map(c -> c.getName())
                 .collect(Collectors.toList());
-        List<String> allComponentTags = allComponentClasses.stream().map(c -> getValue(c, Tag.class)).collect(Collectors.toList());
-        List<String> allTBElementTags = allTBElementClasses.stream().map(c -> getValue(c, Element.class)).collect(Collectors.toList());
+        List<String> allTBElementNames = allTBElementClasses.stream().map(c -> c.getName())
+                .collect(Collectors.toList());
+        List<List<String>> allJsImports = allComponentClasses.stream()
+                .map(c -> getValues(c, JsModule.class).stream().collect(Collectors.toList()))
+                .collect(Collectors.toList());
+        List<String> allComponentTags = allComponentClasses.stream().map(c -> getValue(c, Tag.class))
+                .collect(Collectors.toList());
+        List<String> allTBElementTags = allTBElementClasses.stream().map(c -> getValue(c, Element.class))
+                .collect(Collectors.toList());
 
         HashMap<String, TestComponent> byComponent = new HashMap<>();
         HashMap<String, TestComponent> byTbElement = new HashMap<>();
@@ -119,7 +122,8 @@ public class ComponentUsageTest {
                 tbElement = allTBElementClasses.get(j);
                 tbElementTag = allTBElementTags.get(j);
             }
-            TestComponent testComponent = new TestComponent(component, tbElement, equivalent, componentTag, imports, tbElementTag);
+            TestComponent testComponent = new TestComponent(component, tbElement, equivalent, componentTag, imports,
+                    tbElementTag);
             byComponent.put(componentName, testComponent);
             byTag.put(componentTag, testComponent);
             testComponents.add(testComponent);
@@ -150,7 +154,6 @@ public class ComponentUsageTest {
         }
     }
 
-
     @Test
     public void verifyComponents() throws Exception {
         testComponents.forEach(c -> {
@@ -158,30 +161,35 @@ public class ComponentUsageTest {
                 System.err.printf("ERROR: no Flow-Component for TB-Element %s - %s\n", c.tag, c.tbElement.getName());
             }
             if (c.tbElement == null) {
-                System.err.printf("ERROR: no TB-Element for Flow-Component %s - %s\n", c.localName, c.component.getName());
+                System.err.printf("ERROR: no TB-Element for Flow-Component %s - %s\n", c.localName,
+                        c.component.getName());
             }
             if (c.component != null) {
                 String equivalent = c.component.getName().replaceFirst("(.*)\\.(.*)", "$1.testbench.$2Element");
                 if (!equivalent.equals(c.tbEquivalentName)) {
-                    System.err.printf("ERROR: TB-Element does not follow name convention %s should be %s\n", c.tbElement.getName(), c.tbEquivalentName);
+                    System.err.printf("ERROR: TB-Element does not follow name convention %s should be %s\n",
+                            c.tbElement.getName(), c.tbEquivalentName);
                 }
             }
             if (c.component != null && c.tbElement != null && !c.localName.equals(c.tag)) {
-                System.err.printf("ERROR: different tags used in TB-Element and Flow-Component %s %s %s %s\n", c.localName, c.tag, c.component.getName(), c.tbElement.getName());
+                System.err.printf("ERROR: different tags used in TB-Element and Flow-Component %s %s %s %s\n",
+                        c.localName, c.tag, c.component.getName(), c.tbElement.getName());
             }
         });
     }
 
     @Test
     public void testComponentUsage() throws Exception {
-        List<Class<? extends Component>> allClasses = testComponents.stream().filter(tc -> tc.component != null).map(tc -> tc.component).collect(Collectors.toList());
+        List<Class<? extends Component>> allClasses = testComponents.stream().filter(tc -> tc.component != null)
+                .map(tc -> tc.component).collect(Collectors.toList());
 
         List<String> javaImportRegexs = allClasses.stream().map(c -> ".*[^\\w](" + c.getName() + ")[^\\w].*")
                 .collect(Collectors.toList());
         List<String> javaImports = allClasses.stream().map(c -> "import " + c.getName() + ";")
                 .collect(Collectors.toList());
-        List<String> javaVarRegexs = allClasses.stream().map(c -> "^\\s*([\\w\\.]+\\.)?(" + c.getSimpleName() + " *(<.*>)? *"
-                + StringUtils.uncapitalize(c.getSimpleName()) + ") *[;=].*").collect(Collectors.toList());
+        List<String> javaVarRegexs = allClasses.stream().map(c -> "^\\s*([\\w\\.]+\\.)?(" + c.getSimpleName()
+                + " *(<.*>)? *" + StringUtils.uncapitalize(c.getSimpleName()) + ") *[;=].*")
+                .collect(Collectors.toList());
         List<String> javaVars = allClasses.stream()
                 .map(c -> c.getSimpleName() + " " + StringUtils.uncapitalize(c.getSimpleName()) + " =")
                 .collect(Collectors.toList());
@@ -200,7 +208,6 @@ public class ComponentUsageTest {
                     javaViewFile.getName(), String.join("\n   ", checkedList));
         }
 
-
         checkedList = checkLines(javaLines, javaVarRegexs, javaVars);
         if (!checkedList.isEmpty()) {
             fail = true;
@@ -208,23 +215,37 @@ public class ComponentUsageTest {
                     javaViewFile.getName(), String.join("\n   ", checkedList));
         }
 
-
         Set<String> vaadinComponents = testComponents.stream().filter(tc -> tc.imports.size() > 0)
                 .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
-                .map(s -> s.replaceFirst(".*/(.*)\\.js$", "$1"))
-                .collect(Collectors.toSet());
+                .map(s -> s.replaceFirst(".*/(.*)\\.js$", "$1")).collect(Collectors.toSet());
 
         Set<String> vaadinImports = testComponents.stream().filter(tc -> tc.imports.size() > 0)
                 .flatMap(tc -> tc.imports.stream()).filter(s -> s.matches("^@vaadin/.*$"))
-                .map(s -> s.replaceFirst("/src/", "/").replaceFirst(".[tj]s$", "").replaceFirst("/vaadin-", "/"))
-                .collect(Collectors.toSet());
+                .map(s -> s.replaceFirst(".[tj]s$", "")).collect(Collectors.toSet());
 
-        List<String> jsImportRegexs = vaadinImports.stream().map(s -> "^\\s*import\\s+'" + s + "'; *")
+        List<String> jsImportRegex1s = vaadinImports.stream()
+                .map(s -> "^\\s*import\\s+'" + s.replaceFirst("/src/", "/(src/|)") + "'; *")
                 .collect(Collectors.toList());
-        List<String> jsImports = vaadinImports.stream().map(s -> "import '"+ s + "';").collect(Collectors.toList());
+        List<String> jsImportRegexs = vaadinImports.stream().map(s -> {
+            String[] t = s.split("/");
+            if (t.length == 4 && t[2].equals("src") && t[1].equals(t[3].replaceFirst("^vaadin-", ""))) {
+                return "^\\s*import\\s+'(" + t[0] + "/" + t[1] + "|" + s + ")'; *";
+            } else {
+                return "^\\s*import\\s+'" + s + "'; *";
+            }
+        }).collect(Collectors.toList());
+        List<String> jsImports = vaadinImports.stream().map(s -> {
+            String[] t = s.split("/");
+            if (t.length == 4 && t[2].equals("src") && t[1].equals(t[3].replaceFirst("^vaadin-", ""))) {
+                return "import '" + t[0] + "/" + t[1] + "';";
+            } else {
+                return "import '" + s + "';";
+            }
+        }).collect(Collectors.toList());
         List<String> jsRenderRegexs = vaadinComponents.stream().map(s -> "^.*</?" + s + ">.*")
                 .collect(Collectors.toList());
-        List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + "></" + s + ">").collect(Collectors.toList());
+        List<String> jsComponents = vaadinComponents.stream().map(s -> "<" + s + "></" + s + ">")
+                .collect(Collectors.toList());
 
         File tsViewFile = new File(TS_VIEW);
         assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
@@ -250,12 +271,11 @@ public class ComponentUsageTest {
     private List<String> checkLines(List<String> fileContent, List<String> regexs, List<String> source) {
         return regexs.stream().map(regex -> {
             Optional<String> line = fileContent.stream().filter(l -> {
-                 return l.matches(regex);
-              }).findFirst();
-            return !line.isPresent() ? (source.get(regexs.indexOf(regex))) : null;
+                return l.matches(regex);
+            }).findFirst();
+            return !line.isPresent() ? (source.get(regexs.indexOf(regex)) /* + " " + regex */) : null;
         }).filter(s -> s != null).sorted().collect(Collectors.toList());
     }
-
 
     private static String getValue(Class<?> claz, Class<? extends Annotation> annotation) {
         List<String> values = getValues(claz, annotation);
