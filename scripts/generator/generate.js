@@ -61,6 +61,10 @@ const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom
 const gradlePluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-pom.xml');
 const gradlePluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-pom.xml');
 
+const gradlePortalPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-portal-pom.xml');
+const gradlePortalPluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-portal-pom.xml');
+
+
 const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-containers-tests-pom.xml');
 const servletContainersTestsResultPomFileName = getResultsFilePath('vaadin-platform-servlet-containers-tests-pom.xml');
 
@@ -82,6 +86,7 @@ writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrin
 
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
+writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", servletContainersTestsPomFileName, servletContainersTestsResultPomFileName);
 
 
