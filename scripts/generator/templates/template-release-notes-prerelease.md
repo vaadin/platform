@@ -106,10 +106,10 @@ See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating
 
 # Migrating from Vaadin 10-14
 See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
+Since Vaadin 18, `PolymerTemplate` has been deprecated but it is still supported. `LitTemplate` should be used instead for new templates and we encourage migrating to it.
 
 # Migrating from Vaadin 21
 Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
-In addition, in the case of using the now deprecated PolymerTemplate in views, we encourage to migrate to LitTemplate.
 
 # Reporting Issues
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
