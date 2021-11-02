@@ -546,7 +546,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-legacy-components": {
-            "javaVersion": "1.0.0.alpha2"
+            "javaVersion": "1.0.0.beta1"
         },
         "flow-osgi": {
             "javaVersion": "7.0.0"
@@ -574,7 +574,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "4.0.0.alpha3"
+            "javaVersion": "4.0.0.beta1"
         },
         "vaadin-confirm-dialog": {
             "component": true,
