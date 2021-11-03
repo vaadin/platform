@@ -168,7 +168,7 @@
         "vaadin-dialog": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.5.2",
+            "jsVersion": "2.6.0",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-element-mixin": {
@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "5.8.4",
+            "jsVersion": "5.9.0",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
