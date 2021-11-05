@@ -164,7 +164,7 @@
         },
         "vaadin-upload": {
             "component": true,
-            "javaVersion": "1.0.4",
+            "javaVersion": "1.0.5",
             "jsVersion": "4.0.1"
         },
         "vaadin-usage-statistics": {
