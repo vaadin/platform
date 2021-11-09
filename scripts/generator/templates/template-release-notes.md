@@ -124,7 +124,7 @@ Development is supported with the following operating systems:
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
-- Safari starting from iOS 13
+- Safari starting from 14.1 (iOS 14.5)
 - Google Chrome evergreen on Android (requiring Android 4.4 or newer)
 
 ## Development environments
