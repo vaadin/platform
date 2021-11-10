@@ -110,11 +110,6 @@
             "npmName": "@polymer/iron-a11y-announcer",
             "npmVersion": "3.0.2"
         },
-        "iron-a11y-keys-behavior": {
-            "jsVersion": "2.1.1",
-            "npmName": "@polymer/iron-a11y-keys-behavior",
-            "npmVersion": "3.0.1"
-        },
         "iron-icon": {
             "jsVersion": "2.1.0",
             "npmName": "@polymer/iron-icon",
