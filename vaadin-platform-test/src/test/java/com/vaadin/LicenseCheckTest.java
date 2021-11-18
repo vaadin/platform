@@ -57,6 +57,7 @@ public class LicenseCheckTest {
         // BSD
         whitelist.add("http://www.opensource.org/licenses/bsd-license.php");
         whitelist.add("http://opensource.org/licenses/BSD-2-Clause");
+        whitelist.add("http://opensource.org/licenses/BSD-3-Clause");
 
         // MIT
         whitelist.add("https://opensource.org/licenses/MIT");
@@ -72,6 +73,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.gwtproject.org/terms.html");
         whitelist.add("https://github.com/javaee/javax.annotation/blob/master/LICENSE");
         whitelist.add("https://glassfish.dev.java.net/public/CDDLv1.0.html");
+        whitelist.add("https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html");
 
         // aopalliance:aopalliance
         whitelist.add("Public Domain");
@@ -156,7 +158,7 @@ public class LicenseCheckTest {
             String key = url != null ? url : name != null ? name : null;
 
             if (key == null) {
-                Assert.fail("");
+                Assert.fail("There is no license info (name or url) por dependency: " + dependency);
             } else if (!whitelist.contains(key)) {
                 List<String> licenses = unsupportedLicenses.computeIfAbsent(dependency, k -> new ArrayList<>());
                 licenses.add(name + ": " + url);
