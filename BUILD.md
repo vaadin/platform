@@ -1,8 +1,8 @@
-# Building Vaadin Platform
+# Building the Vaadin platform
 
-## Generate Boms
+## Generate BOMs
 
-For running the project, you need to execute the following script before any maven related commands:
+For running the project, you need to run the following script before any maven related commands:
 ```
 scripts/generateBoms.sh
 ```
@@ -16,7 +16,7 @@ scripts/generateBoms.sh --useSnapshots
 
 For releasing a new platform from CI servers the workflow should be:
  1. set the version to release in pom.xml file by running `mvn versions:set -DnewVersion=n.n.n`
- 2. generate and update other pom.xml files by running `./scripts/generateBoms.sh` script, if you want to use snapshots execute `./scripts/generateBoms.sh --useSnapshots` instead.
+ 2. generate and update other pom.xml files by running `./scripts/generateBoms.sh` script, if you want to use snapshots run `./scripts/generateBoms.sh --useSnapshots` instead.
  3. package  `mvn package -Pjavadocs -DskipTests`
  4. deploy `mvn deploy -Pproduction,release,javadocs,flatten-pom -DskipTests -DshrinkWrap`
  5. generate release notes `node scripts/generator/generate.js --platform=n.n.n --versions=versions.json`
@@ -45,8 +45,8 @@ In Addition, tests include Collaboration Engine, you need to provide a [valid li
 -Dce.license='{"content":{"key":"XXX","owner":"foo","quota":1000000,"endDate":"date"},"checksum":"XXX"}'
 ```
 
-### Run Integration Tests in Saucelabs
-1. you need valid Saucelabs credentials for running the tests
+### Run integration tests in Sauce Labs
+1. You need valid Sauce Labs credentials for running the tests
 2. For Smoke Integration Tests run:
 ```
 mvn verify -Pproduction,npm-it -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
@@ -68,7 +68,7 @@ cd vaadin-platform-gradle-test
   -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key
 ```
 
-### Running Integration Tests in local computer
+### Running integration tests in local computer
 
 1. For Flow Integration Tests run:
 ```
@@ -114,11 +114,3 @@ When in the `vaadin-platform-test` folder run `mvn jetty:run`, then connect to t
 In the `vaadin-platform-hybrid-test` run `mvn spring-boot:run`, then point your browser to `http://localhost:8080`.
 
 In the `vaadin-platform-gradle-test` run `./gradlew appRun`, then go to `http://localhost:8080`.
-
-
-
-
-
-
-
-
