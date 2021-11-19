@@ -142,7 +142,7 @@ Great that you are considering contributing! There are plenty of ways to help ou
 ### Report issues
 Report issues and propose new features in the product repositories. If you are unsure which repository an issue belongs to, use this repository. We’ll move it to the correct one for you.
 
-## Contribute code
+### Contribute code
 Please see our [Contributing to Projects](https://vaadin.com/docs/latest/contributing/overview) guide. Look for issues labelled with `help wanted` or `good first issue` in any of the repositories (for example, web-components: [help wanted](https://github.com/vaadin/web-components/labels/help%20wanted), [good first issue](https://github.com/vaadin/web-components/labels/good%20first%20issue)), to get started.
 
 ## Building locally
