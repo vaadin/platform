@@ -313,7 +313,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.8.6",
+            "jsVersion": "2.9.0",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
