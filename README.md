@@ -1,20 +1,28 @@
 <div align="center">
 
-# ![Vaadin](vaadin-banner.svg)
-
-The modern web application platform for Java  
-[vaadin.com](https://vaadin.com/)
-
-### [Get Started](https://vaadin.com/start) · [Docs](https://vaadin.com/docs) · [Community](#community)
-
-</div>
-
----
+![Vaadin](vaadin-banner.svg)
 
 Vaadin is a web app development platform for Java. It helps you build reliable web apps with great UX faster than before.
 
-*This repository gathers all parts of the Vaadin platform in to a single package, with a new major release every quarter, ensuring all the parts work together.*  
-[Release model](https://vaadin.com/roadmap) · [Roadmap](https://github.com/orgs/vaadin/projects/9)
+### [Get Started](https://vaadin.com/start) · [Docs](https://vaadin.com/docs) · [Community](#community) · [Roadmap](https://github.com/orgs/vaadin/projects/9)
+
+  <br>
+</div>
+
+
+
+## About this repo
+
+This repository gathers all parts of the Vaadin platform in to a single package, with a new major release every quarter, ensuring all the parts work together. Learn more about our [release model](https://vaadin.com/roadmap).
+
+### Supported versions
+
+- **21.0**
+- **14.7** LTS
+- **10.0** LTS
+
+For new users, the latest major version is recommended.  
+For production applications, the latest LTS is recommended.
 
 <br>
 
@@ -99,7 +107,6 @@ Plugins and add-ons for easy integration with 3rd party development tools.
 
 - [**Router**](https://github.com/vaadin/router)
 
----
 
 <br>
 
