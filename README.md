@@ -1,70 +1,159 @@
-# Vaadin platform
+<div align="center">
 
-[Vaadin platform](https://vaadin.com/) consists of a set of web components, a Java web framework called Vaadin Flow, configurable themes, tools and a set of opinionated app starters. Platform releases gather all products in to a single package every quarter. The product versions included in a platform release are not necessarily the latest released versions, but are hand picked so that they work well together.
+![Vaadin](vaadin-banner.svg)
 
-Visit [vaadin.com](https://vaadin.com/) to learn more about Vaadin.
+Vaadin is a web app development platform for Java. It helps you build reliable web apps with great UX faster than before.
 
-Use GitHub projects to open issues, propose new features, and contribute code. Below you can see links to different modules. If you don't know to which repository you should file your issue, just use this repository.
+### [Get Started](https://vaadin.com/start) · [Docs](https://vaadin.com/docs) · [Community](#community) · [Roadmap](https://github.com/orgs/vaadin/projects/9)
+
+  <br>
+</div>
 
 
-## Vaadin Flow - Java framework to simplify web development
 
-Vaadin Flow is a Java web framework that abstracts client-server communication and provides you a Java API for web component.
+## About this repo
 
-| Part | Repository |
-|------|------------|
-| Flow | https://github.com/vaadin/flow |
-| Flow Spring integration | https://github.com/vaadin/spring |
+This repository gathers all parts of the Vaadin platform in to a single package, with a new major release every quarter, ensuring all the parts work together. Learn more about our [release model](https://vaadin.com/roadmap).
 
-Flow is licensed under the Apache License 2.0.
+### Supported versions
 
-## Vaadin Fusion - Build secure and scalable web apps with TypeScript
-[Vaadin Fusion](https://vaadin.com/fusion) is a TypeScript and Java web framework for building modern web applications. You can create UIs in TypeScript and connect to any backend through endpoints written in Java.
+- **21.0**
+- **14.7** LTS
+- **10.0** LTS
 
-| Part | Repository |
-|------|------------|
-| Fusion | https://github.com/vaadin/fusion |
+For new users, the latest major version is recommended.  
+For production applications, the latest LTS is recommended.
 
-## Vaadin components - building blocks for your web app
+<br>
 
-| Part | Repository |
-|------|------------|
-| Vaadin web components and themes | https://github.com/vaadin/web-components |
-| Java APIs for Vaadin components | https://github.com/vaadin/flow-components |
+## Web frameworks
+Free, open source frameworks for building modern web applications.
 
-## Vaadin Collaboration Engine 
+<table width="100%">
+<tr>
+  <td width="50%">
 
-The simplest way to build real-time collaboration into web apps, [check more details](https://vaadin.com/collaboration)
+  [**Vaadin Flow**](https://github.com/vaadin/flow)  
+  Build modern web apps 100% in Java
+  </td>
+  <td width="50%">
 
-| Part | Repository |
-|------|------------|
-| Collaboration-engine | https://github.com/vaadin/collaboration-engine |
+  [**Vaadin Fusion**](https://github.com/vaadin/fusion)    
+  The modern front-end framework for Java
+  </td>
+</tr>
+</table>
 
-## Vaadin Router
+<br>
 
-[Vaadin Router](https://github.com/vaadin/vaadin-router) is a client-side router for Web Components.
+## UI components
+Free, open source UI components for creating high quality, accessible interfaces for business applications.
+
+<table width="100%">
+<tr>
+  <td width="50%">
+
+  [**Flow Components**](https://github.com/vaadin/flow-components)  
+  Java API for Vaadin components
+  </td>
+  <td width="50%">
+
+  [**Web Components**](https://github.com/vaadin/web-components)  
+  TypeScript/JavaScript/HTML API for Vaadin components
+  </td>
+</tr>
+</table>
+
+<br>
 
 ## Tools
+Commercial tools to speed up application development. [Pricing](https://vaadin.com/pricing)
 
-| Tool | Repository |
-|------|------------|
-| Designer | https://github.com/vaadin/designer |
-| TestBench | https://github.com/vaadin/testbench |
+<table width="100%">
+<tr>
+  <td colspan="2">
 
-All tools are part of the [Vaadin Pro Subscription](https://vaadin.com/pricing).
+  [**Collaboration Engine**](https://github.com/vaadin/collaboration-engine)  
+  The simplest way to build real-time collaboration into web apps
+  </td>
+</tr>
+<tr>
+  <td width="50%">
 
-## Getting started
+  [**Designer**](https://github.com/vaadin/designer)  
+  Design Vaadin UIs visually with drag'n'drop
+  </td>
+  <td width="50%">
 
-The best way to get started with Vaadin is to go to https://start.vaadin.com and configure your new application using [Spring Boot](https://spring.io/projects/spring-boot) by setting up your views, entities and styles that you’re interested in.
+  [**TestBench**](https://github.com/vaadin/testbench)  
+  Visual regression tests for Flow-based UIs
+  </td>
+</tr>
+</table>
 
-Read [the documentation site](https://vaadin.com/docs/latest/guide/start) for more ways to generate your starter project. Besides we also offer you other examples based on different technology stacks, click [here](https://vaadin.com/start)
+<br>
+
+## Integrations
+Plugins and add-ons for easy integration with 3rd party development tools.
+
+- [**Spring** add-on](https://github.com/vaadin/spring)
+- [**CDI** add-on](https://github.com/vaadin/cdi)
+- [**Maven** plugin](https://github.com/vaadin/flow/tree/master/flow-plugins/flow-maven-plugin)
+- [**Gradle** plugin](https://github.com/vaadin/flow/tree/master/flow-plugins/flow-gradle-plugin)
+- [**OSGi** plugin](https://github.com/vaadin/osgi)
+- [**Quarkus** plugin](https://github.com/vaadin/quarkus)
+
+## Additional repositories
+
+- [**Router**](https://github.com/vaadin/router)
+
+
+<br>
+
+## Community
+
+[Blog](https://vaadin.com/blog) · [Twitter](https://twitter.com/vaadin) · [Facebook](https://facebook.com/vaadin) · [LinkedIn](https://linkedin.com/company/52231) · [YouTube](https://youtube.com/user/vaadinofficial) · [Instagram](https://www.instagram.com/vaadin/)
+
+<table width="100%">
+<tr>
+  <td width="50%">
+
+  [**Chat on Discord**](https://discord.gg/MYFq5RTbBn)  
+  Get help and discuss with community members
+  </td>
+  <td width="50%">
+
+  [**Stack Overflow**](https://stackoverflow.com/questions/tagged/vaadin)  
+  Ask questions and get answers
+  </td>
+</tr>
+<tr>
+  <td width="50%">
+
+  [**Cookbook**](https://cookbook.vaadin.com)  
+  A collection of solutions to common use cases.
+  </td>
+  <td width="50%">
+
+  [**Add-on Directory**](https://vaadin.com/directory)  
+  Browse 3rd party components and add-ons and publish your own
+  </td>
+</tr>
+</table>
 
 
 ## Contributing
 
-We would absolutely love to get the community involved, and we welcome any form of contributions – comments and questions on different communication channels, issues and pull request in the repositories, and anything that you build and share using our platform. If unsure, feel free to post an issue in this repository and we'll help you.
+Great that you are considering contributing! There are plenty of ways to help out Vaadin as an open source project.
 
-For running the project, read the [Building Vaadin Platform](BUILD.md) article.
+### Report issues
+Report issues and propose new features in the product repositories. If you are unsure which repository an issue belongs to, use this repository. We’ll move it to the correct one for you.
+
+### Contribute code
+Please see our [Contributing to Projects](https://vaadin.com/docs/latest/contributing/overview) guide. Look for issues labelled with `help wanted` or `good first issue` in any of the repositories (for example, web-components: [help wanted](https://github.com/vaadin/web-components/labels/help%20wanted), [good first issue](https://github.com/vaadin/web-components/labels/good%20first%20issue)), to get started.
+
+## Building locally
+To build the Vaadin platform artifacts locally, see [Building the Vaadin platform](BUILD.md).
 
 ## License
 
