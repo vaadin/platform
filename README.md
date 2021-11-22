@@ -99,7 +99,7 @@ Plugins and add-ons for easy integration with 3rd party development tools.
 - [**Spring** add-on](https://github.com/vaadin/spring)
 - [**CDI** add-on](https://github.com/vaadin/cdi)
 - [**Maven** plugin](https://github.com/vaadin/flow/tree/master/flow-plugins/flow-maven-plugin)
-- [**Gradle** plugin](https://github.com/vaadin/vaadin-gradle-plugin)
+- [**Gradle** plugin](https://github.com/vaadin/flow/tree/master/flow-plugins/flow-gradle-plugin)
 - [**OSGi** plugin](https://github.com/vaadin/osgi)
 - [**Quarkus** plugin](https://github.com/vaadin/quarkus)
 
