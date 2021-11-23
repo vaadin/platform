@@ -165,7 +165,7 @@ A [supported version](https://nodejs.org/en/about/releases/) of Node.js: 10.x, 1
 - Links matching the context do not result in browser page load by default, instead they are handled with application routing. To opt-out, set the `router-ignore` attribute on the anchor element. This opt-out is needed for cases when native browser navigation is necessary, e. g., when [using `Anchor` to link a `StreamResource` download](https://github.com/vaadin/flow/issues/7623).
 
 ## OSGi support
-OSGi does not work in V15.
+See https://vaadin.com/docs/latest/flow/integrations/osgi/basic
 
 # Migrating from Vaadin 8
 See [the migration guide]( https://vaadin.com/docs/v14/guide/upgrading/v8/)
