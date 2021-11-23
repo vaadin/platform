@@ -4,14 +4,14 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 21
+## New and Noteworthy Since vaadin 22
 
-Here are the highlighted new and improved features in Vaadin 22. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+Here are the highlighted new and improved features in vaadin 23. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
 {{changesSincePrevious}}
 
 ## Support
-vaadin 22 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+vaadin 23 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
@@ -60,7 +60,7 @@ All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersi
 The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
 
 ### Note
-Vaadin 22 starters are not available just yet in vaadin.com. You can use Vaadin 21 starter and manually change Vaadin version (see instructions below).
+vaadin 23 starters are not available just yet in vaadin.com. You can use vaadin 22 starter and manually change Vaadin version (see instructions below).
 
 ## Manually changing Vaadin version for Java projects
 
@@ -95,7 +95,7 @@ Add the following contents to your project pom.xml.
 
 # Known Issues and Limitations
 
-This is the prerelease version of Vaadin 22 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
+This is the prerelease version of vaadin 23 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
@@ -108,7 +108,7 @@ See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating
 See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
 Since Vaadin 18, `PolymerTemplate` has been deprecated but it is still supported. `LitTemplate` should be used instead for new templates and we encourage migrating to it.
 
-# Migrating from Vaadin 21
+# Migrating from vaadin 22
 Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
 
 # Reporting Issues
