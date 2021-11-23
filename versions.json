@@ -75,7 +75,7 @@
             "javaVersion": "13.0.0"
         },
         "flow-spring": {
-            "javaVersion": "19.0.0.beta3"
+            "javaVersion": "19.0.0.rc1"
         },
         "form-layout": {
             "jsVersion": "22.0.0-rc1",
@@ -541,7 +541,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-legacy-components": {
-            "javaVersion": "1.0.0.beta1"
+            "javaVersion": "1.0.0.rc1"
         },
         "flow-osgi": {
             "javaVersion": "7.0.0"
@@ -569,7 +569,7 @@
             "pro": true
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "4.0.0.beta1"
+            "javaVersion": "4.0.0.rc1"
         },
         "vaadin-confirm-dialog": {
             "component": true,
