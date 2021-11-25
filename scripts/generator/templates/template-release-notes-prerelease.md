@@ -1,122 +1,35 @@
-# Vaadin {{platform}}
+[Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/)
 
-Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
-
-Visit [vaadin.com](https://vaadin.com/) to get started.
-
-## New and Noteworthy Since vaadin 22
-
-Here are the highlighted new and improved features in vaadin 23. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
+*This is a pre-release for the next major version of Vaadin. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
 
 {{changesSincePrevious}}
 
-## Support
-vaadin 23 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+## <a id="_changelogs"></a> Changelogs
 
-Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
+<!-- Remove the ones that do not contain any changes/updates -->
 
-## Included Projects and Change Log
-Vaadin includes the following projects. Release notes with detailed change logs for each project are linked below.
+- Flow and Fusion ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
+- Design System
+  - Web Components ([{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-accordion.jsVersion}}))
+  - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
+- Collaboration Engine ([{{vaadin.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{vaadin.vaadin-collaboration-engine.javaVersion}}))
+- Designer ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
+- TestBench ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
+- Multiplatform Runtime (MPR) ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+- Router ([{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
 
-Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.com/pricing) or [Prime](https://vaadin.com/pricing) subscriptions. Everything else is free and open source.
+**Official add-ons and plugins:**
 
-### Java Web Framework
-- Vaadin Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
-- Vaadin Spring Addon ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
-- Vaadin CDI Addon ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}})). You can use the add-on with V10+, see https://github.com/vaadin/cdi#using-with-vaadin-10 for instructions.
-- Maven Plugin for Vaadin ({{platform}})
-- Gradle plugin for Flow ({{platform}})
-- Vaadin Quarkus ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
-- Vaadin Multiplatform Runtime **(Prime)**
-  - for Framework 7 ([{{core.mpr-v7.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v7.javaVersion}}))
-  - for Framework 8 ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
+- Spring add-on ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
+- CDI add-on ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}}))
+- Maven plugin ({{platform}})
+- Gradle plugin ({{platform}})
+- OSGi plugin ([{{core.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{core.flow-osqi.javaVersion}}))
+- Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
 
-### Components
-#### Vaadin Web Components
-All listed Vaadin web components' version are using [{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-accordion.jsVersion}})
 
-#### Vaadin flow components
-All listed Vaadin components' Java integration follows the Vaadin version [{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}})
+## <a id="_upgrading_guides"></a> Upgrading guides
 
-{{components}}
-
-### Themes
-All listed Vaadin themes' version are sharing [{{core.vaadin-lumo-styles.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-lumo-styles.jsVersion}})
-- Vaadin Lumo theme
-- Vaadin Material theme
-
-### Router
-- Vaadin Router ([v{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
-
-### Collaboration Engine
-- Vaadin Collaboration Engine ([{{vaadin.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{vaadin.vaadin-collaboration-engine.javaVersion}})) 
-
-### Tools
-- Vaadin Designer **(Pro)** ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
-- Vaadin TestBench **(Pro)** ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
-
-# Getting Started with Vaadin
-## App starters
-The best way to get started with Vaadin is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, styles, and the technology stack you’re interested in. 
-
-### Note
-vaadin 23 starters are not available just yet in vaadin.com. You can use vaadin 22 starter and manually change Vaadin version (see instructions below).
-
-## Manually changing Vaadin version for Java projects
-
-Add the following contents to your project pom.xml.
-```
-<dependencyManagement>
-    ...
-    <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-bom</artifactId>
-        <version>{{platform}}</version>
-        <type>pom</type>
-        <scope>import</scope>
-    </dependency>
-    ...
-</dependencyManagement>
-
-<repositories>
-    <repository>
-        <id>vaadin-prereleases</id>
-        <url>https://maven.vaadin.com/vaadin-prereleases</url>
-    </repository>
-</repositories>
-
-<pluginRepositories>
-    <pluginRepository>
-        <id>vaadin-prereleases</id>
-        <url>https://maven.vaadin.com/vaadin-prereleases</url>
-    </pluginRepository>
-</pluginRepositories>
-```
-
-# Known Issues and Limitations
-
-This is the prerelease version of vaadin 23 for evaluating a number of new features and bug fixes. The API in this prerelease version is not considered final and may change based on user feedback.
-
-## Flow
-- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
-- Links matching the context do not result in browser page load by default, instead they are handled with application routing. To opt-out, set the `router-ignore` attribute on the anchor element. This opt-out is needed for cases when native browser navigation is necessary, e. g., when [using `Anchor` to link a `StreamResource` download](https://github.com/vaadin/flow/issues/7623).
-
-# Migrating from Vaadin 8
-See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
-
-# Migrating from Vaadin 10-14
-See [the migration guide](https://vaadin.com/docs/v14/flow/v14-migration/v14-migration-guide.html)
-Since Vaadin 18, `PolymerTemplate` has been deprecated but it is still supported. `LitTemplate` should be used instead for new templates and we encourage migrating to it.
-
-# Migrating from vaadin 22
-Update the Vaadin version in the build files, and check if the project is using any of the breaking changes mentioned in the 'New and Noteworthy' section above.
-
-# Reporting Issues
-We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at https://github.com/vaadin/platform/issues.
-
-A few rules of thumb will help you and us in finding the correct repository for the issue or enhancement request:
-1) If you encounter an issue with the TypeScript and HTML API of Vaadin components, the repository is https://github.com/vaadin/web-components
-2) If you encounter an issue with the Java API of Vaadin components, the repository is https://github.com/vaadin/flow-components
-3) If you encounter an issue with Flow which does not seem to be related to a specific component, the problem is likely in Flow itself. The Flow repository is https://github.com/vaadin/flow
-4) If you encounter an issue with Designer, the repository is https://github.com/vaadin/designer
-5) If you encounter an issue with TestBench, the repository is https://github.com/vaadin/testbench
+- [Upgrading Flow to Vaadin 23](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-23)
+- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-22)
+- [Upgrading Design System to Vaadin 23](https://vaadin.com/docs/latest/ds/upgrading)
