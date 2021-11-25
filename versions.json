@@ -75,7 +75,7 @@
             "javaVersion": "13.0.0"
         },
         "flow-spring": {
-            "javaVersion": "19.0.0.rc1"
+            "javaVersion": "20.0-SNAPSHOT"
         },
         "form-layout": {
             "jsVersion": "23.0.0-alpha1",
