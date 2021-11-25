@@ -11,7 +11,7 @@ Here are the highlighted new and improved features in vaadin 22. To see the full
 
 {{changesSincePrevious}}
 
-### Special thanks
+## Special thanks
 
 Special thanks to @knoobie, for the invaluable help with testing, feedback, and guidance with the accessibility work!
 
