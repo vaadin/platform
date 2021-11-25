@@ -11,6 +11,10 @@ Here are the highlighted new and improved features in vaadin 22. To see the full
 
 {{changesSincePrevious}}
 
+### Special thanks
+
+Special thanks to @knoobie, for the invaluable help with testing, feedback, and guidance with the accessibility work!
+
 ## Support
 Vaadin 22 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
