@@ -27,7 +27,7 @@
 ## <a id="_upgrading_guides"></a> Upgrading guides
 
 - [Upgrading Flow to Vaadin 23](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-22)
+- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-23)
 - [Upgrading Design System to Vaadin 23](https://vaadin.com/docs/latest/ds/upgrading)
 
 
