@@ -33,7 +33,17 @@
 
 
 ## Support
-Vaadin 23 is supported for one month after Vaadin 24 has been released ([release model](https://vaadin.com/roadmap)).
+<!-- New LTS:
+
+Vaadin 23 is an LTS release, and is supported for 5 years, with extended support options available ([release model](https://vaadin.com/roadmap)).
+
+-->
+
+<!-- Non-LTS:
+
+Vaadin 24 is supported for one month after Vaadin 25 has been released ([release model](https://vaadin.com/roadmap)).
+
+-->
 Vaadin also provides [commercial support and warranty](https://vaadin.com/solutions/support).
 
 
