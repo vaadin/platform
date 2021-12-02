@@ -20,6 +20,9 @@ Here are the highlighted new and improved features in this maintenance release.
 <Mark the BFP fixes with **[Warranty fix](https://vaadin.com/support/for-business#warranty)** >
 ### Framework
 
+#### Breaking changes
+- Since platform 14.7.4 (Flow 2.7.3), Jsoup version has been upgraded. Because the older version of third-party library org.jsoup:jsoup has a security issue. This fix upgrades org.jsoup:jsoup to a newer one, but introduces a potential backward incompatibility for the users who uses JSoup dependency explicitly in their code. For such users either the JSoup dependency in their project should be declared explicitly (with an older version) or the code needs to be updated to use new JSoup API.
+
 ### Components
 
 {{componentNote}}
