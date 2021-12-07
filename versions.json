@@ -544,7 +544,7 @@
             "javaVersion": "1.0.0"
         },
         "flow-osgi": {
-            "javaVersion": "7.0.0"
+            "javaVersion": "7.0.1"
         },
         "grid-pro": {
             "jsVersion": "22.0.0",
