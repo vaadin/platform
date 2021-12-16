@@ -38,6 +38,7 @@
         <module>vaadin-platform-javadoc</module>
         <module>hilla-bom</module>
         <module>hilla</module>
+        <module>hilla-spring-boot-starter</module>
     </modules>
 
     <profiles>
