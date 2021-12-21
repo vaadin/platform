@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>23.0-SNAPSHOT</version>
+        <version>{{platform}}</version>
     </parent>
     <groupId>dev.hilla</groupId>
     <artifactId>hilla-bom</artifactId>
@@ -25,19 +25,19 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>${project.version}</version>
+                <version>{{platform}}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>dev.hilla</groupId>
                 <artifactId>hilla</artifactId>
-                <version>${project.version}</version>
+                <version>{{platform}}</version>
             </dependency>
             <dependency>
                 <groupId>dev.hilla</groupId>
                 <artifactId>hilla-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
+                <version>{{platform}}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
