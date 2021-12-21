@@ -68,6 +68,9 @@ const gradlePortalPluginResultPomFileName = getResultsFilePath('vaadin-gradle-pl
 const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-containers-tests-pom.xml');
 const servletContainersTestsResultPomFileName = getResultsFilePath('vaadin-platform-servlet-containers-tests-pom.xml');
 
+const mavenHillaBomTemplateFileName = getTemplateFilePath('template-hilla-bom.xml');
+const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -77,6 +80,7 @@ if (!fs.existsSync(resultsDir)) {
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
+writer.writeMaven(versions, mavenHillaBomTemplateFileName, mavenHillaBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
