@@ -8,8 +8,9 @@ A new major version is released every quarter. Learn more about our [release mod
 
 ## Supported versions
 
-- **21.0**
-- **14.7** LTS
+- **22.0**
+- **21.0** [EOL: 01-01-2022]
+- **14.8** LTS
 - **10.0** LTS
 
 For new users, the latest major version is recommended.  
