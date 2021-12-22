@@ -541,7 +541,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-legacy-components": {
-            "javaVersion": "1.0.0.rc1"
+            "javaVersion": "1.0.0"
         },
         "flow-osgi": {
             "javaVersion": "7.0.1"
