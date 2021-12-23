@@ -36,9 +36,6 @@
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
-        <module>hilla-bom</module>
-        <module>hilla</module>
-        <module>hilla-spring-boot-starter</module>
     </modules>
 
     <profiles>
@@ -57,6 +54,15 @@
             <modules>
                 <module>vaadin-jandex</module>
                 <module>vaadin-core-jandex</module>
+            </modules>
+        </profile>
+        <!-- separate hilla related moduels for releases -->
+        <profile>
+            <id>hilla</id>
+            <modules>
+                <module>hilla-bom</module>
+                <module>hilla</module>
+                <module>hilla-spring-boot-starter</module>
             </modules>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
