@@ -22,5 +22,5 @@
 - CDI add-on ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}}))
 - Maven plugin ({{platform}})
 - Gradle plugin ({{platform}})
-- OSGi plugin ([{{core.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{core.flow-osqi.javaVersion}}))
+- OSGi plugin ([{{vaadin.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{vaadin.flow-osqi.javaVersion}}))
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
