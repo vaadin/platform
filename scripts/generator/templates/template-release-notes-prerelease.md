@@ -6,6 +6,8 @@
 
 ## <a id="_changelogs"></a> Changelogs
 
+**NOTE:** Starting from Vaadin 23, Java 11 is required on your Vaadin apps. 
+
 <!-- Remove the ones that do not contain any changes/updates -->
 
 - Flow and Fusion ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
@@ -28,8 +30,3 @@
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
 
 
-## <a id="_upgrading_guides"></a> Upgrading guides
-
-- [Upgrading Flow to Vaadin 23](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-22)
-- [Upgrading Design System to Vaadin 23](https://vaadin.com/docs/latest/ds/upgrading)
