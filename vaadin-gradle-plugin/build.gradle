@@ -23,8 +23,8 @@ defaultTasks 'jar'
 group pom.parent.groupId
 version = project.hasProperty('vaadin.version') ? project.getProperty('vaadin.version') : pom.parent.version
 archivesBaseName = pom.artifactId
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 /***********************************************************************************************************************
  *
@@ -200,6 +200,6 @@ kotlin {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
