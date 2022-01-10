@@ -12,6 +12,7 @@
     <artifactId>hilla-spring-boot-starter</artifactId>
     <name>Hilla Spring Boot Starter</name>
     <description>Spring Boot Starter for Hilla applications.</description>
+    <version>1.0-SNAPSHOT</version>
 
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
@@ -44,7 +45,7 @@
                 <artifactId>vaadin-spring-bom</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>${project.version}</version>
+                <version>${parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>dev.hilla</groupId>
