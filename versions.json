@@ -68,6 +68,10 @@
             "jsVersion": "23.0.0-alpha4",
             "npmName": "@vaadin/field-base"
         },
+        "field-highlighter": {
+            "jsVersion": "23.0.0-alpha4",
+            "npmName": "@vaadin/field-highlighter"
+        },
         "flow": {
             "javaVersion": "10.0.0.alpha1"
         },
@@ -75,11 +79,7 @@
             "javaVersion": "13.0.0"
         },
         "flow-spring": {
-            "javaVersion": "20.0.0.alpha1"
-        },
-        "field-highlighter": {
-            "jsVersion": "23.0.0-alpha4",
-            "npmName": "@vaadin/field-highlighter"
+            "javaVersion": "20.0.0.alpha3"
         },
         "form-layout": {
             "jsVersion": "23.0.0-alpha4",
