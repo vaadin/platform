@@ -1,0 +1,7 @@
+<project name="Hilla Plugin">
+  <bannerLeft>
+    <name>Hilla Maven Plugin</name>
+    <href>https://hilla.dev/</href>
+  </bannerLeft>
+  
+</project>
