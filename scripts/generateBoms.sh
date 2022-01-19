@@ -22,6 +22,7 @@ mkdir -p vaadin-spring-bom
 cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
 
 cp scripts/generator/results/vaadin-maven-plugin-pom.xml vaadin-maven-plugin/pom.xml
+cp scripts/generator/results/hilla-maven-plugin-pom.xml hilla-maven-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-pom.xml vaadin-gradle-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-plugin/pom-portal.xml
 cp scripts/generator/results/vaadin-platform-servlet-containers-tests-pom.xml vaadin-platform-servlet-containers-tests/pom.xml

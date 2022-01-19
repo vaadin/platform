@@ -64,6 +64,7 @@
                 <module>hilla-bom</module>
                 <module>hilla</module>
                 <module>hilla-spring-boot-starter</module>
+                <module>hilla-maven-plugin</module>
             </modules>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
