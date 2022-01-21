@@ -544,8 +544,8 @@
             "jsVersion": "23.0.0-alpha5",
             "npmName": "@vaadin/crud"
         },
-        "flow-legacy-components": {
-            "javaVersion": "1.0.0"
+        "vaadin-legacy-components": {
+            "javaVersion": "1.0-SNAPSHOT"
         },
         "flow-osgi": {
             "javaVersion": "8.0.0.alpha1"
