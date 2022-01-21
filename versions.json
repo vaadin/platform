@@ -124,7 +124,7 @@
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "5.4.11",
+            "jsVersion": "5.4.12",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-context-menu": {
@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "5.9.1",
+            "jsVersion": "5.9.2",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
