@@ -544,7 +544,7 @@
             "jsVersion": "23.0.0-alpha5",
             "npmName": "@vaadin/crud"
         },
-        "vaadin-legacy-components": {
+        "vaadin-classic-components": {
             "javaVersion": "1.0-SNAPSHOT"
         },
         "flow-osgi": {
