@@ -310,7 +310,7 @@
             "npmName": "@vaadin/vaadin-details"
         },
         "vaadin-development-mode-detector": {
-            "jsVersion": "2.0.4",
+            "jsVersion": "2.0.5",
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "vaadin-dialog": {
@@ -500,7 +500,7 @@
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.1.1",
             "npmName": "@vaadin/vaadin-usage-statistics"
         },
         "vaadin-virtual-list": {
