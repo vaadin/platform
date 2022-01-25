@@ -47,6 +47,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.mozilla.org/MPL/2.0/index.txt");
 
         // Apache
+        whitelist.add("http://apache.org/licenses/LICENSE-2.0");
         whitelist.add("https://www.apache.org/licenses/LICENSE-2.0");
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0.txt");
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0");
@@ -72,6 +73,9 @@ public class LicenseCheckTest {
         whitelist.add("http://www.opensource.org/licenses/mit-license.php");
         whitelist.add("http://opensource.org/licenses/MIT");
         whitelist.add("https://jsoup.org/license");
+
+        // Public Domain
+        whitelist.add("http://creativecommons.org/publicdomain/zero/1.0/");
 
         // WTFPL (org.reflections)
         whitelist.add("http://www.wtfpl.net/");
