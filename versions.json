@@ -73,7 +73,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "10.0.0.alpha4"
+            "javaVersion": "10.0.0.alpha5"
         },
         "flow-cdi": {
             "javaVersion": "14.0.0.alpha1"
@@ -310,7 +310,7 @@
             "npmName": "@vaadin/vaadin-details"
         },
         "vaadin-development-mode-detector": {
-            "jsVersion": "2.0.4",
+            "jsVersion": "2.0.5",
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "vaadin-dialog": {
@@ -500,7 +500,7 @@
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
-            "jsVersion": "2.1.0",
+            "jsVersion": "2.1.1",
             "npmName": "@vaadin/vaadin-usage-statistics"
         },
         "vaadin-virtual-list": {
@@ -544,9 +544,6 @@
             "jsVersion": "23.0.0-alpha5",
             "npmName": "@vaadin/crud"
         },
-        "vaadin-classic-components": {
-            "javaVersion": "1.0-SNAPSHOT"
-        },
         "flow-osgi": {
             "javaVersion": "8.0.0.alpha1"
         },
@@ -571,6 +568,9 @@
             "jsVersion": "23.0.0-alpha5",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
+        },
+        "vaadin-classic-components": {
+            "javaVersion": "1.0-SNAPSHOT"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "5.0.0.alpha2"
