@@ -496,7 +496,7 @@
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
-            "jsVersion": "2.1.1",
+            "jsVersion": "2.1.2",
             "npmName": "@vaadin/vaadin-usage-statistics"
         },
         "vaadin-virtual-list": {
