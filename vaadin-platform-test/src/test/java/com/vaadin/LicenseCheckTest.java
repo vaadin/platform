@@ -54,6 +54,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0.html");
         whitelist.add("https://www.apache.org/licenses/LICENSE-2.0.txt");
         whitelist.add("https://spdx.org/licenses/Apache-2.0#licenseText");
+        whitelist.add("https://www.apache.org/licenses/LICENSE-2.0.html");
          /*
          * License names used by some projects that define their license to be
          * something like to http://projectdomain.com/license, for which the
