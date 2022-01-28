@@ -91,6 +91,12 @@ public class LicenseCheckTest {
 
         // aopalliance:aopalliance
         whitelist.add("Public Domain");
+        
+        // Universal Permissive License
+        whitelist.add("http://opensource.org/licenses/UPL");
+        
+        // BSD-3-Clause
+        whitelist.add("https://asm.ow2.io/license.html");
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
