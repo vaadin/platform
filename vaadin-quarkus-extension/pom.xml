@@ -36,7 +36,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-spring-bom</artifactId>
+                <artifactId>vaadin-bom</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
                 <version>${project.version}</version>
