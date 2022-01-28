@@ -55,6 +55,7 @@
             <modules>
                 <module>vaadin-jandex</module>
                 <module>vaadin-core-jandex</module>
+                <module>vaadin-quarkus-extension</module>
             </modules>
         </profile>
         <!-- separate hilla related moduels for releases -->
