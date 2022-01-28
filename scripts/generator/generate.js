@@ -74,6 +74,9 @@ const servletContainersTestsResultPomFileName = getResultsFilePath('vaadin-platf
 const mavenHillaBomTemplateFileName = getTemplateFilePath('template-hilla-bom.xml');
 const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
 
+const vaadinQuarkusExtensionTemplateFileName = getTemplateFilePath('template-vaadin-quarkus-extention-pom.xml');
+const vaadinQuarkusExtensionFileName = getResultsFilePath('vaadin-quarkus-extention-pom.xml');
+
 const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
 
 if (!fs.existsSync(resultsDir)) {
@@ -96,7 +99,7 @@ writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hill
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", servletContainersTestsPomFileName, servletContainersTestsResultPomFileName);
-
+writer.writeProperty(versions, "vaadin-quarkus", vaadinQuarkusExtensionTemplateFileName, vaadinQuarkusExtensionFileName);
 
 const shrinkwrap = {};
 Object.assign(shrinkwrap, versions.core);

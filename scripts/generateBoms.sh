@@ -20,6 +20,8 @@ mkdir -p hilla-bom
 cp scripts/generator/results/hilla-bom.xml hilla-bom/pom.xml
 mkdir -p vaadin-spring-bom
 cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
+mkdir -p vaadin-quarkus-extension
+cp scripts/generator/results/vaadin-quarkus-extention-pom.xml vaadin-quarkus-extension/pom.xml
 
 cp scripts/generator/results/vaadin-maven-plugin-pom.xml vaadin-maven-plugin/pom.xml
 cp scripts/generator/results/hilla-maven-plugin-pom.xml hilla-maven-plugin/pom.xml

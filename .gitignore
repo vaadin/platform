@@ -44,3 +44,4 @@ vaadin-maven-plugin/pom.xml
 hilla-maven-plugin/pom.xml
 vaadin-gradle-plugin/pom.xml
 vaadin-gradle-plugin/pom*xml
+vaadin-quarkus-extension/pom.xml
