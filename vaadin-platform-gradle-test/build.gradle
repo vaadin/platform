@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+        mavenCentral()
     }
     dependencies {
         classpath group: 'com.vaadin',
