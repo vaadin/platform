@@ -43,6 +43,18 @@
             <groupId>com.vaadin</groupId>
             <artifactId>flow-maven-plugin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>${maven.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <!-- Needed for lambdas in Mojos -->
