@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "5.9.2",
+            "jsVersion": "5.9.3",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
@@ -313,7 +313,7 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.9.0",
+            "jsVersion": "2.9.1",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
