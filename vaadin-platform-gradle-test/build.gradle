@@ -21,10 +21,10 @@ apply plugin: 'com.vaadin'
 apply plugin: 'com.vaadin.plugin.sauce.SauceConnectPlugin'
 
 repositories {
-    mavenLocal()
-    maven { setUrl('https://maven.vaadin.com/vaadin-prereleases') }
     mavenCentral()
+    maven { setUrl('https://maven.vaadin.com/vaadin-prereleases') }
     jcenter()
+    mavenLocal()
 }
 
 dependencies {
