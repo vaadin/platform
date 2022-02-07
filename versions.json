@@ -69,7 +69,7 @@
             "npmName": "@vaadin/field-base"
         },
         "flow": {
-            "javaVersion": "9.0.5"
+            "javaVersion": "9.0.6"
         },
         "flow-cdi": {
             "javaVersion": "13.0.0"
