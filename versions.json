@@ -622,7 +622,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "8.0.0.beta1",
+            "javaVersion": "8.0.0.beta2",
             "pro": true
         }
     }
