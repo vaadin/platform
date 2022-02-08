@@ -187,9 +187,6 @@
             "jsVersion": "23.0.0-beta1",
             "npmName": "@vaadin/password-field"
         },
-        "polymer": {
-            "jsVersion": "2.7.0"
-        },
         "polymer-legacy-adapter": {
             "jsVersion": "23.0.0-beta1",
             "npmName": "@vaadin/polymer-legacy-adapter"
