@@ -552,7 +552,7 @@
             "component": true,
             "javaVersion": "{{version}}",
             "jsVersion": "23.0.0-beta1",
-            "npmName": "@vaadin/vaadin-map",
+            "npmName": "@vaadin/map",
             "pro": true
         },
         "rich-text-editor": {
