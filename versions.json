@@ -549,11 +549,8 @@
             "npmName": "@vaadin/grid-pro"
         },
         "map": {
-            "component": true,
-            "javaVersion": "{{version}}",
             "jsVersion": "23.0.0-beta1",
-            "npmName": "@vaadin/map",
-            "pro": true
+            "npmName": "@vaadin/map"
         },
         "rich-text-editor": {
             "jsVersion": "23.0.0-beta1",
@@ -617,6 +614,13 @@
         "vaadin-license-checker": {
             "javaVersion": "1.2.2",
             "jsVersion": "2.1.2"
+        },
+        "vaadin-map": {
+            "component": true,
+            "javaVersion": "{{version}}",
+            "jsVersion": "23.0.0-beta1",
+            "npmName": "@vaadin/map",
+            "pro": true
         },
         "vaadin-rich-text-editor": {
             "component": true,
