@@ -73,6 +73,11 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-map-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-rich-text-editor-flow</artifactId>
         </dependency>
 
