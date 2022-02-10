@@ -6,7 +6,7 @@ import { PackageInfo } from './src/lib/package-info';
 const vaadinBundleJson = JSON.parse(await readFile('vaadin-bundle.json', {encoding: 'utf8'}));
 const exposes = vaadinBundleJson.packages.flatMap((packageInfo: PackageInfo) => 
   Object.keys(packageInfo.exposes).map((modulePath) => {
-    const moduleSpecifier = modulePath === '.' ? packageInfo.name : `${packageInfo.name}/${modulePath.substring(1)}`
+    const moduleSpecifier = `${packageInfo.name}${modulePath.substring(1)}`;
     return `./node_modules/${moduleSpecifier}`;
   }));
 

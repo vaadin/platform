@@ -42,7 +42,11 @@ describe('vaadin-bundle.json', () => {
   });
 
   it('should contain Vaadin dependencies', () => {
-    getPackage('lit');
+    const lit = getPackage('lit');
+    expect(lit.exposes['./index.js'].exports).to.include(
+      '__@__lit-element/lit-element.js',
+    );
+
     getPackage('highcharts');
   });
 

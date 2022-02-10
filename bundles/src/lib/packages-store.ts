@@ -33,7 +33,9 @@ export class PackagesStore {
     }
 
     const localModulePath = `.${moduleSpecifier.substring(name.length)}`;
-    packageInfo.exposes[localModulePath] = { exports: [] };
+    if (!packageInfo.exposes[localModulePath]) {
+      packageInfo.exposes[localModulePath] = { exports: [] };
+    }
 
     return [packageInfo, {localModulePath}];
   }

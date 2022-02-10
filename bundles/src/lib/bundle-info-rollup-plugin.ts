@@ -92,7 +92,6 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
         }
       }
 
-
       return {
         moduleSideEffects: 'no-treeshake',
       };
