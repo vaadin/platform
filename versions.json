@@ -73,7 +73,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "10.0.0.beta1"
+            "javaVersion": "23.0.0.beta1"
         },
         "flow-cdi": {
             "javaVersion": "14.0.0.beta1"
@@ -186,9 +186,6 @@
         "password-field": {
             "jsVersion": "23.0.0-beta1",
             "npmName": "@vaadin/password-field"
-        },
-        "polymer": {
-            "jsVersion": "2.7.0"
         },
         "polymer-legacy-adapter": {
             "jsVersion": "23.0.0-beta1",
@@ -545,7 +542,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.0.0.beta1"
+            "javaVersion": "8.0.0.beta2"
         },
         "grid-pro": {
             "jsVersion": "23.0.0-beta1",
@@ -570,7 +567,7 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "23.0-SNAPSHOT"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "5.0.0.beta1"
@@ -622,7 +619,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "8.0.0.beta2",
+            "javaVersion": "8.0.0.beta3",
             "pro": true
         }
     }
