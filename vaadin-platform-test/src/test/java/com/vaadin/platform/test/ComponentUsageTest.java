@@ -82,8 +82,15 @@ public class ComponentUsageTest {
         ClassLoader cl = getClass().getClassLoader();
         ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl)
                 .getTopLevelClassesRecursive("com.vaadin.flow.component");
+
         List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> ci.load()).collect(Collectors.toList());
+        List<Class<?>> experimentalFeatureException = vaadinClasses.stream().filter(vc -> vc.getName().contains("ExperimentalFeatureException")).collect(Collectors.toList());
         List<Class<? extends Component>> allComponentClasses = filterByType(vaadinClasses, Component.class);
+
+        for(int i=0; i<experimentalFeatureException.size(); i++){
+            String exclude = experimentalFeatureException.get(i).getPackageName();
+            allComponentClasses = allComponentClasses.stream().filter(acc-> !acc.getPackageName().equals(exclude)).collect(Collectors.toList());
+        }
         List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses,
                 TestBenchElement.class);
 

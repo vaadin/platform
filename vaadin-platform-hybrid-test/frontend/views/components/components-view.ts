@@ -31,7 +31,6 @@ import '@vaadin/integer-field';
 import '@vaadin/list-box';
 import '@vaadin/login/src/vaadin-login-form';
 import '@vaadin/login/src/vaadin-login-overlay';
-import '@vaadin/map/vaadin-map';
 import '@vaadin/menu-bar';
 import '@vaadin/message-input';
 import '@vaadin/message-list';
@@ -266,7 +265,6 @@ export class ComponentsView extends View {
           </div>
         </template>
       </vaadin-notification>
-      <vaadin-map></vaadin-map>
 
       <style-modules></style-modules>
       <template-renderer></template-renderer>
