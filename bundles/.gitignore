@@ -1,3 +1,4 @@
 *.js
 *.js.map
 *-bundle.json
+!package.json

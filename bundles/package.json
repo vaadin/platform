@@ -1,0 +1,50 @@
+{
+  "name": "@vaadin/bundles",
+  "version": "23.0.0-beta1",
+  "description": "Bundles of components and dependencies",
+  "scripts": {
+    "clean": "rm -f *.js *.js.map",
+    "build:scan": "rollup --config=rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build:bundle": "NODE_OPTIONS=\"--loader ts-node/esm\" webpack",
+    "build": "npm run build:scan && npm run build:bundle",
+    "test": "mocha 'src/test/**/*.ts'",
+    "prepack": "npm run clean",
+    "prepare": "npm run build",
+    "postpack": "npm run test"
+  },
+  "type": "module",
+  "main": "vaadin.js",
+  "module": "vaadin.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaadin/platform.git"
+  },
+  "keywords": [
+    "vaadin",
+    "components",
+    "webcomponents",
+    "web-components"
+  ],
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vaadin/platform/issues"
+  },
+  "homepage": "https://github.com/vaadin/platform#readme",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@rollup/pluginutils": "^4.1.2",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@vaadin/vaadin": "23.0.0-beta1",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0",
+    "rollup": "^2.66.1",
+    "ts-node": "^10.5.0",
+    "tslib": "*",
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
