@@ -4,11 +4,11 @@ import { createFilter, FilterPattern } from '@rollup/pluginutils';
 import type { Program } from 'estree';
 import { walk } from 'estree-walker';
 import type { FunctionDeclaration, VariableDeclarator, Property, Identifier } from 'estree';
-import { PackagesStore } from './packages-store';
+import { BundleStore } from './bundle-store';
 
 export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, include?: FilterPattern, exclude?: FilterPattern } = {}): Plugin => {
   const modulesDirectory = options.modulesDirectory || path.resolve(process.cwd(), './node_modules');
-  const packagesStore = new PackagesStore(modulesDirectory);
+  const bundleStore = new BundleStore(modulesDirectory);
   const filter = createFilter(options.include, options.exclude);
 
   return {
@@ -32,12 +32,14 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
         return null;
       }
 
-      const [packageInfo] = await packagesStore.resolveModule(id);
+      const [packageInfo] = await bundleStore.resolveModule(id);
       if (!source.startsWith('.') && !source.endsWith('.js') &&
         (!packageInfo.exposes['.'] || packageInfo.exposes['.'].exports.length === 0)) {
         packageInfo.exposes['.'] = {
           exports: [
-            `__@__${packagesStore.getLocalModuleId(resolution.id)}`,
+            {
+              source: bundleStore.getLocalModuleId(resolution.id),
+            },
           ],
         };
       }
@@ -49,8 +51,8 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
       if (!filter(sourceId)) return;
       if (!sourceId.startsWith(modulesDirectory)) return;
 
-      const id = packagesStore.getLocalModuleId(sourceId);
-      const [packageInfo, {localModulePath}] = await packagesStore.resolveModule(id)
+      const id = bundleStore.getLocalModuleId(sourceId);
+      const [packageInfo, {localModulePath}] = await bundleStore.resolveModule(id)
       const exports = packageInfo.exposes[localModulePath].exports;
 
       const ast = this.parse(code);
@@ -58,14 +60,14 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
       const getTargetId = async (value: string) => {
         const targetResolution = await this.resolve(value, sourceId);
         const targetSourceId = targetResolution.id;
-        return packagesStore.getLocalModuleId(targetSourceId);
+        return bundleStore.getLocalModuleId(targetSourceId);
       };
 
       for (const topLevelNode of (ast as unknown as Program).body) {
         if (topLevelNode.type === 'ExportAllDeclaration') {
-          const namespace = topLevelNode.exported ? topLevelNode.exported.name : '';
-          const targetId = await getTargetId(topLevelNode.source.value as string);
-          exports.push(`${namespace}__@__${targetId}`); 
+          const namespace = topLevelNode.exported ? topLevelNode.exported.name : undefined;
+          const source = await getTargetId(topLevelNode.source.value as string);
+          exports.push({namespace, source});
         } else if (topLevelNode.type === 'ExportDefaultDeclaration') {
           exports.push('default');
         } else if (topLevelNode.type === 'ExportNamedDeclaration') {
@@ -105,7 +107,7 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
       this.emitFile({
         type: 'asset',
         fileName: 'vaadin-bundle.json',
-        source: JSON.stringify(packagesStore.getBundleJson(), undefined, 2),
+        source: JSON.stringify(bundleStore.getBundleJson(), undefined, 2),
       });
     }
   };

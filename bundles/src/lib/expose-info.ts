@@ -1,3 +1,5 @@
+import { ExportInfo } from "./export-info";
+
 export type ExposeInfo = {
-  exports: string[];
+  exports: ExportInfo[],
 };

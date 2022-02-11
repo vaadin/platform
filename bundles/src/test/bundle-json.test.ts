@@ -1,20 +1,17 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { readFile } from 'fs/promises';
+import { BundleJson } from '../lib/bundle-json';
 import { PackageInfo } from '../lib/package-info';
 
 describe('vaadin-bundle.json', () => {
-  const packages = new Map<string, PackageInfo>();
+  let bundleJson: BundleJson;
   let bundleVersion;
 
   before(async () => {
-    const vaadinBundleJson: {packages: PackageInfo[]} = JSON.parse(
+    bundleJson = JSON.parse(
       await readFile('vaadin-bundle.json', { encoding: 'utf8' })
     );
-
-    vaadinBundleJson.packages.forEach(packageInfo => {
-      packages.set(packageInfo.name, packageInfo);
-    });
 
     bundleVersion = JSON.parse(
       await readFile('package.json', {encoding: 'utf8'})
@@ -28,13 +25,13 @@ describe('vaadin-bundle.json', () => {
   }
 
   function getPackage(name: string): PackageInfo {
-    if (!packages.has(name)) {
+    if (!bundleJson.packages[name]) {
       throw new PackageNotFoundError(name);
     }
 
-    return packages.get(name);
+    return bundleJson.packages[name];
   }
-  
+
   it('should contain Vaadin components', () => {
     expect(getPackage('@vaadin/button').version).to.equal(bundleVersion);
     expect(getPackage('@vaadin/grid').version).to.equal(bundleVersion);
@@ -43,10 +40,11 @@ describe('vaadin-bundle.json', () => {
 
   it('should contain Vaadin dependencies', () => {
     const lit = getPackage('lit');
-    expect(lit.exposes['./index.js'].exports).to.include(
-      '__@__lit-element/lit-element.js',
+    expect(lit.exposes['./index.js'].exports).to.deep.include(
+      {
+        source: 'lit-element/lit-element.js',
+      },
     );
-
     getPackage('highcharts');
   });
 

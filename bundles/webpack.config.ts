@@ -1,12 +1,12 @@
 import { default as ModuleFederationPlugin } from 'webpack/lib/container/ModuleFederationPlugin.js';
 import { readFile } from 'fs/promises';
 import { posix as path } from 'path';
-import { PackageInfo } from './src/lib/package-info';
+import { BundleJson } from './src/lib/bundle-json';
 
-const vaadinBundleJson = JSON.parse(await readFile('vaadin-bundle.json', {encoding: 'utf8'}));
-const exposes = vaadinBundleJson.packages.flatMap((packageInfo: PackageInfo) => 
+const bundleJson: BundleJson = JSON.parse(await readFile('vaadin-bundle.json', {encoding: 'utf8'}));
+const exposes = Object.entries(bundleJson.packages).flatMap(([packageName, packageInfo]) => 
   Object.keys(packageInfo.exposes).map((modulePath) => {
-    const moduleSpecifier = `${packageInfo.name}${modulePath.substring(1)}`;
+    const moduleSpecifier = `${packageName}${modulePath.substring(1)}`;
     return `./node_modules/${moduleSpecifier}`;
   }));
 

@@ -2,9 +2,10 @@ import { PackageInfo } from './package-info';
 import { posix as path } from 'path';
 import { promises as fs } from 'fs';
 import { ExposeInfo } from './expose-info';
+import { BundleJson } from './bundle-json';
 
-export class PackagesStore {
-  private packages = new Map<string, PackageInfo>();
+export class BundleStore {
+  private packages: Record<string, PackageInfo> = {};
 
   constructor(private modulesDirectory: string) { }
 
@@ -20,16 +21,16 @@ export class PackagesStore {
     const name = scopeName.startsWith('@') ? `${scopeName}/${scopedPackageName}` : scopeName;
 
     let packageInfo: PackageInfo;
-    if (this.packages.has(name)) {
-      packageInfo = this.packages.get(name);
+    if (this.packages[name]) {
+      packageInfo = this.packages[name];
     } else {
       const packageJson = JSON.parse(
         await fs.readFile(path.resolve(this.modulesDirectory, name, 'package.json'), { encoding: 'utf8' })
       );
       const version = packageJson.version;
       const exposes: Record<string, ExposeInfo> = {};
-      packageInfo = {name, version, exposes};
-      this.packages.set(name, packageInfo);
+      packageInfo = {version, exposes};
+      this.packages[name] = packageInfo;
     }
 
     const localModulePath = `.${moduleSpecifier.substring(name.length)}`;
@@ -40,8 +41,7 @@ export class PackagesStore {
     return [packageInfo, {localModulePath}];
   }
 
-  getBundleJson(): {packages: PackageInfo[]} {
-    const packages = Array.from(this.packages.values());
-    return {packages};
+  getBundleJson(): BundleJson {
+    return {packages: this.packages};
   }
 }
