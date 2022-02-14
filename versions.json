@@ -286,7 +286,7 @@
         "vaadin-select": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.4.2",
+            "jsVersion": "2.4.3",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
