@@ -40,6 +40,9 @@ const coreShrinkwrapResultFileName = getResultsFilePath('vaadin-core-shrinkwrap-
 const vaadinShrinkwrapTemplateFileName = getTemplateFilePath('template-vaadin-shrinkwrap-package.json');
 const vaadinShrinkwrapResultFileName = getResultsFilePath('vaadin-shrinkwrap-package.json');
 
+const bundlesTemplateFileName = getTemplateFilePath('template-bundles-package.json');
+const bundlesResultFileName = getResultsFilePath('bundles-package.json');
+
 const mavenBomTemplateFileName = getTemplateFilePath('template-vaadin-bom.xml');
 const mavenBomResultFileName = getResultsFilePath('vaadin-bom.xml');
 
@@ -90,6 +93,8 @@ writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, rele
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
+
+writer.writePackageVersion(versions.platform, bundlesTemplateFileName,bundlesResultFileName);
 
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hillaMavenPluginResultPomFileName);

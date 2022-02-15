@@ -1,6 +1,6 @@
 {
   "name": "@vaadin/bundles",
-  "version": "23.0.0-beta1",
+  "version": "23.0.0",
   "description": "Bundles of components and dependencies",
   "scripts": {
     "clean": "rm -f *.js *.js.map",
