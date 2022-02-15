@@ -42,7 +42,9 @@
     <profiles>
         <profile>
             <id>gradle</id>
-            
+            <activation>
+                <jdk>(,17]</jdk>
+            </activation>
             <modules>
                 <module>vaadin-gradle-plugin</module>
                 <module>vaadin-gradle-plugin/pom-portal.xml</module>
