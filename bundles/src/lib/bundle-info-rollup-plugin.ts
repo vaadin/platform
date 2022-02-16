@@ -32,16 +32,28 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
         return null;
       }
 
-      const [packageInfo] = await bundleStore.resolveModule(id);
-      if (!source.startsWith('.') && !source.endsWith('.js') &&
-        (!packageInfo.exposes['.'] || packageInfo.exposes['.'].exports.length === 0)) {
-        packageInfo.exposes['.'] = {
-          exports: [
-            {
-              source: bundleStore.getLocalModuleId(resolution.id),
-            },
-          ],
-        };
+      const [packageInfo, {name}] = await bundleStore.resolveModule(id);
+      if (!packageInfo.exposes['.']) {
+        if (!options.custom?.bundleInfoRollupPlugin?.isPackageEntry) {
+          try {
+            await this.resolve(name, importer, {
+              ...options,
+              custom: {
+                bundleInfoRollupPlugin: {
+                  isPackageEntry: true,
+                },
+              },
+            });
+          } catch (_) { }
+        } else {
+          packageInfo.exposes['.'] = {
+            exports: [
+              {
+                source: bundleStore.getLocalModuleId(resolution.id),
+              },
+            ],
+          };
+        }
       }
 
       return resolution;

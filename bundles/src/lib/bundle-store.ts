@@ -14,7 +14,7 @@ export class BundleStore {
       ? moduleId.substring(this.modulesDirectory.length + 1) : moduleId;
   }
 
-  public async resolveModule(moduleId: string): Promise<[PackageInfo, {localModulePath: string}] | undefined> {
+  public async resolveModule(moduleId: string): Promise<[PackageInfo, {name: string, localModulePath: string}] | undefined> {
     const moduleSpecifier = this.getLocalModuleId(moduleId);
 
     const [scopeName, scopedPackageName] = moduleSpecifier.split('/', 2);
@@ -34,11 +34,11 @@ export class BundleStore {
     }
 
     const localModulePath = `.${moduleSpecifier.substring(name.length)}`;
-    if (!packageInfo.exposes[localModulePath]) {
+    if (!packageInfo.exposes[localModulePath] && localModulePath !== '.') {
       packageInfo.exposes[localModulePath] = { exports: [] };
     }
 
-    return [packageInfo, {localModulePath}];
+    return [packageInfo, {name, localModulePath}];
   }
 
   getBundleJson(): BundleJson {
