@@ -22,6 +22,7 @@ function writePackageJson(versions, templateFileName, outputFileName) {
 function writePackageVersion(version, templateFileName, outputFileName) {
     const packageJsonTemplate = require(templateFileName);
     packageJsonTemplate.version = version;
+    packageJsonTemplate.devDependencies["@vaadin/vaadin"] = version;
     const packageJsonResult = JSON.stringify(packageJsonTemplate, null, 2);
 
     fs.writeFileSync(outputFileName, packageJsonResult);
