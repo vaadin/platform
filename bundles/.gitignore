@@ -2,5 +2,4 @@
 *.js.map
 !/src/**/*.js
 *-bundle.json
-!package.json
 !tsconfig.json
