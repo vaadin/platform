@@ -94,7 +94,7 @@ writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, relea
 
 writer.writePackageJson(versions.core, coreShrinkwrapTemplateFileName, coreShrinkwrapResultFileName);
 
-writer.writePackageVersion(versions.platform, bundlesTemplateFileName,bundlesResultFileName);
+writer.writeBundlePackageVersion(versions.bundles.vaadin.npmVersion, bundlesTemplateFileName, bundlesResultFileName);
 
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hillaMavenPluginResultPomFileName);

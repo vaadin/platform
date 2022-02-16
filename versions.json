@@ -633,5 +633,11 @@
             "javaVersion": "8.0.0.beta3",
             "pro": true
         }
+    },
+    "bundles": {
+        "vaadin": {
+            "npmName": "@vaadin/bundles",
+            "jsVersion": "23.0.0-beta2"
+        }
     }
 }

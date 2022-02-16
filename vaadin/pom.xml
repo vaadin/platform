@@ -86,6 +86,13 @@
             <artifactId>collaboration-engine</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -132,6 +139,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- compute bundles version -->
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <id>versions-json-property</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                def versionsJsonFile = new File(project.file, '../../versions.json').getCanonicalFile()
+                                def versions = new groovy.json.JsonSlurper().parse(versionsJsonFile)
+
+                                def vaadinBundle = versions.bundles.vaadin
+                                project.properties.setProperty("bundles.version", vaadinBundle.jsVersion)
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -165,7 +196,7 @@
                     <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>karaf-maven-plugin</artifactId>
@@ -176,6 +207,49 @@
                     </excludedArtifactIds>
                     <includeTransitiveDependency>false</includeTransitiveDependency>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/generated-sources/com/vaadin/bundles</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/templates/com/vaadin/bundles</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/target/generated-sources</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -224,38 +298,19 @@
                         <version>3.1.0</version>
                         <executions>
                             <execution>
-                                <id>copy-resources</id>
+                                <id>copy-shrinkwrap-resources</id>
                                 <phase>generate-sources</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
+                                    <outputDirectory>${basedir}/target/generated-sources/com/vaadin/shrinkwrap</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>src/main/templates</directory>
+                                            <directory>src/main/templates/com/vaadin/shrinkwrap</directory>
                                             <filtering>true</filtering>
                                         </resource>
                                     </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>add-source</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>add-source</goal>
-                                </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>${basedir}/target/generated-sources</source>
-                                    </sources>
                                 </configuration>
                             </execution>
                         </executions>

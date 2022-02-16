@@ -19,7 +19,7 @@ function writePackageJson(versions, templateFileName, outputFileName) {
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
 */
-function writePackageVersion(version, templateFileName, outputFileName) {
+function writeBundlePackageVersion(version, templateFileName, outputFileName) {
     const packageJsonTemplate = require(templateFileName);
     packageJsonTemplate.version = version;
     packageJsonTemplate.devDependencies["@vaadin/vaadin"] = version;
@@ -85,7 +85,7 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
 }
 
 exports.writePackageJson = writePackageJson;
-exports.writePackageVersion = writePackageVersion;
+exports.writeBundlePackageVersion = writeBundlePackageVersion;
 exports.writeMaven = writeMaven;
 exports.writeProperty = writeProperty;
 exports.writeReleaseNotes = writeReleaseNotes;
