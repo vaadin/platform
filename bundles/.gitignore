@@ -3,3 +3,4 @@
 !/src/**/*.js
 *-bundle.json
 !package.json
+!tsconfig.json
