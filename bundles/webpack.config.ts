@@ -20,7 +20,17 @@ export default {
     alias: {
       // FIXME: missing import in the component
       '@vaadin/app-layout/drawer-toggle.js': '@vaadin/app-layout/vaadin-drawer-toggle.js',
-    }
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+    ],
   },
   devtool: 'source-map',
   experiments: {
