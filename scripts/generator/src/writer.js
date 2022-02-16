@@ -14,6 +14,20 @@ function writePackageJson(versions, templateFileName, outputFileName) {
     fs.writeFileSync(outputFileName, packageJsonResult);
     console.log(`Wrote ${outputFileName}`);
 }
+/**
+@param {Spring} string for product versions.
+@param {String} templateFileName absolute path to template file
+@param {String} outputFileName absolute path to output file
+*/
+function writePackageVersion(version, templateFileName, outputFileName) {
+    const packageJsonTemplate = require(templateFileName);
+    packageJsonTemplate.version = version;
+    packageJsonTemplate.devDependencies["@vaadin/vaadin"] = version;
+    const packageJsonResult = JSON.stringify(packageJsonTemplate, null, 2);
+
+    fs.writeFileSync(outputFileName, packageJsonResult);
+    console.log(`Wrote ${outputFileName}`);
+}
 
 /**
 @param {Object} versions data object for product versions.
@@ -71,6 +85,7 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
 }
 
 exports.writePackageJson = writePackageJson;
+exports.writePackageVersion = writePackageVersion;
 exports.writeMaven = writeMaven;
 exports.writeProperty = writeProperty;
 exports.writeReleaseNotes = writeReleaseNotes;
