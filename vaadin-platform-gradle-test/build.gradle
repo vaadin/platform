@@ -1,8 +1,8 @@
 buildscript {
     repositories {
+        mavenCentral()
         mavenLocal()
         maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
-        mavenCentral()
     }
     dependencies {
         classpath group: 'com.vaadin',
@@ -22,9 +22,9 @@ apply plugin: 'com.vaadin.plugin.sauce.SauceConnectPlugin'
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { setUrl('https://maven.vaadin.com/vaadin-prereleases') }
     jcenter()
-    mavenLocal()
 }
 
 dependencies {
