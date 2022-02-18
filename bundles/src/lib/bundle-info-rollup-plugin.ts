@@ -65,6 +65,9 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
 
       const id = bundleStore.getLocalModuleId(sourceId);
       const [packageInfo, {localModulePath}] = await bundleStore.resolveModule(id)
+      if (!packageInfo.exposes[localModulePath]) {
+        packageInfo.exposes[localModulePath] = { exports: [] };
+      }
       const exports = packageInfo.exposes[localModulePath].exports;
 
       const ast = this.parse(code);
@@ -116,6 +119,7 @@ export const bundleInfoRollupPlugin = (options: { modulesDirectory?: string, inc
     },
 
     generateBundle() {
+      console.log(Object.keys(bundleStore.getBundleJson().packages));
       this.emitFile({
         type: 'asset',
         fileName: 'vaadin-bundle.json',

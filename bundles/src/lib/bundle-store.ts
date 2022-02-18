@@ -34,10 +34,6 @@ export class BundleStore {
     }
 
     const localModulePath = `.${moduleSpecifier.substring(name.length)}`;
-    if (!packageInfo.exposes[localModulePath] && localModulePath !== '.') {
-      packageInfo.exposes[localModulePath] = { exports: [] };
-    }
-
     return [packageInfo, {name, localModulePath}];
   }
 

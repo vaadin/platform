@@ -91,4 +91,22 @@ describe('vaadin-bundle.json', () => {
   it('shoud not contain itself', () => {
     expect(() => getPackage('@vaadin/bundles')).to.throw(PackageNotFoundError);
   });
+
+  it('should list all packages in all-imports', async () => {
+    const packageNames = Object.keys(bundleJson.packages);
+    const allImportsSource = await readFile('src/all-imports.js', {encoding: 'utf8'});
+    const allImports = allImportsSource.split(/(\r|\n|\r\n)/)
+      .map(line => line.replace(/^\/\/ ignore .* import/, 'import'))
+      .filter(line => line.startsWith('import '))
+      .map(importLine => /^import '([^']*)';$/.exec(importLine)[1]) as string[];
+    const missingPackageNames = new Set(packageNames.sort());
+    allImports.forEach(source => missingPackageNames.delete(source));
+    if (missingPackageNames.size > 0) {
+      expect.fail(`Detected missing package(s) in src/all-imports.js:
+
+${Array.from(missingPackageNames).join('\n')}
+
+Please add import or ignore line(s) for these.`);
+    }
+  });
 });

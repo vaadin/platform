@@ -17,10 +17,6 @@ export default {
   },
   resolve: {
     symlinks: false,
-    alias: {
-      // FIXME: missing import in the component
-      '@vaadin/app-layout/drawer-toggle.js': '@vaadin/app-layout/vaadin-drawer-toggle.js',
-    },
   },
   module: {
     rules: [
