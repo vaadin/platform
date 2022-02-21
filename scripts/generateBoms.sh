@@ -21,8 +21,6 @@ cp scripts/generator/results/hilla-bom.xml hilla-bom/pom.xml
 mkdir -p vaadin-spring-bom
 cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
 
-cp scripts/generator/results/bundles-package.json bundles/package.json
-
 cp scripts/generator/results/vaadin-maven-plugin-pom.xml vaadin-maven-plugin/pom.xml
 cp scripts/generator/results/hilla-maven-plugin-pom.xml hilla-maven-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-pom.xml vaadin-gradle-plugin/pom.xml

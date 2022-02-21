@@ -71,7 +71,6 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
 }
 
 exports.writePackageJson = writePackageJson;
-exports.writeBundlePackageVersion = writeBundlePackageVersion;
 exports.writeMaven = writeMaven;
 exports.writeProperty = writeProperty;
 exports.writeReleaseNotes = writeReleaseNotes;
