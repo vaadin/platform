@@ -24,9 +24,11 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+import com.vaadin.experimental.FeatureFlags;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.di.Lookup;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
@@ -66,9 +68,23 @@ public class ComponentUsageTest {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private <T> List<Class<? extends T>> filterByType(Collection<Class<?>> list, Class<T> type) {
+        FeatureFlags featureFlags = new FeatureFlags(new Lookup() {
+            @Override
+            public <T> Collection<T> lookupAll(Class<T> serviceClass) {
+                return null;
+            }
+
+            @Override
+            public <T> T lookup(Class<T> serviceClass) {
+                return null;
+            }
+        });
+        List<String> experimental = featureFlags.getFeatures().stream().map(f -> f.getComponentClassName()).collect(Collectors.toList());
+
         return (List) list.stream()
                 .filter(clz -> type.isAssignableFrom(clz) && !clz.getName().contains("$")
-                        && Modifier.isPublic(clz.getModifiers()) && !Modifier.isAbstract(clz.getModifiers()))
+                        && Modifier.isPublic(clz.getModifiers()) && !Modifier.isAbstract(clz.getModifiers())
+                        && !experimental.contains(clz.getName()))
                 .collect(Collectors.toList());
     }
 

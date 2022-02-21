@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.apache.commons.io.IOUtils;
+
 import com.vaadin.collaborationengine.CollaborationAvatarGroup;
 import com.vaadin.collaborationengine.CollaborationEngine;
 import com.vaadin.collaborationengine.CollaborationEngineConfiguration;
@@ -103,7 +105,6 @@ import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.component.ironlist.IronList;
-import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
@@ -137,6 +138,7 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.webcomponent.WebComponentUI;
 import com.vaadin.flow.component.webcomponent.WebComponentWrapper;
 import com.vaadin.flow.data.binder.Binder;
@@ -149,8 +151,6 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
-
-import org.apache.commons.io.IOUtils;
 
 @Route("")
 public class ComponentsView extends AppLayout {
@@ -595,8 +595,6 @@ public class ComponentsView extends AppLayout {
         MessageInput messageInput = new MessageInput();
         messageInput.addSubmitListener(e -> log.log(e.getValue()));
 
-        com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
-
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;
         WebComponentUI webComponentUI;
@@ -644,7 +642,6 @@ public class ComponentsView extends AppLayout {
         components.add(messageList);
         components.add(messageInput);
         components.add(main);
-        components.add(mapComponent);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);

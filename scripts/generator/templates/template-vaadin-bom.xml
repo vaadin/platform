@@ -15,6 +15,7 @@
     <properties>
 {{javadeps}}
         <slf4j.version>1.7.32</slf4j.version>
+        <jna.version>5.10.0</jna.version>
     </properties>
 
     <distributionManagement>
@@ -89,6 +90,17 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jcl</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            <!-- JNA -->
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>${jna.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna-platform</artifactId>
+                <version>${jna.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
