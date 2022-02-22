@@ -198,10 +198,15 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/generated-sources/com/vaadin/bundles</outputDirectory>
+                            <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
+                            <delimiters>
+                                <delimeter>${*}</delimeter>
+                            </delimiters>
+                            <useBuildFilters>false</useBuildFilters>
+                            <useDefaultDelimiters>false</useDefaultDelimiters>
                             <resources>
                                 <resource>
-                                    <directory>src/main/templates/com/vaadin/bundles</directory>
+                                    <directory>src/main/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
