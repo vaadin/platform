@@ -3,6 +3,7 @@ package com.vaadin.platform.test;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,11 +55,16 @@ public class ComponentsIT extends AbstractPlatformTest {
     public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();
 
+        Collection<TestComponent> testComponents = new ComponentUsageTest().getTestComponents();
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+        if (testComponent.localName == "vaadin-context-menu" && testComponent.tbEquivalentName.contains("grid")){
+            tag = "vaadin-grid-context-menu";
+        }
+
         if (beforeRuns.containsKey(tag)) {
             beforeRuns.get(tag).run();
         }
