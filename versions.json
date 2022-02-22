@@ -109,11 +109,6 @@
             "jsVersion": "23.0.0-beta3",
             "npmName": "@vaadin/integer-field"
         },
-        "iron-a11y-announcer": {
-            "jsVersion": "2.1.0",
-            "npmName": "@polymer/iron-a11y-announcer",
-            "npmVersion": "3.0.2"
-        },
         "iron-icon": {
             "jsVersion": "2.1.0",
             "npmName": "@polymer/iron-icon",
@@ -129,11 +124,6 @@
             "jsVersion": "2.0.20",
             "npmName": "@polymer/iron-list",
             "npmVersion": "3.1.0"
-        },
-        "iron-media-query": {
-            "jsVersion": "2.1.0",
-            "npmName": "@polymer/iron-media-query",
-            "npmVersion": "3.0.1"
         },
         "iron-meta": {
             "jsVersion": "2.1.1",
