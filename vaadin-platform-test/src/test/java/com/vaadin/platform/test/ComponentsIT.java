@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
@@ -58,9 +59,22 @@ public class ComponentsIT extends AbstractPlatformTest {
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
+    	
+    	boolean log = testComponent.component != null && "com.vaadin.flow.component.grid.contextmenu.GridContextMenu".equals(testComponent.component.getName());
+    	
+    	if (log) System.err.println(">>>> RUNNING" + testComponent);
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         if (beforeRuns.containsKey(tag)) {
+        	if (log) 	System.err.println(tag + " -> " + $(GridElement.class).first().getCell(1, 0).getInnerHTML());
+        	if (log) System.err.println(">> Click");
+//        	GridTHTDElement cell = $(GridElement.class).first().getCell(1, 0);
             beforeRuns.get(tag).run();
+//            try {
+//				Thread.sleep(300000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
         }
 
         if (excludeComponents.contains(tag)) {
@@ -69,15 +83,20 @@ public class ComponentsIT extends AbstractPlatformTest {
 
         ElementQuery<? extends TestBenchElement> $ = null;
         if (testComponent.tbElement != null) {
+        	
+        	if (log) System.err.println(">>> HAS TB");
             $ = $(testComponent.tbElement);
         }
         if (($  == null || !$.exists()) && tag != null) {
+        	if (log)         	System.err.println(">>> HAS TAG " + tag);
             $ = $(tag);
         }
         if (($  == null || !$.exists())) {
-            System.err.println(">>> Component not found in the View" + testComponent);
+        	if (log)  System.err.println(">>> Component not found in the View\n" + testComponent);
         }
         checkElement($);
+        
+        if (log)  System.err.println("FOUND " + $);
     }
 
     private <T extends TestBenchElement> void checkElement(ElementQuery<T> $) {
