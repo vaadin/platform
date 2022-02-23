@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
@@ -35,16 +36,17 @@ public class ComponentsIT extends AbstractPlatformTest {
     protected String getTestPath() {
         return "/prod-mode/";
     }
-
-    HashMap<String, Runnable> beforeRuns = new HashMap<String, Runnable>() {
+    
+    
+    HashMap<String, Runnable> beforeRunsByTag = new HashMap<String, Runnable>() {
         private static final long serialVersionUID = 1L;
         {
+            put("com.vaadin.flow.component.grid.contextmenu.GridContextMenu", () -> $(GridElement.class).first().getCell(1, 0).click());
             put("vaadin-confirm-dialog", () -> $(ButtonElement.class).id("open-confirm-dialog").click());
             put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
             put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
             put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
             put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
-            put("vaadin-grid-context-menu", () -> $(GridElement.class).first().getCell(1, 0).click());
         }
     };
 
@@ -58,10 +60,18 @@ public class ComponentsIT extends AbstractPlatformTest {
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
-        String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
-        if (beforeRuns.containsKey(tag)) {
-            beforeRuns.get(tag).run();
-        }
+    	
+		String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+		String className = testComponent.component != null ? testComponent.component.getName() : null;
+
+		Runnable run = beforeRunsByTag.get(className);
+		if (run == null) {
+			run = beforeRunsByTag.get(tag);
+		}
+		if (run != null) {
+			$("body").first().click();
+			run.run();
+		}
 
         if (excludeComponents.contains(tag)) {
           return;
@@ -75,7 +85,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             $ = $(tag);
         }
         if (($  == null || !$.exists())) {
-            System.err.println(">>> Component not found in the View" + testComponent);
+        	System.err.println(">>> Component not found in the View\n" + testComponent);
         }
         checkElement($);
     }

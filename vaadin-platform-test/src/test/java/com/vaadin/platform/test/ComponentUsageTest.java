@@ -59,11 +59,11 @@ public class ComponentUsageTest {
         }
 
         @Override
-        public String toString() {
-            return "   " + (component == null ? "" : component.getName()) + "\n   "
-                    + (tbElement == null ? "" : tbElement.getName()) + "\n   " + imports + "\n   " + localName + " - "
-                    + tag;
-        }
+		public String toString() {
+			return "   ComponentName: " + (component == null ? "" : component.getName()) + "\n   TBElementName: "
+					+ (tbElement == null ? "" : tbElement.getName()) + "\n   Imports: " + imports + "\n   LocalName: "
+					+ localName + " - Tag: " + tag;
+		}
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
