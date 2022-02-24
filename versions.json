@@ -76,7 +76,7 @@
             "javaVersion": "23.0.0.beta4"
         },
         "flow-cdi": {
-            "javaVersion": "14.0.0.beta1"
+            "javaVersion": "14.0.0.rc1"
         },
         "flow-spring": {
             "javaVersion": "23.0.0.beta4"
@@ -532,7 +532,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.0.0.beta2"
+            "javaVersion": "8.0.0.rc1"
         },
         "grid-pro": {
             "jsVersion": "23.0.0-rc1",
@@ -627,7 +627,7 @@
     "bundles": {
         "vaadin": {
             "npmName": "@vaadin/bundles",
-            "jsVersion": "23.0.0-beta5"
+            "jsVersion": "23.0.0-rc1"
         }
     }
 }
