@@ -1,4 +1,10 @@
 {
+    "bundles": {
+        "vaadin": {
+            "jsVersion": "23.0.0-beta5",
+            "npmName": "@vaadin/bundles"
+        }
+    },
     "core": {
         "accordion": {
             "jsVersion": "23.0.0-beta5",
@@ -76,7 +82,7 @@
             "javaVersion": "23.0.0.beta4"
         },
         "flow-cdi": {
-            "javaVersion": "14.0.0.beta1"
+            "javaVersion": "14.0.0.rc1"
         },
         "flow-spring": {
             "javaVersion": "23.0.0.beta4"
@@ -622,12 +628,6 @@
         "vaadin-testbench": {
             "javaVersion": "8.0.0",
             "pro": true
-        }
-    },
-    "bundles": {
-        "vaadin": {
-            "npmName": "@vaadin/bundles",
-            "jsVersion": "23.0.0-beta5"
         }
     }
 }
