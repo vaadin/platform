@@ -4,9 +4,11 @@
 
 {{changesSincePrevious}}
 
-## <a id="_changelogs"></a> Changelogs
+**NOTE:** 
+  - Starting from Vaadin 23, Java 11 is required on your Vaadin apps. 
+  - Vaadin Spring addon version starts to follow flow version
 
-**NOTE:** Starting from Vaadin 23, Java 11 is required on your Vaadin apps. 
+## <a id="_changelogs"></a> Changelogs
 
 <!-- Remove the ones that do not contain any changes/updates -->
 
@@ -22,11 +24,11 @@
 
 **Official add-ons and plugins:**
 
-- Spring add-on ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
+- Spring add-on ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
 - CDI add-on ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}}))
 - Maven plugin ({{platform}})
 - Gradle plugin ({{platform}})
-- OSGi plugin ([{{vaadin.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{vaadin.flow-osqi.javaVersion}}))
+- OSGi plugin ([{{vaadin.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{vaadin.flow-osgi.javaVersion}}))
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
 
 
