@@ -227,7 +227,7 @@
             <artifactId>jsr305</artifactId>
             <version>3.0.2</version>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -241,6 +241,11 @@
         <profile>
             <!-- This profile is in sync with profile in vaadin-platform-test -->
             <id>production</id>
+            <activation>
+                <property>
+                    <name>vaadin.productionMode</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <!-- This dynamically calculates all the things we need
