@@ -627,7 +627,7 @@
     "bundles": {
         "vaadin": {
             "npmName": "@vaadin/bundles",
-            "jsVersion": "23.0.0-beta5"
+            "jsVersion": "23.0.0-rc1"
         }
     }
 }
