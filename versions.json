@@ -567,10 +567,10 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.0.0.beta1"
+            "javaVersion": "23.0.0.rc1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.0-SNAPSHOT"
+            "javaVersion": "5.0.0.rc1"
         },
         "vaadin-confirm-dialog": {
             "component": true,
