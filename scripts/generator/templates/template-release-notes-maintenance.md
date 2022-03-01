@@ -18,7 +18,7 @@ Here are the highlighted new and improved features in this maintenance release.
 {{changesSincePrevious}}
 
 ## Support
-vaadin 22 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+vaadin 22 is supported until March 2023. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
