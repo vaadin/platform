@@ -567,7 +567,7 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.0.0.rc1"
+            "javaVersion": "23.0.0"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "5.0.0.rc1"
