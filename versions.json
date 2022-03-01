@@ -82,7 +82,7 @@
             "javaVersion": "23.0.0"
         },
         "flow-cdi": {
-            "javaVersion": "14.0.0.rc1"
+            "javaVersion": "14.0.0"
         },
         "flow-spring": {
             "javaVersion": "23.0.0"
@@ -166,10 +166,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "6.0.0.rc1"
+            "javaVersion": "6.0.0"
         },
         "mpr-v8": {
-            "javaVersion": "6.0.0.rc1"
+            "javaVersion": "6.0.0"
         },
         "notification": {
             "jsVersion": "23.0.0",
@@ -538,7 +538,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.0.0.rc1"
+            "javaVersion": "8.0.0"
         },
         "grid-pro": {
             "jsVersion": "23.0.0",
@@ -567,10 +567,10 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.0.0.rc1"
+            "javaVersion": "23.0.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.0.0.rc1"
+            "javaVersion": "5.0.0"
         },
         "vaadin-confirm-dialog": {
             "component": true,
