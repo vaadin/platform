@@ -79,13 +79,13 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "23.0.0"
+            "javaVersion": "23.1-SNAPSHOT"
         },
         "flow-cdi": {
             "javaVersion": "14.0.0"
         },
         "flow-spring": {
-            "javaVersion": "23.0.0"
+            "javaVersion": "23.1-SNAPSHOT"
         },
         "form-layout": {
             "jsVersion": "23.0.0",
@@ -570,7 +570,7 @@
             "javaVersion": "23.0.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.0.0"
+            "javaVersion": "5.1-SNAPSHOT"
         },
         "vaadin-confirm-dialog": {
             "component": true,
