@@ -1,6 +1,6 @@
 import { DomModule } from "@polymer/polymer/lib/elements/dom-module";
 import { stylesFromTemplate } from "@polymer/polymer/lib/utils/style-gather";
-import { CSSResult, unsafeCSS } from "lit-element";
+import { CSSResult, unsafeCSS } from "lit";
 
 /**
  * Utility function for importing style modules. This is a temporary

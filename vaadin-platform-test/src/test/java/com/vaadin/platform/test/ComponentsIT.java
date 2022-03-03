@@ -41,7 +41,14 @@ public class ComponentsIT extends AbstractPlatformTest {
     HashMap<String, Runnable> beforeRunsByTag = new HashMap<String, Runnable>() {
         private static final long serialVersionUID = 1L;
         {
-            put("com.vaadin.flow.component.grid.contextmenu.GridContextMenu", () -> $(GridElement.class).first().getCell(1, 0).click());
+            put("com.vaadin.flow.component.grid.contextmenu.GridContextMenu", () -> {
+                $(GridElement.class).first().getCell(1, 0).click();
+                waitUntil(driver->$("vaadin-context-menu").exists());
+            });
+            put("com.vaadin.flow.component.grid.contextmenu.GridMenuItem", () -> {
+                $(GridElement.class).first().getCell(1, 0).click();
+                waitUntil(driver->$("vaadin-context-menu").exists());
+            });
             put("vaadin-confirm-dialog", () -> $(ButtonElement.class).id("open-confirm-dialog").click());
             put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
             put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
@@ -67,12 +74,16 @@ public class ComponentsIT extends AbstractPlatformTest {
         String className = testComponent.component != null ? testComponent.component.getName() : null;
 
         Runnable run = beforeRunsByTag.get(className);
-        if (run == null) {
-            run = beforeRunsByTag.get(tag);
+        if (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className)) {
+
+            if (run == null) {
+                run = beforeRunsByTag.get(tag);
+            }
+            if (run != null) {
+                run.run();
+            }
         }
-        if (run != null) {
-            run.run();
-        }
+
 
         if (excludeComponents.contains(tag)) {
           return;

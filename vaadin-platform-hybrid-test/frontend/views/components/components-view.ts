@@ -55,7 +55,7 @@ import type {
   VirtualList,
   VirtualListItemModel,
 } from '@vaadin/virtual-list';
-import { html, css, } from 'lit-element';
+import { html, css, } from 'lit';
 import { customElement, query} from 'lit/decorators.js';
 import { View } from '../view';
 import { LoginOverlay } from '@vaadin/login';
