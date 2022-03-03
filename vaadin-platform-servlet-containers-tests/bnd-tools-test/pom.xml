@@ -241,11 +241,6 @@
         <profile>
             <!-- This profile is in sync with profile in vaadin-platform-test -->
             <id>production</id>
-            <activation>
-                <property>
-                    <name>vaadin.productionMode</name>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <!-- This dynamically calculates all the things we need
