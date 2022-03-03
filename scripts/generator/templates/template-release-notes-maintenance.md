@@ -1,4 +1,4 @@
-*This is a maintenance release for Vaadin 23. See [23.0.0 release notes](https://github.com/vaadin/platform/releases/tag/23.0.0) for details and resources.*
+*This is a maintenance release for Vaadin 23.1. See [23.1.0 release notes](https://github.com/vaadin/platform/releases/tag/23.1.0) for details and resources.*
 
 {{changesSincePrevious}}
 
