@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
@@ -42,16 +41,24 @@ public class ComponentsIT extends AbstractPlatformTest {
         private static final long serialVersionUID = 1L;
         {
             put("com.vaadin.flow.component.grid.contextmenu.GridContextMenu", () -> {
+                $("body").first().click();
                 $(GridElement.class).first().getCell(1, 0).click();
                 waitUntil(driver->$("vaadin-context-menu").exists());
             });
             put("com.vaadin.flow.component.grid.contextmenu.GridMenuItem", () -> {
+                $("body").first().click();
                 $(GridElement.class).first().getCell(1, 0).click();
                 waitUntil(driver->$("vaadin-context-menu").exists());
             });
-            put("vaadin-confirm-dialog", () -> $(ButtonElement.class).id("open-confirm-dialog").click());
+            put("vaadin-confirm-dialog", () -> {
+                $(ButtonElement.class).id("open-confirm-dialog").click();
+                waitUntil(driver->$("vaadin-confirm-dialog").exists());
+            });
             put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
-            put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
+            put("vaadin-login-overlay", () -> {
+                $(ButtonElement.class).id("open-login-overlay").click();
+                waitUntil(driver->$("vaadin-login-overlay").exists());
+            });
             put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
             put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
         }
@@ -62,13 +69,11 @@ public class ComponentsIT extends AbstractPlatformTest {
     @Test
     public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();
-
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
-        // Make sure that we close any modal dialog before each iteration
-        $("body").first().click();
+
 
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         String className = testComponent.component != null ? testComponent.component.getName() : null;
@@ -83,7 +88,6 @@ public class ComponentsIT extends AbstractPlatformTest {
                 run.run();
             }
         }
-
 
         if (excludeComponents.contains(tag)) {
           return;
@@ -100,6 +104,8 @@ public class ComponentsIT extends AbstractPlatformTest {
             System.err.println(">>> Component not found in the View\n" + testComponent);
         }
         checkElement($);
+        // Make sure that we close any modal dialog before each iteration
+        $("body").first().click();
     }
 
     private <T extends TestBenchElement> void checkElement(ElementQuery<T> $) {
