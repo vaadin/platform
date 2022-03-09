@@ -21,7 +21,7 @@ Vaadin {{platform}}
 
 **Official add-ons and plugins:**
 
-- Spring add-on ([{{core.flow-spring.javaVersion}}](https://github.com/vaadin/spring/releases/tag/{{core.flow-spring.javaVersion}}))
+- Spring add-on ({{core.flow-spring.javaVersion}})
 - CDI add-on ([{{core.flow-cdi.javaVersion}}](https://github.com/vaadin/cdi/releases/tag/{{core.flow-cdi.javaVersion}}))
 - Maven plugin ({{platform}})
 - Gradle plugin ({{platform}})
