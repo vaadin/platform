@@ -79,13 +79,13 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "23.0.0"
+            "javaVersion": "23.0.1"
         },
         "flow-cdi": {
             "javaVersion": "14.0.0"
         },
         "flow-spring": {
-            "javaVersion": "23.0.0"
+            "javaVersion": "23.0.1"
         },
         "form-layout": {
             "jsVersion": "23.0.1",
@@ -538,7 +538,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.0.0"
+            "javaVersion": "8.0.1"
         },
         "grid-pro": {
             "jsVersion": "23.0.1",
