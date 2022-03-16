@@ -40,6 +40,10 @@ public class ComponentsIT extends AbstractPlatformTest {
     HashMap<String, Runnable> beforeRunsByTag = new HashMap<String, Runnable>() {
         private static final long serialVersionUID = 1L;
         {
+            put("vaadin-dialog", () -> {
+                $("body").first().click();
+                $(ButtonElement.class).id("open-dialog").click();
+            });
             put("com.vaadin.flow.component.grid.contextmenu.GridContextMenu", () -> {
                 $("body").first().click();
                 $(GridElement.class).first().getCell(1, 0).click();
@@ -50,14 +54,6 @@ public class ComponentsIT extends AbstractPlatformTest {
                 $(GridElement.class).first().getCell(1, 0).click();
                 waitUntil(driver->$("vaadin-context-menu").exists());
             });
-            put("vaadin-confirm-dialog", () -> {
-                $("body").first().click();
-                $(ButtonElement.class).id("open-confirm-dialog").click();
-            });
-            put("vaadin-dialog", () -> {
-                $("body").first().click();
-                $(ButtonElement.class).id("open-dialog").click();
-            });
             put("vaadin-login-overlay", () -> {
                 $("body").first().click();
                 $(ButtonElement.class).id("open-login-overlay").click();
@@ -65,10 +61,16 @@ public class ComponentsIT extends AbstractPlatformTest {
             put("vaadin-context-menu", () -> {
                 $("body").first().click();
                 $(DivElement.class).id("context-menu-target").click();
+                waitUntil(driver->$("vaadin-context-menu").exists());
             });
             put("vaadin-context-menu-item", () -> {
                 $("body").first().click();
                 $(DivElement.class).id("context-menu-target").click();
+                waitUntil(driver->$("vaadin-context-menu").exists());
+            });
+            put("vaadin-confirm-dialog", () -> {
+                $("body").first().click();
+                $(ButtonElement.class).id("open-confirm-dialog").click();
             });
         }
     };
@@ -115,6 +117,7 @@ public class ComponentsIT extends AbstractPlatformTest {
 
         if("vaadin-login-overlay".equals(tag)){
             $(ButtonElement.class).id("close-login-overlay").click();
+            waitUntil(driver -> !$("vaadin-login-overlay").exists());
         }
         $("body").first().click();
     }
