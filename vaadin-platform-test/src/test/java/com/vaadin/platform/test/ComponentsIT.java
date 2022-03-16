@@ -57,6 +57,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             put("vaadin-login-overlay", () -> {
                 $("body").first().click();
                 $(ButtonElement.class).id("open-login-overlay").click();
+                waitUntil(driver->$("vaadin-login-overlay").exists());
             });
             put("vaadin-context-menu", () -> {
                 $("body").first().click();
