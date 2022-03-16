@@ -569,6 +569,9 @@ public class ComponentsView extends AppLayout {
         Button openLoginOverlay = new Button("open Login Overlay", e -> loginOverlay.setOpened(true));
         openLoginOverlay.setId("open-login-overlay");
 
+        Button closeLoginOverlay = new Button("close Login Overlay", e -> loginOverlay.setOpened(false));
+        closeLoginOverlay.setId("close-login-overlay");
+
         Details details = new Details("Details", new Span("Content"));
 
         Accordion accordion = new Accordion();
@@ -630,7 +633,7 @@ public class ComponentsView extends AppLayout {
         components.add(upload);
         components.add(cookieConsent);
         components.add(crud);
-        components.add(openLoginOverlay);
+        components.add(openLoginOverlay, closeLoginOverlay);
         components.add(loginForm);
         components.add(gridPro);
         components.add(richTextEditor);

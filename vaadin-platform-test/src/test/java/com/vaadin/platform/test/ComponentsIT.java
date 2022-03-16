@@ -51,16 +51,25 @@ public class ComponentsIT extends AbstractPlatformTest {
                 waitUntil(driver->$("vaadin-context-menu").exists());
             });
             put("vaadin-confirm-dialog", () -> {
+                $("body").first().click();
                 $(ButtonElement.class).id("open-confirm-dialog").click();
-                waitUntil(driver->$("vaadin-confirm-dialog").exists());
             });
-            put("vaadin-dialog", () -> $(ButtonElement.class).id("open-dialog").click());
+            put("vaadin-dialog", () -> {
+                $("body").first().click();
+                $(ButtonElement.class).id("open-dialog").click();
+            });
             put("vaadin-login-overlay", () -> {
+                $("body").first().click();
                 $(ButtonElement.class).id("open-login-overlay").click();
-                waitUntil(driver->$("vaadin-login-overlay").exists());
             });
-            put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
-            put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-context-menu", () -> {
+                $("body").first().click();
+                $(DivElement.class).id("context-menu-target").click();
+            });
+            put("vaadin-context-menu-item", () -> {
+                $("body").first().click();
+                $(DivElement.class).id("context-menu-target").click();
+            });
         }
     };
 
@@ -73,7 +82,6 @@ public class ComponentsIT extends AbstractPlatformTest {
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
-
 
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         String className = testComponent.component != null ? testComponent.component.getName() : null;
@@ -104,7 +112,10 @@ public class ComponentsIT extends AbstractPlatformTest {
             System.err.println(">>> Component not found in the View\n" + testComponent);
         }
         checkElement($);
-        // Make sure that we close any modal dialog before each iteration
+
+        if("vaadin-login-overlay".equals(tag)){
+            $(ButtonElement.class).id("close-login-overlay").click();
+        }
         $("body").first().click();
     }
 
