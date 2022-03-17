@@ -63,7 +63,26 @@ public class ComponentsIT extends AbstractPlatformTest {
     public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();
 
-        new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+            String className = testComponent.component != null ? testComponent.component.getName() : null;
+            if (!beforeRunsByTag.containsKey(tag) && !beforeRunsByTag.containsKey(className)) {
+                checkElement(testComponent);
+            }
+        });
+    }
+
+    @Test
+    public void appWorksWithAction() throws Exception {
+        $(NotificationElement.class).waitForFirst();
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+            String className = testComponent.component != null ? testComponent.component.getName() : null;
+            if (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className)) {
+                checkElement(testComponent);
+            }
+        });
+
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
