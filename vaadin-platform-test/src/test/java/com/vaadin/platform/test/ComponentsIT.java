@@ -17,6 +17,9 @@ import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
+@NotThreadSafe
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
@@ -24,7 +27,7 @@ public class ComponentsIT extends AbstractPlatformTest {
         String browsers = System.getProperty("grid.browsers");
         if (sauceUser != null && !sauceUser.isEmpty()) {
             if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("firefox,chrome,safari,edge");
+                Parameters.setGridBrowsers("firefox,safari,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
@@ -35,7 +38,6 @@ public class ComponentsIT extends AbstractPlatformTest {
     protected String getTestPath() {
         return "/prod-mode/";
     }
-
 
     HashMap<String, Runnable> beforeRunsByTag = new HashMap<String, Runnable>() {
         private static final long serialVersionUID = 1L;
