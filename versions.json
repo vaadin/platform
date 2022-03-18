@@ -134,7 +134,7 @@
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
-            "jsVersion": "2.2.4",
+            "jsVersion": "2.2.6",
             "npmName": "@vaadin/vaadin-control-state-mixin"
         },
         "vaadin-custom-field": {
