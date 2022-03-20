@@ -158,7 +158,7 @@
         "vaadin-details": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "1.2.0",
+            "jsVersion": "1.2.1",
             "npmName": "@vaadin/vaadin-details"
         },
         "vaadin-development-mode-detector": {
