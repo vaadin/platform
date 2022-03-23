@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
@@ -78,11 +77,21 @@ public class ComponentsIT extends AbstractPlatformTest {
         new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
             String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
             String className = testComponent.component != null ? testComponent.component.getName() : null;
-            if (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className)) {
+            if (tag != "vaadin-login-overlay" && (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className))) {
                 checkElement(testComponent);
             }
         });
+    }
 
+    @Test
+    public void appWorksWithActionOnLoginOverlay() throws Exception {
+        $(NotificationElement.class).waitForFirst();
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+            if (tag == "vaadin-login-overlay") {
+                checkElement(testComponent);
+            }
+        });
     }
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
