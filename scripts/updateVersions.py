@@ -11,17 +11,23 @@ newVersion=sys.argv[2]
 
 if originRepo=="flow-osgi" :
   module="vaadin"
+  version="javaVersion"
+elif originRepo=="bundles" :
+  module="bundles"
+  originRepo="vaadin"
+  version="jsVersion"
 else :
   module="core"
-    
+  version="javaVersion"
+
 with open('../versions.json','r') as data:
     versions = json.load(data)
 
 print("Updating " + originRepo + " verson from: ")
-print(versions[module][originRepo]["javaVersion"])
+print(versions[module][originRepo][version])
 print("to: ")
-versions[module][originRepo]["javaVersion"]=newVersion
-print(versions[module][originRepo]["javaVersion"])
+versions[module][originRepo][version]=newVersion
+print(versions[module][originRepo][version])
 
 with open('../versions.json','w') as data:
     json.dump(versions,data,sort_keys=True, indent=4)
