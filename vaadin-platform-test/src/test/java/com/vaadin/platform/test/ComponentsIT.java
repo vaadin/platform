@@ -72,7 +72,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
             String className = testComponent.component != null ? testComponent.component.getName() : null;
 
-            List<String> exclusion = Arrays.asList("vaadin-login-overlay",
+            List<String> exclusion = Arrays.asList("vaadin-login-overlay", "vaadin-dialog",
                     "com.vaadin.flow.component.grid.contextmenu.GridContextMenu",
                     "com.vaadin.flow.component.grid.contextmenu.GridMenuItem");
             if (!(exclusion.contains(tag) || exclusion.contains(className)) && (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className))) {
@@ -109,6 +109,17 @@ public class ComponentsIT extends AbstractPlatformTest {
         new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
             String className = testComponent.component != null ? testComponent.component.getName() : null;
             if (className == "com.vaadin.flow.component.grid.contextmenu.GridMenuItem" ) {
+                checkElement(testComponent);
+            }
+        });
+    }
+    
+    @Test
+    public void appWorksWithActionOnDialog() throws Exception {
+        $(NotificationElement.class).waitForFirst();
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
+            if (tag == "vaadin-dialog") {
                 checkElement(testComponent);
             }
         });
