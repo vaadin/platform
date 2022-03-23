@@ -77,7 +77,11 @@ public class ComponentsIT extends AbstractPlatformTest {
         new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
             String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
             String className = testComponent.component != null ? testComponent.component.getName() : null;
-            if (tag != "vaadin-login-overlay" && (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className))) {
+
+            List<String> exclusion = Arrays.asList("vaadin-login-overlay",
+                    "com.vaadin.flow.component.grid.contextmenu.GridContextMenu",
+                    "com.vaadin.flow.component.grid.contextmenu.GridMenuItem");
+            if ((!exclusion.contains(tag) || !exclusion.contains(className)) && (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className))) {
                 checkElement(testComponent);
             }
         });
@@ -89,6 +93,28 @@ public class ComponentsIT extends AbstractPlatformTest {
         new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
             String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
             if (tag == "vaadin-login-overlay") {
+                checkElement(testComponent);
+            }
+        });
+    }
+
+    @Test
+    public void appWorksWithActionOnGridContextMenu() throws Exception {
+        $(NotificationElement.class).waitForFirst();
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String className = testComponent.component != null ? testComponent.component.getName() : null;
+            if (className == "com.vaadin.flow.component.grid.contextmenu.GridContextMenu" ) {
+                checkElement(testComponent);
+            }
+        });
+    }
+
+    @Test
+    public void appWorksWithActionOnGridMenuItem() throws Exception {
+        $(NotificationElement.class).waitForFirst();
+        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
+            String className = testComponent.component != null ? testComponent.component.getName() : null;
+            if (className == "com.vaadin.flow.component.grid.contextmenu.GridMenuItem" ) {
                 checkElement(testComponent);
             }
         });
