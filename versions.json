@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "23.0.1",
+            "jsVersion": "23.0.2",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -83,9 +83,6 @@
         },
         "flow-cdi": {
             "javaVersion": "14.0.0"
-        },
-        "flow-spring": {
-            "javaVersion": "23.1-SNAPSHOT"
         },
         "form-layout": {
             "jsVersion": "23.0.2",
