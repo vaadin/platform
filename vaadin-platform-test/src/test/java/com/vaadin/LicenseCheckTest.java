@@ -41,7 +41,8 @@ public class LicenseCheckTest {
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
         whitelist.add("http://www.eclipse.org/legal/epl-v10.html");
         whitelist.add("http://www.eclipse.org/legal/epl-2.0");
-
+        whitelist.add("https://projects.eclipse.org/license/epl-2.0");
+        
         // Mozilla
         whitelist.add("http://www.mozilla.org/MPL/MPL-1.1.html");
         whitelist.add("http://www.mozilla.org/MPL/2.0/index.txt");
@@ -97,6 +98,9 @@ public class LicenseCheckTest {
         
         // BSD-3-Clause
         whitelist.add("https://asm.ow2.io/license.html");
+        
+        // GNU General Public License
+        whitelist.add("https://projects.eclipse.org/license/secondary-gpl-2.0-cp");
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
