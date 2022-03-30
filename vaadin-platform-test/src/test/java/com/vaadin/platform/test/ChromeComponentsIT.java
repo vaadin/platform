@@ -84,490 +84,294 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     }
 
     @Test
-    public void openPageNoClientSideError() {
-        checkLogsForErrors();
-    }
-
-    @Test
     public void buttonIsRenderedAndRecievesClicks() {
         ButtonElement button = $(ButtonElement.class).first();
         assertElementRendered(button);
         button.click();
         assertLog("Clicked button");
-    }
 
-    @Test
-    public void checkboxIsRenderedAndRecievesValueChangeEvent() {
         CheckboxElement checkbox = $(CheckboxElement.class).first();
         TestBenchElement htmlButton = checkbox.$("input")
                 .attribute("type", "checkbox").first();
         assertElementRendered(htmlButton);
-
         checkbox.click();
-
         assertLog("Checkbox value changed from 'false' to 'true'");
-    }
 
-    @Test
-    public void checkboxGroupIsRenderedAndRecievesValueChangeEvent() {
         TestBenchElement checkboxGroup = $("vaadin-checkbox-group").first();
-
         TestBenchElement groupField = checkboxGroup.$(DivElement.class)
                 .attribute("part", "group-field").first();
         assertElementRendered(groupField);
-
         checkboxGroup.$(CheckboxElement.class).first().click();
-
         assertLog("CheckboxGroup value changed from '[]' to '[foo]'");
+
+        DatePickerElement datePicker = $(DatePickerElement.class).first();
+        TestBenchElement textFieldDatePicker = datePicker.$("input").first();
+        assertElementRendered(textFieldDatePicker);
+        datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
+        WebElement dropDownDatePicker = $("vaadin-date-picker-overlay").id("overlay");
+        assertElementRendered(dropDownDatePicker);
+        getCommandExecutor().executeScript("arguments[0].value='2018-12-04'",
+                datePicker);
+        assertLog("DatePicker value changed from null to 2018-12-04");
+
+        TestBenchElement timePicker = $("vaadin-time-picker").first();
+        TestBenchElement textFieldTP = timePicker.$("input").first();
+        assertElementRendered(textFieldTP);
+        timePicker.$("div").attribute("part", "toggle-button").first().click();
+        WebElement dropDownTP = $("vaadin-time-picker-overlay").first();
+        assertElementRendered(dropDownTP);
+        getCommandExecutor().executeScript("arguments[0].value='01:37'",
+                timePicker);
+        assertLog("TimePicker value changed from null to 01:37");
+
+        $(ButtonElement.class).id("open-dialog").click();
+        TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
+                .id("overlay");
+        TestBenchElement content = dialogOverlay.$(TestBenchElement.class)
+                .id("content");
+        assertElementRendered(content);
+        TestBenchElement contentComponent = dialogOverlay
+                .$("flow-component-renderer").first().$(DivElement.class).first();
+        Assert.assertEquals("This is the contents of the dialog",
+                contentComponent.getText());
     }
+
+
 
     @Test
     public void comboboxIsRenderedAndRecievesValueChangeEvent() {
-        ComboBoxElement comboBox = $(ComboBoxElement.class).first();
+        waitUntil(driver -> $(NotificationElement.class).all().size() > 0);
+        NotificationElement notification = $(NotificationElement.class).first();
+        TestBenchElement card = (TestBenchElement) notification.getContext();
+        assertElementRendered(card);
+        waitUntil(driver -> "Hello".equals(notification.getText()));
 
+        ComboBoxElement comboBox = $(ComboBoxElement.class).first();
         TestBenchElement textField = comboBox.$("input").first();
         assertElementRendered(textField);
-
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
-
-        WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
-
-        assertElementRendered(dropDown);
-
+        WebElement dropDownComboBox = $("vaadin-combo-box-overlay").id("overlay");
+        assertElementRendered(dropDownComboBox);
         getCommandExecutor().executeScript("arguments[0].value='1'", comboBox);
-
         assertLog("ComboBox value changed from 'null' to 'First'");
-    }
 
-    @Test
-    public void datePickerIsRenderedAndRecievesValueChangeEvent() {
-        DatePickerElement datePicker = $(DatePickerElement.class).first();
-
-        TestBenchElement textField = datePicker.$("input").first();
-        assertElementRendered(textField);
-
-        datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
-
-        WebElement dropDown = $("vaadin-date-picker-overlay").id("overlay");
-
-        assertElementRendered(dropDown);
-
-        getCommandExecutor().executeScript("arguments[0].value='2018-12-04'",
-                datePicker);
-
-        assertLog("DatePicker value changed from null to 2018-12-04");
-    }
-
-    @Test
-    public void timePickerIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement timePicker = $("vaadin-time-picker").first();
-
-        TestBenchElement textField = timePicker.$("input").first();
-        assertElementRendered(textField);
-
-        timePicker.$("div").attribute("part", "toggle-button").first().click();
-
-        WebElement dropDown = $("vaadin-time-picker-overlay").first();
-
-        assertElementRendered(dropDown);
-
-        getCommandExecutor().executeScript("arguments[0].value='01:37'",
-                timePicker);
-
-        assertLog("TimePicker value changed from null to 01:37");
-    }
-
-    @Test
-    public void selectIsRenderedAndReceivesValueChangeEvent() {
         SelectElement select = $(SelectElement.class).first();
-
         select.$("vaadin-input-container").attribute("part", "input-field").first().click();
-
-        WebElement dropDown = $("vaadin-select-overlay").first();
-
-        assertElementRendered(dropDown);
-
+        WebElement dropDownSelect = $("vaadin-select-overlay").first();
+        assertElementRendered(dropDownSelect);
         getCommandExecutor().executeScript("arguments[0].value='1'", select);
-
         assertLog("Select value changed from null to Spring");
+
+        ElementQuery<IconElement> icons = $(IconElement.class);
+        TestBenchElement hIcon = icons.get(1);
+        TestBenchElement vIcon = icons.get(2);
+        assertElementRendered(hIcon);
+        assertElementRendered(vIcon);
+        TestBenchElement svg = hIcon.$("svg").first();
+        assertElementRendered(svg);
+        svg = vIcon.$("svg").first();
+        assertElementRendered(svg);
+
+        IronListElement ironList = $(IronListElement.class).first();
+        TestBenchElement itemsContainer = ironList.$(DivElement.class).id("items");
+        assertElementRendered(itemsContainer);
+        List<TestBenchElement> items = ironList.$("span").all();
+        Assert.assertFalse(items.isEmpty());
+        items.stream().forEach(this::assertElementRendered);
+        for (int i = 0; i < items.size(); i++) {
+            Assert.assertEquals("Item " + i, items.get(i).getText());
+        }
+
+        RadioButtonGroupElement radioButtonGroup = $(
+                RadioButtonGroupElement.class).first();
+        TestBenchElement groupFieldRBG = radioButtonGroup.$(DivElement.class)
+                .attribute("part", "group-field").first();
+        assertElementRendered(groupFieldRBG);
+        List<RadioButtonElement> radioButtons = radioButtonGroup
+                .$(RadioButtonElement.class).all();
+        Assert.assertEquals(5, radioButtons.size());
+        radioButtons.stream().forEach(this::assertElementRendered);
+        for (int i = 0; i < 5; i++) {
+            Assert.assertEquals("Item " + i, radioButtons.get(i).getText());
+        }
+        radioButtons.get(0).click();
+        assertLog("RadioButtonGroup value changed from null to Item 0");
+
+        FormLayoutElement formLayoutElement = $(FormLayoutElement.class).first();
+        TestBenchElement layoutElement = formLayoutElement
+                .$(TestBenchElement.class).id("layout");
+        assertElementRendered(layoutElement);
+        List<TextFieldElement> textFields = formLayoutElement
+                .$(TextFieldElement.class).all();
+        Assert.assertEquals(6, textFields.size());
     }
+
+
+
 
     @Test
     public void gridIsRenderedAndRecievesSelectionEvents() {
         GridElement grid = $(GridElement.class).first();
-
         assertElementRendered(grid);
-
         TestBenchElement table = grid.$("table").id("table");
-
         assertElementRendered(table);
-
         Assert.assertEquals("Some", grid.getCell(0, 1).getText());
         Assert.assertEquals("Data", grid.getCell(0, 2).getText());
-
         Assert.assertEquals("Second", grid.getCell(1, 1).getText());
         Assert.assertEquals("Row", grid.getCell(1, 2).getText());
-
         grid.getCell(0, 1).click();
-
         assertLog("Grid selection changed to 'Optional[{bar=Data, foo=Some}]'");
-    }
 
-    @Test
-    public void gridContextMenuRenderedAndReceivesTargetItem() {
-        GridElement grid = $(GridElement.class).first();
         grid.getCell(1, 0).click();
-
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
                 By.tagName("vaadin-context-menu-overlay")));
         TestBenchElement contextMenuItem = $("vaadin-context-menu-overlay")
                 .first().$("vaadin-context-menu-item").first();
         Assert.assertEquals("foo", contextMenuItem.getText());
-
         contextMenuItem.click();
         assertLog("GridContextMenu on item Second");
-    }
 
-    @Test
-    public void iconsAreRendered() {
-        ElementQuery<IconElement> icons = $(IconElement.class);
-        TestBenchElement hIcon = icons.get(1);
-        TestBenchElement vIcon = icons.get(2);
-
-        assertElementRendered(hIcon);
-        assertElementRendered(vIcon);
-
-        TestBenchElement svg = hIcon.$("svg").first();
-        assertElementRendered(svg);
-
-        svg = vIcon.$("svg").first();
-        assertElementRendered(svg);
-    }
-
-    @Test
-    public void ironListIsRendered() {
-        IronListElement ironList = $(IronListElement.class).first();
-
-        TestBenchElement itemsContainer = ironList.$(DivElement.class).id("items");
-        assertElementRendered(itemsContainer);
-
-        List<TestBenchElement> items = ironList.$("span").all();
-        Assert.assertFalse(items.isEmpty());
-        items.stream().forEach(this::assertElementRendered);
-
-        for (int i = 0; i < items.size(); i++) {
-            Assert.assertEquals("Item " + i, items.get(i).getText());
-        }
-    }
-
-    @Test
-    public void virtualListIsRendered() {
         VirtualListElement virtualList = $(VirtualListElement.class).first();
-
         TestBenchElement itemsContainer = virtualList.$(DivElement.class).id("items");
         assertElementRendered(itemsContainer);
-
         // All the root-level div elements
         List<TestBenchElement> items = virtualList.$("div:not(#items):not(:empty)").all();
         Assert.assertFalse(items.isEmpty());
         items.stream().forEach(this::assertElementRendered);
-
         for (int i = 0; i < items.size(); i++) {
             Assert.assertEquals("Item " + i, items.get(i).getText());
         }
-    }
 
-    @Test
-    public void progressBarIsRendered() {
         ProgressBarElement ironList = $(ProgressBarElement.class).first();
-
         TestBenchElement bar = ironList.$(DivElement.class).attribute("part", "bar")
                 .first();
         assertElementRendered(bar);
-
         TestBenchElement value = bar.$(DivElement.class).attribute("part", "value")
                 .first();
-
         assertElementRendered(value);
-
         Assert.assertTrue(
                 value.getSize().getWidth() < bar.getSize().getWidth());
-    }
 
-    @Test
-    public void radioButtonGroupIsRenderedAndRecievesValueChangeEvents() {
-        RadioButtonGroupElement radioButtonGroup = $(
-                RadioButtonGroupElement.class).first();
-
-        TestBenchElement groupField = radioButtonGroup.$(DivElement.class)
-                .attribute("part", "group-field").first();
-        assertElementRendered(groupField);
-
-        List<RadioButtonElement> radioButtons = radioButtonGroup
-                .$(RadioButtonElement.class).all();
-        Assert.assertEquals(5, radioButtons.size());
-
-        radioButtons.stream().forEach(this::assertElementRendered);
-
-        for (int i = 0; i < 5; i++) {
-            Assert.assertEquals("Item " + i, radioButtons.get(i).getText());
+        VerticalLayoutElement verticalLayoutElement = $(
+                VerticalLayoutElement.class).id("verticallayout");
+        assertElementRendered(verticalLayoutElement);
+        List<ButtonElement> buttonsVLE = verticalLayoutElement
+                .$(ButtonElement.class).all();
+        Assert.assertEquals(3, buttonsVLE.size());
+        int xLocation = buttonsVLE.get(0).getLocation().getX();
+        for (int i = 1; i < 3; i++) {
+            Assert.assertEquals(xLocation, buttonsVLE.get(i).getLocation().getX());
         }
 
-        radioButtons.get(0).click();
+        HorizontalLayoutElement horizontalLayoutElement = $(
+                HorizontalLayoutElement.class).id("horizontallayout");
+        assertElementRendered(horizontalLayoutElement);
+        List<ButtonElement> buttonsHLE = horizontalLayoutElement
+                .$(ButtonElement.class).all();
+        Assert.assertEquals(3, buttonsHLE.size());
+        int yLocation = buttonsHLE.get(0).getLocation().getY();
+        for (int i = 1; i < 3; i++) {
+            Assert.assertEquals(yLocation, buttonsHLE.get(i).getLocation().getY());
+        }
 
-        assertLog("RadioButtonGroup value changed from null to Item 0");
     }
 
     @Test
     public void textFieldIsRenderedAndRecievesValueChangeEvents() {
         assertTextComponent($(TextFieldElement.class).first(), "input",
                 "TextField value changed from to foo");
-    }
 
-    @Test
-    public void passwordFieldIsRenderedAndRecievesValueChangeEvents() {
         assertTextComponent($(PasswordFieldElement.class).first(),
                 "input", "PasswordField value changed from to foo");
-    }
 
-    @Test
-    public void textAreaIsRenderedAndRecievesValueChangeEvents() {
         assertTextComponent($(TextAreaElement.class).first(), "textarea",
                 "TextArea value changed from to foo");
+
+        TestBenchElement listBoxElement = $("vaadin-list-box").first();
+        TestBenchElement itemsContainer = listBoxElement.$(DivElement.class)
+                .attribute("part", "items").first();
+        assertElementRendered(itemsContainer);
+        List<TestBenchElement> itemsLBE = listBoxElement.$("vaadin-item").all();
+        Assert.assertEquals(7, itemsLBE.size());
+        itemsLBE.stream().forEach(this::assertElementRendered);
+        for (int i = 0; i < 7; i++) {
+            Assert.assertEquals("Item " + i, itemsLBE.get(i).getText());
+        }
+        TestBenchElement listBoxInnerComponent = listBoxElement.$(DivElement.class)
+                .id("list-box-component");
+        assertElementRendered(listBoxInnerComponent);
+        Assert.assertEquals("One more item as a component",
+                listBoxInnerComponent.getText());
+        getCommandExecutor().executeScript("arguments[0].selected=1",
+                listBoxElement);
+        assertLog("ListBox value changed from 'null' to 'Item 1'");
+
+        TestBenchElement contextMenuTarget = $(TestBenchElement.class)
+                .id("context-menu-target");
+        contextMenuTarget.click();
+        // Check to see if the context-menu is there.
+        // If not, a NoSuchElementException will be thrown
+        $("vaadin-context-menu").first();
+        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay").id("overlay");
+        assertElementRendered(contextMenuOverlay);
+        assertElementRendered(contextMenuOverlay.$(DivElement.class).id("overlay"));
+        List<TestBenchElement> itemsCMI = contextMenuOverlay
+                .$("vaadin-context-menu-item").all();
+        Assert.assertEquals(2, itemsCMI.size());
+        for (int i = 0; i < 2; i++) {
+            assertElementRendered(
+                    itemsCMI.get(0).$(DivElement.class).attribute("part", "content").first());
+            Assert.assertEquals("Item " + i, itemsCMI.get(i).getText());
+        }
+        getCommandExecutor().executeScript("arguments[0].click();",
+                itemsCMI.get(0));
+        assertLog("Context menu Item 0 is clicked");
+
+        MessageInputElement messageInput = $(MessageInputElement.class).first();
+        messageInput.submit("foo");
+        assertLog("foo");
     }
 
     @Test
     public void uploadIsRenderedAndUploadFile() throws IOException {
         UploadElement upload = $(UploadElement.class).first();
-
         ButtonElement uploadButton = upload.$(ButtonElement.class).first();
         assertElementRendered(uploadButton);
-
         TestBenchElement dropLabel = upload.$(TestBenchElement.class)
                 .id("dropLabelContainer");
-
         assertElementRendered(dropLabel);
-
         File tempFile = createTempFile();
         fillPathToUploadInput(tempFile.getPath());
-
         assertLog("Upload received file text/plain with text foo");
-    }
 
-    @Test
-    public void dialogIsRendered() {
-        $(ButtonElement.class).id("open-dialog").click();
-        TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
-                .id("overlay");
-
-        TestBenchElement content = dialogOverlay.$(TestBenchElement.class)
-                .id("content");
-
-        assertElementRendered(content);
-
-        TestBenchElement contentComponent = dialogOverlay
-                .$("flow-component-renderer").first().$(DivElement.class).first();
-
-        Assert.assertEquals("This is the contents of the dialog",
-                contentComponent.getText());
-    }
-
-    @Test
-    public void notificationIsRendered() {
-        waitUntil(driver -> $(NotificationElement.class).all().size() > 0);
-        NotificationElement notification = $(NotificationElement.class).first();
-
-        TestBenchElement card = (TestBenchElement) notification.getContext();
-        assertElementRendered(card);
-
-        waitUntil(driver -> "Hello".equals(notification.getText()));
-    }
-
-    @Test
-    public void formLayoutIsRendered() {
-        FormLayoutElement formLayoutElement = $(FormLayoutElement.class).first();
-
-        TestBenchElement layoutElement = formLayoutElement
-                .$(TestBenchElement.class).id("layout");
-
-        assertElementRendered(layoutElement);
-
-        List<TextFieldElement> textFields = formLayoutElement
-                .$(TextFieldElement.class).all();
-
-        Assert.assertEquals(6, textFields.size());
-    }
-
-    @Test
-    public void verticalLayoutIsRendered() {
-        VerticalLayoutElement verticalLayoutElement = $(
-                VerticalLayoutElement.class).id("verticallayout");
-
-        assertElementRendered(verticalLayoutElement);
-
-        List<ButtonElement> buttons = verticalLayoutElement
-                .$(ButtonElement.class).all();
-
-        Assert.assertEquals(3, buttons.size());
-
-        int xLocation = buttons.get(0).getLocation().getX();
-        for (int i = 1; i < 3; i++) {
-            Assert.assertEquals(xLocation, buttons.get(i).getLocation().getX());
-        }
-    }
-
-    @Test
-    public void horizontalLayoutIsRendered() {
-        HorizontalLayoutElement horizontalLayoutElement = $(
-                HorizontalLayoutElement.class).id("horizontallayout");
-
-        assertElementRendered(horizontalLayoutElement);
-
-        List<ButtonElement> buttons = horizontalLayoutElement
-                .$(ButtonElement.class).all();
-
-        Assert.assertEquals(3, buttons.size());
-
-        int yLocation = buttons.get(0).getLocation().getY();
-        for (int i = 1; i < 3; i++) {
-            Assert.assertEquals(yLocation, buttons.get(i).getLocation().getY());
-        }
-    }
-
-    @Test
-    public void splitLayoutIsRendered() {
         SplitLayoutElement splitLayoutElement = $(SplitLayoutElement.class)
                 .id("splithorizontal");
-
         assertElementRendered(splitLayoutElement);
-
         TestBenchElement splitter = splitLayoutElement.$(DivElement.class).id("splitter");
-
         assertElementRendered(splitter);
-
         List<ButtonElement> labels = splitLayoutElement.$(ButtonElement.class)
                 .all();
-
         Assert.assertEquals(2, labels.size());
-
         int yLocation = labels.get(0).getLocation().getY();
         Assert.assertEquals(yLocation, labels.get(1).getLocation().getY());
-    }
 
-    @Test
-    public void menuBarIsRendered() {
         MenuBarElement menuBarElement = $(MenuBarElement.class).id("menubar");
-
         assertElementRendered(menuBarElement);
-
         TestBenchElement rootButton = menuBarElement.$("vaadin-menu-bar-button")
                 .first();
-
         assertElementRendered(rootButton);
-    }
 
-    @Test
-    public void tabsIsRenderedAndRecievesSelectionEvents() {
         TabsElement tabsElement = $(TabsElement.class).first();
-
         assertElementRendered(tabsElement.$(DivElement.class).id("scroll"));
-
         List<TabElement> tabs = tabsElement.$(TabElement.class).all();
-
         Assert.assertEquals(2, tabs.size());
-
         assertElementRendered(tabs.get(0));
-
         Assert.assertEquals("foo", tabs.get(0).getText());
         Assert.assertEquals("bar", tabs.get(1).getText());
-
         getCommandExecutor().executeScript("arguments[0].selected=1",
                 tabsElement);
-
         assertLog("Tabs selected index changed to 1");
-    }
 
-    @Test
-    public void listBoxIsRenderedAndRecievesValueChangeEvents() {
-        TestBenchElement listBoxElement = $("vaadin-list-box").first();
-
-        TestBenchElement itemsContainer = listBoxElement.$(DivElement.class)
-                .attribute("part", "items").first();
-
-        assertElementRendered(itemsContainer);
-
-        List<TestBenchElement> items = listBoxElement.$("vaadin-item").all();
-
-        Assert.assertEquals(7, items.size());
-
-        items.stream().forEach(this::assertElementRendered);
-
-        for (int i = 0; i < 7; i++) {
-            Assert.assertEquals("Item " + i, items.get(i).getText());
-        }
-
-        TestBenchElement listBoxInnerComponent = listBoxElement.$(DivElement.class)
-                .id("list-box-component");
-
-        assertElementRendered(listBoxInnerComponent);
-        Assert.assertEquals("One more item as a component",
-                listBoxInnerComponent.getText());
-
-        getCommandExecutor().executeScript("arguments[0].selected=1",
-                listBoxElement);
-
-        assertLog("ListBox value changed from 'null' to 'Item 1'");
-    }
-
-    @Test
-    public void contextMenuIsRenderedAndRecievesItemSelectionEvents() {
-
-        TestBenchElement contextMenuTarget = $(TestBenchElement.class)
-                .id("context-menu-target");
-
-        contextMenuTarget.click();
-
-        // Check to see if the context-menu is there.
-        // If not, a NoSuchElementException will be thrown
-        $("vaadin-context-menu").first();
-
-        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay").id("overlay");
-
-        assertElementRendered(contextMenuOverlay);
-
-        assertElementRendered(contextMenuOverlay.$(DivElement.class).id("overlay"));
-
-        List<TestBenchElement> items = contextMenuOverlay
-                .$("vaadin-context-menu-item").all();
-        Assert.assertEquals(2, items.size());
-
-        for (int i = 0; i < 2; i++) {
-            assertElementRendered(
-                    items.get(0).$(DivElement.class).attribute("part", "content").first());
-            Assert.assertEquals("Item " + i, items.get(i).getText());
-        }
-
-        getCommandExecutor().executeScript("arguments[0].click();",
-                items.get(0));
-
-        assertLog("Context menu Item 0 is clicked");
-    }
-
-    @Test
-    public void collaborationAvatarGroupIsRendered() {
-        AvatarGroupElement group1 = $(AvatarGroupElement.class).id("collab-avatar-group-1");
-        AvatarGroupElement group2 = $(AvatarGroupElement.class).id("collab-avatar-group-2");
-        assertElementRendered(group1);
-        assertNotNull(group1.getAvatarElement(0));
-        assertNotNull(group1.getAvatarElement(1));
-
-        assertElementRendered(group2);
-        assertNotNull(group2.getAvatarElement(0));
-        assertNotNull(group2.getAvatarElement(1));
-    }
-
-    @Test
-    public void messageListIsRendered() {
         MessageListElement messageList = $(MessageListElement.class).first();
         List<MessageElement> messages = messageList.getMessageElements();
         Assert.assertEquals("Number of messages rendered in MessageList",
@@ -576,17 +380,20 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 "foo", messages.get(0).getText());
         Assert.assertEquals("Text content of the second message of MessageList",
                 "bar", messages.get(1).getText());
-    }
 
-    @Test
-    public void messageInputIsRenderedAndFiresSubmitEvent() {
-        MessageInputElement messageInput = $(MessageInputElement.class).first();
-        messageInput.submit("foo");
-        assertLog("foo");
+        AvatarGroupElement group1 = $(AvatarGroupElement.class).id("collab-avatar-group-1");
+        AvatarGroupElement group2 = $(AvatarGroupElement.class).id("collab-avatar-group-2");
+        assertElementRendered(group1);
+        assertNotNull(group1.getAvatarElement(0));
+        assertNotNull(group1.getAvatarElement(1));
+        assertElementRendered(group2);
+        assertNotNull(group2.getAvatarElement(0));
+        assertNotNull(group2.getAvatarElement(1));
     }
 
     @Test
     public void usageStatisticIsLogged() throws InterruptedException {
+        checkLogsForErrors();
         Assert.assertTrue($(ButtonElement.class).exists());
         // wait 5 seconds for collecting values in local storage
         Thread.sleep(5000);
