@@ -53,31 +53,18 @@ public class ComponentsIT extends AbstractPlatformTest {
     List<String> excludeComponents = Arrays.asList("vaadin-message");
 
     @Test
-    public void appWorksWithHTMLComponents() throws Exception {
+    public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();
 
         new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
             String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
             String className = testComponent.component != null ? testComponent.component.getName() : null;
-            if ((!beforeRunsByTag.containsKey(tag) && !beforeRunsByTag.containsKey(className)) && className.contains("com.vaadin.flow.component.html")) {
+            if (!beforeRunsByTag.containsKey(tag) && !beforeRunsByTag.containsKey(className)) {
                 checkElement(testComponent);
             }
         });
     }
 
-    @Test
-    public void appWorksWithFlowComponents() throws Exception {
-        $(NotificationElement.class).waitForFirst();
-
-        new ComponentUsageTest().getTestComponents().forEach(testComponent -> {
-            String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
-            String className = testComponent.component != null ? testComponent.component.getName() : null;
-            if ((!beforeRunsByTag.containsKey(tag) && !beforeRunsByTag.containsKey(className)) && !className.contains("com.vaadin.flow.component.html")) {
-                checkElement(testComponent);
-            }
-        });
-    }
-    
     @Test
     public void appWorksWithAction() throws Exception {
         $(NotificationElement.class).waitForFirst();
