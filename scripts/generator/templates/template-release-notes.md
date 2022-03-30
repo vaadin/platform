@@ -35,7 +35,7 @@
 ## Support
 <!-- New LTS:
 
-Vaadin 23 is an LTS release, and is supported for 5 years, with extended support options available ([release model](https://vaadin.com/roadmap)).
+Vaadin 23 is the latest stable version, with extended support options available ([release model](https://vaadin.com/roadmap)).
 
 -->
 

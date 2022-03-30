@@ -4,7 +4,7 @@ Looking for an [**overview of Vaadin**](https://github.com/vaadin)?
 
 This repository gathers all parts of the Vaadin platform in to a single package, ensuring all the parts work together.
 
-A new major version is released every quarter. Learn more about our [release model](https://vaadin.com/roadmap).
+Learn more about our [release model](https://vaadin.com/roadmap).
 
 ## Supported versions
 
