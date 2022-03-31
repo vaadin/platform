@@ -106,17 +106,17 @@ Vaadin Designer supports the following IDEs:
   <th>Application server</th>
   <td>
 
-Vaadin Flow requires Java Servlet API 3.1 (JSR-340) or newer. It is tested on:
+Vaadin Flow requires Java Servlet API 3.1 (JSR-340) and JDK11 or newer. It is tested on:
 
 - Apache Tomcat 8.0.x, 8.5, 9
-- Apache TomEE 7.0.4 or newer
-- Oracle WebLogic Server 12.2.1
-- IBM WebSphere Application Server 8.5 Liberty Profile and 9
-- RedHat JBoss EAP 7
-- WildFly 14, 15, 16
+- Apache TomEE 8.0
+- Oracle WebLogic Server 14c
+- IBM WebSphere Application Server v9.0.5 Liberty Profile
+- RedHat JBoss EAP 7.2
+- WildFly 15, 16
 - Jetty 9.4
-- Payara Server
-- Payara Micro
+- Payara Server (platform 5.194)
+- Payara Micro (platform 5.194)
 - Karaf 4.2 or newer
   </td>
 </tr>
