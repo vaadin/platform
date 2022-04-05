@@ -290,6 +290,11 @@
                 <artifactId>vaadin-context-menu-flow</artifactId>
                 <version>${vaadin.context.menu.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-spreadsheet-flow</artifactId>
+                <version>${vaadin.spreadsheet.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -535,6 +540,12 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-upload-testbench</artifactId>
                 <version>${vaadin.upload.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-spreadsheet-testbench</artifactId>
+                <version>${vaadin.spreadsheet.version}</version>
                 <scope>test</scope>
             </dependency>
 

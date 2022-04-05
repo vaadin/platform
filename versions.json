@@ -478,6 +478,11 @@
             "jsVersion": "23.1.0-alpha1",
             "npmName": "@vaadin/vaadin-time-picker"
         },
+        "vaadin-spreadsheet": {
+            "component": true,
+            "javaVersion": "{{version}}",
+            "pro": true
+        },
         "vaadin-upload": {
             "component": true,
             "javaVersion": "{{version}}",
