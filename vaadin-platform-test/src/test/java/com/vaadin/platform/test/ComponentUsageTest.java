@@ -79,12 +79,16 @@ public class ComponentUsageTest {
                 return null;
             }
         });
-        List<String> experimental = featureFlags.getFeatures().stream().map(f -> f.getComponentClassName()).collect(Collectors.toList());
+        List<String> experimentalNamespaces = featureFlags.getFeatures()
+                .stream().filter(f -> f.getComponentClassName() != null)
+                .map(f -> f.getComponentClassName().replaceFirst("\\.[^\\.]+$",
+                        ""))
+                .collect(Collectors.toList());
 
         return (List) list.stream()
                 .filter(clz -> type.isAssignableFrom(clz) && !clz.getName().contains("$")
                         && Modifier.isPublic(clz.getModifiers()) && !Modifier.isAbstract(clz.getModifiers())
-                        && !experimental.contains(clz.getName()))
+                        && !experimentalNamespaces.contains(clz.getPackageName()))
                 .collect(Collectors.toList());
     }
 
