@@ -2,7 +2,11 @@ Vaadin {{platform}}
 
 *This is a maintenance release for Vaadin 23. See [23.0.0 release notes](https://github.com/vaadin/platform/releases/tag/23.0.0) for details and resources.*
 
-{{changesSincePrevious}}
+**NOTE:** 
+ - Starting from Vaadin 23, Java 11 is required on your Vaadin apps.
+ - Flow starts to follow platform version
+ - Vaadin Spring addon is part of the flow project, following platform versioning
+ - Vaadin Fusion has been renamed to [Hilla](https://github.com/vaadin/hilla#hilla), and follows it's own version sequence.
 
 ## Changelogs
 
