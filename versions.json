@@ -4,7 +4,7 @@
             "javaVersion": "1.0.16"
         },
         "flow-spring": {
-            "javaVersion": "10.0.6"
+            "javaVersion": "10.2.0"
         },
         "iron-a11y-announcer": {
             "jsVersion": "2.1.0"
