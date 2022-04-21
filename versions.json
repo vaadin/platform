@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "23.1.0-alpha2",
+            "jsVersion": "23.1.0.alpha3",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -442,6 +442,11 @@
             "jsVersion": "23.1.0-alpha2",
             "npmName": "@vaadin/vaadin-split-layout"
         },
+        "vaadin-spreadsheet": {
+            "component": true,
+            "javaVersion": "{{version}}",
+            "pro": true
+        },
         "vaadin-tabs": {
             "component": true,
             "javaVersion": "{{version}}",
@@ -477,11 +482,6 @@
             "javaVersion": "{{version}}",
             "jsVersion": "23.1.0-alpha2",
             "npmName": "@vaadin/vaadin-time-picker"
-        },
-        "vaadin-spreadsheet": {
-            "component": true,
-            "javaVersion": "{{version}}",
-            "pro": true
         },
         "vaadin-upload": {
             "component": true,
