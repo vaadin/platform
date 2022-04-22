@@ -64,6 +64,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 
 - Chrome (evergreen)
 - Firefox (evergreen)
+   - Firefox Extended Support Release (ESR)
 - Safari 14.1 or newer
 - Edge (Chromium, evergreen)
   </td>
