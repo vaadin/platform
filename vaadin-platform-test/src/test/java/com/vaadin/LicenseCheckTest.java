@@ -77,6 +77,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.opensource.org/licenses/mit-license.php");
         whitelist.add("http://opensource.org/licenses/MIT");
         whitelist.add("https://jsoup.org/license");
+        whitelist.add("http://opensource.org/licenses/mit-license");
 
         // Public Domain
         whitelist.add("http://creativecommons.org/publicdomain/zero/1.0/");
