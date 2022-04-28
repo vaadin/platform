@@ -31,3 +31,4 @@ Vaadin {{platform}}
 - Gradle plugin ({{platform}})
 - OSGi plugin ([{{vaadin.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{vaadin.flow-osgi.javaVersion}}))
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
+- Portlet plugin ([{{vaadin.vaadin-portlet.javaVersion}}](https://github.com/vaadin/portlet/releases/tag/{{vaadin.vaadin-portlet.javaVersion}}))

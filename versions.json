@@ -615,6 +615,9 @@
             "npmName": "@vaadin/map",
             "pro": true
         },
+        "vaadin-portlet": {
+            "javaVersion": "2.0.0.alpha1"
+        },
         "vaadin-rich-text-editor": {
             "component": true,
             "javaVersion": "{{version}}",
