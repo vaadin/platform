@@ -146,6 +146,10 @@
             "jsVersion": "23.1.0-beta1",
             "npmName": "@vaadin/list-box"
         },
+        "lit-renderer": {
+            "jsVersion": "23.1.0-beta1",
+            "npmName": "@vaadin/lit-renderer"
+        },
         "login": {
             "jsVersion": "23.1.0-beta1",
             "npmName": "@vaadin/login"
