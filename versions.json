@@ -146,7 +146,7 @@
         "vaadin-date-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "4.4.2",
+            "jsVersion": "4.4.3",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
@@ -189,7 +189,7 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "5.9.5",
+            "jsVersion": "5.9.6",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icons": {
