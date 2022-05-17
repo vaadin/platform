@@ -10,6 +10,7 @@ import '@vaadin/charts';
 import '@vaadin/charts/src/vaadin-chart';
 import '@vaadin/checkbox';
 import '@vaadin/checkbox-group';
+import '@vaadin/combo-box';
 import '@vaadin/confirm-dialog';
 import '@vaadin/cookie-consent';
 import '@vaadin/crud';
