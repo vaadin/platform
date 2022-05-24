@@ -308,6 +308,10 @@
             "jsVersion": "23.1.0-beta4",
             "npmName": "@vaadin/vaadin-dialog"
         },
+        "vaadin-flow-components-base": {
+            "component": false,
+            "javaVersion": "{{version}}"
+        },
         "vaadin-form-layout": {
             "component": true,
             "javaVersion": "{{version}}",
