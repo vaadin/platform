@@ -79,7 +79,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "23.1.0.beta2"
+            "javaVersion": "23.1.0.rc2"
         },
         "flow-cdi": {
             "javaVersion": "14.0.0"
@@ -539,7 +539,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.0.1"
+            "javaVersion": "8.0.2"
         },
         "grid-pro": {
             "jsVersion": "23.1.0-rc2",
@@ -571,7 +571,7 @@
             "javaVersion": "23.0.2"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.1.0.beta2"
+            "javaVersion": "5.1.0.rc1"
         },
         "vaadin-confirm-dialog": {
             "component": true,
@@ -620,7 +620,7 @@
             "pro": true
         },
         "vaadin-portlet": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "vaadin-rich-text-editor": {
             "component": true,
