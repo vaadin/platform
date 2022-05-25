@@ -620,7 +620,7 @@
             "pro": true
         },
         "vaadin-portlet": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "vaadin-rich-text-editor": {
             "component": true,
