@@ -11,6 +11,7 @@ import '@vaadin/charts/src/vaadin-chart';
 import '@vaadin/checkbox';
 import '@vaadin/checkbox-group';
 import '@vaadin/combo-box';
+import '@vaadin/multi-select-combo-box';
 import '@vaadin/confirm-dialog';
 import '@vaadin/cookie-consent';
 import '@vaadin/crud';
@@ -144,6 +145,7 @@ export class ComponentsView extends View {
           <vaadin-checkbox value="3">Option three</vaadin-checkbox>
         </vaadin-checkbox-group>
         <vaadin-combo-box .items="${[1,2,3,4,5]}"></vaadin-combo-box>
+        <vaadin-multi-select-combo-box .items="${['apple', 'banana', 'lemon', 'orange']}"></vaadin-multi-select-combo-box>
         <vaadin-confirm-dialog></vaadin-confirm-dialog>
         <vaadin-context-menu open-on="click">
           <template>

@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -50,6 +51,7 @@ import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
@@ -265,6 +267,13 @@ public class ComponentsView extends AppLayout {
         comboBox.setItems("First", "Second", "Third");
         comboBox.addValueChangeListener(e -> {
             log.log("ComboBox value changed from '" + e.getOldValue() + "' to '" + e.getValue() + "'");
+        });
+
+        MultiSelectComboBox multiSelectComboBox = new MultiSelectComboBox<>();
+        multiSelectComboBox.setItems(Arrays.asList("foo", "bar", "baz"));
+        multiSelectComboBox.setValue(Set.of("foo", "bar"));
+        multiSelectComboBox.addValueChangeListener(e -> {
+           log.log("ComboBox value changed from '" + e.getOldValue() + "' to '" + e.getValue() + "'");
         });
 
         DatePicker datePicker = new DatePicker();
@@ -605,6 +614,7 @@ public class ComponentsView extends AppLayout {
         components.add(checkbox);
         components.add(checkboxGroup);
         components.add(comboBox);
+        components.add(multiSelectComboBox);
         components.add(dialogButton);
         components.add(confirmDialogButton);
         components.add(datePicker);
