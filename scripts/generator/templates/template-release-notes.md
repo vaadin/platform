@@ -6,7 +6,7 @@ Vaadin {{platform}}
   - Starting from Vaadin 23, Java 11 is required on your Vaadin apps. 
   - Vaadin Spring addon version starts to follow flow version
 
-- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla (<!-- Insert Version -->) 
+- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}})) 
 - Design System
   - Web Components ([{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-accordion.jsVersion}}))
   - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
