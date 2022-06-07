@@ -641,6 +641,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 // exclude the favicon error
                 .filter(logEntry -> !logEntry.getMessage()
                         .contains("favicon.ico"))
+                // exclude icon deprecation warning
+                .filter(logEntry -> !logEntry.getMessage()
+                        .contains("vaadin-iconset.js"))
                 .collect(Collectors.toList());
     }
 
