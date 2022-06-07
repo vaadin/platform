@@ -68,7 +68,11 @@ const servletContainersTestsResultPomFileName = getResultsFilePath('vaadin-platf
 const mavenHillaBomTemplateFileName = getTemplateFilePath('template-hilla-bom.xml');
 const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
 
-const versions = transformer.transformVersions(inputVersions, argv['platform'], argv['useSnapshots']);
+const platform=argv['platform'];
+const versions = transformer.transformVersions(inputVersions, platform, argv['useSnapshots']);
+
+const hilla = process.env.HILLA || platform.replace(/^23/, 1);
+versions.core.hilla = {javaVersion: hilla};
 
 if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);

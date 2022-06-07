@@ -4,14 +4,8 @@ Vaadin {{platform}}
 
 ## <a id="_changelogs"></a> Changelogs
 
-- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([version]([https](https://github.com/vaadin/hilla/releases/tag/<version>))) 
-  - Flow ({{core.flow.javaVersion}}) <details>
-    - <issue 1>
-    - <topic 1>
-  </details>
-  
-  - Hilla (version) <details></details>
 
+- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}})) 
 - Design System
   - Web Components ([{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-accordion.jsVersion}}))
   - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
@@ -76,7 +70,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <td>
 
 - Chrome (evergreen) for Android (4.4 or newer)
-- Safari for iOS (14.5 or newer)
+- Safari for iOS (14.7 or newer)
   </td>
 </tr>
 <tr>
@@ -95,9 +89,8 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, VS Code, Atom, Emacs, and Vim, among others.
 
 Vaadin Designer supports the following IDEs:
-
-- Eclipse Java EE versions: Photon, 2018, and 2019
-- JetBrains IntelliJ IDEA 2017, 2018, and 2019 (Community and Ultimate editions)
+- Eclipse from Photon and upwards
+- JetBrains IntelliJ IDEA from 2017 upwards
   </td>
 </tr>
 <tr>
@@ -132,7 +125,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) and JDK11 or newer. It is te
 </tr>
 <tr>
   <th>Node.js</th>
-  <td>Version 12, 14, or newer</td>
+  <td>Version 16.15 or newer</td>
 </tr>
 </table>
 
