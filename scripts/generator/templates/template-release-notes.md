@@ -7,24 +7,21 @@ Vaadin {{platform}}
 ### Flow
 - Support for Liferray 7
 - Java-side license checker (experimental)
-- Service Worker VITE (experimental)
+- Vite build tool improvements (experimental)
 
 ### Hilla
 - Reactive Endpoints (experimental)
 
 ### Design System
-- Helpers for Lit Template
-- Freeze column to the right in Grid
+- Lit renderer directives
+- Freeze columns to the right in Grid
 - Built-in Header and Footer in Dialog
-- All flow components implements HasStyle
-- Java Api for the Lumo theme
-- Theme variants constants in flow components
+- Java API for Lumo Utility Classes
 - Eager fetch mode in TreeGrid
 - MultiSelect combo box
-- Spreadsheet Flow Component (experimental)
 
 ### Collaboration Engine
-- FormManager Api
+- `FormManager` and `ListOperation` API
 - Clustering Support (experimental)
 
 ## <a id="_changelogs"></a> Changelogs
