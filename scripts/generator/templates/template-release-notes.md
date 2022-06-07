@@ -5,12 +5,11 @@ Vaadin {{platform}}
 ## New and Noteworthy Since Vaadin 23.0
 
 ### Flow
-- Support for Liferray 7
-- Java-side license checker (experimental)
-- Vite build tool improvements (experimental)
+- Support for Liferay 7
+- Vite build tool improvements `*`
 
 ### Hilla
-- Reactive Endpoints (experimental)
+- Reactive Endpoints `*`
 
 ### Design System
 - Lit renderer directives
@@ -22,7 +21,9 @@ Vaadin {{platform}}
 
 ### Collaboration Engine
 - `FormManager` and `ListOperation` API
-- Clustering Support (experimental)
+- Clustering Support `*`
+
+`*` experimental
 
 ## <a id="_changelogs"></a> Changelogs
 
