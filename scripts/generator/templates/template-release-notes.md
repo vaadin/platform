@@ -4,14 +4,8 @@ Vaadin {{platform}}
 
 ## <a id="_changelogs"></a> Changelogs
 
-- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([version]([https](https://github.com/vaadin/hilla/releases/tag/<version>))) 
-  - Flow ({{core.flow.javaVersion}}) <details>
-    - <issue 1>
-    - <topic 1>
-  </details>
-  
-  - Hilla (version) <details></details>
 
+- Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}})) 
 - Design System
   - Web Components ([{{core.vaadin-accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.vaadin-accordion.jsVersion}}))
   - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
