@@ -2,6 +2,31 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
+## New and Noteworthy Since Vaadin 23.0
+
+### Flow
+- Support for Liferray 7
+- Java-side license checker (experimental)
+- Service Worker VITE (experimental)
+
+### Hilla
+- Reactive Endpoints (experimental)
+
+### Design System
+- Helpers for Lit Template
+- Freeze column to the right in Grid
+- Built-in Header and Footer in Dialog
+- All flow components implements HasStyle
+- Java Api for the Lumo theme
+- Theme variants constants in flow components
+- Eager fetch mode in TreeGrid
+- MultiSelect combo box
+- Spreadsheet Flow Component (experimental)
+
+### Collaboration Engine
+- FormManager Api
+- Clustering Support (experimental)
+
 ## <a id="_changelogs"></a> Changelogs
 
 - Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}})) 
