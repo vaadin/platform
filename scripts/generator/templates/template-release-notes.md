@@ -13,15 +13,15 @@ Vaadin {{platform}}
 
 ### Design System
 - Lit renderer directives
-- Freeze columns to the right in Grid
-- Built-in Header and Footer in Dialog
-- Java API for Lumo Utility Classes
-- Eager fetch mode in TreeGrid
-- MultiSelect combo box
+- Grid: freeze columns to the end
+- Dialog: header and footer slots
+- Lumo: Java API for CSS utility classes
+- Tree Grid: eager fetch mode
+- Multi-Select Combo Box
 
 ### Collaboration Engine
 - `FormManager` and `ListOperation` API
-- Clustering Support `*`
+- Clustering support `*`
 
 `*` experimental
 
