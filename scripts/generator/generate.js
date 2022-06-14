@@ -28,6 +28,12 @@ function getResultsFilePath(filename) {
     return path.resolve(`${__dirname}/results/${filename}`);
 }
 
+const coreJsonTemplateFileName = getTemplateFilePath('template-vaadin-core-versions.json');
+const vaadinCoreJsonFileName = getResultsFilePath('vaadin_versions_core.json');
+
+const vaadinJsonTemplateFileName = getTemplateFilePath('template-vaadin-versions.json');
+const vaadinJsonResultFileName = getResultsFilePath('vaadin_versions.json');
+
 const corePackageTemplateFileName = getTemplateFilePath('template-vaadin-core-package.json');
 const corePackageResultFileName = getResultsFilePath('vaadin-core-package.json');
 
@@ -70,6 +76,10 @@ const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
 
 const platform=argv['platform'];
 const versions = transformer.transformVersions(inputVersions, platform, argv['useSnapshots']);
+
+writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
+writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
+writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
 
 const hilla = process.env.HILLA || platform.replace(/^23/, 1);
 versions.core.hilla = {javaVersion: hilla};

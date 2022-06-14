@@ -2,6 +2,13 @@ const render = require('./replacer.js');
 const request = require('sync-request');
 const compareVersions = require('compare-versions');
 
+function createJson(versions, key, jsonTemplate) {
+
+    jsonTemplate[key] = versions;
+
+    return JSON.stringify(jsonTemplate, null, 4);
+}
+
 /**
 @param {Object} versions data object for product versions.
 @param {Object} packageJsonTemplate template data object to put versions to.
@@ -472,7 +479,7 @@ function requestGH(path) {
     }
     return retValue
 }
-
+exports.createJson = createJson;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;

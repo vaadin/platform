@@ -7,6 +7,8 @@ error-screenshots/
 .project
 .settings
 tmp.*
+vaadin-core/vaadin_versions_core.json
+vaadin/vaadin_versions.json
 vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
@@ -44,3 +46,4 @@ vaadin-maven-plugin/pom.xml
 hilla-maven-plugin/pom.xml
 vaadin-gradle-plugin/pom.xml
 vaadin-gradle-plugin/pom*xml
+vaadin-platform-servlet-containers-tests/pom.xml
