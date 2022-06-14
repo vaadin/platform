@@ -27,8 +27,8 @@ public class VersionsFileTest {
     public void testVersionsFile_existsAsClassPathResource()
             throws IOException {
         File file = new File(
-                getClass().getResource("vaadin_versions_core.json").getFile());
-        Assert.assertTrue("vaadin_versions.json file is missing",
+                getClass().getResource("vaadin-core-versions.json").getFile());
+        Assert.assertTrue("vaadin-core-versions.json file is missing",
                 file.exists() && !file.isDirectory());
 
         // checking that the file has some content in it

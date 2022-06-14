@@ -7,8 +7,8 @@ error-screenshots/
 .project
 .settings
 tmp.*
-vaadin-core/vaadin_versions_core.json
-vaadin/vaadin_versions.json
+vaadin-core/vaadin-core-versions.json
+vaadin/vaadin-versions.json
 vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
