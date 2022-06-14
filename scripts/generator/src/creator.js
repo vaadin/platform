@@ -2,6 +2,11 @@ const render = require('./replacer.js');
 const request = require('sync-request');
 const compareVersions = require('compare-versions');
 
+/**
+@param {Object} versions data object for product versions.
+@param {String} key name for the generated json object
+@param {Object} jsonTemplate template data object to put versions to.
+*/
 function createJson(versions, key, jsonTemplate) {
 
     jsonTemplate[key] = versions;

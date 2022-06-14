@@ -169,8 +169,8 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>./vaadin_versions.json</sourceFile>
-                            <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
+                            <sourceFile>./vaadin-versions.json</sourceFile>
+                            <destinationFile>${basedir}/target/classes/vaadin-versions.json</destinationFile>
                         </configuration>
                     </execution>
                 </executions>

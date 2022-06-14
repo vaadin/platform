@@ -29,10 +29,10 @@ function getResultsFilePath(filename) {
 }
 
 const coreJsonTemplateFileName = getTemplateFilePath('template-vaadin-core-versions.json');
-const vaadinCoreJsonFileName = getResultsFilePath('vaadin_versions_core.json');
+const vaadinCoreJsonFileName = getResultsFilePath('vaadin-versions-core.json');
 
 const vaadinJsonTemplateFileName = getTemplateFilePath('template-vaadin-versions.json');
-const vaadinJsonResultFileName = getResultsFilePath('vaadin_versions.json');
+const vaadinJsonResultFileName = getResultsFilePath('vaadin-versions.json');
 
 const corePackageTemplateFileName = getTemplateFilePath('template-vaadin-core-package.json');
 const corePackageResultFileName = getResultsFilePath('vaadin-core-package.json');

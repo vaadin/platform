@@ -1,6 +1,12 @@
 const creator = require('./creator');
 const fs = require('fs');
 
+/**
+@param {Object} versions data object for product versions.
+@param {String} templateFileName absolute path to template file
+@param {String} outputFileName absolute path to output file
+@param {String} key name for the generated json object
+*/
 function writeSeparateJson(versions, templateFileName, outputFileName, key) {
     const packageJsonTemplate = require(templateFileName);
 
