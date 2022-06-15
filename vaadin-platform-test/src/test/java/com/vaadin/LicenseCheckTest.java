@@ -102,6 +102,10 @@ public class LicenseCheckTest {
         
         // GNU General Public License
         whitelist.add("https://projects.eclipse.org/license/secondary-gpl-2.0-cp");
+
+        //CDDL + GPLv2 with classpath exception
+        whitelist.add("https://oss.oracle.com/licenses/CDDL+GPL-1.1");
+        
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
