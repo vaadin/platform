@@ -28,6 +28,12 @@ function getResultsFilePath(filename) {
     return path.resolve(`${__dirname}/results/${filename}`);
 }
 
+const coreJsonTemplateFileName = getTemplateFilePath('template-vaadin-core-versions.json');
+const vaadinCoreJsonFileName = getResultsFilePath('vaadin-core-versions.json');
+
+const vaadinJsonTemplateFileName = getTemplateFilePath('template-vaadin-versions.json');
+const vaadinJsonResultFileName = getResultsFilePath('vaadin-versions.json');
+
 const corePackageTemplateFileName = getTemplateFilePath('template-vaadin-core-package.json');
 const corePackageResultFileName = getResultsFilePath('vaadin-core-package.json');
 
@@ -71,12 +77,18 @@ const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
 const platform=argv['platform'];
 const versions = transformer.transformVersions(inputVersions, platform, argv['useSnapshots']);
 
-const hilla = process.env.HILLA || platform.replace(/^23/, 1);
-versions.core.hilla = {javaVersion: hilla};
-
 if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
 }
+
+writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
+writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
+writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
+writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
+writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
+
+const hilla = process.env.HILLA || platform.replace(/^23/, 1);
+versions.core.hilla = {javaVersion: hilla};
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
