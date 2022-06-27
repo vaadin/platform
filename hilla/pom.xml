@@ -128,7 +128,7 @@
                         </goals>
                         <configuration>
                             <sourceFile>../versions.json</sourceFile>
-                            <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
+                            <destinationFile>${basedir}/target/classes/vaadin-versions.json</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -140,8 +140,8 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <tasks>
-                                <replace token= "{{version}}" value="${version}" dir="target/classes">
-                                    <include name="vaadin_versions.json"/>
+                                <replace token= "{{version}}" value="${project.parent.version}" dir="target/classes">
+                                    <include name="vaadin-versions.json"/>
                                 </replace>
                             </tasks>
                         </configuration>
