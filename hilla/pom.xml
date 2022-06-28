@@ -14,7 +14,6 @@
     <description>Hilla Platform</description>
     <version>${hilla.version}</version>
     <url>https://hilla.dev</url>
-
     <distributionManagement>
         <repository>
             <id>vaadin-prereleases</id>
@@ -36,8 +35,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>fusion-endpoint</artifactId>
+            <groupId>dev.hilla</groupId>
+            <artifactId>hilla-endpoint</artifactId> <!-- The artifact name is not decided yet -->
+            <version>${hilla.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
