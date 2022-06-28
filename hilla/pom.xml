@@ -128,7 +128,9 @@
                         </goals>
                         <configuration>
                             <sourceFile>../versions.json</sourceFile>
-                            <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
+                            <!-- use vaadin-core-versions.json here, as flow check this file firstly. 
+                                 later we should consider to split this file for core and pro components. -->
+                            <destinationFile>${basedir}/target/classes/vaadin-core-versions.json</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -140,8 +142,8 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <tasks>
-                                <replace token= "{{version}}" value="${version}" dir="target/classes">
-                                    <include name="vaadin_versions.json"/>
+                                <replace token= "{{version}}" value="${project.parent.version}" dir="target/classes">
+                                    <include name="vaadin-core-versions.json"/>
                                 </replace>
                             </tasks>
                         </configuration>
