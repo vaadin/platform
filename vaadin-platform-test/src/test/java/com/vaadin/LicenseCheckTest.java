@@ -106,6 +106,7 @@ public class LicenseCheckTest {
 
         //CDDL + GPLv2 with classpath exception
         whitelist.add("https://oss.oracle.com/licenses/CDDL+GPL-1.1");
+        whitelist.add("https://javaee.github.io/javamail/LICENSE");
         
     }
 
