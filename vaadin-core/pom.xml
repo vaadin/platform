@@ -325,7 +325,6 @@
                         <excludedArtifactId>flow-client</excludedArtifactId>
                         <excludedArtifactId>flow-html-components</excludedArtifactId>
                         <excludedArtifactId>flow-dnd</excludedArtifactId>
-                        <excludedArtifactId>fusion-endpoint</excludedArtifactId>
                         <excludedArtifactId>slf4j-api</excludedArtifactId>
                         <excludedArtifactId>vaadin-grid-flow</excludedArtifactId>
                     </excludedArtifactIds>
