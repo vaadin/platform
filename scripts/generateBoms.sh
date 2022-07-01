@@ -18,3 +18,6 @@ mkdir -p vaadin-bom
 cp scripts/generator/results/vaadin-bom.xml vaadin-bom/pom.xml
 mkdir -p vaadin-spring-bom
 cp scripts/generator/results/vaadin-spring-bom.xml vaadin-spring-bom/pom.xml
+
+cp scripts/generator/results/vaadin-core-versions.json vaadin-core/vaadin-core-versions.json
+cp scripts/generator/results/vaadin-versions.json vaadin/vaadin-versions.json
