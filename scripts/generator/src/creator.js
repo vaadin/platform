@@ -4,6 +4,18 @@ const compareVersions = require('compare-versions');
 
 /**
 @param {Object} versions data object for product versions.
+@param {String} key name for the generated json object
+@param {Object} jsonTemplate template data object to put versions to.
+*/
+function createJson(versions, key, jsonTemplate) {
+
+    jsonTemplate[key] = versions;
+
+    return JSON.stringify(jsonTemplate, null, 4);
+}
+
+/**
+@param {Object} versions data object for product versions.
 @param {Object} bowerTemplate template data object to put versions to.
 */
 function createBower(versions, bowerTemplate) {
@@ -467,7 +479,7 @@ function requestGH(path) {
     }
     return retValue
 }
-
+exports.createJson = createJson;
 exports.createBower = createBower;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
