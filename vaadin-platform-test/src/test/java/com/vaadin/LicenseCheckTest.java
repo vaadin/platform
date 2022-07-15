@@ -79,6 +79,7 @@ public class LicenseCheckTest {
         whitelist.add("https://jsoup.org/license");
         whitelist.add("http://opensource.org/licenses/mit-license");
         whitelist.add("https://spdx.org/licenses/MIT-0.html");
+        whitelist.add("https://raw.githubusercontent.com/auth0/java-jwt/master/LICENSE");
 
         // Public Domain
         whitelist.add("http://creativecommons.org/publicdomain/zero/1.0/");
