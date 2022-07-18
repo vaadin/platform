@@ -167,10 +167,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "6.0.1"
+            "javaVersion": "6.0.2"
         },
         "mpr-v8": {
-            "javaVersion": "6.0.1"
+            "javaVersion": "6.0.2"
         },
         "notification": {
             "jsVersion": "23.2.0-alpha3",
