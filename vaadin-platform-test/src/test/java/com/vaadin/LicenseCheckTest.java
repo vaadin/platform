@@ -109,6 +109,10 @@ public class LicenseCheckTest {
         whitelist.add("https://oss.oracle.com/licenses/CDDL+GPL-1.1");
         whitelist.add("https://javaee.github.io/javamail/LICENSE");
         
+        //Bouncy Castle Licence
+        //dependency 'org.bouncycastle:bcpkix-jdk15on'
+        whitelist.add("https://www.bouncycastle.org/licence.html");
+        
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
