@@ -19,7 +19,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
-        <selenium.version>4.2.1</selenium.version>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
     </properties>
     <dependencyManagement>

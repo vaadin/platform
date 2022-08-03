@@ -16,6 +16,7 @@
 package com.vaadin.platform.fusion.offline;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ import org.junit.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -65,6 +67,12 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
 
+    private DevToolsWrapper devTools = null;
+
+    protected DevToolsWrapper getDevTools() {
+        return devTools;
+    }
+
     @BeforeClass
     public static void setupClass() {
         String sauceKey = System.getProperty("sauce.sauceAccessKey");
@@ -89,15 +97,20 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         } else if (Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
         } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
-            driver = new RemoteWebDriver(new URL(getHubURL()),
+            URL url = new URL(getHubURL());
+            driver = new RemoteWebDriver(url,
                 chromeOptions.merge(getDesiredCapabilities()));
+            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, url);
         } else if (getRunOnHub(getClass()) != null
                 || Parameters.getHubHostname() != null) {
-            driver = new RemoteWebDriver(new URL(getHubURL()),
+            URL url = new URL(getHubURL());
+            driver = new RemoteWebDriver(url,
             chromeOptions.merge(getDesiredCapabilities()));
+            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, url);
         } else {
             driver = new ChromeDriver(chromeOptions);
         }
+        devTools = new DevToolsWrapper(driver);
 
         setDriver(TestBench.createDriver(driver));
     }
@@ -177,6 +190,35 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                                 + "  navigator.serviceWorker.ready,"
                                 + "  timeout])"
                                 + ".then(result => done(!!result));"));
+    }
+
+    /**
+     * Sets the `se:cdp` and `se:cdpVersion` capabilities for the remote web
+     * driver. Note that the capabilities are set at runtime because they depend
+     * on the session id that becomes only available after the driver is
+     * initialized. Without these capabilities, Selenium cannot establish a
+     * connection with DevTools.
+     */
+    private void setDevToolsRuntimeCapabilities(RemoteWebDriver driver,
+                                                URL remoteUrl) throws RuntimeException {
+        try {
+            Field capabilitiesField = RemoteWebDriver.class
+                    .getDeclaredField("capabilities");
+            capabilitiesField.setAccessible(true);
+
+            String sessionId = driver.getSessionId().toString();
+            String devtoolsUrl = String.format("ws://%s:%s/devtools/%s/page",
+                    remoteUrl.getHost(), remoteUrl.getPort(), sessionId);
+
+            MutableCapabilities mutableCapabilities = (MutableCapabilities) capabilitiesField
+                    .get(driver);
+            mutableCapabilities.setCapability("se:cdp", devtoolsUrl);
+            mutableCapabilities.setCapability("se:cdpVersion",
+                    mutableCapabilities.getBrowserVersion());
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Failed to set DevTools capabilities for RemoteWebDriver");
+        }
     }
 
     /**
