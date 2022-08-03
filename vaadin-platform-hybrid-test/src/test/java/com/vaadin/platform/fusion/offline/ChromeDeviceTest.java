@@ -97,16 +97,14 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         } else if (Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
         } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
-            URL url = new URL(getHubURL());
-            driver = new RemoteWebDriver(url,
-                chromeOptions.merge(getDesiredCapabilities()));
-            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, url);
+            URL remoteURL = new URL(getHubURL());
+            driver = new RemoteWebDriver(remoteURL, chromeOptions);
+            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else if (getRunOnHub(getClass()) != null
                 || Parameters.getHubHostname() != null) {
-            URL url = new URL(getHubURL());
-            driver = new RemoteWebDriver(url,
-            chromeOptions.merge(getDesiredCapabilities()));
-            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, url);
+            URL remoteURL = new URL(getHubURL());
+            driver = new RemoteWebDriver(remoteURL, chromeOptions);
+            setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else {
             driver = new ChromeDriver(chromeOptions);
         }
@@ -185,8 +183,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                         "const done = arguments[arguments.length - 1];"
                                 + "const timeout = new Promise("
                                 + "  resolve => setTimeout(resolve, 100000)"
-                                + ");"
-                                + "Promise.race(["
+                                + ");" + "Promise.race(["
                                 + "  navigator.serviceWorker.ready,"
                                 + "  timeout])"
                                 + ".then(result => done(!!result));"));
