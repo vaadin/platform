@@ -225,12 +225,4 @@ public abstract class ChromeDeviceTest extends ParallelTest {
                 .singletonList(Browser.CHROME.getDesiredCapabilities());
     }
     
-    @Override
-    protected String getHubURL() {
-        String hubUrl = super.getHubURL();
-        if (hubUrl.contains("ondemand.saucelabs")) {
-            return "http://localhost:4445/wd/hub";
-        }
-        return hubUrl;
-    }
 }
