@@ -122,19 +122,11 @@ public abstract class ChromeDeviceTest extends ParallelTest {
      * @return customized Chrome options instance
      */
     protected ChromeOptions customizeChromeOptions(ChromeOptions chromeOptions) {
-        // Unfortunately using offline emulation ("setNetworkConnection"
-        // session command) in Chrome requires the "networkConnectionEnabled"
-        // capability, which is:
-        //   - Not W3C WebDriver API compliant, so we disable W3C protocol
-        //   - device mode: mobileEmulation option with some device settings
-
         final Map<String, Object> mobileEmulationParams = new HashMap<>();
         mobileEmulationParams.put("deviceName", "Laptop with touch");
 
-        // chromeOptions.setExperimentalOption("w3c", false);
         chromeOptions.setExperimentalOption("mobileEmulation",
                 mobileEmulationParams);
-        // chromeOptions.setCapability("networkConnectionEnabled", true);
 
         // Enable service workers over http remote connection
         chromeOptions.addArguments(String.format(
@@ -149,29 +141,6 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         chromeOptions.addArguments("--disable-dev-shm-usage");
 
         return chromeOptions;
-    }
-
-    /**
-     * Change network connection type in the browser.
-     *
-     * @param connectionType the new connection type
-     * @throws IOException
-     */
-    protected void setConnectionType(
-            NetworkConnection.ConnectionType connectionType)
-            throws IOException {
-        RemoteWebDriver driver = (RemoteWebDriver) ((TestBenchDriverProxy) getDriver())
-                .getWrappedDriver();
-        final Map<String, Integer> parameters = new HashMap<>();
-        parameters.put("type", connectionType.hashCode());
-        final Map<String, Object> connectionParams = new HashMap<>();
-        connectionParams.put("parameters", parameters);
-        Response response = driver.getCommandExecutor()
-                .execute(new Command(driver.getSessionId(),
-                        "setNetworkConnection", connectionParams));
-        if (response.getStatus() != 0) {
-            throw new RuntimeException("Unable to set connection type");
-        }
     }
 
     public void waitForServiceWorkerReady() {

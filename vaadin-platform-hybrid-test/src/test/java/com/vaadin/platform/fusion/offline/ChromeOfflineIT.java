@@ -52,7 +52,7 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
       waitForServiceWorkerReady();
 
       // Set offline network conditions in ChromeDriver
-      setConnectionType(NetworkConnection.ConnectionType.AIRPLANE_MODE);
+      getDevTools().setOfflineEnabled(true);
 
       try {
           Assert.assertEquals("navigator.onLine should be false", false,
@@ -77,7 +77,7 @@ public class ChromeOfflineIT extends ChromeDeviceTest {
                   findElement(By.tagName("vaadin-connection-indicator")).getAttribute("offline"));
       } finally {
           // Reset network conditions back
-          setConnectionType(NetworkConnection.ConnectionType.ALL);
+          getDevTools().setOfflineEnabled(false);
       }
   }
 
