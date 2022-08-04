@@ -98,12 +98,14 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             driver = new ChromeDriver(chromeOptions);
         } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
             URL remoteURL = new URL(getHubURL());
-            driver = new RemoteWebDriver(remoteURL, chromeOptions.merge(getDesiredCapabilities()));
+            chromeOptions = chromeOptions.merge(getDesiredCapabilities());
+            driver = new RemoteWebDriver(remoteURL, chromeOptions);
             setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else if (getRunOnHub(getClass()) != null
                 || Parameters.getHubHostname() != null) {
             URL remoteURL = new URL(getHubURL());
-            driver = new RemoteWebDriver(remoteURL, chromeOptions.merge(getDesiredCapabilities()));
+            chromeOptions = chromeOptions.merge(getDesiredCapabilities());
+            driver = new RemoteWebDriver(remoteURL, chromeOptions);
             setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else {
             driver = new ChromeDriver(chromeOptions);
@@ -262,5 +264,14 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public List<DesiredCapabilities> getBrowserConfiguration() {
         return Collections
                 .singletonList(Browser.CHROME.getDesiredCapabilities());
+    }
+
+    @Override
+    protected String getHubURL() {
+        String hubUrl = super.getHubURL();
+        if (hubUrl.contains("ondemand.saucelabs")) {
+            return "http://localhost:4445/wd/hub";
+        }
+        return hubUrl;
     }
 }
