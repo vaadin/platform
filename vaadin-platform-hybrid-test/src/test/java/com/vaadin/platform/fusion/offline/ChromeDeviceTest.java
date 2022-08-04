@@ -31,6 +31,7 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
 
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import org.junit.Assert;
 import org.junit.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -98,12 +99,12 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             driver = new ChromeDriver(chromeOptions);
         } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
             URL remoteURL = new URL(getHubURL());
-            driver = new RemoteWebDriver(remoteURL, chromeOptions);
+            driver = new RemoteWebDriver(remoteURL, chromeOptions.merge(getDesiredCapabilities()));
             setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else if (getRunOnHub(getClass()) != null
                 || Parameters.getHubHostname() != null) {
             URL remoteURL = new URL(getHubURL());
-            driver = new RemoteWebDriver(remoteURL, chromeOptions);
+            driver = new RemoteWebDriver(remoteURL, chromeOptions.merge(getDesiredCapabilities()));
             setDevToolsRuntimeCapabilities((RemoteWebDriver) driver, remoteURL);
         } else {
             driver = new ChromeDriver(chromeOptions);
