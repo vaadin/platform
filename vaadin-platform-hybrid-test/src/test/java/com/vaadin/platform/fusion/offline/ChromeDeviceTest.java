@@ -237,7 +237,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     @Override
     protected String getHubURL() {
         String hubUrl = super.getHubURL();
-        if (hubUrl.contains("ondemand.saucelabs")) {
+        if (hubUrl.contains("https://ondemand.us-west-1.saucelabs.com/wd/hub")) {
             return "http://localhost:4445/wd/hub";
         }
         return hubUrl;
