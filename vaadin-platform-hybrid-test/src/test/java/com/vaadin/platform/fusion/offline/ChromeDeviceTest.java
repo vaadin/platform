@@ -134,8 +134,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
         chromeOptions.setExperimentalOption("w3c", false);
         chromeOptions.setExperimentalOption("mobileEmulation",
                 mobileEmulationParams);
-        chromeOptions.setCapability("networkConnectionEnabled", true);
-
+        // chromeOptions.setCapability("networkConnectionEnabled", true);
 
         // Enable service workers over http remote connection
         chromeOptions.addArguments(String.format(
