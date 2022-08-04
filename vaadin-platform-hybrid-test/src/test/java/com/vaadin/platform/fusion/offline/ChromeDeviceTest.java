@@ -31,7 +31,6 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
 
-import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import org.junit.Assert;
 import org.junit.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -263,14 +262,5 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public List<DesiredCapabilities> getBrowserConfiguration() {
         return Collections
                 .singletonList(Browser.CHROME.getDesiredCapabilities());
-    }
-    
-    @Override
-    protected String getHubURL() {
-        String hubUrl = super.getHubURL();
-        if (hubUrl.contains("ondemand.saucelabs")) {
-            return "http://localhost:4445/";
-        }
-        return hubUrl;
     }
 }
