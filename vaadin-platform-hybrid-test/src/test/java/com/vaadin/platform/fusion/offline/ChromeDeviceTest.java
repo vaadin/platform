@@ -31,6 +31,7 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
 
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import org.junit.Assert;
 import org.junit.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -45,6 +46,11 @@ import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.vaadin.platform.fusion.offline.SauceLabsHelper.getSauceAccessKey;
+import static com.vaadin.platform.fusion.offline.SauceLabsHelper.getSauceUser;
 
 /**
  * Base class for TestBench tests to run in Chrome with customized options,
@@ -67,10 +73,19 @@ public abstract class ChromeDeviceTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
 
+    private static final String SAUCE_USERNAME_ENV = "SAUCE_USERNAME";
+    private static final String SAUCE_USERNAME_PROP = "sauce.user";
+    private static final String SAUCE_ACCESS_KEY_ENV = "SAUCE_ACCESS_KEY";
+    private static final String SAUCE_ACCESS_KEY_PROP = "sauce.sauceAccessKey";
+
     private DevToolsWrapper devTools = null;
 
     protected DevToolsWrapper getDevTools() {
         return devTools;
+    }
+
+    private static Logger getLogger() {
+        return LoggerFactory.getLogger(SauceLabsIntegration.class);
     }
 
     @BeforeClass
@@ -236,9 +251,24 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     @Override
     protected String getHubURL() {
+
         String hubUrl = super.getHubURL();
         if (hubUrl.contains("https://ondemand.us-west-1.saucelabs.com/wd/hub")) {
-            return "http://localhost:4445/wd/hub";
+            String username = getSauceUser();
+            String accessKey = getSauceAccessKey();
+
+            if (username == null) {
+                getLogger().debug("You can give a Sauce Labs user name using -D"
+                        + SAUCE_USERNAME_PROP + "=<username> or by "
+                        + SAUCE_USERNAME_ENV + " environment variable.");
+            }
+            if (accessKey == null) {
+                getLogger().debug("You can give a Sauce Labs access key using -D"
+                        + SAUCE_ACCESS_KEY_PROP + "=<accesskey> or by "
+                        + SAUCE_ACCESS_KEY_ENV + " environment variable.");
+            }
+            return "http://" + username + ":" + accessKey +
+                    "@localhost:4445/wd/hub";
         }
         return hubUrl;
     }
