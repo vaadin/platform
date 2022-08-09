@@ -39,6 +39,11 @@
             <version>${flow.version}</version>
         </dependency>
         <dependency>
+            <groupId>dev.hilla</groupId>
+            <artifactId>engine-maven-plugin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.8.0</version>
@@ -130,6 +135,21 @@
                                     <artifactId>flow-maven-plugin</artifactId>
                                     <version>${flow.version}</version>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>
+                                    <outputDirectory>src/main/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>dev.hilla</groupId>
+                                    <artifactId>engine-maven-plugin</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>sources</classifier>
+                                    <includes>**/*.java</includes>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>dev.hilla</groupId>
+                                    <artifactId>engine-maven-plugin</artifactId>
+                                    <version>${project.version}</version>
+                                    <excludes>**/*.class,META-INF/**</excludes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
