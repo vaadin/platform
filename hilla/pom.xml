@@ -36,7 +36,12 @@
     <dependencies>
         <dependency>
             <groupId>dev.hilla</groupId>
-            <artifactId>endpoint</artifactId> <!-- The artifact name is not decided yet -->
+            <artifactId>endpoint</artifactId>
+            <version>${hilla.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.hilla</groupId>
+            <artifactId>engine-runtime</artifactId>
             <version>${hilla.version}</version>
         </dependency>
         <dependency>
