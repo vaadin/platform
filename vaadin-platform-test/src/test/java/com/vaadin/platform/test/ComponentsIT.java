@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
@@ -100,6 +101,11 @@ public class ComponentsIT extends AbstractPlatformTest {
             System.err.println(">>> Component not found in the View\n" + testComponent);
         }
         checkElement($);
+
+        if (run == null && tag == "vaadin-confirm-dialog"){
+            ConfirmDialogElement dialogElement = $(ConfirmDialogElement.class).waitForFirst();
+            dialogElement.getConfirmButton().click();
+        }
     }
 
     private <T extends TestBenchElement> void checkElement(ElementQuery<T> $) {
