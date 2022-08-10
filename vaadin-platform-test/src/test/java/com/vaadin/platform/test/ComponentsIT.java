@@ -75,10 +75,12 @@ public class ComponentsIT extends AbstractPlatformTest {
         String className = testComponent.component != null ? testComponent.component.getName() : null;
 
         Runnable run = beforeRunsByTag.get(className);
+        Boolean flag = Boolean.FALSE;
         if (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className)) {
 
             if (run == null) {
                 run = beforeRunsByTag.get(tag);
+                flag = Boolean.TRUE;
             }
             if (run != null) {
                 run.run();
@@ -102,7 +104,7 @@ public class ComponentsIT extends AbstractPlatformTest {
         }
         checkElement($);
 
-        if (run == null && tag == "vaadin-confirm-dialog"){
+        if (flag == Boolean.TRUE && tag == "vaadin-confirm-dialog"){
             ConfirmDialogElement dialogElement = $(ConfirmDialogElement.class).waitForFirst();
             dialogElement.getConfirmButton().click();
         }
