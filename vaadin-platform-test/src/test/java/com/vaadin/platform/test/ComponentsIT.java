@@ -1,7 +1,10 @@
 package com.vaadin.platform.test;
 
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.flow.component.board.testbench.BoardElement;
 import com.vaadin.flow.component.board.testbench.RowElement;
@@ -26,9 +29,11 @@ import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.ParallelTest;
+
 
 public class ComponentsIT extends ParallelTest {
 
@@ -37,9 +42,37 @@ public class ComponentsIT extends ParallelTest {
                 "ie11,firefox,chrome,safari-9,safari-10,safari-11,edge,edge-18");
     }
 
+    private static Logger log = LoggerFactory.getLogger(ComponentsIT.class);
+    static String hostName;
+
+    static {
+        String sauceUser = System.getProperty("sauce.user");
+        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        boolean isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
+                && !sauceKey.isEmpty();
+        String hubHost = System
+                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        boolean isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
+
+        String browsers = System.getProperty("grid.browsers");
+        if (sauceUser != null && !sauceUser.isEmpty()) {
+            if (browsers == null || browsers.isEmpty()) {
+                Parameters.setGridBrowsers("ie11,firefox,safari-9,safari-10,safari-14,edge,edge-18");
+            } else {
+                Parameters.setGridBrowsers(browsers);
+            }
+        }
+
+        log.info("Running Tests app-url=http://{}:8080 mode={}", hostName,
+                isSauce ? "SAUCE (user:" + sauceUser + " browsers: " + browsers + ")"
+                        : isHub ? "HUB (hub-host:" + hubHost + ")"
+                                : "LOCAL (chromedriver)");
+    }
+
     @Test
     public void appWorks() throws Exception {
-        getDriver().get("http://localhost:8080/");
+        getDriver().get("http://" + hostName + ":8080/prod-mode/");
         checkCustomElement($(NotificationElement.class).waitForFirst());
         checkCustomElement($(DialogElement.class).first());
 

@@ -108,21 +108,35 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.20</version>
+                <version>2.22.2</version>
                 <executions>
                     <execution>
+                        <id>hub-tests</id>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>sauce-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <sauce.user>${sa.user}</sauce.user>
+                                <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
+                                <sauce.options>${sauce.options}</sauce.options>
+                                <grid.browsers>${sa.browsers}</grid.browsers>
+                            </systemPropertyVariables>
+                            <includes>
+                                <include>ComponentsIT.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
                 </executions>
                 <configuration>
-                    <systemPropertyVariables>
-                        <sauce.user>${sauce.user}</sauce.user>
-                        <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
-                        <sauce.options>${sauce.options}</sauce.options>
-                    </systemPropertyVariables>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
@@ -194,4 +208,5 @@
 
         </plugins>
     </build>
+
 </project>
