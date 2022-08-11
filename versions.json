@@ -609,7 +609,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.5.3"
+            "javaVersion": "1.6.0"
         },
         "vaadin-map": {
             "component": true,
