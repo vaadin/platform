@@ -53,11 +53,6 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-confirm-dialog-flow</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-cookie-consent-flow</artifactId>
         </dependency>
 
