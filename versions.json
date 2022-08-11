@@ -276,8 +276,7 @@
             "component": true,
             "javaVersion": "{{version}}",
             "jsVersion": "23.2.0-beta1",
-            "npmName": "@vaadin/vaadin-confirm-dialog",
-            "pro": true
+            "npmName": "@vaadin/vaadin-confirm-dialog"
         },
         "vaadin-context-menu": {
             "component": true,
