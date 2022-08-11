@@ -323,7 +323,7 @@
                     </plugin>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.20</version>
+                        <version>2.22.2</version>
                         <dependencies>
                             <!--The following dependencies are needed for Java 10+
                                 support -->
@@ -350,20 +350,33 @@
                         </dependencies>
                         <executions>
                             <execution>
+                                <id>hub-tests</id>
                                 <goals>
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <id>sauce-tests</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemPropertyVariables>
+                                        <sauce.user>${sa.user}</sauce.user>
+                                        <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
+                                        <sauce.options>${sauce.options}</sauce.options>
+                                        <grid.browsers>${sa.browsers}</grid.browsers>
+                                    </systemPropertyVariables>
+                                    <includes>
+                                        <include>ComponentsIT.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
                         </executions>
                         <configuration>
-                            <systemPropertyVariables>
-                                <sauce.user>${sauce.user}</sauce.user>
-                                <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
-                                <sauce.options>${sauce.options}</sauce.options>
-                                <grid.browsers>${grid.browsers}</grid.browsers>
-                            </systemPropertyVariables>
-                            <trimStackTrace>false</trimStackTrace>
+                            <forkCount>2</forkCount>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -371,8 +384,8 @@
                         <artifactId>sauce-connect-plugin</artifactId>
                         <version>2.1.25</version>
                         <configuration>
-                            <sauceUsername>${sauce.user}</sauceUsername>
-                            <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                            <sauceUsername>${sa.user}</sauceUsername>
+                            <sauceAccessKey>${sa.key}</sauceAccessKey>
                             <options>${sauce.options}</options>
                         </configuration>
                         <dependencies>
