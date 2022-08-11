@@ -25,7 +25,7 @@ public class ComponentsIT extends AbstractPlatformTest {
         String browsers = System.getProperty("grid.browsers");
         if (sauceUser != null && !sauceUser.isEmpty()) {
             if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("firefox,chrome,safari,edge");
+                Parameters.setGridBrowsers("firefox,safari,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
