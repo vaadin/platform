@@ -41,6 +41,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
         whitelist.add("http://www.eclipse.org/legal/epl-v10.html");
         whitelist.add("http://www.eclipse.org/legal/epl-2.0");
+        whitelist.add("https://www.eclipse.org/legal/epl-v20.html");
         whitelist.add("https://projects.eclipse.org/license/epl-2.0");
         
         // Mozilla
