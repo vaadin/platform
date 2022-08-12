@@ -32,7 +32,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
 
-    static final String hostName = IPAddress.findSiteLocalAddress();
+    static String hostName;
     static boolean isSauce;
     static boolean isHub;
     static boolean isLocal;
@@ -57,6 +57,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
                 WebDriverManager.chromedriver().setup();
             }
         }
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
         getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
                 SERVER_PORT,
                 isSauce ? "SAUCE (user:" + sauceUser + ")"
