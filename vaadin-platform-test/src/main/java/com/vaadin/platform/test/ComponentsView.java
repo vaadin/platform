@@ -604,6 +604,8 @@ public class ComponentsView extends AppLayout {
         MessageInput messageInput = new MessageInput();
         messageInput.addSubmitListener(e -> log.log(e.getValue()));
 
+        com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;
         WebComponentUI webComponentUI;
@@ -652,6 +654,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageList);
         components.add(messageInput);
         components.add(main);
+        components.add(mapComponent);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
