@@ -49,16 +49,22 @@ In Addition, tests include Collaboration Engine, you need to provide a [valid li
 1. You need valid Sauce Labs credentials for running the tests
 2. For Smoke Integration Tests run:
 ```
-mvn verify -Pproduction,npm-it -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
+mvn verify -Pproduction,npm-it \
+  -Dsa.user=your_username -Dsa.key=your_key \
+  -Dce.license=your_ce_license
 ```
 2. For Fusion Integration Tests run:
 ```
-mvn verify -Pproduction,fusion-hybrid -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
+mvn verify -Pproduction,fusion-hybrid \
+  -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key \
+  -Dce.license=your_ce_license
 ```
 3. For Servlet Contaner Integration Tests need to run:
 ```
 mvn install -Pproduction,npm-it -DskipTests
-mvn verify -Pproduction,npm-it-servlet-containers -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key -Dce.license=your_ce_license
+mvn verify -Pproduction,npm-it-servlet-containers \
+  -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key \
+  -Dce.license=your_ce_license
 ```
 4. For gradle module tests
 ```
@@ -66,6 +72,22 @@ cd vaadin-platform-gradle-test
 ./gradlew clean build \
   -Pvaadin.productionMode \
   -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key
+```
+
+### Runing tests in selenium hub
+
+1. First you need to install docker in your local computer, and run the selenium standalone container
+
+```
+ docker run --name selenium-container -p 4444:4444 --rm selenium/standalone-chrome:latest
+```
+
+2. Then run the smoke tests in other terminal
+```
+mvn verify -Pproduction,npm-it \
+  -Dce.license=your_ce_license \
+  -Dcom.vaadin.testbench.Parameters.hubHostname=localhost \
+  -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
 
 ### Running integration tests in local computer
@@ -114,3 +136,4 @@ When in the `vaadin-platform-test` folder run `mvn jetty:run`, then connect to t
 In the `vaadin-platform-hybrid-test` run `mvn spring-boot:run`, then point your browser to `http://localhost:8080`.
 
 In the `vaadin-platform-gradle-test` run `./gradlew appRun`, then go to `http://localhost:8080`.
+
