@@ -17,10 +17,13 @@ package com.vaadin.platform.test;
 
 import java.io.File;
 
-import com.vaadin.testbench.parallel.ParallelTest;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vaadin.testbench.IPAddress;
+import com.vaadin.testbench.parallel.ParallelTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -29,16 +32,37 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
 
+    static String hostName;
+    static boolean isSauce;
+    static boolean isHub;
+    static boolean isLocal;
+
+    static Logger getLogger() {
+        return LoggerFactory.getLogger(AbstractPlatformTest.class);
+    }
+
     @BeforeClass
     public static void setupClass() {
+        String sauceUser = System.getProperty("sauce.user");
         String sauceKey = System.getProperty("sauce.sauceAccessKey");
-        String hubHost = System.getProperty("com.vaadin.testbench.Parameters.hubHostname");
-        if ((sauceKey == null || sauceKey.isEmpty()) && (hubHost == null || hubHost.isEmpty())) {
+        isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
+                && !sauceKey.isEmpty();
+        String hubHost = System
+                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
+        isLocal = !isSauce && !isHub;
+        if (isLocal) {
             String driver = System.getProperty("webdriver.chrome.driver");
             if (driver == null || !new File(driver).exists()) {
                 WebDriverManager.chromedriver().setup();
             }
         }
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
+        getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
+                SERVER_PORT,
+                isSauce ? "SAUCE (user:" + sauceUser + ")"
+                        : isHub ? "HUB (hub-host:" + hubHost + ")"
+                                : "LOCAL (chromedriver)");
     }
 
     @Before
@@ -78,7 +102,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
      * @return the host name of development server
      */
     protected String getDeploymentHostname() {
-        return "localhost";
+        return hostName;
     }
 
 }
