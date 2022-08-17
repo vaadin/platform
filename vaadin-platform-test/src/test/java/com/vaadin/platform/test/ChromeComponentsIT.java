@@ -41,6 +41,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
@@ -69,6 +70,8 @@ import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.testbench.IPAddress;
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
@@ -76,9 +79,34 @@ import com.vaadin.testbench.parallel.ParallelTest;
 
 public class ChromeComponentsIT extends ParallelTest {
 
+    private static Logger log = LoggerFactory.getLogger(ComponentsIT.class);
+    static String hostName;
+
+    static {
+        String sauceUser = System.getProperty("sauce.user");
+        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        boolean isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
+                && !sauceKey.isEmpty();
+        String hubHost = System
+                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        boolean isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
+
+        String browsers = System.getProperty("grid.browsers", "chrome");
+        if (sauceUser != null && !sauceUser.isEmpty()) {
+            Parameters.setGridBrowsers(browsers);
+        }
+
+        log.info("Running Tests app-url=http://{}:8080 mode={}", hostName,
+                isSauce ? "SAUCE (user:" + sauceUser + " browsers: " + browsers + ")"
+                        : isHub ? "HUB (hub-host:" + hubHost + ")"
+                                : "LOCAL (chromedriver)");
+    }
+
+
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+        getDriver().get("http://" + hostName + ":8080/prod-mode/");
     }
 
     @Test
@@ -548,7 +576,7 @@ public class ChromeComponentsIT extends ParallelTest {
     public void messageListIsRendered() {
         //skip this test under bowermode
         Assume.assumeFalse(isBower());
-        
+
         MessageListElement messageList = $(MessageListElement.class).first();
         List<MessageElement> messages = messageList.getMessageElements();
         Assert.assertEquals("Number of messages rendered in MessageList",
@@ -563,31 +591,31 @@ public class ChromeComponentsIT extends ParallelTest {
     public void messageInputIsRenderedAndFiresSubmitEvent() {
         //skip this test under bowermode
         Assume.assumeFalse(isBower());
-        
+
         MessageInputElement messageInput = $(MessageInputElement.class).first();
         messageInput.submit("foo");
         assertLog("foo");
     }
 
     @Test
-    public void usageStatisticIsLogged() throws InterruptedException {	
-        Assert.assertTrue($(ButtonElement.class).exists());	
-        // wait 5 seconds for collecting values in local storage	
+    public void usageStatisticIsLogged() throws InterruptedException {
+        Assert.assertTrue($(ButtonElement.class).exists());
+        // wait 5 seconds for collecting values in local storage
         sleep(5000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object mode = js.executeScript("return Vaadin.developmentMode");	
+        Object mode = js.executeScript("return Vaadin.developmentMode");
 
-        String item = (String) js.executeScript(	
-                "return window.localStorage.getItem('vaadin.statistics.basket');");	
+        String item = (String) js.executeScript(
+                "return window.localStorage.getItem('vaadin.statistics.basket');");
 
-        if(Boolean.TRUE.equals(mode)){	
-            Assert.assertTrue("Under development mode, the checked usage statistics are not found",	
-                    item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));	
-        } else {	
-            Assert.assertTrue("Under production mode, the usage statistics info should be empty",	
-                    (item == null || item.length() == 0));	
-        }	
+        if(Boolean.TRUE.equals(mode)){
+            Assert.assertTrue("Under development mode, the checked usage statistics are not found",
+                    item.contains("flow") && item.contains("java") && item.contains("vaadin-button"));
+        } else {
+            Assert.assertTrue("Under production mode, the usage statistics info should be empty",
+                    (item == null || item.length() == 0));
+        }
 
     }
 

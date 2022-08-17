@@ -42,13 +42,9 @@ public class ComponentsIT extends ParallelTest {
         boolean isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
 
-        String browsers = System.getProperty("grid.browsers");
+        String browsers = System.getProperty("grid.browsers", "ie11,firefox,safari-9,safari-10,safari-14,edge,edge-18");
         if (sauceUser != null && !sauceUser.isEmpty()) {
-            if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("ie11,firefox,safari-9,safari-10,safari-14,edge,edge-18");
-            } else {
-                Parameters.setGridBrowsers(browsers);
-            }
+            Parameters.setGridBrowsers(browsers);
         }
 
         log.info("Running Tests app-url=http://{}:8080 mode={}", hostName,
