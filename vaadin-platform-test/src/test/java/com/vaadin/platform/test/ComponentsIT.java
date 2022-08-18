@@ -25,26 +25,37 @@ import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.commands.TestBenchCommandExecutor;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.IPAddress;
 
 public class ComponentsIT extends ParallelTest {
 
     private static Logger log = LoggerFactory.getLogger(ComponentsIT.class);
+    static String hostName;
 
     static {
         String sauceUser = System.getProperty("sauce.user");
-        String browsers = System.getProperty("grid.browsers");
+        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        boolean isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
+                && !sauceKey.isEmpty();
+        String hubHost = System
+                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        boolean isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
+
+        String browsers = System.getProperty("grid.browsers", "ie11,firefox,safari-9,safari-10,safari-14,edge,edge-18");
         if (sauceUser != null && !sauceUser.isEmpty()) {
-            if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("ie11,firefox,chrome,safari-9,safari-10,safari-14,edge,edge-18");
-            } else {
-                Parameters.setGridBrowsers(browsers);
-            }
+            Parameters.setGridBrowsers(browsers);
         }
+
+        log.info("Running Tests app-url=http://{}:8080 mode={}", hostName,
+                isSauce ? "SAUCE (user:" + sauceUser + " browsers: " + browsers + ")"
+                        : isHub ? "HUB (hub-host:" + hubHost + ")"
+                                : "LOCAL (chromedriver)");
     }
 
     @Before
     public void setUp() {
-        getDriver().get("http://localhost:8080/prod-mode/");
+        getDriver().get("http://" + hostName + ":8080/prod-mode/");
     }
 
     private HashMap<String, Runnable> beforeRuns = new HashMap<String, Runnable>() {
