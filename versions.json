@@ -176,6 +176,10 @@
         "mpr-v8": {
             "javaVersion": "6.0.2"
         },
+        "multi-select-combo-box": {
+            "jsVersion": "23.2.0-beta2",
+            "npmName": "@vaadin/multi-select-combo-box"
+        },
         "notification": {
             "jsVersion": "23.2.0-beta2",
             "npmName": "@vaadin/notification"
