@@ -571,7 +571,7 @@
             "javaVersion": "23.0.2"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.1.0"
+            "javaVersion": "5.1.1"
         },
         "vaadin-confirm-dialog": {
             "component": true,
