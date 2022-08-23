@@ -145,8 +145,8 @@
                 <artifactId>sauce-connect-plugin</artifactId>
                 <version>2.1.25</version>
                 <configuration>
-                    <sauceUsername>${sauce.user}</sauceUsername>
-                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                    <sauceUsername>${sa.user}</sauceUsername>
+                    <sauceAccessKey>${sa.key}</sauceAccessKey>
                     <options>${sauce.options}</options>
                 </configuration>
                 <dependencies>
