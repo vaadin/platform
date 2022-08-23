@@ -67,7 +67,7 @@ public class ComponentsIT extends ParallelTest {
 
     @Test
     public void appWorks() throws Exception {
-        getDriver().get("http://" + hostName + ":8080/prod-mode/");
+        getDriver().get("http://" + hostName + ":8080/");
         checkCustomElement($(NotificationElement.class).waitForFirst());
         checkCustomElement($(DialogElement.class).first());
 
