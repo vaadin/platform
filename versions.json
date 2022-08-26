@@ -79,6 +79,7 @@
             "npmName": "@vaadin/field-base"
         },
         "field-highlighter": {
+			"javaVersion": "{{version}}",
             "jsVersion": "23.2.0-beta3",
             "npmName": "@vaadin/field-highlighter"
         },
@@ -321,6 +322,11 @@
             "javaVersion": "{{version}}",
             "jsVersion": "23.2.0-beta3",
             "npmName": "@vaadin/vaadin-dialog"
+        },
+		"vaadin-field-highlighter": {
+			"javaVersion": "{{version}}",
+            "jsVersion": "23.2.0-beta3",
+            "npmName": "@vaadin/field-highlighter"
         },
         "vaadin-form-layout": {
             "component": true,
