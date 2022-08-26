@@ -175,7 +175,7 @@
                 <artifactId>vaadin-date-time-picker-flow</artifactId>
                 <version>${vaadin.date.time.picker.version}</version>
             </dependency>
-			<dependency>
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-field-highlighter-flow</artifactId>
                 <version>${vaadin.field.highlighter.version}</version>

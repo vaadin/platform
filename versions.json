@@ -76,7 +76,11 @@
         },
         "field-highlighter": {
             "javaVersion": "{{version}}",
+<<<<<<< HEAD
             "jsVersion": "23.1.6",
+=======
+            "jsVersion": "23.2.0-beta3",
+>>>>>>> 95a3039 (format)
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
@@ -309,8 +313,8 @@
             "jsVersion": "23.1.6",
             "npmName": "@vaadin/vaadin-dialog"
         },
-		"vaadin-field-highlighter": {
-			"javaVersion": "{{version}}",
+        "vaadin-field-highlighter": {
+            "javaVersion": "{{version}}",
             "jsVersion": "23.1.6",
             "npmName": "@vaadin/field-highlighter"
         },
