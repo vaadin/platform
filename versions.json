@@ -584,10 +584,10 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.2.0.rc1"
+            "javaVersion": "23.2.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.2.0.rc1"
+            "javaVersion": "5.2.0"
         },
         "vaadin-cookie-consent": {
             "component": true,
