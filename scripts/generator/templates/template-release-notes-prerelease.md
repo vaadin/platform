@@ -2,7 +2,7 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-*This is a pre-release for the Vaadin 23.2. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
+*This is a pre-release for the Vaadin 23.3. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
 
 **NOTE:**
 - Starting from Vaadin 23, Java 11 is required on your Vaadin apps.

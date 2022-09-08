@@ -1,6 +1,6 @@
 Vaadin {{platform}}
 
-*This is a maintenance release for Vaadin 23.2. See [23.1.0 release notes](https://github.com/vaadin/platform/releases/tag/23.1.0) for details and resources.*
+*This is a maintenance release for Vaadin 23.3. See [23.3.0 release notes](https://github.com/vaadin/platform/releases/tag/23.3.0) for details and resources.*
 
 **NOTE:**
 - Starting from Vaadin 23, Java 11 is required on your Vaadin apps.
