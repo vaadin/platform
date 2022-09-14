@@ -221,6 +221,10 @@
             "jsVersion": "23.3.0-alpha1",
             "npmName": "@vaadin/tabs"
         },
+		"tabsheet": {
+            "jsVersion": "23.3.0-alpha1",
+            "npmName": "@vaadin/tabsheet"
+        },
         "text-area": {
             "jsVersion": "23.3.0-alpha1",
             "npmName": "@vaadin/text-area"
@@ -232,6 +236,10 @@
         "time-picker": {
             "jsVersion": "23.3.0-alpha1",
             "npmName": "@vaadin/time-picker"
+        },
+		"tooltip": {
+            "jsVersion": "23.3.0-alpha1",
+            "npmName": "@vaadin/tooltip"
         },
         "upload": {
             "jsVersion": "23.3.0-alpha1",
@@ -473,6 +481,10 @@
         },
         "vaadin-tabs": {
             "component": true,
+			"components": [
+                "Tabs",
+                "Tabsheet"
+            ],
             "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha1",
             "npmName": "@vaadin/vaadin-tabs"
