@@ -47,6 +47,7 @@ import '@vaadin/rich-text-editor';
 import '@vaadin/scroller/vaadin-scroller';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
+import '@vaadin/tabsheet';
 import '@vaadin/tabs/src/vaadin-tab';
 import '@vaadin/text-area';
 import '@vaadin/text-field';
@@ -246,11 +247,17 @@ export class ComponentsView extends View {
           <div><vaadin-button>LEFT</vaadin-button></div>
         </vaadin-split-layout>
 
-        <vaadin-tabs>
-          <vaadin-tab>Tab one</vaadin-tab>
-          <vaadin-tab>Tab two</vaadin-tab>
-          <vaadin-tab>Tab three</vaadin-tab>
-        </vaadin-tabs>
+        <vaadin-tabsheet>
+          <vaadin-tabs slot="tabs">
+            <vaadin-tab id="tab-1">Tab 1</vaadin-tab>
+            <vaadin-tab id="tab-2">Tab 2</vaadin-tab>
+            <vaadin-tab id="tab-3">Tab 3</vaadin-tab>
+          </vaadin-tabs>
+
+          <div tab="tab-1">Panel 1</div>
+          <div tab="tab-2">Panel 2</div>
+          <div tab="tab-3">Panel 3</div>
+        </vaadin-tabsheet>
 
         <vaadin-upload></vaadin-upload>
 
