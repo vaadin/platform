@@ -51,6 +51,7 @@ import '@vaadin/tabsheet';
 import '@vaadin/tabs/src/vaadin-tab';
 import '@vaadin/text-area';
 import '@vaadin/text-field';
+import '@vaadin/tooltip';
 import '@vaadin/upload';
 import '@vaadin/vertical-layout';
 import '@vaadin/virtual-list/vaadin-virtual-list';
@@ -116,7 +117,8 @@ export class ComponentsView extends View {
           </vaadin-board-row>
         </vaadin-board>
 
-        <vaadin-button theme="primary">Primary</vaadin-button>
+        <vaadin-button theme="primary" id="confirm">Primary</vaadin-button>
+        <vaadin-tooltip text="Click to save changes" for="confirm"></vaadin-tooltip>
         <vaadin-button theme="secondary">Secondary</vaadin-button>
         <vaadin-button theme="tertiary">Tertiary</vaadin-button>
 
