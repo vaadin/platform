@@ -1,0 +1,53 @@
+name: PiT
+on:
+  push:
+    paths: [".github/workflows/pit.yml"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        type: string
+      starter:
+        description: 'Starter'
+        required: false
+        type: string
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
+    steps:
+      - id: set
+        run: |
+          # COMPUTE
+          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" ] && exit 1
+          git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
+          S="${{github.event.inputs.starter}}"
+          [ -n "$S" ] && S='{"include":[{"current":"'$S'"}]}' || S=`./pit/scripts/pit/run.sh --matrix`
+          echo "::set-output name=matrix::$S"
+  run:
+    runs-on: ubuntu-latest
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
+    steps:
+      - run: |
+          # TEST PARAMETERS
+          [ -z "${{matrix.current}}" ] && exit 1
+          echo "RUNNING TEST FOR ${{matrix.current}} APP"
+      - run: |
+          # INSTALL PIT
+          git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
+      - run: |
+          # INSTALL LICENSE
+          mkdir -p ~/.vaadin/
+          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
+      - run: |
+          # INSTALL SYSTEM PACKAGES
+          sudo bash pit/scripts/pit/docker/setup.sh
+      - run: |
+          # PIT TESTS ${{matrix.current}} ${{github.event.inputs.version}}
+          [ -n "${{github.event.inputs.version}}" ] && V="--version=${{github.event.inputs.version}}"
+          ./pit/scripts/pit/run.sh $V --starters=${{matrix.current}}
