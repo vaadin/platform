@@ -87,7 +87,7 @@
             "javaVersion": "23.3-SNAPSHOT"
         },
         "flow-cdi": {
-            "javaVersion": "14.0.0"
+            "javaVersion": "14.0.1"
         },
         "form-layout": {
             "jsVersion": "23.3.0-alpha1",
