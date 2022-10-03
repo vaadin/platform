@@ -35,8 +35,8 @@ dependencies {
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'
     testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.0'
-
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 
     // logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties for logger configuration
     implementation 'org.slf4j:slf4j-simple:1.7.30'
