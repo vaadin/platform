@@ -2,13 +2,7 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-*This is a pre-release for the Vaadin 23.3. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
-
-**NOTE:**
-- Starting from Vaadin 23, Java 11 is required on your Vaadin apps.
-- Flow starts to follow the platform version
-- Vaadin Spring addon is part of the flow project, following platform versioning
-- Vaadin Fusion has been renamed to [Hilla](https://github.com/vaadin/hilla#hilla), and follows it's own version sequence.
+*This is a pre-release for the Vaadin 24.0. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
 
 ## <a id="_changelogs"></a> Changelogs
 
