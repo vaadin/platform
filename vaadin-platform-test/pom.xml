@@ -296,7 +296,7 @@
                             <systemProperties>
                                 <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
                             </systemProperties>
-                        </configuration>
+                        </configuration>    
                         <executions>
                             <execution>
                                 <id>start-jetty</id>
