@@ -1,4 +1,5 @@
 import '@vaadin/accordion';
+import '@vaadin/accordion/src/vaadin-accordion-panel';
 import '@vaadin/app-layout';
 import '@vaadin/app-layout/src/vaadin-drawer-toggle';
 import '@vaadin/avatar';
