@@ -22,6 +22,16 @@ on:
         required: false
         type: boolean
         default: false
+      linux:
+        description: 'Run build in linux runner'
+        required: false
+        type: boolean
+        default: false
+      windows:
+        description: 'Run build in windows runner'
+        required: false
+        type: boolean
+        default: false
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -29,40 +39,57 @@ jobs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
       - id: set
+        shell: bash
         run: |
-          # COMPUTE
+          # COMPUTE MATRIX
+          echo "Computing matrix ..."
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" ] && exit 1
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
+          V="${{github.event.inputs.version}}"
+          W="${{github.event.inputs.windows}}"
+          L="${{github.event.inputs.linux}}"
+          [ true != "$L" -a true != "$W" ] && L=true
           S="${{github.event.inputs.starter}}"
           [ -z "$S" ] && S=`./pit/scripts/pit/run.sh --list`
           M='{"include":['
           for i in `echo $S | tr "," " "`; do
-            M=$M'{"current":"'$i'"},'
+            J='{"app":"'$i'"'
+            [ -n "$V" ] && J=$J',"version":"'$V'"'
+            [ true = "$W" ] && M=$M$J',"os":"windows"},'
+            [ true = "$L" ] && M=$M$J',"os":"ubuntu"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
           echo "$M"
           echo "::set-output name=matrix::$M"
   run:
-    runs-on: ubuntu-latest
     needs: prepare
     strategy:
       fail-fast: false
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
+    runs-on: ${{matrix.os}}-latest
     steps:
       - run: |
           # TEST PARAMETERS
-          [ -z "${{matrix.current}}" ] && exit 1
-          echo "RUNNING TEST FOR ${{matrix.current}} APP"
+          [ -z "${{matrix.app}}" ] && exit 1
+          echo "RUNNING TEST FOR ${{matrix.app}} APP"
+        shell: bash
       - run: |
           # INSTALL PIT
           git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
+          cd pit && git rev-parse --short HEAD
+        shell: bash
       - run: |
           # INSTALL LICENSE
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-      - run: |
-          # INSTALL SYSTEM PACKAGES
-          sudo bash pit/scripts/pit/docker/setup.sh --chrome
+        shell: bash
+      - if: ${{runner.os == 'Linux'}}
+        run: |
+          # INSTALL GRAPHIC LIBS
+          # see https://github.com/browser-actions/setup-chrome/issues/240
+          sudo apt-get -qqy update
+          sudo apt-get -qqy --no-install-recommends install \
+            libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -73,22 +100,15 @@ jobs:
       - uses: stCarolas/setup-maven@v4
         with:
           maven-version: '3.8.2'
+      - uses: browser-actions/setup-chrome@latest
       - run: |
-          echo $PATH
-          pwd
-          mvn -version
-          node --version
-          npm --version
-          google-chrome --version
-      - run: |
-          # PIT TESTS ${{matrix.current}} ${{github.event.inputs.version}}
-          echo $PATH
-          mvn -version
+          # PIT TESTS ${{matrix.app}} ${{github.event.inputs.version}}
           [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
           [ true = "${{github.event.inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{github.event.inputs.debug}}" ] && ARG="$ARG --debug"
-          echo ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.current}}
-          ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.current}}
+          echo ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}
+          ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}
+        shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v2.2.0
         with:
@@ -96,4 +116,3 @@ jobs:
           path: tmp/**/*.out
           if-no-files-found: error
           retention-days: 7
-
