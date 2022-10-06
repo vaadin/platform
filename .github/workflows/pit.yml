@@ -34,13 +34,13 @@ jobs:
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" ] && exit 1
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           S="${{github.event.inputs.starter}}"
-          [ -n "$S" ] && S='{"include":[{"current":"'$S'"}]}' || S=`./pit/scripts/pit/run.sh --list`
+          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh --list`
           M='{"include":['
           for i in `echo $S | tr "," " "`; do
             M=$M'{"current":"'$i'"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
-
+          echo "$M"
           echo "::set-output name=matrix::$M"
   run:
     runs-on: ubuntu-latest
@@ -68,6 +68,7 @@ jobs:
           [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
           [ true = "${{github.event.inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{github.event.inputs.debug}}" ] && ARG="$ARG --debug"
+          echo ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.current}}
           ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.current}}
       - if: ${{failure()}}
         uses: actions/upload-artifact@v2.2.0
