@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>23.2-SNAPSHOT</version>
+        <version>24.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-platform-test</artifactId>
     <packaging>war</packaging>
@@ -13,8 +13,8 @@
     <description>Vaadin Platform Tests</description>
     <url>https://vaadin.com</url>
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -90,9 +90,9 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -192,7 +192,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.20</version>
+                        <version>2.22.2</version>
                         <dependencies>
                             <!--The following dependencies are needed for Java 10+
                                 support -->
@@ -219,20 +219,33 @@
                         </dependencies>
                         <executions>
                             <execution>
+                                <id>hub-tests</id>
                                 <goals>
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <id>sauce-tests</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemPropertyVariables>
+                                        <sauce.user>${sa.user}</sauce.user>
+                                        <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
+                                        <sauce.options>${sauce.options}</sauce.options>
+                                        <grid.browsers>${sa.browsers}</grid.browsers>
+                                    </systemPropertyVariables>
+                                    <includes>
+                                        <include>ComponentsIT.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
                         </executions>
                         <configuration>
-                            <systemPropertyVariables>
-                                <sauce.user>${sauce.user}</sauce.user>
-                                <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
-                                <sauce.options>${sauce.options}</sauce.options>
-                                <grid.browsers>${grid.browsers}</grid.browsers>
-                            </systemPropertyVariables>
-                            <trimStackTrace>false</trimStackTrace>
+                            <forkCount>2</forkCount>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -240,8 +253,8 @@
                         <artifactId>sauce-connect-plugin</artifactId>
                         <version>2.1.25</version>
                         <configuration>
-                            <sauceUsername>${sauce.user}</sauceUsername>
-                            <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
+                            <sauceUsername>${sa.user}</sauceUsername>
+                            <sauceAccessKey>${sa.key}</sauceAccessKey>
                             <options>${sauce.options}</options>
                         </configuration>
                         <dependencies>
@@ -275,25 +288,21 @@
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
-                        <version>9.4.36.v20210114</version>
+                        <version>11.0.8</version>
                         <configuration>
                             <stopPort>9999</stopPort>
                             <stopWait>5</stopWait>
                             <stopKey>foo</stopKey>
-                            <scanIntervalSeconds>1</scanIntervalSeconds>
                             <systemProperties>
-                                <systemProperty>
-                                    <name>vaadin.ce.dataDir</name>
-                                    <value>${project.build.directory}</value>
-                                </systemProperty>
+                                <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
                             </systemProperties>
-                        </configuration>
+                        </configuration>    
                         <executions>
                             <execution>
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>deploy-war</goal>
+                                    <goal>start-war</goal>
                                 </goals>
                             </execution>
                             <execution>

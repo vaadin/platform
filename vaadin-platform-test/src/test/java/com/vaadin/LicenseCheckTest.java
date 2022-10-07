@@ -41,6 +41,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
         whitelist.add("http://www.eclipse.org/legal/epl-v10.html");
         whitelist.add("http://www.eclipse.org/legal/epl-2.0");
+        whitelist.add("https://www.eclipse.org/legal/epl-v20.html");
         whitelist.add("https://projects.eclipse.org/license/epl-2.0");
         
         // Mozilla
@@ -78,6 +79,8 @@ public class LicenseCheckTest {
         whitelist.add("http://opensource.org/licenses/MIT");
         whitelist.add("https://jsoup.org/license");
         whitelist.add("http://opensource.org/licenses/mit-license");
+        whitelist.add("https://spdx.org/licenses/MIT-0.html");
+        whitelist.add("https://raw.githubusercontent.com/auth0/java-jwt/master/LICENSE");
 
         // Public Domain
         whitelist.add("http://creativecommons.org/publicdomain/zero/1.0/");
@@ -102,6 +105,11 @@ public class LicenseCheckTest {
         
         // GNU General Public License
         whitelist.add("https://projects.eclipse.org/license/secondary-gpl-2.0-cp");
+
+        //CDDL + GPLv2 with classpath exception
+        whitelist.add("https://oss.oracle.com/licenses/CDDL+GPL-1.1");
+        whitelist.add("https://javaee.github.io/javamail/LICENSE");
+        
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",

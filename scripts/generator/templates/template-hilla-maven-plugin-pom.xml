@@ -19,8 +19,8 @@
 
     <properties>
 {{javadeps}}
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.version>3.8.4</maven.version>
@@ -37,6 +37,12 @@
             <groupId>com.vaadin</groupId>
             <artifactId>flow-maven-plugin</artifactId>
             <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.hilla</groupId>
+            <artifactId>engine-maven-plugin</artifactId>
+            <!-- use hardcoded hilla dependency version until 2.0 branch has been created -->
+            <version>1.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -130,6 +136,23 @@
                                     <artifactId>flow-maven-plugin</artifactId>
                                     <version>${flow.version}</version>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>
+                                    <outputDirectory>src/main/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>dev.hilla</groupId>
+                                    <artifactId>engine-maven-plugin</artifactId>
+                                    <!-- use hardcoded hilla dependency version until 2.0 branch has been created -->
+                                    <version>1.3-SNAPSHOT</version>
+                                    <classifier>sources</classifier>
+                                    <includes>**/*.java</includes>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>dev.hilla</groupId>
+                                    <artifactId>engine-maven-plugin</artifactId>
+                                    <!-- use hardcoded hilla dependency version until 2.0 branch has been created -->
+                                    <version>1.3-SNAPSHOT</version>
+                                    <excludes>**/*.class,META-INF/**</excludes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>

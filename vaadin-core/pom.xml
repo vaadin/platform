@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>23.2-SNAPSHOT</version>
+        <version>24.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-core</artifactId>
     <packaging>jar</packaging>
@@ -101,6 +101,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-confirm-dialog-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-custom-field-flow</artifactId>
         </dependency>
         <dependency>
@@ -130,6 +134,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-form-layout-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-field-highlighter-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -268,8 +276,8 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>../versions.json</sourceFile>
-                            <destinationFile>${basedir}/target/classes/vaadin_versions.json</destinationFile>
+                            <sourceFile>./vaadin-core-versions.json</sourceFile>
+                            <destinationFile>${basedir}/target/classes/vaadin-core-versions.json</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -325,7 +333,6 @@
                         <excludedArtifactId>flow-client</excludedArtifactId>
                         <excludedArtifactId>flow-html-components</excludedArtifactId>
                         <excludedArtifactId>flow-dnd</excludedArtifactId>
-                        <excludedArtifactId>fusion-endpoint</excludedArtifactId>
                         <excludedArtifactId>slf4j-api</excludedArtifactId>
                         <excludedArtifactId>vaadin-grid-flow</excludedArtifactId>
                     </excludedArtifactIds>

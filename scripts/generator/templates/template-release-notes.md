@@ -2,27 +2,18 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 23.0
+## New and Noteworthy Since Vaadin 24.0
 
 ### Flow
-- Support for Liferay 7
-- Vite build tool improvements `*`
-
+- 
 ### Hilla
-- Reactive Endpoints `*`
+- 
 
 ### Design System
-- Lit renderer directives
-- Grid: freeze columns to the end
-- Dialog: header and footer slots
-- Lumo: Java API for CSS utility classes
-- Tree Grid: eager fetch mode
-- Multi-Select Combo Box
+- 
 
 ### Collaboration Engine
-- `FormManager` and `ListOperation` API
-- Clustering support `*`
-
+- 
 `*` experimental
 
 ## <a id="_changelogs"></a> Changelogs
@@ -148,6 +139,13 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) and JDK11 or newer. It is te
 <tr>
   <th>Node.js</th>
   <td>Version 16.15 or newer</td>
+</tr>
+<tr>
+  <th>Spring Boot</th>
+  <td>Vaadin 23.1 supports Spring Boot 2.6 and 2.7. 
+    <p>2.6 is supported to give you time to upgrade to 2.7 and support will be removed in 23.2
+    </p>
+  </td>
 </tr>
 </table>
 

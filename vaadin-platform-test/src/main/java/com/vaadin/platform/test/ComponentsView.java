@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.vaadin.flow.component.tabs.TabSheet;
 import org.apache.commons.io.IOUtils;
 
 import com.vaadin.collaborationengine.CollaborationAvatarGroup;
@@ -475,6 +476,11 @@ public class ComponentsView extends AppLayout {
         tabs.add(tab, new Tab("bar"));
         tabs.addSelectedChangeListener(event -> log.log("Tabs selected index changed to " + tabs.getSelectedIndex()));
 
+        TabSheet tabSheet = new TabSheet();
+        tabSheet.add("Tab one", new Span("Tab one content"));
+        tabSheet.add("Tab two", new Span("Tab two content"));
+        tabSheet.addSelectedChangeListener(event -> log.log("TabSheet selected index changed to " + tabSheet.getSelectedIndex()));
+
         Div contextMenuTarget = new Div();
         contextMenuTarget.setText("Context Menu Target");
         contextMenuTarget.setId("context-menu-target");
@@ -604,6 +610,8 @@ public class ComponentsView extends AppLayout {
         MessageInput messageInput = new MessageInput();
         messageInput.addSubmitListener(e -> log.log(e.getValue()));
 
+        com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         JavaScriptBootstrapUI javaScriptBootstrapUI;
         WebComponentUI webComponentUI;
@@ -652,6 +660,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageList);
         components.add(messageInput);
         components.add(main);
+        components.add(mapComponent);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
@@ -660,6 +669,7 @@ public class ComponentsView extends AppLayout {
         layouts.add(splitLayout);
         layouts.add(splitVertical);
         layouts.add(tabs);
+        layouts.add(tabSheet);
         layouts.add(contextMenuTarget);
         layouts.add(board);
         layouts.add(details);

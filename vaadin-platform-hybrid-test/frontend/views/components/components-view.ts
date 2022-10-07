@@ -33,6 +33,7 @@ import '@vaadin/integer-field';
 import '@vaadin/list-box';
 import '@vaadin/login/src/vaadin-login-form';
 import '@vaadin/login/src/vaadin-login-overlay';
+import '@vaadin/map';
 import '@vaadin/menu-bar';
 import '@vaadin/message-input';
 import '@vaadin/message-list';
@@ -46,9 +47,11 @@ import '@vaadin/rich-text-editor';
 import '@vaadin/scroller/vaadin-scroller';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
+import '@vaadin/tabsheet';
 import '@vaadin/tabs/src/vaadin-tab';
 import '@vaadin/text-area';
 import '@vaadin/text-field';
+import '@vaadin/tooltip';
 import '@vaadin/upload';
 import '@vaadin/vertical-layout';
 import '@vaadin/virtual-list/vaadin-virtual-list';
@@ -114,7 +117,8 @@ export class ComponentsView extends View {
           </vaadin-board-row>
         </vaadin-board>
 
-        <vaadin-button theme="primary">Primary</vaadin-button>
+        <vaadin-button theme="primary" id="confirm">Primary</vaadin-button>
+        <vaadin-tooltip text="Click to save changes" for="confirm"></vaadin-tooltip>
         <vaadin-button theme="secondary">Secondary</vaadin-button>
         <vaadin-button theme="tertiary">Tertiary</vaadin-button>
 
@@ -245,11 +249,17 @@ export class ComponentsView extends View {
           <div><vaadin-button>LEFT</vaadin-button></div>
         </vaadin-split-layout>
 
-        <vaadin-tabs>
-          <vaadin-tab>Tab one</vaadin-tab>
-          <vaadin-tab>Tab two</vaadin-tab>
-          <vaadin-tab>Tab three</vaadin-tab>
-        </vaadin-tabs>
+        <vaadin-tabsheet>
+          <vaadin-tabs slot="tabs">
+            <vaadin-tab id="tab-1">Tab 1</vaadin-tab>
+            <vaadin-tab id="tab-2">Tab 2</vaadin-tab>
+            <vaadin-tab id="tab-3">Tab 3</vaadin-tab>
+          </vaadin-tabs>
+
+          <div tab="tab-1">Panel 1</div>
+          <div tab="tab-2">Panel 2</div>
+          <div tab="tab-3">Panel 3</div>
+        </vaadin-tabsheet>
 
         <vaadin-upload></vaadin-upload>
 
@@ -268,6 +278,7 @@ export class ComponentsView extends View {
           </div>
         </template>
       </vaadin-notification>
+      <vaadin-map></vaadin-map>
 
       <style-modules></style-modules>
       <template-renderer></template-renderer>
