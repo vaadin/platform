@@ -32,6 +32,16 @@ on:
         required: false
         type: boolean
         default: false
+      v24:
+        description: 'Use v24 version starters'
+        required: false
+        type: boolean
+        default: false
+      pre:
+        description: 'Use pre version starters'
+        required: false
+        type: boolean
+        default: false
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -50,7 +60,9 @@ jobs:
           L="${{github.event.inputs.linux}}"
           [ true != "$L" -a true != "$W" ] && L=true
           S="${{github.event.inputs.starter}}"
-          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh --list`
+          [ true = "${{github.event.inputs.v24}}" ] && A="--v24"
+          [ true = "${{github.event.inputs.pre}}" ] && A="--pre"
+          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list`
           M='{"include":['
           for i in `echo $S | tr "," " "`; do
             J='{"app":"'$i'"'
@@ -106,8 +118,11 @@ jobs:
           [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
           [ true = "${{github.event.inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{github.event.inputs.debug}}" ] && ARG="$ARG --debug"
-          echo ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}
-          ./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}
+          echo "${{matrix.app}}" | grep "^v24" && ARG="$ARG --v24"
+          echo "${{matrix.app}}" | grep "^pre" && ARG="$ARG --pre"
+          ARG="$ARG --starters=${{matrix.app}}"
+          echo ./pit/scripts/pit/run.sh $ARG
+          ./pit/scripts/pit/run.sh $ARG
         shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v2.2.0
