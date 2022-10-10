@@ -97,11 +97,11 @@ jobs:
         shell: bash
       - if: ${{runner.os == 'Linux'}}
         run: |
-          # INSTALL GRAPHIC LIBS
+          # INSTALL CHROME
           # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo apt-get -qqy update
-          sudo apt-get -qqy --no-install-recommends install \
-            libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
+          sudo ./pit/scripts/pit/docker/setup.sh --chrome
+      - if: ${{runner.os != 'Linux'}}
+        uses: browser-actions/setup-chrome@latest
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -112,7 +112,6 @@ jobs:
       - uses: stCarolas/setup-maven@v4
         with:
           maven-version: '3.8.2'
-      - uses: browser-actions/setup-chrome@latest
       - run: |
           # PIT TESTS ${{matrix.app}} ${{github.event.inputs.version}}
           [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
@@ -122,6 +121,7 @@ jobs:
           echo "${{matrix.app}}" | grep "^pre" && ARG="$ARG --pre"
           ARG="$ARG --starters=${{matrix.app}}"
           echo ./pit/scripts/pit/run.sh $ARG
+          set > set.out
           ./pit/scripts/pit/run.sh $ARG
         shell: bash
       - if: ${{failure()}}
