@@ -505,7 +505,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spreadsheet-testbench</artifactId>
                 <version>${vaadin.spreadsheet.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
