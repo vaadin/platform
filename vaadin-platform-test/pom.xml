@@ -233,6 +233,8 @@
                                 </goals>
                                 <configuration>
                                     <systemPropertyVariables>
+                                        <sauce.user>${sa.user}</sauce.user>
+                                        <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
                                         <sauce.options>${sauce.options}</sauce.options>
                                         <grid.browsers>${sa.browsers}</grid.browsers>
                                     </systemPropertyVariables>
