@@ -104,13 +104,4 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     protected String getDeploymentHostname() {
         return hostName;
     }
-
-    @Override
-    protected String getHubURL() {
-        String hubUrl = super.getHubURL();
-        if (hubUrl.contains("ondemand.saucelabs")) {
-            return "http://localhost:4445/wd/hub";
-        }
-        return hubUrl;
-    }
 }
