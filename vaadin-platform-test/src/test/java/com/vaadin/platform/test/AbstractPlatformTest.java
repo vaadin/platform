@@ -43,8 +43,8 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        String sauceUser = System.getProperty("sauce.user");
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        String sauceUser = System.getProperty("sauce.user") != null ? System.getProperty("sauce.user") : System.getenv("SAUCE_USERNAME");
+        String sauceKey = System.getProperty("sauce.sauceAccessKey") != null ? System.getProperty("sauce.sauceAccessKey") : System.getenv("SAUCE_ACCESS_KEY");
         isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
                 && !sauceKey.isEmpty();
         String hubHost = System
