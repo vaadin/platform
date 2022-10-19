@@ -11,20 +11,20 @@ import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
+
 
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
-        String sauceUser = System.getProperty("sauce.user");
         String browsers = System.getProperty("grid.browsers");
-        if (sauceUser != null && !sauceUser.isEmpty()) {
+        if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
             if (browsers == null || browsers.isEmpty()) {
                 Parameters.setGridBrowsers("firefox,safari,edge");
             } else {
