@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -43,8 +44,8 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        String sauceUser = System.getProperty("sauce.user") != null ? System.getProperty("sauce.user") : System.getenv("SAUCE_USERNAME");
-        String sauceKey = System.getProperty("sauce.sauceAccessKey") != null ? System.getProperty("sauce.sauceAccessKey") : System.getenv("SAUCE_ACCESS_KEY");
+        String sauceUser = SauceLabsIntegration.getSauceUser();
+        String sauceKey = SauceLabsIntegration.getSauceAccessKey();
         isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
                 && !sauceKey.isEmpty();
         String hubHost = System
