@@ -17,19 +17,13 @@ import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
-import com.vaadin.testbench.parallel.SauceLabsIntegration;
-
 
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
         String browsers = System.getProperty("grid.browsers");
-        if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
-            if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("firefox,safari,edge");
-            } else {
-                Parameters.setGridBrowsers(browsers);
-            }
+        if (browsers != null && !browsers.isEmpty()) {
+            Parameters.setGridBrowsers(browsers);
         }
     }
 
