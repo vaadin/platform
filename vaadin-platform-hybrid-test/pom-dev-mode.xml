@@ -19,7 +19,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
-        <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -198,11 +197,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <systemPropertyVariables>
-                        <sauce.user>${sauce.user}</sauce.user>
-                        <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
-                        <sauce.options>${sauce.options}</sauce.options>
-                    </systemPropertyVariables>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>

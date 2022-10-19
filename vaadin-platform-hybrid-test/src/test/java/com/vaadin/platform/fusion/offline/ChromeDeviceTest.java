@@ -89,7 +89,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             driver = new ChromeDriver(chromeOptions);
         } else if (Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
-        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
+        } else if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
             driver = new RemoteWebDriver(new URL(getHubURL()),
                 chromeOptions.merge(getDesiredCapabilities()));
         } else if (getRunOnHub(getClass()) != null
