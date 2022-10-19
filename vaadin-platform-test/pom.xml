@@ -20,7 +20,6 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
         <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
-        <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -235,7 +234,6 @@
                                     <systemPropertyVariables>
                                         <sauce.user>${sa.user}</sauce.user>
                                         <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
-                                        <sauce.options>${sauce.options}</sauce.options>
                                         <grid.browsers>${sa.browsers}</grid.browsers>
                                     </systemPropertyVariables>
                                     <includes>
