@@ -45,3 +45,8 @@ So that I can *expected results (e.g. free resources immediately)*
 
 - [ ] Limitations: 
 <!--here list of limitations, preferably links to GH issues or Epic that specifies them-->
+
+## Security Requirements
+- [ ] There is a security requirement (ellaborate it o link to document)
+- [ ] There might be security risks that impacts the product
+- [ ] There are issues regarding any of Integrity, Confidentiality, Availability, Accountability, Authorization, Authentication (ellaborate it o link to document)
