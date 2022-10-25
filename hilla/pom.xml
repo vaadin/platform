@@ -37,14 +37,12 @@
         <dependency>
             <groupId>dev.hilla</groupId>
             <artifactId>endpoint</artifactId>
-            <!-- use hardcoded hilla dependency version until 2.0 branch has been created -->
-            <version>1.3-SNAPSHOT</version>
+            <version>${hilla.version}</version>
         </dependency>
         <dependency>
             <groupId>dev.hilla</groupId>
             <artifactId>engine-runtime</artifactId>
-            <!-- use hardcoded hilla dependency version until 2.0 branch has been created -->
-            <version>1.3-SNAPSHOT</version>
+            <version>${hilla.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
