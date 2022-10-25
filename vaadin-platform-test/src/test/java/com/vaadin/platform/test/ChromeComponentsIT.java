@@ -93,7 +93,7 @@ public class ChromeComponentsIT extends ParallelTest {
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
 
         String browsers = System.getProperty("grid.browsers", "chrome");
-        if (sauceUser != null && !sauceUser.isEmpty()) {
+        if (isSauce) {
             Parameters.setGridBrowsers(browsers);
         }
 

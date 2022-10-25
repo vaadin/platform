@@ -227,43 +227,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.saucelabs.maven.plugin</groupId>
-                <artifactId>sauce-connect-plugin</artifactId>
-                <version>2.1.25</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.saucelabs</groupId>
-                        <artifactId>ci-sauce</artifactId>
-                        <version>1.138</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <!-- Start Sauce Connect prior to running the integration 
-                        tests -->
-                    <execution>
-                        <id>start-sauceconnect</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start-sauceconnect</goal>
-                        </goals>
-                    </execution>
-                    <!-- Stop the Sauce Connect process after the integration 
-                        tests have finished -->
-                    <execution>
-                        <id>stop-sauceconnect</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop-sauceconnect</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sauceUsername>${sauce.user}</sauceUsername>
-                    <sauceAccessKey>${sauce.sauceAccessKey}</sauceAccessKey>
-                    <options>${sauce.options}</options>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
