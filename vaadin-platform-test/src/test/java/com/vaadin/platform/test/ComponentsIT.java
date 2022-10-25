@@ -25,6 +25,7 @@ import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.commands.TestBenchCommandExecutor;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import com.vaadin.testbench.IPAddress;
 
 public class ComponentsIT extends ParallelTest {
@@ -33,18 +34,21 @@ public class ComponentsIT extends ParallelTest {
     static String hostName;
 
     static {
-        String sauceUser = System.getProperty("sauce.user");
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
-        boolean isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
-                && !sauceKey.isEmpty();
+        String sauceUser = SauceLabsIntegration.getSauceUser();
+        boolean isSauce = SauceLabsIntegration.isConfiguredForSauceLabs();
         String hubHost = System
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         boolean isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
 
-        String browsers = System.getProperty("grid.browsers", "ie11,firefox,safari-9,safari-10,safari-14,edge,edge-18");
-        if (sauceUser != null && !sauceUser.isEmpty()) {
-            Parameters.setGridBrowsers(browsers);
+        String browsers = System.getProperty("grid.browsers");
+        if (isSauce) {
+            if (browsers == null || browsers.isEmpty()) {
+                Parameters.setGridBrowsers("ie11,firefox,safari-14,edge,edge-18");
+            } else {
+                Parameters.setGridBrowsers(browsers);
+            }
+
         }
 
         log.info("Running Tests app-url=http://{}:8080 mode={}", hostName,
