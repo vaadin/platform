@@ -151,6 +151,10 @@ public class ComponentsIT extends ParallelTest {
 
     @Override
     protected String getHubURL() {
-        return "https://ondemand.us-west-1.saucelabs.com/wd/hub";
+        String hubUrl = super.getHubURL();
+        if (hubUrl.contains(":4445")) {
+            return "https://ondemand.us-west-1.saucelabs.com/wd/hub";
+        }
+        return hubUrl;
     }
 }
