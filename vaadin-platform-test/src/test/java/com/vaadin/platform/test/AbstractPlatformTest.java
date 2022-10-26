@@ -47,6 +47,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
         String sauceKey = System.getProperty("sauce.sauceAccessKey");
         isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
                 && !sauceKey.isEmpty();
+
         String hubHost = System
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
