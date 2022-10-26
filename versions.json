@@ -70,8 +70,8 @@
             "npmName": "@vaadin/date-picker"
         },
         "date-time-picker": {
-          "javaVersion": "{{version}}",
-          "jsVersion": "23.3.0-alpha3",
+            "javaVersion": "{{version}}",
+            "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/date-time-picker"
         },
         "details": {
@@ -80,8 +80,8 @@
             "npmName": "@vaadin/details"
         },
         "vaadin-development-mode-detector": {
-          "jsVersion": "2.0.5",
-          "npmName": "@vaadin/vaadin-development-mode-detector"
+            "jsVersion": "2.0.5",
+            "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "dialog": {
             "javaVersion": "{{version}}",
@@ -108,6 +108,7 @@
             "javaVersion": "15.0.0.alpha1"
         },
         "form-layout": {
+            "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/form-layout"
         },
@@ -236,9 +237,9 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/number-field"
         },
-      "vaadin-ordered-layout": {
-          "javaVersion": "{{version}}"
-      },
+        "vaadin-ordered-layout": {
+            "javaVersion": "{{version}}"
+        },
         "password-field": {
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/password-field"
@@ -261,7 +262,7 @@
             "npmName": "@vaadin/radio-group"
         },
         "vaadin-renderer": {
-          "javaVersion": "{{version}}"
+            "javaVersion": "{{version}}"
         },
         "vaadin-router": {
             "jsVersion": "1.7.4",

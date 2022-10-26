@@ -233,7 +233,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-messages-flow</artifactId>
-                <version>${messages.version}</version>
+                <version>${vaadin.messages.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -253,7 +253,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-radio-button-flow</artifactId>
-                <version>${radio.button.version}</version>
+                <version>${radio.group.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -473,7 +473,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-messages-testbench</artifactId>
-                <version>${messages.version}</version>
+                <version>${vaadin.messages.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -497,7 +497,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-radio-button-testbench</artifactId>
-                <version>${radio.button.version}</version>
+                <version>${radio.group.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
