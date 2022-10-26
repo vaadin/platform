@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "23.3.0-alpha3",
+            "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -78,10 +78,6 @@
             "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/details"
-        },
-        "vaadin-development-mode-detector": {
-            "jsVersion": "2.0.5",
-            "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "dialog": {
             "javaVersion": "{{version}}",
@@ -173,10 +169,6 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/list-box"
         },
-        "vaadin-list-mixin": {
-            "jsVersion": "23.3.0-alpha3",
-            "npmName": "@vaadin/vaadin-list-mixin"
-        },
         "lit-renderer": {
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/lit-renderer"
@@ -185,22 +177,6 @@
             "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/login"
-        },
-        "vaadin-lumo-styles": {
-            "jsVersion": "23.3.0-alpha3",
-            "npmName": "@vaadin/vaadin-lumo-styles",
-            "releasenotes": true
-        },
-        "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-material-styles": {
-            "jsVersion": "23.3.0-alpha3",
-            "npmName": "@vaadin/vaadin-material-styles",
-            "releasenotes": true
-        },
-        "vaadin-material-theme": {
-            "javaVersion": "{{version}}"
         },
         "menu-bar": {
             "javaVersion": "{{version}}",
@@ -214,9 +190,6 @@
         "message-list": {
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/message-list"
-        },
-        "vaadin-messages": {
-            "javaVersion": "{{version}}"
         },
         "mpr-v7": {
             "javaVersion": "6.0.2"
@@ -237,9 +210,6 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/number-field"
         },
-        "vaadin-ordered-layout": {
-            "javaVersion": "{{version}}"
-        },
         "password-field": {
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/password-field"
@@ -253,21 +223,10 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/progress-bar"
         },
-        "vaadin-quarkus": {
-            "javaVersion": "1.1.2"
-        },
         "radio-group": {
             "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/radio-group"
-        },
-        "vaadin-renderer": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-router": {
-            "jsVersion": "1.7.4",
-            "npmName": "@vaadin/router",
-            "releasenotes": true
         },
         "scroller": {
             "jsVersion": "23.3.0-alpha3",
@@ -310,14 +269,55 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/tooltip"
         },
-        "vaadin-usage-statistics": {
-            "jsVersion": "2.1.2",
-            "npmName": "@vaadin/vaadin-usage-statistics"
-        },
         "upload": {
             "javaVersion": "{{version}}",
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/upload"
+        },
+        "vaadin-development-mode-detector": {
+            "jsVersion": "2.0.5",
+            "npmName": "@vaadin/vaadin-development-mode-detector"
+        },
+        "vaadin-list-mixin": {
+            "jsVersion": "23.3.0-alpha3",
+            "npmName": "@vaadin/vaadin-list-mixin"
+        },
+        "vaadin-lumo-styles": {
+            "jsVersion": "23.3.0-alpha3",
+            "npmName": "@vaadin/vaadin-lumo-styles",
+            "releasenotes": true
+        },
+        "vaadin-lumo-theme": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-material-styles": {
+            "jsVersion": "23.3.0-alpha3",
+            "npmName": "@vaadin/vaadin-material-styles",
+            "releasenotes": true
+        },
+        "vaadin-material-theme": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-messages": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-ordered-layout": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-quarkus": {
+            "javaVersion": "1.1.2"
+        },
+        "vaadin-renderer": {
+            "javaVersion": "{{version}}"
+        },
+        "vaadin-router": {
+            "jsVersion": "1.7.4",
+            "npmName": "@vaadin/router",
+            "releasenotes": true
+        },
+        "vaadin-usage-statistics": {
+            "jsVersion": "2.1.2",
+            "npmName": "@vaadin/vaadin-usage-statistics"
         },
         "vertical-layout": {
             "jsVersion": "23.3.0-alpha3",
@@ -372,10 +372,6 @@
             "jsVersion": "23.3.0-alpha3",
             "npmName": "@vaadin/rich-text-editor"
         },
-        "vaadin-spreadsheet": {
-            "javaVersion": "{{version}}",
-            "pro": true
-        },
         "vaadin-classic-components": {
             "javaVersion": "23.2.0"
         },
@@ -394,6 +390,10 @@
         },
         "vaadin-portlet": {
             "javaVersion": "2.0.0"
+        },
+        "vaadin-spreadsheet": {
+            "javaVersion": "{{version}}",
+            "pro": true
         },
         "vaadin-testbench": {
             "javaVersion": "8.1.1",
