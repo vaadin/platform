@@ -148,4 +148,13 @@ public class ComponentsIT extends ParallelTest {
         assertTrue(tag + " customElement not registered for " + currentBrowser(), !tag.contains("-")
                 || (Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
     }
+
+    @Override
+    protected String getHubURL() {
+        String hubUrl = super.getHubURL();
+        if (hubUrl.contains("http://localhost:4445/wd/hub")) {
+            return "https://ondemand.us-west-1.saucelabs.com/wd/hub";
+        }
+        return hubUrl;
+    }
 }
