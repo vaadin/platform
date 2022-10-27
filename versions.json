@@ -237,6 +237,10 @@
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/number-field"
         },
+        "overlay": {
+            "jsVersion": "24.0.0-alpha1",
+            "npmName": "@vaadin/overlay"
+        },
         "vaadin-ordered-layout": {
             "javaVersion": "{{version}}"
         },
