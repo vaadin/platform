@@ -104,7 +104,6 @@ import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.component.ironlist.IronList;
@@ -243,8 +242,6 @@ public class ComponentsView extends AppLayout {
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param);
-
-        IronIcon ironIcon = new IronIcon("communication", "email");
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
 
@@ -617,7 +614,6 @@ public class ComponentsView extends AppLayout {
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
 
-        components.add(ironIcon);
         components.add(button);
         components.add(checkbox);
         components.add(checkboxGroup);
