@@ -70,6 +70,7 @@ public class LicenseCheckTest {
         // BSD
         whitelist.add("http://www.opensource.org/licenses/bsd-license.php");
         whitelist.add("http://opensource.org/licenses/BSD-2-Clause");
+        whitelist.add("https://opensource.org/licenses/BSD-2-Clause");
         whitelist.add("http://opensource.org/licenses/BSD-3-Clause");
 
         // MIT
