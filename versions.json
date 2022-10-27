@@ -258,7 +258,7 @@
             "npmName": "@vaadin/progress-bar"
         },
         "vaadin-quarkus": {
-            "javaVersion": "1.1.2"
+            "javaVersion": "2.0.0.alpha1"
         },
         "radio-group": {
             "javaVersion": "{{version}}",
