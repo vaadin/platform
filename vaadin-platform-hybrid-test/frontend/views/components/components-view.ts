@@ -123,9 +123,6 @@ export class ComponentsView extends View {
         <vaadin-button theme="secondary">Secondary</vaadin-button>
         <vaadin-button theme="tertiary">Tertiary</vaadin-button>
 
-        <vaadin-icons></vaadin-icons>
-        <iron-icon icon="vaadin:airplane"></iron-icon>
-
         <vaadin-icon name="vaadin:user"></vaadin-icon>
         <vaadin-iconset name="foo" size="16">
           <svg><defs>
@@ -145,9 +142,9 @@ export class ComponentsView extends View {
           </vaadin-chart-series>
         </vaadin-chart>
         <vaadin-checkbox-group label="Label" theme="vertical">
-          <vaadin-checkbox value="1" checked>Option one</vaadin-checkbox>
-          <vaadin-checkbox value="2">Option two</vaadin-checkbox>
-          <vaadin-checkbox value="3">Option three</vaadin-checkbox>
+          <vaadin-checkbox value="1" label="Option one" checked></vaadin-checkbox>
+          <vaadin-checkbox value="2" label="Option two"></vaadin-checkbox>
+          <vaadin-checkbox value="3" label="Option three"></vaadin-checkbox>
         </vaadin-checkbox-group>
         <vaadin-combo-box .items="${[1,2,3,4,5]}"></vaadin-combo-box>
         <vaadin-multi-select-combo-box .items="${['apple', 'banana', 'lemon', 'orange']}"></vaadin-multi-select-combo-box>
@@ -239,9 +236,9 @@ export class ComponentsView extends View {
         ]}"></vaadin-menu-bar>
 
         <vaadin-radio-group label="Label" theme="vertical">
-          <vaadin-radio-button checked>Option one</vaadin-radio-button>
-          <vaadin-radio-button>Option two</vaadin-radio-button>
-          <vaadin-radio-button>Option three</vaadin-radio-button>
+          <vaadin-radio-button label="Option one" checked></vaadin-radio-button>
+          <vaadin-radio-button label="Option two"></vaadin-radio-button>
+          <vaadin-radio-button label="Option three"></vaadin-radio-button>
         </vaadin-radio-group>
 
         <vaadin-rich-text-editor></vaadin-rich-text-editor>
