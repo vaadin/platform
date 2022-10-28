@@ -49,7 +49,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-testbench</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
             <!-- Flow -->
             <dependency>
@@ -300,26 +299,22 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-testbench-core</artifactId>
                 <version>${vaadin.testbench.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-html-components-testbench</artifactId>
                 <version>${flow.version}</version>
-                <scope>test</scope>
             </dependency>
             <!-- Component Testbench API -->
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-accordion-testbench</artifactId>
                 <version>${accordion.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-app-layout-testbench</artifactId>
                 <version>${app.layout.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -330,223 +325,186 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-board-testbench</artifactId>
                 <version>${board.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-button-testbench</artifactId>
                 <version>${button.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-charts-testbench</artifactId>
                 <version>${charts.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-checkbox-testbench</artifactId>
                 <version>${checkbox.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-combo-box-testbench</artifactId>
                 <version>${combo.box.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-confirm-dialog-testbench</artifactId>
                 <version>${confirm.dialog.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-context-menu-testbench</artifactId>
                 <version>${context.menu.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-cookie-consent-testbench</artifactId>
                 <version>${cookie.consent.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-crud-testbench</artifactId>
                 <version>${crud.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-custom-field-testbench</artifactId>
                 <version>${custom.field.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-date-picker-testbench</artifactId>
                 <version>${date.picker.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-date-time-picker-testbench</artifactId>
                 <version>${date.time.picker.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-details-testbench</artifactId>
                 <version>${details.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-dialog-testbench</artifactId>
                 <version>${dialog.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-form-layout-testbench</artifactId>
                 <version>${form.layout.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-grid-testbench</artifactId>
                 <version>${grid.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-grid-pro-testbench</artifactId>
                 <version>${grid.pro.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-icons-testbench</artifactId>
                 <version>${icons.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-iron-list-testbench</artifactId>
                 <version>${iron.list.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-virtual-list-testbench</artifactId>
                 <version>${virtual.list.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-list-box-testbench</artifactId>
                 <version>${list.box.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-login-testbench</artifactId>
                 <version>${login.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-map-testbench</artifactId>
                 <version>${map.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-menu-bar-testbench</artifactId>
                 <version>${menu.bar.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-messages-testbench</artifactId>
                 <version>${vaadin.messages.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                  <groupId>com.vaadin</groupId>
                  <artifactId>vaadin-notification-testbench</artifactId>
                  <version>${notification.version}</version>
-                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-ordered-layout-testbench</artifactId>
                 <version>${vaadin.ordered.layout.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-progress-bar-testbench</artifactId>
                 <version>${progress.bar.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-radio-button-testbench</artifactId>
                 <version>${radio.group.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-rich-text-editor-testbench</artifactId>
                 <version>${rich.text.editor.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-select-testbench</artifactId>
                 <version>${select.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-split-layout-testbench</artifactId>
                 <version>${split.layout.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-tabs-testbench</artifactId>
                 <version>${tabs.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-text-field-testbench</artifactId>
                 <version>${text.field.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-time-picker-testbench</artifactId>
                 <version>${time.picker.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-upload-testbench</artifactId>
                 <version>${upload.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spreadsheet-testbench</artifactId>
                 <version>${vaadin.spreadsheet.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
