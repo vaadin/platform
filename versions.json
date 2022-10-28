@@ -400,7 +400,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.0-SNAPSHOT",
+            "javaVersion": "9.0.0.alpha1",
             "pro": true
         }
     }
