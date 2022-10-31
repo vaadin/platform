@@ -38,7 +38,7 @@ dependencies {
     providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 
     // logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties for logger configuration
-    implementation 'org.slf4j:slf4j-simple:1.7.30'
+    implementation 'org.slf4j:slf4j-simple:2.0.3'
 }
 
 defaultTasks('clean', 'build')
@@ -101,6 +101,11 @@ task integrationTest(type: Test) {
     testLogging {
         showStandardStreams = true
     }
+}
+
+wrapper {
+    gradleVersion = '7.5.1'
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 check.dependsOn integrationTest
