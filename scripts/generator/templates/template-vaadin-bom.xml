@@ -50,12 +50,6 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-portlet</artifactId>
-                <version>${vaadin.portlet.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-classic-components-flow</artifactId>
                 <version>${vaadin.classic.components.version}</version>
             </dependency>
