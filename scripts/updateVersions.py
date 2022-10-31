@@ -9,10 +9,7 @@ originRepo=sys.argv[1]
 # this will come from the build chain/dependency
 newVersion=sys.argv[2]
 
-if originRepo=="flow-osgi" :
-  module="vaadin"
-  version="javaVersion"
-elif originRepo=="bundles" :
+if originRepo=="bundles" :
   module="bundles"
   originRepo="vaadin"
   version="jsVersion"

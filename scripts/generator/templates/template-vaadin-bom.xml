@@ -50,12 +50,6 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>flow-osgi</artifactId>
-                <version>${flow.osgi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-portlet</artifactId>
                 <version>${vaadin.portlet.version}</version>
             </dependency>
