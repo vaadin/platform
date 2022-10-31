@@ -191,12 +191,6 @@
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/message-list"
         },
-        "mpr-v7": {
-            "javaVersion": "6.0.2"
-        },
-        "mpr-v8": {
-            "javaVersion": "6.0.2"
-        },
         "multi-select-combo-box": {
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/multi-select-combo-box"
@@ -358,9 +352,6 @@
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/crud"
         },
-        "flow-osgi": {
-            "javaVersion": "8.0.2"
-        },
         "grid-pro": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.0.0-alpha1",
@@ -391,9 +382,6 @@
         },
         "vaadin-license-checker": {
             "javaVersion": "1.10.1"
-        },
-        "vaadin-portlet": {
-            "javaVersion": "2.0.0"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
