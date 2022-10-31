@@ -47,6 +47,4 @@ So that I can *expected results (e.g. free resources immediately)*
 <!--here list of limitations, preferably links to GH issues or Epic that specifies them-->
 
 ## Security
-- [ ] There is a security requirement (ellaborate it or link to document)
-- [ ] There might be security risks that impacts the product
-- [ ] There are issues regarding any of Integrity, Confidentiality, Availability, Accountability, Authorization, Authentication (ellaborate it or link to document)
+- [ ] Security implications have been taken into account (elaborate or link to product security requirement specification if there are implications)
