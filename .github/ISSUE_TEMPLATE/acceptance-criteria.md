@@ -45,3 +45,6 @@ So that I can *expected results (e.g. free resources immediately)*
 
 - [ ] Limitations: 
 <!--here list of limitations, preferably links to GH issues or Epic that specifies them-->
+
+## Security
+- [ ] Security implications have been taken into account (elaborate or link to product security requirement specification if there are implications)
