@@ -30,9 +30,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <properties>
-        <spring.security.version>6.0.0-RC1</spring.security.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -70,7 +67,12 @@
                     <version>7.0.0</version>
                     <scope>provided</scope>
                 </dependency>
-                <!-- provided dependencies from flow/fusion-endpoint -->
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-spring</artifactId>
+                    <version>${project.version}</version>
+                    <scope>provided</scope>
+                </dependency>
                 <dependency>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-web</artifactId>
@@ -147,13 +149,13 @@
                     <groupId>org.junit.jupiter</groupId>
                     <artifactId>junit-jupiter-api</artifactId>
                     <version>${junit.jupiter.version}</version>
-                    <scope>test</scope>
+                    <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.junit.jupiter</groupId>
                     <artifactId>junit-jupiter</artifactId>
                     <version>${junit.jupiter.version}</version>
-                    <scope>test</scope>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
             <build>
