@@ -67,6 +67,8 @@ const gradlePluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-p
 const gradlePortalPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-portal-pom.xml');
 const gradlePortalPluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-portal-pom.xml');
 
+const platformJavadocTemplatePomFileName = getTemplateFilePath('template-vaadin-platform-javadoc-pom.xml');
+const platformJavadocResultPomFileName = getResultsFilePath('vaadin-platform-javadoc-pom.xml');
 
 const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-containers-tests-pom.xml');
 
@@ -102,4 +104,4 @@ writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPlug
 writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hillaMavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
-
+writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
