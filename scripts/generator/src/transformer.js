@@ -27,10 +27,13 @@ function transformPlatformVersion(versions, platformVersion) {
 
 function transformJavaSnapshots(versions) {
     const majorMinorVersions = /(\d*?\.\d*).*/;
+    let module;
     const snapshotVersionVisitor = (key, value, parent) => {
-        if (key === 'javaVersion') {
+        // dont update  the license-checker version to snapshot
+        if (key === 'javaVersion' && module !== 'vaadin-license-checker') {
             parent[key] = value.replace(majorMinorVersions, "$1-SNAPSHOT");
         }
+        module = key;
     };
     const transformedVersions = Object.assign({}, versions);
     visit(transformedVersions, snapshotVersionVisitor);
