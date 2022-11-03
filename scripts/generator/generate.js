@@ -88,7 +88,7 @@ writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCore
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
-const hilla = process.env.HILLA || platform.replace(/^23/, 1);
+const hilla = process.env.HILLA || platform.replace(/^24/, 2);
 versions.core.hilla = {javaVersion: hilla};
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
