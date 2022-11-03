@@ -4,13 +4,17 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>24.0-SNAPSHOT</version>
+        <version>{{platform}}</version>
     </parent>
     <artifactId>vaadin-platform-javadoc</artifactId>
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-platform-javadoc)</name>
     <description>Vaadin Platform (vaadin-platform-javadoc)</description>
     <url>https://vaadin.com</url>
+
+    <properties>
+        {{javadeps}}
+    </properties>
 
     <distributionManagement>
         <repository>
@@ -70,7 +74,7 @@
                 <dependency>
                     <groupId>com.vaadin</groupId>
                     <artifactId>vaadin-spring</artifactId>
-                    <version>24.0.0.alpha5</version>
+                    <version>${flow.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
