@@ -244,22 +244,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     }
 
     @Test
-    public void ironListIsRendered() {
-        IronListElement ironList = $(IronListElement.class).first();
-
-        TestBenchElement itemsContainer = ironList.$(DivElement.class).id("items");
-        assertElementRendered(itemsContainer);
-
-        List<TestBenchElement> items = ironList.$("span").all();
-        Assert.assertFalse(items.isEmpty());
-        items.stream().forEach(this::assertElementRendered);
-
-        for (int i = 0; i < items.size(); i++) {
-            Assert.assertEquals("Item " + i, items.get(i).getText());
-        }
-    }
-
-    @Test
     public void virtualListIsRendered() {
         VirtualListElement virtualList = $(VirtualListElement.class).first();
 
