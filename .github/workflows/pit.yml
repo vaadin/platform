@@ -72,7 +72,7 @@ jobs:
           done
           M=`echo $M | sed -e s/,$//`']}'
           echo "$M"
-          echo "::set-output name=matrix::$M"
+          echo "matrix=$M" >> $GITHUB_OUTPUT
   run:
     needs: prepare
     strategy:
