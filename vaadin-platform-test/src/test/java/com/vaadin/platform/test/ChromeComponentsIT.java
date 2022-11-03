@@ -37,7 +37,6 @@ import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.icon.testbench.IconElement;
-import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.messages.testbench.MessageElement;
 import com.vaadin.flow.component.messages.testbench.MessageInputElement;
