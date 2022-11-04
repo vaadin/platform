@@ -134,32 +134,6 @@
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/integer-field"
         },
-        "iron-icon": {
-            "jsVersion": "2.1.0",
-            "npmName": "@polymer/iron-icon",
-            "npmVersion": "3.0.1"
-        },
-        "iron-iconset-svg": {
-            "jsVersion": "2.2.1",
-            "npmName": "@polymer/iron-iconset-svg",
-            "npmVersion": "3.0.1"
-        },
-        "iron-list": {
-            "javaVersion": "{{version}}",
-            "jsVersion": "2.0.20",
-            "npmName": "@polymer/iron-list",
-            "npmVersion": "3.1.0"
-        },
-        "iron-meta": {
-            "jsVersion": "2.1.1",
-            "npmName": "@polymer/iron-meta",
-            "npmVersion": "3.0.1"
-        },
-        "iron-resizable-behavior": {
-            "jsVersion": "2.1.1",
-            "npmName": "@polymer/iron-resizable-behavior",
-            "npmVersion": "3.0.1"
-        },
         "item": {
             "jsVersion": "24.0.0-alpha1",
             "npmName": "@vaadin/item"
@@ -388,7 +362,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.0.0.alpha2",
+            "javaVersion": "9.0.0.alpha3",
             "pro": true
         }
     }

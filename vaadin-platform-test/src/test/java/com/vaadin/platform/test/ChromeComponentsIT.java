@@ -37,7 +37,6 @@ import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.icon.testbench.IconElement;
-import com.vaadin.flow.component.ironlist.testbench.IronListElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.messages.testbench.MessageElement;
 import com.vaadin.flow.component.messages.testbench.MessageInputElement;
@@ -242,22 +241,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         svg = vIcon.$("svg").first();
         assertElementRendered(svg);
-    }
-
-    @Test
-    public void ironListIsRendered() {
-        IronListElement ironList = $(IronListElement.class).first();
-
-        TestBenchElement itemsContainer = ironList.$(DivElement.class).id("items");
-        assertElementRendered(itemsContainer);
-
-        List<TestBenchElement> items = ironList.$("span").all();
-        Assert.assertFalse(items.isEmpty());
-        items.stream().forEach(this::assertElementRendered);
-
-        for (int i = 0; i < items.size(); i++) {
-            Assert.assertEquals("Item " + i, items.get(i).getText());
-        }
     }
 
     @Test
