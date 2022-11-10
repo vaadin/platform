@@ -59,6 +59,13 @@
                 <artifactId>collaboration-engine</artifactId>
                 <version>${vaadin.collaboration.engine.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>${vaadin.license.checker.version}</version>
+            </dependency>
+
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
