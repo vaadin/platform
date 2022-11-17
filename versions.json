@@ -396,7 +396,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.10.1",
+            "javaVersion": "1.11.1",
             "jsVersion": "2.1.2"
         },
         "vaadin-rich-text-editor": {
