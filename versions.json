@@ -165,6 +165,9 @@
             "jsVersion": "24.0.0-alpha4",
             "npmName": "@vaadin/message-list"
         },
+        "mpr-v8": {
+            "javaVersion": "7.0.0.alpha1"
+        },
         "multi-select-combo-box": {
             "jsVersion": "24.0.0-alpha4",
             "npmName": "@vaadin/multi-select-combo-box"
