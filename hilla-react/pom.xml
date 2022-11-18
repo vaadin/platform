@@ -132,7 +132,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>${basedir}/versions.json</sourceFile>
+                            <sourceFile>${basedir}/hilla-react-versions.json</sourceFile>
                             <!-- use vaadin-core-versions.json here, as flow check this file firstly. 
                                  later we should consider to split this file for core and pro components. -->
                             <destinationFile>${basedir}/target/classes/vaadin-core-versions.json</destinationFile>
