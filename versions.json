@@ -5,6 +5,12 @@
             "npmName": "@vaadin/bundles"
         }
     },
+    "react": {
+        "react-components": {
+            "jsVersion": "1.3.0-alpha6",
+            "npmName": "@hilla/react-components"
+        }
+    },
     "core": {
         "accordion": {
             "jsVersion": "23.3.0-alpha6",

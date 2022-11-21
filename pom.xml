@@ -64,6 +64,7 @@
             <modules>
                 <module>hilla-bom</module>
                 <module>hilla</module>
+                <module>hilla-react</module>
                 <module>hilla-spring-boot-starter</module>
                 <module>hilla-maven-plugin</module>
             </modules>

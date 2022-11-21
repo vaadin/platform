@@ -12,9 +12,11 @@ vaadin/vaadin-versions.json
 vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
+hilla/hilla-versions.json
 hilla-maven-plugin/src/main
 hilla-maven-plugin/bin
 hilla-maven-plugin/.factorypath
+hilla-react/hilla-react-versions.json
 vaadin-gradle-plugin/build
 vaadin-platform-gradle-test/build
 vaadin-gradle-plugin/.gradle

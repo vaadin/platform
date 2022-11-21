@@ -8,10 +8,10 @@
         <version>23.3-SNAPSHOT</version>
     </parent>
     <groupId>dev.hilla</groupId>
-    <artifactId>hilla</artifactId>
+    <artifactId>hilla-react</artifactId>
     <packaging>jar</packaging>
-    <name>Hilla Platform</name>
-    <description>Hilla Platform</description>
+    <name>Hilla Platform for React</name>
+    <description>Hilla Platform for React-based Applications</description>
     <version>${hilla.version}</version>
     <url>https://hilla.dev</url>
     <distributionManagement>
@@ -130,7 +130,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>${basedir}/hilla-versions.json</sourceFile>
+                            <sourceFile>${basedir}/hilla-react-versions.json</sourceFile>
                             <!-- use vaadin-core-versions.json here, as flow check this file firstly. 
                                  later we should consider to split this file for core and pro components. -->
                             <destinationFile>${basedir}/target/classes/vaadin-core-versions.json</destinationFile>
