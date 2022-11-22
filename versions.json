@@ -1,14 +1,8 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "23.3.0-alpha8",
+            "jsVersion": "23.3.0-beta1",
             "npmName": "@vaadin/bundles"
-        }
-    },
-    "react": {
-        "react-components": {
-            "jsVersion": "1.3.0-alpha8",
-            "npmName": "@hilla/react-components"
         }
     },
     "core": {
@@ -552,6 +546,12 @@
         }
     },
     "platform": "{{version}}",
+    "react": {
+        "react-components": {
+            "jsVersion": "1.3.0-alpha8",
+            "npmName": "@hilla/react-components"
+        }
+    },
     "vaadin": {
         "board": {
             "jsVersion": "23.3.0-alpha8",
