@@ -87,7 +87,7 @@
             "javaVersion": "23.3.0.beta1"
         },
         "flow-cdi": {
-            "javaVersion": "14.1.0.alpha1"
+            "javaVersion": "14.1.0.beta1"
         },
         "form-layout": {
             "jsVersion": "23.3.0-beta1",
