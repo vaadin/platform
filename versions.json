@@ -615,7 +615,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.9.0",
+            "javaVersion": "1.11.2",
             "jsVersion": "2.1.2"
         },
         "vaadin-map": {
