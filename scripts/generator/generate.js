@@ -101,6 +101,10 @@ writer.writeSeparateJson(versions.react, hillaReactJsonTemplateFileName, hillaRe
 
 const hilla = process.env.HILLA || platform.replace(/^23/, 1);
 versions.core.hilla = {javaVersion: hilla};
+// write hilla version to hilla-react-versions.json as platform
+const hillaVersions = {platform : hilla};
+
+writer.writeSeparateJson(hillaVersions.platform, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "platform");
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
