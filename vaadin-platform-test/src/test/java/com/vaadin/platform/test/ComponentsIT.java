@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
@@ -20,9 +21,8 @@ import com.vaadin.testbench.TestBenchElement;
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
-        String sauceUser = System.getProperty("sauce.user");
-        String browsers = System.getProperty("grid.browsers");
-        if (sauceUser != null && !sauceUser.isEmpty()) {
+        if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
+            String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
                 Parameters.setGridBrowsers("firefox,safari,edge");
             } else {
