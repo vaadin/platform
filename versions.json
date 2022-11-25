@@ -253,10 +253,6 @@
             "jsVersion": "2.0.5",
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
-        "vaadin-list-mixin": {
-            "jsVersion": "24.0.0-alpha4",
-            "npmName": "@vaadin/vaadin-list-mixin"
-        },
         "vaadin-lumo-styles": {
             "jsVersion": "24.0.0-alpha5",
             "npmName": "@vaadin/vaadin-lumo-styles",
