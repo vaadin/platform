@@ -19,9 +19,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <hilla.version>2.0-SNAPSHOT</hilla.version>
-        <spring-boot.version>3.0.0-RC2</spring-boot.version>
-        <spring.version>6.0.0-RC4</spring.version>
-        <spring.security.version>6.0.0-RC2</spring.security.version>
+        <spring-boot.version>3.0.0</spring-boot.version>
+        <spring.version>6.0.2</spring.version>
+        <spring.security.version>6.0.0</spring.security.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
     </properties>
 
@@ -110,10 +110,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>spring milestones</id>
-            <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
     <pluginRepositories>
