@@ -94,13 +94,16 @@ writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJson
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 writer.writeSeparateJson(versions.bundles, hillaJsonTemplateFileName, hillaJsonResultFileName, "bundles");
 writer.writeSeparateJson(versions.core, hillaJsonTemplateFileName, hillaJsonResultFileName, "core");
-writer.writeSeparateJson(versions.platform, hillaJsonTemplateFileName, hillaJsonResultFileName, "platform");
 writer.writeSeparateJson(versions.vaadin, hillaJsonTemplateFileName, hillaJsonResultFileName, "vaadin");
 writer.writeSeparateJson(versions.bundles, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "bundles");
 writer.writeSeparateJson(versions.react, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "react");
 
 const hilla = process.env.HILLA || platform.replace(/^23/, 1);
 versions.core.hilla = {javaVersion: hilla};
+// write hilla version to hilla-react-versions.json as platform
+const hillaVersions = {platform : hilla};
+writer.writeSeparateJson(hillaVersions.platform, hillaJsonTemplateFileName, hillaJsonResultFileName, "platform");
+writer.writeSeparateJson(hillaVersions.platform, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "platform");
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
