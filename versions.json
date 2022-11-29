@@ -549,6 +549,9 @@
         "kubernets-kit-starter": {
             "javaVersion": "1.0.0.beta1"
         },
+        "observability-kit": {
+            "version": "1.0.0.rc2"
+        },
         "sso-kit-starter": {
             "javaVersion": "1.0.0.rc2"
         }
