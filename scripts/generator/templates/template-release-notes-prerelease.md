@@ -34,5 +34,8 @@ Vaadin {{platform}}
 - OSGi plugin ([{{vaadin.flow-osgi.javaVersion}}](https://github.com/vaadin/osgi/releases/tag/{{vaadin.flow-osgi.javaVersion}}))
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
 - Portlet plugin ([{{vaadin.vaadin-portlet.javaVersion}}](https://github.com/vaadin/portlet/releases/tag/{{vaadin.vaadin-portlet.javaVersion}}))
+- Kubernetes Kit ([{{kits.kubernets-kit-starter.javaVersion}}](https://github.com/vaadin/kubernetes-kit/releases/tag/{{kits.kubernets-kit-starter.javaVersion}}))
+- SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
+- Observability Kit ([{{kits.observability-kit.version}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit.version}}))
 
 
