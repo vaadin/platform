@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -43,10 +44,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        String sauceUser = System.getProperty("sauce.user");
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
-        isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
-                && !sauceKey.isEmpty();
+        isSauce = SauceLabsIntegration.isConfiguredForSauceLabs();
         String hubHost = System
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
@@ -60,7 +58,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
         getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
                 SERVER_PORT,
-                isSauce ? "SAUCE (user:" + sauceUser + ")"
+                isSauce ? "SAUCE (user:" + SauceLabsIntegration.getSauceUser() + ")"
                         : isHub ? "HUB (hub-host:" + hubHost + ")"
                                 : "LOCAL (chromedriver)");
     }
@@ -104,13 +102,5 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     protected String getDeploymentHostname() {
         return hostName;
     }
-
-    @Override
-    protected String getHubURL() {
-        String hubUrl = super.getHubURL();
-        if (hubUrl.contains("ondemand.saucelabs")) {
-            return "http://localhost:4445/wd/hub";
-        }
-        return hubUrl;
-    }
+    
 }
