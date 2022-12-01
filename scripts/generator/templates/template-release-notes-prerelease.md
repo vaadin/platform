@@ -37,5 +37,6 @@ Vaadin {{platform}}
 - Kubernetes Kit ([{{kits.kubernets-kit-starter.javaVersion}}](https://github.com/vaadin/kubernetes-kit/releases/tag/{{kits.kubernets-kit-starter.javaVersion}}))
 - SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
 - Observability Kit ([{{kits.observability-kit.version}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit.version}}))
+- Azure Kit ([doc](https://vaadin.com/docs/latest/tools/azure))
 
 
