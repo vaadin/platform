@@ -84,7 +84,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "23.3.0.beta3"
+            "javaVersion": "23.3.0.beta4"
         },
         "flow-cdi": {
             "javaVersion": "14.1.0.beta1"
@@ -613,10 +613,10 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.2.0"
+            "javaVersion": "23.3.0.beta1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.2.0"
+            "javaVersion": "5.3.0.beta1"
         },
         "vaadin-cookie-consent": {
             "component": true,
