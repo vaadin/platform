@@ -546,7 +546,7 @@
         }
     },
     "kits": {
-        "kubernets-kit-starter": {
+        "kubernetes-kit-starter": {
             "javaVersion": "1.0.0.beta1"
         },
         "observability-kit": {
