@@ -17,6 +17,7 @@ package com.vaadin.platform.test;
 
 import java.io.File;
 
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -43,10 +44,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        String sauceUser = System.getProperty("sauce.user");
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
-        isSauce = sauceUser != null && !sauceUser.isEmpty() && sauceKey != null
-                && !sauceKey.isEmpty();
+        isSauce = SauceLabsIntegration.isConfiguredForSauceLabs();
         String hubHost = System
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
@@ -60,7 +58,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
         getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
                 SERVER_PORT,
-                isSauce ? "SAUCE (user:" + sauceUser + ")"
+                isSauce ? "SAUCE (user:" + SauceLabsIntegration.getSauceUser() + ")"
                         : isHub ? "HUB (hub-host:" + hubHost + ")"
                                 : "LOCAL (chromedriver)");
     }

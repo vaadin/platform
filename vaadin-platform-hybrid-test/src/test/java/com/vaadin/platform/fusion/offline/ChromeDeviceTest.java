@@ -29,6 +29,7 @@ import com.vaadin.testbench.TestBenchDriverProxy;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -67,7 +68,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
 
     @BeforeClass
     public static void setupClass() {
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
+        String sauceKey = SauceLabsIntegration.getSauceAccessKey();
         String hubHost = System.getProperty("com.vaadin.testbench.Parameters.hubHostname");
         if ((sauceKey == null || sauceKey.isEmpty()) && (hubHost == null || hubHost.isEmpty())) {
             String driver = System.getProperty("webdriver.chrome.driver");
@@ -88,7 +89,7 @@ public abstract class ChromeDeviceTest extends ParallelTest {
             driver = new ChromeDriver(chromeOptions);
         } else if (Parameters.isLocalWebDriverUsed()) {
             driver = new ChromeDriver(chromeOptions);
-        } else if (SauceLabsHelper.isConfiguredForSauceLabs()) {
+        } else if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
             driver = new RemoteWebDriver(new URL(getHubURL()),
                 chromeOptions.merge(getDesiredCapabilities()));
         } else if (getRunOnHub(getClass()) != null
