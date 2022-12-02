@@ -74,8 +74,8 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>kubernets-kit-starter</artifactId>
-                <version>${kubernets.kit.starter.version}</version>
+                <artifactId>kubernetes-kit-starter</artifactId>
+                <version>${kubernetes.kit.starter.version}</version>
             </dependency>
 
             <dependency>
