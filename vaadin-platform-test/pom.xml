@@ -255,7 +255,7 @@
                             <stopWait>5</stopWait>
                             <stopKey>foo</stopKey>
                             <systemProperties>
-                                <vaadin.ce.dataDir>${project.build.directory}/dataDir</vaadin.ce.dataDir>
+                                <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
                             </systemProperties>
                         </configuration>
                         <executions>
