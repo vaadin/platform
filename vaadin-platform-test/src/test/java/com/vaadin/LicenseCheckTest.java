@@ -36,6 +36,7 @@ public class LicenseCheckTest {
         // Vaadin
         whitelist.add("https://vaadin.com/license/cvdl-4.0");
         whitelist.add("http://vaadin.com/license/cvrl-1");
+	whitelist.add("https://vaadin.com/commercial-license-and-service-terms");
 
         // Eclipse
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
@@ -43,6 +44,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.eclipse.org/legal/epl-2.0");
         whitelist.add("https://www.eclipse.org/legal/epl-v20.html");
         whitelist.add("https://projects.eclipse.org/license/epl-2.0");
+		whitelist.add("https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt");
         
         // Mozilla
         whitelist.add("http://www.mozilla.org/MPL/MPL-1.1.html");
@@ -70,6 +72,7 @@ public class LicenseCheckTest {
         // BSD
         whitelist.add("http://www.opensource.org/licenses/bsd-license.php");
         whitelist.add("http://opensource.org/licenses/BSD-2-Clause");
+        whitelist.add("https://opensource.org/licenses/BSD-2-Clause");
         whitelist.add("http://opensource.org/licenses/BSD-3-Clause");
 
         // MIT
@@ -105,6 +108,7 @@ public class LicenseCheckTest {
         
         // GNU General Public License
         whitelist.add("https://projects.eclipse.org/license/secondary-gpl-2.0-cp");
+		whitelist.add("https://www.gnu.org/software/classpath/license.html");
 
         //CDDL + GPLv2 with classpath exception
         whitelist.add("https://oss.oracle.com/licenses/CDDL+GPL-1.1");

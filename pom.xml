@@ -19,6 +19,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <hilla.version>2.0-SNAPSHOT</hilla.version>
+        <spring-boot.version>3.0.0</spring-boot.version>
+        <spring.version>6.0.2</spring.version>
+        <spring.security.version>6.0.0</spring.security.version>
+        <junit.jupiter.version>5.9.1</junit.jupiter.version>
     </properties>
 
     <distributionManagement>
@@ -35,6 +39,7 @@
         <module>vaadin-core</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
+        <module>vaadin-testbench-junit5</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
     </modules>
@@ -76,12 +81,6 @@
             </modules>
         </profile>
         <profile>
-            <id>npm-it-servlet-containers</id>
-            <modules>
-                <module>vaadin-platform-servlet-containers-tests</module>
-            </modules>
-        </profile>
-        <profile>
             <id>fusion-hybrid</id>
             <modules>
                 <module>vaadin-platform-hybrid-test</module>
@@ -111,14 +110,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>spring milestones</id>
-            <url>https://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
-            <id>apache snapshots</id>
-            <url>https://repository.apache.org/content/repositories/snapshots</url>
         </repository>
     </repositories>
     <pluginRepositories>

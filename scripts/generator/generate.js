@@ -67,9 +67,10 @@ const gradlePluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-p
 const gradlePortalPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-portal-pom.xml');
 const gradlePortalPluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-portal-pom.xml');
 
+const platformJavadocTemplatePomFileName = getTemplateFilePath('template-vaadin-platform-javadoc-pom.xml');
+const platformJavadocResultPomFileName = getResultsFilePath('vaadin-platform-javadoc-pom.xml');
 
 const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-containers-tests-pom.xml');
-const servletContainersTestsResultPomFileName = getResultsFilePath('vaadin-platform-servlet-containers-tests-pom.xml');
 
 const mavenHillaBomTemplateFileName = getTemplateFilePath('template-hilla-bom.xml');
 const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
@@ -87,7 +88,7 @@ writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCore
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
-const hilla = process.env.HILLA || platform.replace(/^23/, 1);
+const hilla = process.env.HILLA || platform.replace(/^24/, 2);
 versions.core.hilla = {javaVersion: hilla};
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
@@ -103,5 +104,4 @@ writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPlug
 writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hillaMavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
-writer.writeProperty(versions, "flow", servletContainersTestsPomFileName, servletContainersTestsResultPomFileName);
-
+writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);

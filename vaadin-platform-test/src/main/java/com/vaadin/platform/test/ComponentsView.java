@@ -104,10 +104,8 @@ import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
-import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
@@ -244,8 +242,6 @@ public class ComponentsView extends AppLayout {
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param);
 
-        IronIcon ironIcon = new IronIcon("communication", "email");
-
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
 
         Button button = new Button("Button text", e -> {
@@ -347,11 +343,6 @@ public class ComponentsView extends AppLayout {
 
 
         HorizontalLayout icons = new HorizontalLayout(new Icon(VaadinIcon.VAADIN_H), new Icon(VaadinIcon.VAADIN_V));
-
-        IronList<String> ironList = new IronList<>();
-        ironList.setHeight("50px");
-        Stream<String> items = IntStream.range(0, 100).mapToObj(i -> ("Item " + i));
-        ironList.setItems(items);
 
         VirtualList<String> virtualList = new VirtualList<>();
         virtualList.setHeight("50px");
@@ -617,7 +608,6 @@ public class ComponentsView extends AppLayout {
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
 
-        components.add(ironIcon);
         components.add(button);
         components.add(checkbox);
         components.add(checkboxGroup);
@@ -632,7 +622,6 @@ public class ComponentsView extends AppLayout {
         components.add(grid);
         components.add(treeGrid);
         components.add(icons);
-        components.add(ironList);
         components.add(virtualList);
         components.add(listBox);
         components.add(multiSelectListBox);

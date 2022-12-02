@@ -257,7 +257,7 @@
                             <systemProperties>
                                 <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
                             </systemProperties>
-                        </configuration>    
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>start-jetty</id>
@@ -328,39 +328,6 @@
                               <goal>run</goal>
                             </goals>
                           </execution>
-                        </executions>
-                    </plugin>
-                    <!-- The following plugins are needed for OSGi tests
-                        in vaadin-platform-servlet-containers-tests module -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <version>3.1.2</version>
-                        <configuration>
-                            <archive>
-                                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                                <index>false</index>
-                                <manifest>
-                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>ui-tests</id>
-                                <goals>
-                                    <goal>test-jar</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>ui</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <classifier>ui</classifier>
-                                </configuration>
-                            </execution>
                         </executions>
                     </plugin>
                 </plugins>

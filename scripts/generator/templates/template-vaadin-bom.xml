@@ -14,7 +14,7 @@
 
     <properties>
 {{javadeps}}
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.4</slf4j.version>
         <jna.version>5.11.0</jna.version>
     </properties>
 
@@ -46,18 +46,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-cdi</artifactId>
                 <version>${flow.cdi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-osgi</artifactId>
-                <version>${flow.osgi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-portlet</artifactId>
-                <version>${vaadin.portlet.version}</version>
             </dependency>
 
             <dependency>
