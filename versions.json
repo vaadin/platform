@@ -84,10 +84,10 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "23.3.0.beta4"
+            "javaVersion": "23.3.0.rc1"
         },
         "flow-cdi": {
-            "javaVersion": "14.1.0.beta1"
+            "javaVersion": "14.1.0.rc1"
         },
         "form-layout": {
             "jsVersion": "23.3.0-beta2",
@@ -172,10 +172,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "6.1.0.beta1"
+            "javaVersion": "6.1.0.rc1"
         },
         "mpr-v8": {
-            "javaVersion": "6.1.0.beta1"
+            "javaVersion": "6.1.0.rc1"
         },
         "multi-select-combo-box": {
             "jsVersion": "23.3.0-beta2",
@@ -587,7 +587,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.1.0.beta1"
+            "javaVersion": "8.1.0.rc1"
         },
         "grid-pro": {
             "jsVersion": "23.3.0-beta2",
@@ -660,7 +660,7 @@
             "pro": true
         },
         "vaadin-portlet": {
-            "javaVersion": "2.1.0.beta1"
+            "javaVersion": "2.1.0.rc1"
         },
         "vaadin-rich-text-editor": {
             "component": true,
@@ -670,7 +670,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "8.2.0.beta1",
+            "javaVersion": "8.2.0",
             "pro": true
         }
     }

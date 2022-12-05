@@ -154,10 +154,7 @@ Vaadin Flow requires Java Servlet API 3.1 (JSR-340) and JDK11 or newer. It is te
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Vaadin 23.1 supports Spring Boot 2.6 and 2.7. 
-    <p>2.6 is supported to give you time to upgrade to 2.7 and support will be removed in 23.2
-    </p>
-  </td>
+  <td>Vaadin 23.3 requires Spring Boot 2.7</td>  
 </tr>
 </table>
 
