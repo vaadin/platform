@@ -547,10 +547,11 @@
     },
     "kits": {
         "Azure-kit": {
-            "pro": "true"
+            "pro": "true",
+            "version": "1.0.0.rc1"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "1.0.0.beta1"
+            "javaVersion": "1.0.0.rc1"
         },
         "observability-kit": {
             "version": "1.0.0.rc2"
