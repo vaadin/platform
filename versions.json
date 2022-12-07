@@ -546,6 +546,9 @@
         }
     },
     "kits": {
+        "Azure-kit": {
+            "pro": "true"
+        },
         "kubernetes-kit-starter": {
             "javaVersion": "1.0.0.beta1"
         },
