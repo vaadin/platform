@@ -49,6 +49,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
         isLocal = !isSauce && !isHub;
+        getLogger().info("Running Tests isSauce={} isHub={} isLocal={}", isSauce, isHub, isLocal);
         if (isLocal) {
             String driver = System.getProperty("webdriver.chrome.driver");
             if (driver == null || !new File(driver).exists()) {
@@ -56,11 +57,14 @@ public abstract class AbstractPlatformTest extends ParallelTest {
             }
         }
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
-        getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
+        getLogger().info("Running Tests app-url=http://{}:{} mode={} hubHost={} isSauce={} isHub={} isLocal={} {} {}",
+                hostName,
                 SERVER_PORT,
                 isSauce ? "SAUCE (user:" + SauceLabsIntegration.getSauceUser() + ")"
                         : isHub ? "HUB (hub-host:" + hubHost + ")"
-                                : "LOCAL (chromedriver)");
+                                : "LOCAL (chromedriver)",
+                hubHost, isSauce, isHub, isLocal, SauceLabsIntegration.getSauceUser(),
+                SauceLabsIntegration.getSauceAccessKey());
     }
 
     @Before
