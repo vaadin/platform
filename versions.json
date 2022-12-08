@@ -557,7 +557,7 @@
             "version": "1.0.0.rc2"
         },
         "sso-kit-starter": {
-            "javaVersion": "1.0.0.rc2"
+            "javaVersion": "1.0.0.rc3"
         }
     },
     "platform": "{{version}}",
