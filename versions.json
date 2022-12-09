@@ -546,7 +546,7 @@
         }
     },
     "kits": {
-        "Azure-kit": {
+        "azure-kit": {
             "pro": "true",
             "version": "1.0.0.rc1"
         },
@@ -558,6 +558,12 @@
         },
         "sso-kit-starter": {
             "javaVersion": "1.0.0.rc3"
+        },
+        "swing-kit": {
+            "version": "1.0.1"
+        },
+        "vaadin-collaboration-engine": {
+            "javaVersion": "5.3.0.rc1"
         }
     },
     "platform": "{{version}}",
