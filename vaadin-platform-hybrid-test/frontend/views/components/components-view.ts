@@ -87,7 +87,7 @@ export class ComponentsView extends View {
         <header>header</header>
         <vaadin-accordion>
           <vaadin-accordion-panel>
-            <div slot="summary">summary</div>
+            <vaadin-accordion-heading slot="summary">summary</vaadin-accordion-heading>
             <div>accordion content</div>
           </vaadin-accordion-panel>
         </vaadin-accordion>
@@ -172,7 +172,10 @@ export class ComponentsView extends View {
 
 
         <vaadin-date-time-picker></vaadin-date-time-picker>
-        <vaadin-details></vaadin-details>
+        <vaadin-details>
+          <vaadin-details-summary slot="summary">Summary</vaadin-details-summary>
+          <div>Details</div>
+        </vaadin-details>
         <vaadin-drawer-toggle></vaadin-drawer-toggle>
         <vaadin-form-layout>
           <vaadin-text-field></vaadin-text-field>
