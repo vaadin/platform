@@ -4,6 +4,8 @@ Vaadin {{platform}}
 
 ## New and Noteworthy Since Vaadin 23.2
 
+NOTE: Since Vaadin 23.3, Vaadin Commercial license and Service Terms has been updated. Read [more](https://vaadin.com/commercial-license-and-service-terms) 
+
 ### Flow
 - Preserve on refresh: add refresh flag to navigation events
   _Adds the `isRefreshEvent` flag to `BeforeEnterEvent` and `AfterNavigationEvent` to distinguish if the event is for refresh on the view with `@PreserveOnRefresh`_
@@ -33,11 +35,12 @@ Vaadin {{platform}}
 - Shift-click for **Grid** multi-sort
 
 ### Vaadin Kits
-- Collaboration Engine 
-- Kubernetes Kit 
-  _Kubernetes Kit provides all the tools to deploy a Vaadin app to K8s and achieve auto-scaling and high-availability_
+- Collaboration Kit 
+  _No new features, just internal changes needed for updating dependencies_
 - Azure Kit
   _Azure Kit contains all the features of Kubernetes Kit, in addition it provides a set of blueprints to create and manage Azure clusters and resources by code_
+- Kubernetes Kit 
+  _Kubernetes Kit provides all the tools to deploy a Vaadin app to K8s and achieve auto-scaling and high-availability_
 - Observability Kit 
   _Observability Kit lets you monitor your app performance_
 - SSO Kit 
@@ -56,8 +59,8 @@ Vaadin {{platform}}
 - Multiplatform Runtime (MPR) ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
 - Router ([{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
 - Vaadin Kits
+  - Collaboration Kit (aka Collaboration Engine) ([{{kits.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{vaadin.vaadin-collaboration-engine.javaVersion}}))  
   - Azure Kit ([{{kits.azure-kit.version}}](https://vaadin.com/docs/latest/tools/azure))
-  - Collaboration Engine ([{{kits.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{vaadin.vaadin-collaboration-engine.javaVersion}}))
   - Kubernetes Kit ([{{kits.kubernetes-kit-starter.javaVersion}}](https://github.com/vaadin/kubernetes-kit/releases/tag/{{kits.kubernetes-kit-starter.javaVersion}}))
   - Observability Kit ([{{kits.observability-kit.version}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit.version}}))
   - SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
