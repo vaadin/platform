@@ -87,7 +87,7 @@
             "javaVersion": "23.3.0"
         },
         "flow-cdi": {
-            "javaVersion": "14.1.0.rc1"
+            "javaVersion": "14.1.0"
         },
         "form-layout": {
             "jsVersion": "23.3.0",
@@ -172,10 +172,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "6.1.0.rc1"
+            "javaVersion": "6.1.0"
         },
         "mpr-v8": {
-            "javaVersion": "6.1.0.rc1"
+            "javaVersion": "6.1.0"
         },
         "multi-select-combo-box": {
             "jsVersion": "23.3.0",
@@ -594,7 +594,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.1.0.rc1"
+            "javaVersion": "8.1.0"
         },
         "grid-pro": {
             "jsVersion": "23.3.0",
@@ -664,7 +664,7 @@
             "pro": true
         },
         "vaadin-portlet": {
-            "javaVersion": "2.1.0.rc1"
+            "javaVersion": "2.1.0"
         },
         "vaadin-rich-text-editor": {
             "component": true,
