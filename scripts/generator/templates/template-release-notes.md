@@ -30,7 +30,6 @@ NOTE: Since Vaadin 23.3, Vaadin Commercial license and Service Terms has been up
 - Stable **Spreadsheet** component for flow
 - New component: **TabSheet**
 - New component: **Tooltip** 
-- Chain validation in inputs: 1. web-component, 2. Flow component, 3. Binder.
 - **DatePicker**: 2-digit year parsing
 - Shift-click for **Grid** multi-sort
 
