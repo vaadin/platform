@@ -56,6 +56,11 @@ import '@vaadin/tooltip';
 import '@vaadin/upload';
 import '@vaadin/vertical-layout';
 import '@vaadin/virtual-list/vaadin-virtual-list';
+import '@vaadin/context-menu';
+import '@vaadin/dialog';
+import '@vaadin/notification';
+import '@vaadin/select';
+import '@vaadin/time-picker';
 
 import type {
   VirtualList,
@@ -176,6 +181,9 @@ export class ComponentsView extends View {
           <vaadin-details-summary slot="summary">Summary</vaadin-details-summary>
           <div>Details</div>
         </vaadin-details>
+        <vaadin-dialog></vaadin-dialog>
+        <vaadin-select></vaadin-select>
+        <vaadin-time-picker></vaadin-time-picker>
         <vaadin-drawer-toggle></vaadin-drawer-toggle>
         <vaadin-form-layout>
           <vaadin-text-field></vaadin-text-field>
