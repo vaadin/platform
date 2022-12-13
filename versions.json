@@ -548,22 +548,22 @@
     "kits": {
         "azure-kit": {
             "pro": "true",
-            "version": "1.0.0.rc1"
+            "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "1.0.0.rc1"
+            "javaVersion": "1.0.0"
         },
         "observability-kit": {
-            "version": "1.0.0.rc2"
+            "version": "1.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "1.0.0.rc3"
+            "javaVersion": "1.0.0"
         },
         "swing-kit": {
             "version": "1.0.1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.3.0.rc1"
+            "javaVersion": "5.3.0"
         }
     },
     "platform": "{{version}}",
@@ -623,7 +623,7 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.3.0.rc1"
+            "javaVersion": "23.3.0"
         },
         "vaadin-cookie-consent": {
             "component": true,
