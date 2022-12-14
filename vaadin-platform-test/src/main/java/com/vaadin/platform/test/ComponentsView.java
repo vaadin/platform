@@ -105,7 +105,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
@@ -604,7 +603,6 @@ public class ComponentsView extends AppLayout {
         com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
-        JavaScriptBootstrapUI javaScriptBootstrapUI;
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
 
