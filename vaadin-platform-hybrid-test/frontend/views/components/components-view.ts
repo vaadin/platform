@@ -18,6 +18,7 @@ import '@vaadin/cookie-consent';
 import '@vaadin/crud';
 import '@vaadin/crud/src/vaadin-crud-edit-column';
 import '@vaadin/date-time-picker';
+import '@vaadin/date-picker';
 import '@vaadin/details';
 import '@vaadin/email-field';
 import '@vaadin/form-layout';
@@ -175,7 +176,7 @@ export class ComponentsView extends View {
           </vaadin-grid>
         </vaadin-crud>
 
-
+        <vaadin-date-picker></vaadin-date-picker>
         <vaadin-date-time-picker></vaadin-date-time-picker>
         <vaadin-details>
           <vaadin-details-summary slot="summary">Summary</vaadin-details-summary>
