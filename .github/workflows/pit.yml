@@ -124,7 +124,7 @@ jobs:
           GHTK=${{secrets.GHTK}} ./pit/scripts/pit/run.sh $ARG
         shell: bash
       - if: ${{failure()}}
-        uses: actions/upload-artifact@v2.2.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: failed-outputs
           path: tmp/**/*.out
