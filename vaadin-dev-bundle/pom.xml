@@ -20,6 +20,9 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        <flow.version>${project.version}</flow.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -55,22 +58,14 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.12</version>
-                <configuration>
-                    <supportedPackagings>jar</supportedPackagings>
-                    <useProvidedScope>true</useProvidedScope>
-                    <systemProperties>
-                        <vaadin.enableDevServer>false</vaadin.enableDevServer>
-                    </systemProperties>
-                </configuration>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-dev-bundle-plugin</artifactId>
+                <version>${flow.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>start</goal>
+                            <goal>build-dev-bundle</goal>
                         </goals>
-                        <phase>prepare-package</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -85,7 +80,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.basedir}/target/classes/vaadin-dev-bundle</outputDirectory>
+                            <outputDirectory>${project.build.outputDirectory}/vaadin-dev-bundle</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>dev-bundle</directory>
