@@ -75,6 +75,9 @@ const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-
 const mavenHillaBomTemplateFileName = getTemplateFilePath('template-hilla-bom.xml');
 const mavenHillaBomResultFileName = getResultsFilePath('hilla-bom.xml');
 
+const devBundleTemplateFileName = getTemplateFilePath('template-dev-bundle-pom.xml');
+const devBundlePomResultFileName = getResultsFilePath('vaadin-dev-bundle-pom.xml');
+
 const platform=argv['platform'];
 const versions = transformer.transformVersions(inputVersions, platform, argv['useSnapshots']);
 
@@ -105,3 +108,6 @@ writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hill
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
+
+writer.writeProperty(versions, "flow", devBundleTemplateFileName, devBundlePomResultFileName);
+
