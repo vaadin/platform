@@ -29,4 +29,5 @@ cp scripts/generator/results/vaadin-gradle-plugin-pom.xml vaadin-gradle-plugin/p
 cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-plugin/pom-portal.xml
 cp scripts/generator/results/vaadin-core-versions.json vaadin-core/vaadin-core-versions.json
 cp scripts/generator/results/vaadin-versions.json vaadin/vaadin-versions.json
+cp scripts/generator/results/vaadin-dev-bundle-pom.xml vaadin-dev-bundle/pom.xml
 
