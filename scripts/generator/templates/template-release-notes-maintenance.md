@@ -2,6 +2,9 @@ Vaadin {{platform}}
 
 *This is a maintenance release for Vaadin 23.3. See [23.3.0 release notes](https://github.com/vaadin/platform/releases/tag/23.3.0) for details and resources.*
 
+**Notable Changes**
+- Since Vaadin 23.3, the minimal supported Spring-boot version is 2.7.x
+
 ## Changelogs
 
 <!-- Remove the ones that do not contain any changes/updates -->
