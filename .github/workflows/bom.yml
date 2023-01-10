@@ -1,0 +1,47 @@
+name: SBOM
+on:
+  push:
+    paths: [".github/workflows/bom.yml"]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch'
+        required: false
+        type: string
+        default: master
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 'stable'      
+      - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1 
+      - run: |
+          wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb 
+          sudo dpkg -i bomber_0.4.0_linux_amd64.deb 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: '3.8.2'          
+      - run: |
+          mkdir -p ~/.vaadin/
+          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
+      - run: scripts/checkSBOM.js
+      - if: ${{always()}}
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: sboms
+          path: |
+            vaadin-platform-test/target/bom*.json
+            vaadin-platform-test/target/report*.json
+            vaadin-platform-test/target/tree*.out
+          if-no-files-found: error
+          retention-days: 7
