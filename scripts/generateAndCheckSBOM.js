@@ -211,6 +211,11 @@ function reportVulnerabilities(vuls) {
   return ret;
 }
 
+function reportFileContent(title, file) {
+  const content = fs.readFileSync(file);
+  return `\n<details><summary><h2>${title}</h2></summary><code>\n${content}\n</code></details>\n`;
+}
+
 async function main() {
   await isInstalled('bomber');
   await isInstalled('osv-scanner');
@@ -225,9 +230,9 @@ async function main() {
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
-  await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.out'});
+  await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.txt'});
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-  await run('npm ls --depth 1', {output: 'target/tree-npm.out'});
+  await run('npm ls --depth 1', {output: 'target/tree-npm.txt'});
   await run('npm install @cyclonedx/cyclonedx-npm');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.xml  --output-format XML');
@@ -261,8 +266,8 @@ async function main() {
     gha += `\n## ✅ Licenses Report\n`;
   }
   gha += reportLicenses(licenses);
-
-  console.log(gha);
+  gha += reportFileContent("Maven Dependency Tree", 'target/tree-maven.txt');
+  gha += reportFileContent("NPM Dependency Tree", 'target/tree-npm.txt');
 
   ghaStepReport(gha);
 
