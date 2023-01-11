@@ -3,12 +3,6 @@ on:
   push:
     paths: [".github/workflows/bom.yml"]
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch'
-        required: false
-        type: string
-        default: master
 jobs:
   run:
     runs-on: ubuntu-latest
