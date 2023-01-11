@@ -11,7 +11,7 @@ const asyncExec = require('util').promisify(require('child_process').exec);
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-// const versions = require('../../versions.json');
+const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 
 const licenseWhiteList = [
   'ISC',
@@ -24,10 +24,7 @@ const licenseWhiteList = [
   'LGPL-2.1-or-later',
   'BSD-3-Clause',
   'BSD-2-Clause',
-  'SEE LICENSE IN LICENSE',
-  'SEE LICENSE IN https://vaadin.com/license/cvdl-4.0',
   'https://www.highcharts.com/license',
-  'Vaadin Commercial License and Service Terms',
   'https://vaadin.com/commercial-license-and-service-terms',
   'Zlib',
   'CC0-1.0',
@@ -97,14 +94,26 @@ async function consolidateSBoms(...boms) {
     if (!ret) {
       ret = sbom;
     } else {
-      ret.components = ret.components.concat(ret.components, sbom.components);
-      ret.dependencies = ret.dependencies.concat(ret.dependencies, sbom.dependencies);
+      ret.components = ret.components.concat(sbom.components);
+      ret.dependencies = ret.dependencies.concat(sbom.dependencies);
     }
   });
   ret.components.forEach(c => {
     c.licenses && c.licenses.forEach(l => {
+      if (/vaadin/.test(c.purl)) {
+        if (l.expression) {
+          l.expression = l.expression.replace(/SEE LICENSE IN [^\)]+/, VAADIN_LICENSE);
+        }
+        if (l.license && l.license.name == 'SEE LICENSE IN LICENSE') {
+          l.license.url = VAADIN_LICENSE;
+        }
+      }
       l.expression && (l.license = { id: l.expression });
     });
+    // See https://github.com/mapbox/jsonlint README
+    if (/jsonlint-lines-primitives/.test(c.purl) && !c.licenses) {
+      c.licenses = [{license: {id: 'MIT'}}];
+    } 
   });
   return ret;
 }
@@ -116,14 +125,13 @@ function sumarizeLicenses(f) {
     let comp = decodeURIComponent(e.purl).replace(/[?#].*$/g, '');
     let lic = e.licenses && [...(e.licenses.reduce((p, l) => {
       return p.add(l.expression ? l.expression.replace(/[\(\)]/g, '') :
-        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));
+        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));      
     }, new Set()))].join(' OR ');
+    const addLic = (idx, l) => (summary[idx] = summary[idx] || []).push(l);
     if (!lic) {
-      (summary[null] = summary[null] || []).push(comp);
+      addLic(null, comp);
     } else {
-      lic.split(/ +(?:OR|AND) +/).forEach(l => {
-        (summary[l] = summary[l] || []).push(comp);
-      });
+      lic.split(/ +(?:OR|AND) +/).forEach(l => addLic(l, comp));
     }
   });
   return summary;
@@ -150,7 +158,7 @@ function sumarizeOSV(f, summary) {
 
 function sumarizeBomber(f, summary) {
   const res = JSON.parse(fs.readFileSync(f));
-  res.packages.forEach(p => {
+  (res.packages || []).forEach(p => {
     p.vulnerabilities.forEach(v => {
       const pkg = p.coordinates.replace(/\?.+/, '');
       summary[pkg] = summary[pkg] || {};
@@ -180,24 +188,25 @@ function checkVunerabilities(vuls) {
 }
 
 function reportLicenses(licenses) {
-  let ret = "|  | License | Packages |\n|-------|--------|-------|\n";
+  let ret = "";
   Object.keys(licenses).sort((a, b) => licenseWhiteList.indexOf(a) - licenseWhiteList.indexOf(b)).forEach(lic => {
     const status = licenseWhiteList.indexOf(lic) < 0 ? '🚫' : '✅';
     const license = `\`${lic}\``;
     const summary = `<details><summary>${licenses[lic].length}</summary><ul><li><code>${licenses[lic].join('</code><li><code>').replace(/@(\d)/g, ' $1')}</code></ul></details>`
     ret += `|${status}|${license}|${summary}|\n`;
   });
+  ret && (ret = "|  | License | Packages |\n|-------|--------|-------|\n" + ret);
   return ret;
 }
 
 function reportVulnerabilities(vuls) {
-  let ret = "| Package | CVEs |\n|-------|--------|\n";
+  let ret = "";
   Object.keys(vuls).forEach(v => {
     ret += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o => `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_`).join('<li>')}</ul>\n`;
   });
+  ret && (ret = "| Package | CVEs |\n|-------|--------|\n" + ret);
   return ret;
 }
-
 
 async function main() {
   await isInstalled('bomber');
@@ -212,23 +221,23 @@ async function main() {
 
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
-  await run('mvn package -ntp -B -Pproduction -DskipTests');
-  await run('mvn dependency:tree', {output: 'target/tree-maven.out'});
+  await run('mvn package -ntp -B -Pproduction -DskipTests -q');
+  await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.out'});
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
   await run('npm ls --depth 1', {output: 'target/tree-npm.out'});
   await run('npm install @cyclonedx/cyclonedx-npm');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.xml  --output-format XML');
-  log(`generating 'bom-all.js'`);
+  log(`generating 'bom-vaadin.js'`);
   const sbom = await consolidateSBoms('target/bom.json', 'target/bom-npm.json');
-  fs.writeFileSync('target/bom-all.json', JSON.stringify(sbom, null, 2));
+  fs.writeFileSync('target/bom-vaadin.json', JSON.stringify(sbom, null, 2));
 
   log(`running 'bomber'`);
-  await run('bomber scan target/bom-all.json --output json', { output: 'target/report-bomber.json' });
+  await run('bomber scan target/bom-vaadin.json --output json', { output: 'target/report-bomber.json' });
   log(`running 'osv-scanner'`);
-  await run('osv-scanner --sbom=target/bom-all.json --json', { output: 'target/report-osv-scanner.json' });
+  await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
 
-  const licenses = sumarizeLicenses('target/bom-all.json');
+  const licenses = sumarizeLicenses('target/bom-vaadin.json');
   const vulnerabilities = sumarizeOSV('target/report-osv-scanner.json', {});
   sumarizeBomber('target/report-bomber.json', vulnerabilities);
   const errLic = checkLicenses(licenses);
@@ -237,12 +246,16 @@ async function main() {
   let gha = "";
   if (errVul) {
     err(`- Vulnerabilities:\n\n${errVul}\n`);
-    gha += `\n🚫 Found Vulnerabilities\n\n`;
+    gha += `\n## 🚫 Found Vulnerabilities\n\n`;
+  } else {
+    gha += `\n## ✅ No Vulnerabilities Found\n\n`;
   }
   gha +=reportVulnerabilities(vulnerabilities);
   if (errLic) {
     err(`- License errors:\n\n${errLic}\n`);
-    gha += `\n🚫 Found License Issues\n`;
+    gha += `\n## 🚫 Found License Issues\n`;
+  } else {
+    gha += `\n## ✅ Licenses Report\n`;
   }
   gha += reportLicenses(licenses);
 

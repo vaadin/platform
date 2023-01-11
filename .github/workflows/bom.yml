@@ -38,10 +38,9 @@ jobs:
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: sboms
+          name: files
           path: |
-            vaadin-platform-test/target/bom*.json
-            vaadin-platform-test/target/report*.json
-            vaadin-platform-test/target/tree*.out
+            **/target/bom-vaadin.json
+            **/target/tree-*.txt
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 60
