@@ -22,14 +22,17 @@ const licenseWhiteList = [
   'CDDL-1.0',
   'GPL-2.0-with-classpath-exception',
   'LGPL-2.1-or-later',
+  'LGPL-2.1-only',
   'BSD-3-Clause',
   'BSD-2-Clause',
-  'https://www.highcharts.com/license',
-  'https://vaadin.com/commercial-license-and-service-terms',
-  'Zlib',
-  'CC0-1.0',
+  'EPL-2.0',
   'AFL-2.1',
-  'CC-BY-4.0'
+  'MPL-1.1',
+  'CC0-1.0',
+  'CC-BY-4.0',
+  'Zlib',
+  'https://vaadin.com/commercial-license-and-service-terms',
+  'https://www.highcharts.com/license'
 ];
 
 const testProject = path.resolve('vaadin-platform-test');
