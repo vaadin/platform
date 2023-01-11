@@ -36,6 +36,7 @@ import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
+import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.flow.component.icon.testbench.IconElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.messages.testbench.MessageElement;
@@ -348,8 +349,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(content);
 
-        TestBenchElement contentComponent = dialogOverlay
-                .$("flow-component-renderer").first().$(DivElement.class).first();
+        TestBenchElement contentComponent = dialogOverlay.$(LabelElement.class).first();
 
         Assert.assertEquals("This is the contents of the dialog",
                 contentComponent.getText());
