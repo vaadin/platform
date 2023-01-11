@@ -232,7 +232,11 @@ async function main() {
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.txt'});
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
+<<<<<<< HEAD
   await run('npm ls --depth 6', {output: 'target/tree-npm.txt'});
+=======
+  await run('npm ls --depth 3', {output: 'target/tree-npm.txt'});
+>>>>>>> 0be1e92 (clean tree output)
   await run('npm install @cyclonedx/cyclonedx-npm');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.xml  --output-format XML');
