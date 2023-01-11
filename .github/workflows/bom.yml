@@ -1,7 +1,7 @@
 name: SBOM
 on:
   push:
-    paths: [".github/workflows/bom.yml"]
+    paths: [".github/workflows/bom.yml", "scripts/generateAndCheckSBOM.js"]
   workflow_dispatch:
 jobs:
   run:
@@ -28,7 +28,7 @@ jobs:
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-      - run: scripts/checkSBOM.js
+      - run: scripts/generateAndCheckSBOM.js
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
