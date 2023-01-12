@@ -278,28 +278,36 @@ async function main() {
   fs.writeFileSync('target/bom-vaadin.json', JSON.stringify(sbom, null, 2));
   const licenses = sumarizeLicenses('target/bom-vaadin.json');
 
-  log(`running 'bomber'`);
-  const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
-  useBomber && await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
-  useBomber && hasOssToken &&
-    await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
-      { output: 'target/report-bomber-oss.json' });
-
-  log(`running 'osv-scanner'`);
-  useOSV && await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
-
-  log(`running 'org.owasp'`);
-  useOWASP && await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
-  useFullOWASP && await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
-
   const vulnerabilities = {}
+  if (useBomber) {
+    log(`running 'bomber'`);
+    const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
+    await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
+    sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
+    if (hasOssToken) {
+      await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
+        { output: 'target/report-bomber-oss.json' });
+      sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+    }
+  }
 
-  useOSV && sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
-  useBomber && sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
-  useBomber && hasOssToken && sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+  if (useOSV) {
+    log(`running 'osv-scanner'`);
+    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
+    sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
+  }
 
-  useOWASP && sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
-  console.log(vulnerabilities)
+  if (useFullOWASP) {
+    log(`running 'org.owasp'`);
+    await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+    sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
+  } else if (useOWASP) {
+    // https://github.com/jeremylong/DependencyCheck/issues/4293
+    // https://github.com/jeremylong/DependencyCheck/issues/1947
+    fs.unlinkSync('package-lock.json')
+    await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
+    sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
+  }
 
   const errLic = checkLicenses(licenses);
   const errVul = checkVunerabilities(vulnerabilities);
