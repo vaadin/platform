@@ -3,6 +3,27 @@ on:
   push:
     paths: [".github/workflows/bom.yml", "scripts/generateAndCheckSBOM.js"]
   workflow_dispatch:
+    inputs:
+          useBomber:
+            description: 'Use bomber'
+            required: false
+            type: boolean
+            default: true
+          useOSV:
+            description: 'Use osv-scanner'
+            required: false
+            type: boolean
+            default: true
+          useOWASP:
+            description: 'Use owasp:dependency-check-maven'
+            required: false
+            type: boolean
+            default: true
+          useFullOWASP:
+            description: 'Use full owasp:dependency-check'
+            required: false
+            type: boolean
+            default: false
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -35,7 +56,12 @@ jobs:
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-      - run: scripts/generateAndCheckSBOM.js
+      - run: |
+         [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+         [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+         [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+         [ false = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --full-owasp"
+         scripts/generateAndCheckSBOM.js $A
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
