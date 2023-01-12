@@ -11,10 +11,10 @@ const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 
-const useBomber = process.argv.indexOf('--skip-bomber') < 0;
-const useOSV = process.argv.indexOf('--skip-osv-scan') < 0;
-const useOWASP = process.argv.indexOf('--skip-owasp') < 0;
-const useFullOWASP = useOWASP && process.argv.indexOf('--full-owasp') >= 0;
+const useBomber = process.argv.indexOf('--disable-bomber') < 0;
+const useOSV = process.argv.indexOf('--disable-osv-scan') < 0;
+const useOWASP = process.argv.indexOf('--disable-owasp') < 0;
+const useFullOWASP = process.argv.indexOf('--full-owasp') >= 0;
 
 if (process.argv.indexOf('--help') >= 0) {
   console.log(`Usage: ${path.relative('.', process.argv[1])} [--skip-bomber] [--skip-osv-scan] [--skip-owasp] [--full-owasp]`);
@@ -280,7 +280,6 @@ async function main() {
 
   const vulnerabilities = {}
   if (useBomber) {
-    log(`running 'bomber'`);
     const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
     await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
     sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
@@ -292,16 +291,11 @@ async function main() {
   }
 
   if (useOSV) {
-    log(`running 'osv-scanner'`);
     await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
     sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
   }
 
-  if (useFullOWASP) {
-    log(`running 'org.owasp'`);
-    await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
-    sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
-  } else if (useOWASP) {
+  if (useOWASP) {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.unlinkSync('package-lock.json')
@@ -309,11 +303,16 @@ async function main() {
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
+  if (useFullOWASP) {
+    log(`running 'org.owasp'`);
+    await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+    sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
+  }
+
   const errLic = checkLicenses(licenses);
   const errVul = checkVunerabilities(vulnerabilities);
-  console.log(errVul);
-
   let gha = "";
+
   if (errVul) {
     err(`- Vulnerabilities:\n\n${errVul}\n`);
     gha += `\n## 🚫 Found Vulnerabilities\n\n`;
