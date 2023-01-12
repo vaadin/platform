@@ -58,7 +58,7 @@ function ghaStepReport(msg) {
 }
 
 async function run(order, ops = { debug: true, throw: true, output: undefined }) {
-  (!ops.output && ops.debug) && log(order);
+  log(`${order}${ops.output ? ` > ${ops.output}` : ''}`);
   return new Promise((resolve, reject) => {
     const cmd = order.split(/ +/)[0];
     const arg = order.split(/ +/).splice(1);
@@ -116,7 +116,7 @@ async function consolidateSBoms(...boms) {
     // See https://github.com/mapbox/jsonlint README
     if (/jsonlint-lines-primitives/.test(c.purl) && !c.licenses) {
       c.licenses = [{license: {id: 'MIT'}}];
-    } 
+    }
   });
   return ret;
 }
@@ -128,7 +128,7 @@ function sumarizeLicenses(f) {
     let comp = decodeURIComponent(e.purl).replace(/[?#].*$/g, '');
     let lic = e.licenses && [...(e.licenses.reduce((p, l) => {
       return p.add(l.expression ? l.expression.replace(/[\(\)]/g, '') :
-        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));      
+        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));
     }, new Set()))].join(' OR ');
     const addLic = (idx, l) => (summary[idx] = summary[idx] || []).push(l);
     if (!lic) {
@@ -148,9 +148,12 @@ function sumarizeOSV(f, summary) {
         v.affected.forEach(a => {
           const pkg = a.package.purl + "@" + p.package.version;
           summary[pkg] = summary[pkg] || {};
-          v.aliases.forEach(al => {
-            summary[pkg][al] = summary[pkg][al] || {};
-            summary[pkg][al].title = v.summary;
+          v.aliases.forEach(id => {
+            summary[pkg][id] = summary[pkg][id] || {};
+            summary[pkg][id].title = v.summary;
+            summary[pkg][id].details = v.details;
+            console.log(pkg, id, summary);
+            (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scanner');
           });
         });
       });
@@ -161,13 +164,33 @@ function sumarizeOSV(f, summary) {
 
 function sumarizeBomber(f, summary) {
   const res = JSON.parse(fs.readFileSync(f));
-  (res.packages || []).forEach(p => {
+  (res.packages || []).forEach(p => {
     p.vulnerabilities.forEach(v => {
       const pkg = p.coordinates.replace(/\?.+/, '');
+      const id = v.id;
       summary[pkg] = summary[pkg] || {};
-      summary[pkg][v.id] = summary[pkg][v.id] || {};
-      summary[pkg][v.id].title = v.title;
+      summary[pkg][id] = summary[pkg][id] || {};
+      summary[pkg][id].title = v.title;
+      summary[pkg][id].details = v.description;
+      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`bomber-${/oss/.test(f) ? 'oss' :'osv'}`);
     });
+  });
+  return summary;
+}
+
+function sumarizeOWASP(f, summary) {
+  const res = JSON.parse(fs.readFileSync(f));
+  res.dependencies.forEach(d => {
+    (d.vulnerabilities || []).forEach(v => {
+      const id = v.name;
+      (d.packages || []).map(p => p.id).forEach(pkg => {
+        summary[pkg] = summary[pkg] || {};
+        summary[pkg][id] = summary[pkg][id] || {};
+        summary[pkg][id].title = `${v.description.substring(0, 120)}…`;
+        summary[pkg][id].details = v.description;
+        (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('dependency-check');
+      });
+    })
   });
   return summary;
 }
@@ -205,7 +228,8 @@ function reportLicenses(licenses) {
 function reportVulnerabilities(vuls) {
   let ret = "";
   Object.keys(vuls).forEach(v => {
-    ret += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o => `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_`).join('<li>')}</ul>\n`;
+    ret += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
+      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${vuls[v][o].scanner.join(',')})`).join('<li>')}</ul>\n`;
   });
   ret && (ret = "| Package | CVEs |\n|-------|--------|\n" + ret);
   return ret;
@@ -226,34 +250,51 @@ async function main() {
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
+  const hasOssToken = process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN;
 
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
+
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.txt'});
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-<<<<<<< HEAD
   await run('npm ls --depth 6', {output: 'target/tree-npm.txt'});
-=======
-  await run('npm ls --depth 3', {output: 'target/tree-npm.txt'});
->>>>>>> 0be1e92 (clean tree output)
+
+  await run('npm install');
   await run('npm install @cyclonedx/cyclonedx-npm');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
-  await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.xml  --output-format XML');
+
   log(`generating 'bom-vaadin.js'`);
   const sbom = await consolidateSBoms('target/bom.json', 'target/bom-npm.json');
   fs.writeFileSync('target/bom-vaadin.json', JSON.stringify(sbom, null, 2));
+  const licenses = sumarizeLicenses('target/bom-vaadin.json');
 
   log(`running 'bomber'`);
-  await run('bomber scan target/bom-vaadin.json --output json', { output: 'target/report-bomber.json' });
+  const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
+  await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
+  hasOssToken &&
+    await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
+      { output: 'target/report-bomber-oss.json' });
+
   log(`running 'osv-scanner'`);
   await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
 
-  const licenses = sumarizeLicenses('target/bom-vaadin.json');
-  const vulnerabilities = sumarizeOSV('target/report-osv-scanner.json', {});
-  sumarizeBomber('target/report-bomber.json', vulnerabilities);
+  log(`running 'org.owasp'`);
+  await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
+  // await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+
+  const vulnerabilities = {}
+
+  sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
+  sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
+  hasOssToken && sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+
+  sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
+  console.log(vulnerabilities)
+
   const errLic = checkLicenses(licenses);
   const errVul = checkVunerabilities(vulnerabilities);
+  console.log(errVul);
 
   let gha = "";
   if (errVul) {
