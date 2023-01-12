@@ -1,17 +1,25 @@
 #!/usr/bin/env node
+
 // brew tap devops-kung-fu/homebrew-tap
 // brew install devops-kung-fu/homebrew-tap/bomber
 // brew install osv-scanner
-// mvn org.owasp:dependency-check-maven:check
 // sudo go install github.com/google/osv-scanner/cmd/osv-scanner@v1
-// wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
-// sudo dpkg -i bomber_0.4.0_linux_amd64.deb
 
 const asyncExec = require('util').promisify(require('child_process').exec);
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
+
+const useBomber = process.argv.indexOf('--skip-bomber') < 0;
+const useOSV = process.argv.indexOf('--skip-osv-scan') < 0;
+const useOWASP = process.argv.indexOf('--skip-owasp') < 0;
+const useFullOWASP = useOWASP && process.argv.indexOf('--full-owasp') >= 0;
+
+if (process.argv.indexOf('--help') >= 0) {
+  console.log(`Usage: ${path.relative('.', process.argv[1])} [--skip-bomber] [--skip-osv-scan] [--skip-owasp] [--full-owasp]`);
+  process.exit(0);
+}
 
 const licenseWhiteList = [
   'ISC',
@@ -153,7 +161,7 @@ function sumarizeOSV(f, summary) {
             summary[pkg][id].title = v.summary;
             summary[pkg][id].details = v.details;
             console.log(pkg, id, summary);
-            (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scanner');
+            (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scan');
           });
         });
       });
@@ -172,7 +180,7 @@ function sumarizeBomber(f, summary) {
       summary[pkg][id] = summary[pkg][id] || {};
       summary[pkg][id].title = v.title;
       summary[pkg][id].details = v.description;
-      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`bomber-${/oss/.test(f) ? 'oss' :'osv'}`);
+      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`${/oss/.test(f) ? 'oss' :'osv'}-bomber`);
     });
   });
   return summary;
@@ -188,7 +196,7 @@ function sumarizeOWASP(f, summary) {
         summary[pkg][id] = summary[pkg][id] || {};
         summary[pkg][id].title = `${v.description.substring(0, 120)}…`;
         summary[pkg][id].details = v.description;
-        (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('dependency-check');
+        (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('owasp');
       });
     })
   });
@@ -243,10 +251,11 @@ function reportFileContent(title, file, filter = c => c) {
 async function main() {
   await isInstalled('bomber');
   await isInstalled('osv-scanner');
+  await isInstalled('osv-scanner');
   await isInstalled('mvn');
 
   await run(`./scripts/generateBoms.sh`);
-  await run('mvn  -ntp -B clean install -DskipTests -T 1C -q');
+  await run('mvn -ntp -B clean install -DskipTests -T 1C -q');
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
@@ -271,25 +280,25 @@ async function main() {
 
   log(`running 'bomber'`);
   const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
-  await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
-  hasOssToken &&
+  useBomber && await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
+  useBomber && hasOssToken &&
     await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
       { output: 'target/report-bomber-oss.json' });
 
   log(`running 'osv-scanner'`);
-  await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
+  useOSV && await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
 
   log(`running 'org.owasp'`);
-  await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
-  // await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+  useOWASP && await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
+  useFullOWASP && await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
 
   const vulnerabilities = {}
 
-  sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
-  sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
-  hasOssToken && sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+  useOSV && sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
+  useBomber && sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
+  useBomber && hasOssToken && sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
 
-  sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
+  useOWASP && sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   console.log(vulnerabilities)
 
   const errLic = checkLicenses(licenses);
@@ -312,8 +321,8 @@ async function main() {
   }
   gha += reportLicenses(licenses);
   gha += reportFileContent("Maven Dependency Tree", 'target/tree-maven.txt', c => {
-    return c.split('\n').map(l => l.replace(/^\[INFO\] /, ''))
-      .filter(l => l.length && !/^(Scanning|Building|---|Build|Total|Finished)/.test(l)).join('\n');
+    return c.split('\n').map(l => l.replace(/^\[INFO\] +/, ''))
+      .filter(l => l.length && !/^(Scanning|Building|---|Build|Total|Finished|BUILD)/.test(l)).join('\n');
   });
   gha += reportFileContent("NPM Dependency Tree", 'target/tree-npm.txt', c => {
     return c.split('\n').filter(l => !/ deduped|UNMET OPTIONAL/.test(l)).join('\n');
