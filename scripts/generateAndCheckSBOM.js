@@ -267,9 +267,9 @@ async function main() {
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.txt'});
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
+  await run('npm ls --depth 6', {output: 'target/tree-npm.txt'});
 
   await run('npm install');
-  await run('npm ls --depth 3', {output: 'target/tree-npm.txt'});
   await run('npm install @cyclonedx/cyclonedx-npm');
   await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
 
@@ -325,7 +325,7 @@ async function main() {
       .filter(l => l.length && !/^(Scanning|Building|---|Build|Total|Finished|BUILD)/.test(l)).join('\n');
   });
   gha += reportFileContent("NPM Dependency Tree", 'target/tree-npm.txt', c => {
-    return c.split('\n').filter(l => !/ deduped|UNMET OPTIONAL/.test(l)).join('\n');
+    return c.split('\n').map(l => l.replace(/ overridden$/, '')).filter(l => l.length && !/ deduped|UNMET OPTIONAL/.test(l)).join('\n');
   });
 
   ghaStepReport(gha);
