@@ -194,7 +194,7 @@ function sumarizeOWASP(f, summary) {
       (d.packages || []).map(p => p.id).forEach(pkg => {
         summary[pkg] = summary[pkg] || {};
         summary[pkg][id] = summary[pkg][id] || {};
-        summary[pkg][id].title = `${v.description.substring(0, 120)}…`;
+        summary[pkg][id].title = summary[pkg][id].title || `${v.description.substring(0, 120)}…`;
         summary[pkg][id].details = v.description;
         (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('owasp');
       });
@@ -237,7 +237,7 @@ function reportVulnerabilities(vuls) {
   let ret = "";
   Object.keys(vuls).forEach(v => {
     ret += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
-      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${vuls[v][o].scanner.join(',')})`).join('<li>')}</ul>\n`;
+      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   ret && (ret = "| Package | CVEs |\n|-------|--------|\n" + ret);
   return ret;
