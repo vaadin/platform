@@ -10,11 +10,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
         with:
-          go-version: 'stable'      
-      - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1 
+          go-version: 'stable'
+      - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb 
-          sudo dpkg -i bomber_0.4.0_linux_amd64.deb 
+          # Install bomber-0.4.0
+          wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
+          sudo dpkg -i bomber_0.4.0_linux_amd64.deb
+      - run: |
+          # Install dependency-check-7.4.4
+          cd /tmp
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.4/dependency-check-7.4.4-release.zip
+          unzip dependency-check-7.4.4-release.zip
+          sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -24,7 +31,7 @@ jobs:
           distribution: 'temurin'
       - uses: stCarolas/setup-maven@v4.5
         with:
-          maven-version: '3.8.2'          
+          maven-version: '3.8.2'
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
