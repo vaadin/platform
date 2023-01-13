@@ -11,14 +11,19 @@ const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 
-const useBomber = process.argv.indexOf('--disable-bomber') < 0;
-const useOSV = process.argv.indexOf('--disable-osv-scan') < 0;
-const useOWASP = process.argv.indexOf('--disable-owasp') < 0;
-const useFullOWASP = process.argv.indexOf('--full-owasp') >= 0;
-
-if (process.argv.indexOf('--help') >= 0) {
-  console.log(`Usage: ${path.relative('.', process.argv[1])} [--skip-bomber] [--skip-osv-scan] [--skip-owasp] [--full-owasp]`);
-  process.exit(0);
+const cmd = { useBomber: true, useOSV: true, useOWASP: true };
+for (let i = 2, l = process.argv.length; i < l; i++) {
+  switch (process.argv[i]) {
+    case '--disable-bomber': cmd.useBomber = false; break;
+    case '--disable-osv-scan': cmd.useOSV = false; break;
+    case '--disable-owasp': cmd.useOWASP = false; break;
+    case '--enable-full-owasp': cmd.useFullOWASP = true; break;
+    case '--version': cmd.version = process.argv[++i]; break;
+    default:
+      console.log(`Usage: ${path.relative('.', process.argv[1])} 
+        [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
+      process.exit(1);
+  }
 }
 
 const licenseWhiteList = [
@@ -56,7 +61,7 @@ function err(...args) {
 
 function ghaStepReport(msg) {
   const f = process.env.GITHUB_STEP_SUMMARY;
-  if (f ) {
+  if (f) {
     try {
       fs.accessSync(path.dirname(f), fs.constants.W_OK);
       fs.writeFileSync(f, msg);
@@ -65,7 +70,8 @@ function ghaStepReport(msg) {
   }
 }
 
-async function run(order, ops = { debug: true, throw: true, output: undefined }) {
+async function run(order, ops) {
+  ops = {...{throw: true, debug: true}, ...ops};
   log(`${order}${ops.output ? ` > ${ops.output}` : ''}`);
   return new Promise((resolve, reject) => {
     const cmd = order.split(/ +/)[0];
@@ -123,7 +129,7 @@ async function consolidateSBoms(...boms) {
     });
     // See https://github.com/mapbox/jsonlint README
     if (/jsonlint-lines-primitives/.test(c.purl) && !c.licenses) {
-      c.licenses = [{license: {id: 'MIT'}}];
+      c.licenses = [{ license: { id: 'MIT' } }];
     }
   });
   return ret;
@@ -180,7 +186,7 @@ function sumarizeBomber(f, summary) {
       summary[pkg][id] = summary[pkg][id] || {};
       summary[pkg][id].title = v.title;
       summary[pkg][id].details = v.description;
-      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`${/oss/.test(f) ? 'oss' :'osv'}-bomber`);
+      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`${/oss/.test(f) ? 'oss' : 'osv'}-bomber`);
     });
   });
   return summary;
@@ -254,7 +260,11 @@ async function main() {
   await isInstalled('osv-scanner');
   await isInstalled('mvn');
 
-  await run(`./scripts/generateBoms.sh`);
+  if (cmd.version) {
+    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} versions:set -q`);
+  }
+
+  await run(`./scripts/generateBoms.sh`, { debug: false });
   await run('mvn -ntp -B clean install -DskipTests -T 1C -q');
 
   log(`cd ${testProject}`);
@@ -265,9 +275,9 @@ async function main() {
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
 
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
-  await run('mvn dependency:tree -ntp -B', {output: 'target/tree-maven.txt'});
+  await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-  await run('npm ls --depth 6', {output: 'target/tree-npm.txt'});
+  await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
 
   await run('npm install');
   await run('npm install @cyclonedx/cyclonedx-npm');
@@ -279,23 +289,23 @@ async function main() {
   const licenses = sumarizeLicenses('target/bom-vaadin.json');
 
   const vulnerabilities = {}
-  if (useBomber) {
+  if (cmd.useBomber) {
     const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
     await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
     sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
-    if (hasOssToken) {
+    if (cmd.hasOssToken) {
       await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
         { output: 'target/report-bomber-oss.json' });
       sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
     }
   }
 
-  if (useOSV) {
+  if (cmd.useOSV) {
     await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
     sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
   }
 
-  if (useOWASP) {
+  if (cmd.useOWASP) {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.unlinkSync('package-lock.json')
@@ -303,7 +313,7 @@ async function main() {
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
-  if (useFullOWASP) {
+  if (cmd.useFullOWASP) {
     log(`running 'org.owasp'`);
     await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
@@ -319,7 +329,7 @@ async function main() {
   } else {
     gha += `\n## ✅ No Vulnerabilities Found\n\n`;
   }
-  gha +=reportVulnerabilities(vulnerabilities);
+  gha += reportVulnerabilities(vulnerabilities);
   if (errLic) {
     err(`- License errors:\n\n${errLic}\n`);
     gha += `\n## 🚫 Found License Issues\n`;

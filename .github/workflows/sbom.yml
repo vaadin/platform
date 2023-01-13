@@ -2,6 +2,7 @@ name: SBOM
 on:
   push:
     paths: [".github/workflows/bom.yml", "scripts/generateAndCheckSBOM.js"]
+  pull_request:
   workflow_dispatch:
     inputs:
           useBomber:
@@ -24,11 +25,30 @@ on:
             required: false
             type: boolean
             default: false
+          version:
+            description: 'Use set Platform Version to:'
+            required: false
+            type: string
+            default: ''
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          [ -z "${{secrets.TB_LICENSE}}" ] \
+            && echo "🚫 **TB_LICENSE** is not defined, check that **${{github.repository}}** repo has a valid secret" \
+            | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: '3.8.2'
       - uses: actions/setup-go@v3
         with:
           go-version: 'stable'
@@ -43,16 +63,6 @@ jobs:
           wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.4/dependency-check-7.4.4-release.zip
           unzip dependency-check-7.4.4-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v4.5
-        with:
-          maven-version: '3.8.2'
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
@@ -61,6 +71,7 @@ jobs:
          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
          [ false = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --full-owasp"
+         [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
          scripts/generateAndCheckSBOM.js $A
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1

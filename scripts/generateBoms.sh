@@ -10,7 +10,7 @@ snapshot=$1
 
 # run the generator
 cmd="node scripts/generator/generate.js --platform=$version --versions=versions.json $snapshot"
-echo Running: "$cmd"
+echo Running: "$cmd" >&2
 $cmd || exit 1
 
 # copy generated poms to the final place
@@ -30,4 +30,3 @@ cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-p
 cp scripts/generator/results/vaadin-core-versions.json vaadin-core/vaadin-core-versions.json
 cp scripts/generator/results/vaadin-versions.json vaadin/vaadin-versions.json
 cp scripts/generator/results/vaadin-dev-bundle-pom.xml vaadin-dev-bundle/pom.xml
-
