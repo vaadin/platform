@@ -265,7 +265,7 @@ async function main() {
   }
 
   await run(`./scripts/generateBoms.sh`, { debug: false });
-  await run('mvn -ntp -B clean install -DskipTests -T 1C -q');
+  await run('mvn -ntp -B clean install -T 1C -q');
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
