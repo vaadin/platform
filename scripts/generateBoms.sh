@@ -10,7 +10,7 @@ snapshot=$1
 
 # run the generator
 cmd="node scripts/generator/generate.js --platform=$version --versions=versions.json $snapshot"
-echo Running: "$cmd"
+echo Running: "$cmd" >&2
 $cmd || exit 1
 
 # copy generated poms to the final place
