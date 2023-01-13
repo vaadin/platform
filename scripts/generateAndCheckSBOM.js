@@ -186,7 +186,7 @@ function sumarizeBomber(f, summary) {
       summary[pkg][id] = summary[pkg][id] || {};
       summary[pkg][id].title = v.title;
       summary[pkg][id].details = v.description;
-      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`${/oss/.test(f) ? 'oss' : 'osv'}-bomber`);
+      (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push(`${f.includes('oss') ? 'oss' : 'osv'}-bomber`);
     });
   });
   return summary;
