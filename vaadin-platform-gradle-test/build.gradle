@@ -35,7 +35,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.0'
     
-    providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 
     // logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties for logger configuration
     implementation 'org.slf4j:slf4j-simple:2.0.3'
