@@ -27,6 +27,7 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
 }
 
 const licenseWhiteList = [
+
   'ISC',
   'MIT',
   '0BSD',
@@ -38,12 +39,15 @@ const licenseWhiteList = [
   'LGPL-2.1-only',
   'BSD-3-Clause',
   'BSD-2-Clause',
+  'EPL-1.0',
   'EPL-2.0',
   'AFL-2.1',
   'MPL-1.1',
   'CC0-1.0',
   'CC-BY-4.0',
   'Zlib',
+  'WTFPL',
+  'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
   'https://vaadin.com/commercial-license-and-service-terms',
   'https://www.highcharts.com/license'
 ];
