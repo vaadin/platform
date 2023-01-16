@@ -70,7 +70,7 @@ function ghaStepReport(msg) {
   }
 }
 
-async function run(order, ops) {
+async function exec(order, ops) {
   ops = {...{throw: true, debug: true}, ...ops};
   log(`${order}${ops.output ? ` > ${ops.output}` : ''}`);
   return new Promise((resolve, reject) => {
@@ -96,9 +96,21 @@ async function run(order, ops) {
     });
   });
 }
+async function run(order, ops) {
+  try {
+    return await exec(order, ops);
+  } catch (ret) {
+    if (ops.throw) {
+      err(`!! ERROR ${ret.code} !! running: ${order}!!\n${ops.output || !ops.debug ? ret.stdout : ''}`)
+      process.exit(1);
+    } else {
+      return ret;
+    }
+  }
+}
 
 async function isInstalled(command) {
-  if ((await run(`which ${command}`, { debug: false, throw: false })).code) {
+  if ((await exec(`which ${command}`, { debug: false, throw: false })).code) {
     err(`You need to install '${command}' command in your PATH to continue\n`);
     process.exit(1);
   }
@@ -166,7 +178,6 @@ function sumarizeOSV(f, summary) {
             summary[pkg][id] = summary[pkg][id] || {};
             summary[pkg][id].title = v.summary;
             summary[pkg][id].details = v.details;
-            console.log(pkg, id, summary);
             (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scan');
           });
         });
@@ -257,7 +268,7 @@ function reportFileContent(title, file, filter = c => c) {
 async function main() {
   await isInstalled('bomber');
   await isInstalled('osv-scanner');
-  await isInstalled('osv-scanner');
+  await isInstalled('dependency-check');
   await isInstalled('mvn');
 
   if (cmd.version) {
@@ -275,7 +286,7 @@ async function main() {
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
 
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
-  await run('mvn dependency:tree -Dscope=compile -ntp -B', { output: 'target/tree-maven.txt' });
+  await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
   await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
 
@@ -301,7 +312,7 @@ async function main() {
   }
 
   if (cmd.useOSV) {
-    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' });
+    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' , throw: false});
     sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
   }
 
