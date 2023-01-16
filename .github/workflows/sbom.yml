@@ -1,8 +1,9 @@
 name: SBOM
 on:
   push:
-    paths: [".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+    branches: ["master", "23.3"]
   pull_request:
+    paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
   workflow_dispatch:
     inputs:
           useBomber:
@@ -67,14 +68,15 @@ jobs:
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
       - run: |
-         [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
-         [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
-         [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
-         [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
-         [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
-         cmd="scripts/generateAndCheckSBOM.js $A"
-         echo "Running: $cmd"
-         $cmd
+          # Generate And Check SBOM
+          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+          [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
+          [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
+          cmd="scripts/generateAndCheckSBOM.js $A"
+          echo "Running: $cmd"
+          $cmd
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
