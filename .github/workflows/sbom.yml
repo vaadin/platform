@@ -1,0 +1,84 @@
+name: SBOM
+on:
+  push:
+    paths: [".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+          useBomber:
+            description: 'Use bomber'
+            required: false
+            type: boolean
+            default: true
+          useOSV:
+            description: 'Use osv-scanner'
+            required: false
+            type: boolean
+            default: true
+          useOWASP:
+            description: 'Use owasp:dependency-check-maven'
+            required: false
+            type: boolean
+            default: true
+          useFullOWASP:
+            description: 'Use full owasp:dependency-check'
+            required: false
+            type: boolean
+            default: false
+          version:
+            description: 'Use set Platform Version to:'
+            required: false
+            type: string
+            default: ''
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          [ -z "${{secrets.TB_LICENSE}}" ] \
+            && echo "🚫 **TB_LICENSE** is not defined, check that **${{github.repository}}** repo has a valid secret" \
+            | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: '3.8.2'
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 'stable'
+      - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
+      - run: |
+          # Install bomber-0.4.0
+          wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
+          sudo dpkg -i bomber_0.4.0_linux_amd64.deb
+      - run: |
+          # Install dependency-check-7.4.4
+          cd /tmp
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.4/dependency-check-7.4.4-release.zip
+          unzip dependency-check-7.4.4-release.zip
+          sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
+      - run: |
+          mkdir -p ~/.vaadin/
+          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
+      - run: |
+         [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+         [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+         [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+         [ false = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --full-owasp"
+         [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
+         scripts/generateAndCheckSBOM.js $A
+      - if: ${{always()}}
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: files
+          path: |
+            **/target/bom-vaadin.json
+            **/target/tree-*.txt
+          if-no-files-found: error
+          retention-days: 60
