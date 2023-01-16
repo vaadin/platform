@@ -286,7 +286,7 @@ async function main() {
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
 
   await run('mvn package -ntp -B -Pproduction -DskipTests -q');
-  await run('mvn dependency:tree -Dscope=compile -ntp -B', { output: 'target/tree-maven.txt' });
+  await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
   await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
 
