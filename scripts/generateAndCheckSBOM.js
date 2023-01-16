@@ -48,7 +48,7 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
-const testProject = path.resolve('vaadin-platform-test');
+const testProject = path.resolve('vaadin-platform-sbom');
 function log(...args) {
   process.stderr.write(`\x1b[0m> \x1b[0;32m${args}\x1b[0m\n`);
 }
