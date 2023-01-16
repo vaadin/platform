@@ -70,9 +70,11 @@ jobs:
          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
-         [ false = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --full-owasp"
+         [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
          [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
-         scripts/generateAndCheckSBOM.js $A
+         cmd="scripts/generateAndCheckSBOM.js $A"
+         echo "Running: $cmd"
+         $cmd
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
