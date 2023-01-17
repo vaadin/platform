@@ -5,6 +5,8 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
     paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+  release:
+    types: ["published"]
   workflow_dispatch:
     inputs:
           useBomber:
@@ -91,13 +93,13 @@ jobs:
             **/target/tree-*.txt
           if-no-files-found: error
           retention-days: 60
-      - if: ${{success() && github.event.inputs.version != ''}}
+      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: vaadin-platform-sbom/target/bom-vaadin.json
           asset_name: sbom.json
-          tag: ${{ github.event.inputs.version }}
+          tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
         
