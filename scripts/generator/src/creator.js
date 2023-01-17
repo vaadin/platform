@@ -318,7 +318,8 @@ function compareAndBuildJavaComponentReleaseString(versionName, currentVersion, 
     let result = '';
     const currentVersionSemver = toSemVer(currentVersion);
     const previousVersionSemver = toSemVer(previousVersion);
-    if (compareVersions(currentVersionSemver, previousVersionSemver) === 1) {
+    // sometimes we use SNAPSHOTS in versions.json e.g. when waiting for a new alpha/beta with a fix
+    if (compareVersions(currentVersionSemver.replace('-SNAPSHOT', '.0'), previousVersionSemver) === 1) {
         result = getReleaseNoteLink(versionName, currentVersion);
     }
     return result;
