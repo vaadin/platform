@@ -36,6 +36,10 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
+const cveWhiteList = {
+  'pkg:maven/org.springframework/spring-web@5.3.24' : ['CVE-2016-1000027']
+}
+
 const cmd = { useBomber: true, useOSV: true, useOWASP: true,
     hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)};
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -66,6 +70,7 @@ function err(...args) {
 
 function ghaStepReport(msg) {
   const f = process.env.GITHUB_STEP_SUMMARY;
+  fs.writeFileSync('target/dependencies.md', msg);
   if (f) {
     try {
       fs.accessSync(path.dirname(f), fs.constants.W_OK);
@@ -236,11 +241,14 @@ function checkLicenses(licenses) {
 }
 
 function checkVunerabilities(vuls) {
-  let ret = "";
+  let err = false;
+  let msg = "";
   Object.keys(vuls).forEach(v => {
-    ret += `Found vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
+    const cves = Object.keys(vuls[v]).sort().join(', ');
+    err = err && (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
+    msg += `Found vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
   });
-  return ret;
+  return {err, msg};
 }
 
 function reportLicenses(licenses) {
@@ -267,7 +275,7 @@ function reportVulnerabilities(vuls) {
 
 function reportFileContent(title, file, filter = c => c) {
   const content = filter(fs.readFileSync(file).toString());
-  return `\n<details><summary><h2>${title}</h2></summary><code>\n${content}\n</code></details>\n`;
+  return `\n<details><summary><h3>${title}</h3></summary><code>\n${content}\n</code></details>\n`;
 }
 
 async function main() {
@@ -335,21 +343,25 @@ async function main() {
   }
 
   const errLic = checkLicenses(licenses);
-  const errVul = checkVunerabilities(vulnerabilities);
+  const errVul = checkVunerabilities(vulnerabilities).err;
+  const msgVul = checkVunerabilities(vulnerabilities).msg;
   let gha = "";
 
   if (errVul) {
-    err(`- Vulnerabilities:\n\n${errVul}\n`);
-    gha += `\n## 🚫 Found Vulnerabilities\n\n`;
+    err(`- 🚫 Vulnerabilities:\n\n${msgVul}\n`);
+    gha += `\n### 🚫 Found Vulnerabilities\n\n`;
+  } else if (msgVul) {
+    err(`- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`);
+    gha += `\n### 🟠 Known Vulnerabilities\n\n`;
   } else {
-    gha += `\n## ✅ No Vulnerabilities Found\n\n`;
+    gha += `\n### ✅ No Vulnerabilities\n\n`;
   }
   gha += reportVulnerabilities(vulnerabilities);
   if (errLic) {
-    err(`- License errors:\n\n${errLic}\n`);
-    gha += `\n## 🚫 Found License Issues\n`;
+    err(`- 🚫 License errors:\n\n${errLic}\n`);
+    gha += `\n### 🚫 Found License Issues\n`;
   } else {
-    gha += `\n## ✅ Licenses Report\n`;
+    gha += `\n### ✅ Licenses Report\n`;
   }
   gha += reportLicenses(licenses);
   gha += reportFileContent("Maven Dependency Tree", 'target/tree-maven.txt', c => {
