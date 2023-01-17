@@ -78,6 +78,9 @@ jobs:
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
+        env:
+         OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
+         OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
