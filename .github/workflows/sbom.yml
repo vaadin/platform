@@ -1,8 +1,12 @@
 name: SBOM
 on:
   push:
-    paths: [".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+    branches: ["master", "23.3"]
   pull_request:
+    types: [opened, synchronize, reopened, edited]
+    paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+  release:
+    types: ["published"]
   workflow_dispatch:
     inputs:
           useBomber:
@@ -67,20 +71,35 @@ jobs:
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
       - run: |
-         [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
-         [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
-         [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
-         [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
-         [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
-         cmd="scripts/generateAndCheckSBOM.js $A"
-         echo "Running: $cmd"
-         $cmd
+          # Generate And Check SBOM
+          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+          [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
+          [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
+          cmd="scripts/generateAndCheckSBOM.js $A"
+          echo "Running: $cmd"
+          $cmd
+        env:
+         OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
+         OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
           name: files
           path: |
             **/target/bom-vaadin.json
+            **/target/*-report.json
             **/target/tree-*.txt
           if-no-files-found: error
           retention-days: 60
+      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: vaadin-platform-sbom/target/bom-vaadin.json
+          asset_name: sbom.json
+          tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
+          overwrite: true
+          body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
+        
