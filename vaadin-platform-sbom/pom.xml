@@ -44,10 +44,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
         </dependency>
-        <dependency>
+        <!-- Disabled until https://github.com/vaadin/sso-kit/issues/63 -->
+        <!-- <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>sso-kit-starter</artifactId>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>kubernetes-kit-starter</artifactId>
