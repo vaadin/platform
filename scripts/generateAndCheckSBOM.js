@@ -275,7 +275,7 @@ async function main() {
   await isInstalled('mvn');
 
   if (cmd.version) {
-    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} versions:set -q`);
+    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
   }
 
   await run(`./scripts/generateBoms.sh`, { debug: false });

@@ -37,10 +37,15 @@
         <module>vaadin-testbench</module>
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
-        <module>vaadin-platform-sbom</module>
     </modules>
 
     <profiles>
+        <profile>
+            <id>sbom</id>
+            <modules>
+                <module>vaadin-platform-sbom</module>
+            </modules>
+        </profile>
         <profile>
             <id>gradle</id>
             <activation>
