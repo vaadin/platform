@@ -36,7 +36,8 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
-const cmd = { useBomber: true, useOSV: true, useOWASP: true };
+const cmd = { useBomber: true, useOSV: true, useOWASP: true,
+    hasOssToken: process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN};
 for (let i = 2, l = process.argv.length; i < l; i++) {
   switch (process.argv[i]) {
     case '--disable-bomber': cmd.useBomber = false; break;
@@ -282,7 +283,6 @@ async function main() {
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
-  const hasOssToken = process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN;
 
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
