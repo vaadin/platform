@@ -92,7 +92,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: vaadin-platform-sbom/target/bom-vaadin.json
-          asset_name: sbom
+          asset_name: sbom.json
           tag: ${{ github.event.inputs.version }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
