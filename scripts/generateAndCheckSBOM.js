@@ -10,7 +10,6 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
-
 const testProject = path.resolve('vaadin-platform-sbom');
 const licenseWhiteList = [
   'ISC',
@@ -288,7 +287,7 @@ async function main() {
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
 
-  await run('mvn package -ntp -B -Pproduction -DskipTests -q');
+  await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
   await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
@@ -305,18 +304,18 @@ async function main() {
   const vulnerabilities = {}
   if (cmd.useBomber) {
     const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
-    await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
-    sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
+    await run(cmdBomber, { output: 'target/bomber-osv-report.json' });
+    sumarizeBomber('target/bomber-osv-report.json', vulnerabilities);
     if (cmd.hasOssToken) {
       await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
-        { output: 'target/report-bomber-oss.json' });
-      sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+        { output: 'target/bomber-oss-report.json' });
+      sumarizeBomber('target/bomber-oss-report.json', vulnerabilities);
     }
   }
 
   if (cmd.useOSV) {
-    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' , throw: false});
-    sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
+    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/osv-scanner-report.json' , throw: false});
+    sumarizeOSV('target/osv-scanner-report.json', vulnerabilities);
   }
 
   if (cmd.useOWASP) {
