@@ -37,7 +37,7 @@ const licenseWhiteList = [
 ];
 
 const cmd = { useBomber: true, useOSV: true, useOWASP: true,
-    hasOssToken: process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN};
+    hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)};
 for (let i = 2, l = process.argv.length; i < l; i++) {
   switch (process.argv[i]) {
     case '--disable-bomber': cmd.useBomber = false; break;
@@ -51,6 +51,8 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
       process.exit(1);
   }
 }
+
+console.log(`Running ${process.argv[1]} with arguments: ${JSON.stringify(cmd)}`);
 
 function log(...args) {
   process.stderr.write(`\x1b[0m> \x1b[0;32m${args}\x1b[0m\n`);
