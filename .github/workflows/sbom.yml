@@ -84,6 +84,7 @@ jobs:
           name: files
           path: |
             **/target/bom-vaadin.json
+            **/target/*-report.json
             **/target/tree-*.txt
           if-no-files-found: error
           retention-days: 60
