@@ -11,23 +11,8 @@ const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 
-const cmd = { useBomber: true, useOSV: true, useOWASP: true };
-for (let i = 2, l = process.argv.length; i < l; i++) {
-  switch (process.argv[i]) {
-    case '--disable-bomber': cmd.useBomber = false; break;
-    case '--disable-osv-scan': cmd.useOSV = false; break;
-    case '--disable-owasp': cmd.useOWASP = false; break;
-    case '--enable-full-owasp': cmd.useFullOWASP = true; break;
-    case '--version': cmd.version = process.argv[++i]; break;
-    default:
-      console.log(`Usage: ${path.relative('.', process.argv[1])} 
-        [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
-      process.exit(1);
-  }
-}
-
+const testProject = path.resolve('vaadin-platform-sbom');
 const licenseWhiteList = [
-
   'ISC',
   'MIT',
   '0BSD',
@@ -48,11 +33,25 @@ const licenseWhiteList = [
   'Zlib',
   'WTFPL',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
-  'https://vaadin.com/commercial-license-and-service-terms',
+  VAADIN_LICENSE,
   'https://www.highcharts.com/license'
 ];
 
-const testProject = path.resolve('vaadin-platform-sbom');
+const cmd = { useBomber: true, useOSV: true, useOWASP: true };
+for (let i = 2, l = process.argv.length; i < l; i++) {
+  switch (process.argv[i]) {
+    case '--disable-bomber': cmd.useBomber = false; break;
+    case '--disable-osv-scan': cmd.useOSV = false; break;
+    case '--disable-owasp': cmd.useOWASP = false; break;
+    case '--enable-full-owasp': cmd.useFullOWASP = true; break;
+    case '--version': cmd.version = process.argv[++i]; break;
+    default:
+      console.log(`Usage: ${path.relative('.', process.argv[1])} 
+        [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
+      process.exit(1);
+  }
+}
+
 function log(...args) {
   process.stderr.write(`\x1b[0m> \x1b[0;32m${args}\x1b[0m\n`);
 }

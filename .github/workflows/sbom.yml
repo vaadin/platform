@@ -3,6 +3,7 @@ on:
   push:
     branches: ["master", "23.3"]
   pull_request:
+    types: [opened, synchronize, reopened, edited]
     paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
   workflow_dispatch:
     inputs:
@@ -86,3 +87,13 @@ jobs:
             **/target/tree-*.txt
           if-no-files-found: error
           retention-days: 60
+      - if: ${{success() && github.event.inputs.version != ''}}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: vaadin-platform-sbom/target/bom-vaadin.json
+          asset_name: sbom
+          tag: ${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
+        
