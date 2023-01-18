@@ -10,8 +10,34 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
+const testProject = path.resolve('vaadin-platform-sbom');
+const licenseWhiteList = [
+  'ISC',
+  'MIT',
+  '0BSD',
+  'Apache-2.0',
+  'CDDL',
+  'CDDL-1.0',
+  'GPL-2.0-with-classpath-exception',
+  'LGPL-2.1-or-later',
+  'LGPL-2.1-only',
+  'BSD-3-Clause',
+  'BSD-2-Clause',
+  'EPL-1.0',
+  'EPL-2.0',
+  'AFL-2.1',
+  'MPL-1.1',
+  'CC0-1.0',
+  'CC-BY-4.0',
+  'Zlib',
+  'WTFPL',
+  'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
+  VAADIN_LICENSE,
+  'https://www.highcharts.com/license'
+];
 
-const cmd = { useBomber: true, useOSV: true, useOWASP: true };
+const cmd = { useBomber: true, useOSV: true, useOWASP: true,
+    hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)};
 for (let i = 2, l = process.argv.length; i < l; i++) {
   switch (process.argv[i]) {
     case '--disable-bomber': cmd.useBomber = false; break;
@@ -26,29 +52,8 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
   }
 }
 
-const licenseWhiteList = [
-  'ISC',
-  'MIT',
-  '0BSD',
-  'Apache-2.0',
-  'CDDL',
-  'CDDL-1.0',
-  'GPL-2.0-with-classpath-exception',
-  'LGPL-2.1-or-later',
-  'LGPL-2.1-only',
-  'BSD-3-Clause',
-  'BSD-2-Clause',
-  'EPL-2.0',
-  'AFL-2.1',
-  'MPL-1.1',
-  'CC0-1.0',
-  'CC-BY-4.0',
-  'Zlib',
-  'https://vaadin.com/commercial-license-and-service-terms',
-  'https://www.highcharts.com/license'
-];
+console.log(`Running ${process.argv[1]} with arguments: ${JSON.stringify(cmd)}`);
 
-const testProject = path.resolve('vaadin-platform-test');
 function log(...args) {
   process.stderr.write(`\x1b[0m> \x1b[0;32m${args}\x1b[0m\n`);
 }
@@ -272,7 +277,7 @@ async function main() {
   await isInstalled('mvn');
 
   if (cmd.version) {
-    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} versions:set -q`);
+    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
   }
 
   await run(`./scripts/generateBoms.sh`, { debug: false });
@@ -280,12 +285,11 @@ async function main() {
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
-  const hasOssToken = process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN;
 
   log(`cleaning package.json`);
   fs.existsSync('package.json') && fs.unlinkSync('package.json');
 
-  await run('mvn package -ntp -B -Pproduction -DskipTests -q');
+  await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
   await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
@@ -302,18 +306,18 @@ async function main() {
   const vulnerabilities = {}
   if (cmd.useBomber) {
     const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
-    await run(cmdBomber, { output: 'target/report-bomber-osv.json' });
-    sumarizeBomber('target/report-bomber-osv.json', vulnerabilities);
+    await run(cmdBomber, { output: 'target/bomber-osv-report.json' });
+    sumarizeBomber('target/bomber-osv-report.json', vulnerabilities);
     if (cmd.hasOssToken) {
       await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
-        { output: 'target/report-bomber-oss.json' });
-      sumarizeBomber('target/report-bomber-oss.json', vulnerabilities);
+        { output: 'target/bomber-oss-report.json' });
+      sumarizeBomber('target/bomber-oss-report.json', vulnerabilities);
     }
   }
 
   if (cmd.useOSV) {
-    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/report-osv-scanner.json' , throw: false});
-    sumarizeOSV('target/report-osv-scanner.json', vulnerabilities);
+    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/osv-scanner-report.json' , throw: false});
+    sumarizeOSV('target/osv-scanner-report.json', vulnerabilities);
   }
 
   if (cmd.useOWASP) {
