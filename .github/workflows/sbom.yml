@@ -64,8 +64,8 @@ jobs:
       - run: |
           # Install dependency-check-8.0.0
           cd /tmp
-          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.4/dependency-check-7.4.4-release.zip
-          unzip dependency-check-7.4.4-release.zip
+          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
+          unzip dependency-check-8.0.0-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
       - run: |
           mkdir -p ~/.vaadin/
@@ -91,7 +91,7 @@ jobs:
             **/target/bom-vaadin.json
             **/target/*-report.json
             **/target/tree-*.txt
-            **/target/dependencies.md
+            **/target/dependencies.html
           if-no-files-found: error
           retention-days: 60
       - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
@@ -99,7 +99,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: vaadin-platform-sbom/target/bom-vaadin.json
-          asset_name: "Software Bill of Materials"
+          asset_name: "Software.Bill.Of.Materials.json"
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
@@ -107,8 +107,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: vaadin-platform-sbom/target/dependencies.md
-          asset_name: "Dependencies Report"
+          file: vaadin-platform-sbom/target/dependencies.html
+          asset_name: "Dependencies.Report.html"
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} Dependencies"
