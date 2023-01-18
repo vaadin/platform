@@ -36,9 +36,7 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
-const cveWhiteList = {
-  'pkg:maven/org.springframework/spring-web@5.3.24' : ['CVE-2016-1000027']
-}
+const cveWhiteList = {}
 
 const cmd = { useBomber: true, useOSV: true, useOWASP: true,
     hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)};
