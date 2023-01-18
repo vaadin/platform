@@ -42,7 +42,10 @@ jobs:
           [ -z "${{secrets.TB_LICENSE}}" ] \
             && echo "🚫 **TB_LICENSE** is not defined, check that **${{github.repository}}** repo has a valid secret" \
             | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
+        name: Check secrets
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -58,20 +61,21 @@ jobs:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          # Install bomber-0.4.0
           wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
           sudo dpkg -i bomber_0.4.0_linux_amd64.deb
+        name: Install bomber-0.4.0
       - run: |
           # Install dependency-check-8.0.0
           cd /tmp
           wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
           unzip dependency-check-8.0.0-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
+        name: Install dependency-check-8.0.0
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
+        name: Install proKey
       - run: |
-          # Generate And Check SBOM
           [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
           [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
@@ -81,9 +85,16 @@ jobs:
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
+          echo "$DEPENDENCIES_REPORT\n[details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        name: Generate And Check SBOM
         env:
          OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
          OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
+      - if: ${{always()}}
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: "${{env.DEPENDENCIES_REPORT}}\n[ [Click for more Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) ]"
+          comment_tag: dependencies_report
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -113,4 +124,4 @@ jobs:
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} Dependencies"
-        
+
