@@ -1,8 +1,12 @@
 name: SBOM
 on:
   push:
-    paths: [".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+    branches: ["master", "23.3"]
   pull_request:
+    types: [opened, synchronize, reopened, edited]
+    paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+  release:
+    types: ["published"]
   workflow_dispatch:
     inputs:
           useBomber:
@@ -55,32 +59,57 @@ jobs:
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
           # Install bomber-0.4.0
-          wget https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb
           sudo dpkg -i bomber_0.4.0_linux_amd64.deb
       - run: |
-          # Install dependency-check-7.4.4
+          # Install dependency-check-8.0.0
           cd /tmp
-          wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.4/dependency-check-7.4.4-release.zip
-          unzip dependency-check-7.4.4-release.zip
+          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
+          unzip dependency-check-8.0.0-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
       - run: |
-         [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
-         [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
-         [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
-         [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
-         [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
-         cmd="scripts/generateAndCheckSBOM.js $A"
-         echo "Running: $cmd"
-         $cmd
+          # Generate And Check SBOM
+          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+          [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
+          [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
+          cmd="scripts/generateAndCheckSBOM.js $A"
+          echo "Running: $cmd"
+          $cmd
+        env:
+         OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
+         OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
         with:
           name: files
           path: |
             **/target/bom-vaadin.json
+            **/target/*-report.json
             **/target/tree-*.txt
+            **/target/dependencies.html
           if-no-files-found: error
           retention-days: 60
+      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: vaadin-platform-sbom/target/bom-vaadin.json
+          asset_name: "Software.Bill.Of.Materials.json"
+          tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
+          overwrite: true
+          body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
+      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: vaadin-platform-sbom/target/dependencies.html
+          asset_name: "Dependencies.Report.html"
+          tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
+          overwrite: true
+          body: "Vaadin Platform V${{github.event.inputs.version}} Dependencies"
+        
