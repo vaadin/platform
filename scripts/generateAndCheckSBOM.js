@@ -36,6 +36,8 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
+const cveWhiteList = {}
+
 const cmd = { useBomber: true, useOSV: true, useOWASP: true,
     hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)};
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -236,38 +238,46 @@ function checkLicenses(licenses) {
 }
 
 function checkVunerabilities(vuls) {
-  let ret = "";
+  let err = false;
+  let msg = "";
   Object.keys(vuls).forEach(v => {
-    ret += `Found vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
+    const cves = Object.keys(vuls[v]).sort().join(', ');
+    err = err && (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
+    msg += `Found vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
   });
-  return ret;
+  return {err, msg};
 }
 
 function reportLicenses(licenses) {
-  let ret = "";
+  let md = "", html = "";
   Object.keys(licenses).sort((a, b) => licenseWhiteList.indexOf(a) - licenseWhiteList.indexOf(b)).forEach(lic => {
     const status = licenseWhiteList.indexOf(lic) < 0 ? '🚫' : '✅';
-    const license = `\`${lic}\``;
+    const license = `${lic}`;
     const summary = `<details><summary>${licenses[lic].length}</summary><ul><li><code>${licenses[lic].join('</code><li><code>').replace(/@(\d)/g, ' $1')}</code></ul></details>`
-    ret += `|${status}|${license}|${summary}|\n`;
+    html += `<tr><td>${status}</td><td><pre>${license}</pre></td><td>${summary}</td></tr>\n`
+    md += `|${status}|\`${license}\`|${summary}|\n`;
   });
-  ret && (ret = "|  | License | Packages |\n|-------|--------|-------|\n" + ret);
-  return ret;
+  html && (html = `<table><tr><th></th><th>License</th><th>Packages</th></tr>\n${html}</table>\n`);
+  md && (md = "|  | License | Packages |\n|-------|--------|-------|\n" + md);
+  return {md, html};
 }
 
 function reportVulnerabilities(vuls) {
-  let ret = "";
+  let md = "", html = "";
   Object.keys(vuls).forEach(v => {
-    ret += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
+    html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
+      `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${vuls[v][o].title}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
+    md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
       `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
-  ret && (ret = "| Package | CVEs |\n|-------|--------|\n" + ret);
-  return ret;
+  html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
+  md && (md = "| Package | CVEs |\n|-------|--------|\n" + md);
+  return {md, html};
 }
 
 function reportFileContent(title, file, filter = c => c) {
   const content = filter(fs.readFileSync(file).toString());
-  return `\n<details><summary><h2>${title}</h2></summary><code>\n${content}\n</code></details>\n`;
+  return `\n<details><summary><h3 style="display: inline">${title}</h3></summary><pre>\n${content}\n</pre></details>\n`;
 }
 
 async function main() {
@@ -292,7 +302,7 @@ async function main() {
   await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
   await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
   await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-  await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
+  await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
 
   await run('npm install');
   await run('npm install @cyclonedx/cyclonedx-npm');
@@ -329,38 +339,59 @@ async function main() {
   }
 
   if (cmd.useFullOWASP) {
-    log(`running 'org.owasp'`);
     await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
   const errLic = checkLicenses(licenses);
-  const errVul = checkVunerabilities(vulnerabilities);
-  let gha = "";
+  const errVul = checkVunerabilities(vulnerabilities).err;
+  const msgVul = checkVunerabilities(vulnerabilities).msg;
+  let md = "";
+  let html = `<style>
+    body {max-width: 700px; margin: auto; font-family: arial}
+    table {width: 100%; border-collapse: collapse; font-size: 14px}
+    table, th, td {border: solid 1px grey; vertical-align: top; padding: 5px 1px 5px 8px}
+    body > * {padding-top: 1em}
+  </style>\n<h2>Vaadin Platform ${cmd.version} Dependencies Report</h2>\n`;
 
   if (errVul) {
-    err(`- Vulnerabilities:\n\n${errVul}\n`);
-    gha += `\n## 🚫 Found Vulnerabilities\n\n`;
+    err(`- 🚫 Vulnerabilities:\n\n${msgVul}\n`);
+    md += `\n### 🚫 Found Vulnerabilities\n`;
+    html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
+  } else if (msgVul) {
+    err(`- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`);
+    md += `\n### 🟠 Known Vulnerabilities\n`;
+    html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
   } else {
-    gha += `\n## ✅ No Vulnerabilities Found\n\n`;
+    md += `\n### ✅ No Vulnerabilities\n`;
+    html += `\n<h3>✅ No Vulnerabilities</h3>\n`;
   }
-  gha += reportVulnerabilities(vulnerabilities);
+  md += reportVulnerabilities(vulnerabilities).md;
+  html += reportVulnerabilities(vulnerabilities).html;
   if (errLic) {
-    err(`- License errors:\n\n${errLic}\n`);
-    gha += `\n## 🚫 Found License Issues\n`;
+    err(`- 🚫 License errors:\n\n${errLic}\n`);
+    md += `\n### 🚫 Found License Issues\n`;
+    html += `\n<h3>>🚫 Found License Issues</h3>\n`;
   } else {
-    gha += `\n## ✅ Licenses Report\n`;
+    md += `\n### ✅ Licenses Report\n`;
+    html += `\n<h3>✅ Licenses Report</h3>\n`;
   }
-  gha += reportLicenses(licenses);
-  gha += reportFileContent("Maven Dependency Tree", 'target/tree-maven.txt', c => {
+  md += reportLicenses(licenses).md;
+  html += reportLicenses(licenses).html;
+  let cnt = reportFileContent("Maven Dependency Tree", 'target/tree-maven.txt', c => {
     return c.split('\n').map(l => l.replace(/^\[INFO\] +/, ''))
       .filter(l => l.length && !/^(Scanning|Building|---|Build|Total|Finished|BUILD)/.test(l)).join('\n');
   });
-  gha += reportFileContent("NPM Dependency Tree", 'target/tree-npm.txt', c => {
+  md += cnt;
+  html += cnt;
+  cnt = reportFileContent("NPM Dependency Tree", 'target/tree-npm.txt', c => {
     return c.split('\n').map(l => l.replace(/ overridden$/, '')).filter(l => l.length && !/ deduped|UNMET OPTIONAL/.test(l)).join('\n');
   });
+  md += cnt;
+  html += cnt;
 
-  ghaStepReport(gha);
+  ghaStepReport(md);
+  fs.writeFileSync('target/dependencies.html', html);
 
   if (errLic || errVul) {
     process.exit(1);
