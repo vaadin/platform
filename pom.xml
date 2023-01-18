@@ -47,6 +47,12 @@
 
     <profiles>
         <profile>
+            <id>sbom</id>
+            <modules>
+                <module>vaadin-platform-sbom</module>
+            </modules>
+        </profile>
+        <profile>
             <id>gradle</id>
             <activation>
                 <jdk>(,18)</jdk>
