@@ -76,7 +76,8 @@ jobs:
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
           [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
-          [ -n "${{github.event.inputs.version}}" ] && A="--version ${{github.event.inputs.version}}"
+          V="${{ github.event.inputs.version || github.event.release.tag_name }}"
+          [ -n "$V" ] && A="--version $V"
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
