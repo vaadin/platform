@@ -344,7 +344,7 @@
             "npmName": "@vaadin/rich-text-editor"
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.2.0"
+            "javaVersion": "24.0.0.alpha1"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.0.0.alpha2"
