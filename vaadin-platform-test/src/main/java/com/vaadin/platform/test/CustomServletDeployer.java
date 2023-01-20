@@ -21,7 +21,7 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.ServletRegistration;
 import jakarta.servlet.annotation.WebListener;
 
-import com.vaadin.flow.server.Constants;
+import com.vaadin.flow.server.InitParameters;
 import com.vaadin.flow.server.VaadinServlet;
 
 @WebListener
@@ -35,7 +35,7 @@ public class CustomServletDeployer implements ServletContextListener {
                         VaadinServlet.class);
 
         devModeRegistration.setInitParameter(
-                Constants.SERVLET_PARAMETER_PRODUCTION_MODE,
+                InitParameters.SERVLET_PARAMETER_PRODUCTION_MODE,
                 Boolean.FALSE.toString());
         devModeRegistration.setAsyncSupported(true);
         devModeRegistration.addMapping("/*");
@@ -44,7 +44,7 @@ public class CustomServletDeployer implements ServletContextListener {
                 .addServlet(VaadinServlet.class.getName(), VaadinServlet.class);
 
         productionRegistration.setInitParameter(
-                Constants.SERVLET_PARAMETER_PRODUCTION_MODE,
+                InitParameters.SERVLET_PARAMETER_PRODUCTION_MODE,
                 Boolean.TRUE.toString());
         productionRegistration.setAsyncSupported(true);
         productionRegistration.addMapping("/prod-mode/*");

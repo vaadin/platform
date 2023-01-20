@@ -32,6 +32,7 @@ const licenseWhiteList = [
   'Zlib',
   'WTFPL',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
+  'https://www.gnu.org/software/classpath/license.html',
   VAADIN_LICENSE,
   'https://www.highcharts.com/license'
 ];
