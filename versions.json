@@ -569,7 +569,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "1.3.4",
+            "jsVersion": "1.3.5",
             "npmName": "@hilla/react-components"
         }
     },
