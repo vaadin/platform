@@ -55,6 +55,7 @@ import com.vaadin.flow.component.tabs.testbench.TabsElement;
 import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
+import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
 import com.vaadin.flow.component.virtuallist.testbench.VirtualListElement;
 import com.vaadin.testbench.ElementQuery;
@@ -160,7 +161,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void timePickerIsRenderedAndRecievesValueChangeEvent() {
-        TestBenchElement timePicker = $("vaadin-time-picker").first();
+        TimePickerElement timePicker = $(TimePickerElement.class).id("time-picker");
 
         TestBenchElement textField = timePicker.$("input").first();
         assertElementRendered(textField);
@@ -171,8 +172,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(dropDown);
 
-        getCommandExecutor().executeScript("arguments[0].value='01:37'",
-                timePicker);
+        timePicker.setValue("01:37");
 
         assertLog("TimePicker value changed from null to 01:37");
     }
