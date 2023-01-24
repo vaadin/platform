@@ -2,7 +2,18 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 24.0
+## New and Noteworthy Since Vaadin 23
+
+**Notable Changes**
+- Java 17 is required instead of 11
+- Safari 14 support is dropped. All iOS devices can be upgraded from Safari 14 to 15
+- Weblogic + TomEE is not supported or tested as there is no version available for Jakarta EE 10
+- Karaf or OSGI is not supported as OSGi standards are still lacking servlet 6 support
+- Portlets are not supported as portlet standards are still lacking servlet 6 support
+- Some servers are still in beta with their Jakarta EE 10 support but are still tested
+- Node.js support is raised to the current LTS (Node 18) to avoid future problems
+- Gradle support is raised to the version (Gradle 7.3) introducing Java 17 support
+- Spring Boot 2 is not supported
 
 ### Flow
 - 
@@ -72,7 +83,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 - Chrome (evergreen)
 - Firefox (evergreen)
    - Firefox Extended Support Release (ESR)
-- Safari 14.1 or newer
+- Safari 15 or newer
 - Edge (Chromium, evergreen)
   </td>
 </tr>
@@ -81,7 +92,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <td>
 
 - Chrome (evergreen) for Android (4.4 or newer)
-- Safari for iOS (14.7 or newer)
+- Safari for iOS (15 or newer)
   </td>
 </tr>
 <tr>
@@ -106,7 +117,7 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Java</th>
-  <td>Version 11, and 17 of any JDK or JRE</td>
+  <td>Version 17 of any JDK or JRE</td>
 </tr>
 <tr>
   <th>Maven</th>
@@ -114,35 +125,30 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Gradle</th>
-  <td>Version 5.0 or newer</td>
+  <td>Version 7.3 or newer</td>
 </tr>
 <tr>
   <th>Application server</th>
   <td>
 
-Vaadin Flow requires Java Servlet API 3.1 (JSR-340) and JDK11 or newer. It is tested on:
+Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
-- Apache Tomcat 8.0.x, 8.5, 9
-- Apache TomEE 8.0
-- Oracle WebLogic Server 14c
-- IBM WebSphere Application Server v9.0.5 Liberty Profile
-- RedHat JBoss EAP 7.2
-- WildFly 15, 16
-- Jetty 9.4
-- Payara Server (platform 5.194)
-- Payara Micro (platform 5.194)
-- Karaf 4.2 or newer
+- Apache Tomcat 10.1
+- Open Liberty 23.0.0.1-beta
+- RedHat JBoss EAP 8.0 beta
+- WildFly 27
+- Jetty 12 beta
+- Payara Server 6
+- Payara Micro 6
   </td>
 </tr>
 <tr>
   <th>Node.js</th>
-  <td>Version 16.15 or newer</td>
+  <td>Version 18 or newer</td>
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Vaadin 23.1 supports Spring Boot 2.6 and 2.7. 
-    <p>2.6 is supported to give you time to upgrade to 2.7 and support will be removed in 23.2
-    </p>
+  <td>Version 3.0 or newer
   </td>
 </tr>
 </table>
