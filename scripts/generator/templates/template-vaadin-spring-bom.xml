@@ -52,6 +52,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-testbench-junit5</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-dev-bundle</artifactId>
                 <version>${project.version}</version>
             </dependency>
