@@ -285,6 +285,7 @@ public class ComponentsView extends AppLayout {
         });
 
         TimePicker timePicker = new TimePicker();
+        timePicker.setId("time-picker");
         log.log("TimePicker default is " + timePicker.getValue());
         timePicker.addValueChangeListener(e -> {
             log.log("TimePicker value changed from " + e.getOldValue() + " to " + e.getValue());
