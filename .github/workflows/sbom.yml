@@ -85,15 +85,14 @@ jobs:
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
-          echo "$DEPENDENCIES_REPORT\n[details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         name: Generate And Check SBOM
         env:
          OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
          OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
-      - if: ${{always()}}
+      - if: ${{github.event.pull_request}}
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: "${{env.DEPENDENCIES_REPORT}}\n[ [Click for more Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) ]"
+          message: "${{env.DEPENDENCIES_REPORT}}\n[[Click for more Details](${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}})]"
           comment_tag: dependencies_report
       - if: ${{always()}}
         uses: actions/upload-artifact@v3.1.1
