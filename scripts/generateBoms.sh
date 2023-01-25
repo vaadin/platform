@@ -30,3 +30,5 @@ cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-p
 cp scripts/generator/results/vaadin-core-versions.json vaadin-core/vaadin-core-versions.json
 cp scripts/generator/results/vaadin-versions.json vaadin/vaadin-versions.json
 cp scripts/generator/results/vaadin-dev-bundle-pom.xml vaadin-dev-bundle/pom.xml
+cp scripts/generator/results/hilla-versions.json hilla/hilla-versions.json
+cp scripts/generator/results/hilla-react-versions.json hilla-react/hilla-react-versions.json
