@@ -4,7 +4,7 @@ on:
     branches: ["master", "23.3"]
   pull_request:
     types: [opened, synchronize, reopened, edited]
-    paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js"]
+    paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js", "scripts/generator/templates/*.xml"]
   release:
     types: ["published"]
   workflow_dispatch:
