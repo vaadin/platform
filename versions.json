@@ -5,12 +5,6 @@
             "npmName": "@vaadin/bundles"
         }
     },
-    "react": {
-        "react-components": {
-            "jsVersion": "2.0.0-alpha12",
-            "npmName": "@hilla/react-components"
-        }
-    },
     "core": {
         "accordion": {
             "javaVersion": "{{version}}",
@@ -104,7 +98,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.0.0.alpha15"
+            "javaVersion": "24.0.0.alpha16"
         },
         "flow-cdi": {
             "javaVersion": "15.0.0.alpha4"
@@ -310,6 +304,12 @@
         }
     },
     "platform": "{{version}}",
+    "react": {
+        "react-components": {
+            "jsVersion": "2.0.0-alpha12",
+            "npmName": "@hilla/react-components"
+        }
+    },
     "vaadin": {
         "board": {
             "javaVersion": "{{version}}",
