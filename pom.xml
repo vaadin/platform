@@ -37,6 +37,7 @@
         <module>vaadin-spring-bom</module>
         <module>vaadin-bom</module>
         <module>vaadin-core</module>
+        <module>vaadin-dev</module>
         <module>vaadin-maven-plugin</module>
         <module>vaadin-testbench</module>
         <module>vaadin-testbench-junit5</module>
@@ -76,6 +77,7 @@
             <modules>
                 <module>hilla-bom</module>
                 <module>hilla</module>
+                <module>hilla-dev</module>
                 <module>hilla-react</module>
                 <module>hilla-spring-boot-starter</module>
                 <module>hilla-maven-plugin</module>

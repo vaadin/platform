@@ -43,8 +43,8 @@
             <artifactId>engine-runtime</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev-server</artifactId>
+            <groupId>dev.hilla</groupId>
+            <artifactId>hilla-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
