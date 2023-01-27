@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev-server</artifactId>
+            <artifactId>vaadin-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
