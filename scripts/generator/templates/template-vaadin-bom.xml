@@ -59,6 +59,17 @@
                 <artifactId>collaboration-engine</artifactId>
                 <version>${vaadin.collaboration.engine.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>kubernetes-kit-starter</artifactId>
+                <version>${kubernetes.kit.starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>sso-kit-starter</artifactId>
+                <version>${sso.kit.starter.version}</version>
+            </dependency>
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
