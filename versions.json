@@ -303,6 +303,26 @@
             "npmName": "@vaadin/virtual-list"
         }
     },
+    "kits": {
+        "azure-kit": {
+            "version": "1.0.0"
+        },
+        "kubernetes-kit-starter": {
+            "javaVersion": "2.0.0.alpha1"
+        },
+        "observability-kit": {
+            "version": "2.0-SNAPSHOT"
+        },
+        "sso-kit-starter": {
+            "javaVersion": "2.0.0.alpha3"
+        },
+        "swing-kit": {
+            "version": "2.0-SNAPSHOT"
+        },
+        "vaadin-collaboration-engine": {
+            "javaVersion": "6.0.0.alpha2"
+        }
+    },
     "platform": "{{version}}",
     "react": {
         "react-components": {

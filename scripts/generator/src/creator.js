@@ -41,7 +41,7 @@ function createPackageJson(versions, packageJsonTemplate) {
 @param {String} mavenTemplate template string to replace versions in.
 */
 function createMaven(versions, mavenTemplate) {
-    const allVersions = Object.assign({}, versions.core, versions.vaadin);
+    const allVersions = Object.assign({}, versions.core, versions.vaadin, versions.kits);
     const includedProperties = computeUsedProperties(mavenTemplate);
 
     let mavenDeps = '';
