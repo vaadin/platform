@@ -337,7 +337,7 @@ function checkVunerabilities(vuls) {
   let msg = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
-    err = err && (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
+    err = err || (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
     msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
   });
   return { err, msg };
