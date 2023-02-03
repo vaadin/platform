@@ -4,6 +4,8 @@ Vaadin {{platform}}
 
 **Notable Changes**
 - Since Vaadin 23.3, the minimal supported Spring-boot version is 2.7.x
+- Since Vaadin 23.3.5, due to the founded vulnerability ([CVE-2022-1471](https://nvd.nist.gov/vuln/detail/CVE-2022-1471)), dependency for `org.yaml:snakeyaml` has been removed. 
+  - Vaadin project is not depending on the vulnerable dependency (`org.yaml:snakeyaml`) directly, users can add the dependency if needed 
 
 ## Changelogs
 
@@ -25,6 +27,7 @@ Vaadin {{platform}}
   - SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
   - Swing Kit ([{{kits.swing-kit.version}}](https://vaadin.com/docs/latest/tools/swing))
 - Designer ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
+- Design System Publisher ([Documentation](https://vaadin.com/design-system-publisher))
 
 **Official add-ons and plugins:**
 
