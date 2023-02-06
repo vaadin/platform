@@ -38,7 +38,10 @@ const licenseWhiteList = [
   'https://www.highcharts.com/license'
 ];
 
-const cveWhiteList = {}
+const cveWhiteList = {
+  // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
+  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404']
+}
 
 const STYLE = `<style>
 body {max-width: 800px; margin: auto; font-family: arial;padding-top: 2em;padding-bottom: 4em}
@@ -337,7 +340,7 @@ function checkVunerabilities(vuls) {
   let msg = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
-    err = err && (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
+    err = err || (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
     msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
   });
   return { err, msg };

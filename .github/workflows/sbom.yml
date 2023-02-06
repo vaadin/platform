@@ -89,7 +89,7 @@ jobs:
         env:
          OSSINDEX_USER: ${{secrets.OSSINDEX_USER}}
          OSSINDEX_TOKEN: ${{secrets.OSSINDEX_TOKEN}}
-      - if: ${{github.event.pull_request}}
+      - if: ${{always() && env.DEPENDENCIES_REPORT && github.event.pull_request}}
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: "${{env.DEPENDENCIES_REPORT}}\n[[Click for more Details](${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}})]"
