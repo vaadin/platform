@@ -279,7 +279,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/*Fake*</exclude>
-                        <exclude>**/BundleComponents*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
