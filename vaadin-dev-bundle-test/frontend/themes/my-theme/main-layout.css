@@ -1,0 +1,16 @@
+vaadin-scroller[slot="drawer"] {
+  padding: var(--lumo-space-s);
+}
+
+[slot="drawer"]:is(header, footer) {
+  display: flex;
+  align-items: center;
+  gap: var(--lumo-space-s);
+  padding: var(--lumo-space-s) var(--lumo-space-m);
+  min-height: var(--lumo-size-xl);
+  box-sizing: border-box;
+}
+
+[slot="drawer"]:is(header, footer):is(:empty) {
+  display: none;
+}
