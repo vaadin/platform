@@ -56,7 +56,6 @@ h1,h2,h3 {color: dodgerblue}
 pre[b] {border: solid 1px darkgrey}
 </style>`;
 
-
 const cmd = {
   useBomber: true, useOSV: true, useOWASP: true,
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
@@ -385,8 +384,8 @@ function reportVulnerabilities(vuls) {
 function reportDiffs(summary) {
   const comps = summary.components;
   let html = `<h3>✍ Dependencies Comparison since V${summary.prevVersion}</h3><div>\n`;
-  const icons = ['🔴', '🟠', '🔵', '🟢'];
   const colors = ['style="color:red"', 'style="color:orange"', 'style="color:blue"', 'style="color:green"'];
+  const icons = {removed:'🔴', added:'🟠', modified:'🔵', same:'🟢'};
   const packages = Object.keys(comps).sort((a, b) => comps[a].vaadin && !comps[b].vaadin ? 1 : !comps[a].vaadin && comps[b].vaadin ? -1 : a.localeCompare(b));
   ['removed', 'added', 'modified', 'same'].forEach(status => {
     const color = colors.shift();
@@ -409,7 +408,7 @@ function reportDiffs(summary) {
       });
       html += `</table></details>`;
     }
-    html += `<h4>&nbsp;&nbsp;&nbsp;${icons.shift()} ${pkgs.length} ${status} dependencies</h4>`;
+    html += `<h4>&nbsp;&nbsp;&nbsp;${icons[status]} ${pkgs.length} ${status} dependencies</h4>`;
     table('Maven', 'pkg:maven/');
     table('Npm', 'pkg:npm/');
   });
