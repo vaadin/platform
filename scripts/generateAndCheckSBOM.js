@@ -40,7 +40,9 @@ const licenseWhiteList = [
 
 const cveWhiteList = {
   // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404']
+  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
+  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.beta1' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404']
+
 }
 
 const STYLE = `<style>
@@ -214,16 +216,8 @@ function highlight(s1, s2) {
   }
   return ret.replace(/<\/span><span [^>]+>/g, '');
 }
-
 function sortReleases(releases) {
-  return [...new Set(releases)].sort((b, a) => {
-    const r = /^((.+)[\.-]((?:beta|alpha|rc)\d+)|(.+))$/;
-    const ae = r.exec(a);
-    const be = r.exec(b);
-    const as = (ae[2] || ae[1]).split('.');
-    const bs = (be[2] || be[1]).split('.');
-    return ((as[0] || 0) - (bs[0] || 0)) || ((as[1] || 0) - (bs[1] || 0)) || ((as[2] || 0) - (bs[2] || 0)) || (ae[3] || 'Z').localeCompare(be[3] || 'Z') || a.localeCompare(b);
-  });
+  return [...new Set(releases)].map(r => r.replace(/\d+/, n => +n+900000)).sort().map(r => r.replace(/\d+/, n => +n-900000)).reverse();
 }
 
 async function computeLastVersions(release) {
@@ -567,7 +561,7 @@ async function main() {
   fs.writeFileSync('target/dependencies.html', html);
 
   ghaSetEnv('DEPENDENCIES_REPORT', errMsg);
-  
+
   err(errMsg);
 
   if (errLic || errVul) {
