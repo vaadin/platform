@@ -20,6 +20,10 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        {{javadeps}}
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
