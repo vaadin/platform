@@ -1,7 +1,7 @@
 name: SBOM
 on:
   push:
-    branches: ["master", "23.3"]
+    branches: ["master", "24.0", "23.3"]
   pull_request:
     types: [opened, synchronize, reopened, edited]
     paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js", "scripts/generator/templates/*.xml"]
