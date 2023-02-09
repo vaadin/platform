@@ -216,7 +216,15 @@ function highlight(s1, s2) {
   return ret.replace(/<\/span><span [^>]+>/g, '');
 }
 function sortReleases(releases) {
-  return [...new Set(releases)].map(r => r.replace(/\d+/, n => +n+900000)).sort().map(r => r.replace(/\d+/, n => +n-900000)).reverse();
+  return [...new Set(releases)]
+    .map(r => r
+      .replace(/\.0$/, '.0.z')          // fix: 23.0.0  lesser than 23.0.0.alpha1
+      .replace(/-/, '.z-')              // fix: 23.0-   lesser than 23.0.
+      .replace(/\d+/g, n => +n+900000)) // fix: 23.0.10 lesser than 23.0.9
+    .sort().reverse()
+    .map(r => r
+      .replace(/\d+/g, n => +n-900000).replace(/\.z/, '')
+    );
 }
 
 async function computeLastVersions(release) {
@@ -456,6 +464,7 @@ async function main() {
   log(`generating 'bom-vaadin.js'`);
   const sbom = await consolidateSBoms('target/bom.json', 'target/bom-npm.json');
   fs.writeFileSync('target/bom-vaadin.json', JSON.stringify(sbom, null, 2));
+
   const licenses = sumarizeLicenses('target/bom-vaadin.json');
 
   const vulnerabilities = {}
