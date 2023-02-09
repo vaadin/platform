@@ -7,7 +7,7 @@ error-screenshots/
 .project
 .settings
 tmp.*
-vaadin-core/vaadin-core-versions.json
+vaadin-internal/vaadin-core-versions.json
 vaadin/vaadin-versions.json
 vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
