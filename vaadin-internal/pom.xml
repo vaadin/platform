@@ -30,7 +30,8 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
+            <artifactId>vaadin-core-internal</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- TestBench must be included in the project separately to get
