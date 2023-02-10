@@ -545,7 +545,7 @@ async function main() {
   html += cnt;
 
   const prev = await computeLastVersions(currVersion);
-  for await (const v of [prev.lastPatch, prev.prevMinor]) {
+  for await (const v of [...new Set([prev.lastPatch, prev.prevMinor])]) {
     if (v !== currVersion) {
       const file = await downloadSbom(v);
       if (file) {
