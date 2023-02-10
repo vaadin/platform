@@ -27,8 +27,8 @@ cp scripts/generator/results/vaadin-maven-plugin-pom.xml vaadin-maven-plugin/pom
 cp scripts/generator/results/hilla-maven-plugin-pom.xml hilla-maven-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-pom.xml vaadin-gradle-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-plugin/pom-portal.xml
-cp scripts/generator/results/vaadin-core-versions.json vaadin-internal/vaadin-core-versions.json
-cp scripts/generator/results/vaadin-versions.json vaadin/vaadin-versions.json
+cp scripts/generator/results/vaadin-core-versions.json vaadin-core-internal/vaadin-core-versions.json
+cp scripts/generator/results/vaadin-versions.json vaadin-internal/vaadin-versions.json
 cp scripts/generator/results/vaadin-dev-bundle-pom.xml vaadin-dev-bundle/pom.xml
 cp scripts/generator/results/hilla-versions.json hilla/hilla-versions.json
 cp scripts/generator/results/hilla-react-versions.json hilla-react/hilla-react-versions.json
