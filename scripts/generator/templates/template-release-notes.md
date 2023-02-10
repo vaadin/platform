@@ -2,18 +2,9 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 23
+## New and Noteworthy Since Vaadin 24.0
 
 **Notable Changes**
-- Java 17 is required instead of 11
-- Safari 14 support is dropped. All iOS devices can be upgraded from Safari 14 to 15
-- Weblogic + TomEE is not supported or tested as there is no version available for Jakarta EE 10
-- Karaf or OSGI is not supported as OSGi standards are still lacking servlet 6 support
-- Portlets are not supported as portlet standards are still lacking servlet 6 support
-- Some servers are still in beta with their Jakarta EE 10 support but are still tested
-- Node.js support is raised to the current LTS (Node 18) to avoid future problems
-- Gradle support is raised to the version (Gradle 7.3) introducing Java 17 support
-- Spring Boot 2 is not supported
 
 ### Flow
 - 
@@ -58,16 +49,16 @@ Vaadin {{platform}}
 
 ## <a id="_upgrading_guides"></a> Upgrading guides
 
-- [Upgrading Flow to Vaadin 23](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Design System to Vaadin 23](https://vaadin.com/docs/latest/ds/upgrading)
+- [Upgrading Flow to Vaadin 24](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-24)
+- [Upgrading Fusion to Vaadin 24](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-24)
+- [Upgrading Design System to Vaadin 24](https://vaadin.com/docs/latest/ds/upgrading)
 
 
 
 ## Support
 <!-- New LTS:
 
-Vaadin 23 is the latest stable version, with extended support options available ([release model](https://vaadin.com/roadmap)).
+Vaadin 24 is the latest stable version, with extended support options available ([release model](https://vaadin.com/roadmap)).
 
 -->
 
