@@ -17,27 +17,16 @@ package com.vaadin.devbundle.test;
 
 import java.io.File;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.vaadin.flow.component.button.testbench.ButtonElement;
+import org.junit.Test;
+
 import com.vaadin.flow.server.Constants;
 import com.vaadin.flow.server.frontend.FrontendUtils;
-import com.vaadin.testbench.TestBenchTestCase;
 
-public class DefaultDevBundleIT extends TestBenchTestCase {
 
-    @Before
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        setDriver(new ChromeDriver());
-        getDriver().get("http://localhost:8080/");
-        $(ButtonElement.class).waitForFirst();
-    }
+public class DefaultDevBundleIT extends AbstractPlatformTest {
 
     @Test
     public void test() {
@@ -58,4 +47,8 @@ public class DefaultDevBundleIT extends TestBenchTestCase {
         getDriver().quit();
     }
 
+    @Override
+    protected String getTestPath() {
+        return "";
+    }
 }
