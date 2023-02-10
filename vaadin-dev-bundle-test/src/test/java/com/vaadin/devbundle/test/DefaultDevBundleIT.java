@@ -36,7 +36,7 @@ public class DefaultDevBundleIT extends TestBenchTestCase {
         WebDriverManager.chromedriver().setup();
         setDriver(new ChromeDriver());
         getDriver().get("http://localhost:8080/");
-        waitUntil(driver0 -> $(ButtonElement.class).waitForFirst() != null);
+        $(ButtonElement.class).waitForFirst();
     }
 
     @Test
