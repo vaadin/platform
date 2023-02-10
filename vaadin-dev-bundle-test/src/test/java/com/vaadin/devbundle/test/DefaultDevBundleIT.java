@@ -26,6 +26,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.server.Constants;
+import com.vaadin.flow.server.frontend.FrontendUtils;
 import com.vaadin.testbench.TestBenchTestCase;
 
 public class DefaultDevBundleIT extends TestBenchTestCase {
@@ -42,9 +43,13 @@ public class DefaultDevBundleIT extends TestBenchTestCase {
     public void test() {
         File baseDir = new File(System.getProperty("user.dir", "."));
         File devBundle = new File(baseDir, Constants.DEV_BUNDLE_LOCATION);
+        File nodeModules = new File(baseDir, FrontendUtils.NODE_MODULES);
 
         // shouldn't create a dev-bundle
         Assert.assertFalse(devBundle.exists());
+
+        // shouldn't run npm install
+        Assert.assertFalse(nodeModules.exists());
     }
 
     @After
