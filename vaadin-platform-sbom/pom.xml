@@ -44,16 +44,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>sso-kit-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>kubernetes-kit-starter</artifactId>
-        </dependency>
-
     </dependencies>
     <profiles>
         <profile>
