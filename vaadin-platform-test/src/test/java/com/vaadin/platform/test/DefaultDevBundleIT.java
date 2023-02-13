@@ -20,7 +20,6 @@ import java.io.File;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.vaadin.flow.server.Constants;
 import com.vaadin.flow.server.frontend.FrontendUtils;
@@ -34,10 +33,10 @@ public class DefaultDevBundleIT extends AbstractPlatformTest {
         File nodeModules = new File(baseDir, FrontendUtils.NODE_MODULES);
 
         // shouldn't create a dev-bundle
-        Assert.assertFalse(devBundle.exists());
+        Assert.assertFalse("Error: file '" + devBundle.getPath() + "' shouldn't exist." + devBundle.getPath(), devBundle.exists());
 
         // shouldn't run npm install
-        Assert.assertFalse(nodeModules.exists());
+        Assert.assertFalse("Error: folder '" + nodeModules.getPath() + "' shouldn't exist.", nodeModules.exists());
     }
 
     @After
