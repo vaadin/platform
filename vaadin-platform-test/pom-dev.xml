@@ -71,20 +71,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.cmpn</artifactId>
-            <version>7.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.core</artifactId>
-            <version>7.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
@@ -115,17 +101,6 @@
                 <configuration>
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -202,8 +177,6 @@
                             </goals>
                             <configuration>
                               <target>
-                                <!-- Do not read @Theme annotations from the bundle application class -->
-                                <delete dir="../vaadin-dev-bundle/target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
                                 <!-- Express mode does not need any frontend stuff -->
                                 <delete dir="node_modules" includeemptydirs="true"></delete>
                                 <delete dir="src/main/dev-bundle" includeemptydirs="true"></delete>
