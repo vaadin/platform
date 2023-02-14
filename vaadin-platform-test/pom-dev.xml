@@ -7,7 +7,7 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>24.1-SNAPSHOT</version>
     </parent>
-    <artifactId>vaadin-platform-test</artifactId>
+    <artifactId>vaadin-platform-test-dev</artifactId>
     <packaging>war</packaging>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -16,7 +16,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.deploy.skip>true</maven.deploy.skip>
-        <osgi.bundle.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</osgi.bundle.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -72,20 +71,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.cmpn</artifactId>
-            <version>7.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.core</artifactId>
-            <version>7.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
@@ -102,51 +87,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>biz.aQute.bnd</groupId>
-                <artifactId>bnd-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>bnd-process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <executions>
-                    <execution>
-                        <id>read-local-properties-if-present</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>../local.properties</file>
-                            </files>
-                            <quiet>true</quiet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
@@ -161,17 +101,6 @@
                 <configuration>
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -191,31 +120,14 @@
                         <version>2.22.2</version>
                         <executions>
                             <execution>
-                                <id>hub-tests</id>
+                                <id>dev-mode-tests</id>
                                 <goals>
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
                                 <configuration>
-                                    <excludes>
-                                        <exclude>DefaultDevBundleIT</exclude>
-                                    </excludes>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>sauce-tests</id>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                                <configuration>
-                                    <systemPropertyVariables>
-                                        <sauce.user>${sa.user}</sauce.user>
-                                        <sauce.sauceAccessKey>${sa.key}</sauce.sauceAccessKey>
-                                        <grid.browsers>${sa.browsers}</grid.browsers>
-                                    </systemPropertyVariables>
                                     <includes>
-                                        <include>ComponentsIT</include>
+                                        <include>DefaultDevBundleIT,ChromeComponentsIT</include>
                                     </includes>
                                 </configuration>
                             </execution>
@@ -234,6 +146,7 @@
                             <stopKey>foo</stopKey>
                             <systemProperties>
                                 <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
+                                <vaadin.productionMode>false</vaadin.productionMode>
                             </systemProperties>
                         </configuration>
                         <executions>
@@ -241,7 +154,7 @@
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>start-war</goal>
+                                    <goal>start</goal>
                                 </goals>
                             </execution>
                             <execution>
@@ -254,52 +167,36 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                          <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                              <target>
+                                <!-- Express mode does not need any frontend stuff -->
+                                <delete dir="node_modules" includeemptydirs="true"></delete>
+                                <delete dir="src/main/dev-bundle" includeemptydirs="true"></delete>
+                                <delete file="package.json"></delete>
+                                <delete file="package-lock.json"></delete>
+                                <delete file="tsconfig.json"></delete>
+                                <!-- Collaboration Kit License -->
+                                <echo file="${project.build.directory}/ce-license.json">${ce.license}</echo>
+                              </target>
+                            </configuration>
+                          </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>com.vaadin</groupId>
                         <artifactId>vaadin-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>prepare-frontend</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                          <execution>
-                            <phase>compile</phase>
-                            <configuration>
-                              <target><echo file="${project.build.directory}/ce-license.json">${ce.license}</echo></target>
-                            </configuration>
-                            <goals>
-                              <goal>run</goal>
-                            </goals>
-                          </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- Production mode is activated using -Pproduction -->
-            <id>production</id>
-            <activation>
-                <property>
-                    <name>vaadin.productionMode</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>vaadin-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>build-frontend</goal>
                                 </goals>
                             </execution>
                         </executions>
