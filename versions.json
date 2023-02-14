@@ -587,7 +587,7 @@
             "javaVersion": "23.2.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.2.0"
+            "javaVersion": "5.2.1"
         },
         "vaadin-cookie-consent": {
             "component": true,
