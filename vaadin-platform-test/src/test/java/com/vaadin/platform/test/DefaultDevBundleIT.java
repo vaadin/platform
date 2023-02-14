@@ -27,13 +27,13 @@ import com.vaadin.flow.server.frontend.FrontendUtils;
 public class DefaultDevBundleIT extends AbstractPlatformTest {
 
     @Test
-    public void test() {
+    public void test() throws Exception {
         File baseDir = new File(System.getProperty("user.dir", "."));
         File devBundle = new File(baseDir, Constants.DEV_BUNDLE_LOCATION);
         File nodeModules = new File(baseDir, FrontendUtils.NODE_MODULES);
 
         // shouldn't create a dev-bundle
-        Assert.assertFalse("Error: file '" + devBundle.getPath() + "' shouldn't exist." + devBundle.getPath(), devBundle.exists());
+        Assert.assertFalse("Error: folder '" + devBundle.getPath() + "' shouldn't exist." + devBundle.getPath(), devBundle.exists());
 
         // shouldn't run npm install
         Assert.assertFalse("Error: folder '" + nodeModules.getPath() + "' shouldn't exist.", nodeModules.exists());

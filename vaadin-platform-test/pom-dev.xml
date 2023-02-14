@@ -143,30 +143,6 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.22.2</version>
-                        <dependencies>
-                            <!--The following dependencies are needed for Java 10+
-                                support -->
-                            <dependency>
-                                <groupId>javax.xml.bind</groupId>
-                                <artifactId>jaxb-api</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-core</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-impl</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>javax.activation</groupId>
-                                <artifactId>activation</artifactId>
-                                <version>1.1.1</version>
-                            </dependency>
-                        </dependencies>
                         <executions>
                             <execution>
                                 <id>dev-mode-tests</id>
@@ -188,7 +164,7 @@
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
-                        <version>11.0.8</version>
+                        <version>${jetty.version}</version>
                         <configuration>
                             <stopPort>9999</stopPort>
                             <stopWait>5</stopWait>
@@ -226,11 +202,15 @@
                             </goals>
                             <configuration>
                               <target>
+                                <!-- Do not read @Theme annotations from the bundle application class -->
+                                <delete dir="../vaadin-dev-bundle/target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
+                                <!-- Express mode does not need any frontend stuff -->
                                 <delete dir="node_modules" includeemptydirs="true"></delete>
-                                <delete dir="../vaadin-dev-bundle/target" includeemptydirs="true"></delete>
+                                <delete dir="src/main/dev-bundle" includeemptydirs="true"></delete>
                                 <delete file="package.json"></delete>
                                 <delete file="package-lock.json"></delete>
                                 <delete file="tsconfig.json"></delete>
+                                <!-- Collaboration Kit License -->
                                 <echo file="${project.build.directory}/ce-license.json">${ce.license}</echo>
                               </target>
                             </configuration>

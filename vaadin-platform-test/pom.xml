@@ -189,30 +189,6 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.22.2</version>
-                        <dependencies>
-                            <!--The following dependencies are needed for Java 10+
-                                support -->
-                            <dependency>
-                                <groupId>javax.xml.bind</groupId>
-                                <artifactId>jaxb-api</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-core</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-impl</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>javax.activation</groupId>
-                                <artifactId>activation</artifactId>
-                                <version>1.1.1</version>
-                            </dependency>
-                        </dependencies>
                         <executions>
                             <execution>
                                 <id>hub-tests</id>
@@ -251,7 +227,7 @@
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
-                        <version>11.0.8</version>
+                        <version>${jetty.version}</version>
                         <configuration>
                             <stopPort>9999</stopPort>
                             <stopWait>5</stopWait>
