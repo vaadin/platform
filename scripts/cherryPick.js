@@ -111,14 +111,14 @@ async function cherryPickCommits(){
       await postComment(arrURL[i], arrUser[i], arrBranch[i]);
       
       await exec(`git cherry-pick --abort`);
-      await exec(`git checkout master`);
+      await exec(`git checkout main`);
       await exec(`git branch -D ${branchName}`);     
       continue;
     }
     await exec(`git push origin HEAD:${branchName}`);
     
     await createPR(arrTitle[i], branchName, arrBranch[i]);
-    await exec(`git checkout master`);
+    await exec(`git checkout main`);
     await exec(`git branch -D ${branchName}`);
     await labelCommit(arrURL[i], `cherry-picked-${arrBranch[i]}`);
   }
