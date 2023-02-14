@@ -33,7 +33,7 @@
     </repositories>
 
     <properties>
-        <spring-boot.version>2.7.4</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
     </properties>
 
     <dependencyManagement>
