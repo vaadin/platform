@@ -34,7 +34,10 @@ const licenseWhiteList = [
   'WTFPL',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
   VAADIN_LICENSE,
-  'https://www.highcharts.com/license'
+  'https://vaadin.com/license/cvdl-4.0',
+  'http://vaadin.com/license/cvrl-1,
+  'https://www.highcharts.com/license',
+  'UNLICENSED'
 ];
 
 const cveWhiteList = {
