@@ -33,7 +33,7 @@
     </repositories>
 
     <properties>
-        <spring-boot.version>2.7.4</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -63,6 +63,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>            
         </dependency>
         <!-- End Spring -->
 
