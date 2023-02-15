@@ -91,7 +91,7 @@ async function cherryPickCommits(){
   for(let i=arrPR.length-1; i>=0; i--){
     let branchName = `cherry-pick-${arrPR[i]}-to-${arrBranch[i]}-${Date.now()}`;
     
-    await exec('git checkout master');
+    await exec('git checkout main');
     await exec('git pull');
     await exec(`git checkout ${arrBranch[i]}`);
     await exec(`git reset --hard origin/${arrBranch[i]}`);
