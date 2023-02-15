@@ -24,6 +24,18 @@
         {{javadeps}}
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -31,6 +43,12 @@
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spreadsheet-flow</artifactId>
+            <optional>true</optional>
+        </dependency>
+
 
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -110,7 +128,25 @@
                     </filesets>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                  <execution>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                      <target>
+                        <!-- Remove application class file, so as IT modules do not read @Theme annotations when
+                             maven configures the classpath for multimodule projects -->
+                        <delete dir="target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
+                      </target>
+                    </configuration>
+                  </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
