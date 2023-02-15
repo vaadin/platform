@@ -90,6 +90,9 @@
                             <resources>
                                 <resource>
                                     <directory>src/main/dev-bundle</directory>
+                                    <excludes>
+                                        <exclude>webapp/VAADIN/build/*.js</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
