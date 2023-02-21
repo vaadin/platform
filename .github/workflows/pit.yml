@@ -104,7 +104,7 @@ jobs:
         uses: browser-actions/setup-chrome@latest
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '16.14'
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
