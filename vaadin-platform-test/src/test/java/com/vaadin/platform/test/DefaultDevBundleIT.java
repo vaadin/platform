@@ -39,6 +39,15 @@ public class DefaultDevBundleIT extends AbstractPlatformTest {
         Assert.assertFalse("Error: folder '" + nodeModules.getPath() + "' shouldn't exist.", nodeModules.exists());
     }
 
+    @Test
+    public void serviceWorkerIsIncludedAndServed() {
+        getDriver().get(getRootURL() + "/sw.js");
+        String pageSource = getDriver().getPageSource();
+        Assert.assertFalse("Service Worker is not served properly",
+                pageSource.contains("Error 404 Not Found")
+                || pageSource.contains("Could not navigate to"));
+    }
+
     @After
     public void tearDown() throws Exception {
         // close the browser instance when all tests are done
