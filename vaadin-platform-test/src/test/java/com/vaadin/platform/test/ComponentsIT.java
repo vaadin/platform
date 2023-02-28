@@ -1,6 +1,11 @@
 package com.vaadin.platform.test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.testbench.Parameters;
@@ -26,6 +31,13 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void appWorks() throws Exception {
-        $(NotificationElement.class).waitForFirst();
+        try {
+            $(NotificationElement.class).waitForFirst();
+        } finally {
+            List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).getAll();
+            for (LogEntry e : logs) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
 }
