@@ -90,7 +90,6 @@
         <profile>
             <id>npm-it</id>
             <modules>
-                <module>vaadin-platform-test/pom-dev.xml</module>
                 <module>vaadin-platform-test</module>
             </modules>
         </profile>
