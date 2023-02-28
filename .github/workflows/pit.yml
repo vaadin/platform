@@ -53,7 +53,7 @@ jobs:
         run: |
           # COMPUTE MATRIX
           echo "Computing matrix ..."
-          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" ] && exit 1
+          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" ] && exit 1
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           V="${{github.event.inputs.version}}"
           W="${{github.event.inputs.windows}}"
@@ -94,6 +94,7 @@ jobs:
           # INSTALL LICENSE
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
+          echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
         shell: bash
       - if: ${{runner.os == 'Linux'}}
         run: |
