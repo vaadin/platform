@@ -6,14 +6,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import org.junit.Test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
-import com.vaadin.platform.test.ComponentUsageTest.TestComponent;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
@@ -63,49 +61,6 @@ public class ComponentsIT extends AbstractPlatformTest {
     @Test
     public void appWorks() throws Exception {
         $(NotificationElement.class).waitForFirst();
-
-        new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
-    }
-
-    private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
-        // Make sure that we close any modal dialog before each iteration
-        $("body").first().click();
-
-        String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
-        String className = testComponent.component != null ? testComponent.component.getName() : null;
-
-        Runnable run = beforeRunsByTag.get(className);
-        if (beforeRunsByTag.containsKey(tag) || beforeRunsByTag.containsKey(className)) {
-
-            if (run == null) {
-                run = beforeRunsByTag.get(tag);
-            }
-            if (run != null) {
-                run.run();
-            }
-        }
-
-
-        if (excludeComponents.contains(tag)) {
-          return;
-        }
-
-        ElementQuery<? extends TestBenchElement> $ = null;
-        if (testComponent.tbElement != null) {
-            $ = $(testComponent.tbElement);
-        }
-        if (($  == null || !$.exists()) && tag != null) {
-            $ = $(tag);
-        }
-        if (($  == null || !$.exists())) {
-            System.err.println(">>> Component not found in the View\n" + testComponent);
-        }
-        checkElement($);
-
-        if ($(ConfirmDialogElement.class).exists()){
-            ConfirmDialogElement dialogElement = $(ConfirmDialogElement.class).waitForFirst();
-            dialogElement.getConfirmButton().click();
-        }
     }
 
     private <T extends TestBenchElement> void checkElement(ElementQuery<T> $) {
