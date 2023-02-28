@@ -35,11 +35,14 @@ public class ComponentsIT extends AbstractPlatformTest {
             $(NotificationElement.class).waitForFirst();
         } finally {
             List o = (List) executeScript("return window.Vaadin.ConsoleErrors;");
-            for (int i = 0; i < o.size(); i++) {
-                System.err.println("Error " + i + ":");
-                List l = (List) o.get(i);
-                for (int j = 0; j < l.size(); j++) {
-                    System.err.println(l.get(j));
+            if (o != null) {
+
+                for (int i = 0; i < o.size(); i++) {
+                    System.err.println("Error " + i + ":");
+                    List l = (List) o.get(i);
+                    for (int j = 0; j < l.size(); j++) {
+                        System.err.println(l.get(j));
+                    }
                 }
             }
             // List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).getAll();
