@@ -32,12 +32,14 @@ public class ComponentsIT extends AbstractPlatformTest {
     @Test
     public void appWorks() throws Exception {
         try {
-            while (true) {
+            System.err.println("Wait for notification");
+            $(NotificationElement.class).waitForFirst();
+            System.err.println("Notification found");
+            for (int i=0; i < 10; i++) {
                 System.err.println("Checking window.Vaadin.ConsoleErrors");
                 executeScript("return window.Vaadin.ConsoleErrors");
                 Thread.sleep(5000);
             }
-            // $(NotificationElement.class).waitForFirst();
         } finally {
             List o = (List) executeScript("return window.Vaadin.ConsoleErrors;");
             if (o != null) {
