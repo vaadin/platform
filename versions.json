@@ -308,13 +308,13 @@
             "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "observability-kit": {
             "version": "2.0.0.beta1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "swing-kit": {
             "version": "2.0-SNAPSHOT"
