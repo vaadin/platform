@@ -308,19 +308,19 @@
             "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "observability-kit": {
             "version": "2.0.0.beta1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0.rc1"
         },
         "swing-kit": {
             "version": "2.0-SNAPSHOT"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.0.0.beta1"
+            "javaVersion": "6.0.0.rc1"
         }
     },
     "platform": "{{version}}",
@@ -370,7 +370,7 @@
             "npmName": "@vaadin/rich-text-editor"
         },
         "vaadin-classic-components": {
-            "javaVersion": "24.0.0.beta1"
+            "javaVersion": "24.0.0.rc1"
         },
         "vaadin-core": {
             "jsVersion": "{{version}}",
