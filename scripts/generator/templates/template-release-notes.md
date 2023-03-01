@@ -16,17 +16,48 @@ Vaadin {{platform}}
 - Spring Boot 2 is not supported
 
 ### Flow
-- 
+- New development mode with faster start-up (aka Express Build mode)
+- Polymer to Lit conversion tool
+- Support for JUnit 5 in TestBench
+- Support for Spring AOT Native Image Compilation
+- Helper methods for Component
+- Svg component
+- Dev tools improvements:
+  - find where components are created and attached in code by clicking in UI
+    utils for opening a file in the IDE running the application
+(Flow upgrade guide can be found from [here](https://vaadin.com/docs/next/upgrading))
+
 ### Hilla
-- 
+- Multi-Module Engine
+  - default setting, no feature flag any more
+- Reactive Endpoints [docs](https://hilla.dev/docs/lit/guides/reactive-endpoints)
+- AOT Native Image Compilation
+  - Faster startup and lower memory requirements compared to running with JVM
+- React Starter with Authentication
+  - Starting React Hilla project with login form and access control for views
 
 ### Design System
-- 
+- Theming improvements [docs](https://vaadin.com/docs/next/styling)
+- Spreadsheet new features [docs](https://vaadin.com/docs/next/components/spreadsheet)
+  - Embedded components
+  - Embedded Charts 
+- GridPro custom editor value provider 
+  - Allows converting the model value into the appropriate type or format used by the editor
+- Validation enhancements
+  – Server-side validation is triggered on blur
+  – Binder takes into account component constraints
+  – Entering bad input invalidates the field
 
-### Collaboration Engine
-- 
-`*` experimental
 
+### Acceleration Kits
+- SSO Kit for Hilla
+  - Supported providers are Keycloak, Okta and Azure AD
+  - Login through the provider
+  - Access to the user information
+  - In-app logout (RP-initiated)
+  - Backchannel logout with notification dialog about the logout
+  - Both Hilla Lit and React are supported
+  
 ## <a id="_changelogs"></a> Changelogs
 
 - Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}})) 
@@ -58,10 +89,7 @@ Vaadin {{platform}}
 
 ## <a id="_upgrading_guides"></a> Upgrading guides
 
-- [Upgrading Flow to Vaadin 23](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Fusion to Vaadin 23](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-23)
-- [Upgrading Design System to Vaadin 23](https://vaadin.com/docs/latest/ds/upgrading)
-
+- [Upgrading Vaadin 23 to Vaadin 24](https://vaadin.com/docs/next/upgrading)
 
 
 ## Support
@@ -144,7 +172,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 - Open Liberty 23.0.0.1-beta
 - RedHat JBoss EAP 8.0 beta
 - WildFly 27
-- Jetty 12 beta
+- Jetty 11 (currently Jetty 12 beta is not working)
 - Payara Server 6
 - Payara Micro 6
   </td>
