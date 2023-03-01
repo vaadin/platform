@@ -33,6 +33,7 @@ public class ComponentsIT extends AbstractPlatformTest {
     public void appWorks() throws Exception {
         try {
             while (true) {
+                System.err.println("Checking window.Vaadin.ConsoleErrors");
                 executeScript("return window.Vaadin.ConsoleErrors");
                 Thread.sleep(5000);
             }
