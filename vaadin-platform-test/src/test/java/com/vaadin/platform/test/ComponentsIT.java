@@ -32,6 +32,7 @@ public class ComponentsIT extends AbstractPlatformTest {
     @Test
     public void appWorks() throws Exception {
         try {
+            Thread.sleep(3600*1000);
             $(NotificationElement.class).waitForFirst();
         } finally {
             List o = (List) executeScript("return window.Vaadin.ConsoleErrors;");
