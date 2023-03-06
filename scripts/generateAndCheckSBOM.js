@@ -381,7 +381,7 @@ function reportVulnerabilities(vuls) {
     html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${vuls[v][o].title}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
     md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
-      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
+      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title.replace(/\n+/, ' ')}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
   md && (md = "| Package | CVEs |\n|-------|--------|\n" + md);
