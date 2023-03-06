@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev</artifactId>
+            <artifactId>vaadin-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
