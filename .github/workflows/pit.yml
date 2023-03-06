@@ -96,13 +96,12 @@ jobs:
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
           echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
         shell: bash
-      - if: ${{runner.os == 'Linux'}}
+      - if: ${{ env.ACT }}
         run: |
-          # INSTALL CHROME
+          # Install linux libs (ACT)
           # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo ./pit/scripts/pit/docker/setup.sh --chrome
-      - if: ${{runner.os != 'Linux'}}
-        uses: browser-actions/setup-chrome@latest
+          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
+      - uses: browser-actions/setup-chrome@latest
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
