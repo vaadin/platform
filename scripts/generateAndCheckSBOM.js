@@ -41,9 +41,6 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.beta1' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
   'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908']
 }
 
