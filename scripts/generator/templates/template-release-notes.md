@@ -157,10 +157,11 @@ Vaadin Designer supports the following IDEs:
 <tr>
   <th>Maven</th>
   <td>Version 3.5 or newer</td>
+  <td>Maven 3.8.2 and 3.8.3 are not suggested to use as the known issue mentioned in https://maven.apache.org/docs/3.8.4/release-notes.html</td>
 </tr>
 <tr>
   <th>Gradle</th>
-  <td>Version 7.3 or newer</td>
+  <td>Version 7.5 or newer</td>
 </tr>
 <tr>
   <th>Application server</th>
