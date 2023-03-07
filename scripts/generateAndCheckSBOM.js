@@ -35,14 +35,13 @@ const licenseWhiteList = [
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
   'https://www.gnu.org/software/classpath/license.html',
   VAADIN_LICENSE,
-  'https://www.highcharts.com/license'
+  'https://www.highcharts.com/license',
+  'http://www.gnu.org/licenses/lgpl-3.0.html',
+  'CC-BY-3.0'
 ];
 
 const cveWhiteList = {
-  // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.beta1' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404']
-
+  'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908']
 }
 
 const STYLE = `<style>
@@ -382,7 +381,7 @@ function reportVulnerabilities(vuls) {
     html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${vuls[v][o].title}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
     md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
-      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
+      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title.replace(/\n+/, ' ')}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
   md && (md = "| Package | CVEs |\n|-------|--------|\n" + md);
