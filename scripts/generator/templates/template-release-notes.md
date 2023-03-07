@@ -202,3 +202,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
   </td>
 </tr>
 </table>
+
+## Known Vulnerability
+
+TestBench brings the dependency `pkg:maven/com.google.guava/guava@31.1-jre`, that has the vulnerability described in [CVE-2020-8908](https://github.com/advisories/GHSA-5mg8-w23w-74h3), the problematic method has been [deprecated in guava](https://github.com/google/guava/issues/4011) and it is not used in Vaadin.
