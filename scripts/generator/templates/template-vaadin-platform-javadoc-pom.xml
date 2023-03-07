@@ -26,6 +26,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${project.version}</version>
@@ -122,13 +129,11 @@
                 <dependency>
                     <groupId>org.springframework.data</groupId>
                     <artifactId>spring-data-commons</artifactId>
-                    <version>${spring-boot.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-autoconfigure</artifactId>
-                    <version>${spring-boot.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
