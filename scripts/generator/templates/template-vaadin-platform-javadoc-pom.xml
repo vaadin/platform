@@ -166,6 +166,18 @@
                     <version>${junit.jupiter.version}</version>
                     <scope>provided</scope>
                 </dependency>
+                <dependency>
+                    <groupId>jakarta.websocket</groupId>
+                    <artifactId>jakarta.websocket-client-api</artifactId>
+                    <version>2.1.0</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>jakarta.websocket</groupId>
+                    <artifactId>jakarta.websocket-api</artifactId>
+                    <version>2.1.0</version>
+                    <scope>provided</scope>
+                </dependency>
             </dependencies>
             <build>
                 <plugins>
