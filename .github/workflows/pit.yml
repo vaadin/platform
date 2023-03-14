@@ -8,12 +8,22 @@ on:
         description: 'Version'
         required: false
         type: string
-      starter:
+      starters:
         description: 'Starters to run, separated by comma'
         required: false
         type: string
       skipcurrent:
         description: 'Skip running tests in current version'
+        required: false
+        type: boolean
+        default: false
+      skipdev:
+        description: 'Skip running tests in dev mode'
+        required: false
+        type: boolean
+        default: false
+      skipprod:
+        description: 'Skip running tests in production mode'
         required: false
         type: boolean
         default: false
@@ -29,6 +39,16 @@ on:
         default: false
       windows:
         description: 'Run build in windows runner'
+        required: false
+        type: boolean
+        default: false
+      generated:
+        description: 'Generate and run all supported start presets and archetypes'
+        required: false
+        type: boolean
+        default: false
+      demos:
+        description: 'Checkout and run all demos'
         required: false
         type: boolean
         default: false
@@ -59,9 +79,11 @@ jobs:
           W="${{github.event.inputs.windows}}"
           L="${{github.event.inputs.linux}}"
           [ true != "$L" -a true != "$W" ] && L=true
-          S="${{github.event.inputs.starter}}"
+          S="${{github.event.inputs.starters}}"
           [ true = "${{github.event.inputs.v24}}" ] && A="--v24"
           [ true = "${{github.event.inputs.pre}}" ] && A="--pre"
+          [ true = "${{github.event.inputs.generated}}" ] && A="--generated"
+          [ true = "${{github.event.inputs.demos}}" ] && A="--demos"
           [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list`
           M='{"include":['
           for i in `echo $S | tr "," " "`; do
@@ -104,7 +126,7 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -116,6 +138,8 @@ jobs:
           # PIT TESTS ${{matrix.app}} ${{github.event.inputs.version}}
           [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
           [ true = "${{github.event.inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
+          [ true = "${{github.event.inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
+          [ true = "${{github.event.inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
           [ true = "${{github.event.inputs.debug}}" ] && ARG="$ARG --debug"
           echo "${{matrix.app}}" | grep "^v24" && ARG="$ARG --v24"
           echo "${{matrix.app}}" | grep "^pre" && ARG="$ARG --pre"
