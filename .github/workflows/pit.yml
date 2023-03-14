@@ -1,7 +1,5 @@
 name: PiT
 on:
-  push:
-    paths: [".github/workflows/pit.yml"]
   workflow_dispatch:
     inputs:
       version:
