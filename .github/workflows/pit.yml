@@ -50,6 +50,12 @@ on:
         required: false
         type: boolean
         default: false
+      join:
+        description: 'Number of apps to run per container (default 1)'
+        required: false
+        type: choice
+        options: ["1", "2", "3", "4"]
+        default: "1"
       v24:
         description: 'Use v24 version starters'
         required: false
@@ -78,13 +84,13 @@ jobs:
           L="${{github.event.inputs.linux}}"
           [ true != "$L" -a true != "$W" ] && L=true
           S="${{github.event.inputs.starters}}"
-          [ true = "${{github.event.inputs.v24}}" ] && A="--v24"
-          [ true = "${{github.event.inputs.pre}}" ] && A="--pre"
-          [ true = "${{github.event.inputs.generated}}" ] && A="--generated"
-          [ true = "${{github.event.inputs.demos}}" ] && A="--demos"
-          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list`
+          [ true = "${{github.event.inputs.v24}}" ] && A="$A --v24"
+          [ true = "${{github.event.inputs.pre}}" ] && A="$A --pre"
+          [ true = "${{github.event.inputs.generated}}" ] && A="$A --generated"
+          [ true = "${{github.event.inputs.demos}}" ] && A="$A --demos"
+          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list=${{github.event.inputs.join}}`
           M='{"include":['
-          for i in `echo $S | tr "," " "`; do
+          for i in `echo $S`; do
             J='{"app":"'$i'"'
             [ -n "$V" ] && J=$J',"version":"'$V'"'
             [ true = "$W" ] && M=$M$J',"os":"windows"},'
