@@ -25,11 +25,6 @@ on:
         required: false
         type: boolean
         default: false
-      debug:
-        description: 'Show build and test outputs'
-        required: false
-        type: boolean
-        default: false
       linux:
         description: 'Run build in linux runner'
         required: false
@@ -56,16 +51,6 @@ on:
         type: choice
         options: ["1", "2", "3", "4"]
         default: "1"
-      v24:
-        description: 'Use v24 version starters'
-        required: false
-        type: boolean
-        default: false
-      pre:
-        description: 'Use pre version starters'
-        required: false
-        type: boolean
-        default: false
 jobs:
   prepare:
     runs-on: ubuntu-latest
