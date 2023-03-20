@@ -152,6 +152,10 @@
                      <version>3.3.1</version>
                 </plugin>
                 <plugin>
+                     <artifactId>maven-surefire-plugin</artifactId>
+                     <version>3.0.0</version>
+                </plugin>
+                <plugin>
                      <groupId>com.vaadin</groupId>
                      <artifactId>vaadin-maven-plugin</artifactId>
                      <version>${project.version}</version>
