@@ -440,7 +440,7 @@ async function main() {
 
   await run(`./scripts/generateBoms.sh`, { debug: false });
   const currVersion = cmd.version || (await run('mvn help:evaluate -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
-  await run('mvn -ntp -B clean install -T 1C -q');
+  await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
