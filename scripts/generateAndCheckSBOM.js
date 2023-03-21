@@ -58,6 +58,7 @@ const cmd = {
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
   switch (process.argv[i]) {
+    case '--useSnapshots': cmd.useSnapshots = true; break;
     case '--disable-bomber': cmd.useBomber = false; break;
     case '--disable-osv-scan': cmd.useOSV = false; break;
     case '--disable-owasp': cmd.useOWASP = false; break;
@@ -66,7 +67,7 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--compare': cmd.org = process.argv[++i]; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-        [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
       process.exit(1);
   }
 }
@@ -78,7 +79,7 @@ function out(...args) {
   process.stderr.write(`\x1b[2m\x1b[196m${args}\x1b[0m`);
 }
 function err(...args) {
-  process.stderr.write(`\x1b[0;31m${args}\x1b[0m`);
+  process.stderr.write(`\x1b[0;31m${args}\x1b[0m\n`);
 }
 
 function ghaStepReport(msg) {
@@ -136,9 +137,11 @@ async function run(order, ops) {
     return await exec(order, ops);
   } catch (ret) {
     if (!ops || ops.throw !== false) {
+      ret.stderr && out(rest.stderr);
       err(`!! ERROR ${ret.code} !! running: ${order}!!\n${!ops || ops.output || !ops.debug ? ret.stdout : ''}`)
       process.exit(1);
     } else {
+      ret.stderr && out(rest.stderr);
       return ret;
     }
   }
@@ -290,7 +293,13 @@ function sumarizeOSV(f, summary) {
 }
 
 function sumarizeBomber(f, summary) {
-  const res = JSON.parse(fs.readFileSync(f));
+  let res;
+  try {
+    res = JSON.parse(fs.readFileSync(f));
+  } catch (error) {
+    err(`Error parsing JSON file '${f}'`, error);
+    return summary;
+  }
   (res.packages || []).forEach(p => {
     p.vulnerabilities.forEach(v => {
       const pkg = p.coordinates.replace(/\?.+/, '');
@@ -438,8 +447,9 @@ async function main() {
     await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
   }
 
-  await run(`./scripts/generateBoms.sh`, { debug: false });
-  const currVersion = cmd.version || (await run('mvn help:evaluate -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
+  const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
+  log(`current version: ${currVersion}`);
+  await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
   await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
 
   log(`cd ${testProject}`);
