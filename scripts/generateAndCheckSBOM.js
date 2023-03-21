@@ -297,7 +297,13 @@ function sumarizeOSV(f, summary) {
 }
 
 function sumarizeBomber(f, summary) {
-  const res = JSON.parse(fs.readFileSync(f));
+  let res;
+  try {
+    res = JSON.parse(fs.readFileSync(f));
+  } catch (error) {
+    err(`Error parsing JSON file '${f}'`, error);
+    return summary;
+  }
   (res.packages || []).forEach(p => {
     p.vulnerabilities.forEach(v => {
       const pkg = p.coordinates.replace(/\?.+/, '');
