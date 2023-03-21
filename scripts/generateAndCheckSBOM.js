@@ -85,7 +85,7 @@ function out(...args) {
   process.stderr.write(`\x1b[2m\x1b[196m${args}\x1b[0m`);
 }
 function err(...args) {
-  process.stderr.write(`\x1b[0;31m${args}\x1b[0m`);
+  process.stderr.write(`\x1b[0;31m${args}\x1b[0m\n`);
 }
 
 function ghaStepReport(msg) {
@@ -143,9 +143,11 @@ async function run(order, ops) {
     return await exec(order, ops);
   } catch (ret) {
     if (!ops || ops.throw !== false) {
+      ret.stderr && out(rest.stderr);
       err(`!! ERROR ${ret.code} !! running: ${order}!!\n${!ops || ops.output || !ops.debug ? ret.stdout : ''}`)
       process.exit(1);
     } else {
+      ret.stderr && out(rest.stderr);
       return ret;
     }
   }
