@@ -444,8 +444,9 @@ async function main() {
     await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
   }
 
-  await run(`./scripts/generateBoms.sh`, { debug: false });
-  const currVersion = cmd.version || (await run('mvn help:evaluate -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
+  const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
+  log(`current version: ${currVersion}`);
+  await run(`./scripts/generateBoms.sh${/-SNAPSHOT/.test(currVersion) ? ' --useSnapshots' :''}`, { debug: false });
   await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
 
   log(`cd ${testProject}`);
