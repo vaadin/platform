@@ -303,7 +303,7 @@
             "npmName": "@vaadin/vaadin-details"
         },
         "vaadin-development-mode-detector": {
-            "jsVersion": "2.0.5",
+            "jsVersion": "2.0.6",
             "npmName": "@vaadin/vaadin-development-mode-detector"
         },
         "vaadin-dialog": {
