@@ -64,6 +64,7 @@ const cmd = {
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
   switch (process.argv[i]) {
+    case '--useSnapshots': cmd.useSnapshots = true; break;
     case '--disable-bomber': cmd.useBomber = false; break;
     case '--disable-osv-scan': cmd.useOSV = false; break;
     case '--disable-owasp': cmd.useOWASP = false; break;
@@ -72,7 +73,7 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--compare': cmd.org = process.argv[++i]; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-        [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
       process.exit(1);
   }
 }
@@ -446,7 +447,7 @@ async function main() {
 
   const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
   log(`current version: ${currVersion}`);
-  await run(`./scripts/generateBoms.sh${/-SNAPSHOT/.test(currVersion) ? ' --useSnapshots' :''}`, { debug: false });
+  await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
   await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
 
   log(`cd ${testProject}`);
