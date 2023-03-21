@@ -7,6 +7,11 @@ on:
     types: ["published"]
   workflow_dispatch:
     inputs:
+          useSnapshots:
+            description: 'Use snapthots for all vaadin products'
+            required: false
+            type: boolean
+            default: false
           useBomber:
             description: 'Use bomber'
             required: false
@@ -78,6 +83,7 @@ jobs:
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
           [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
+          [ true = "${{github.event.inputs.useSnapshots}}" ] && A="$A --useSnapshots"
           V="${{ github.event.inputs.version || github.event.release.tag_name }}"
           [ -n "$V" ] && A="--version $V"
           cmd="scripts/generateAndCheckSBOM.js $A"
