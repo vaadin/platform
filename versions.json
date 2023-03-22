@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "24.0.0",
+            "jsVersion": "24.0.1",
             "npmName": "@vaadin/bundles"
         }
     },
