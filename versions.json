@@ -101,7 +101,7 @@
             "javaVersion": "24.1.0.alpha1"
         },
         "flow-cdi": {
-            "javaVersion": "15.0.0.beta1"
+            "javaVersion": "15.0.0"
         },
         "form-layout": {
             "javaVersion": "{{version}}",
@@ -166,10 +166,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "7.0.0.beta1"
+            "javaVersion": "7.0.0"
         },
         "mpr-v8": {
-            "javaVersion": "7.0.0.beta1"
+            "javaVersion": "7.0.0"
         },
         "multi-select-combo-box": {
             "jsVersion": "24.1.0-alpha4",
@@ -279,7 +279,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
@@ -308,19 +308,19 @@
             "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.0.0"
         },
         "observability-kit": {
-            "version": "2.0.0.beta1"
+            "version": "2.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.0.0.beta1"
+            "javaVersion": "2.1-SNAPSHOT"
         },
         "swing-kit": {
-            "version": "2.0-SNAPSHOT"
+            "version": "2.0.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.0.0.beta1"
+            "javaVersion": "6.0.0"
         }
     },
     "platform": "{{version}}",
@@ -370,7 +370,7 @@
             "npmName": "@vaadin/rich-text-editor"
         },
         "vaadin-classic-components": {
-            "javaVersion": "24.0.0.beta1"
+            "javaVersion": "24.0.0"
         },
         "vaadin-core": {
             "jsVersion": "{{version}}",
