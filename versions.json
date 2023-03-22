@@ -98,7 +98,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.1-SNAPSHOT"
+            "javaVersion": "24.1.0.alpha1"
         },
         "flow-cdi": {
             "javaVersion": "15.0.0"
@@ -285,7 +285,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-router": {
-            "jsVersion": "1.7.4",
+            "jsVersion": "1.7.5",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
