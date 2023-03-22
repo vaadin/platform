@@ -62,6 +62,11 @@ import '@vaadin/dialog';
 import '@vaadin/notification';
 import '@vaadin/select';
 import '@vaadin/time-picker';
+import '@vaadin/board';
+import '@vaadin/board/src/vaadin-board-row';
+import '@vaadin/icon';
+import '@vaadin/scroller';
+import '@vaadin/virtual-list'
 
 import type {
   VirtualList,
