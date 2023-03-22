@@ -285,7 +285,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-router": {
-            "jsVersion": "1.7.4",
+            "jsVersion": "1.7.5",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
