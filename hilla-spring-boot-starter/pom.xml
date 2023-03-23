@@ -34,10 +34,6 @@
         </repository>
     </repositories>
 
-    <properties>
-        <spring-boot.version>2.7.8</spring-boot.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -71,7 +67,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
+            <version>${spring.boot.version}</version>
         </dependency>
         <!-- End Spring -->
 

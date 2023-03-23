@@ -3,7 +3,7 @@ Vaadin {{platform}}
 *This is a maintenance release for Vaadin 23.3. See [23.3.0 release notes](https://github.com/vaadin/platform/releases/tag/23.3.0) for details and resources.*
 
 **Notable Changes**
-- Since Vaadin 23.3, the minimal supported Spring-boot version is 2.7.x
+- Since Vaadin 23.3, the minimal supported spring.boot.version is 2.7.x
 - Since Vaadin 23.3.5, due to the founded vulnerability ([CVE-2022-1471](https://nvd.nist.gov/vuln/detail/CVE-2022-1471)), dependency for `org.yaml:snakeyaml` has been removed. 
   - Vaadin project is not depending on the vulnerable dependency (`org.yaml:snakeyaml`) directly, users can add the dependency if needed 
 
