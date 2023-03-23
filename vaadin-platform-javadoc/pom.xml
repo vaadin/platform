@@ -22,6 +22,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${project.version}</version>
@@ -48,7 +55,6 @@
         <profile>
             <id>javadocs</id>
             <dependencies>
-                <!-- provided dependencies from flow/flow-server -->
                 <dependency>
                     <groupId>javax.servlet</groupId>
                     <artifactId>javax.servlet-api</artifactId>
@@ -68,23 +74,19 @@
                     <version>7.0.0</version>
                     <scope>provided</scope>
                 </dependency>
-                <!-- provided dependencies from flow/fusion-endpoint -->
                 <dependency>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-web</artifactId>
-                    <version>5.3.18</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-webmvc</artifactId>
-                    <version>5.3.18</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-autoconfigure</artifactId>
-                    <version>2.6.6</version>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
