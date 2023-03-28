@@ -16,10 +16,11 @@ Learn more about our [release model](https://vaadin.com/roadmap).
 
 ## Supported versions
 
-- **23** (feature releases)
-- **22**
-- **14** (no feature updates)
-- **10** (no feature updates)
+- **24** (Java 17 support, feature releases)
+- **23** (Latest Java 11 support, no feature updates)
+- **22** (Latest Java 8 support, **commercial license**)
+- **14** (LTS, no feature updates)
+- **10** (LTS, no feature updates)
 
 For new users, the latest major version is recommended.  
 
