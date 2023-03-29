@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "24.1.0-alpha5",
+            "jsVersion": "24.1.0-alpha6",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -326,7 +326,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "2.1.0-alpha5",
+            "jsVersion": "2.1.0-alpha6",
             "npmName": "@hilla/react-components"
         }
     },
