@@ -276,7 +276,7 @@ async function sumarizeDiffs(newSbomFile, oldSbomFile, currVersion, prevVersion)
 
 function sumarizeOSV(f, summary) {
   const res = JSON.parse(fs.readFileSync(f));
-  res.results.forEach(r => {
+  res.results && res.results.forEach(r => {
     r.packages.forEach(p => {
       p.vulnerabilities.forEach(v => {
         v.affected.forEach(a => {
