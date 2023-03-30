@@ -6,6 +6,10 @@
         }
     },
     "core": {
+        "a11y-base": {
+            "jsVersion": "24.1.0-alpha6",
+            "npmName": "@vaadin/a11y-base"
+        },
         "accordion": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.1.0-alpha6",
@@ -98,7 +102,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.1.0.alpha1"
+            "javaVersion": "24.1-SNAPSHOT"
         },
         "flow-cdi": {
             "javaVersion": "15.0.0"
@@ -387,7 +391,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.0.1",
+            "javaVersion": "9.0.2",
             "pro": true
         }
     }
