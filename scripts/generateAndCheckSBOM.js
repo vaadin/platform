@@ -391,7 +391,7 @@ function reportLicenses(licenses) {
 function reportVulnerabilities(vuls) {
   let md = "", html = "";
   Object.keys(vuls).forEach(v => {
-    const title = o => o.title.replace(/[^\w\d]/g, ' ');
+    const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
     html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
     md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
