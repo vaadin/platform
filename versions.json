@@ -6,6 +6,10 @@
         }
     },
     "core": {
+        "a11y-base": {
+            "jsVersion": "24.1.0-alpha6",
+            "npmName": "@vaadin/a11y-base"
+        },
         "accordion": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.1.0-alpha6",
