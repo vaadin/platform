@@ -674,7 +674,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "8.2.2",
+            "javaVersion": "8.2.3",
             "pro": true
         }
     }
