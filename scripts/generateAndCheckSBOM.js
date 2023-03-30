@@ -140,11 +140,11 @@ async function run(order, ops) {
     return await exec(order, ops);
   } catch (ret) {
     if (!ops || ops.throw !== false) {
-      ret.stderr && out(rest.stderr);
+      ret.stderr && out(ret.stderr);
       err(`!! ERROR ${ret.code} !! running: ${order}!!\n${!ops || ops.output || !ops.debug ? ret.stdout : ''}`)
       process.exit(1);
     } else {
-      ret.stderr && out(rest.stderr);
+      ret.stderr && out(ret.stderr);
       return ret;
     }
   }
@@ -276,7 +276,7 @@ async function sumarizeDiffs(newSbomFile, oldSbomFile, currVersion, prevVersion)
 
 function sumarizeOSV(f, summary) {
   const res = JSON.parse(fs.readFileSync(f));
-  res.results.forEach(r => {
+  res.results && res.results.forEach(r => {
     r.packages.forEach(p => {
       p.vulnerabilities.forEach(v => {
         v.affected.forEach(a => {
