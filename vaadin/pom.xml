@@ -82,7 +82,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M2</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>enforce-maven-version</id>
@@ -103,7 +103,11 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence />
-                                <requireUpperBoundDeps />
+                                <requireUpperBoundDeps>
+                                    <excludes>
+                                        <exclude>org.slf4j:slf4j-api</exclude>
+                                    </excludes>
+                                </requireUpperBoundDeps>
                             </rules>
                         </configuration>
                         <goals>
