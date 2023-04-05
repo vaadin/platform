@@ -30,7 +30,7 @@ repositories {
 dependencies {
     // Vaadin
     implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
-    implementation 'com.vaadin:vaadin-core'
+    implementation 'com.vaadin:vaadin'
     
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'
