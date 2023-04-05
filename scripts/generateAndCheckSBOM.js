@@ -30,6 +30,7 @@ const licenseWhiteList = [
   'MPL-1.1',
   'CC0-1.0',
   'CC-BY-4.0',
+  'CC-BY-3.0',
   'Zlib',
   'WTFPL',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
