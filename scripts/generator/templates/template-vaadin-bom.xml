@@ -14,8 +14,8 @@
 
     <properties>
 {{javadeps}}
-        <slf4j.version>1.7.36</slf4j.version>
-        <jna.version>5.12.1</jna.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <jna.version>5.13.0</jna.version>
     </properties>
 
     <distributionManagement>
