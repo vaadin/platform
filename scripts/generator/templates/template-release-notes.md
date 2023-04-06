@@ -4,7 +4,7 @@ Vaadin consists of a set of web components, a Java web framework, configurable t
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-## New and Noteworthy Since Vaadin 21
+## New and Noteworthy Since Vaadin 22
 
 Here are the highlighted new and improved features in vaadin 22. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
