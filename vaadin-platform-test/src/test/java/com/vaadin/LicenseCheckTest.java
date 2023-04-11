@@ -36,6 +36,7 @@ public class LicenseCheckTest {
         // Vaadin
         whitelist.add("https://vaadin.com/license/cvdl-4.0");
         whitelist.add("http://vaadin.com/license/cvrl-1");
+        whitelist.add("https://vaadin.com/commercial-license-and-service-terms");
 
         // Eclipse
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
