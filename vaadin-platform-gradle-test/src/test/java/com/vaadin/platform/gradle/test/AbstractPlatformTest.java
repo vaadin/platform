@@ -18,26 +18,12 @@ package com.vaadin.platform.gradle.test;
 import org.junit.Before;
 
 import com.vaadin.testbench.parallel.ParallelTest;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.BeforeClass;
 import java.io.File;
 
 public abstract class AbstractPlatformTest extends ParallelTest {
 
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
-
-    @BeforeClass
-    public static void setupClass() {
-        String sauceKey = System.getProperty("sauce.sauceAccessKey");
-        String hubHost = System.getProperty("com.vaadin.testbench.Parameters.hubHostname");
-        if ((sauceKey == null || sauceKey.isEmpty()) && (hubHost == null || hubHost.isEmpty())) {
-            String driver = System.getProperty("webdriver.chrome.driver");
-            if (driver == null || !new File(driver).exists()) {
-                WebDriverManager.chromedriver().setup();
-            }
-        }
-    }
 
     @Before
     public void setUp() {
