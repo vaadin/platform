@@ -33,7 +33,6 @@ dependencies {
     
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'
-    testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.0'
     
     providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 
