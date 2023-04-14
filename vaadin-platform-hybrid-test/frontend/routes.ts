@@ -1,7 +1,7 @@
 import { Flow } from '@vaadin/flow-frontend';
 
 const { serverSideRoutes } = new Flow({
-  imports: () => import('../target/frontend/generated-flow-imports'),
+  imports: () => import('Frontend/generated/flow/generated-flow-imports.js'),
 });
 
 export const routes = [
