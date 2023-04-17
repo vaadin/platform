@@ -4,6 +4,9 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.ChartType;
+import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -45,7 +48,14 @@ public class HelloVaadinerView extends VerticalLayout {
 
         addClassName("centered-content");
 
-        add(textField, button, vaadinSvgIcon, vaadinFontIcon);
+        Chart chart = new Chart(ChartType.LINE);
+        chart.setId("chart");
+        chart.getElement().getStyle().set("height", "100px");
+        chart.getConfiguration().addSeries(new ListSeries(1, 3, 2, 4, 3, 5, 5, 4, 7));
+        chart.getElement().getStyle().set("width", "100%");
+        chart.getElement().getStyle().set("height", "100%");
+
+        add(textField, button, vaadinSvgIcon, vaadinFontIcon, chart);
     }
 
 }
