@@ -98,6 +98,27 @@
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>change-prod-bundle-location</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/vaadin-prod-bundle</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.outputDirectory}/META-INF/VAADIN</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
@@ -110,7 +131,11 @@
                       <target>
                         <!-- Remove application class file, so as IT modules do not read @Theme annotations when
                              maven configures the classpath for multimodule projects -->
-                        <delete dir="target/classes/com/vaadin/prodbundle" includeemptydirs="true"></delete>
+                          <delete dir="target/classes/com/vaadin/prodbundle"
+                                includeemptydirs="true"/>
+                          <!-- Move bundle files to vaadin-prod-bundle folder -->
+                          <delete dir="target/classes/META-INF"
+                                includeemptydirs="true"/>
                       </target>
                     </configuration>
                   </execution>
