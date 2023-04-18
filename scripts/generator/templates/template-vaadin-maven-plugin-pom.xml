@@ -47,6 +47,11 @@
             <version>${maven.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-prod-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <!-- Needed for lambdas in Mojos -->
