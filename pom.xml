@@ -45,6 +45,7 @@
         <module>vaadin-spring-boot-starter</module>
         <module>vaadin-platform-javadoc</module>
         <module>vaadin-dev-bundle</module>
+        <module>vaadin-prod-bundle</module>
     </modules>
 
     <profiles>
