@@ -135,7 +135,7 @@
                           <delete dir="target/classes/com/vaadin/prodbundle"
                                 includeemptydirs="true"/>
                           <!-- Move bundle files to vaadin-prod-bundle folder -->
-                          <delete dir="target/classes/META-INF"
+                          <delete dir="target/classes/META-INF/VAADIN"
                                 includeemptydirs="true"/>
                       </target>
                     </configuration>
