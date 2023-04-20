@@ -37,6 +37,11 @@ on:
             required: false
             type: string
             default: ''
+          forcePushReports:
+            description: 'Push the SBOM to release note'
+            required: false
+            type: boolean
+            default: false
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -64,16 +69,16 @@ jobs:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.2/bomber_0.4.2_linux_amd64.deb
-          sudo dpkg -i bomber_0.4.2_linux_amd64.deb
-        name: Install bomber-0.4.2
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.4/bomber_0.4.4_linux_amd64.deb
+          sudo dpkg -i bomber_0.4.4_linux_amd64.deb
+        name: Install bomber-0.4.4
       - run: |
-          # Install dependency-check-8.1.2
+          # Install dependency-check-8.2.1
           cd /tmp
-          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.1.2/dependency-check-8.1.2-release.zip
-          unzip dependency-check-8.1.2-release.zip
+          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.2.1/dependency-check-8.2.1-release.zip
+          unzip dependency-check-8.2.1-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
-        name: Install dependency-check-8.1.2
+        name: Install dependency-check-8.2.1
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
@@ -109,7 +114,7 @@ jobs:
             **/target/dependencies.html
           if-no-files-found: error
           retention-days: 60
-      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
+      - if: ${{(success() || github.event.inputs.forcePushReports) && (github.event.inputs.version || github.event.release.tag_name)}}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -118,7 +123,7 @@ jobs:
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
           body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
-      - if: ${{success() && (github.event.inputs.version || github.event.release.tag_name)}}
+      - if: ${{(success() || github.event.inputs.forcePushReports) && (github.event.inputs.version || github.event.release.tag_name)}}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
