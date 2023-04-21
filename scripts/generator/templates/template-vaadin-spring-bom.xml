@@ -112,14 +112,6 @@
                 <artifactId>flow-server-production-mode</artifactId>
                 <version>${flow.version}</version>
             </dependency>
-            <!-- flow is using an older version of spring-boot version, remove after flow new release -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.11</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring</artifactId>
