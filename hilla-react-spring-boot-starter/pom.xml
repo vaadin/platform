@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>dev.hilla</groupId>
-    <artifactId>hilla-spring-boot-starter</artifactId>
-    <name>Hilla Spring Boot Starter</name>
-    <description>Spring Boot Starter for Hilla applications using Lit.</description>
+    <artifactId>hilla-react-spring-boot-starter</artifactId>
+    <name>Hilla-React Spring Boot Starter</name>
+    <description>Spring Boot Starter for Hilla applications using React.</description>
     <version>${hilla.version}</version>
 
     <repositories>
@@ -60,7 +60,7 @@
         </dependency>
         <dependency>
             <groupId>dev.hilla</groupId>
-            <artifactId>hilla</artifactId>
+            <artifactId>hilla-react</artifactId>
         </dependency>
 
         <!-- Spring -->
