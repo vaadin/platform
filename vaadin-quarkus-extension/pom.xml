@@ -48,6 +48,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-quarkus</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>flow-server</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
