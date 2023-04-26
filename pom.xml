@@ -82,6 +82,7 @@
                 <module>hilla-dev</module>
                 <module>hilla-react</module>
                 <module>hilla-spring-boot-starter</module>
+                <module>hilla-react-spring-boot-starter</module>
                 <module>hilla-maven-plugin</module>
             </modules>
         </profile>
