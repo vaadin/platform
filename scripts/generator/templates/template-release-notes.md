@@ -6,6 +6,8 @@ Vaadin {{platform}}
 
 **Notable Changes**
 
+Gradle support is raised to the version (Gradle 7.6) required by [jackson](https://github.com/FasterXML/jackson-core/issues/955)
+
 ### Flow
 - 
 ### Hilla
