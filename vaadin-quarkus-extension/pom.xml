@@ -64,4 +64,30 @@
             <artifactId>vaadin-core-jandex</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-extension-metadata</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>com.vaadin</includeGroupIds>
+                            <includeArtifactIds>vaadin-quarkus</includeArtifactIds>
+                            <includeTypes>jar</includeTypes>
+                            <excludeClassifiers>codestarts</excludeClassifiers>
+                            <includes>META-INF/quarkus-extension.yaml</includes>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
