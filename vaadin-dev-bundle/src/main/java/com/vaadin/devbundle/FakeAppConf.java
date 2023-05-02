@@ -8,7 +8,6 @@ import com.vaadin.flow.theme.Theme;
 
 @Theme("vaadin-dev-bundle")
 @PWA(name = "vaadin-dev-bundle", shortName = "vaadin-dev-bundle")
-@JsModule("@vaadin-component-factory/vcf-nav")
 public class FakeAppConf implements AppShellConfigurator{
 
 }
