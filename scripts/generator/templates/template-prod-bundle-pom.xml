@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
@@ -20,8 +20,9 @@
         </repository>
     </distributionManagement>
 
-    <properties>
-        {{javadeps}}
+    <properties> {{javadeps}} 
+      <optimizeBundle>true</optimizeBundle>
+      <skipTests>false</skipTests>
     </properties>
 
     <dependencyManagement>
@@ -97,7 +98,7 @@
                             <goal>build-frontend</goal>
                         </goals>
                         <configuration>
-                            <optimizeBundle>false</optimizeBundle>
+                            <optimizeBundle>${optimizeBundle}</optimizeBundle>
                         </configuration>
                     </execution>
                 </executions>
@@ -127,23 +128,24 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
-                  <execution>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-                        <!-- Remove application class file, so as IT modules do not read @Theme annotations when
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Remove application class file, so as IT modules do not read
+                                @Theme annotations when
                              maven configures the classpath for multimodule projects -->
-                          <delete dir="target/classes/com/vaadin/prodbundle"
-                                includeemptydirs="true"/>
-                          <!-- Move bundle files to vaadin-prod-bundle folder -->
-                          <delete dir="target/classes/META-INF/VAADIN"
-                                includeemptydirs="true"/>
-                      </target>
-                    </configuration>
-                  </execution>
+                                <delete dir="target/classes/com/vaadin/prodbundle"
+                                    includeemptydirs="true" />
+                                <!-- Move bundle files to vaadin-prod-bundle folder -->
+                                <delete dir="target/classes/META-INF/VAADIN"
+                                    includeemptydirs="true" />
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
