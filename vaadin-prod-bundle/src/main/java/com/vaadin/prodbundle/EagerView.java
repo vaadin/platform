@@ -113,8 +113,8 @@ public class EagerView extends Div {
     public TextField textField;
     public TimePicker timePicker;
     public TreeGrid<String> treeGrid;
-    public Tooltip tooltip;
-    public TooltipConfiguration tooltipConfiguration;
+    // public Tooltip tooltip;
+    // public TooltipConfiguration tooltipConfiguration;
     public Upload upload;
     public VerticalLayout verticalLayout;
     public VirtualList<String> virtualList;
