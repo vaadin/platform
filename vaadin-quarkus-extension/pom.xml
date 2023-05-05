@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
@@ -11,6 +11,11 @@
     <artifactId>vaadin-quarkus-extension</artifactId>
     <name>Vaadin Quarkus Extension</name>
     <description>Dependency for a Quarkus project.</description>
+
+    <properties>
+        <vaadin.version>${project.version}</vaadin.version>
+        <codestarts>${project.groupId}:${project.artifactId}:codestarts:jar:${project.version}</codestarts>
+    </properties>
 
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
@@ -68,22 +73,140 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>io.reformanda.semper</groupId>
+                <artifactId>dependencyversion-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>set-vaadin-quarkus-version</id>
+                        <goals>
+                            <goal>set-version</goal>
+                        </goals>
+                        <configuration>
+                            <propertySets>
+                                <propertySet>
+                                    <includes>
+                                        <include>com.vaadin:vaadin-quarkus:jar</include>
+                                    </includes>
+                                    <transitive>false</transitive>
+                                </propertySet>
+                            </propertySets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>unpack-extension-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.vaadin</groupId>
+                                    <artifactId>vaadin-quarkus</artifactId>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/build/quarkus-metadata</outputDirectory>
+                                    <includes>META-INF/quarkus-extension.yaml</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.vaadin</groupId>
+                                    <artifactId>vaadin-quarkus</artifactId>
+                                    <classifier>codestarts</classifier>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/build/quarkus-codestarts
+                                    </outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>copy-extension-metadata</id>
-                        <phase>generate-resources</phase>
+                        <phase>process-resources</phase>
                         <goals>
-                            <goal>unpack-dependencies</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <includeGroupIds>com.vaadin</includeGroupIds>
-                            <includeArtifactIds>vaadin-quarkus</includeArtifactIds>
-                            <includeTypes>jar</includeTypes>
-                            <excludeClassifiers>codestarts</excludeClassifiers>
-                            <includes>META-INF/quarkus-extension.yaml</includes>
+                            <!--
+                                Replaces codestart artifact in quarkus-metadata to point to the one generated for the platform
+                                Uses maven groupId:artifactId: and :type:version as delimiter for replacement.
+                                From the text 'artifact: "com.vaadin:vaadin-quarkus:codestarts:jar:2.0-SNAPSHOT"'
+                                it extracts the 'codestarts' token that is then replaced with the corresponding maven
+                                property, so the result in the filtered file is the expansion of 'artifact: "${codestart}"'
+                            -->
+                            <delimiters>
+                                <delimiter>com.vaadin:vaadin-quarkus:*:jar:${com.vaadin:vaadin-quarkus:jar.version}
+                                </delimiter>
+                            </delimiters>
+                            <useDefaultDelimiters>false</useDefaultDelimiters>
                             <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/build/quarkus-metadata</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!--
+                        Extracts the contents of the 'vaadin-quarkus' codestarts and prepares for packaging
+                        in vaadin-quarkus-extension codestart artifact, pinning platform version in codestart.yml
+                        -->
+                        <id>clone-extension-codestarts</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/processed-quarkus-codestarts</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/build/quarkus-codestarts</directory>
+                                    <excludes>
+                                        <exclude>**/codestart.yml</exclude>
+                                        <exclude>META-INF/**</exclude>
+                                    </excludes>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${project.build.directory}/build/quarkus-codestarts</directory>
+                                    <includes>
+                                        <include>**/codestart.yml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- Attach cloned codestart jar to the build, for deployment -->
+                        <id>generate-codestart-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${project.build.directory}/processed-quarkus-codestarts</classesDirectory>
+                            <classifier>codestarts</classifier>
+                            <skipIfEmpty>true</skipIfEmpty>
                         </configuration>
                     </execution>
                 </executions>
