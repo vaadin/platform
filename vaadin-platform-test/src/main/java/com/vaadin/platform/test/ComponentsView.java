@@ -123,6 +123,8 @@ import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -603,6 +605,14 @@ public class ComponentsView extends AppLayout {
 
         com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
 
+        SideNav sideNav = new SideNav("Navigation");
+        sideNav.setCollapsible(true);
+        sideNav.addItem(new SideNavItem("Nav item 1", "/1"));
+        SideNavItem parentNavItem = new SideNavItem("Nav item 2", "/2");
+        parentNavItem.addItem(new SideNavItem("Nav item 2 - 1", "/2/1"));
+        parentNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
+        sideNav.addItem(parentNavItem);
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
@@ -649,6 +659,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageInput);
         components.add(main);
         components.add(mapComponent);
+        components.add(sideNav);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);

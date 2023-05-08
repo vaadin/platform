@@ -219,6 +219,11 @@
             "jsVersion": "24.1.0-alpha9",
             "npmName": "@vaadin/select"
         },
+        "side-nav": {
+            "javaVersion": "{{version}}",
+            "jsVersion": "24.1.0-alpha9",
+            "npmName": "@vaadin/side-nav"
+        },
         "split-layout": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.1.0-alpha9",
