@@ -24,7 +24,6 @@ mkdir -p vaadin-platform-javadoc
 cp scripts/generator/results/vaadin-platform-javadoc-pom.xml vaadin-platform-javadoc/pom.xml
 
 cp scripts/generator/results/vaadin-maven-plugin-pom.xml vaadin-maven-plugin/pom.xml
-cp scripts/generator/results/hilla-maven-plugin-pom.xml hilla-maven-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-pom.xml vaadin-gradle-plugin/pom.xml
 cp scripts/generator/results/vaadin-gradle-plugin-portal-pom.xml vaadin-gradle-plugin/pom-portal.xml
 cp scripts/generator/results/vaadin-core-versions.json vaadin-core-internal/vaadin-core-versions.json
