@@ -64,9 +64,6 @@ const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-p
 const mavenPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-maven-plugin-pom.xml');
 const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom.xml');
 
-const hillaMavenPluginTemplatePomFileName = getTemplateFilePath('template-hilla-maven-plugin-pom.xml');
-const hillaMavenPluginResultPomFileName = getResultsFilePath('hilla-maven-plugin-pom.xml');
-
 const gradlePluginTemplatePomFileName = getTemplateFilePath('template-vaadin-gradle-plugin-pom.xml');
 const gradlePluginResultPomFileName = getResultsFilePath('vaadin-gradle-plugin-pom.xml');
 
@@ -122,7 +119,6 @@ writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, rele
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 
 writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
-writer.writeProperty(versions, "flow", hillaMavenPluginTemplatePomFileName, hillaMavenPluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
