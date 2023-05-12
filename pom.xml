@@ -84,7 +84,6 @@
                 <module>hilla-react</module>
                 <module>hilla-spring-boot-starter</module>
                 <module>hilla-react-spring-boot-starter</module>
-                <module>hilla-maven-plugin</module>
             </modules>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->

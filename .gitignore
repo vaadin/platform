@@ -13,9 +13,6 @@ vaadin-maven-plugin/src/main
 vaadin-maven-plugin/bin
 vaadin-maven-plugin/.factorypath
 hilla/hilla-versions.json
-hilla-maven-plugin/src/main
-hilla-maven-plugin/bin
-hilla-maven-plugin/.factorypath
 hilla-react/hilla-react-versions.json
 vaadin-gradle-plugin/build
 vaadin-platform-gradle-test/build
@@ -48,7 +45,6 @@ vaadin-bom/pom.xml
 hilla-bom/pom.xml
 vaadin-spring-bom/pom.xml
 vaadin-maven-plugin/pom.xml
-hilla-maven-plugin/pom.xml
 vaadin-gradle-plugin/pom.xml
 vaadin-gradle-plugin/pom*xml
 vaadin-platform-javadoc/pom.xml
