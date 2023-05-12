@@ -91,7 +91,6 @@ public class EagerView extends Div {
     public GridPro<String> gridPro;
     public HorizontalLayout horizontalLayout;
     public IntegerField integerField;
-    public Icon icon;
     public ListBox<String> listBox;
     public LoginOverlay loginOverlay;
     public LoginForm LoginForm;
