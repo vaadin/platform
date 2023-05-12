@@ -615,7 +615,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "7.1-SNAPSHOT",
+            "javaVersion": "7.1.0.alpha1",
             "pro": true
         }
     }
