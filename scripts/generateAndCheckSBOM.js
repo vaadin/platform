@@ -468,8 +468,8 @@ async function main() {
   if (!cmd.quick) {
     fs.existsSync('package.json') && log(`cleaning package.json`) && fs.unlinkSync('package.json');
     // Ensure Flow does not clean up package.json and node_modules
-    await run('mkdir node_modules');
-    await run('echo {} > package.json');
+    fs.mkdirSync('node_modules');
+    fs.writeFileSync("package.json","{}");
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
