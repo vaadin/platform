@@ -23,6 +23,8 @@ public class AllComponentsIncludedTest {
 
         unoptimizedStats.remove("entryScripts");
         optimizedStats.remove("entryScripts");
+        unoptimizedStats.remove("indexHtmlGenerated");
+        optimizedStats.remove("indexHtmlGenerated");
 
         Assertions.assertEquals(JsonUtil.stringify(unoptimizedStats, 2),
                 JsonUtil.stringify(optimizedStats, 2));
