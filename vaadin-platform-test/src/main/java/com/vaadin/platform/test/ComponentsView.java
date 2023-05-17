@@ -96,6 +96,7 @@ import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.html.NativeDetails;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
@@ -613,6 +614,8 @@ public class ComponentsView extends AppLayout {
         parentNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
         sideNav.addItem(parentNavItem);
 
+        NativeLabel nativeLabel = new NativeLabel("Native Label");
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
@@ -660,6 +663,7 @@ public class ComponentsView extends AppLayout {
         components.add(main);
         components.add(mapComponent);
         components.add(sideNav);
+        components.add(nativeLabel);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
