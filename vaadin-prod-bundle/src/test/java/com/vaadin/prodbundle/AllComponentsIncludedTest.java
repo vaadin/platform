@@ -3,7 +3,12 @@ package com.vaadin.prodbundle;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
+import com.github.difflib.DiffUtils;
+import com.github.difflib.UnifiedDiffUtils;
+import com.github.difflib.patch.Patch;
+import com.github.difflib.unifieddiff.UnifiedDiff;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,8 +31,17 @@ public class AllComponentsIncludedTest {
         unoptimizedStats.remove("indexHtmlGenerated");
         optimizedStats.remove("indexHtmlGenerated");
 
-        Assertions.assertEquals(JsonUtil.stringify(unoptimizedStats, 2),
-                JsonUtil.stringify(optimizedStats, 2));
+        List<String> unoptJson = List
+                .of(JsonUtil.stringify(unoptimizedStats, 2).split("\n"));
+        List<String> optJson = List
+                .of(JsonUtil.stringify(optimizedStats, 2).split("\n"));
+        if (!unoptJson.equals(optJson)) {
+            Patch<String> patch = DiffUtils.diff(unoptJson, optJson);
+            List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff(
+                    "unoptimized-stats.json", "optimized-stats.json", unoptJson,
+                    patch, 5);
+            Assertions.fail(String.join("\n", unifiedDiff));
+        }
 
     }
 
