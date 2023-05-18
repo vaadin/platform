@@ -288,7 +288,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "2.0.0"
+            "javaVersion": "2.0.1"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
