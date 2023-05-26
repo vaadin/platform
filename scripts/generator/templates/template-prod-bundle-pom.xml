@@ -90,6 +90,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/*Fake*</exclude>
+                        <exclude>vaadin-featureflags.properties</exclude>
                     </excludes>
                 </configuration>
             </plugin>
