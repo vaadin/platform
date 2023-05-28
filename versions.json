@@ -349,7 +349,7 @@
         "vaadin-board": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "2.2.1",
+            "jsVersion": "2.2.2",
             "npmName": "@vaadin/vaadin-board",
             "pro": true
         },
