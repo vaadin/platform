@@ -30,12 +30,14 @@ const licenseWhiteList = [
   'MPL-1.1',
   'CC0-1.0',
   'CC-BY-4.0',
-  'CC-BY-3.0',
   'Zlib',
   'WTFPL',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
+  'https://www.gnu.org/software/classpath/license.html',
   VAADIN_LICENSE,
-  'https://www.highcharts.com/license'
+  'https://www.highcharts.com/license',
+  'http://www.gnu.org/licenses/lgpl-3.0.html',
+  'CC-BY-3.0'
 ];
 
 const cveWhiteList = {
@@ -66,9 +68,10 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--enable-full-owasp': cmd.useFullOWASP = true; break;
     case '--version': cmd.version = process.argv[++i]; break;
     case '--compare': cmd.org = process.argv[++i]; break;
+    case '--quick': cmd.quick = true; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick]`);
       process.exit(1);
   }
 }
@@ -172,8 +175,8 @@ async function consolidateSBoms(...boms) {
         if (l.expression) {
           l.expression = l.expression.replace(/SEE LICENSE IN [^\)]+/, VAADIN_LICENSE);
         }
-        if (l.license && l.license.name == 'SEE LICENSE IN LICENSE') {
-          l.license.url = VAADIN_LICENSE;
+        if (l.license && /SEE LICENSE IN/.test(l.license.name)) {
+          l.license.name = l.license.name.replace(/SEE LICENSE IN [^\)]+/, VAADIN_LICENSE);
         }
       }
       l.expression && (l.license = { id: l.expression });
@@ -192,8 +195,10 @@ function sumarizeLicenses(f) {
   sbom.components.forEach((e) => {
     let comp = decodeURIComponent(e.purl).replace(/[?#].*$/g, '');
     let lic = e.licenses && [...(e.licenses.reduce((p, l) => {
-      return p.add(l.expression ? l.expression.replace(/[\(\)]/g, '') :
-        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));
+      return p.add((l.expression ? l.expression :
+        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name))
+        // remove parenthesis
+        .replace(/[\(\)]/g, ''));
     }, new Set()))].join(' OR ');
     const addLic = (idx, l) => (summary[idx] = summary[idx] || []).push(l);
     if (!lic) {
@@ -347,8 +352,8 @@ function checkVunerabilities(vuls) {
   let msg = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
-    err = err && (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
-    msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}]\n`;
+    err = err || (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
+    msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})\n`;
   });
   return { err, msg };
 }
@@ -385,10 +390,11 @@ function reportLicenses(licenses) {
 function reportVulnerabilities(vuls) {
   let md = "", html = "";
   Object.keys(vuls).forEach(v => {
+    const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
     html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
-      `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${vuls[v][o].title}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
+      `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
     md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
-      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${vuls[v][o].title}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
+      `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${title(vuls[v][o])}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
   md && (md = "| Package | CVEs |\n|-------|--------|\n" + md);
@@ -444,29 +450,33 @@ async function main() {
   await isInstalled('mvn');
   await isInstalled('curl');
 
-  if (cmd.version) {
+  if (!cmd.quick && cmd.version) {
     await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
   }
 
   const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
   log(`current version: ${currVersion}`);
-  await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
-  await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
+  if (!cmd.quick) {
+    await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
+    await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
+  }
 
   log(`cd ${testProject}`);
   process.chdir(testProject);
 
-  log(`cleaning package.json`);
-  fs.existsSync('package.json') && fs.unlinkSync('package.json');
-
-  await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
-  await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
-  await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-  await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
-
-  await run('npm install');
-  await run('npm install @cyclonedx/cyclonedx-npm');
-  await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
+  if (!cmd.quick) {
+    fs.existsSync('package.json') && log(`cleaning package.json`) && fs.unlinkSync('package.json');
+    // Ensure Flow does not clean up package.json and node_modules
+    fs.mkdirSync('node_modules');
+    fs.writeFileSync("package.json","{}");
+    await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
+    await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
+    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
+    await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
+    await run('npm install');
+    await run('npm install --save-dev @cyclonedx/cyclonedx-npm');
+    await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
+  }
 
   log(`generating 'bom-vaadin.js'`);
   const sbom = await consolidateSBoms('target/bom.json', 'target/bom-npm.json');
@@ -476,31 +486,32 @@ async function main() {
 
   const vulnerabilities = {}
   if (cmd.useBomber) {
-    const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
-    await run(cmdBomber, { output: 'target/bomber-osv-report.json' });
-    sumarizeBomber('target/bomber-osv-report.json', vulnerabilities);
-    if (cmd.hasOssToken) {
-      await run(`${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
+    if (!cmd.quick) {
+      const cmdBomber = `bomber scan target/bom-vaadin.json --output json`;
+      await run(cmdBomber, { output: 'target/bomber-osv-report.json' });
+      cmd.hasOssToken && await run(
+        `${cmdBomber} --provider ossindex --username ${process.env.OSSINDEX_USER} --token ${process.env.OSSINDEX_TOKEN}`,
         { output: 'target/bomber-oss-report.json' });
-      sumarizeBomber('target/bomber-oss-report.json', vulnerabilities);
     }
+    sumarizeBomber('target/bomber-osv-report.json', vulnerabilities);
+    fs.existsSync('target/bomber-oss-report.json') && sumarizeBomber('target/bomber-oss-report.json', vulnerabilities);
   }
 
   if (cmd.useOSV) {
-    await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/osv-scanner-report.json', throw: false });
+    !cmd.quick && await run('osv-scanner --sbom=target/bom-vaadin.json --json', { output: 'target/osv-scanner-report.json', throw: false });
     sumarizeOSV('target/osv-scanner-report.json', vulnerabilities);
   }
 
   if (cmd.useOWASP) {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
-    fs.unlinkSync('package-lock.json')
-    await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
+    fs.existsSync('package-lock.json') && fs.unlinkSync('package-lock.json')
+    !cmd.quick && await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
   if (cmd.useFullOWASP) {
-    await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+    !cmd.quick && await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
