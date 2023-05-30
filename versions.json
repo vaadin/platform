@@ -320,10 +320,10 @@
             "javaVersion": "2.0.0"
         },
         "observability-kit": {
-            "version": "2.1.0.beta2"
+            "version": "2.1.0.beta3"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.1.0.beta2"
+            "javaVersion": "2.1.0.beta3"
         },
         "swing-kit": {
             "version": "2.0.0"
