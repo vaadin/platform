@@ -2,7 +2,7 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 24.0
+## New and Noteworthy Since Vaadin 24.1
 
 **Notable Changes**
 
