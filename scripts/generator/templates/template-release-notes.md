@@ -18,6 +18,9 @@ Gradle support is raised to the version (Gradle 7.6) required by [jackson](https
   - Allows changing styles immediately without page reload
 see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0.beta1) for all features
 
+### Classic Components
+- The rendering performance of the Classic GridLayout has been enhanced for large/huge grids.
+
 ### Hilla
 - Hilla Gradle Plugin [documentation](https://github.com/vaadin/docs/blob/6edc1f91ac698d2233bd7e0325fd2df94c385aa0/articles/lit/start/gradle.adoc)
 - **start.spring.io** enhancements [documentation](https://github.com/vaadin/docs/blob/6d670ae18ab92e94d7d7b097d788b9c3d3ba5107/articles/lit/start/quick.adoc#coming-from-spring-initializr)
