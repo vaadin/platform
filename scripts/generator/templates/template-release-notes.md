@@ -26,16 +26,16 @@ see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0.beta1) for
   
 ### Design System
 - New **SideNav** component (released under feature flag)
-  - If you have a project using `vcf-nav` it is recommended to migrate from to `vaadin-side-nav`.
-- **Map** new features
-  - Styleable label for marker [documentation](https://vaadin.com/docs/latest/components/map/#marker-text)
-  - Drag and Drop Marker [ducumentation](https://vaadin.com/docs/latest/components/map/#marker-drag-drop)
+  - If you have a project using `vcf-nav` it is recommended to migrate to `vaadin-side-nav`.
+- New **Map** features
+  - Styleable label for markers [documentation](https://vaadin.com/docs/latest/components/map/#marker-text)
+  - Drag and drop markers [documentation](https://vaadin.com/docs/latest/components/map/#marker-drag-drop)
 - Warning color in **Lumo** theme
 - Warning **Notification** theme variant
 - **Accessibility** improvements
   - Flow component APIs for setting aria-label and aria-labelledby
   - Optional borders around input fields
-- **TreeGrid** scrollToIndex
+- **TreeGrid** hierarchical scrollToIndex
 
 
 ### Kits
