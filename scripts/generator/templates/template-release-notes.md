@@ -25,7 +25,8 @@ see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0.beta1) for
   - Plugin command for scaffolding initial frontend
   
 ### Design System
-- New **SideNav** component ( * released under feature flag)
+- New **SideNav** component (released under feature flag)
+  - If you have a project using `vcf-nav` it is recommended to migrate from to `vaadin-side-nav`.
 - **Map** new features
   - Styleable label for marker [documentation](https://vaadin.com/docs/latest/components/map/#marker-text)
   - Drag and Drop Marker [ducumentation](https://vaadin.com/docs/latest/components/map/#marker-drag-drop)
@@ -178,12 +179,6 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
 ## Known issues and limitations
 
-<table>
-<tr>
-  <th>Flow</th>
-  <td>
-
-- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
-  </td>
-</tr>
-</table>
+#### Flow
+- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+).
+- That if you see the error <em>'An import path can only end with a `.ts` extension ...'</em>, then you can add `allowImportingTsExtensions: true` to `tsconfig.json`.
