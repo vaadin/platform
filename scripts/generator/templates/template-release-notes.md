@@ -9,14 +9,35 @@ Vaadin {{platform}}
 Gradle support is raised to the version (Gradle 7.6) required by [jackson](https://github.com/FasterXML/jackson-core/issues/955)
 
 ### Flow
-- 
+- Pre-compiled frontend bundle for production builds
+  - Vaadin uses a pre-compiled frontend bundle enabling building Vaadin Flow projects for production more quickly without installing Node.js and npm dependencies. This is an extension of frontend dev bundle feature, introduced in Vaadin 24.0, but for production builds.
+- Production Bundle Loading Optimizations
+  - A production build scans for Routes and lazy loads the components used in the routes when navigated.
+  - [documentation](https://vaadin.com/docs/latest/production/production-build)
+- Hot Module Redeployment
+  - Allows changing styles immediately without page reload
+see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0.beta1) for all features
+
 ### Hilla
-- 
-
+- Hilla Gradle Plugin [documentation](https://github.com/vaadin/docs/blob/6edc1f91ac698d2233bd7e0325fd2df94c385aa0/articles/lit/start/gradle.adoc)
+- **start.spring.io** enhancements [documentation](https://github.com/vaadin/docs/blob/6d670ae18ab92e94d7d7b097d788b9c3d3ba5107/articles/lit/start/quick.adoc#coming-from-spring-initializr)
+  - Help message for next steps in default view
+  - Plugin command for scaffolding initial frontend
+  
 ### Design System
-- 
+- New **SideNav** component ( * released under feature flag)
+- **Map** new features
+  - Styleable label for marker [documentation](https://vaadin.com/docs/latest/components/map/#marker-text)
+  - Drag and Drop Marker [ducumentation](https://vaadin.com/docs/latest/components/map/#marker-drag-drop)
+- Warning color in **Lumo** theme
+- Warning **Notification** theme variant
+- **Accessibility** improvements
+  - Flow component APIs for setting aria-label and aria-labelledby
+  - Optional borders around input fields
+- **TreeGrid** scrollToIndex
 
-### Collaboration Engine
+
+### Kits
 - 
 `*` experimental
 
