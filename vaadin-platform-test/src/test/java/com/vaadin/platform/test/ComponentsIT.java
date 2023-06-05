@@ -26,8 +26,8 @@ public class ComponentsIT extends AbstractPlatformTest {
         if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
-                // supported broswers : firefox esr is 102, safari 15 is listed in the note
-                Parameters.setGridBrowsers("firefox,firefox-102,safari,safari-15,edge");
+                // supported broswers : firefox esr is 102
+                Parameters.setGridBrowsers("firefox,firefox-102,safari,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
