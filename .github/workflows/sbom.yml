@@ -122,7 +122,6 @@ jobs:
           asset_name: "Software.Bill.Of.Materials.json"
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
-          body: "Vaadin Platform V${{github.event.inputs.version}} SBOM"
       - if: ${{(success() || github.event.inputs.forcePushReports) && (github.event.inputs.version || github.event.release.tag_name)}}
         uses: svenstaro/upload-release-action@v2
         with:
@@ -131,5 +130,4 @@ jobs:
           asset_name: "Dependencies.Report.html"
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
-          body: "Vaadin Platform V${{github.event.inputs.version}} Dependencies"
 
