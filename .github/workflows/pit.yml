@@ -141,5 +141,5 @@ jobs:
         with:
           name: failed-outputs
           path: tmp/**/*.out
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
