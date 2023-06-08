@@ -23,9 +23,6 @@ see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0) for all f
 
 ### Hilla
 - Hilla Gradle Plugin [documentation](https://hilla.dev/docs/lit/start/gradle)
-- **start.spring.io** enhancements [documentation](https://github.com/vaadin/docs/blob/6d670ae18ab92e94d7d7b097d788b9c3d3ba5107/articles/lit/start/quick.adoc#coming-from-spring-initializr)
-  - Help message for next steps in default view
-  - Plugin command for scaffolding initial frontend
   
 ### Design System
 - New **SideNav** component (released under feature flag)
