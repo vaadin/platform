@@ -41,7 +41,7 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908']
+  'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
 }
 
 const STYLE = `<style>
