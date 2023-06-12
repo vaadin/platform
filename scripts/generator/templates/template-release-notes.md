@@ -182,3 +182,8 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 #### Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+).
 - That if you see the error <em>'An import path can only end with a `.ts` extension ...'</em>, then you can add `allowImportingTsExtensions: true` to `tsconfig.json`.
+
+
+## Known Vulnerability
+
+TestBench brings the dependency `pkg:maven/com.google.guava/guava@31.1-jre`, that has the vulnerability described in CVE-2020-8908 and CVE-2023-2976, the problematic method has been deprecated in guava and it is not used in Vaadin.
