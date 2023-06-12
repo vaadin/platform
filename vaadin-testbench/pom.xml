@@ -40,6 +40,11 @@
         </dependency>
 
         <!-- TEMPORARY FIX OF DEP VULNERABILITIES -->
+		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.0.1-jre</version>
+        </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-transport</artifactId>

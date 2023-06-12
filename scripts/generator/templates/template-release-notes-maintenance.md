@@ -32,3 +32,6 @@ Vaadin {{platform}}
 - Maven plugin ({{platform}})
 - Gradle plugin ({{platform}})
 - Quarkus plugin ([{{core.vaadin-quarkus.javaVersion}}](https://github.com/vaadin/quarkus/releases/tag/{{core.vaadin-quarkus.javaVersion}}))
+
+## known vulnerability 
+TestBench brings the dependency `pkg:maven/com.google.guava/guava@31.1-jre`, that has the vulnerability described in CVE-2020-8908 and CVE-2023-2976, the problematic method has been deprecated in guava and it is not used in Vaadin.
