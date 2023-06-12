@@ -18,9 +18,6 @@ Gradle support is raised to the version (Gradle 7.6) required by [jackson](https
   - Allows changing styles immediately without page reload
 see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0) for all features
 
-### Classic Components
-- The rendering performance of the Classic GridLayout has been enhanced for large/huge grids.
-
 ### Hilla
 - Hilla Gradle Plugin [documentation](https://hilla.dev/docs/lit/start/gradle)
   
@@ -37,10 +34,12 @@ see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0) for all f
   - Optional borders around input fields
 - **TreeGrid** hierarchical scrollToIndex
 
-
 ### Kits
 - 
 `*` experimental
+
+### Classic Components
+- The rendering performance of the Classic GridLayout has been enhanced for large/huge grids.
 
 ## <a id="_changelogs"></a> Changelogs
 
