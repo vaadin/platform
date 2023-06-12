@@ -41,7 +41,7 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/org.springframework/spring-web@5.3.26' : ['CVE-2016-1000027']
+  'pkg:maven/org.springframework/spring-web@5.3.27' : ['CVE-2016-1000027']
 }
 
 const STYLE = `<style>
