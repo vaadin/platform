@@ -41,8 +41,8 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
-  'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
+  // Check fix in vaadin-testbench/pom.xml, and update when Selenium is fixed
+  // 'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
 }
 
 const STYLE = `<style>
