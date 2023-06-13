@@ -35,8 +35,10 @@ see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0) for all f
 - **TreeGrid** hierarchical scrollToIndex
 
 ### Kits
-- 
-`*` experimental
+- **Observability Kit** now includes Frontend Observability to instrument client-side code and collect traces from the browser
+- **Obserability Kit** has now support for Hilla apps with a new Java starter module and a client-side library
+- **SSO Kit** gets its own client-side libraries for both Lit and React when used in Hilla apps
+- **SSO Kit** now provides an API to require authentication for specific route for both Vaadin and React routers
 
 ### Classic Components
 - The rendering performance of the Classic GridLayout has been enhanced for large/huge grids.
