@@ -38,6 +38,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-classic-components-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
@@ -52,6 +56,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>kubernetes-kit-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>observability-kit-starter</artifactId>
         </dependency>
 
     </dependencies>
