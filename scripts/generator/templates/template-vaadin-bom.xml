@@ -75,6 +75,21 @@
                 <artifactId>observability-kit-starter</artifactId>
                 <version>${observability.kit.starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-swing-kit-flow</artifactId>
+                <version>${swing.kit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-swing-kit-client</artifactId>
+                <version>${swing.kit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-swing-kit-client-api</artifactId>
+                <version>${swing.kit.version}</version>
+            </dependency>
             <!-- SLF4J -->
             <dependency>
                 <groupId>org.slf4j</groupId>
