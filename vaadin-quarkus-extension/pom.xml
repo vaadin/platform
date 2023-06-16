@@ -15,6 +15,8 @@
     <properties>
         <vaadin.version>${project.version}</vaadin.version>
         <codestarts>${project.groupId}:${project.artifactId}:codestarts:jar:${project.version}</codestarts>
+        <vaadin-quarkus>${project.groupId}:${project.artifactId}::jar:${project.version}</vaadin-quarkus>
+        <codestart>${project.groupId}:${project.artifactId}::jar:${project.version}</codestart>
     </properties>
 
     <repositories>
@@ -133,7 +135,34 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-extension-metadata</id>
+                        <id>replace-extension-coordinates</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <!--
+                                Replaces extension artifact in quarkus-metadata to point to the one generated for the platform
+                                Uses maven groupId: and ::type:version as delimiter for replacement.
+                                From the text 'artifact: "com.vaadin:vaadin-quarkus::jar:2.0-SNAPSHOT"'
+                                it extracts the 'vaadin-quarkus' token that is then replaced with the corresponding maven
+                                property, so the result in the filtered file is the expansion of 'artifact: "${vaadin-quarkus}"'
+                            -->
+                            <delimiters>
+                                <delimiter>com.vaadin:*::jar:${com.vaadin:vaadin-quarkus:jar.version}</delimiter>
+                            </delimiters>
+                            <useDefaultDelimiters>false</useDefaultDelimiters>
+                            <outputDirectory>${project.build.directory}/build/quarkus-metadata-step1</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/build/quarkus-metadata</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>replace-codestart-coordinates</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -147,14 +176,13 @@
                                 property, so the result in the filtered file is the expansion of 'artifact: "${codestart}"'
                             -->
                             <delimiters>
-                                <delimiter>com.vaadin:vaadin-quarkus:*:jar:${com.vaadin:vaadin-quarkus:jar.version}
-                                </delimiter>
+                                <delimiter>com.vaadin:vaadin-quarkus:*:jar:${com.vaadin:vaadin-quarkus:jar.version}</delimiter>
                             </delimiters>
                             <useDefaultDelimiters>false</useDefaultDelimiters>
                             <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/build/quarkus-metadata</directory>
+                                    <directory>${project.build.directory}/build/quarkus-metadata-step1</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
