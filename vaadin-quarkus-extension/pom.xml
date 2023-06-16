@@ -224,6 +224,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <!-- Attach cloned codestart jar to the build, for deployment -->
