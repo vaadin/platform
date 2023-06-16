@@ -9,16 +9,39 @@ Vaadin {{platform}}
 Gradle support is raised to the version (Gradle 7.6) required by [jackson](https://github.com/FasterXML/jackson-core/issues/955)
 
 ### Flow
-- 
+- Pre-compiled frontend bundle for production builds
+  - Vaadin uses a pre-compiled frontend bundle enabling building Vaadin Flow projects for production more quickly without installing Node.js and npm dependencies. This is an extension of frontend dev bundle feature, introduced in Vaadin 24.0, but for production builds.
+- Production Bundle Loading Optimizations
+  - A production build scans for Routes and lazy loads the components used in the routes when navigated.
+  - [documentation](https://vaadin.com/docs/latest/production/production-build)
+- Hot Module Redeployment
+  - Allows changing styles immediately without page reload
+see [release note](https://github.com/vaadin/flow/releases/tag/24.1.0) for all features
+
 ### Hilla
-- 
-
+- Hilla Gradle Plugin [documentation](https://hilla.dev/docs/lit/start/gradle)
+  
 ### Design System
-- 
+- New **SideNav** component (released under feature flag)
+  - If you have a project using `vcf-nav` it is recommended to migrate to `vaadin-side-nav`.
+- New **Map** features
+  - Styleable label for markers [documentation](https://vaadin.com/docs/latest/components/map/#marker-text)
+  - Drag and drop markers [documentation](https://vaadin.com/docs/latest/components/map/#marker-drag-drop)
+- Warning color in **Lumo** theme
+- Warning **Notification** theme variant
+- **Accessibility** improvements
+  - Flow component APIs for setting aria-label and aria-labelledby
+  - Optional borders around input fields
+- **TreeGrid** hierarchical scrollToIndex
 
-### Collaboration Engine
-- 
-`*` experimental
+### Kits
+- **Observability Kit** now includes Frontend Observability to instrument client-side code and collect traces from the browser
+- **Obserability Kit** has now support for Hilla apps with a new Java starter module and a client-side library
+- **SSO Kit** gets its own client-side libraries for both Lit and React when used in Hilla apps
+- **SSO Kit** now provides an API to require authentication for specific route for both Vaadin and React routers
+
+### Classic Components
+- The rendering performance of the Classic GridLayout has been enhanced for large/huge grids.
 
 ## <a id="_changelogs"></a> Changelogs
 
@@ -36,9 +59,9 @@ Gradle support is raised to the version (Gradle 7.6) required by [jackson](https
   - Azure Kit ([{{kits.azure-kit.version}}](https://vaadin.com/docs/latest/tools/azure))
   - Collaboration Engine ([{{kits.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-engine/releases/tag/{{kits.vaadin-collaboration-engine.javaVersion}}))
   - Kubernetes Kit ([{{kits.kubernetes-kit-starter.javaVersion}}](https://github.com/vaadin/kubernetes-kit/releases/tag/{{kits.kubernetes-kit-starter.javaVersion}}))
-  - Observability Kit ([{{kits.observability-kit.version}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit.version}}))
-  - SSO Kit ([Documentation](https://vaadin.com/docs/latest/tools/sso))
-  - Swing Kit ([{{kits.swing-kit.version}}](https://vaadin.com/docs/latest/tools/swing))
+  - Observability Kit ([{{kits.observability-kit-starter.javaVersion}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit.version}}))
+  - SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
+  - Swing Kit ([{{kits.swing-kit.javaVersion}}](https://vaadin.com/docs/latest/tools/swing))
 - Designer ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 
 **Official add-ons and plugins:**
@@ -83,7 +106,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 - Chrome (evergreen)
 - Firefox (evergreen)
    - Firefox Extended Support Release (ESR)
-- Safari 15 or newer
+- Safari 15.6 or newer
 - Edge (Chromium, evergreen)
   </td>
 </tr>
@@ -92,7 +115,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <td>
 
 - Chrome (evergreen) for Android (4.4 or newer)
-- Safari for iOS (15 or newer)
+- Safari for iOS (15.6 or newer)
   </td>
 </tr>
 <tr>
@@ -157,12 +180,11 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
 ## Known issues and limitations
 
-<table>
-<tr>
-  <th>Flow</th>
-  <td>
+#### Flow
+- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+).
+- That if you see the error <em>'An import path can only end with a `.ts` extension ...'</em>, then you can add `allowImportingTsExtensions: true` to `tsconfig.json`.
 
-- The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
-  </td>
-</tr>
-</table>
+
+## Known Vulnerability
+
+TestBench brings the dependency `pkg:maven/com.google.guava/guava@31.1-jre`, that has the vulnerability described in CVE-2020-8908 and CVE-2023-2976, the problematic method has been deprecated in guava and it is not used in Vaadin.

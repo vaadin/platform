@@ -39,6 +39,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.component.shared.TooltipConfiguration;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -89,7 +91,6 @@ public class EagerView extends Div {
     public GridPro<String> gridPro;
     public HorizontalLayout horizontalLayout;
     public IntegerField integerField;
-    public Icon icon;
     public ListBox<String> listBox;
     public LoginOverlay loginOverlay;
     public LoginForm LoginForm;
@@ -105,6 +106,8 @@ public class EagerView extends Div {
     public RadioButtonGroup<String> radioButtonGroup;
     public Scroller scroller;
     public Select<String> select;
+    public SideNav sideNav;
+    public SideNavItem sideNavItem;
     public SplitLayout splitLayout;
     public Tabs tabs;
     public Tab tab;

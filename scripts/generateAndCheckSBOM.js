@@ -41,10 +41,8 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  // Remove when https://github.com/jeremylong/DependencyCheck/pull/5415
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.alpha3' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
-  'pkg:maven/com.vaadin/sso-kit-starter@2.0.0.beta1' : ['CVE-2020-36321', 'CVE-2021-31407', 'CVE-2021-31412', 'CVE-2021-31404'],
-  'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908']
+  // Check fix in vaadin-testbench/pom.xml, and update when Selenium is fixed
+  // 'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
 }
 
 const STYLE = `<style>
@@ -178,8 +176,8 @@ async function consolidateSBoms(...boms) {
         if (l.expression) {
           l.expression = l.expression.replace(/SEE LICENSE IN [^\)]+/, VAADIN_LICENSE);
         }
-        if (l.license && l.license.name == 'SEE LICENSE IN LICENSE') {
-          l.license.url = VAADIN_LICENSE;
+        if (l.license && /SEE LICENSE IN/.test(l.license.name)) {
+          l.license.name = l.license.name.replace(/SEE LICENSE IN [^\)]+/, VAADIN_LICENSE);
         }
       }
       l.expression && (l.license = { id: l.expression });
@@ -198,8 +196,10 @@ function sumarizeLicenses(f) {
   sbom.components.forEach((e) => {
     let comp = decodeURIComponent(e.purl).replace(/[?#].*$/g, '');
     let lic = e.licenses && [...(e.licenses.reduce((p, l) => {
-      return p.add(l.expression ? l.expression.replace(/[\(\)]/g, '') :
-        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name));
+      return p.add((l.expression ? l.expression :
+        (l.license.id || (!l.license.name || / /.test(l.license.name)) && l.license.url || l.license.name))
+        // remove parenthesis
+        .replace(/[\(\)]/g, ''));
     }, new Set()))].join(' OR ');
     const addLic = (idx, l) => (summary[idx] = summary[idx] || []).push(l);
     if (!lic) {
@@ -467,6 +467,9 @@ async function main() {
 
   if (!cmd.quick) {
     fs.existsSync('package.json') && log(`cleaning package.json`) && fs.unlinkSync('package.json');
+    // Ensure Flow does not clean up package.json and node_modules
+    fs.mkdirSync('node_modules');
+    fs.writeFileSync("package.json","{}");
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');

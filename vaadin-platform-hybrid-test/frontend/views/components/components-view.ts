@@ -52,6 +52,9 @@ import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
 import '@vaadin/rich-text-editor';
 import '@vaadin/scroller/vaadin-scroller';
+import '@vaadin/side-nav/enable.js';
+import '@vaadin/side-nav';
+import '@vaadin/side-nav/vaadin-side-nav-item.js';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
 import '@vaadin/tabsheet';
@@ -259,6 +262,17 @@ export class ComponentsView extends View {
         </vaadin-radio-group>
 
         <vaadin-rich-text-editor></vaadin-rich-text-editor>
+        
+        <vaadin-side-nav collapsible>
+          <span slot="label">Main menu</span>
+          <vaadin-side-nav-item path="/1">Nav Item 1</vaadin-side-nav-item>
+          <vaadin-side-nav-item path="/2">
+            Nav Item 2
+            <vaadin-side-nav-item path="/2/1" slot="children">Nav Item 2 - 1</vaadin-side-nav-item>
+            <vaadin-side-nav-item path="/2/2" slot="children">Nav Item 2 - 2</vaadin-side-nav-item>
+          </vaadin-side-nav-item>
+        </vaadin-side-nav>
+        
         <vaadin-split-layout>
           <div><vaadin-button>RIGHT</vaadin-button></div>
           <div><vaadin-button>LEFT</vaadin-button></div>
