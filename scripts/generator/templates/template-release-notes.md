@@ -43,7 +43,7 @@ Projects marked as **(Pro)** are available for users with [Pro](https://vaadin.c
 
 # Getting Started with Vaadin 14
 ## App starters
-The best way to get started with Vaadin 14 is to go to [https://vaadin.com/start](https://vaadin.com/start) and pick an app template for the technology stack you’re interested in.
+The best way to get started with Vaadin 14 is to go to [https://vaadin.com/hello-world-starters#v14](https://vaadin.com/hello-world-starters#v14) and pick an app template for the technology stack you’re interested in.
 
 ## Maven Archetypes
 
