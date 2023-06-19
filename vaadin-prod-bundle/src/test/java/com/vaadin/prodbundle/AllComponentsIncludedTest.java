@@ -1,23 +1,38 @@
 package com.vaadin.prodbundle;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.github.difflib.DiffUtils;
 import com.github.difflib.UnifiedDiffUtils;
 import com.github.difflib.patch.Patch;
-import com.github.difflib.unifieddiff.UnifiedDiff;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.vaadin.flow.internal.JsonUtils;
 
 import elemental.json.Json;
 import elemental.json.JsonObject;
 import elemental.json.impl.JsonUtil;
 
 public class AllComponentsIncludedTest {
+
+    private static final Set<String> lazyComponentFiles = Set.of(
+            "@vaadin/charts/theme/lumo/vaadin-chart.js",
+            "@vaadin/icon/theme/lumo/vaadin-icon.js",
+            "@vaadin/icons/vaadin-iconset.js",
+            "@vaadin/map/theme/lumo/vaadin-map.js",
+            "@vaadin/rich-text-editor/theme/lumo/vaadin-rich-text-editor.js",
+            "Frontend/generated/jar-resources/vaadin-map/mapConnector.js",
+            "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js");
 
     @Test
     public void compareStatsWithUnoptimized() throws IOException {
@@ -43,6 +58,47 @@ public class AllComponentsIncludedTest {
             Assertions.fail(String.join("\n", unifiedDiff));
         }
 
+    }
+
+    @Test
+    public void compareBundleImportsWithEagerLoading() throws IOException {
+        // This tries to ensure that no components are not marked as eager but
+        // still included as part of a lazy component, like checkbox group is a
+        // dependency of spreadsheet but should still be in the eager bundle
+
+        JsonObject optimizedStats = getStats(
+                "META-INF/VAADIN/config/stats.json");
+
+        List<String> bundleImports = JsonUtils
+                .stream(optimizedStats.getArray("bundleImports"))
+                .map(v -> v.asString()).toList();
+
+        File generatedImports = Path.of("frontend", "generated", "flow",
+                "generated-flow-imports.js").toFile();
+        Assertions.assertTrue(generatedImports.exists(),
+                "Generated imports file " + generatedImports.getAbsolutePath()
+                        + " is missing");
+
+        List<String> imports = FileUtils.readLines(generatedImports,
+                StandardCharsets.UTF_8);
+        Set<String> eagerImports = new HashSet<>(imports.stream()
+                .filter(row -> row.startsWith("import '")).map(row -> row
+                        .replaceFirst("^import '", "").replaceFirst("';$", ""))
+                .toList());
+
+        for (String bundleImport : bundleImports) {
+            boolean shouldBeLazy = lazyComponentFiles.contains(bundleImport);
+            if (shouldBeLazy) {
+                Assertions.assertFalse(eagerImports.contains(bundleImport), "'"
+                        + bundleImport
+                        + "' is marked as part of a lazy loaded component but loaded eagerly.");
+            } else {
+                Assertions.assertTrue(eagerImports.remove(bundleImport), "'"
+                        + bundleImport
+                        + "' is included but not eagerly loaded. If it is part of a lazy loaded component only, update this test. Otherwise, include the relevant component in "
+                        + EagerView.class.getName());
+            }
+        }
     }
 
     private JsonObject getStats(String resource) throws IOException {
