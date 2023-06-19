@@ -27,7 +27,7 @@ Here are the highlighted new and improved features in this maintenance release.
 
 # Getting Started with Vaadin 14
 ## App starters
-The best way to get started with Vaadin 14 is to go to [https://start.vaadin.com](https://start.vaadin.com) and configure your new application by setting up your views, entities, and styles.
+The best way to get started with Vaadin 14 is to go to [https://vaadin.com/hello-world-starters#v14](https://vaadin.com/hello-world-starters#v14) and configure your new application by setting up your views, entities, and styles.
 
 For the full list of how to get started go to the [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.10.0).
 
