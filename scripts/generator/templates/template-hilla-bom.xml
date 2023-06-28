@@ -9,7 +9,7 @@
     <groupId>dev.hilla</groupId>
     <artifactId>hilla-bom</artifactId>
     <packaging>pom</packaging>
-    <name>HIlla Platform (Bill of Materials)</name>
+    <name>Hilla Platform (Bill of Materials)</name>
     <description>Hilla Platform (Bill of Materials)</description>
     <version>${hilla.version}</version>
     <url>https://hilla.dev</url>
