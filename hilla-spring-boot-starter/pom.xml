@@ -13,7 +13,9 @@
     <name>Hilla Spring Boot Starter</name>
     <description>Spring Boot Starter for Hilla applications using Lit.</description>
     <version>${hilla.version}</version>
-
+    <properties>
+        <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+    </properties>
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
 
