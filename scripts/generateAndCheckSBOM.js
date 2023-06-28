@@ -41,7 +41,9 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/org.springframework/spring-web@5.3.27' : ['CVE-2016-1000027']
+  'pkg:maven/org.springframework/spring-web@5.3.27' : ['CVE-2016-1000027'],
+  // based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.2' : ['CVE-2023-35116']
 }
 
 const STYLE = `<style>
