@@ -31,23 +31,7 @@
         </repository>
     </distributionManagement>
 
-    <modules>
-        <module>vaadin-internal</module>
-        <module>vaadin</module>
-        <module>vaadin-spring-bom</module>
-        <module>vaadin-bom</module>
-        <module>vaadin-core-internal</module>
-        <module>vaadin-core</module>
-        <module>vaadin-dev</module>
-        <module>vaadin-maven-plugin</module>
-        <module>vaadin-testbench</module>
-        <module>vaadin-testbench-junit5</module>
-        <module>vaadin-spring-boot-starter</module>
-        <module>vaadin-platform-javadoc</module>
-        <module>vaadin-dev-bundle</module>
-        <module>vaadin-prod-bundle/pom-unoptimized.xml</module>
-        <module>vaadin-prod-bundle</module>
-    </modules>
+
 
     <profiles>
         <profile>
@@ -58,9 +42,6 @@
         </profile>
         <profile>
             <id>gradle</id>
-            <activation>
-                <jdk>(,18)</jdk>
-            </activation>
             <modules>
                 <module>vaadin-gradle-plugin</module>
                 <module>vaadin-gradle-plugin/pom-portal.xml</module>
@@ -74,7 +55,7 @@
                 <module>vaadin-quarkus-extension</module>
             </modules>
         </profile>
-        <!-- separate hilla related moduels for releases -->
+        <!-- separate hilla related modules for releases -->
         <profile>
             <id>hilla</id>
             <modules>
@@ -85,6 +66,40 @@
                 <module>hilla-spring-boot-starter</module>
                 <module>hilla-react-spring-boot-starter</module>
             </modules>
+            <!-- This prevents deploying all com.vaadin modules, but we need to set it to true in
+            all hilla modules  -->
+            <properties>
+                <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+            </properties>
+        </profile>
+        <!-- separate platform modules for active by default it must be after hilla modules -->
+        <profile>
+            <id>platform</id>
+            <activation>
+                <property>
+                    <name>!skipPlatform</name>
+                </property>
+            </activation>
+            <modules>
+                <module>vaadin-internal</module>
+                <module>vaadin</module>
+                <module>vaadin-spring-bom</module>
+                <module>vaadin-bom</module>
+                <module>vaadin-core-internal</module>
+                <module>vaadin-core</module>
+                <module>vaadin-dev</module>
+                <module>vaadin-maven-plugin</module>
+                <module>vaadin-testbench</module>
+                <module>vaadin-testbench-junit5</module>
+                <module>vaadin-spring-boot-starter</module>
+                <module>vaadin-platform-javadoc</module>
+                <module>vaadin-dev-bundle</module>
+                <module>vaadin-prod-bundle/pom-unoptimized.xml</module>
+                <module>vaadin-prod-bundle</module>
+            </modules>
+            <properties>
+                <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+            </properties>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
