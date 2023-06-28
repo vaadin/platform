@@ -15,7 +15,7 @@
     <version>${hilla.version}</version>
     <url>https://hilla.dev</url>
     <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
+        <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
     </properties>
     <distributionManagement>
         <repository>

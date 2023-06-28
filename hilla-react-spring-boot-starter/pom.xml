@@ -14,7 +14,7 @@
     <description>Spring Boot Starter for Hilla applications using React.</description>
     <version>${hilla.version}</version>
     <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
+        <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
     </properties>
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->

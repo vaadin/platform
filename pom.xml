@@ -69,7 +69,7 @@
             <!-- This prevents deploying all com.vaadin modules, but we need to set it to true in
             all hilla modules  -->
             <properties>
-                <maven.deploy.skip>true</maven.deploy.skip>
+                <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
             </properties>
         </profile>
         <!-- separate platform modules for active by default it must be after hilla modules -->
@@ -98,7 +98,7 @@
                 <module>vaadin-prod-bundle</module>
             </modules>
             <properties>
-                <maven.deploy.skip>false</maven.deploy.skip>
+                <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
             </properties>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
