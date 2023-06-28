@@ -35,6 +35,45 @@
 
     <profiles>
         <profile>
+            <id>sbom</id>
+            <modules>
+                <module>vaadin-platform-sbom</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>gradle</id>
+            <modules>
+                <module>vaadin-gradle-plugin</module>
+                <module>vaadin-gradle-plugin/pom-portal.xml</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jandex</id>
+            <modules>
+                <module>vaadin-jandex</module>
+                <module>vaadin-core-jandex</module>
+                <module>vaadin-quarkus-extension</module>
+            </modules>
+        </profile>
+        <!-- separate hilla related modules for releases -->
+        <profile>
+            <id>hilla</id>
+            <modules>
+                <module>hilla-bom</module>
+                <module>hilla</module>
+                <module>hilla-dev</module>
+                <module>hilla-react</module>
+                <module>hilla-spring-boot-starter</module>
+                <module>hilla-react-spring-boot-starter</module>
+            </modules>
+            <!-- This prevents deploying all com.vaadin modules, but we need to set it to true in
+            all hilla modules  -->
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+        <!-- separate platform modules for active by default it must be after hilla modules -->
+        <profile>
             <id>platform</id>
             <activation>
                 <property>
@@ -58,39 +97,9 @@
                 <module>vaadin-prod-bundle/pom-unoptimized.xml</module>
                 <module>vaadin-prod-bundle</module>
             </modules>
-        </profile>    
-        <profile>
-            <id>sbom</id>
-            <modules>
-                <module>vaadin-platform-sbom</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>gradle</id>
-            <modules>
-                <module>vaadin-gradle-plugin</module>
-                <module>vaadin-gradle-plugin/pom-portal.xml</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>jandex</id>
-            <modules>
-                <module>vaadin-jandex</module>
-                <module>vaadin-core-jandex</module>
-                <module>vaadin-quarkus-extension</module>
-            </modules>
-        </profile>
-        <!-- separate hilla related moduels for releases -->
-        <profile>
-            <id>hilla</id>
-            <modules>
-                <module>hilla-bom</module>
-                <module>hilla</module>
-                <module>hilla-dev</module>
-                <module>hilla-react</module>
-                <module>hilla-spring-boot-starter</module>
-                <module>hilla-react-spring-boot-starter</module>
-            </modules>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
         </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
