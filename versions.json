@@ -105,7 +105,7 @@
             "javaVersion": "24.2.0.alpha1"
         },
         "flow-cdi": {
-            "javaVersion": "15.0.0"
+            "javaVersion": "15.0.1"
         },
         "form-layout": {
             "javaVersion": "{{version}}",
