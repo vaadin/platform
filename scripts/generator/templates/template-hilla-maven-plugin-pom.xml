@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.version>3.8.4</maven.version>
+        <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
     </properties>
 
     <dependencies>
