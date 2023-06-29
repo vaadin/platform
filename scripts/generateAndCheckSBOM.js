@@ -43,6 +43,8 @@ const licenseWhiteList = [
 const cveWhiteList = {
   // Check fix in vaadin-testbench/pom.xml, and update when Selenium is fixed
   // 'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
+  // based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.2' : ['CVE-2023-35116']
 }
 
 const STYLE = `<style>
