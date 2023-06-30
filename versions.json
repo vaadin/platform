@@ -72,7 +72,7 @@
             "javaVersion": "9.1.3"
         },
         "flow-cdi": {
-            "javaVersion": "13.1.0"
+            "javaVersion": "13.1.1"
         },
         "flow-spring": {
             "javaVersion": "19.1.0"
