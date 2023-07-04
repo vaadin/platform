@@ -551,7 +551,7 @@
             "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "1.0.2"
+            "javaVersion": "1.0-SNAPSHOT"
         },
         "observability-kit": {
             "version": "1.1.0"
