@@ -337,7 +337,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "2.2.0-alpha2",
+            "jsVersion": "2.2.0-alpha3",
             "npmName": "@hilla/react-components"
         }
     },
