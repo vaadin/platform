@@ -2,7 +2,6 @@
 
 ## Generate BOMs
 
-For running the project, you need to run the following script before any maven related commands:
 ```
 scripts/generateBoms.sh
 ```
