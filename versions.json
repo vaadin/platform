@@ -328,7 +328,7 @@
             "jsVersion": "2.1.0"
         },
         "swing-kit": {
-            "javaVersion": "2.0.0"
+            "javaVersion": "2.1.0"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.0.0"
