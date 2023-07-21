@@ -324,7 +324,7 @@
             "jsVersion": "2.1.1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.1.0",
+            "javaVersion": "2.1-SNAPSHOT",
             "jsVersion": "2.1.0"
         },
         "swing-kit": {
