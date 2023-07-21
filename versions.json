@@ -314,7 +314,7 @@
             "version": "2.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.0.4"
+            "javaVersion": "2.0-SNAPSHOT"
         },
         "swing-kit": {
             "version": "2.0.0"
