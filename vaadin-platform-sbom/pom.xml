@@ -61,8 +61,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>observability-kit-starter</artifactId>
         </dependency>
-<<<<<<< HEAD
-=======
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-swing-kit-flow</artifactId>
@@ -75,8 +73,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-swing-kit-client-api</artifactId>
         </dependency>
-
->>>>>>> 8c3332b5 (chore: update swing-kit 2.1.0 (#4351))
     </dependencies>
     <profiles>
         <profile>
