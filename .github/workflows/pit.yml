@@ -1,4 +1,5 @@
 name: PiT
+run-name: PiT ${{ inputs.version }} (lin=${{inputs.linux}} win=${{inputs.windows}} skip=${{inputs.skipcurrent}}) ${{inputs.starters}}
 on:
   workflow_dispatch:
     inputs:
