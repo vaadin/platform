@@ -21,8 +21,8 @@ on:
         required: false
         type: boolean
         default: false
-      skipprod:
-        description: 'Skip running tests in production mode'
+      verbose:
+        description: 'Be verbose when running PiT steps'
         required: false
         type: boolean
         default: false
@@ -30,7 +30,7 @@ on:
         description: 'Run build in linux runner'
         required: false
         type: boolean
-        default: false
+        default: true
       windows:
         description: 'Run build in windows runner'
         required: false
@@ -65,16 +65,14 @@ jobs:
           echo "Computing matrix ..."
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" ] && exit 1
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          V="${{github.event.inputs.version}}"
-          W="${{github.event.inputs.windows}}"
-          L="${{github.event.inputs.linux}}"
+          V="${{inputs.version}}"
+          W="${{inputs.windows}}"
+          L="${{inputs.linux}}"
           [ true != "$L" -a true != "$W" ] && L=true
-          S="${{github.event.inputs.starters}}"
-          [ true = "${{github.event.inputs.v24}}" ] && A="$A --v24"
-          [ true = "${{github.event.inputs.pre}}" ] && A="$A --pre"
-          [ true = "${{github.event.inputs.generated}}" ] && A="$A --generated"
-          [ true = "${{github.event.inputs.demos}}" ] && A="$A --demos"
-          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list=${{github.event.inputs.join}}`
+          S="${{inputs.starters}}"
+          [ true = "${{inputs.generated}}" ] && A="$A --generated"
+          [ true = "${{inputs.demos}}" ] && A="$A --demos"
+          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list=${{inputs.join}}`
           M='{"include":['
           for i in `echo $S`; do
             J='{"app":"'$i'"'
@@ -125,16 +123,16 @@ jobs:
         with:
           maven-version: '3.9.0'
       - run: |
-          # PIT TESTS ${{matrix.app}} ${{github.event.inputs.version}}
-          [ -n "${{github.event.inputs.version}}" ] && ARG="--version=${{github.event.inputs.version}}"
-          [ true = "${{github.event.inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
-          [ true = "${{github.event.inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
-          [ true = "${{github.event.inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
-          [ true = "${{github.event.inputs.debug}}" ] && ARG="$ARG --debug"
-          echo "${{matrix.app}}" | grep "^v24" && ARG="$ARG --v24"
-          echo "${{matrix.app}}" | grep "^pre" && ARG="$ARG --pre"
+          # PIT TESTS ${{matrix.app}} ${{inputs.version}}
+          [ -n "${{inputs.version}}" ] && ARG="--version=${{inputs.version}}"
+          [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
+          [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
+          [ true = "${{inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
+          [ true = "${{inputs.verbose}}" ] && ARG="$ARG --debug"
           ARG="$ARG --starters=${{matrix.app}}"
           echo ./pit/scripts/pit/run.sh $ARG
+          ./pit/scripts/pit/run.sh $ARG --test
+          echo ""
           GHTK=${{secrets.GHTK}} ./pit/scripts/pit/run.sh $ARG
         shell: bash
       - if: ${{failure()}}
