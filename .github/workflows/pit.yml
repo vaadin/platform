@@ -133,7 +133,10 @@ jobs:
           echo ./pit/scripts/pit/run.sh $ARG
           ./pit/scripts/pit/run.sh $ARG --test
           echo ""
-          GHTK='${{secrets.GHTK}}' CE_LICENSE='${{secrets.CE_LICENSE}}' ./pit/scripts/pit/run.sh $ARG
+          ./pit/scripts/pit/run.sh $ARG
+        env:
+            GHTK: ${{secrets.GHTK}}
+            CE_LICENSE: ${{secrets.CE_LICENSE}}
         shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v3.1.1
