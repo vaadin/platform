@@ -130,8 +130,8 @@ jobs:
           [ true = "${{inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
           [ true = "${{inputs.verbose}}" ] && ARG="$ARG --debug"
           ARG="$ARG --starters=${{matrix.app}}"
-          echo ./pit/scripts/pit/run.sh $ARG
-          ./pit/scripts/pit/run.sh $ARG --test
+          echo GHTK=${{secrets.GHTK}} CE_LICENSE=${{secrets.CE_LICENSE}} ./pit/scripts/pit/run.sh $ARG
+          GHTK=${{secrets.GHTK}} CE_LICENSE=${{secrets.CE_LICENSE}} ./pit/scripts/pit/run.sh $ARG --test
           echo ""
           GHTK=${{secrets.GHTK}} CE_LICENSE=${{secrets.CE_LICENSE}} ./pit/scripts/pit/run.sh $ARG
         shell: bash
