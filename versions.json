@@ -398,7 +398,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.0.5",
+            "javaVersion": "9.0.6",
             "pro": true
         }
     }
