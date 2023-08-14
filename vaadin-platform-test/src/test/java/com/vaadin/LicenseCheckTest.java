@@ -85,6 +85,9 @@ public class LicenseCheckTest {
 
         // aopalliance:aopalliance
         whitelist.add("Public Domain");
+
+        //Bouncy Castle Licence
+        whitelist.add("https://www.bouncycastle.org/licence.html");
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
