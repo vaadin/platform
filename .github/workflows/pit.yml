@@ -69,10 +69,10 @@ jobs:
           W="${{inputs.windows}}"
           L="${{inputs.linux}}"
           [ true != "$L" -a true != "$W" ] && L=true
-          S="${{inputs.starters}}"
+          A="$A --starters=${{inputs.starters}}"
           [ true = "${{inputs.generated}}" ] && A="$A --generated"
           [ true = "${{inputs.demos}}" ] && A="$A --demos"
-          [ -z "$S" ] && S=`./pit/scripts/pit/run.sh $A --list=${{inputs.join}}`
+          S=`./pit/scripts/pit/run.sh $A --list=${{inputs.join}}`
           M='{"include":['
           for i in `echo $S`; do
             J='{"app":"'$i'"'
