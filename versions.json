@@ -170,10 +170,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "7.0.6"
+            "javaVersion": "7.0.7"
         },
         "mpr-v8": {
-            "javaVersion": "7.0.6"
+            "javaVersion": "7.0.7"
         },
         "multi-select-combo-box": {
             "jsVersion": "24.1.5",
