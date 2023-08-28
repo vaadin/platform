@@ -52,7 +52,6 @@ import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
 import '@vaadin/rich-text-editor';
 import '@vaadin/scroller/vaadin-scroller';
-import '@vaadin/side-nav/enable.js';
 import '@vaadin/side-nav';
 import '@vaadin/side-nav/vaadin-side-nav-item.js';
 import '@vaadin/split-layout';
