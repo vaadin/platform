@@ -18,7 +18,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <hilla.version>2.2-SNAPSHOT</hilla.version>
         <spring.boot.version>3.1.2</spring.boot.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>11.0.13</jetty.version>
@@ -30,8 +29,6 @@
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
         </repository>
     </distributionManagement>
-
-
 
     <profiles>
         <profile>
@@ -55,24 +52,6 @@
                 <module>vaadin-quarkus-extension</module>
             </modules>
         </profile>
-        <!-- separate hilla related modules for releases -->
-        <profile>
-            <id>hilla</id>
-            <modules>
-                <module>hilla-bom</module>
-                <module>hilla</module>
-                <module>hilla-dev</module>
-                <module>hilla-react</module>
-                <module>hilla-spring-boot-starter</module>
-                <module>hilla-react-spring-boot-starter</module>
-            </modules>
-            <!-- This prevents deploying all com.vaadin modules, but we need to set it to true in
-            all hilla modules  -->
-            <properties>
-                <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
-            </properties>
-        </profile>
-        <!-- separate platform modules for active by default it must be after hilla modules -->
         <profile>
             <id>platform</id>
             <activation>
@@ -241,5 +220,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
