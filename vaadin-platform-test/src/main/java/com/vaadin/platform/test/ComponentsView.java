@@ -609,10 +609,10 @@ public class ComponentsView extends AppLayout {
         SideNav sideNav = new SideNav("Navigation");
         sideNav.setCollapsible(true);
         sideNav.addItem(new SideNavItem("Nav item 1", "/1"));
-        SideNavItem parentNavItem = new SideNavItem("Nav item 2", "/2");
-        parentNavItem.addItem(new SideNavItem("Nav item 2 - 1", "/2/1"));
-        parentNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
-        sideNav.addItem(parentNavItem);
+        SideNavItem sideNavItem = new SideNavItem("Nav item 2", "/2");
+        sideNavItem.addItem(new SideNavItem("Nav item 2 - 1", "/2/1"));
+        sideNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
+        sideNav.addItem(sideNavItem);
 
         NativeLabel nativeLabel = new NativeLabel("Native Label");
 
