@@ -54,6 +54,7 @@ import '@vaadin/rich-text-editor';
 import '@vaadin/scroller/vaadin-scroller';
 import '@vaadin/side-nav';
 import '@vaadin/side-nav/vaadin-side-nav-item.js';
+import '@vaadin/side-nav/src/vaadin-side-nav-item';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
 import '@vaadin/tabsheet';
