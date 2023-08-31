@@ -39,6 +39,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- TEMPORARY FIX OF DEP VULNERABILITIES -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.2-jre</version>
+        </dependency>
+
         <!-- Flow HTML components -->
         <dependency>
             <groupId>com.vaadin</groupId>
