@@ -105,6 +105,8 @@ import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.FontIcon;
+import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
@@ -245,6 +247,10 @@ public class ComponentsView extends AppLayout {
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
+        FontIcon fontIcon = new FontIcon("fa-solid", "fa-user");
+        SvgIcon svgIcon = new SvgIcon();;
+        components.add(fontIcon);
+        components.add(svgIcon);
 
         Button button = new Button("Button text", e -> {
             log.log("Clicked button");
