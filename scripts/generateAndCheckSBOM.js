@@ -48,7 +48,7 @@ const cveWhiteList = {
   // Check fix in vaadin-testbench/pom.xml, and update when Selenium is fixed
   // 'pkg:maven/com.google.guava/guava@31.1-jre': ['CVE-2020-8908', 'CVE-2023-2976']
   // exclude jackson-databind:2.15.2, as https://github.com/jeremylong/DependencyCheck/issues/5779
-  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.2': ['CVE-2023-35116']，
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.2': ['CVE-2023-35116'],
   // exclude false positive based on https://github.com/jeremylong/DependencyCheck/issues/5912
   'pkg:maven/io.netty/netty-handler@4.1.94.Final': ['CVE-2023-4586']
 }
