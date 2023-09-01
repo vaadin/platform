@@ -65,7 +65,17 @@
                     <groupId>org.yaml</groupId>
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-core</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <!-- CVE-2023-41080 UNTIL new Springboot with tomcat version bump -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>10.1.13</version>
         </dependency>
         <!-- End Spring -->
 
