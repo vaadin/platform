@@ -107,6 +107,9 @@
         "flow-cdi": {
             "javaVersion": "15.0.1"
         },
+        "flow-form-filler": {
+            "javaVersion": "1.0.0.alpha1"
+        },
         "form-layout": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.2.0-alpha14",
