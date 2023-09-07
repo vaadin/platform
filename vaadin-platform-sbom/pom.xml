@@ -48,6 +48,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.flow.ai</groupId>
+            <artifactId>form-filler-addon</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
