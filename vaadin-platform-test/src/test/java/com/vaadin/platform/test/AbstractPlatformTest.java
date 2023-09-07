@@ -26,8 +26,6 @@ import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.parallel.ParallelTest;
 import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 public abstract class AbstractPlatformTest extends ParallelTest {
 
     public static final int SERVER_PORT = Integer
@@ -48,13 +46,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
         String hubHost = System
                 .getProperty("com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
-        isLocal = !isSauce && !isHub;
-        if (isLocal) {
-            String driver = System.getProperty("webdriver.chrome.driver");
-            if (driver == null || !new File(driver).exists()) {
-                WebDriverManager.chromedriver().setup();
-            }
-        }
+
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
         getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
                 SERVER_PORT,
