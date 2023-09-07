@@ -8,8 +8,8 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'com.gradle.plugin-publish' version '0.11.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
-    id 'org.jetbrains.dokka' version '1.7.20'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+    id 'org.jetbrains.dokka' version '1.8.20'
 }
 
 /***********************************************************************************************************************
@@ -65,7 +65,7 @@ repositories {
 dependencies {
     implementation('org.jetbrains.kotlin:kotlin-stdlib:1.7.20')
     implementation("com.vaadin:flow-plugin-base:${pom.properties.getAt('flow.version')}")
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.7.20")
 }
 
@@ -182,7 +182,7 @@ publishing {
  *
  **********************************************************************************************************************/
 wrapper {
-    gradleVersion = '7.5.1'
+    gradleVersion = '8.3'
     distributionType = Wrapper.DistributionType.ALL
 }
 
