@@ -89,6 +89,9 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
     runs-on: ${{matrix.os}}-latest
+    container:
+      image: catthehacker/ubuntu:runner-latest
+      options: --privileged
     steps:
       - run: |
           # TEST PARAMETERS
@@ -129,11 +132,10 @@ jobs:
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
           [ true = "${{inputs.verbose}}" ] && ARG="$ARG --debug"
-          ARG="$ARG --starters=${{matrix.app}}"
-          echo ./pit/scripts/pit/run.sh $ARG
-          ./pit/scripts/pit/run.sh $ARG --test
-          echo ""
-          ./pit/scripts/pit/run.sh $ARG
+          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}"
+          echo "$CMD"
+          $CMD --test
+          $CMD
         env:
             GHTK: ${{secrets.GHTK}}
             CE_LICENSE: ${{secrets.CE_LICENSE}}
