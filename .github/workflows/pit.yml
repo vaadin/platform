@@ -21,7 +21,7 @@ on:
         required: false
         type: boolean
         default: false
-      verbose:
+      debug:
         description: 'Be verbose when running PiT steps'
         required: false
         type: boolean
@@ -108,7 +108,7 @@ jobs:
         shell: bash
       - if: ${{ env.ACT }}
         run: |
-          # Install linux libs (ACT)
+          # LINUX LIBS (ACT)
           # see https://github.com/browser-actions/setup-chrome/issues/240
           sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
       - uses: browser-actions/setup-chrome@latest
@@ -124,21 +124,30 @@ jobs:
           maven-version: '3.9.0'
       - run: |
           # PIT TESTS ${{matrix.app}} ${{inputs.version}}
+          echo "${{toJSON(inputs)}}"
           [ -n "${{inputs.version}}" ] && ARG="--version=${{inputs.version}}"
           [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
-          [ true = "${{inputs.skipprod}}" ] && ARG="$ARG --skip-prod"
-          [ true = "${{inputs.verbose}}" ] && ARG="$ARG --debug"
-          ARG="$ARG --starters=${{matrix.app}}"
-          echo ./pit/scripts/pit/run.sh $ARG
-          ./pit/scripts/pit/run.sh $ARG --test
-          echo ""
-          ./pit/scripts/pit/run.sh $ARG
+          [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
+          ./pit/scripts/pit/run.sh --path
+          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}"
+          # Output the PiT command to execute, so as we can run the same locally
+          echo "$CMD"
+          # Run PiT in test mode, so as we can copy and paste commands when reporting
+          $CMD --test
+          # Run PiT
+          $CMD
         env:
             GHTK: ${{secrets.GHTK}}
             CE_LICENSE: ${{secrets.CE_LICENSE}}
             OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
+            MAVEN_ARGS: ${{env.MAVEN_ARGS}}
         shell: bash
+      - if: ${{ env.ACT }}
+        run: |
+          # WAIT (ACT)
+          echo "Keeping docker container running, push Ctrl-C to terminate ..."
+          read key
       - if: ${{failure()}}
         uses: actions/upload-artifact@v3.1.1
         with:
