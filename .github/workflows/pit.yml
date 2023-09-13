@@ -112,6 +112,8 @@ jobs:
           # see https://github.com/browser-actions/setup-chrome/issues/240
           sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
       - uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
