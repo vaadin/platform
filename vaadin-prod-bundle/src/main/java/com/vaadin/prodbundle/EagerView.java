@@ -26,6 +26,8 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.FontIcon;
+import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
@@ -87,6 +89,7 @@ public class EagerView extends Div {
     public DrawerToggle drawerToggle;
     public EmailField emailField;
     public FieldHighlighterInitializer fieldHighlighterInitializer;
+    public FontIcon fontIcon;
     public FormLayout formLayout;
     public Grid<String> grid;
     public GridPro<String> gridPro;
@@ -110,6 +113,7 @@ public class EagerView extends Div {
     public SideNav sideNav;
     public SideNavItem sideNavItem;
     public SplitLayout splitLayout;
+    public SvgIcon svgIcon;
     public Tabs tabs;
     public Tab tab;
     public TabSheet tabSheet;
