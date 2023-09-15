@@ -27,7 +27,6 @@ public class AllComponentsIncludedTest {
 
     private static final Set<String> lazyComponentFiles = Set.of(
             "@vaadin/charts/theme/lumo/vaadin-chart.js",
-            "@vaadin/icon/theme/lumo/vaadin-icon.js",
             "@vaadin/icons/vaadin-iconset.js",
             "@vaadin/map/theme/lumo/vaadin-map.js",
             "@vaadin/rich-text-editor/theme/lumo/vaadin-rich-text-editor.js",
