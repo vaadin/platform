@@ -48,7 +48,9 @@ const cveWhiteList = {
   // exclude jackson-databind:2.15.2, as https://github.com/jeremylong/DependencyCheck/issues/5779 and https://nvd.nist.gov/vuln/detail/CVE-2023-35116
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.2': ['CVE-2023-35116'],
   // exclude false positive based on https://github.com/jeremylong/DependencyCheck/issues/5912
-  'pkg:maven/io.netty/netty-handler@4.1.94.Final': ['CVE-2023-4586']
+  'pkg:maven/io.netty/netty-handler@4.1.94.Final': ['CVE-2023-4586'],
+  // remove after using the dependency-check-plugin 8.4.1 
+  'pkg:maven/com.vaadin.flow.ai/form-filler-addon@1.0.0.alpha2': ['CVE-2019-25027', 'CVE-2021-31412', 'CVE-2018-25007', 'CVE-2021-31404']
 }
 
 const STYLE = `<style>
