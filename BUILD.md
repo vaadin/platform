@@ -79,7 +79,7 @@ cd vaadin-platform-gradle-test
 1. First you need to install docker in your local computer, and run the selenium standalone container
 
 ```
- docker run --name selenium-container -p 4444:4444 --rm selenium/standalone-chrome:latest
+ docker run --name selenium-container -p 4444:4444 -p7900:7900 --rm selenium/standalone-chrome:latest
 ```
 
 2. Then run the smoke tests in other terminal
@@ -89,6 +89,7 @@ mvn verify -Pproduction,npm-it \
   -Dcom.vaadin.testbench.Parameters.hubHostname=localhost \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
+_NOTE:_ when docker container is running you can visit to http://localhost:7900 to see browser output
 
 ### Running integration tests in local computer
 
