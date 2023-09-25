@@ -481,10 +481,10 @@ async function main() {
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-    await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
+    await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
     await run('npm install');
     await run('npm install --save-dev @cyclonedx/cyclonedx-npm');
-    await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
+    await run('npx @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
   }
 
   log(`generating 'bom-vaadin.js'`);
