@@ -41,7 +41,8 @@ const licenseWhiteList = [
   'http://oss.sgi.com/projects/FreeB',
   'Apache-1.1',
   'http://font.ubuntu.com/ufl/ubuntu-font-licence-1.0.txt',
-  'http://www.spdx.org/licenses/BSD-4-Clause'
+  'http://www.spdx.org/licenses/BSD-4-Clause',
+  'BlueOak-1.0.0'
 ];
 
 const cveWhiteList = {
@@ -481,10 +482,10 @@ async function main() {
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-    await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
+    await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
     await run('npm install');
     await run('npm install --save-dev @cyclonedx/cyclonedx-npm');
-    await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
+    await run('npx @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
   }
 
   log(`generating 'bom-vaadin.js'`);
