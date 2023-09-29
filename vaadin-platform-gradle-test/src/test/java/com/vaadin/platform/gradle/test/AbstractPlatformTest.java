@@ -15,15 +15,45 @@
  */
 package com.vaadin.platform.gradle.test;
 
-import org.junit.Before;
-
-import com.vaadin.testbench.parallel.ParallelTest;
 import java.io.File;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vaadin.testbench.IPAddress;
+import com.vaadin.testbench.parallel.ParallelTest;
+import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 public abstract class AbstractPlatformTest extends ParallelTest {
 
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8080"));
+
+    static String hostName;
+    static boolean isSauce;
+    static boolean isHub;
+    static boolean isLocal;
+
+    static Logger getLogger() {
+        return LoggerFactory.getLogger(AbstractPlatformTest.class);
+    }
+
+    @BeforeClass
+    public static void setupClass() {
+        isSauce = SauceLabsIntegration.isConfiguredForSauceLabs();
+        String hubHost = System
+                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
+
+        hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
+        getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
+                SERVER_PORT,
+                isSauce ? "SAUCE (user:" + SauceLabsIntegration.getSauceUser() + ")"
+                        : isHub ? "HUB (hub-host:" + hubHost + ")"
+                        : "LOCAL (chromedriver)");
+    }
 
     @Before
     public void setUp() {
@@ -62,7 +92,6 @@ public abstract class AbstractPlatformTest extends ParallelTest {
      * @return the host name of development server
      */
     protected String getDeploymentHostname() {
-        return "localhost";
+        return hostName;
     }
-
 }
