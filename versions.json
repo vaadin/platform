@@ -320,18 +320,18 @@
             "version": "1.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.1.0.beta1"
+            "javaVersion": "2.1.0.rc1"
         },
         "observability-kit-starter": {
-            "javaVersion": "2.2.0.beta1",
-            "jsVersion": "2.2.0-beta1"
+            "javaVersion": "2.2.0.rc1",
+            "jsVersion": "2.2.0-rc1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.2.0.beta1",
-            "jsVersion": "2.2.0-beta1"
+            "javaVersion": "2.2.0.rc1",
+            "jsVersion": "2.2.0-rc1"
         },
         "swing-kit": {
-            "javaVersion": "2.2.0.beta1"
+            "javaVersion": "2.2.0.rc1"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.0.1"
