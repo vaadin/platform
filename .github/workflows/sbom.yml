@@ -16,7 +16,8 @@ on:
             description: 'Use bomber'
             required: false
             type: boolean
-            default: true
+            ## TODO: do not disable bomber by default (https://github.com/devops-kung-fu/bomber/issues/174)
+            default: false
           useOSV:
             description: 'Use osv-scanner'
             required: false
@@ -84,10 +85,9 @@ jobs:
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
         name: Install proKey
       - run: |
-          ## TODO: do not disable bomber by default.
-          [ false = "${{github.event.inputs.useBomber}}" -o -z "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
-          [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
-          [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
+          [ -z "${{github.event.inputs.useBomber}}" -o false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ -z "${{github.event.inputs.useOSV}}" -o false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
+          [ -z "${{github.event.inputs.useOWASP}}" -o false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
           [ true = "${{github.event.inputs.useSnapshots}}" ] && A="$A --useSnapshots"
           V="${{ github.event.inputs.version || github.event.release.tag_name }}"
