@@ -243,7 +243,7 @@ function sortReleases(releases) {
 }
 
 async function computeLastVersions(release) {
-  const releases = (await run(`git tag`, { debug: false })).stdout.split('\n').filter(l => /^2[43]\.[03]/.test(l));
+  const releases = (await run(`git tag`, { debug: false })).stdout.split('\n').filter(l => /^[2-9][3-9]\.\d/.test(l));
   const minor = release.replace(/^(\d+\.\d+).*$/, '$1');
   let sorted = sortReleases([release, ...releases]);
   const lastPatch = sorted[sorted.indexOf(release) + 1];
