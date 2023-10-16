@@ -56,6 +56,12 @@
 
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>appsec-kit-starter</artifactId>
+                <version>${appsec.kit.starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>collaboration-engine</artifactId>
                 <version>${vaadin.collaboration.engine.version}</version>
             </dependency>
