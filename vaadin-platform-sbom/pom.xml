@@ -55,6 +55,10 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>appsec-kit-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>sso-kit-starter</artifactId>
         </dependency>
         <dependency>

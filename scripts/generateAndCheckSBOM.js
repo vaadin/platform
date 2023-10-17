@@ -22,6 +22,7 @@ const licenseWhiteList = [
   'GPL-2.0-with-classpath-exception',
   'LGPL-2.1-or-later',
   'LGPL-2.1-only',
+  'BSD-4-Clause',
   'BSD-3-Clause',
   'BSD-2-Clause',
   'EPL-1.0',
