@@ -13,6 +13,7 @@ flowchart TB
            Q 
            OSGi
            MPR
+           FF
            POR
         end  
         subgraph Components
@@ -29,6 +30,7 @@ flowchart TB
             SW
             AZ
             CE
+            AK
         end   
         subgraph Hilla
             HT
@@ -45,10 +47,12 @@ flowchart TB
             F --> CE
             F --> CDI
             F --> MPR
+            F --> FF
             F --> Q
 
             F --> SSO
             F --> K8S
+            F --> AK
             F --> O11
             F --> SW
 
@@ -66,11 +70,13 @@ flowchart TB
 
             CDI -.-> P
             MPR -.-> P
+            FF -.-> P
             Q -.-> P
             FC  -.-> P
             SSO -.-> P
             SW  -.-> P
             K8S  -.-> P
+            AK  -.-> P
             B  -.-> P
             O11 -.-> P
             LC --> F
@@ -93,38 +99,40 @@ flowchart TB
             P -.-> HR
 
 
-TB(Testbench <span style='color: grey'>9.0.5 <div style='color: coral'>Flow &#128280)
+TB(Testbench <span style='color: grey'>9.1.0 <div style='color: coral'>Flow &#128280)
 
-F(Flow <span style='color: grey'>24.1.0 <div style='color: coral'>Flow &#128280)
-CDI(cdi <span style='color: grey'>15.0.0 <div style='color: coral'>Flow &#128280)
+F(Flow <span style='color: grey'>24.2.0 <div style='color: coral'>Flow &#128280)
+CDI(cdi <span style='color: grey'>15.0.1 <div style='color: coral'>Flow &#128280)
 Q(Quarkus <span style='color: grey'>2.0.1 <div style='color: coral'>Flow &#128280)
-MPR(MPR <span style='color: grey'>7.0.3 <div style='color: coral'>Flow &#128280)
+MPR(MPR <span style='color: grey'>7.0.8 <div style='color: coral'>Flow &#128280)
+FF(Form Filler <span style='color: grey'>1.0.0 <div style='color: coral'>Flow &#128280)
 OSGi(OSGi <span style='color: grey'>unsupported <div style='color: coral'>Flow &#128280)
 POR(Portlet <span style='color: grey'>unsupported <div style='color: coral'>Flow &#128280)
 
 
-SSO(SSO Java Kit <span style='color: grey'>2.1.0</span><br/>SSO Hilla Kit <span style='color: grey'>2.1.0</span><div style='color: coral'>platform &#128280</div>)
-O11(O11y Java Kit <span style='color: grey'>2.1.0</span><br/>O11y Hilla Kit <span style='color: grey'>2.1.0</span><div style='color: coral'>platform &#128280</div>)
-K8S(Kubernetes Kit <span style='color: grey'>2.0.0 <div style='color: coral'>Kits &#128280)
+SSO(SSO Java Kit <span style='color: grey'>2.2.0</span><br/>SSO Hilla Kit <span style='color: grey'>2.1.0</span><div style='color: coral'>platform &#128280</div>)
+O11(O11y Java Kit <span style='color: grey'>2.2.0</span><br/>O11y Hilla Kit <span style='color: grey'>2.1.0</span><div style='color: coral'>platform &#128280</div>)
+K8S(Kubernetes Kit <span style='color: grey'>2.1.0 <div style='color: coral'>Kits &#128280)
 AZ(Azure Kit <span style='color: grey'>1.0.0 <div style='color: coral'>Kits &#128280)
-CE(Collaboration Kit <span style='color: grey'>6.0.0 <div style='color: coral'>platform &#128280)
-SW(Swing Kit <span style='color: grey'>2.0.0 <div style='color: coral'>modernization &#128280)
+CE(Collaboration Kit <span style='color: grey'>6.1.0 <div style='color: coral'>platform &#128280)
+SW(Swing Kit <span style='color: grey'>2.2.0 <div style='color: coral'>modernization &#128280)
+AK(AppSec Kit <span style='color: grey'>3.0.0 <div style='color: coral'>platform &#128280)
 
-WC(Web-Components <span style='color: grey'>24.1.0 <div style='color: coral'>DS &#128280)
-B(Bundles <span style='color: grey'>24.1.0 <div style='color: coral'>platform &#128280)
-RC(React-Components <span style='color: grey'>2.1.0 <div style='color: coral'>hilla &#128280)
-FC(Flow-Components <span style='color: grey'>24.1.0 <div style='color: coral'>platform &#128280)
+WC(Web-Components <span style='color: grey'>24.2.0 <div style='color: coral'>DS &#128280)
+B(Bundles <span style='color: grey'>24.2.0 <div style='color: coral'>platform &#128280)
+RC(React-Components <span style='color: grey'>2.2.0 <div style='color: coral'>hilla &#128280)
+FC(Flow-Components <span style='color: grey'>24.2.0 <div style='color: coral'>platform &#128280)
 
 
-CC(Classic-Components <span style='color: grey'>24.1.0 <div style='color: coral'>platform &#128280)
-P(Platform <span style='color: grey'>24.1.0 <div style='color: coral'>platform &#128280)
+CC(Classic-Components <span style='color: grey'>24.2.0 <div style='color: coral'>platform &#128280)
+P(Platform <span style='color: grey'>24.2.0 <div style='color: coral'>platform &#128280)
 
-HT(Hilla TS <span style='color: grey'>2.1.0 <div style='color: coral'>platform &#128280)
-HJ(Hilla Java <span style='color: grey'>2.1.0 <div style='color: coral'>platform &#128280)
-HP(Hilla <span style='color: grey'>2.1.0 <div style='color: coral'>platform &#128280)
-HR(Hilla-React <span style='color: grey'>2.1.0 <div style='color: coral'>platform &#128280)
+HT(Hilla TS <span style='color: grey'>2.3.0 <div style='color: coral'>hilla &#128280)
+HJ(Hilla Java <span style='color: grey'>2.3.0 <div style='color: coral'>hilla &#128280)
+HP(Hilla <span style='color: grey'>2.3.0 <div style='color: coral'>hilla &#128280)
+HR(Hilla-React <span style='color: grey'>2.3.0 <div style='color: coral'>hilla &#128280)
 
-LC(License Checker <span style='color: grey'>1.12.0 <div style='color: coral'>platform &#128280)
+LC(License Checker <span style='color: grey'>1.12.3 <div style='color: coral'>platform &#128280)
 
 
 ```
