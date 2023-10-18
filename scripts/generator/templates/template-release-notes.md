@@ -4,21 +4,62 @@ Vaadin {{platform}}
 
 ## New and Noteworthy Since Vaadin 24.1
 
-**Notable Changes**
-
-Gradle support is raised to the version (Gradle 7.6) required by [jackson](https://github.com/FasterXML/jackson-core/issues/955)
-
 ### Flow
-- 
-### Hilla
-- 
+- Server-side API for Web Push Notifications
+  - Vaadin provides an API in Flow to send [Web Push Notifications](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) from the server to the client's browsers.
+   Read more about Web Push API in our [online documentation](https://vaadin.com/docs/latest/configuration/setting-up-webpush#create-webpushservice) and try [base starter](https://github.com/vaadin/base-starter-flow-webpush) or [CRM example project](https://github.com/vaadin/flow-crm-tutorial/tree/feature/webpush), that shows how to store Web Push subscriptions in database.
+
+- Gradle Incremental Build for Prepare Frontend
+  - Defines the inputs and outputs for `vaadinPrepareFrontendTask` of Vaadin Gradle plugin making it possible to skip the task and reduce build time in development mode if _inputs_ and _outputs_ are not changed, e.g. if project configuration not changed and no clean-up made, giving `UP-TO-DATE` result, according to incremental builds feature.
+
+    Read more about this feature in our [online documentation](https://vaadin.com/docs/latest/guide/start/gradle#incremental.builds).
+
+- Faster server reloads for Spring-based applications
+  -  Server reload time in Vaadin 24.2 is less by ~53% in average than for Vaadin 24.1, which gives a better developer experience for live-reload of Java changes.
+  
+- Dev Tools plugin support
+  -  You can implement a Dev Tools plugin, when you run in development mode. See [documentation](https://vaadin.com/docs/latest/configuration/development-mode/dev-tools/dev-tools-plugin-support) for more details.
+
+Check [Flow 24.2.0 release notes](https://github.com/vaadin/flow/releases/tag/24.2.0) for more infos about this release .
 
 ### Design System
-- 
+- Support for SVG and font icons ([Documentation](https://vaadin.com/docs/latest/components/icons#using-third-party-icons))
+- Custom content slots in Login component ([Documentation](https://vaadin.com/docs/latest/components/login#custom-form-area))
+- Side Navigation component improved and stable ([Documentation](https://vaadin.com/docs/latest/components/side-nav))
+- API for marking Grid cells as row headers
+  - New API in Grid for defining which columns' cells should be marked up as headers for their rows, in order to improve usability with screen readers. See https://github.com/vaadin/web-components/issues/5321 for more details.
+- Common Java interface for input field components
+  - A generic Java interface for input field components, combining all of the functional interfaces they have in common. See https://github.com/vaadin/platform/issues/4489 for more details
+- Java API for getting splitter position of SplitLayout ([Documentation](https://vaadin.com/docs/latest/components/split-layout#splitter-position))
 
-### Collaboration Engine
-- 
-`*` experimental
+### Addons
+- AI Form Filler Addon *
+  - Automatically fills Flow UI components from unstructured data (Raw Natural Language Text)
+  - Most of the Flow Components supported (included Grid)
+  - Built-in prompt engineering - ready to use
+  - Multilingual Support (both input and output)
+  - API to add more context instructions for the AI model
+  - API to add instructions to give extra information to the AI model about a specific field
+  - Documentation under Tools section https://vaadin.com/docs/latest/tools/ai-form-filler 
+
+### Kits
+- AppSec kit for Vaadin 24 project **
+  - Identify and manage vulnerabilities in Vaadin app dependencies
+  - [Documentation](https://vaadin.com/docs/latest/tools/appsec)
+
+
+*Experimental content
+**AppSec Kit for Vaadin 24 will be added to vaadin-bom in 24.2.1. 
+
+## Known Vulnerability
+- [CVE-2023-42795, CVE-2023-45648]
+  - This vulnerable dependency, `org.apache.tomcat.embed/tomcat-embed-core@10.1.13`, is a transitive depndency from Spring Boot (<3.1.5), which will be fixed in the following Vaadin release, after new spring boot (3.1.5, scheduled on 19th Oct, 2023) release. 
+- [[CVE-2023-35116](https://nvd.nist.gov/vuln/detail/CVE-2023-35116)]
+  - This is a **DISPUTED** report. The dependency, `com.fasterxml.jackson.core/jackson-databind@2.15.2`,  will be updated in the next vaadin maintenance release. 
+- [[CVE-2023-4586](https://nvd.nist.gov/vuln/detail/CVE-2023-4586)]
+  - This has been identified as a [False-Positive report](https://github.com/jeremylong/DependencyCheck/issues/5912). The affected version will be fixed in the next vaadin maintenance release. 
+- CVEs regarding form-filler-addon 1.0.x
+  - This is a [false positive report](https://github.com/jeremylong/DependencyCheck/pull/5927) by the owasp plugin, suppression has been sent to `dependency-check-maven` plugin and it will be included in the next maintenance release (8.4.1)
 
 ## <a id="_changelogs"></a> Changelogs
 
