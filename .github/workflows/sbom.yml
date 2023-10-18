@@ -92,7 +92,7 @@ jobs:
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
           [ true = "${{github.event.inputs.useSnapshots}}" ] && A="$A --useSnapshots"
           V="${{ github.event.inputs.version || github.event.release.tag_name }}"
-          [ -n "$V" ] && A="--version $V"
+          [ -n "$V" ] && A="$A --version $V"
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
