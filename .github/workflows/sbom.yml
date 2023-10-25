@@ -69,9 +69,9 @@ jobs:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.4/bomber_0.4.4_linux_amd64.deb
-          sudo dpkg -i bomber_0.4.4_linux_amd64.deb
-        name: Install bomber-0.4.4
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.5/bomber_0.4.5_linux_amd64.deb
+          sudo dpkg -i bomber_0.4.5_linux_amd64.deb
+        name: Install bomber-0.4.5
       - run: |
           # Install dependency-check-8.2.1
           cd /tmp
@@ -85,7 +85,7 @@ jobs:
         name: Install proKey
       - run: |
           ## TODO: do not disable bomber by default (https://github.com/devops-kung-fu/bomber/issues/174)
-          [ -z "${{github.event.inputs.useBomber}}" -o false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
           [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
