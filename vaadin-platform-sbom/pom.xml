@@ -36,7 +36,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-classic-components-flow</artifactId>
         </dependency>
@@ -47,6 +47,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-webpush</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin.flow.ai</groupId>
@@ -65,7 +69,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>kubernetes-kit-starter</artifactId>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>observability-kit-starter</artifactId>
         </dependency>
