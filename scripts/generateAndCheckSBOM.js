@@ -42,7 +42,8 @@ const licenseWhiteList = [
   'http://oss.sgi.com/projects/FreeB',
   'Apache-1.1',
   'http://font.ubuntu.com/ufl/ubuntu-font-licence-1.0.txt',
-  'http://www.spdx.org/licenses/BSD-4-Clause'
+  'http://www.spdx.org/licenses/BSD-4-Clause',
+  'https://www.bouncycastle.org/licence.html'  
 ];
 
 const cveWhiteList = {
