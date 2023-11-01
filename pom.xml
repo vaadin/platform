@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring.boot.version>3.1.5</spring.boot.version>
+        <spring.boot.version>3.2.0-RC1</spring.boot.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>11.0.13</jetty.version>
     </properties>
@@ -115,6 +115,14 @@
         <repository>
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!-- Remove this after springboot 3.2 is stable -->
+        <repository>
+            <id>spring-milestones</id>
+            <url>https://repo.spring.io/milestone/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
