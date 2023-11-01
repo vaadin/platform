@@ -326,8 +326,8 @@
             "javaVersion": "2.1.0"
         },
         "observability-kit-starter": {
-            "javaVersion": "2.2.0",
-            "jsVersion": "2.2.0"
+            "javaVersion": "2.2.1",
+            "jsVersion": "2.2.1"
         },
         "sso-kit-starter": {
             "javaVersion": "2.2.0",
