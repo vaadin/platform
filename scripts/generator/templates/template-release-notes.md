@@ -2,50 +2,15 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 23.2
-
-NOTE: Since Vaadin 23.3, Vaadin Commercial license and Service Terms has been updated. Read [more](https://vaadin.com/commercial-license-and-service-terms) 
+## New and Noteworthy Since Vaadin 23.3
 
 ### Flow
-- Preserve on refresh: add refresh flag to navigation events
-  _Adds the `isRefreshEvent` flag to `BeforeEnterEvent` and `AfterNavigationEvent` to distinguish if the event is for refresh on the view with `@PreserveOnRefresh`_
-- Better Vite compilation logs
-- Allow setting content of the Html component
-  _Adds `Html::setHtmlContent()` to sets the content based on the given HTML fragment (thanks @TatuLund !)_ 
-- Rerouting to external URL
-  _Redirects to the given URL in `BeforeEnterEvent::forwardToUrl()` even if the servlet is deployed with a non-root context path_
-- Use new `auto-configuration` in spring-boot
-- Auto-update of the tsconfig
-  _Auto-updates `tsconfig.json` in the project and gives a descriptive message to the developer asking to add custom changes manually (if any)_
-- Gradle plugin: Filtering dependencies during prepare frontend task
-  _Speeds up the prepare frontend task execution for the cases when the number of dependencies of the project is very large and the types of dependencies are very different (thanks @mvysny !)_
-
+-
 ### Hilla
-- Hilla React
-  - New starter CLI application presets based on React
-  - @hilla/react-components npm package with wrappers of all Vaadin web components (excl. Map and Spreadsheet)
-  - [Documentation](hilla.dev/docs/react/start/basics)
+- 
   
 ### Design System
-- Stable **Spreadsheet** component for flow
-- New component: **TabSheet**
-- New component: **Tooltip** 
-- **DatePicker**: 2-digit year parsing
-- Shift-click for **Grid** multi-sort
-
-### Vaadin Kits
-- Collaboration Kit 
-  _No new features, just internal changes needed for updating dependencies_
-- Azure Kit
-  _Azure Kit contains all the features of Kubernetes Kit, in addition it provides a set of blueprints to create and manage Azure clusters and resources by code_
-- Kubernetes Kit 
-  _Kubernetes Kit provides all the tools to deploy a Vaadin app to K8s and achieve auto-scaling and high-availability_
-- Observability Kit 
-  _Observability Kit lets you monitor your app performance_
-- SSO Kit 
-  _SSO Kit adds support for single sign-on in Vaadin apps_
-- Swing Kit
-  _Swing kit aims at enabling a phased approach migration from Swing into Vaadin, allowing Swing to include Vaadin views inside the main desktop application_ 
+- 
 
 ## <a id="_changelogs"></a> Changelogs
 
