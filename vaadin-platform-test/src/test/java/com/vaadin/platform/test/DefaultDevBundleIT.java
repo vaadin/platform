@@ -29,7 +29,7 @@ public class DefaultDevBundleIT extends AbstractPlatformTest {
     @Test
     public void test() throws Exception {
         File baseDir = new File(System.getProperty("user.dir", "."));
-        File devBundle = new File(baseDir, Constants.DEV_BUNDLE_LOCATION);
+        File devBundle = new File(baseDir, "target/" + Constants.DEV_BUNDLE_LOCATION);
         File nodeModules = new File(baseDir, FrontendUtils.NODE_MODULES);
 
         // shouldn't create a dev-bundle

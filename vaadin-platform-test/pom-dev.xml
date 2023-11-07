@@ -173,7 +173,7 @@
                               <target>
                                 <!-- Express mode does not need any frontend stuff -->
                                 <delete dir="node_modules" includeemptydirs="true"></delete>
-                                <delete dir="src/main/dev-bundle" includeemptydirs="true"></delete>
+                                <delete dir="src/main/bundles" includeemptydirs="true"></delete>
                                 <delete file="package.json"></delete>
                                 <delete file="package-lock.json"></delete>
                                 <delete file="tsconfig.json"></delete>

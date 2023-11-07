@@ -132,7 +132,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${project.basedir}/src/main/dev-bundle</directory>
+                            <directory>${project.basedir}/src/main/bundles</directory>
                         </fileset>
                     </filesets>
                 </configuration>
