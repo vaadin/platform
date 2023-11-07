@@ -49,6 +49,6 @@ public class BundleTest {
             }
 
         });
-        Assertions.assertEquals(1, foundInFiles.get(), "The key '" + needle + "'' should be found in one file");
+        Assertions.assertEquals(1, foundInFiles.get(), "The key '" + needle + "' should be found in one file");
     }
 }
