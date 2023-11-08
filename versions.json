@@ -340,8 +340,8 @@
             "javaVersion": "6.1.0"
         },
         "copilot-client-free": {
-            "javaVersion": "{{version}}",
-        },
+            "javaVersion": "24.3-SNAPSHOT"
+        }
     },
     "platform": "{{version}}",
     "react": {

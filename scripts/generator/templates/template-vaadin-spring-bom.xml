@@ -146,6 +146,11 @@
                 <artifactId>vaadin-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>copilot-client-free</artifactId>
+                <version>${copilot.client.free.version}</version>
+            </dependency>
 
             <!-- Free Components -->
             <dependency>
