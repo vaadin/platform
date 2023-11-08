@@ -55,6 +55,10 @@
             <artifactId>vaadin-dev-server</artifactId>
             <version>${flow.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>copilot-client-free</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
