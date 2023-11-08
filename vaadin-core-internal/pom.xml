@@ -208,10 +208,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-menu-bar-flow</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>copilot-client-free</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

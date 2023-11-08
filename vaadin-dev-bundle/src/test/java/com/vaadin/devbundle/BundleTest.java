@@ -19,19 +19,39 @@ public class BundleTest {
     @Test
     public void usageStatsIncluded() throws IOException {
         String needle = "StatisticsGatherer";
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp", "VAADIN", "build");
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
+                "VAADIN", "build");
+
+        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        Assertions.assertEquals(1, foundInFiles,
+                "The key '" + needle + "' should be found in one file");
+    }
+    @Test
+    public void copilotIncluded() throws IOException {
+        String needle = "copilot-main";
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
+                "VAADIN", "build");
+
+        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        Assertions.assertEquals(1, foundInFiles,
+                "The key '" + needle + "' should be found in one file");
+    }
+
+    private int findInFiles(Path path, String needle) throws IOException {
         AtomicInteger foundInFiles = new AtomicInteger();
-        Files.walkFileTree(bundlerBuildFolder, new FileVisitor<Path>() {
+        Files.walkFileTree(path, new FileVisitor<Path>() {
 
             @Override
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
-                    throws IOException {
+            public FileVisitResult preVisitDirectory(Path dir,
+                    BasicFileAttributes attrs) throws IOException {
                 return FileVisitResult.CONTINUE;
             }
 
             @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                String content = FileUtils.readFileToString(file.toFile(), StandardCharsets.UTF_8);
+            public FileVisitResult visitFile(Path file,
+                    BasicFileAttributes attrs) throws IOException {
+                String content = FileUtils.readFileToString(file.toFile(),
+                        StandardCharsets.UTF_8);
                 if (content.contains(needle)) {
                     foundInFiles.incrementAndGet();
                 }
@@ -39,16 +59,19 @@ public class BundleTest {
             }
 
             @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+            public FileVisitResult visitFileFailed(Path file, IOException exc)
+                    throws IOException {
                 return FileVisitResult.CONTINUE;
             }
 
             @Override
-            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+                    throws IOException {
                 return FileVisitResult.CONTINUE;
             }
 
         });
-        Assertions.assertEquals(1, foundInFiles.get(), "The key '" + needle + "' should be found in one file");
+        return foundInFiles.get();
+
     }
 }
