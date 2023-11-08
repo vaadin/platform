@@ -19,7 +19,7 @@ public class BundleTest {
     @Test
     public void usageStatsIncluded() throws IOException {
         String needle = "StatisticsGatherer";
-        Path bundlerBuildFolder = Paths.get("src", "main", "dev-bundle", "webapp", "VAADIN", "build");
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp", "VAADIN", "build");
         AtomicInteger foundInFiles = new AtomicInteger();
         Files.walkFileTree(bundlerBuildFolder, new FileVisitor<Path>() {
 
@@ -49,6 +49,6 @@ public class BundleTest {
             }
 
         });
-        Assertions.assertEquals(1, foundInFiles.get(), "The key '" + needle + "'' should be found in one file");
+        Assertions.assertEquals(1, foundInFiles.get(), "The key '" + needle + "' should be found in one file");
     }
 }
