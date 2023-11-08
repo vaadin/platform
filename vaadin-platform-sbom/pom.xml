@@ -86,6 +86,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-swing-kit-client-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>copilot-client-free</artifactId>
+        </dependency>
 
     </dependencies>
     <profiles>
