@@ -338,7 +338,10 @@
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.1.0"
-        }
+        },
+        "copilot-client-free": {
+            "javaVersion": "{{version}}",
+        },
     },
     "platform": "{{version}}",
     "react": {
