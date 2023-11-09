@@ -118,7 +118,7 @@
                 "Checkbox Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "2.6.0",
+            "jsVersion": "2.6.1",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
