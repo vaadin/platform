@@ -69,11 +69,11 @@ jobs:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.4/bomber_0.4.4_linux_amd64.deb
-          sudo dpkg -i bomber_0.4.4_linux_amd64.deb
-        name: Install bomber-0.4.4
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.7/bomber_0.4.7_linux_amd64.deb
+          sudo dpkg -i bomber_0.4.7_linux_amd64.deb
+        name: Install bomber-0.4.7
       - run: |
-          # Install dependency-check-8.2.1
+          # Install dependency-check-8.2.2
           cd /tmp
           wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.2/dependency-check-8.4.2-release.zip
           unzip dependency-check-8.4.2-release.zip
@@ -84,8 +84,7 @@ jobs:
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
         name: Install proKey
       - run: |
-          ## TODO: do not disable bomber by default (https://github.com/devops-kung-fu/bomber/issues/174)
-          [ -z "${{github.event.inputs.useBomber}}" -o false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
+          [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
           [ false = "${{github.event.inputs.useOWASP}}" ] && A="$A --disable-owasp"
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
