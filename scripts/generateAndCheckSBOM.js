@@ -48,6 +48,7 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
+  'pkg:maven/com.vaadin.flow.ai/form-filler-addon@1.0.1': ['CVE-2019-25027', 'CVE-2021-31412', 'CVE-2018-25007', 'CVE-2021-31404']
 }
 
 const STYLE = `<style>
