@@ -55,6 +55,7 @@ task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
  **********************************************************************************************************************/
 
 repositories {
+    mavenLocal()
     maven { url 'target/dependencies' }
     mavenCentral()
     maven { url = 'https://plugins.gradle.org/m2/' }
