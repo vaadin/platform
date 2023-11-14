@@ -24,18 +24,6 @@
         {{javadeps}}
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -46,9 +34,9 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
+            <version>{{platform}}</version>
             <optional>true</optional>
         </dependency>
-
 
         <dependency>
             <groupId>com.vaadin</groupId>
