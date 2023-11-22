@@ -102,6 +102,7 @@ import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Param;
 import com.vaadin.flow.component.html.Pre;
+import com.vaadin.flow.component.html.RangeInput;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
@@ -235,6 +236,7 @@ public class ComponentsView extends AppLayout {
         nativeDetails.setContent(new Span("content"));
         HtmlObject htmlObject = new HtmlObject();
         Param param = new Param();
+        RangeInput rangeInput = new RangeInput();
 
 
         // Using full qualified name since in parent class there is a Section Enum
@@ -244,7 +246,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param);
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
         FontIcon fontIcon = new FontIcon("fa-solid", "fa-user");
