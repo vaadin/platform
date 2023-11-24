@@ -627,9 +627,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 // exclude icon deprecation warning
                 .filter(logEntry -> !logEntry.getMessage()
                         .contains("vaadin-iconset.js"))
-                // exclude this error as prod-mode is used(copilot)
-                .filter(logEntry -> !logEntry.getMessage()
-                        .contains("Dev tools functionality denied for this host."))
                 .collect(Collectors.toList());
     }
 
