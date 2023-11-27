@@ -636,8 +636,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(input);
 
-        getCommandExecutor().executeScript("arguments[0].value='foo'", element);
-
+        element.sendKeys("foo");
+        
         assertLog(msg);
     }
 
