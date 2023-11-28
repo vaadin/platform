@@ -189,6 +189,10 @@
             "jsVersion": "23.3.28",
             "npmName": "@vaadin/number-field"
         },
+        "overlay": {
+            "jsVersion": "23.3.28",
+            "npmName": "@vaadin/overlay"
+        },
         "password-field": {
             "jsVersion": "23.3.28",
             "npmName": "@vaadin/password-field"
