@@ -41,7 +41,7 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/org.springframework/spring-web@5.3.30' : ['CVE-2016-1000027'],
+  'pkg:maven/org.springframework/spring-web@5.3.31' : ['CVE-2016-1000027'],
   // based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.2' : ['CVE-2023-35116'],
   'pkg:maven/com.vaadin/vaadin-core@23.3-SNAPSHOT' : ['CVE-2023-25499', 'CVE-2023-25500']
@@ -509,7 +509,7 @@ async function main() {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.existsSync('package-lock.json') && fs.unlinkSync('package-lock.json')
-    !cmd.quick && await run('mvn org.owasp:dependency-check-maven:check -Dformat=JSON -q', { throw: false });
+    !cmd.quick && await run('mvn org.owasp:dependency-check-maven:8.4.2:check -Dformat=JSON -q', { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
