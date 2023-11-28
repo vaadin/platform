@@ -343,7 +343,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "2.2.3",
+            "jsVersion": "2.2.4",
             "npmName": "@hilla/react-components"
         }
     },
