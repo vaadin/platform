@@ -4,6 +4,7 @@ Vaadin {{platform}}
 
 **Notable Changes**
 - Since Vaadin 23.3, the minimal supported spring.boot.version is 2.7.x
+  - Spring boot 2.7 is using logback-classic 1.2.12, reported in [CVE-2023-6378](https://nvd.nist.gov/vuln/detail/CVE-2023-6378), logback-* 1.2.13 contains the fix
 - Since Vaadin 23.3.5, due to the founded vulnerability ([CVE-2022-1471](https://nvd.nist.gov/vuln/detail/CVE-2022-1471)), dependency for `org.yaml:snakeyaml` has been removed. 
   - Vaadin project is not depending on the vulnerable dependency (`org.yaml:snakeyaml`) directly, users can add the dependency if needed 
 - Vaadin 23.3.x depends on Spring framework 5.3.x, which has been identified with vulnerability CVE-2016-1000027
