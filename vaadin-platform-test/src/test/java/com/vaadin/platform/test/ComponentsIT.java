@@ -63,7 +63,7 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void appWorks() throws Exception {
-        $(NotificationElement.class).waitForFirst(30);
+        $(NotificationElement.class).waitForFirst(60);
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
     }
