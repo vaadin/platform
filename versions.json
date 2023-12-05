@@ -333,8 +333,8 @@
             "jsVersion": "2.2.1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.2.0",
-            "jsVersion": "2.2.0"
+            "javaVersion": "2.3.0.rc2",
+            "jsVersion": "2.3.0.rc2"
         },
         "swing-kit": {
             "javaVersion": "2.2.2"
