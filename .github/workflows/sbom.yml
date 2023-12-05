@@ -1,7 +1,7 @@
 name: SBOM
 on:
   push:
-    branches: ["master", "24.0", "23.3"]
+    branches: ["master", "24.0", "23.4"]
   pull_request:
     types: [opened, synchronize, reopened, edited]
     paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js", "scripts/generator/templates/*.xml"]
@@ -77,17 +77,10 @@ jobs:
       - run: |
           # Install dependency-check-9.0.2
           cd /tmp
-<<<<<<< HEAD
-          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.2.1/dependency-check-8.2.1-release.zip
-          unzip dependency-check-8.2.1-release.zip
-          sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
-        name: Install dependency-check-8.2.1
-=======
           wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v9.0.2/dependency-check-9.0.2-release.zip
           unzip dependency-check-9.0.2-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
         name: Install dependency-check-9.0.2
->>>>>>> 9d03032d (chore : update dependency-check to use latest (#4731))
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
