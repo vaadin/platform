@@ -64,6 +64,7 @@ import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.Browser;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -83,6 +84,12 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     protected String getTestPath() {
         return "/prod-mode/";
     }
+
+    @Before
+    public void load(){
+        $(NotificationElement.class).waitForFirst(60);
+    }
+
 
     @Test
     public void openPageNoClientSideError() {
