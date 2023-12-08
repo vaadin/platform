@@ -24,6 +24,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -66,10 +67,7 @@ import com.vaadin.testbench.parallel.Browser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -87,7 +85,17 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Before
     public void load(){
-        $(NotificationElement.class).waitForFirst(60);
+        waitUntil(driver -> {
+            try {
+                TestBenchElement testBenchElement = $("div").attribute("class", "message").waitForFirst();
+                return testBenchElement == null;
+            } catch (TimeoutException e){
+                return true;
+            } catch (NoSuchElementException e){
+                return true;
+            }
+        });
+        $(NotificationElement.class).waitForFirst();
     }
 
 
