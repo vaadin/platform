@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.parallel.SauceLabsIntegration;
+import org.openqa.selenium.TimeoutException;
 
 
 public class ComponentsIT extends AbstractPlatformTest {
@@ -63,7 +65,18 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void appWorks() throws Exception {
-        $(NotificationElement.class).waitForFirst(60);
+        waitUntil(driver -> {
+            try {
+                TestBenchElement testBenchElement = $("div").attribute("class", "message").waitForFirst();
+                return testBenchElement == null;
+            } catch (TimeoutException e){
+                return true;
+            } catch (NoSuchElementException e){
+                return true;
+            }
+        });
+
+        $(NotificationElement.class).waitForFirst();
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
     }

@@ -227,6 +227,7 @@
                             <stopKey>foo</stopKey>
                             <systemProperties>
                                 <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
+                                <vaadin.productionMode>true</vaadin.productionMode>
                             </systemProperties>
                         </configuration>
                         <executions>

@@ -102,7 +102,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.3.0.rc1"
+            "javaVersion": "24.3.0.rc2"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -173,10 +173,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "7.0.8"
+            "javaVersion": "7.0.9"
         },
         "mpr-v8": {
-            "javaVersion": "7.0.8"
+            "javaVersion": "7.0.9"
         },
         "multi-select-combo-box": {
             "jsVersion": "24.3.0-rc1",
@@ -323,7 +323,7 @@
             "version": "1.0.0"
         },
         "copilot-client-free": {
-            "javaVersion": "24.3.0.alpha8"
+            "javaVersion": "24.3.0.alpha10"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.1.1"
