@@ -322,8 +322,8 @@
         "azure-kit": {
             "version": "1.0.0"
         },
-        "copilot-client-free": {
-            "javaVersion": "24.3.0.alpha10"
+        "copilot": {
+            "javaVersion": "24.3.0.alpha13"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.1.1"
