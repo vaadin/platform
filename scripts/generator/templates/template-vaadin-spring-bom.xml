@@ -153,8 +153,8 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>copilot-client-free</artifactId>
-                <version>${copilot.client.free.version}</version>
+                <artifactId>copilot</artifactId>
+                <version>${copilot.version}</version>
             </dependency>
 
             <!-- Free Components -->

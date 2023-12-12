@@ -15,7 +15,6 @@
  */
 package com.vaadin.platform.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedWriter;
@@ -66,10 +65,7 @@ import com.vaadin.testbench.parallel.Browser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -87,7 +83,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Before
     public void load(){
-        $(NotificationElement.class).waitForFirst(60);
+        $(NotificationElement.class).waitForFirst();
     }
 
 
