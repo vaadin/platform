@@ -317,7 +317,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "3.1.0.rc1"
+            "javaVersion": "3.1.0"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -333,14 +333,14 @@
             "jsVersion": "2.2.1"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.3.0.rc2",
-            "jsVersion": "2.3.0.rc2"
+            "javaVersion": "2.3.0",
+            "jsVersion": "2.3.0"
         },
         "swing-kit": {
             "javaVersion": "2.2.2"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.2.0"
+            "javaVersion": "6.2.1"
         }
     },
     "platform": "{{version}}",
