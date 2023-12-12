@@ -15,7 +15,6 @@
  */
 package com.vaadin.platform.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedWriter;
@@ -24,7 +23,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -85,16 +83,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
     @Before
     public void load(){
-        waitUntil(driver -> {
-            try {
-                TestBenchElement testBenchElement = $("div").attribute("class", "message").waitForFirst();
-                return testBenchElement == null;
-            } catch (TimeoutException e){
-                return true;
-            } catch (NoSuchElementException e){
-                return true;
-            }
-        });
         $(NotificationElement.class).waitForFirst();
     }
 
