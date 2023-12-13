@@ -2,39 +2,16 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-## New and Noteworthy Since Vaadin 24.2
+## New and Noteworthy Since Vaadin 24.3
 
 **Notable Changes**
+-
 
-- Springboot version is 3.2.x
-- Gradle support is raised to the version (Gradle 8.5) to fully support JDK 21
-- 
 ### Flow
-- New API for Navigation Access Control ([Documentation](https://vaadin.com/docs/latest/security/advanced-topics/navigation-access-control))
-- Rerouting to a custom page upon access denial ([Documentation](https://vaadin.com/docs/latest/security/enabling-security#customizing-error-messages-for-unauthorized-views))
-- Default I18N Provider ([Documentation](https://vaadin.com/docs/latest/advanced/i18n-localization))
-- Access Component from ErrorEvent / ErrorHandler ([Documentation](https://vaadin.com/docs/latest/advanced/custom-error-handler))
-- Pre-compiled bundle improvements ([Documentation](https://vaadin.com/docs/latest/configuration/development-mode#precompiled-bundle))
+- 
 
 ### Design System
-- Multi-Select Combo Box features
-  - MSCB Auto-Expand mode
-  - MSCB selected items at top of list
-  - Documentation can be found from [HERE](https://vaadin.com/docs/latest/components/multi-select-combo-box)  
-- Feature-specific style properties
-  - 65 new style properties for styling specific component features. These properties make it possible to customize the styling of commonly styled features in Vaadin components without writing complex CSS selectors and figuring out which generic CSS properties to use.
-  - Examples can be found from [Vaadin.com/compoennts](https://vaadin.com/docs/latest/components), for example [here](https://vaadin.com/docs/latest/components/text-field/styling)
-- Multiple styling improvements
-  - Item classname APIs
-    - Individual items in MenuBar, ContextMenu, MessageList, AvatarGroup and Select can now be styled using CSS classnames. APIs have been added to apply stylenames to items.
-  - Grid header and footer classname APIs
-  - Grid cell cursor, font-size and font-weight can now be styled through cell part names (e.g. `vaadin-grid::part(body-cell)) { font-weight: bold; }` )
-  - New `--vaadin-grid-cell-background` style property makes it easier to style row background e.g. based on hover state: `vaadin-grid::part(row):hover { --vaadin-grid-cell-background: yellow; }`
-  - New `collapsed-row` and `collapsed-row-cell` part names in Tree Grid for styling collapsed parent rows.
-  - New `input-fields` part name in Custom Field for styling the content wrapper.
-  - New `toolbar-button-pressed` part name in Rich Text Editor, for styling toggled-on toolbar buttons.
-  - New `--vaadin-app-layout-drawer-width` style property for setting the width of the App Layout drawer.
-
+-
 
 
 ## <a id="_changelogs"></a> Changelogs
