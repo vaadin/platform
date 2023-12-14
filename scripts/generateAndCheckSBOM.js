@@ -47,7 +47,6 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/com.vaadin.flow.ai/form-filler-addon@1.0.1': ['CVE-2019-25027', 'CVE-2021-31412', 'CVE-2018-25007', 'CVE-2021-31404'],
   // based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.3' : ['CVE-2023-35116']
 }
