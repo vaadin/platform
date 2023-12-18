@@ -387,7 +387,7 @@
             "npmName": "@vaadin/rich-text-editor"
         },
         "vaadin-classic-components": {
-            "javaVersion": "24.1.0"
+            "javaVersion": "24.2.0"
         },
         "vaadin-core": {
             "jsVersion": "{{version}}",
