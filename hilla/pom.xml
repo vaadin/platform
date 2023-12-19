@@ -17,6 +17,7 @@
 
     <properties>
         <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
     <distributionManagement>
         <repository>
