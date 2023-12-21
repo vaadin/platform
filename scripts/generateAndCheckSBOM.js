@@ -5,11 +5,9 @@
 // brew install osv-scanner
 // sudo go install github.com/google/osv-scanner/cmd/osv-scanner@v1
 
-const asyncExec = require('util').promisify(require('child_process').exec);
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { on } = require('stream');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 const SBOM_URL = 'https://github.com/vaadin/platform/releases/download/%%VERSION%%/Software.Bill.Of.Materials.json'
 const testProject = path.resolve('vaadin-platform-sbom');
@@ -245,12 +243,22 @@ function sortReleases(releases) {
     );
 }
 
+async function getReleases() {
+  return (await run(`git ls-remote --tags origin`, { debug: false }))
+    .stdout.split('\n').map(l => l.replace(/.*refs\/tags\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l));
+}
+
+async function getBranches() {
+  return (await run(`git branch -r`, { debug: false }))
+    .stdout.split('\n').map(b => b.replace(/ *origin\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l));
+}
+
 async function computeLastVersions(release) {
-  const releases = (await run(`git tag`, { debug: false })).stdout.split('\n').filter(l => /^[2-9][3-9]\.\d/.test(l));
+  const releases = await getReleases()
   const minor = release.replace(/^(\d+\.\d+).*$/, '$1');
   let sorted = sortReleases([release, ...releases]);
   const lastPatch = sorted[sorted.indexOf(release) + 1];
-  const branch = (await run(`git branch -r`, { debug: false })).stdout.split('\n').map(b => b.replace(/ *origin\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l)).filter(b => b === minor)[0];
+  const branch = (await getBranches()).filter(b => b === minor)[0];
   sorted = sortReleases([minor, ...(releases.filter(v => !v.startsWith(minor)))]);
   const prevMinor = sorted[sorted.indexOf(minor) + 1];
   return ({ release, minor, lastPatch, prevMinor, branch });
@@ -369,10 +377,11 @@ function checkVunerabilities(vuls) {
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
     const line = `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
-    ${asset ? asset.description + '\n' : ''}      ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n      ')}
+    ${asset ? '👌 ' + asset.description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}
     `;
-    listed ? err += line : msg += line;
+    listed ? msg += line: err += line;
   });
+  console.log(">>>>>ERR\n", err, "\n>>>>>MSG\n", msg)
   return { err, msg };
 }
 
@@ -412,9 +421,9 @@ function reportVulnerabilities(vuls) {
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
-    html += `<tr><td><code>${v}</code>${listed ? '<br>' + asset.description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
+    html += `<tr><td><code>${v}</code>${listed ? '<br>👌 ' + asset.description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
-    md += `|\`${v}\`${listed ? '<br>' + asset.description :''}|<ul><li>${Object.keys(vuls[v]).map(o =>
+    md += `|\`${v}\`${listed ? '<br>👌 ' + asset.description :''}|<ul><li>${Object.keys(vuls[v]).map(o =>
       `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${title(vuls[v][o])}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
@@ -475,10 +484,6 @@ async function main() {
   const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
   const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim();
   log(`Building SBOM for version ${currVersion} in branch: ${currBranch}`);
-
-  if (!cmd.quick && cmd.version) {
-    await run('git fetch --tags', { debug: false });
-  }
 
   const prev = await computeLastVersions(currVersion);
   if (prev.branch && prev.branch !== currBranch) {
@@ -559,15 +564,15 @@ async function main() {
   let html = `${STYLE}<h2>V${currVersion} Dependencies Report</h2>\n`;
   let errMsg = "#### Dependencies Report\n\n";
 
-  if (errVul) {
-    errMsg += `- 🚫 Vulnerabilities:\n\n${msgVul}\n`;
-    md += `\n### 🚫 Found Vulnerabilities\n`;
-    html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
-  }
   if (msgVul) {
     errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
     md += `\n### 🟠 Known Vulnerabilities\n`;
     html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
+  }
+  if (errVul) {
+    errMsg += `- 🚫 Vulnerabilities:\n\n${errVul}\n`;
+    md += `\n### 🚫 Found Vulnerabilities\n`;
+    html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
   }
   if(!errVul && !msgVul) {
     errMsg += `- 🔒 No Vulnerabilities\n`;
