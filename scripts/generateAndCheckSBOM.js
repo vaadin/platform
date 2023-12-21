@@ -363,16 +363,15 @@ function checkLicenses(licenses) {
 }
 
 function checkVunerabilities(vuls) {
-  let err = false;
-  let msg = "";
+  let err = "", msg = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
-    err = err || !listed;
-    msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
+    const line = `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
     ${asset ? asset.description + '\n' : ''}      ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n      ')}
     `;
+    listed ? err += line : msg += line;
   });
   return { err, msg };
 }
@@ -564,11 +563,13 @@ async function main() {
     errMsg += `- 🚫 Vulnerabilities:\n\n${msgVul}\n`;
     md += `\n### 🚫 Found Vulnerabilities\n`;
     html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
-  } else if (msgVul) {
+  }
+  if (msgVul) {
     errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
     md += `\n### 🟠 Known Vulnerabilities\n`;
     html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
-  } else {
+  }
+  if(!errVul && !msgVul) {
     errMsg += `- 🔒 No Vulnerabilities\n`;
     md += `\n### 🔒 No Vulnerabilities\n`;
     html += `\n<h3>🔒 No Vulnerabilities</h3>\n`;
