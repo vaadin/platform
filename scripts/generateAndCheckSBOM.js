@@ -489,8 +489,8 @@ async function main() {
   if (prev.branch && prev.branch !== currBranch) {
     await run(`git checkout ${prev.branch}`, { debug: false });
     onExit = async () => {
-      await run(`git stash`, { debug: false });
-      await run(`git checkout ${currBranch}`, { debug: false });
+      await run(`git stash`, { debug: false, throw: false });
+      await run(`git checkout ${currBranch}`, { debug: false, throw: false });
     } 
   }
 
