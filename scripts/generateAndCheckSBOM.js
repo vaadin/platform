@@ -480,12 +480,10 @@ async function main() {
   await isInstalled('mvn');
   await isInstalled('curl');
 
-
   const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
-  const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim();
-  log(`Building SBOM for version ${currVersion} in branch: ${currBranch}`);
-
+  const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim() || (await run('git rev-parse --short HEAD', { debug: false })).stdout.trim() || '-';
   const prev = await computeLastVersions(currVersion);
+  log(`Building SBOM for version ${currVersion}, current: ${currBranch}, needed: ${prev.branch}`);
   if (prev.branch && prev.branch !== currBranch) {
     await run(`git checkout ${prev.branch}`, { debug: false });
     onExit = async () => {
