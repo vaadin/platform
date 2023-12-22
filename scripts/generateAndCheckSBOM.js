@@ -380,7 +380,6 @@ function checkVunerabilities(vuls) {
     `;
     listed ? msg += line: err += line;
   });
-  console.log(">>>>>ERR\n", err, "\n>>>>>MSG\n", msg)
   return { err, msg };
 }
 
@@ -479,18 +478,17 @@ async function main() {
   await isInstalled('mvn');
   await isInstalled('curl');
 
-
   const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
-  const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim();
-  log(`Building SBOM for version ${currVersion} in branch: ${currBranch}`);
-
+  const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim()
+    || (await run('git rev-parse --short HEAD', { debug: false })).stdout.trim()  || '-';
   const prev = await computeLastVersions(currVersion);
+  log(`Building SBOM for version ${currVersion}, current: ${currBranch}${prev.branch ? ', needed: ' + prev.branch : ''}`);
   if (prev.branch && prev.branch !== currBranch) {
     await run(`git checkout ${prev.branch}`, { debug: false });
     onExit = async () => {
-      await run(`git stash`, { debug: false });
-      await run(`git checkout ${currBranch}`, { debug: false });
-    } 
+      await run(`git stash`, { debug: false, throw: false });
+      await run(`git checkout ${currBranch}`, { debug: false, throw: false });
+    }
   }
 
   if (!cmd.quick && cmd.version) {
@@ -510,7 +508,7 @@ async function main() {
     await run('rm -rf package.json node_modules frontend src');
     fs.mkdirSync('node_modules');
     fs.writeFileSync("package.json","{}");
-    await run('mvn clean package -ntp -B -Pproduction -DskipTests');
+    await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
     await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
