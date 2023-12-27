@@ -52,14 +52,6 @@ const cveWhiteList = {
     cves: ['CVE-2023-25499', 'CVE-2023-25500'],
     description: 'faulty report as the cve contains the prerelease versions'
   }
-  'pkg:maven/ch.qos.logback/logback-classic@1.2.13' : {
-    cves: ['CVE-2023-6378'],
-    description: 'version 1.2.13 contains the fix, but CVE makes FP'
-  },
-  'pkg:maven/ch.qos.logback/logback-core@1.2.13' : {
-    cves: ['CVE-2023-6378'],
-    description: 'version 1.2.13 contains the fix, but CVE makes FP'
-  }
 }
 
 const STYLE = `<style>
