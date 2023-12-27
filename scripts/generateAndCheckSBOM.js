@@ -5,7 +5,6 @@
 // brew install osv-scanner
 // sudo go install github.com/google/osv-scanner/cmd/osv-scanner@v1
 
-const asyncExec = require('util').promisify(require('child_process').exec);
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -41,13 +40,22 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/org.springframework/spring-web@5.3.31' : ['CVE-2016-1000027'],
-  // based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972
-  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.2' : ['CVE-2023-35116'],
-  'pkg:maven/com.vaadin/vaadin-core@23.3-SNAPSHOT' : ['CVE-2023-25499', 'CVE-2023-25500'],
-  // version 1.2.13 contains the fix, but CVE makes FP
-  'pkg:maven/ch.qos.logback/logback-classic@1.2.13' : ['CVE-2023-6378'],
-  'pkg:maven/ch.qos.logback/logback-core@1.2.13' : ['CVE-2023-6378']
+  'pkg:maven/org.springframework/spring-web@5.3.31' : {
+    cves: ['CVE-2016-1000027'],
+    description: 'as the faulty code has been deprecated in spring framework 5.3.x, Vaadin 23.3 project is NOT affected.'
+  },
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.2' : {
+    cves: ['CVE-2023-35116'],
+    description: 'based on the issue this is not a CVE https://github.com/FasterXML/jackson-databind/issues/3972'
+  },
+  'pkg:maven/com.vaadin/vaadin-core@23.3-SNAPSHOT' : {
+    cves: ['CVE-2023-25499', 'CVE-2023-25500'],
+    description: 'faulty report as the cve contains the prerelease versions'
+  },
+  'pkg:npm/ejs@3.1.9' :{
+    cves: ['CVE-2023-29827'],
+    description: 'NOTE: this is disputed by the vendor because the render function is not intended to be used with untrusted input.'
+  }
 }
 
 const STYLE = `<style>
@@ -142,6 +150,7 @@ async function exec(order, ops) {
     });
   });
 }
+let onExit = () => { };
 async function run(order, ops) {
   try {
     return await exec(order, ops);
@@ -149,6 +158,7 @@ async function run(order, ops) {
     if (!ops || ops.throw !== false) {
       ret.stderr && out(ret.stderr);
       err(`!! ERROR ${ret.code} !! running: ${order}!!\n${!ops || ops.output || !ops.debug ? ret.stdout : ''}`)
+      await onExit();
       process.exit(1);
     } else {
       ret.stderr && out(ret.stderr);
@@ -238,14 +248,25 @@ function sortReleases(releases) {
     );
 }
 
+async function getReleases() {
+  return (await run(`git ls-remote --tags origin`, { debug: false }))
+    .stdout.split('\n').map(l => l.replace(/.*refs\/tags\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l));
+}
+
+async function getBranches() {
+  return (await run(`git branch -r`, { debug: false }))
+    .stdout.split('\n').map(b => b.replace(/ *origin\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l));
+}
+
 async function computeLastVersions(release) {
-  const releases = (await run(`git tag`, { debug: false })).stdout.split('\n').filter(l => /^[2-9][3-9]\.\d/.test(l));
+  const releases = await getReleases()
   const minor = release.replace(/^(\d+\.\d+).*$/, '$1');
   let sorted = sortReleases([release, ...releases]);
   const lastPatch = sorted[sorted.indexOf(release) + 1];
+  const branch = (await getBranches()).filter(b => b === minor)[0];
   sorted = sortReleases([minor, ...(releases.filter(v => !v.startsWith(minor)))]);
   const prevMinor = sorted[sorted.indexOf(minor) + 1];
-  return ({ release, minor, lastPatch, prevMinor });
+  return ({ release, minor, lastPatch, prevMinor, branch });
 }
 
 async function downloadSbom(release) {
@@ -336,6 +357,7 @@ function sumarizeOWASP(f, summary) {
         summary[pkg][id] = summary[pkg][id] || {};
         summary[pkg][id].title = summary[pkg][id].title || `${v.description.substring(0, 120)}…`;
         summary[pkg][id].details = v.description;
+        summary[pkg][id].cpes = v.vulnerableSoftware.map(o => o.software.id);
         (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('owasp');
       });
     })
@@ -354,12 +376,15 @@ function checkLicenses(licenses) {
 }
 
 function checkVunerabilities(vuls) {
-  let err = false;
-  let msg = "";
+  let err = "", msg = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
-    err = err || (!cveWhiteList[v] || cves !== cveWhiteList[v].sort().join(', '));
-    msg += `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})\n`;
+    const asset = cveWhiteList[v];
+    const listed = asset && cves ===  asset.cves.sort().join(', ');
+    const line = `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
+    ${asset ? '👌 ' + asset.description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}
+    `;
+    listed ? msg += line: err += line;
   });
   return { err, msg };
 }
@@ -396,10 +421,13 @@ function reportLicenses(licenses) {
 function reportVulnerabilities(vuls) {
   let md = "", html = "";
   Object.keys(vuls).forEach(v => {
+    const cves = Object.keys(vuls[v]).sort().join(', ');
+    const asset = cveWhiteList[v];
+    const listed = asset && cves ===  asset.cves.sort().join(', ');
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
-    html += `<tr><td><code>${v}</code></td><td><ul><li>${Object.keys(vuls[v]).map(o =>
+    html += `<tr><td><code>${v}</code>${listed ? '<br>👌 ' + asset.description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
-    md += `|\`${v}\`|<ul><li>${Object.keys(vuls[v]).map(o =>
+    md += `|\`${v}\`${listed ? '<br>👌 ' + asset.description :''}|<ul><li>${Object.keys(vuls[v]).map(o =>
       `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${title(vuls[v][o])}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
@@ -456,12 +484,23 @@ async function main() {
   await isInstalled('mvn');
   await isInstalled('curl');
 
-  if (!cmd.quick && cmd.version) {
-    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q`);
+  const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
+  const currBranch = (await run('git branch --show-current', { debug: false })).stdout.trim()
+    || (await run('git rev-parse --short HEAD', { debug: false })).stdout.trim()  || '-';
+  const prev = await computeLastVersions(currVersion);
+  log(`Building SBOM for version ${currVersion}, current: ${currBranch}${prev.branch ? ', needed: ' + prev.branch : ''}`);
+  if (prev.branch && prev.branch !== currBranch) {
+    await run(`git checkout ${prev.branch}`, { debug: false });
+    onExit = async () => {
+      await run(`git stash`, { debug: false, throw: false });
+      await run(`git checkout ${currBranch}`, { debug: false, throw: false });
+    }
   }
 
-  const currVersion = cmd.version || (await run('mvn help:evaluate -N -q -DforceStdout -Dexpression=project.version', { debug: false })).stdout;
-  log(`current version: ${currVersion}`);
+  if (!cmd.quick && cmd.version) {
+    await run(`mvn -ntp -N -B -DnewVersion=${cmd.version} -Psbom versions:set -q -DgenerateBackupPoms=false`);
+  }
+
   if (!cmd.quick) {
     await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
     await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
@@ -471,17 +510,17 @@ async function main() {
   process.chdir(testProject);
 
   if (!cmd.quick) {
-    fs.existsSync('package.json') && log(`cleaning package.json`) && fs.unlinkSync('package.json');
-    // Ensure Flow does not clean up package.json and node_modules
+    // Ensure package.json and node_modules are empty
+    await run('rm -rf package.json node_modules frontend src');
     fs.mkdirSync('node_modules');
     fs.writeFileSync("package.json","{}");
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
-    await run('npm ls --depth 6 --omit dev', { output: 'target/tree-npm.txt' });
-    await run('npm install');
-    await run('npm install --save-dev @cyclonedx/cyclonedx-npm');
-    await run('npx @cyclonedx/cyclonedx-npm --omit dev --output-file target/bom-npm.json --output-format JSON');
+    await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
+    await run('npm install --silent');
+    await run('npm install --silent --save-dev @cyclonedx/cyclonedx-npm');
+    await run('npx @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
   }
 
   log(`generating 'bom-vaadin.js'`);
@@ -528,15 +567,17 @@ async function main() {
   let html = `${STYLE}<h2>V${currVersion} Dependencies Report</h2>\n`;
   let errMsg = "#### Dependencies Report\n\n";
 
-  if (errVul) {
-    errMsg += `- 🚫 Vulnerabilities:\n\n${msgVul}\n`;
-    md += `\n### 🚫 Found Vulnerabilities\n`;
-    html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
-  } else if (msgVul) {
+  if (msgVul) {
     errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
     md += `\n### 🟠 Known Vulnerabilities\n`;
     html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
-  } else {
+  }
+  if (errVul) {
+    errMsg += `- 🚫 Vulnerabilities:\n\n${errVul}\n`;
+    md += `\n### 🚫 Found Vulnerabilities\n`;
+    html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
+  }
+  if(!errVul && !msgVul) {
     errMsg += `- 🔒 No Vulnerabilities\n`;
     md += `\n### 🔒 No Vulnerabilities\n`;
     html += `\n<h3>🔒 No Vulnerabilities</h3>\n`;
@@ -568,7 +609,6 @@ async function main() {
   md += cnt;
   html += cnt;
 
-  const prev = await computeLastVersions(currVersion);
   for await (const v of [...new Set([prev.lastPatch, prev.prevMinor])]) {
     if (v !== currVersion) {
       const file = await downloadSbom(v);
@@ -595,6 +635,7 @@ async function main() {
   ghaSetEnv('DEPENDENCIES_REPORT', errMsg);
 
   err(errMsg);
+  await onExit()
 
   if (errLic || errVul) {
     process.exit(1);
