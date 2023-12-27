@@ -51,14 +51,10 @@ const cveWhiteList = {
   'pkg:maven/com.vaadin/vaadin-core@23.3-SNAPSHOT' : {
     cves: ['CVE-2023-25499', 'CVE-2023-25500'],
     description: 'faulty report as the cve contains the prerelease versions'
-  }
-  'pkg:maven/ch.qos.logback/logback-classic@1.2.13' : {
-    cves: ['CVE-2023-6378'],
-    description: 'version 1.2.13 contains the fix, but CVE makes FP'
   },
-  'pkg:maven/ch.qos.logback/logback-core@1.2.13' : {
-    cves: ['CVE-2023-6378'],
-    description: 'version 1.2.13 contains the fix, but CVE makes FP'
+  'pkg:npm/ejs@3.1.9' :{
+    cves: ['CVE-2023-29827'],
+    description: 'NOTE: this is disputed by the vendor because the render function is not intended to be used with untrusted input.'
   }
 }
 
