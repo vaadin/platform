@@ -42,7 +42,8 @@ const licenseWhiteList = [
   'Apache-1.1',
   'http://font.ubuntu.com/ufl/ubuntu-font-licence-1.0.txt',
   'http://www.spdx.org/licenses/BSD-4-Clause',
-  'https://www.bouncycastle.org/licence.html'  
+  'https://www.bouncycastle.org/licence.html',
+  'BlueOak-1.0.0'
 ];
 
 const cveWhiteList = {
