@@ -220,7 +220,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     public void gridContextMenuRenderedAndReceivesTargetItem() {
         GridElement grid = $(GridElement.class).first();
         grid.scrollIntoView();
-        grid.getCell(1, 0).click();
+        grid.getCell(1, 1).click();
 
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
                 By.tagName("vaadin-context-menu-overlay")));
