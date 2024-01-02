@@ -219,6 +219,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     @Test
     public void gridContextMenuRenderedAndReceivesTargetItem() {
         GridElement grid = $(GridElement.class).first();
+        grid.scrollIntoView();
         grid.getCell(1, 0).click();
 
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
