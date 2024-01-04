@@ -53,7 +53,7 @@ public class ComponentsIT extends ParallelTest {
         String browsers = System.getProperty("grid.browsers");
         if (sauceUser != null && !sauceUser.isEmpty()) {
             if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("safari-9");
+                Parameters.setGridBrowsers("ie11,firefox,safari-9,safari-10");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
