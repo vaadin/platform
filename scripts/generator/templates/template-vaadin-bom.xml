@@ -14,7 +14,7 @@
 
     <properties>
 {{javadeps}}
-        <slf4j.version>2.0.4</slf4j.version>
+        <slf4j.version>2.0.11</slf4j.version>
         <jna.version>5.14.0</jna.version>
     </properties>
 
@@ -40,6 +40,13 @@
                 <version>${vaadin.testbench.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-bom</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
 
             <dependency>
@@ -96,32 +103,7 @@
                 <artifactId>vaadin-swing-kit-client-api</artifactId>
                 <version>${swing.kit.version}</version>
             </dependency>
-			<!-- SLF4J -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jdk14</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jcl</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
+
             <!-- JNA -->
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
