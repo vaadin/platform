@@ -346,7 +346,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "24.4.0-alpha3",
+            "jsVersion": "24.4.0-alpha4",
             "npmName": "@vaadin/react-components"
         }
     },
