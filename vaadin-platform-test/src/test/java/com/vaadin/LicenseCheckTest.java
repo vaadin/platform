@@ -58,6 +58,7 @@ public class LicenseCheckTest {
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0.html");
         whitelist.add("https://www.apache.org/licenses/LICENSE-2.0.txt");
         whitelist.add("https://spdx.org/licenses/Apache-2.0#licenseText");
+        whitelist.add("http://opensource.org/licenses/apache2.0.php");
 
         // BSD
         whitelist.add("http://www.opensource.org/licenses/bsd-license.php");
