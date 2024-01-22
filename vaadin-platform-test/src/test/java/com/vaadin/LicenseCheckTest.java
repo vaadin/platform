@@ -36,6 +36,9 @@ public class LicenseCheckTest {
         // Vaadin
         whitelist.add("https://vaadin.com/license/cvdl-4.0");
         whitelist.add("http://vaadin.com/license/cvrl-1");
+        whitelist.add("http://vaadin.com/license/cval-3");
+        whitelist.add("https://vaadin.com/license/cval-3");
+        whitelist.add("https://vaadin.com/license/cval-3.0");
 
         // Eclipse
         whitelist.add("http://www.eclipse.org/org/documents/edl-v10.php");
@@ -48,6 +51,8 @@ public class LicenseCheckTest {
 
         // Apache
         whitelist.add("https://www.apache.org/licenses/LICENSE-2.0");
+        whitelist.add("Apache-2.0");
+        whitelist.add("Apache2");
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0.txt");
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0");
         whitelist.add("http://www.apache.org/licenses/LICENSE-2.0.html");
@@ -57,6 +62,8 @@ public class LicenseCheckTest {
         // BSD
         whitelist.add("http://www.opensource.org/licenses/bsd-license.php");
         whitelist.add("http://opensource.org/licenses/BSD-2-Clause");
+        whitelist.add("http://opensource.org/licenses/BSD-3-Clause");
+        whitelist.add("https://spdx.org/licenses/BSD 3-Clause#licenseText");
 
         // MIT
         whitelist.add("https://opensource.org/licenses/MIT");
@@ -72,9 +79,12 @@ public class LicenseCheckTest {
         whitelist.add("http://www.gwtproject.org/terms.html");
         whitelist.add("https://github.com/javaee/javax.annotation/blob/master/LICENSE");
         whitelist.add("https://glassfish.dev.java.net/public/CDDLv1.0.html");
+        whitelist.add("https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html");
+
 
         // aopalliance:aopalliance
         whitelist.add("Public Domain");
+
     }
 
     private static final List<String> excludeDirs = Arrays.asList(".git", "bower_components", "node", "node_modules",
@@ -156,7 +166,7 @@ public class LicenseCheckTest {
             String key = url != null ? url : name != null ? name : null;
 
             if (key == null) {
-                Assert.fail("");
+                Assert.fail("There is no license info (name or url) por dependency: " + dependency);
             } else if (!whitelist.contains(key)) {
                 List<String> licenses = unsupportedLicenses.computeIfAbsent(dependency, k -> new ArrayList<>());
                 licenses.add(name + ": " + url);
