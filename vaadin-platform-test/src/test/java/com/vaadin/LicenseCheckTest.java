@@ -166,7 +166,7 @@ public class LicenseCheckTest {
             String key = url != null ? url : name != null ? name : null;
 
             if (key == null) {
-                Assert.fail("There is no license info (name or url) por dependency: " + dependency);
+                Assert.fail("There is no license info (name or url) for dependency: " + dependency);
             } else if (!whitelist.contains(key)) {
                 List<String> licenses = unsupportedLicenses.computeIfAbsent(dependency, k -> new ArrayList<>());
                 licenses.add(name + ": " + url);
