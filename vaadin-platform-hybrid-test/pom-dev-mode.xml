@@ -247,6 +247,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <reactRouterEnabled>false</reactRouterEnabled>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
