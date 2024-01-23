@@ -50,6 +50,10 @@ const cveWhiteList = {
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.3' : {
     cves: ['CVE-2023-35116'],
     description: 'Not a valid CVE report based on the vendor analysis and [research](https://github.com/FasterXML/jackson-databind/issues/3972)'
+  },
+  'pkg:maven/me.friwi/jcef-api@jcef-af53d63%2Bcef-104.4.23%2Bg46ae630%2Bchromium-104.0.5112.102' : {
+    cves: ['CVE-2024-21639', 'CVE-2024-21640'],
+    description: 'Wait for the update from the jcefmaven community. Meanwhile the swing-kit is supposed to be used with fixed websites and not to browse the internet, we have a check for that, so the only possible attacker would be the same person that created the swing application, aka our customer devs. so this vulnerability is not classified by us as critical issue'
   }
 }
 
