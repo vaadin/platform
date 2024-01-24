@@ -31,9 +31,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-maven-plugin</artifactId>
-            <version>${flow.version}</version>
+            <groupId>com.vaadin.hilla</groupId>
+            <artifactId>hilla-maven-plugin</artifactId>
+            <version>${hilla.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -115,24 +115,24 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.vaadin</groupId>
-                                    <artifactId>flow-maven-plugin</artifactId>
-                                    <version>${flow.version}</version>
+                                    <groupId>com.vaadin.hilla</groupId>
+                                    <artifactId>hilla-maven-plugin</artifactId>
+                                    <version>${hilla.version}</version>
                                     <classifier>sources</classifier>
                                     <includes>**/*.java</includes>
                                     <outputDirectory>src/main/java</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin</groupId>
-                                    <artifactId>flow-maven-plugin</artifactId>
-                                    <version>${flow.version}</version>
+                                    <groupId>com.vaadin.hilla</groupId>
+                                    <artifactId>hilla-maven-plugin</artifactId>
+                                    <version>${hilla.version}</version>
                                     <excludes>**/*.class,META-INF/**</excludes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin</groupId>
-                                    <artifactId>flow-maven-plugin</artifactId>
-                                    <version>${flow.version}</version>
+                                    <groupId>com.vaadin.hilla</groupId>
+                                    <artifactId>hilla-maven-plugin</artifactId>
+                                    <version>${hilla.version}</version>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
