@@ -45,11 +45,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
-            <artifactId>hilla-dev-mode</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
         </dependency>
