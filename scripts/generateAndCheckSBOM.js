@@ -502,6 +502,9 @@ async function main() {
 
   if (!cmd.quick) {
     await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
+    const testBranch= (await run('git branch --show-current', { debug: false })).stdout.trim();
+    log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    log(`current branch is ${testBranch}`);
     await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
   }
 
