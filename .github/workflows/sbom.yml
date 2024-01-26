@@ -109,8 +109,7 @@ jobs:
         with:
           name: files
           path: |
-            **/target/bom-vaadin.json
-            **/target/*-report.json
+            **/target/*.json
             **/target/tree-*.txt
             **/target/dependencies.html
           if-no-files-found: error
