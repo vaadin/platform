@@ -89,6 +89,7 @@ writer.writeSeparateJson(versions.react, coreJsonTemplateFileName, vaadinCoreJso
 
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
+writer.writeSeparateJson(versions.react, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "react");
 writer.writeSeparateJson(versions["react-pro"], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "react-pro");
 
 
