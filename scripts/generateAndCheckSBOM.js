@@ -488,7 +488,7 @@ async function main() {
     || (await run('git rev-parse --short HEAD', { debug: false })).stdout.trim()  || '-';
   const prev = await computeLastVersions(currVersion);
   log(`Building SBOM for version ${currVersion}, current: ${currBranch}${prev.branch ? ', needed: ' + prev.branch : ''}`);
-  if (prev.branch && prev.branch !== currBranch) {
+  if (prev.branch && prev.branch !== currBranch && (prev.branch + '-SNAPSHOT') !== currVersion) {
     await run(`git checkout ${prev.branch}`, { debug: false });
     onExit = async () => {
       await run(`git stash`, { debug: false, throw: false });
