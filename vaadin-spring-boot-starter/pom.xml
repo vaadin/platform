@@ -53,6 +53,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.hilla</groupId>
+            <artifactId>hilla</artifactId>
+        </dependency>
 
         <!-- Spring -->
         <dependency>

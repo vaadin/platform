@@ -26,6 +26,14 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.vaadin.hilla</groupId>
+                <artifactId>hilla-bom</artifactId>
+                <version>${hilla.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin</artifactId>
                 <version>${project.version}</version>
