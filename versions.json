@@ -353,6 +353,12 @@
             "npmName": "@vaadin/react-components"
         }
     },
+    "react-pro": {
+        "react-components-pro": {
+            "jsVersion": "24.4.0-alpha9",
+            "npmName": "@vaadin/react-components-pro"
+        }
+    },
     "vaadin": {
         "board": {
             "javaVersion": "{{version}}",
