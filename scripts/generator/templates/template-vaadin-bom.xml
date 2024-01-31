@@ -115,13 +115,6 @@
                 <artifactId>jna-platform</artifactId>
                 <version>${jna.version}</version>
             </dependency>
-
-            <!-- workaround,should be removed after this module has been added to hilla-bom -->
-            <dependency>
-                <groupId>com.vaadin.hilla</groupId>
-                <artifactId>hilla-dev-mode</artifactId>
-                <version>${hilla.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
