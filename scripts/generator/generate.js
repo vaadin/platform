@@ -101,9 +101,9 @@ writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesRes
 writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 
-writer.writeProperty(versions, "flow", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
-writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
-writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
+writer.writeProperty(versions, "hilla", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
+writer.writeProperty(versions, "hilla", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
+writer.writeProperty(versions, "hilla", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
 
 writer.writeProperty(versions, "flow", devBundleTemplateFileName, devBundlePomResultFileName);
