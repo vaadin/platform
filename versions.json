@@ -104,9 +104,6 @@
         "flow": {
             "javaVersion": "24.4.0.alpha4"
         },
-        "hilla": {
-            "javaVersion": "24.4.0.alpha2"
-        },
         "flow-cdi": {
             "javaVersion": "15.0.1"
         },
