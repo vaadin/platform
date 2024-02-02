@@ -26,7 +26,7 @@ public class VaadinBundlesTest {
         try {
             final Class<?> vaadinBundlesClazz = getClass().getClassLoader().loadClass("com.vaadin.bundles.VaadinBundles");
             final NpmPackage[] npmPackages = vaadinBundlesClazz.getAnnotationsByType(NpmPackage.class);
-            Assert.assertEquals(1, npmPackages.length);
+            Assert.assertTrue("at least one @NpmPackage", npmPackages.length >= 1);
             Assert.assertEquals("@vaadin/bundles", npmPackages[0].value());
             Assert.assertNotEquals("${bundles.version}", npmPackages[0].version());
         } catch (ClassNotFoundException e) {

@@ -21,5 +21,6 @@ import com.vaadin.flow.component.dependency.NpmPackage;
  * Empty class which makes Flow add npm @vaadin/bundles dependency.
  */
 @NpmPackage(value = "@vaadin/bundles", version = "${bundles.version}")
+@NpmPackage(value = "@vaadin/react-components", version = "${react-components.version}")
 public class VaadinBundles {
 }

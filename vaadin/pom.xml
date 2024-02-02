@@ -80,6 +80,9 @@
 
                                 def vaadinBundle = versions.bundles.vaadin
                                 project.properties.setProperty("bundles.version", vaadinBundle.jsVersion)
+
+                                def reactComponents = versions["react"]["react-components"]
+                                project.properties.setProperty("react-components.version", reactComponents.jsVersion)
                             </source>
                         </configuration>
                     </execution>
