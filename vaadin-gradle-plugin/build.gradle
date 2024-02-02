@@ -145,7 +145,7 @@ gradlePlugin {
     plugins {
         vaadinPlugin {
             id = 'com.vaadin'
-            implementationClass = 'com.vaadin.gradle.VaadinPlugin'
+            implementationClass = 'com.vaadin.gradle.plugin.VaadinPlugin'
         }
     }
 }
