@@ -166,7 +166,7 @@ import java.nio.file.Path
 import java.util.stream.Collectors
 
 // Define the directory to search for Kotlin files
-String directoryPath = 'src/main/kotlin/com/vaadin/gradle/plugin'
+String directoryPath = 'vaadin-gradle-plugin/src/main/kotlin/com/vaadin/gradle/plugin'
 String oldPackage = 'package com.vaadin.hilla.gradle.plugin'
 String newPackage = 'package com.vaadin.gradle.plugin'
 String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
