@@ -41,7 +41,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-gradle-plugin</artifactId>
-            <version>${project.version}</version>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
