@@ -136,8 +136,8 @@
                             <goal>rename</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>src/main/kotlin/com/vaadin/gradle/HillaPlugin.kt</sourceFile>
-                            <destinationFile>src/main/kotlin/com/vaadin/gradle/VaadinPlugin.kt</destinationFile>
+                            <sourceFile>src/main/kotlin/com/vaadin/gradle/plugin/HillaPlugin.kt</sourceFile>
+                            <destinationFile>src/main/kotlin/com/vaadin/gradle/plugin/VaadinPlugin.kt</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -164,9 +164,9 @@ import java.nio.file.Path
 import java.util.stream.Collectors
 
 // Define the directory to search for Kotlin files
-String directoryPath = 'src/main/kotlin/com/vaadin/gradle'
+String directoryPath = 'src/main/kotlin/com/vaadin/gradle/plugin'
 String oldPackage = 'package com.vaadin.hilla.gradle.plugin'
-String newPackage = 'package com.vaadin.gradle'
+String newPackage = 'package com.vaadin.gradle.plugin'
 String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
 String newPluginClassDef = 'public class VaadinPlugin : Plugin<Project> {'
 
@@ -255,7 +255,7 @@ Files.walk(Paths.get(directoryPath))
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/main/kotlin/com/vaadin/gradle</outputDirectory>
+                            <outputDirectory>${basedir}/src/main/kotlin/com/vaadin/gradle/plugin</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/target/temp/com/vaadin/hilla/gradle/plugin</directory>
