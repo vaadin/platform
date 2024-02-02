@@ -103,6 +103,7 @@ writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, relea
 
 writer.writeProperty(versions, "hilla", mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, "hilla", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
+writer.writeProperty(versions, "flow", gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
 writer.writeProperty(versions, "hilla", gradlePortalPluginTemplatePomFileName, gradlePortalPluginResultPomFileName);
 writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
 
