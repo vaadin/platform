@@ -55,12 +55,6 @@
             <artifactId>vaadin-dev-bundle</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>4.0.18</version>
-            <type>pom</type>
-        </dependency>
     </dependencies>
 
     <build>
@@ -147,6 +141,14 @@
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
                 <version>3.0.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>4.0.18</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>replace-package-declaration-in-src-files</id>
