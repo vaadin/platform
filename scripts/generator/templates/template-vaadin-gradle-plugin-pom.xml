@@ -90,6 +90,15 @@
                         </goals>
                         <configuration>
                             <artifactItems>
+                                <!-- bring .kt code from both: flow and hilla prugins -->
+                                <artifactItem>
+                                    <groupId>com.vaadin</groupId>
+                                    <artifactId>flow-gradle-plugin</artifactId>
+                                    <version>${flow.version}</version>
+                                    <classifier>sources</classifier>
+                                    <includes>**/*.kt</includes>
+                                    <outputDirectory>target/temp</outputDirectory>
+                                </artifactItem>
                                 <artifactItem>
                                     <groupId>com.vaadin.hilla</groupId>
                                     <artifactId>hilla-gradle-plugin</artifactId>
@@ -98,6 +107,7 @@
                                     <includes>**/*.kt</includes>
                                     <outputDirectory>target/temp</outputDirectory>
                                 </artifactItem>
+                                <!-- re-pack hilla plugin resources in vaadin plugin -->
                                 <artifactItem>
                                     <groupId>com.vaadin.hilla</groupId>
                                     <artifactId>hilla-gradle-plugin</artifactId>
