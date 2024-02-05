@@ -65,19 +65,22 @@ function createMaven(versions, mavenTemplate) {
 @param {String} module for the version.
 @param {String} mavenTemplate template string to replace versions in.
 */
-function addProperty(versions, module, mavenTemplate) {
+function addProperty(versions, modules, mavenTemplate) {
     const allVersions = Object.assign({}, versions.core, versions.vaadin);
 
     const property = computeUsedProperties(mavenTemplate);
     let mavenDeps = '';
-    for (let [dependencyName, dependency] of Object.entries(allVersions)) {
-        const propertyName = module.replace(/-/g, '.') + '.version';
+    for (let module of modules){
+        for (let [dependencyName, dependency] of Object.entries(allVersions)) {
+            const propertyName = module.replace(/-/g, '.') + '.version';
 
-        if (dependency.javaVersion && dependencyName === module){
-            const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
-            mavenDeps = mavenDeps.concat(mavenDependency);
+            if (dependency.javaVersion && dependencyName === module){
+                const mavenDependency = `        <${propertyName}>${dependency.javaVersion}</${propertyName}>\n`;
+                mavenDeps = mavenDeps.concat(mavenDependency);
+            }
         }
     }
+
 
     const mavenData = Object.assign(versions, { javadeps: mavenDeps });
 

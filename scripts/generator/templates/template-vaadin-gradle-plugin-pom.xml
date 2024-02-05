@@ -40,6 +40,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>flow-gradle-plugin</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-prod-bundle</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -91,7 +96,7 @@
                                     <version>${hilla.version}</version>
                                     <classifier>sources</classifier>
                                     <includes>**/*.kt</includes>
-                                    <outputDirectory>src/main/kotlin</outputDirectory>
+                                    <outputDirectory>target/temp</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.vaadin.hilla</groupId>
@@ -108,6 +113,86 @@
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>rename-hilla-plugin-to-vaadin</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>src/main/kotlin/com/vaadin/gradle/plugin/HillaPlugin.kt</sourceFile>
+                            <destinationFile>src/main/kotlin/com/vaadin/gradle/plugin/VaadinPlugin.kt</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>3.0.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>4.0.18</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>replace-package-declaration-in-src-files</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scripts>
+                                <script>
+                                    <![CDATA[
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.Path
+import java.util.stream.Collectors
+
+// Define the directory to search for Kotlin files
+String directoryPath = 'vaadin-gradle-plugin/src/main/kotlin/com/vaadin/gradle/plugin'
+String oldPackage = 'package com.vaadin.hilla.gradle.plugin'
+String newPackage = 'package com.vaadin.gradle.plugin'
+String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
+String newPluginClassDef = 'public class VaadinPlugin : Plugin<Project> {'
+
+// Use NIO to walk through the directory
+Files.walk(Paths.get(directoryPath))
+    // Filter to include only Kotlin files
+    .filter { path -> path.toString().endsWith('.kt') }
+    // Collect paths to process them
+    .collect(Collectors.toList())
+    // Iterate over each file
+    .each { Path path ->
+        // Read the content of the file
+        String content = new String(Files.readAllBytes(path))
+        // Replace the old package declaration with the new one
+        String updatedContent = content.replace(oldPackage, newPackage)
+        // Replace the old plugin class definition with the new one
+        updatedContent = updatedContent.replace(oldPluginClassDef, newPluginClassDef)
+        // Write the updated content back to the file
+        Files.write(path, updatedContent.getBytes())
+        println "Updated package declaration in file: ${path}"
+    }
+                                    ]]>
+                                </script>
+                            </scripts>
                         </configuration>
                     </execution>
                 </executions>
@@ -158,6 +243,26 @@
                                     <directory>build/libs/</directory>
                                     <includes>
                                         <include>**/*.jar</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- for copying extracted src files from target/temp to new package -->
+                        <id>move-src-from-hilla-package-to-vaadin</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/main/kotlin/com/vaadin/gradle/plugin</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/temp/com/vaadin/hilla/gradle/plugin</directory>
+                                    <includes>
+                                        <include>**/*.kt</include>
                                     </includes>
                                 </resource>
                             </resources>
