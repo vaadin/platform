@@ -157,6 +157,12 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
+                            <properties>
+                                <property>
+                                    <name>basedir</name>
+                                    <value>${project.basedir}</value>
+                                </property>
+                            </properties>
                             <scripts>
                                 <script>
                                     <![CDATA[
@@ -165,8 +171,10 @@ import java.nio.file.Paths
 import java.nio.file.Path
 import java.util.stream.Collectors
 
+def baseDirPath = basedir
+
 // Define the directory to search for Kotlin files
-String directoryPath = 'vaadin-gradle-plugin/src/main/kotlin/com/vaadin/gradle/plugin'
+String directoryPath = "${baseDirPath}/src/main/kotlin/com/vaadin/gradle/plugin"
 String oldPackage = 'package com.vaadin.hilla.gradle.plugin'
 String newPackage = 'package com.vaadin.gradle.plugin'
 String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
