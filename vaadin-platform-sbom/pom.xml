@@ -108,6 +108,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <reactRouterEnabled>true</reactRouterEnabled>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
