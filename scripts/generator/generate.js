@@ -106,6 +106,6 @@ writer.writeProperty(versions, ["hilla"], gradlePortalPluginTemplatePomFileName,
 writer.writeProperty(versions, ["flow"], platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
 
 writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, devBundlePomResultFileName);
-writer.writeProperty(versions, ["flow", "hilla"], prodBundleTemplateFileName, prodBundlePomResultFileName);
+writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
 
