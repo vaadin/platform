@@ -35,7 +35,7 @@ import com.vaadin.flow.component.datepicker.testbench.DatePickerElement;
 import com.vaadin.flow.component.formlayout.testbench.FormLayoutElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
-import com.vaadin.flow.component.html.testbench.LabelElement;
+import com.vaadin.flow.component.html.testbench.NativeLabelElement;
 import com.vaadin.flow.component.icon.testbench.IconElement;
 import com.vaadin.flow.component.menubar.testbench.MenuBarElement;
 import com.vaadin.flow.component.messages.testbench.MessageElement;
@@ -64,7 +64,6 @@ import com.vaadin.testbench.parallel.Browser;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntry;
@@ -325,7 +324,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 "TextArea value changed from to foo");
     }
 
-    @Test @Ignore("ignore until fixed after hilla-dev inluded in platform")
+    @Test
     public void uploadIsRenderedAndUploadFile() throws IOException {
         UploadElement upload = $(UploadElement.class).first();
 
@@ -354,7 +353,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(content);
 
-        TestBenchElement contentComponent = dialogOverlay.$(LabelElement.class).first();
+        TestBenchElement contentComponent = dialogOverlay.$(NativeLabelElement.class).first();
 
         Assert.assertEquals("This is the contents of the dialog",
                 contentComponent.getText());
