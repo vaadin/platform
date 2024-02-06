@@ -33,6 +33,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.vaadin.hilla</groupId>
+            <artifactId>hilla-dev-mode</artifactId>
+            <version>${hilla.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
             <version>{{platform}}</version>
