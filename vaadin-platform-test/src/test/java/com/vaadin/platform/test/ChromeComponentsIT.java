@@ -83,13 +83,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     }
 
     @Before
-    public void load() {
-        if (getDriver().getPageSource().contains("<div class=\"message\">Building front-end development bundle</div>")) {
-            // Wait for the development bundle to be loaded
-            $(NotificationElement.class).waitForFirst(180);
-        } else {
-            $(NotificationElement.class).waitForFirst();
-        }
+    public void load(){
+        $(NotificationElement.class).waitForFirst();
     }
 
 
