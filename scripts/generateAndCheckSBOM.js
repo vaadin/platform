@@ -14,8 +14,10 @@ const testProject = path.resolve('vaadin-platform-sbom');
 const licenseWhiteList = [
   'ISC',
   'MIT',
+  'MIT-0',
   '0BSD',
   'Apache-2.0',
+  'Apache 2.0',
   'CDDL',
   'CDDL-1.0',
   'GPL-2.0-with-classpath-exception',
