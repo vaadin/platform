@@ -329,6 +329,9 @@ function sumarizeOSV(f, summary) {
 function sumarizeBomber(f, summary) {
   let res;
   try {
+    if (!fs.existsSync(f) || fs.statSync(f).size === 0) {
+      return summary;
+    }
     res = JSON.parse(fs.readFileSync(f));
   } catch (error) {
     err(`Error parsing JSON file '${f}'`, error);
@@ -383,8 +386,7 @@ function checkVunerabilities(vuls) {
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
     const line = `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
-    ${asset ? '👌 ' + asset.description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}
-    `;
+    ${asset ? '👌 ' + asset.description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}\n`;
     listed ? msg += line: err += line;
   });
   return { err, msg };
