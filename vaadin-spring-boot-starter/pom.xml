@@ -56,12 +56,6 @@
         <dependency>
             <groupId>com.vaadin.hilla</groupId>
             <artifactId>hilla-react</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.vaadin.hilla</groupId>
-                    <artifactId>hilla-dev-mode</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- Spring -->
