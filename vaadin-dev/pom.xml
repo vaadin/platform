@@ -44,11 +44,6 @@
             <artifactId>vaadin-dev-bundle</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>copilot</artifactId>
-        </dependency>
-
     </dependencies>
     <build>
         <plugins>
