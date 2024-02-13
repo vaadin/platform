@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin.hilla</groupId>
-            <artifactId>hilla-dev-mode</artifactId>
+            <artifactId>hilla-dev</artifactId>
             <version>${hilla.version}</version>
         </dependency>
         <dependency>

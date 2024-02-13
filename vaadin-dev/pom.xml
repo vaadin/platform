@@ -46,7 +46,7 @@
 
         <dependency>
             <groupId>com.vaadin.hilla</groupId>
-            <artifactId>hilla-dev-mode</artifactId>
+            <artifactId>hilla-dev</artifactId>
         </dependency>
 
         <dependency>
