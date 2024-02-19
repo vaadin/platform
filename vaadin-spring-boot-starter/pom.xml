@@ -55,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin.hilla</groupId>
-            <artifactId>hilla-react</artifactId>
+            <artifactId>hilla</artifactId>
         </dependency>
 
         <!-- Spring -->
