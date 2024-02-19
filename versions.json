@@ -403,7 +403,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.12.7"
+            "javaVersion": "1.12.8"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
