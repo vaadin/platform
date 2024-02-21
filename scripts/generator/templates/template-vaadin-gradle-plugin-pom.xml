@@ -175,7 +175,7 @@ def baseDirPath = basedir
 
 // Define the directory to search for Kotlin files
 String directoryPath = "${baseDirPath}/src/main/kotlin/com/vaadin/gradle/plugin"
-String oldPackage = 'package com.vaadin.gradle.plugin'
+String oldPackage = 'package com.vaadin.hilla.gradle.plugin'
 String newPackage = 'package com.vaadin.gradle.plugin'
 String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
 String newPluginClassDef = 'public class VaadinPlugin : Plugin<Project> {'
