@@ -186,11 +186,14 @@
                     <version>3.3.1</version>
                     <configuration>
                         <includeDependencySources>true</includeDependencySources>
+                        <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
                             <!-- Exclude client engine since it is not user
                                 facing API -->
                             <dependencySourceExclude>com.vaadin:flow-client</dependencySourceExclude>
                             <dependencySourceExclude>com.vaadin:license-checker</dependencySourceExclude>
+                            <!-- We need this until https://github.com/vaadin/hilla/issues/2091 is fixed -->
+                            <dependencySourceExclude>com.vaadin:hilla-*</dependencySourceExclude>
                         </dependencySourceExcludes>
                         <dependencySourceIncludes>
                             <dependencySourceInclude>com.vaadin:*</dependencySourceInclude>
