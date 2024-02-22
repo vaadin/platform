@@ -114,14 +114,14 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v4.5
+      - uses: stCarolas/setup-maven@v5
         with:
           maven-version: '3.9.0'
       - run: |
