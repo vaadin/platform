@@ -102,7 +102,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.4-SNAPSHOT"
+            "javaVersion": "24.4.0.alpha10"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -121,7 +121,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.4-SNAPSHOT"
+            "javaVersion": "24.4.0.alpha5"
         },
         "horizontal-layout": {
             "jsVersion": "24.4.0-alpha13",
@@ -326,18 +326,18 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.4.0.alpha2"
+            "javaVersion": "24.4.0.alpha4"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.2.0"
         },
         "observability-kit-starter": {
-            "javaVersion": "2.2.1",
-            "jsVersion": "2.2.1"
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "3.0.0.alpha2"
         },
         "sso-kit-starter": {
-            "javaVersion": "2.3.0",
-            "jsVersion": "2.3.0"
+            "javaVersion": "3.0.0.alpha2",
+            "jsVersion": "3.0.0.alpha2"
         },
         "swing-kit": {
             "javaVersion": "2.2.3"
@@ -403,14 +403,14 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.12.7"
+            "javaVersion": "1.12.8"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.2.2",
+            "javaVersion": "9.2.3",
             "pro": true
         }
     }

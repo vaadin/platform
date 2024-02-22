@@ -45,7 +45,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
+            <groupId>com.vaadin</groupId>
             <artifactId>hilla-dev</artifactId>
         </dependency>
 

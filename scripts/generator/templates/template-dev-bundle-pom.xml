@@ -32,7 +32,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
+            <groupId>com.vaadin</groupId>
             <artifactId>hilla-dev</artifactId>
             <version>${hilla.version}</version>
         </dependency>

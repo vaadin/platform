@@ -64,8 +64,8 @@ repositories {
 
 dependencies {
     implementation('org.jetbrains.kotlin:kotlin-stdlib:1.9.20')
-    implementation("com.vaadin.hilla:plugin-base:${pom.properties.getAt('hilla.version')}")
-    implementation("com.vaadin.hilla:engine-core:${pom.properties.getAt('hilla.version')}")
+    implementation("com.vaadin:hilla-plugin-base:${pom.properties.getAt('hilla.version')}")
+    implementation("com.vaadin:hilla-engine-core:${pom.properties.getAt('hilla.version')}")
     implementation("com.vaadin:flow-gradle-plugin:${pom.properties.getAt('flow.version')}")
     implementation("com.vaadin:vaadin-prod-bundle:${project.version}")
     implementation("com.vaadin:vaadin-dev-bundle:${project.version}")
