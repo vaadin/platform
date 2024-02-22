@@ -29,12 +29,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
-            <artifactId>plugin-base</artifactId>
+            <groupId>com.vaadin</groupId>
+            <artifactId>hilla-plugin-base</artifactId>
             <version>${hilla.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
+            <groupId>com.vaadin</groupId>
             <artifactId>hilla-gradle-plugin</artifactId>
             <version>${hilla.version}</version>
         </dependency>
@@ -91,7 +91,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-gradle-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <classifier>sources</classifier>
@@ -99,14 +99,14 @@
                                     <outputDirectory>target/temp</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-gradle-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <excludes>**/*.class,META-INF/**</excludes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-gradle-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>

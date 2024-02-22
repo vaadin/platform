@@ -31,7 +31,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.hilla</groupId>
+            <groupId>com.vaadin</groupId>
             <artifactId>hilla-maven-plugin</artifactId>
             <version>${hilla.version}</version>
         </dependency>
@@ -115,7 +115,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-maven-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <classifier>sources</classifier>
@@ -123,14 +123,14 @@
                                     <outputDirectory>src/main/java</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-maven-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <excludes>**/*.class,META-INF/**</excludes>
                                     <outputDirectory>src/main/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.vaadin.hilla</groupId>
+                                    <groupId>com.vaadin</groupId>
                                     <artifactId>hilla-maven-plugin</artifactId>
                                     <version>${hilla.version}</version>
                                     <includes>**/lifecycle-mapping-metadata.xml</includes>
