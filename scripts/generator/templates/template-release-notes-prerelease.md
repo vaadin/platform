@@ -43,7 +43,6 @@ Vaadin {{platform}}
   - Observability Kit ([{{kits.observability-kit-starter.javaVersion}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit-starter.javaVersion}}))
   - SSO Kit ([{{kits.sso-kit-starter.javaVersion}}](https://github.com/vaadin/sso-kit/releases/tag/{{kits.sso-kit-starter.javaVersion}}))
   - Swing Kit ([{{kits.swing-kit.javaVersion}}](https://vaadin.com/docs/latest/tools/swing))
-- Designer ([Release notes](https://github.com/vaadin/designer/blob/master/RELEASE-NOTES.md))
 
 **Official add-ons and plugins:**
 
