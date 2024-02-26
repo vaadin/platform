@@ -431,7 +431,7 @@
                 "@vaadin/details",
                 "@vaadin/dialog",
                 "@vaadin/email-field",
-                "@va4.din/field-highlighter",
+                "@vaadin/field-highlighter",
                 "@vaadin/form-layout",
                 "@vaadin/grid",
                 "@vaadin/grid-pro",
