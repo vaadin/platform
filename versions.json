@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.4.0.alpha11"
+            "javaVersion": "24.4.0.alpha12"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -405,9 +405,6 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "24.4.0-alpha14",
-            "mode": "react",
-            "npmName": "@vaadin/react-components",
             "exclusions": [
                 "@vaadin/a11y-base",
                 "@vaadin/accordion",
@@ -472,7 +469,10 @@
                 "@vaadin/vaadin-themable-mixin",
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
-            ]
+            ],
+            "jsVersion": "24.4.0-alpha14",
+            "mode": "react",
+            "npmName": "@vaadin/react-components"
         }
     },
     "vaadin": {
