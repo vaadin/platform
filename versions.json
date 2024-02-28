@@ -406,7 +406,6 @@
     "react": {
         "react-components": {
             "exclusions": [
-                "@vaadin/a11y-base",
                 "@vaadin/accordion",
                 "@vaadin/app-layout",
                 "@vaadin/avatar",
@@ -464,9 +463,6 @@
                 "@vaadin/time-picker",
                 "@vaadin/tooltip",
                 "@vaadin/upload",
-                "@vaadin/vaadin-lumo-styles",
-                "@vaadin/vaadin-material-styles",
-                "@vaadin/vaadin-themable-mixin",
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
