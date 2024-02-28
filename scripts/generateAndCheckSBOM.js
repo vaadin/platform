@@ -49,7 +49,7 @@ const licenseWhiteList = [
 ];
 
 const cveWhiteList = {
-  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.3' : {
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
     cves: ['CVE-2023-35116'],
     description: 'Not a valid CVE report based on the vendor analysis and [research](https://github.com/FasterXML/jackson-databind/issues/3972)'
   },
