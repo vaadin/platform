@@ -30,11 +30,6 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hilla-plugin-base</artifactId>
-            <version>${hilla.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>hilla-gradle-plugin</artifactId>
             <version>${hilla.version}</version>
         </dependency>
