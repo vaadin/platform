@@ -55,6 +55,10 @@ const cveWhiteList = {
   'pkg:npm/ejs@3.1.9' :{
     cves: ['CVE-2023-29827'],
     description: 'NOTE: this is disputed by the vendor because the render function is not intended to be used with untrusted input.'
+  },
+  'pkg:npm/railroad-diagrams@1.0.0' : {
+    cves: ['CVE-2024-26467'],
+    description: 'This is coming from the tools, @cyclonedx/cyclonedx-npm, we have used for sbom module, FP for us. '
   }
 }
 
