@@ -35,6 +35,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>hilla-dev</artifactId>
             <version>${hilla.version}</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -47,11 +48,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev-server</artifactId>
             <version>${flow.version}</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
             <version>${copilot.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
