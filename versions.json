@@ -130,7 +130,7 @@
         "vaadin-context-menu": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "4.6.0",
+            "jsVersion": "4.6.1",
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-control-state-mixin": {
