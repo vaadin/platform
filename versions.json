@@ -214,7 +214,7 @@
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
-            "jsVersion": "2.5.2",
+            "jsVersion": "2.5.3",
             "npmName": "@vaadin/vaadin-list-mixin"
         },
         "vaadin-login": {
