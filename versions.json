@@ -466,7 +466,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "24.4.0-alpha16",
+            "jsVersion": "24.4.0-alpha17",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         }
