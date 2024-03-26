@@ -92,6 +92,28 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>9.0.10</version>
+                <configuration>
+                    <nvdDatafeedUrl>https://nvd.nist.gov/feeds/json/cpematch/1.0/nvdcpematch-1.0.json.gz</nvdDatafeedUrl>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
     <profiles>
         <profile>
             <id>production</id>
