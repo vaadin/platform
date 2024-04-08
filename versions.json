@@ -528,7 +528,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.12.9"
+            "javaVersion": "1.12.10"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
