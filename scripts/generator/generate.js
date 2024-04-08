@@ -85,12 +85,9 @@ if (!fs.existsSync(resultsDir)) {
 writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
-writer.writeSeparateJson(versions.react, coreJsonTemplateFileName, vaadinCoreJsonFileName, "react");
 
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
-writer.writeSeparateJson(versions.react, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "react");
-writer.writeSeparateJson(versions["react-pro"], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "react-pro");
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
