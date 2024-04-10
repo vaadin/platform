@@ -98,10 +98,10 @@ writer.writeSeparateJson(versions.vaadin, hillaJsonTemplateFileName, hillaJsonRe
 writer.writeSeparateJson(versions.bundles, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "bundles");
 writer.writeSeparateJson(versions.react, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "react");
 
-const hilla = process.env.HILLA || platform.replace(/^23/, 1);
-versions.core.hilla = {javaVersion: hilla};
+//const hilla = process.env.HILLA || platform.replace(/^23/, 1);
+versions.core.hilla = {javaVersion: "1.4.0"};
 // write hilla version to hilla-react-versions.json as platform
-const hillaVersions = {platform : hilla};
+const hillaVersions = {platform : "1.4.0"};
 writer.writeSeparateJson(hillaVersions.platform, hillaJsonTemplateFileName, hillaJsonResultFileName, "platform");
 writer.writeSeparateJson(hillaVersions.platform, hillaReactJsonTemplateFileName, hillaReactJsonResultFileName, "platform");
 
