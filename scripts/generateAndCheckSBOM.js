@@ -52,9 +52,9 @@ const cveWhiteList = {
     cves: ['CVE-2023-25499', 'CVE-2023-25500'],
     description: 'faulty report as the cve contains the prerelease versions'
   },
-  'pkg:npm/ejs@3.1.9' :{
+  'pkg:npm/ejs@3.1.10' :{
     cves: ['CVE-2023-29827'],
-    description: 'NOTE: this is disputed by the vendor because the render function is not intended to be used with untrusted input.'
+    description: 'NOTE: this is disputed by the vendor because the render function is not intended to be used with untrusted input. More detail: https://github.com/mde/ejs/issues/720#issuecomment-1587399501'
   },
   'pkg:npm/railroad-diagrams@1.0.0' : {
     cves: ['CVE-2024-26467'],
