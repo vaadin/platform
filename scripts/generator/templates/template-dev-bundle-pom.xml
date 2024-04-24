@@ -33,12 +33,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hilla-dev</artifactId>
-            <version>${hilla.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
             <version>${vaadin.spreadsheet.version}</version>
             <optional>true</optional>

@@ -7,10 +7,10 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>24.4-SNAPSHOT</version>
     </parent>
-    <artifactId>vaadin-dev</artifactId>
+    <artifactId>vaadin-dev-hilla</artifactId>
     <packaging>jar</packaging>
-    <name>Vaadin Platform (vaadin-dev)</name>
-    <description>Vaadin Platform (vaadin-dev)</description>
+    <name>Vaadin Platform (vaadin-dev-hilla)</name>
+    <description>Vaadin Platform (vaadin-dev-hilla)</description>
     <url>https://vaadin.com</url>
 
     <distributionManagement>
@@ -33,17 +33,23 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev-flow</artifactId>
+            <artifactId>vaadin-dev-server</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev-hilla</artifactId>
+            <artifactId>hilla-dev</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>copilot</artifactId>
+        </dependency>
+
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

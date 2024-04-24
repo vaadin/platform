@@ -66,6 +66,8 @@
                 <module>vaadin-bom</module>
                 <module>vaadin-core-internal</module>
                 <module>vaadin-core</module>
+                <module>vaadin-dev-flow</module>
+                <module>vaadin-dev-hilla</module>
                 <module>vaadin-dev</module>
                 <module>vaadin-maven-plugin</module>
                 <module>vaadin-testbench</module>

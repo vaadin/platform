@@ -30,7 +30,7 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dev</artifactId>
+            <artifactId>vaadin-dev-flow</artifactId>
             <version>${project.version}</version>
         </dependency>
 
