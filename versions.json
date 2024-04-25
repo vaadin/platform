@@ -382,7 +382,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.4.0.alpha23"
+            "javaVersion": "24.4.0.alpha24"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.2.1"
@@ -535,7 +535,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.2.7",
+            "javaVersion": "9.3.0.alpha1",
             "pro": true
         }
     }
