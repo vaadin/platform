@@ -583,7 +583,7 @@
                     "@vaadin/map",
                     "@vaadin/rich-text-editor"
                 ],
-                "jsVersion": "24.4.0-beta1",
+                "jsVersion": "24.4.0-beta2",
                 "mode": "react",
                 "npmName": "@vaadin/react-components-pro"
             }
