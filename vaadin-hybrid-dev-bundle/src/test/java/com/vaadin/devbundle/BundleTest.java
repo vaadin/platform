@@ -19,32 +19,30 @@ public class BundleTest {
     @Test
     public void usageStatsIncluded() throws IOException {
         String needle = "StatisticsGatherer";
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
-                "VAADIN", "build");
-
-        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        int foundInFiles = findInBundleBuildFolder(needle);
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
-
     @Test
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
-                "VAADIN", "build");
-
-        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        int foundInFiles = findInBundleBuildFolder(needle);
+        Assertions.assertEquals(1, foundInFiles,
+                "The key '" + needle + "' should be found in one file");
+    }
+    @Test
+    public void hillaIncluded() throws IOException {
+        String needle = "@vaadin/hilla-frontend";
+        int foundInFiles = findInBundleBuildFolder(needle);
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
 
-    @Test
-    public void hillaPackageLockIncluded() throws IOException {
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "hybrid-package-lock.json");
-        Assertions.assertTrue(bundlerBuildFolder.toFile().exists(),
-                "Expecting hybrid-package-lock.json to be present in dev-bundle, but was not");
+    private int findInBundleBuildFolder(String needle) throws IOException {
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
+                "VAADIN", "build");
+        return findInFiles(bundlerBuildFolder, needle);
     }
-
 
     private int findInFiles(Path path, String needle) throws IOException {
         AtomicInteger foundInFiles = new AtomicInteger();

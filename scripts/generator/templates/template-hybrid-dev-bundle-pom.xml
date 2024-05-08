@@ -7,10 +7,10 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>{{platform}}</version>
     </parent>
-    <artifactId>vaadin-dev-bundle</artifactId>
+    <artifactId>vaadin-hybrid-dev-bundle</artifactId>
     <packaging>jar</packaging>
-    <name>Vaadin Dev Bundle</name>
-    <description>Vaadin Dev Bundle</description>
+    <name>Vaadin Hybrid Dev Bundle</name>
+    <description>Vaadin Hybrid Dev Bundle</description>
     <url>https://vaadin.com</url>
 
     <distributionManagement>
@@ -26,12 +26,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>vaadin-hybrid-dev-bundle</artifactId>
-            <version>${project.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-internal</artifactId>
             <version>${project.version}</version>
@@ -42,6 +36,23 @@
             <artifactId>hilla-dev</artifactId>
             <version>${hilla.version}</version>
             <optional>true</optional>
+        </dependency>
+        <!-- Add hilla dependency to collect Hilla npm dependencies -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>hilla</artifactId>
+            <version>${hilla.version}</version>
+            <optional>true</optional>
+            <exclusions>
+                <!--
+                    Exclude hilla-engine-runtime to prevent Hilla internal Maven invocation.
+                    There is no need to execute Hilla generators, since we only want to create package-lock.json
+                -->
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>hilla-engine-runtime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -113,39 +124,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.6.1</version>
-                <executions>
-                    <execution>
-                        <id>copy-hilla-package-lock-to-bundle</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>vaadin-hybrid-dev-bundle</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/dev-bundle</outputDirectory>
-                                    <includes>**/package-lock.json</includes>
-                                    <fileMappers>
-                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
-                                            <pattern>^\Qvaadin-dev-bundle/package-lock.json\E</pattern>
-                                            <replacement>hybrid-package-lock.json</replacement>
-                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
-                                    </fileMappers>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
                 <executions>
@@ -160,6 +138,9 @@
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/dev-bundle</directory>
+                                    <excludes>
+                                        <exclude>file-routes.json</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -181,19 +162,19 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
-                  <execution>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-                        <!-- Remove application class file, so as IT modules do not read @Theme annotations when
-                             maven configures the classpath for multimodule projects -->
-                        <delete dir="target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
-                      </target>
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Remove application class file, so as IT modules do not read @Theme annotations when
+                                     maven configures the classpath for multimodule projects -->
+                                <delete dir="target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
