@@ -26,6 +26,7 @@ public class BundleTest {
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
+
     @Test
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
@@ -36,6 +37,14 @@ public class BundleTest {
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
+
+    @Test
+    public void hillaPackageLockIncluded() throws IOException {
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "hybrid-package-lock.json");
+        Assertions.assertTrue(bundlerBuildFolder.toFile().exists(),
+                "Expecting hybrid-package-lock.json to be present in dev-bundle, but was not");
+    }
+
 
     private int findInFiles(Path path, String needle) throws IOException {
         AtomicInteger foundInFiles = new AtomicInteger();
