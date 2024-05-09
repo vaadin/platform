@@ -37,11 +37,22 @@
             <version>${hilla.version}</version>
             <optional>true</optional>
         </dependency>
+        <!-- Add hilla dependency to collect Hilla npm dependencies -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>hilla</artifactId>
             <version>${hilla.version}</version>
             <optional>true</optional>
+            <exclusions>
+                <!--
+                    Exclude hilla-engine-runtime to prevent Hilla internal Maven invocation.
+                    There is no need to execute Hilla generators, since we only want to create package-lock.json
+                -->
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>hilla-engine-runtime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -151,19 +162,19 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
-                  <execution>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-                        <!-- Remove application class file, so as IT modules do not read @Theme annotations when
-                             maven configures the classpath for multimodule projects -->
-                        <delete dir="target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
-                      </target>
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Remove application class file, so as IT modules do not read @Theme annotations when
+                                     maven configures the classpath for multimodule projects -->
+                                <delete dir="target/classes/com/vaadin/devbundle" includeemptydirs="true"></delete>
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
