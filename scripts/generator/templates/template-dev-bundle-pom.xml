@@ -119,7 +119,7 @@
                 <executions>
                     <execution>
                         <id>copy-hilla-package-lock-to-bundle</id>
-                        <phase>prepare-package</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>

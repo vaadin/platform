@@ -19,20 +19,14 @@ public class BundleTest {
     @Test
     public void usageStatsIncluded() throws IOException {
         String needle = "StatisticsGatherer";
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
-                "VAADIN", "build");
-
-        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        int foundInFiles = findInBundleBuildFolder(needle);
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
     @Test
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
-                "VAADIN", "build");
-
-        int foundInFiles = findInFiles(bundlerBuildFolder, needle);
+        int foundInFiles = findInBundleBuildFolder(needle);
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
