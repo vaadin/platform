@@ -1,0 +1,1 @@
+const __dummy__ = "Fake view only used to trigger Hilla usage in frontend build";
