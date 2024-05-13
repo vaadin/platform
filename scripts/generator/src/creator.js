@@ -14,6 +14,15 @@ function createJson(versions, key, jsonTemplate) {
     return JSON.stringify(jsonTemplate, null, 4);
 }
 
+function createNestedJson(versions, key, nestedKey, nestedKey2, jsonTemplate) {
+
+    jsonTemplate[key][nestedKey] = {}
+
+    jsonTemplate[key][nestedKey][nestedKey2] = versions;
+
+    return JSON.stringify(jsonTemplate, null, 4);
+}
+
 /**
 @param {Object} versions data object for product versions.
 @param {Object} packageJsonTemplate template data object to put versions to.
@@ -489,6 +498,7 @@ function requestGH(path) {
     return retValue
 }
 exports.createJson = createJson;
+exports.createNestedJson = createNestedJson;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;

@@ -15,6 +15,14 @@ function writeSeparateJson(versions, templateFileName, outputFileName, key) {
     console.log(`Wrote ${outputFileName}`);
 }
 
+function writeNestedSeparateJson(versions, templateFileName, outputFileName, key, nestedKey, nestedKey2) {
+    const packageJsonTemplate = require(templateFileName);
+
+    const packageJsonResult = creator.createNestedJson(versions, key, nestedKey, nestedKey2, packageJsonTemplate);
+    fs.writeFileSync(outputFileName, packageJsonResult);
+    console.log(`Wrote ${outputFileName}`);
+}
+
 /**
 @param {Object} versions data object for product versions.
 @param {String} templateFileName absolute path to template file
@@ -85,6 +93,7 @@ function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
 }
 
 exports.writeSeparateJson = writeSeparateJson;
+exports.writeNestedSeparateJson = writeNestedSeparateJson;
 exports.writePackageJson = writePackageJson;
 exports.writeMaven = writeMaven;
 exports.writeProperty = writeProperty;
