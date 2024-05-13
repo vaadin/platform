@@ -129,7 +129,7 @@
                 <executions>
                     <execution>
                         <id>copy-dev-bundle-to-target</id>
-                        <phase>process-sources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -163,7 +163,7 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <phase>process-sources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
