@@ -87,9 +87,11 @@ if (!fs.existsSync(resultsDir)) {
 
 writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
+writer.writeNestedSeparateJson(versions.react['react-components'], coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
 
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
+writer.writeNestedSeparateJson(versions.react['react-components-pro'], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
