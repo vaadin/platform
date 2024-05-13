@@ -72,6 +72,9 @@ const servletContainersTestsPomFileName = getTemplateFilePath('template-servlet-
 const devBundleTemplateFileName = getTemplateFilePath('template-dev-bundle-pom.xml');
 const devBundlePomResultFileName = getResultsFilePath('vaadin-dev-bundle-pom.xml');
 
+const hybridDevBundleTemplateFileName = getTemplateFilePath('template-hybrid-dev-bundle-pom.xml');
+const hybridDevBundlePomResultFileName = getResultsFilePath('vaadin-hybrid-dev-bundle-pom.xml');
+
 const prodBundleTemplateFileName = getTemplateFilePath('template-prod-bundle-pom.xml');
 const prodBundlePomResultFileName = getResultsFilePath('vaadin-prod-bundle-pom.xml');
 
@@ -103,6 +106,8 @@ writer.writeProperty(versions, ["hilla"], gradlePortalPluginTemplatePomFileName,
 writer.writeProperty(versions, ["flow"], platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
 
 writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, devBundlePomResultFileName);
+writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
+writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 
