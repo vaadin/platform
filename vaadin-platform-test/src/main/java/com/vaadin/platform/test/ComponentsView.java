@@ -97,6 +97,14 @@ import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.html.NativeDetails;
 import com.vaadin.flow.component.html.NativeLabel;
+import com.vaadin.flow.component.html.NativeTable;
+import com.vaadin.flow.component.html.NativeTableBody;
+import com.vaadin.flow.component.html.NativeTableCaption;
+import com.vaadin.flow.component.html.NativeTableCell;
+import com.vaadin.flow.component.html.NativeTableFooter;
+import com.vaadin.flow.component.html.NativeTableHeader;
+import com.vaadin.flow.component.html.NativeTableHeaderCell;
+import com.vaadin.flow.component.html.NativeTableRow;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
@@ -238,6 +246,14 @@ public class ComponentsView extends AppLayout {
         Param param = new Param();
         RangeInput rangeInput = new RangeInput();
 
+        NativeTable nativeTable = new NativeTable();
+        NativeTableBody nativeTableBody = new NativeTableBody();
+        NativeTableCaption nativeTableCaption = new NativeTableCaption();
+        NativeTableCell nativeTableCell = new NativeTableCell();
+        NativeTableFooter nativeTableFooter = new NativeTableFooter();
+        NativeTableHeader nativeTableHeader = new NativeTableHeader();
+        NativeTableHeaderCell nativeTableHeaderCell = new NativeTableHeaderCell();
+        NativeTableRow nativeTableRow = new NativeTableRow();
 
         // Using full qualified name since in parent class there is a Section Enum
         com.vaadin.flow.component.html.Section section =
@@ -246,7 +262,8 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput);
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
+                nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
         FontIcon fontIcon = new FontIcon("fa-solid", "fa-user");
