@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.5-SNAPSHOT"
+            "javaVersion": "24.5.0.alpha2"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -376,7 +376,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "3.2.0.beta1"
+            "javaVersion": "3.2.0.rc1"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -388,12 +388,12 @@
             "javaVersion": "2.2.2"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.0.0.beta1",
-            "jsVersion": "3.0.0.beta1"
+            "javaVersion": "3.0.0.rc1",
+            "jsVersion": "3.0.0.rc1"
         },
         "sso-kit-starter": {
-            "javaVersion": "3.0.0.beta1",
-            "jsVersion": "3.0.0.beta1"
+            "javaVersion": "3.0.0.rc1",
+            "jsVersion": "3.0.0.rc1"
         },
         "swing-kit": {
             "javaVersion": "2.2.3"
