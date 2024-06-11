@@ -85,7 +85,17 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>sso-kit-starter-hilla</artifactId>
+                <version>${sso.kit.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>observability-kit-starter</artifactId>
+                <version>${observability.kit.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>observability-kit-starter-hilla</artifactId>
                 <version>${observability.kit.starter.version}</version>
             </dependency>
             <dependency>

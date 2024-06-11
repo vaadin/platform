@@ -376,7 +376,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "3.2.0.rc1"
+            "javaVersion": "3.2.0"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -388,12 +388,12 @@
             "javaVersion": "2.2.2"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.0.0.rc1",
-            "jsVersion": "3.0.0.rc1"
+            "javaVersion": "3.0.0",
+            "jsVersion": "3.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "3.0.0.rc1",
-            "jsVersion": "3.0.0.rc1"
+            "javaVersion": "3.0.0",
+            "jsVersion": "3.0.0"
         },
         "swing-kit": {
             "javaVersion": "2.2.3"
