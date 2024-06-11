@@ -4,14 +4,73 @@ Vaadin {{platform}}
 
 ## New and Noteworthy Since Vaadin 24.3
 
-**Notable Changes**
--
+### Vaadin Copilot
+
+We are glad to introduce you a handy development tool that’s ready to assist you whenever you run an application in development mode, **Vaadin Copilot**. Copilot is a visual development tool and an AI-empowered assistant. You can inspect and edit the UI, and use generative AI to help with a variety of tasks.
+
+Vaadin Copilot is present by default while working with your project in development mode.
+
+### Unified Vaadin Platform
+
+The Hilla framework has been more closely integrated with the Vaadin platform. Vaadin BOM and Vaadin Spring Boot Starter now include the Hilla framework stating from version 24.4. This enables Vaadin users to choose between Flow and Hilla, or mix both frameworks when necessary.
 
 ### Flow
-- 
+- **Mixing Flow and Hilla views in one single application**
+   [Docs](https://vaadin.com/docs/next/flow/integrations/hilla) · [Example Project](https://github.com/vaadin/flow-hilla-hybrid-example/tree/v24.4)
+
+  - Vaadin project can now have both server-side and client-side routes, written in Java or React, aka Flow views and Hilla views respectively. This doesn't need any special configuration, Vaadin Flow uses the React Router by default, adds all needed React dependencies and React components, provided by Vaadin.
+
+- **Using React components from Flow**
+   [Docs](https://vaadin.com/docs/next/flow/integrations/react)
+
+  - You can wrap any React component as a Flow component and use it in your Flow view, change the component's state and send events from server to client and vice-versa. 
+
+- **Using Flow components from React**
+   [Docs](https://vaadin.com/docs/next/hilla/guides/flow-component-in-hilla)
+
+  - Flow components can be embedded in a Hilla/React view by using a known `WebComponentExporter` API and using the exported Web component on the React view
+
+- **Use React Router by default**
+  [Docs](https://vaadin.com/docs/next/flow/configuration/maven#properties) 
+
+  - Vaadin Flow uses [React Router](https://reactrouter.com/en/main/start/overview) by default, which gives an opportunity to start adding React components/views immediately into Vaadin application and develop in React.
+
+- **Move /frontend directory under /src/main by default**
+  - Vaadin uses `src/main/frontend/` directory as a default location of frontend resources, which is more natural for Maven projects. It fallbacks to `frontend` directory if the `src/main/frontend/` does not exist. 
+
+### Hilla
+
+- **Hilla File Router**
+
+  The file-system based router, `@vaadin/hilla-file-router`, was added to Hilla. It simplifies adding React views to applications by automaticaly mapping files in the `src/main/frontend/views/` directory as routes, eliminating the step of editing the URL mapping for each added view. The Hilla file router is based on the React Router library.
+
+- **Automatic Main Menu**
+
+  The file router includes the `createMenuItems()` utility function, which enables populating the menu items in the React main layout. Hilla file router views and Java classes with the `@Menu` annotation are added as the menu items automatically.
+
+- **Hilla React Signals**
+
+  The new library for managing state in React applications, `@vaadin/hilla-react-signals`, was added to Hilla. Signals provide robust and convenient way of subscribing to state updates in UI, and allow to easily share the state updates between multiple components. The API of Hilla React signals follows the Preact Signals library.
 
 ### Design System
--
+- Checkbox
+  - Support for read-only state in Checkbox and Checkbox Group.
+  - Support for helper-text in Checkbox (including individual checkboxes in a Checkbox Group), and support for required state (incl. indicator) and error message in individual Checkboxes.
+- Grid
+  - API for removing Grid header rows  
+- Grid-Pro
+  - An API in Grid for dynamically setting whether a cell is editable. (Similar e.g. to PartNameGenerator and TooltipGenerator) 
+- MenuBar
+  - support for reverse collapsing order
+    - An option to have Menu Bar buttons collapse into the overflow menu starting from the left (start) end of the bar instead of the right (end) end of the bar.
+- SideNav
+  - API for configuring a link in SideNav to open in a new browser window/tab.
+  - SideNav query parameter support
+- TextArea 
+  - API for programmatically setting the scroll position of Text Area to top or bottom.
+- Upload
+  - File name property added to Upload progress and rejected events 
+    - The Upload component's FileRejectedEvent and ProgressUpdateEvent were missing a way to get the name of the file that that the event was about. This has now been addressed by the addition of a getFileName() API in both.    
 
 
 ## <a id="_changelogs"></a> Changelogs
