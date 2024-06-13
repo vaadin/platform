@@ -331,6 +331,7 @@ function compareAndBuildJavaComponentReleaseString(versionName, currentVersion, 
     const currentVersionSemver = toSemVer(currentVersion);
     const previousVersionSemver = toSemVer(previousVersion);
     // sometimes we use SNAPSHOTS in versions.json e.g. when waiting for a new alpha/beta with a fix
+    console.log(currentVersionSemver, previousVersionSemver);
     if (compareVersions(currentVersionSemver.replace('-SNAPSHOT', '.0'), previousVersionSemver) === 1) {
         result = getReleaseNoteLink(versionName, currentVersion);
     }
