@@ -43,7 +43,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>enforce-maven-version</id>
@@ -58,6 +58,26 @@
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
+                    </execution>
+                    <execution>
+                        <id>enforce</id>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence>
+                                    <excludes>
+                                        <exclude>com.vaadin:flow-*</exclude>
+                                    </excludes>
+                                </dependencyConvergence>
+                                <requireUpperBoundDeps>
+                                    <excludes>
+                                        <exclude>org.slf4j:slf4j-api</exclude>
+                                    </excludes>
+                                </requireUpperBoundDeps>
+                            </rules>
+                        </configuration>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
