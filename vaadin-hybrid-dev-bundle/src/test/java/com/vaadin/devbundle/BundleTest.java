@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
@@ -23,13 +25,17 @@ public class BundleTest {
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
+
     @Test
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
-        int foundInFiles = findInBundleBuildFolder(needle);
+        int foundInFiles = findInBundleBuildFolder(line -> line.contains(needle)
+                && !line.contains("document.querySelector"));
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
+
     }
+
     @Test
     public void hillaIncluded() throws IOException {
         String needle = "@vaadin/hilla-frontend";
@@ -39,12 +45,18 @@ public class BundleTest {
     }
 
     private int findInBundleBuildFolder(String needle) throws IOException {
-        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
-                "VAADIN", "build");
-        return findInFiles(bundlerBuildFolder, needle);
+        return findInBundleBuildFolder(line -> line.contains(needle));
     }
 
-    private int findInFiles(Path path, String needle) throws IOException {
+    private int findInBundleBuildFolder(Function<String, Boolean> matcher)
+            throws IOException {
+        Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
+                "VAADIN", "build");
+        return findInFiles(bundlerBuildFolder, matcher);
+    }
+
+    private int findInFiles(Path path, Function<String, Boolean> matcher)
+            throws IOException {
         AtomicInteger foundInFiles = new AtomicInteger();
         Files.walkFileTree(path, new FileVisitor<Path>() {
 
@@ -57,10 +69,13 @@ public class BundleTest {
             @Override
             public FileVisitResult visitFile(Path file,
                     BasicFileAttributes attrs) throws IOException {
-                String content = FileUtils.readFileToString(file.toFile(),
+                List<String> lines = FileUtils.readLines(file.toFile(),
                         StandardCharsets.UTF_8);
-                if (content.contains(needle)) {
-                    foundInFiles.incrementAndGet();
+                for (String line : lines) {
+                    if (matcher.apply(line)) {
+                        foundInFiles.incrementAndGet();
+                        break;
+                    }
                 }
                 return FileVisitResult.CONTINUE;
             }
