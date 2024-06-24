@@ -83,7 +83,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: true, useOSV: true, useOWASP: true,
+  useBomber: false, useOSV: true, useOWASP: true,
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
