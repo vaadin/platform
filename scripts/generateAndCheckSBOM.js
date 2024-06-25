@@ -83,7 +83,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: false, useOSV: true, useOWASP: true,
+  useBomber: true, useOSV: true, useOWASP: true,
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -318,26 +318,24 @@ async function sumarizeDiffs(newSbomFile, oldSbomFile, currVersion, prevVersion)
 }
 
 function sumarizeOSV(f, summary) {
-  if (fs.readFileSync(f).length !== 0) {
-    const res = JSON.parse(fs.readFileSync(f));
-    res.results && res.results.forEach(r => {
-      r.packages.forEach(p => {
-        p.vulnerabilities.forEach(v => {
-          v.affected.forEach(a => {
-            const pkg = a.package.purl + "@" + p.package.version;
-            summary[pkg] = summary[pkg] || {};
-            v.aliases && v.aliases.forEach(id => {
-              summary[pkg][id] = summary[pkg][id] || {};
-              summary[pkg][id].title = v.summary;
-              summary[pkg][id].details = v.details;
-              (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scan');
-            });
+  const res = JSON.parse(fs.readFileSync(f));
+  res.results && res.results.forEach(r => {
+    r.packages.forEach(p => {
+      p.vulnerabilities.forEach(v => {
+        v.affected.forEach(a => {
+          const pkg = a.package.purl + "@" + p.package.version;
+          summary[pkg] = summary[pkg] || {};
+          v.aliases && v.aliases.forEach(id => {
+            summary[pkg][id] = summary[pkg][id] || {};
+            summary[pkg][id].title = v.summary;
+            summary[pkg][id].details = v.details;
+            (summary[pkg][id].scanner = summary[pkg][id].scanner || []).push('osv-scan');
           });
         });
       });
     });
-    return summary;
-  }
+  });
+  return summary;
 }
 
 function sumarizeBomber(f, summary) {
