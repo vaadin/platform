@@ -128,7 +128,7 @@
             "javaVersion": "15.0.1"
         },
         "flow-form-filler": {
-            "javaVersion": "1.1.0"
+            "javaVersion": "1.1.1"
         },
         "form-layout": {
             "javaVersion": "{{version}}",
@@ -143,7 +143,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.4.1"
+            "javaVersion": "24.4.2"
         },
         "horizontal-layout": {
             "jsVersion": "24.4.0",
@@ -542,7 +542,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.3.0",
+            "javaVersion": "9.3.1",
             "pro": true
         }
     }
