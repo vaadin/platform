@@ -330,7 +330,7 @@
         "vaadin-upload": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "4.4.3",
+            "jsVersion": "4.4.4",
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
