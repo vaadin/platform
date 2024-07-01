@@ -566,7 +566,7 @@ async function main() {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.existsSync('package-lock.json') && fs.unlinkSync('package-lock.json')
-    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -DautoUpdate=false -q`, { throw: false });
+    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -q`, { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
