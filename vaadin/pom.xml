@@ -65,7 +65,9 @@
                             <rules>
                                 <dependencyConvergence>
                                     <excludes>
+                                        <!-- exclude flow-*, as sometimes, the dependencies are using flow snapshot instead of released version  -->
                                         <exclude>com.vaadin:flow-*</exclude>
+                                        <!-- we will not align the slf4j version in platform, as the MPR support and license-checker -->
                                         <exclude>org.slf4j:slf4j-api</exclude>
                                     </excludes>
                                 </dependencyConvergence>
