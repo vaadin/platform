@@ -34,6 +34,7 @@ public class LicenseCheckTest {
     static {
 
         // Vaadin
+        whitelist.add("https://vaadin.com/commercial-license-and-service-terms");
         whitelist.add("https://vaadin.com/license/cvdl-4.0");
         whitelist.add("http://vaadin.com/license/cvrl-1");
         whitelist.add("http://vaadin.com/license/cval-3");
