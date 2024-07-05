@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.5.0.alpha5"
+            "javaVersion": "24.5.0.alpha6"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -382,7 +382,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.5-SNAPSHOT"
+            "javaVersion": "24.5.0.alpha4"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.2.2"
@@ -542,7 +542,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.3.1",
+            "javaVersion": "9.3.2",
             "pro": true
         }
     }
