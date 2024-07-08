@@ -350,7 +350,7 @@ function sumarizeBomber(f, summary) {
     return summary;
   }
   (res.packages || []).forEach(p => {
-    p.vulnerabilities.forEach(v => {
+    (p.vulnerabilities || []).forEach(v => {
       const pkg = p.coordinates.replace(/\?.+/, '');
       const id = v.id;
       summary[pkg] = summary[pkg] || {};
