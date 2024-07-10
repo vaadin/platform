@@ -28,9 +28,6 @@ function getResultsFilePath(filename) {
     return path.resolve(`${__dirname}/results/${filename}`);
 }
 
-const coreBowerTemplateFileName = getTemplateFilePath('template-vaadin-core-bower.json');
-const coreBowerResultFileName = getResultsFilePath('vaadin-core-bower.json');
-
 const coreJsonTemplateFileName = getTemplateFilePath('template-vaadin-core-versions.json');
 const vaadinCoreJsonFileName = getResultsFilePath('vaadin-core-versions.json');
 
@@ -39,9 +36,6 @@ const vaadinJsonResultFileName = getResultsFilePath('vaadin-versions.json');
 
 const corePackageTemplateFileName = getTemplateFilePath('template-vaadin-core-package.json');
 const corePackageResultFileName = getResultsFilePath('vaadin-core-package.json');
-
-const vaadinBowerTemplateFileName = getTemplateFilePath('template-vaadin-bower.json');
-const vaadinBowerResultFileName = getResultsFilePath('vaadin-bower.json');
 
 const vaadinPackageTemplateFileName = getTemplateFilePath('template-vaadin-package.json');
 const vaadinPackageResultFileName = getResultsFilePath('vaadin-package.json');
@@ -76,7 +70,6 @@ if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
 }
 
-writer.writeBower(versions.core, coreBowerTemplateFileName, coreBowerResultFileName);
 writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
@@ -84,7 +77,6 @@ writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJson
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
-writer.writeBower(versions.vaadin, vaadinBowerTemplateFileName, vaadinBowerResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
 writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResultFileName);
