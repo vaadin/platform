@@ -16,35 +16,6 @@ function createJson(versions, key, jsonTemplate) {
 
 /**
 @param {Object} versions data object for product versions.
-@param {Object} bowerTemplate template data object to put versions to.
-*/
-function createBower(versions, bowerTemplate) {
-    let jsDeps = {};
-    for (let [name, version] of Object.entries(versions)) {
-        if (version.jsVersion) {
-            // Non-vaadin components like iron elements
-            if (!/vaadin-/.test(name)) {
-                jsDeps[name] = `${name}#${version.jsVersion}`;
-            } else
-            // Exclude new vaadin components that are not bower compliant
-            if (!/vaadin-messages/.test(name)) {
-                // prefixing all package always with vaadin to avoid trip to
-                // bower register, which is deprecated
-                jsDeps[name] = `vaadin/${
-                    // license-checker is a special case
-                    /vaadin-license-checker/.test(name) ? 'license-checker' : name
-                }#${version.jsVersion}`;
-            }
-        }
-    }
-
-    bowerTemplate.dependencies = jsDeps;
-
-    return JSON.stringify(bowerTemplate, null, 2);
-}
-
-/**
-@param {Object} versions data object for product versions.
 @param {Object} packageJsonTemplate template data object to put versions to.
 */
 function createPackageJson(versions, packageJsonTemplate) {
@@ -104,7 +75,6 @@ function computeUsedProperties(mavenTemplate) {
     return usedProperties;
 }
 
-
 /**
 @param {Object} versions data object for product versions.
 @param {String} releaseNoteTemplate template string to replace versions in.
@@ -118,7 +88,7 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
             componentVersions = componentVersions.concat(result);
         }
     }
-    
+
     const changed = getChangedSincePrevious(versions);
     //console.log(versions.platform);
     let releaseNoteData;
@@ -480,7 +450,6 @@ function requestGH(path) {
     return retValue
 }
 exports.createJson = createJson;
-exports.createBower = createBower;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;

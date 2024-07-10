@@ -1,4 +1,4 @@
-Generates `bower.json` for core, `bower.json` for vaadin, Maven BOM and release 
+Generates `package.json` for core, `package.json` for vaadin, Maven BOM and release
 notes from `versions.json`.
 
 ## Run
