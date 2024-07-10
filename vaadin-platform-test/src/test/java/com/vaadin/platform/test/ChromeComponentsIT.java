@@ -567,14 +567,8 @@ public class ChromeComponentsIT extends ParallelTest {
         assertLog("Context menu Item 0 is clicked");
     }
 
-    private boolean isBower() {
-            return (Boolean) $("html").first().getCommandExecutor().executeScript("return !!window.Vaadin.Lumo");
-    }
-
     @Test
     public void messageListIsRendered() {
-        //skip this test under bowermode
-        Assume.assumeFalse(isBower());
 
         MessageListElement messageList = $(MessageListElement.class).first();
         List<MessageElement> messages = messageList.getMessageElements();
@@ -588,8 +582,6 @@ public class ChromeComponentsIT extends ParallelTest {
 
     @Test
     public void messageInputIsRenderedAndFiresSubmitEvent() {
-        //skip this test under bowermode
-        Assume.assumeFalse(isBower());
 
         MessageInputElement messageInput = $(MessageInputElement.class).first();
         messageInput.submit("foo");
