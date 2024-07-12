@@ -145,15 +145,16 @@
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <replace token= "{{version}}" value="${project.parent.version}" dir="target/classes">
                                     <include name="vaadin-core-versions.json"/>
                                 </replace>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
