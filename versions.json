@@ -459,7 +459,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "24.4.2",
+            "jsVersion": "24.4.3",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
@@ -473,7 +473,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "24.4.2",
+            "jsVersion": "24.4.3",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
