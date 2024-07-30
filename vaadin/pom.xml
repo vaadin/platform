@@ -69,6 +69,8 @@
                                         <exclude>com.vaadin:flow-*</exclude>
                                         <!-- we will not align the slf4j version in platform, as the MPR support and license-checker -->
                                         <exclude>org.slf4j:slf4j-api</exclude>
+                                        <!-- commons-lang3 in grid comes with a newer version until other commons from flow have the same -->
+                                        <exclude>org.apache.commons:commons-lang3</exclude>
                                     </excludes>
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
