@@ -289,6 +289,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-popover-flow</artifactId>
+                <version>${popover.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-radio-button-flow</artifactId>
                 <version>${radio.group.version}</version>
             </dependency>
@@ -493,6 +498,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-ordered-layout-testbench</artifactId>
                 <version>${vaadin.ordered.layout.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-popover-testbench</artifactId>
+                <version>${popover.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>

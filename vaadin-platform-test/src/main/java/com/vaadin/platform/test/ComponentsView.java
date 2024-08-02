@@ -131,6 +131,7 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.popover.Popover;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.richtexteditor.RichTextEditor;
@@ -631,6 +632,8 @@ public class ComponentsView extends AppLayout {
 
         com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
 
+        Popover popover = new Popover();
+
         SideNav sideNav = new SideNav("Navigation");
         sideNav.setCollapsible(true);
         sideNav.addItem(new SideNavItem("Nav item 1", "/1"));
@@ -687,6 +690,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageInput);
         components.add(main);
         components.add(mapComponent);
+        components.add(popover);
         components.add(sideNav);
         components.add(nativeLabel);
 
