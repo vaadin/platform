@@ -48,6 +48,7 @@ import '@vaadin/number-field';
 import '@vaadin/password-field';
 import '@vaadin/polymer-legacy-adapter/style-modules';
 import '@vaadin/polymer-legacy-adapter/template-renderer';
+import '@vaadin/popover';
 import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
 import '@vaadin/rich-text-editor';
@@ -248,6 +249,8 @@ export class ComponentsView extends View {
 
         <vaadin-progress-bar indeterminate></vaadin-progress-bar>
 
+        <vaadin-popover></vaadin-popover>
+
         <vaadin-menu-bar .items="${[
             {text: 'Home'},
             {text: 'Dashboard'},
@@ -262,7 +265,7 @@ export class ComponentsView extends View {
         </vaadin-radio-group>
 
         <vaadin-rich-text-editor></vaadin-rich-text-editor>
-        
+
         <vaadin-side-nav collapsible>
           <span slot="label">Main menu</span>
           <vaadin-side-nav-item path="/1">Nav Item 1</vaadin-side-nav-item>
@@ -272,7 +275,7 @@ export class ComponentsView extends View {
             <vaadin-side-nav-item path="/2/2" slot="children">Nav Item 2 - 2</vaadin-side-nav-item>
           </vaadin-side-nav-item>
         </vaadin-side-nav>
-        
+
         <vaadin-split-layout>
           <div><vaadin-button>RIGHT</vaadin-button></div>
           <div><vaadin-button>LEFT</vaadin-button></div>

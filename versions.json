@@ -245,6 +245,12 @@
             "jsVersion": "24.5.0-alpha6",
             "npmName": "@vaadin/polymer-legacy-adapter"
         },
+        "popover": {
+            "javaVersion": "{{version}}",
+            "jsVersion": "24.5.0-alpha6",
+            "mode": "lit",
+            "npmName": "@vaadin/popover"
+        },
         "progress-bar": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.5.0-alpha6",
