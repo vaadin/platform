@@ -53,6 +53,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>ui-tests</artifactId>
+        </dependency>
 
     </dependencies>
     <build>
