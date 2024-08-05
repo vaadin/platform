@@ -459,7 +459,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "24.4.4",
+            "jsVersion": "24.4.5",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
