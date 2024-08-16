@@ -520,7 +520,7 @@ async function main() {
     fs.writeFileSync("package.json","{}");
     await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
-    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:2.8.0:makeAggregateBom -q');
+    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
     await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
     await run('npm install --silent');
     await run('npm install --silent --save-dev @cyclonedx/cyclonedx-npm');
