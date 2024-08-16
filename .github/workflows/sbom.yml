@@ -69,9 +69,9 @@ jobs:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.4.7/bomber_0.4.7_linux_amd64.deb
-          sudo dpkg -i bomber_0.4.7_linux_amd64.deb
-        name: Install bomber-0.4.7
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.5.0/bomber_0.5.0_linux_amd64.deb
+          sudo dpkg -i bomber_0.5.0_linux_amd64.deb
+        name: Install bomber-0.5.0
       - run: |
           # Install dependency-check-9.0.2
           cd /tmp
