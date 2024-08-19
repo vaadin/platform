@@ -452,6 +452,7 @@
                 "@vaadin/number-field",
                 "@vaadin/overlay",
                 "@vaadin/password-field",
+                "@vaadin/popover",
                 "@vaadin/progress-bar",
                 "@vaadin/radio-group",
                 "@vaadin/scroller",
