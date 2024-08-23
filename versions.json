@@ -411,7 +411,7 @@
             "javaVersion": "6.3.0.alpha2"
         },
         "control-center": {
-            "javaVersion": "1.0.0.alpha8"
+            "javaVersion": "1.0-SNAPSHOT"
         }
     },
     "platform": "{{version}}",
