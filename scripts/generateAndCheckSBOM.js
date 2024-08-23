@@ -68,7 +68,12 @@ const cveWhiteList = {
   'pkg:npm/libxmljs2@0.33.0' : {
     cves: ['CVE-2024-34394', 'CVE-2024-34393'],
     description: 'This is coming from the tools, @cyclonedx/cyclonedx, we have used for sbom module, FP for us. '
+  },
+  'pkg:npm/micromatch@4.0.7' : {
+      cves: ['CVE-2024-4067'],
+      description: 'Based on the assumption that the code is only run as part of a build, we take this as a false positive. Also we are tracking the development process to upgrade the vulnerable dependencies.'
   }
+
 }
 
 const STYLE = `<style>
