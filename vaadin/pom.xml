@@ -71,14 +71,6 @@
                                         <exclude>org.slf4j:slf4j-api</exclude>
                                         <!-- commons-lang3 in grid comes with a newer version until other commons from flow have the same -->
                                         <exclude>org.apache.commons:commons-lang3</exclude>
-                                        <!-- Temporary exclude broken dependencies from the ui-tests
-                                             it should be fixed when ui-tests removes unused parsers and
-                                             generators from the artifact used by copilot -->
-                                        <exclude>com.fasterxml.jackson.core:jackson-core</exclude>
-                                        <exclude>com.fasterxml.jackson.core:jackson-databind</exclude>
-                                        <exclude>com.fasterxml.jackson.datatype:jackson-datatype-jsr310</exclude>
-                                        <exclude>io.projectreactor:reactor-core</exclude>
-                                        <exclude>org.jsoup:jsoup</exclude>
                                     </excludes>
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
