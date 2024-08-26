@@ -78,6 +78,7 @@ import com.vaadin.flow.component.html.Aside;
 import com.vaadin.flow.component.html.DescriptionList;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Emphasis;
+import com.vaadin.flow.component.html.FieldSet;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
@@ -134,6 +135,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.popover.Popover;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.react.ReactRouterOutlet;
 import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.sidenav.SideNav;
@@ -643,6 +645,8 @@ public class ComponentsView extends AppLayout {
         sideNav.addItem(sideNavItem);
 
         NativeLabel nativeLabel = new NativeLabel("Native Label");
+        ReactRouterOutlet reactRouterOutlet = new ReactRouterOutlet();
+        FieldSet fieldSet = new FieldSet();
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
@@ -693,6 +697,8 @@ public class ComponentsView extends AppLayout {
         components.add(popover);
         components.add(sideNav);
         components.add(nativeLabel);
+        components.add(reactRouterOutlet);
+        components.add(fieldSet);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
