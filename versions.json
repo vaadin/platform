@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.5.0.alpha10"
+            "javaVersion": "24.5.0.alpha12"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -387,6 +387,9 @@
         "azure-kit": {
             "version": "1.0.0"
         },
+        "control-center": {
+            "javaVersion": "1.0.0.alpha8"
+        },
         "copilot": {
             "javaVersion": "24.5.0.alpha11"
         },
@@ -409,9 +412,6 @@
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.3.0.alpha2"
-        },
-        "control-center": {
-            "javaVersion": "1.0.0.alpha8"
         }
     },
     "platform": "{{version}}",
