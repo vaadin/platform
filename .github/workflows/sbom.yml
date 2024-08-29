@@ -110,7 +110,7 @@ jobs:
             **/target/dependencies.html
           if-no-files-found: error
           retention-days: 60
-      - if: ${{ github.event.release.tag_name }}
+      - if: ${{ always() && (github.event.release.tag_name || github.event.inputs.version) }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -118,7 +118,7 @@ jobs:
           asset_name: "Software.Bill.Of.Materials.json"
           tag: ${{ github.event.inputs.version || github.event.release.tag_name }}
           overwrite: true
-      - if: ${{ github.event.release.tag_name }}
+      - if: ${{ always() && (github.event.release.tag_name || github.event.inputs.version) }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
