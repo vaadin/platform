@@ -510,7 +510,13 @@ async function main() {
   const prev = await computeLastVersions(currVersion);
   log(`Building SBOM for version ${currVersion}, current: ${currBranch}${prev.branch ? ', needed: ' + prev.branch : ''}`);
   if (prev.branch && prev.branch !== currBranch && (prev.branch + '-SNAPSHOT') !== currVersion) {
+    log(`Changing branch to ${prev.branch}`)
     await run(`git checkout ${prev.branch}`, { debug: false });
+    const tag = (await run(`git tag`, { debug: false, throw: false })).stdout.split('\n').filter(l => l == currVersion)[0];
+    if (tag) {
+      log(`Checking out tag ${tag}`)
+      await run(`git checkout ${tag}`, { debug: false });
+    }
     onExit = async () => {
       await run(`git stash`, { debug: false, throw: false });
       await run(`git checkout ${currBranch}`, { debug: false, throw: false });
