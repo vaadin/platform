@@ -438,12 +438,15 @@ function reportLicenses(licenses) {
   return { md, html };
 }
 
-function reportVulnerabilities(vuls) {
+function reportVulnerabilities(vuls, known) {
   let md = "", html = "";
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
+    if (known && !listed) {
+      return;
+    }
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
     html += `<tr><td><code>${v}</code>${listed ? '<br>👌 ' + asset.description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
@@ -597,30 +600,35 @@ async function main() {
     errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
     md += `\n### 🟠 Known Vulnerabilities\n`;
     html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
-  }
+    const knownVuls = reportVulnerabilities(vulnerabilities, true);
+    md += knownVuls.md;
+    html += knownVuls.html;
+    }
   if (errVul) {
     errMsg += `- 🚫 Vulnerabilities:\n\n${errVul}\n`;
     md += `\n### 🚫 Found Vulnerabilities\n`;
     html += `\n<h3>🚫 Found Vulnerabilities</h3>\n`
+    const errVuls = reportVulnerabilities(vulnerabilities, false);
+    md += errVuls.md;
+    html += errVuls.html;
+
   }
   if(!errVul && !msgVul) {
     errMsg += `- 🔒 No Vulnerabilities\n`;
     md += `\n### 🔒 No Vulnerabilities\n`;
     html += `\n<h3>🔒 No Vulnerabilities</h3>\n`;
   }
-  md += reportVulnerabilities(vulnerabilities).md;
-  html += reportVulnerabilities(vulnerabilities).html;
   if (errLic) {
     md += `\n### 🚫 Found License Issues\n`;
     html += `\n<h3>>🚫 Found License Issues</h3>\n`;
+    md += reportLicenses(licenses).md;
+    html += reportLicenses(licenses).html;
   } else {
     errMsg += `- 📔 No License Issues\n`;
     md += `\n### 📔 Licenses\n`;
     html += `\n<h3>📔 Licenses</h3>\n`;
   }
 
-  md += reportLicenses(licenses).md;
-  html += reportLicenses(licenses).html;
 
   let cnt = reportFileContent("🌳 Maven Dependencies", 'target/tree-maven.txt', c => {
     return c.split('\n').map(l => l.replace(/^\[INFO\] +/, ''))
