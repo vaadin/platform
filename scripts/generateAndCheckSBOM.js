@@ -443,7 +443,7 @@ function reportVulnerabilities(vuls, known) {
   Object.keys(vuls).forEach(v => {
     const cves = Object.keys(vuls[v]).sort().join(', ');
     const asset = cveWhiteList[v];
-    const listed = asset && cves ===  asset.cves.sort().join(', ');
+    const listed = asset && cves ===  asset.cves.sort().join(', ') || false;
     if (known != listed) {
       return;
     }
@@ -602,7 +602,6 @@ async function main() {
     const errVuls = reportVulnerabilities(vulnerabilities, false);
     md += errVuls.md;
     html += errVuls.html;
-
   }
   if (msgVul) {
     errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
