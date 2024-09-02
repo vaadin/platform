@@ -444,7 +444,7 @@ function reportVulnerabilities(vuls, known) {
     const cves = Object.keys(vuls[v]).sort().join(', ');
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
-    if (known && !listed) {
+    if (known != listed) {
       return;
     }
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
