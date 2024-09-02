@@ -444,7 +444,7 @@ function reportVulnerabilities(vuls, known) {
     const cves = Object.keys(vuls[v]).sort().join(', ');
     const asset = cveWhiteList[v];
     const listed = asset && cves ===  asset.cves.sort().join(', ');
-    if (known && !listed) {
+    if (known != listed) {
       return;
     }
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
@@ -595,15 +595,6 @@ async function main() {
   let md = "";
   let html = `${STYLE}<h2>V${currVersion} Dependencies Report</h2>\n`;
   let errMsg = "#### Dependencies Report\n\n";
-
-  if (msgVul) {
-    errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
-    md += `\n### 🟠 Known Vulnerabilities\n`;
-    html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
-    const knownVuls = reportVulnerabilities(vulnerabilities, true);
-    md += knownVuls.md;
-    html += knownVuls.html;
-    }
   if (errVul) {
     errMsg += `- 🚫 Vulnerabilities:\n\n${errVul}\n`;
     md += `\n### 🚫 Found Vulnerabilities\n`;
@@ -612,6 +603,14 @@ async function main() {
     md += errVuls.md;
     html += errVuls.html;
 
+  }
+  if (msgVul) {
+    errMsg += `- 🟠 Known Vulnerabilities:\n\n${msgVul}\n`;
+    md += `\n### 🟠 Known Vulnerabilities\n`;
+    html += `\n<h3>🟠 Known Vulnerabilities</h3>\n`;
+    const knownVuls = reportVulnerabilities(vulnerabilities, true);
+    md += knownVuls.md;
+    html += knownVuls.html;
   }
   if(!errVul && !msgVul) {
     errMsg += `- 🔒 No Vulnerabilities\n`;
