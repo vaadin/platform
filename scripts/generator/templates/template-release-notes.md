@@ -100,11 +100,14 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <th>IDE</th>
   <td>
 
-Any IDE or editor that works with the language of your choice should work well. Our teams often use Eclipse, IntelliJ, VS Code, Atom, Emacs, and Vim, among others.
+Any IDE or editor that works with the language of your choice should work well. Our teams often use IntelliJ, Eclipse, VS Code among others.
+
+Vaadin IDE plugins (IntelliJ and VS Code) support the IDE versions released during the last 12 months
 
 Vaadin Designer supports the following IDEs:
 - Eclipse from Photon and upwards
 - JetBrains IntelliJ IDEA from 2017 upwards
+
   </td>
 </tr>
 <tr>
