@@ -540,6 +540,9 @@
         "vaadin-classic-components": {
             "javaVersion": "24.2.1"
         },
+        "vaadin-feature-pack": {
+            "javaVersion": "24.5.0.alpha1"
+        },
         "vaadin-core": {
             "jsVersion": "{{version}}",
             "npmName": "@vaadin/vaadin-core"

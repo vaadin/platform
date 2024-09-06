@@ -24,6 +24,7 @@ Vaadin {{platform}}
 - Design System Publisher ([Documentation](https://vaadin.com/design-system-publisher))
 - TestBench ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 - Classic Components([{{vaadin.vaadin-classic-components.javaVersion}}](https://github.com/vaadin/classic-components/releases/tag/{{vaadin.vaadin-classic-components.javaVersion}}))
+- Feature Pack([{{vaadin.vaadin-feature-pack.javaVersion}}](https://github.com/vaadin/feature-pack/releases/tag/{{vaadin.vaadin-feature-pack.javaVersion}}))
 - Multiplatform Runtime (MPR) ([{{core.mpr-v8.javaVersion}}](https://github.com/vaadin/multiplatform-runtime/releases/tag/{{core.mpr-v8.javaVersion}}))
 - Router ([{{core.vaadin-router.jsVersion}}](https://github.com/vaadin/vaadin-router/releases/tag/v{{core.vaadin-router.jsVersion}}))
 - Vaadin Kits

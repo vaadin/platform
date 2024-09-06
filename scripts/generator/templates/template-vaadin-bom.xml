@@ -60,6 +60,12 @@
                 <artifactId>vaadin-classic-components-flow</artifactId>
                 <version>${vaadin.classic.components.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-feature-pack-flow</artifactId>
+                <version>${vaadin.feature.pack.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>
