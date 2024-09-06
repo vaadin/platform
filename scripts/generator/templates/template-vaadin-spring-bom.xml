@@ -569,6 +569,11 @@
                 <artifactId>vaadin-spreadsheet-testbench</artifactId>
                 <version>${vaadin.spreadsheet.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-feature-pack-testbench</artifactId>
+                <version>${vaadin.feature.pack.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.vaadin</groupId>

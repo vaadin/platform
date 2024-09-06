@@ -40,7 +40,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-classic-components-flow</artifactId>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-feature-pack-flow</artifactId>
         </dependency>
