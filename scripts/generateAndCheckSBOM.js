@@ -57,11 +57,15 @@ const cveWhiteList = {
   },
   'pkg:npm/railroad-diagrams@1.0.0' : {
     cves: ['CVE-2024-26467'],
-    description: 'This is coming from the tools, @cyclonedx/cyclonedx-npm, we have used for sbom module, FP for us. '
+    description: 'This is coming from the tools, @cyclonedx/cyclonedx-npm, we have used for sbom module, FP for us.'
   },
   'pkg:npm/libxmljs2@0.33.0' : {
     cves: ['CVE-2024-34394', 'CVE-2024-34393'],
-    description: 'This is coming from the tools, @cyclonedx/cyclonedx-library@6.6.0, we have used for sbom module, FP for us. '
+    description: 'This is coming from the tools, @cyclonedx/cyclonedx-library@6.6.0, we have used for sbom module, FP for us.'
+  },
+  'pkg:npm/path-to-regexp@2.4.0' : {
+    cves: ['CVE-2024-45296'],
+    description: 'From vaadin-rounte:1.7.5. Very low impact for us since we're only running that code in the user's browser and the only impact is a degraded performance.'
   }
 }
 
