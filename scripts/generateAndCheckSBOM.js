@@ -65,7 +65,7 @@ const cveWhiteList = {
   },
   'pkg:npm/path-to-regexp@2.4.0' : {
     cves: ['CVE-2024-45296'],
-    description: 'From vaadin-rounte:1.7.5. Very low impact for us since we're only running that code in the user's browser and the only impact is a degraded performance.'
+    description: "From vaadin-rounte:1.7.5. Very low impact for us since we're only running that code in the user's browser and the only impact is a degraded performance."
   }
 }
 
