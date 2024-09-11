@@ -33,7 +33,29 @@ public class JandexSmokeTest {
             Assert.assertNotNull("Class from a component was not found",
                     classByName);
         }
+    }
 
+    @Test
+    public void generatedJandex_shouldNotContainsOptionalDependencies()
+            throws IOException {
+        try (InputStream jandexStream = JandexSmokeTest.class.getClassLoader()
+                .getResourceAsStream("META-INF/jandex.idx")) {
+            IndexReader reader = new IndexReader(jandexStream);
+            final Index index = reader.read();
+
+            ClassInfo classByName = index.getClassByName("com.vaadin.base.devserver.startup.DevModeStartupListener");
+            Assert.assertNull("Class from vaadin-dev-server was found",
+                    classByName);
+
+            classByName = index.getClassByName("com.vaadin.flow.component.react.ReactAdapterComponent");
+            Assert.assertNull("Class from flow-react was found",
+                    classByName);
+
+            classByName = index.getClassByName("com.vaadin.copilot.Copilot");
+            Assert.assertNull("Class from copilot was found",
+                    classByName);
+
+        }
     }
 
 }
