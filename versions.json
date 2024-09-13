@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.5.0.alpha18"
+            "javaVersion": "24.5.0.alpha20"
         },
         "flow-cdi": {
             "javaVersion": "15.0.1"
@@ -540,15 +540,15 @@
         "vaadin-classic-components": {
             "javaVersion": "24.2.1"
         },
-        "vaadin-feature-pack": {
-            "javaVersion": "24.5.0.alpha1"
-        },
         "vaadin-core": {
             "jsVersion": "{{version}}",
             "npmName": "@vaadin/vaadin-core"
         },
         "vaadin-designer": {
             "pro": true
+        },
+        "vaadin-feature-pack": {
+            "javaVersion": "24.5.0.alpha1"
         },
         "vaadin-license-checker": {
             "javaVersion": "1.13.0.alpha5"
