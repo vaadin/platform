@@ -9,9 +9,8 @@ See the full release notes for Vaadin 14.12 in [GitHub releases](https://github.
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
-Vaadin 14 is an LTS (long term support) version, which will be supported for 5 years after the GA (general availability) release. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
+Vaadin 14 free support has been ended after 5 years (2019-2024) since the GA (general availability) release. Vaadin 14.12 is Extended Maintenance support version, which is served under [Vaadin Commercial License and Service Terms](https://vaadin.com/commercial-license-and-service-terms). More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap). You can contact us for you [licenses](https://vaadin.com/solutions/support).
 
-Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
 ## New and Noteworthy
 
