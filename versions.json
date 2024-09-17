@@ -411,7 +411,7 @@
             "javaVersion": "1.0.0.alpha5"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.3.0.alpha4"
+            "javaVersion": "6.3.0.beta1"
         }
     },
     "platform": "{{version}}",
@@ -548,7 +548,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "24.5.0.alpha1"
+            "javaVersion": "24.5.0.beta1"
         },
         "vaadin-license-checker": {
             "javaVersion": "1.13.0.beta1"
