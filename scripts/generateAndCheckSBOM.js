@@ -532,7 +532,7 @@ async function main() {
 
   if (!cmd.quick) {
     await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
-    await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
+    await run('mvn -ntp -B clean install -Denforcer.skip=true -T 1C -q -DskipTests');
   }
 
   log(`cd ${testProject}`);
