@@ -360,7 +360,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-router": {
-            "jsVersion": "2.0.0-rc2",
+            "jsVersion": "2.0.0-rc3",
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
