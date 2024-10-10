@@ -1,6 +1,6 @@
 Vaadin {{platform}}
 
-*This is a maintenance release for Vaadin 24.5. See [24.5.0 release notes](https://github.com/vaadin/platform/releases/tag/24.5.0) for details and resources.*
+*This is a maintenance release for Vaadin 24.6. See [24.6.0 release notes](https://github.com/vaadin/platform/releases/tag/24.6.0) for details and resources.*
 
 ## Changelogs
 
