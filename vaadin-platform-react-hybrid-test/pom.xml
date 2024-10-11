@@ -9,8 +9,8 @@
     </parent>
     <artifactId>vaadin-platform-react-hybrid-test-prod</artifactId>
     <packaging>war</packaging>
-    <name>Vaadin Platform Hybrid (flow and fusion views) Tests (Production Mode)</name>
-    <description>Vaadin Platform Hybrid (flow and fusion views) Tests (Production Mode)</description>
+    <name>Vaadin Platform React Hybrid (flow and hilla views) Tests (Production Mode)</name>
+    <description>Vaadin Platform React Hybrid (flow and hilla views) Tests (Production Mode)</description>
     <url>https://vaadin.com</url>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

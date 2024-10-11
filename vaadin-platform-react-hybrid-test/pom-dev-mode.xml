@@ -9,8 +9,8 @@
     </parent>
     <artifactId>vaadin-platform-react-hybrid-test</artifactId>
     <packaging>jar</packaging>
-    <name>Vaadin Platform Hybrid Tests (Dev Mode)</name>
-    <description>Vaadin Platform Hybrid Tests (Dev Mode)</description>
+    <name>Vaadin Platform React Hybrid Tests (Dev Mode)</name>
+    <description>Vaadin Platform React Hybrid Tests (Dev Mode)</description>
     <url>https://vaadin.com</url>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
