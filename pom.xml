@@ -76,6 +76,7 @@
                 <module>vaadin-dev-bundle</module>
                 <module>vaadin-prod-bundle/pom-unoptimized.xml</module>
                 <module>vaadin-prod-bundle</module>
+                <module>vaadin-platform-react-hybrid-test</module>
             </modules>
             <properties>
                 <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
@@ -93,6 +94,12 @@
             <id>fusion-hybrid</id>
             <modules>
                 <module>vaadin-platform-hybrid-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>react-hybrid</id>
+            <modules>
+                <module>vaadin-platform-react-hybrid-test</module>
             </modules>
         </profile>
     </profiles>
