@@ -10,7 +10,7 @@
     </parent>
     <artifactId>vaadin-platform-parent</artifactId>
     <packaging>pom</packaging>
-    <version>24.5-SNAPSHOT</version>
+    <version>24.6-SNAPSHOT</version>
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
     <url>https://vaadin.com</url>
@@ -127,6 +127,14 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository> 
+            <id>repository.spring.milestone</id> 
+            <name>Spring Milestone Repository</name> 
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
     <pluginRepositories>
         <!-- Main Maven repository -->
@@ -140,6 +148,14 @@
         <pluginRepository>
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository> 
+            <id>repository.spring.milestone</id> 
+            <name>Spring Milestone Repository</name> 
+            <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
