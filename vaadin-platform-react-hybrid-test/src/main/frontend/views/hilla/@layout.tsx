@@ -31,7 +31,6 @@ export default function Layout() {
                         location={location}>
                         {
                             createMenuItems().filter(({to}) => {
-                                 console.log("+++", to);
                                 return to.startsWith("hilla") || to.startsWith("/hilla");
                             }).map(({ to, icon, title }) => (
                                 <SideNavItem path={to} key={to}>

@@ -29,8 +29,10 @@ import org.openqa.selenium.logging.LogType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
+import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 
 public class ComponentsIT extends AbstractPlatformTest {
 
@@ -42,8 +44,10 @@ public class ComponentsIT extends AbstractPlatformTest {
     $(NotificationElement.class).waitForFirst();
     
     // Do something with the view
-    WebElement view = $("components-view").first().getWrappedElement();
-    getCommandExecutor().executeScript("arguments[0].openLoginOverlay()", view);
+    VerticalLayoutElement mainLayout = $(VerticalLayoutElement.class).id(
+            "components");
+    mainLayout.$(ButtonElement.class).id("open-overlay").click();
+
     assertNotNull($(LoginOverlayElement.class).waitForFirst());
   }
 

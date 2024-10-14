@@ -81,7 +81,7 @@ export default function Components() {
     }
 
     return (
-        <VerticalLayout theme="padding">
+        <VerticalLayout theme="padding" id={"components"}>
             <Accordion>
                 <AccordionPanel>
                     <AccordionHeading slot="summary">summary</AccordionHeading>
@@ -237,7 +237,7 @@ export default function Components() {
 
             <LoginForm></LoginForm>
 
-            <Button onClick={() => openLoginOverlay()}>Open Login
+            <Button onClick={() => openLoginOverlay()} id={"open-overlay"}>Open Login
                 Overlay</Button>
             <LoginOverlay></LoginOverlay>
 
