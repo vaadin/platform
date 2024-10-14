@@ -15,11 +15,16 @@
  */
 package com.vaadin.platform.react.test;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.flow.component.sidenav.testbench.SideNavElement;
+import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.parallel.ParallelTest;
 import com.vaadin.testbench.parallel.SauceLabsIntegration;
@@ -91,5 +96,13 @@ public abstract class AbstractPlatformTest extends ParallelTest {
      */
     protected String getDeploymentHostname() {
         return hostName;
+    }
+
+    protected Optional<SideNavItemElement> getMenuElement(String label) {
+        List<SideNavItemElement> items = $(SideNavElement.class).first()
+                .getItems();
+        return items.stream()
+                .filter(item -> item.getLabel().equals(label))
+                .findFirst();
     }
 }

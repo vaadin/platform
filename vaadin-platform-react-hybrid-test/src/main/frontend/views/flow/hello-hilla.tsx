@@ -14,7 +14,7 @@ export default function HelloHilla() {
     const [name, setName] = useState("");
 
     return (
-        <VerticalLayout theme="padding">
+        <VerticalLayout theme="padding" id={"flow-hilla"}>
             <TextField label="Your name for Hilla" onValueChanged={(e) => setName(e.detail.value)} />
             <Button onClick = {() => Notification.show(`Hello ${name}` , {
                 position: 'middle',

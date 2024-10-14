@@ -1,10 +1,15 @@
 package com.vaadin.platform.react.test;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.sidenav.testbench.SideNavElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
 public class FlowInHillaIT extends AbstractPlatformTest{
@@ -14,14 +19,14 @@ public class FlowInHillaIT extends AbstractPlatformTest{
         Assert.assertNotNull(findElement(By.id("hilla")));
 
         // Navigate to Flow view
-        $(SideNavItemElement.class).withCaption("Flow in hilla").first().click();
+        getMenuElement("Flow in hilla").get().click();
 
         waitUntil(ExpectedConditions.presenceOfElementLocated(By.id("flow-hilla")));
 
-        Assert.assertNull("Showing hilla placeholder even though Flow should be shown", findElement(By.id("placeholder")));
-
         // navigate away from Flow view
-        $(SideNavItemElement.class).withCaption("React Components").first().click();
+        getMenuElement("React Components").get().click();
+
+        Assert.assertTrue("React components view should be shown", $(ButtonElement.class).id("open-overlay").isDisplayed());
     }
 
     @Override

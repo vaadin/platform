@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
 public class HillaInFlowIT extends AbstractPlatformTest{
@@ -14,14 +15,14 @@ public class HillaInFlowIT extends AbstractPlatformTest{
         waitUntil(ExpectedConditions.presenceOfElementLocated(By.id("flow-main")));
 
         // Navigate to Flow view
-        $(SideNavItemElement.class).withCaption("Flow in hilla").first().click();
+        getMenuElement("Hello React in Flow Layout").get().click();
 
         waitUntil(ExpectedConditions.presenceOfElementLocated(By.id("flow-hilla")));
 
-        Assert.assertNull("Showing hilla placeholder even though Flow should be shown", findElement(By.id("placeholder")));
-
         // navigate away from Flow view
-        $(SideNavItemElement.class).withCaption("React Components").first().click();
+        getMenuElement("Flow Hello").get().click();
+
+       Assert.assertTrue("Flow layout should have been rendered", $(HorizontalLayoutElement.class).first().isDisplayed());
     }
 
     @Override
