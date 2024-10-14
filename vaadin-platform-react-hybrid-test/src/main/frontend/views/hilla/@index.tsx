@@ -1,4 +1,5 @@
 import type {ViewConfig} from "@vaadin/hilla-file-router/types.js";
+import { NavLink } from "react-router-dom";
 
 export const config: ViewConfig = {
     menu: {
@@ -12,6 +13,7 @@ export default function Hilla() {
         <div>
             <span id={"hilla"} hidden={true}></span>
             <div>"Hilla root view for menu!"</div>
+            <NavLink to={"/hilla/hello-react"} id={"toHello"}>To hello react</NavLink>
         </div>
     );
 }

@@ -13,7 +13,7 @@ export default function HelloReact() {
     const [name, setName] = useState("");
 
     return (
-        <VerticalLayout theme="padding">
+        <VerticalLayout theme="padding" id={"HelloReact"}>
             <TextField label="Your name" onValueChanged={(e) => setName(e.detail.value)} />
             <Button onClick = {() => Notification.show(`Hello ${name}` , {
                 position: 'middle',
