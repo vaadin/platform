@@ -17,6 +17,7 @@ public class HelloWorldView extends HorizontalLayout {
     private Button sayHello;
 
     public HelloWorldView() {
+        setId("flow-hello");
         setPadding(true);
         setSpacing(true);
         name = new TextField("Your name");

@@ -18,8 +18,12 @@ package com.vaadin.platform.react.test;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +35,8 @@ import com.vaadin.testbench.parallel.SauceLabsIntegration;
 
 public abstract class AbstractPlatformTest extends ParallelTest {
 
-    public static final int SERVER_PORT = Integer
-            .parseInt(System.getProperty("serverPort", "8080"));
+    public static final int SERVER_PORT = Integer.parseInt(
+            System.getProperty("serverPort", "8080"));
 
     static String hostName;
     static boolean isSauce;
@@ -46,16 +50,16 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     @BeforeClass
     public static void setupClass() {
         isSauce = SauceLabsIntegration.isConfiguredForSauceLabs();
-        String hubHost = System
-                .getProperty("com.vaadin.testbench.Parameters.hubHostname");
+        String hubHost = System.getProperty(
+                "com.vaadin.testbench.Parameters.hubHostname");
         isHub = !isSauce && hubHost != null && !hubHost.isEmpty();
 
         hostName = isHub ? IPAddress.findSiteLocalAddress() : "localhost";
         getLogger().info("Running Tests app-url=http://{}:{} mode={}", hostName,
-                SERVER_PORT,
-                isSauce ? "SAUCE (user:" + SauceLabsIntegration.getSauceUser() + ")"
-                        : isHub ? "HUB (hub-host:" + hubHost + ")"
-                        : "LOCAL (chromedriver)");
+                SERVER_PORT, isSauce ?
+                        "SAUCE (user:" + SauceLabsIntegration.getSauceUser() +
+                                ")" : isHub ? "HUB (hub-host:" + hubHost + ")" :
+                        "LOCAL (chromedriver)");
     }
 
     @Before
@@ -67,7 +71,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
      * Gets the absolute path to the test, starting with a "/".
      *
      * @return he path to the test, appended to {@link #getRootURL()} for the
-     *         full test URL.
+     * full test URL.
      */
     protected abstract String getTestPath();
 
@@ -98,11 +102,30 @@ public abstract class AbstractPlatformTest extends ParallelTest {
         return hostName;
     }
 
+    /**
+     * Get the sideNavItem with given label
+     *
+     * @param label label to look for
+     * @return sidenav with label if found
+     */
     protected Optional<SideNavItemElement> getMenuElement(String label) {
         List<SideNavItemElement> items = $(SideNavElement.class).first()
                 .getItems();
-        return items.stream()
-                .filter(item -> item.getLabel().equals(label))
+        return items.stream().filter(item -> item.getLabel().equals(label))
                 .findFirst();
+    }
+
+    /**
+     * Wait for element else fail with message.
+     *
+     * @param message failure message
+     * @param by      By for locating element
+     */
+    protected void waitForElement(String message, By by) {
+        try {
+            waitUntil(ExpectedConditions.presenceOfElementLocated(by));
+        } catch (TimeoutException te) {
+            Assert.fail(message);
+        }
     }
 }
