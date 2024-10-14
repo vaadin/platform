@@ -220,7 +220,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <mainClass>com.vaadin.platform.fusion.test.Application</mainClass>
+                            <mainClass>com.vaadin.platform.react.test.Application</mainClass>
                         </configuration>
                     </plugin>
                     <plugin>
