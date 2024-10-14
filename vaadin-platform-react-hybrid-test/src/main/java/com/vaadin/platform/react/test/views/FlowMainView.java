@@ -7,6 +7,8 @@ import com.vaadin.flow.router.Route;
 @Route("flow")
 public class FlowMainView extends VerticalLayout {
     public FlowMainView() {
-        add(new Span("Flow root view for menu!"));
+        Span span = new Span("Flow root view for menu!");
+        span.setId("flow-main");
+        add(span);
     }
 }

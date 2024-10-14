@@ -17,6 +17,7 @@ public class FlowHillaView extends HorizontalLayout {
     private Button sayHello;
 
     public FlowHillaView() {
+        setId("flow-hilla");
         setPadding(true);
         setSpacing(true);
         name = new TextField("Your name for Flow");
