@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.platform.react.offline;
+package com.vaadin.platform.react.test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -32,16 +32,10 @@ import org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
 
-public class ComponentsIT extends ChromeDeviceTest {
-
-  protected Logger getLogger() {
-    return LoggerFactory.getLogger(this.getClass().getSimpleName());
-  }
+public class ComponentsIT extends AbstractPlatformTest {
 
   @Test
   public void loadComponents() throws Exception {
-    getDriver().get(getRootURL() + "/hilla/components");
-
     // There should not be component errors in console
     checkLogsForErrors();
     // Notification opens when loaded
@@ -72,4 +66,8 @@ public class ComponentsIT extends ChromeDeviceTest {
         .filter(logEntry -> !logEntry.getMessage().contains("favicon.ico")).collect(Collectors.toList());
   }
 
+  @Override
+  protected String getTestPath() {
+    return "/hilla/components";
+  }
 }
