@@ -19,8 +19,8 @@ import com.vaadin.flow.theme.Theme;
  *
  */
 @SpringBootApplication
-@Theme(value = "fusion-test")
-@PWA(name = "fusion-test", shortName = "fusion-test", offlineResources = {"images/logo.png"})
+@Theme(value = "react-test")
+@PWA(name = "react-test", shortName = "react-test", offlineResources = {"images/logo.png"})
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 
     public static void main(String[] args) {
