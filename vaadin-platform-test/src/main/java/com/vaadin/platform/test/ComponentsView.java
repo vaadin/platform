@@ -652,10 +652,10 @@ public class ComponentsView extends AppLayout {
         FieldSet fieldSet = new FieldSet();
 
         Dashboard dashboard = new Dashboard();
-        DashboardWidget widget = new DashboardWidget();
-        widget.setTitle("Widget");
-        widget.setContent(new Span("Content"));
-        dashboard.add(widget);
+        DashboardWidget dashboardWidget = new DashboardWidget();
+        dashboardWidget.setTitle("Widget");
+        dashboardWidget.setContent(new Span("Content"));
+        dashboard.add(dashboardWidget);
         DashboardSection dashboardSection = dashboard.addSection("Section");
         DashboardWidget widgetInSection = new DashboardWidget();
         widgetInSection.setTitle("Widget in Section");
