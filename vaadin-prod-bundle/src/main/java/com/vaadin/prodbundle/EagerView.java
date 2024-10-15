@@ -16,6 +16,7 @@ import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.customfield.CustomField;
+import com.vaadin.flow.component.dashboard.Dashboard;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -83,6 +84,7 @@ public class EagerView extends Div {
     public CookieConsent cookieConsent;
     public Crud<String> crud;
     public CustomField<String> customField;
+    public Dashboard dashboard;
     public DatePicker datePicker;
     public DateTimePicker dateTimePicker;
     public Details details;

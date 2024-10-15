@@ -431,6 +431,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-dashboard-testbench</artifactId>
+                <version>${dashboard.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-date-picker-testbench</artifactId>
                 <version>${date.picker.version}</version>
             </dependency>
@@ -609,6 +614,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-custom-field-flow</artifactId>
                 <version>${custom.field.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-dashboard-flow</artifactId>
+                <version>${dashboard.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
