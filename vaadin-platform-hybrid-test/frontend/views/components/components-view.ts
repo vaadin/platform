@@ -23,6 +23,8 @@ import '@vaadin/cookie-consent';
 import '@vaadin/crud';
 import '@vaadin/crud/src/vaadin-crud-edit-column';
 import '@vaadin/dashboard';
+import '@vaadin/dashboard/src/vaadin-dashboard-section';
+import '@vaadin/dashboard/src/vaadin-dashboard-widget';
 import '@vaadin/date-time-picker';
 import '@vaadin/date-picker';
 import '@vaadin/details';
@@ -214,7 +216,8 @@ export class ComponentsView extends View {
               widget.textContent = model.item.content;
           }}"
         ></vaadin-dashboard>
-
+        <vaadin-dashboard-widget></vaadin-dashboard-widget>
+        <vaadin-dashboard-section></vaadin-dashboard-section>
         <vaadin-date-picker></vaadin-date-picker>
         <vaadin-date-time-picker></vaadin-date-time-picker>
         <vaadin-details>
