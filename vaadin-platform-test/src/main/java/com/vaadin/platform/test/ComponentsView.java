@@ -62,6 +62,9 @@ import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.crud.CrudFilter;
 import com.vaadin.flow.component.crud.CrudGrid;
 import com.vaadin.flow.component.customfield.CustomField;
+import com.vaadin.flow.component.dashboard.Dashboard;
+import com.vaadin.flow.component.dashboard.DashboardSection;
+import com.vaadin.flow.component.dashboard.DashboardWidget;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.details.Details;
@@ -648,6 +651,15 @@ public class ComponentsView extends AppLayout {
         ReactRouterOutlet reactRouterOutlet = new ReactRouterOutlet();
         FieldSet fieldSet = new FieldSet();
 
+        Dashboard dashboard = new Dashboard();
+        DashboardWidget widget = new DashboardWidget();
+        widget.setTitle("Widget");
+        dashboard.add(widget);
+        DashboardSection section = dashboard.addSection("Section");
+        DashboardWidget widgetInSection = new DashboardWidget();
+        widgetInSection.setTitle("Widget in Section");
+        section.add(widgetInSection);
+
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
@@ -699,6 +711,7 @@ public class ComponentsView extends AppLayout {
         components.add(nativeLabel);
         components.add(reactRouterOutlet);
         components.add(fieldSet);
+        components.add(dashboard);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);

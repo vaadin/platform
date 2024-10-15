@@ -22,6 +22,7 @@ import '@vaadin/confirm-dialog';
 import '@vaadin/cookie-consent';
 import '@vaadin/crud';
 import '@vaadin/crud/src/vaadin-crud-edit-column';
+import '@vaadin/dashboard';
 import '@vaadin/date-time-picker';
 import '@vaadin/date-picker';
 import '@vaadin/details';
@@ -76,6 +77,11 @@ import type {
   VirtualList,
   VirtualListItemModel,
 } from '@vaadin/virtual-list';
+import type {
+  Dashboard,
+  DashboardItem,
+  DashboardWidget,
+} from '@vaadin/dashboard';
 import { html, css, } from 'lit';
 import { customElement, query} from 'lit/decorators.js';
 import { View } from '../view';
@@ -83,6 +89,11 @@ import { LoginOverlay } from '@vaadin/login';
 
 type Person = {
   name: string;
+};
+
+type CustomWidget = {
+  title: string;
+  content: string;
 };
 
 @customElement('components-view')
@@ -184,6 +195,20 @@ export class ComponentsView extends View {
             <vaadin-grid-column path="surname"></vaadin-grid-column>
           </vaadin-grid>
         </vaadin-crud>
+
+        <vaadin-dashboard
+          .items="${[{ title: 'Widget 1', content: 'Content 1'}, { title: 'Widget 2', content: 'Content 2'}]}"
+          .renderer="${(
+            root: HTMLElement,
+            _dashboard: Dashboard<CustomWidget>,
+            model: DashboardItem<CustomWidget>
+          ) => {
+              const widget: DashboardWidget = root.firstElementChild || document.createElement('vaadin-dashboard-widget');
+              root.appendChild(widget);
+              widget.widgetTitle = model.item.title;
+              widget.textContent = model.item.content;
+          }}"
+        ></vaadin-dashboard>
 
         <vaadin-date-picker></vaadin-date-picker>
         <vaadin-date-time-picker></vaadin-date-time-picker>
