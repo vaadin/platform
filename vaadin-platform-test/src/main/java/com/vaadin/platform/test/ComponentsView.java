@@ -655,10 +655,10 @@ public class ComponentsView extends AppLayout {
         DashboardWidget widget = new DashboardWidget();
         widget.setTitle("Widget");
         dashboard.add(widget);
-        DashboardSection section = dashboard.addSection("Section");
+        DashboardSection dashboardSection = dashboard.addSection("Section");
         DashboardWidget widgetInSection = new DashboardWidget();
         widgetInSection.setTitle("Widget in Section");
-        section.add(widgetInSection);
+        dashboardSection.add(widgetInSection);
 
         // These components are flow internal classes, these lines is to make pass the ComponentUsageTest
         WebComponentUI webComponentUI;
