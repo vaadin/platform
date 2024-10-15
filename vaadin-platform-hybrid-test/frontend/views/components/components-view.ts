@@ -79,9 +79,11 @@ import type {
 } from '@vaadin/virtual-list';
 import type {
   Dashboard,
-  DashboardItem,
-  DashboardWidget,
+  DashboardItemModel,
 } from '@vaadin/dashboard';
+import type {
+  DashboardWidget,
+} from '@vaadin/dashboard/vaadin-dashboard-widget';
 import { html, css, } from 'lit';
 import { customElement, query} from 'lit/decorators.js';
 import { View } from '../view';
@@ -94,6 +96,9 @@ type Person = {
 type CustomWidget = {
   title: string;
   content: string;
+  id?: unknown;
+  colspan?: number;
+  rowspan?: number;
 };
 
 @customElement('components-view')
@@ -201,9 +206,9 @@ export class ComponentsView extends View {
           .renderer="${(
             root: HTMLElement,
             _dashboard: Dashboard<CustomWidget>,
-            model: DashboardItem<CustomWidget>
+            model: DashboardItemModel<CustomWidget>
           ) => {
-              const widget: DashboardWidget = root.firstElementChild || document.createElement('vaadin-dashboard-widget');
+              const widget: DashboardWidget = <DashboardWidget>root.firstElementChild || document.createElement('vaadin-dashboard-widget');
               root.appendChild(widget);
               widget.widgetTitle = model.item.title;
               widget.textContent = model.item.content;
