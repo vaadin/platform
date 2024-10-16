@@ -548,7 +548,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "24.5.0.rc1"
+            "javaVersion": "24.5.0"
         },
         "vaadin-license-checker": {
             "javaVersion": "1.13.0"
