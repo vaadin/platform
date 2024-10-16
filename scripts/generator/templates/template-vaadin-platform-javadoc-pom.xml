@@ -199,6 +199,12 @@
                     <version>1.4.1</version>
                     <scope>provided</scope>
                 </dependency>
+                <dependency>
+                    <groupId>com.microsoft.playwright</groupId>
+                    <artifactId>playwright</artifactId>
+                    <version>1.47.0</version>
+                    <scope>provided</scope>
+                 </dependency>
             </dependencies>
             <build>
                 <plugins>
