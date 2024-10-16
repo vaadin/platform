@@ -482,6 +482,7 @@
                 "@vaadin/charts",
                 "@vaadin/cookie-consent",
                 "@vaadin/crud",
+                "@vaadin/dashboard",
                 "@vaadin/grid-pro",
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
@@ -518,6 +519,12 @@
             "jsVersion": "24.6.0-alpha2",
             "mode": "lit",
             "npmName": "@vaadin/crud"
+        },
+        "dashboard": {
+            "javaVersion": "{{version}}",
+            "jsVersion": "24.6.0-alpha2",
+            "mode": "lit",
+            "npmName": "@vaadin/dashboard"
         },
         "grid-pro": {
             "javaVersion": "{{version}}",

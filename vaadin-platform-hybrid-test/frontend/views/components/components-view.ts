@@ -22,6 +22,9 @@ import '@vaadin/confirm-dialog';
 import '@vaadin/cookie-consent';
 import '@vaadin/crud';
 import '@vaadin/crud/src/vaadin-crud-edit-column';
+import '@vaadin/dashboard';
+import '@vaadin/dashboard/src/vaadin-dashboard-section';
+import '@vaadin/dashboard/src/vaadin-dashboard-widget';
 import '@vaadin/date-time-picker';
 import '@vaadin/date-picker';
 import '@vaadin/details';
@@ -76,6 +79,13 @@ import type {
   VirtualList,
   VirtualListItemModel,
 } from '@vaadin/virtual-list';
+import type {
+  Dashboard,
+  DashboardItemModel,
+} from '@vaadin/dashboard';
+import type {
+  DashboardWidget,
+} from '@vaadin/dashboard/vaadin-dashboard-widget';
 import { html, css, } from 'lit';
 import { customElement, query} from 'lit/decorators.js';
 import { View } from '../view';
@@ -83,6 +93,14 @@ import { LoginOverlay } from '@vaadin/login';
 
 type Person = {
   name: string;
+};
+
+type CustomWidget = {
+  title: string;
+  content: string;
+  id?: unknown;
+  colspan?: number;
+  rowspan?: number;
 };
 
 @customElement('components-view')
@@ -185,6 +203,21 @@ export class ComponentsView extends View {
           </vaadin-grid>
         </vaadin-crud>
 
+        <vaadin-dashboard
+          .items="${[{ title: 'Widget 1', content: 'Content 1'}, { title: 'Widget 2', content: 'Content 2'}]}"
+          .renderer="${(
+            root: HTMLElement,
+            _dashboard: Dashboard<CustomWidget>,
+            model: DashboardItemModel<CustomWidget>
+          ) => {
+              const widget: DashboardWidget = <DashboardWidget>root.firstElementChild || document.createElement('vaadin-dashboard-widget');
+              root.appendChild(widget);
+              widget.widgetTitle = model.item.title;
+              widget.textContent = model.item.content;
+          }}"
+        ></vaadin-dashboard>
+        <vaadin-dashboard-widget></vaadin-dashboard-widget>
+        <vaadin-dashboard-section></vaadin-dashboard-section>
         <vaadin-date-picker></vaadin-date-picker>
         <vaadin-date-time-picker></vaadin-date-time-picker>
         <vaadin-details>
