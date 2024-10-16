@@ -388,10 +388,10 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.0.0.rc1"
+            "javaVersion": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.5.0.rc2"
+            "javaVersion": "24.5.0"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.2.2"
