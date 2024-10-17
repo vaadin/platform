@@ -1,11 +1,8 @@
 package com.vaadin.platform.react.test.views;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
@@ -17,17 +14,20 @@ import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.server.menu.MenuConfiguration;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-import com.vaadin.platform.react.test.security.UserInfoService;
 
 @Layout("/flow")
 @RoutePrefix("flow")
 @AnonymousAllowed
 public class FlowLayout extends AppLayout {
+    public static final String LOGIN_BUTTON_ID = "login-button";
+    private final AuthenticationContext authenticationContext;
 
     private H1 viewTitle;
 
-    public FlowLayout() {
+    public FlowLayout(AuthenticationContext authenticationContext) {
+        this.authenticationContext = authenticationContext;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -71,18 +71,19 @@ public class FlowLayout extends AppLayout {
 
     private Footer createFooter() {
         Footer layout = new Footer();
+        Button login;
 
-        if (SecurityContextHolder.getContext().getAuthentication() == null ||
-                !SecurityContextHolder.getContext().getAuthentication()
-                        .isAuthenticated()) {
-            layout.add(new Button("Sign in",
-                    e -> e.getSource().getUI().get().navigate("login")));
-        } else {
-            layout.add(new Button("Logout", e -> {
-                SecurityContextHolder.getContext().setAuthentication(null);
+        if (authenticationContext.isAuthenticated()) {
+            login = new Button("Logout", e -> {
+                authenticationContext.logout();
                 e.getSource().getUI().get().getPage().reload();
-            }));
+            });
+        } else {
+            login = new Button("Sign in",
+                    e -> e.getSource().getUI().get().navigate("login"));
         }
+        login.setId(LOGIN_BUTTON_ID);
+        layout.add(login);
 
         return layout;
     }

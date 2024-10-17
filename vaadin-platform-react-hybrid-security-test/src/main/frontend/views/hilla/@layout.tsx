@@ -27,12 +27,9 @@ export default function Layout() {
     const userName : string = state.user?.name;
 
     async function doLogout() {
-        const isServerSideRoute = window.location.pathname === '/flow';
         await logout();
-        if (isServerSideRoute) {
-            // Workaround for https://github.com/vaadin/hilla/issues/2235
-            window.location.reload();
-        }
+        // Workaround for https://github.com/vaadin/hilla/issues/2235
+        window.location.reload();
     }
 
     return (
@@ -64,12 +61,12 @@ export default function Layout() {
                                 <Avatar theme="xsmall" name={userName}/>
                                 {userName}
                             </div>
-                            <Button onClick={async () => doLogout()}>Sign
+                            <Button onClick={async () => doLogout()} id={"login-button"}>Sign
                                 out</Button>
                         </>
                     ) : (
                         <a href="/login">
-                            <Button className="w-full">Sign in</Button>
+                            <Button className="w-full" id={"login-button"}>Sign in</Button>
                         </a>
                     )}
                 </footer>

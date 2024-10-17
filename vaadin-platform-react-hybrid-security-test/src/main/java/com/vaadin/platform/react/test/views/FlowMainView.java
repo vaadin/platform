@@ -16,12 +16,12 @@ public class FlowMainView extends VerticalLayout {
         add(span);
 
         RouterLink flow = new RouterLink("Flow with RouterLink",
-                HelloWorldView.class);
+                PublicView.class);
         flow.setId("flow-link");
 
         Button flowButton = new Button("Flow with Button",
                 e -> e.getSource().getUI().get()
-                        .navigate(HelloWorldView.class));
+                        .navigate(PublicView.class));
         flowButton.setId("flow-button");
 
         add(flow, flowButton);

@@ -1,7 +1,5 @@
 package com.vaadin.platform.react.test.views;
 
-import jakarta.annotation.security.PermitAll;
-
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -11,16 +9,16 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-@Route("flow/hello-world")
-@PageTitle("Hello World")
-@Menu(title = "Flow Hello")
+@Route("flow/public")
+@PageTitle("Public View")
+@Menu(title = "Flow Public")
 @AnonymousAllowed
-public class HelloWorldView extends HorizontalLayout {
+public class PublicView extends HorizontalLayout {
 
     private TextField name;
     private Button sayHello;
 
-    public HelloWorldView() {
+    public PublicView() {
         setId("flow-hello");
         setPadding(true);
         setSpacing(true);

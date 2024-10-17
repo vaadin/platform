@@ -1,7 +1,6 @@
-import { Button, TextField, VerticalLayout } from "@vaadin/react-components";
+import { VerticalLayout } from "@vaadin/react-components";
 import type { ViewConfig } from "@vaadin/hilla-file-router/types.js";
 import { useState } from "react";
-import { Notification } from '@vaadin/react-components/Notification.js';
 
 export const config: ViewConfig = {
     menu: {

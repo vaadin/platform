@@ -4,20 +4,18 @@ import { useState } from "react";
 
 export const config: ViewConfig = {
     menu: {
-        title: "Hello React in Flow Layout",
+        title: "Hello Admin",
     },
-    title: "Hilla in Flow",
     loginRequired: true,
-    rolesAllowed: [ "ROLE_USER", "ROLE_ADMIN" ]
+    rolesAllowed: ['ROLE_ADMIN'],
 };
 
-export default function HelloHilla() {
+export default function HelloReact() {
     const [name, setName] = useState("");
 
     return (
-        <VerticalLayout theme="padding" id={"flow-hilla-login"}>
-           <span>Hilla in Flow Layout with USER/ADMIN login required!</span>
+        <VerticalLayout theme="padding" id={"HelloAdmin"}>
+            <span>Hello ADMIN of the system.</span>
         </VerticalLayout>
-    )
-        ;
+    );
 }
