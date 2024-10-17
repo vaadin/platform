@@ -391,7 +391,7 @@
             "javaVersion": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.5.0.rc1"
+            "javaVersion": "24.6-SNAPSHOT"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.2.2"
@@ -411,7 +411,7 @@
             "javaVersion": "1.0-SNAPSHOT"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.3.0.rc1"
+            "javaVersion": "6.3.0"
         }
     },
     "platform": "{{version}}",
@@ -555,7 +555,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "24.5.0.rc1"
+            "javaVersion": "24.5.0"
         },
         "vaadin-license-checker": {
             "javaVersion": "1.13.0"
