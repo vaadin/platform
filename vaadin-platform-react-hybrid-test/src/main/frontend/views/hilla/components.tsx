@@ -62,7 +62,7 @@ import {
     ChartSeries,
     CookieConsent,
     Crud,
-    CrudEditColumn,
+    CrudEditColumn, Dashboard,
     GridPro,
     GridProEditColumn,
     RichTextEditor
@@ -310,6 +310,7 @@ export default function Components() {
 
             <VirtualList items={[{name: 'Juan'}, {name: 'John'}]}>
             </VirtualList>
+            <Dashboard></Dashboard>
         </VerticalLayout>
     );
 }
