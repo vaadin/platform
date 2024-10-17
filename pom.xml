@@ -95,6 +95,12 @@
                 <module>vaadin-platform-hybrid-test</module>
             </modules>
         </profile>
+        <profile>
+            <id>hilla-hybrid</id>
+            <modules>
+                <module>vaadin-platform-react-hybrid-security-test</module>
+            </modules>
+        </profile>
     </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
