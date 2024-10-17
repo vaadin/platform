@@ -408,7 +408,7 @@
             "javaVersion": "2.2.3"
         },
         "ui-tests": {
-            "javaVersion": "1.0-SNAPSHOT"
+            "javaVersion": "1.0.0"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.3.0"
