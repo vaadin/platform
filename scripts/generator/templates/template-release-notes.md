@@ -122,7 +122,7 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Gradle</th>
-  <td>Version 8.5 or newer</td>
+  <td>Version 8.7 or newer</td>
 </tr>
 <tr>
   <th>Application server</th>
