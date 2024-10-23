@@ -59,6 +59,11 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dashboard-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-grid-pro-flow</artifactId>
         </dependency>
 
@@ -70,11 +75,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-rich-text-editor-flow</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>collaboration-engine</artifactId>
         </dependency>
 
     </dependencies>
