@@ -75,7 +75,7 @@
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
                                     <excludes>
-                                        <exclude>com.vaadin:flow-*</exclude>
+                                        <exclude>com.vaadin</exclude>
                                         <exclude>org.slf4j:slf4j-api</exclude>
                                     </excludes>
                                 </requireUpperBoundDeps>
