@@ -101,6 +101,12 @@
                 <module>vaadin-platform-react-hybrid-test</module>
             </modules>
         </profile>
+        <profile>
+            <id>hybrid-security</id>
+            <modules>
+                <module>vaadin-platform-react-hybrid-security-test</module>
+            </modules>
+        </profile>
     </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
