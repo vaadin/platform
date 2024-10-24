@@ -96,7 +96,7 @@
             </modules>
         </profile>
         <profile>
-            <id>hilla-hybrid</id>
+            <id>hybrid-security</id>
             <modules>
                 <module>vaadin-platform-react-hybrid-security-test</module>
             </modules>
