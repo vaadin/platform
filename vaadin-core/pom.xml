@@ -32,6 +32,12 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>ui-tests</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
