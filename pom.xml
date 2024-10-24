@@ -76,7 +76,6 @@
                 <module>vaadin-dev-bundle</module>
                 <module>vaadin-prod-bundle/pom-unoptimized.xml</module>
                 <module>vaadin-prod-bundle</module>
-                <module>vaadin-platform-react-hybrid-test</module>
             </modules>
             <properties>
                 <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
