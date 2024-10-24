@@ -7,16 +7,10 @@
         <artifactId>vaadin-platform-parent</artifactId>
         <version>24.6-SNAPSHOT</version>
     </parent>
-<!--    <parent>-->
-<!--        <groupId>org.springframework.boot</groupId>-->
-<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
-<!--        <version>3.3.3</version>-->
-<!--                <relativePath />-->
-<!--    </parent>-->
-    <artifactId>vaadin-platform-react-hybrid-test-prod</artifactId>
+    <artifactId>vaadin-platform-react-hybrid-security-test-prod</artifactId>
     <packaging>war</packaging>
-    <name>Vaadin Platform React Hybrid (flow and hilla views) Tests (Production Mode)</name>
-    <description>Vaadin Platform React Hybrid (flow and hilla views) Tests (Production Mode)</description>
+    <name>Vaadin Platform React Hybrid (flow and hilla views) security Tests (Production Mode)</name>
+    <description>Vaadin Platform React Hybrid (flow and hilla views) security Tests (Production Mode)</description>
     <url>https://vaadin.com</url>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -31,14 +25,14 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>24.6-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.4</version>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -112,7 +106,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
             <scope>test</scope>
-            <version>24.6-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -126,18 +119,6 @@
             <artifactId>slf4j-simple</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.4.3</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jsoup</groupId>
-                    <artifactId>jsoup</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
