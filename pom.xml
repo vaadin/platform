@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring.boot.version>3.3.4</spring.boot.version>
+        <spring.boot.version>3.3.5</spring.boot.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>11.0.13</jetty.version>
     </properties>
@@ -93,6 +93,18 @@
             <id>fusion-hybrid</id>
             <modules>
                 <module>vaadin-platform-hybrid-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>react-hybrid</id>
+            <modules>
+                <module>vaadin-platform-react-hybrid-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>hybrid-security</id>
+            <modules>
+                <module>vaadin-platform-react-hybrid-security-test</module>
             </modules>
         </profile>
     </profiles>
