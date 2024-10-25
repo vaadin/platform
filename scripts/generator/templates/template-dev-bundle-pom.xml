@@ -25,10 +25,17 @@
     </properties>
 
     <dependencies>
+        <!--
+            vaadin-hybrid-dev-bundle must be a project dependency otherwise it will be built
+            after vaadin-dev-bundle because of modules configuration in root pom.
+            Configuring the dependency with provided scope will prevent it to be scanned by
+            flow-dev-bundle-plugin.
+        -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>vaadin-hybrid-dev-bundle</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
