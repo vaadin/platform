@@ -356,7 +356,7 @@
         "vaadin-charts": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "6.3.7",
+            "jsVersion": "6.3.8",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
