@@ -132,14 +132,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository> 
-            <id>repository.spring.milestone</id> 
-            <name>Spring Milestone Repository</name> 
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
     <pluginRepositories>
         <!-- Main Maven repository -->
@@ -153,14 +145,6 @@
         <pluginRepository>
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository> 
-            <id>repository.spring.milestone</id> 
-            <name>Spring Milestone Repository</name> 
-            <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
