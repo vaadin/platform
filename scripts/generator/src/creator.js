@@ -2,6 +2,8 @@ const render = require('./replacer.js');
 const request = require('sync-request');
 const compareVersions = require('compare-versions');
 
+const token = process.env['GITHUB_TOKEN'];
+
 /**
 @param {Object} versions data object for product versions.
 @param {String} key name for the generated json object
@@ -149,27 +151,56 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
 @param {Object} versions data object for product versions.
 @param {String} modulesReleaseNoteTemplate template string to replace versions in.
 */
-function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
-    const allVersions = Object.assign({}, versions.core, versions.vaadin);
-    let componentVersions = '';
-    for (let [versionName, version] of Object.entries(allVersions)) {
+function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate) {
 
-        if (version.component) {
-            const result = buildComponentReleaseNoteString(versionName, version);
-            componentVersions = componentVersions.concat(result);
-        }
-    }
+    const platformReleaseNote = requestGH(`https://api.github.com/repos/vaadin/platform/releases/tags/${version}`)
+    const platformReleaseNoteBody = platformReleaseNote.body;
 
-    const changed = getChangedReleaseNotesSincePrevious(versions);
+    let modulesReleaseNotes="";
+    let docLinks=[];
 
-    let modulesReleaseNotes = '';
-    changed.split("\n").forEach((split) => {
-        modulesReleaseNotes += split.substring(0, 1) == '#' || split == '' ? split+'\n\n' : '## '+requestGH(split)['name']+'\n\n'+requestGH(split)['body']+'\n\n';
-    });
+    platformReleaseNoteBody.split("\n").forEach(
+      line => {
+        if (line.includes("https") && line.includes("docs")){
+          line.split("](").forEach(
+            l => l.split("))").filter(docs=>docs.includes("https")).forEach(
+              doc => docLinks.push(doc)
+            )
+          )
+        };
+        if (line.includes("https") && line.includes("tag") && !line.includes("platform")){
+          line.split("](").forEach(
+            l => l.split("))").filter(notes=>notes.includes("https")).forEach(
+              noteLink => {
+                moduleName = getModuleName(noteLink)
+                noteVersion = getReleaseNoteVersion(noteLink)
+                noteBody = getReleaseNoteBody(moduleName, noteVersion)
+
+                modulesReleaseNotes += moduleName + ' ' + noteVersion + '\n' + noteBody + '\n\n\n';
+              }
+            )
+          )
+        };
+      }
+    )
 
     const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
 
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+}
+
+function getModuleName(link){
+  return link.substring(link.lastIndexOf("/vaadin/") + "/vaadin/".length, link.lastIndexOf("/releases"));
+}
+
+function getReleaseNoteVersion(link){
+  return link.substring(link.lastIndexOf("releases/tag/") + "releases/tag/".length)
+}
+
+function getReleaseNoteBody(name, version){
+  link=`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`
+  releaseNoteFull = requestGH(link)
+  return releaseNoteFull.body
 }
 
 /**
@@ -484,6 +515,7 @@ function requestGH(path) {
     const res = request('GET', path, {
         headers: {
             'user-agent': 'vaadin-platform',
+            'Authorization': `token ${token}`,
         },
     });
     if (res.statusCode != 200) {
