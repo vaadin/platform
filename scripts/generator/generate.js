@@ -55,6 +55,9 @@ const releaseNotesMaintenanceResultFileName = getResultsFilePath('release-notes-
 const releaseNotesPrereleaseTemplateFileName = getTemplateFilePath('template-release-notes-prerelease.md');
 const releaseNotesPrereleaseResultFileName = getResultsFilePath('release-notes-prerelease.md');
 
+const modulesReleaseNotesFileName = getTemplateFilePath('template-modules-release-notes.md');
+const modulesReleaseNotesResultFileName = getResultsFilePath('modules-release-notes.md');
+
 const mavenPluginTemplatePomFileName = getTemplateFilePath('template-vaadin-maven-plugin-pom.xml');
 const mavenPluginResultPomFileName = getResultsFilePath('vaadin-maven-plugin-pom.xml');
 
@@ -101,6 +104,9 @@ writer.writeMaven(versions, mavenSpringBomTemplateFileName, mavenSpringBomResult
 writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
+if(!versions.platform.includes('SNAPSHOT')){
+  writer.writeModulesReleaseNotes(versions, versions.platform, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
+}
 
 writer.writeProperty(versions, ["flow","hilla"], mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);
 writer.writeProperty(versions, ["flow","hilla"], gradlePluginTemplatePomFileName, gradlePluginResultPomFileName);
