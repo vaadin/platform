@@ -1,4 +1,4 @@
-name: SBOM
+name: full-release-note
 on:
   release:
     types: ["published"]
