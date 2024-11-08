@@ -2,8 +2,6 @@ const render = require('./replacer.js');
 const request = require('sync-request');
 const compareVersions = require('compare-versions');
 
-const token = process.env['GITHUB_TOKEN'];
-
 /**
 @param {Object} versions data object for product versions.
 @param {String} key name for the generated json object
@@ -199,7 +197,8 @@ function getReleaseNoteVersion(link){
 
 function getReleaseNoteBody(name, version){
   link=`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`
-  releaseNoteFull = requestGH(link)
+  const token = process.env['GITHUB_TOKEN'];
+  releaseNoteFull = requestGHWithToken(link, token)
   return releaseNoteFull.body
 }
 
@@ -511,7 +510,26 @@ function buildComponentReleaseNoteString(versionName, version) {
 }
 
 function requestGH(path) {
-    // TODO: use token to have higher rate limit
+    // when calling github api for multiple times
+    // please use the requestGHWithToken(path, token)
+    const res = request('GET', path, {
+        headers: {
+            'user-agent': 'vaadin-platform'
+        },
+    });
+    if (res.statusCode != 200) {
+        return '';
+    }
+    let retValue = '';
+    try {
+        retValue = JSON.parse(res.getBody('utf8'));
+    } catch (error) {
+        retValue = error;
+    }
+    return retValue
+}
+
+function requestGHWithToken(path, token){
     const res = request('GET', path, {
         headers: {
             'user-agent': 'vaadin-platform',
@@ -529,6 +547,7 @@ function requestGH(path) {
     }
     return retValue
 }
+
 exports.createJson = createJson;
 exports.createNestedJson = createNestedJson;
 exports.createPackageJson = createPackageJson;
