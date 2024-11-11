@@ -84,9 +84,9 @@ function writeReleaseNotes(versions, templateFileName, outputFileName) {
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
 */
-function writeModulesReleaseNotes(versions, templateFileName, outputFileName) {
+function writeModulesReleaseNotes(versions, version, templateFileName, outputFileName) {
     const modulesReleaseNoteTemplate = fs.readFileSync(templateFileName, 'utf8');
-    const modulesReleaseNotes = creator.createModulesReleaseNotes(versions, modulesReleaseNoteTemplate);
+    const modulesReleaseNotes = creator.createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate);
 
     fs.writeFileSync(outputFileName, modulesReleaseNotes);
     console.log(`Wrote ${outputFileName}`);
