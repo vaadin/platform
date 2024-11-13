@@ -157,34 +157,40 @@ function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate
     let modulesReleaseNotes="";
     let docLinks=[];
 
-    platformReleaseNoteBody.split("\n").forEach(
-      line => {
-        if (line.includes("https") && line.includes("docs")){
-          line.split("](").forEach(
-            l => l.split("))").filter(docs=>docs.includes("https")).forEach(
-              doc => docLinks.push(doc)
-            )
-          )
-        };
-        if (line.includes("https") && line.includes("tag") && !line.includes("platform")){
-          line.split("](").forEach(
-            l => l.split("))").filter(notes=>notes.includes("https")).forEach(
-              noteLink => {
-                moduleName = getModuleName(noteLink)
-                noteVersion = getReleaseNoteVersion(noteLink)
-                noteBody = getReleaseNoteBody(moduleName, noteVersion)
+    if(platformReleaseNoteBody) {
 
-                modulesReleaseNotes += moduleName + ' ' + noteVersion + '\n' + noteBody + '\n\n\n';
-              }
-            )
-          )
-        };
-      }
-    )
+        platformReleaseNoteBody.split("\n").forEach(
+          line => {
+            if (line.includes("https") && line.includes("docs")){
+              line.split("](").forEach(
+                l => l.split("))").filter(docs=>docs.includes("https")).forEach(
+                  doc => docLinks.push(doc)
+                )
+              )
+            };
+            if (line.includes("https") && line.includes("tag") && !line.includes("platform")){
+              line.split("](").forEach(
+                l => l.split("))").filter(notes=>notes.includes("https")).forEach(
+                  noteLink => {
+                    moduleName = getModuleName(noteLink)
+                    noteVersion = getReleaseNoteVersion(noteLink)
+                    noteBody = getReleaseNoteBody(moduleName, noteVersion)
 
-    const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
+                    modulesReleaseNotes += moduleName + ' ' + noteVersion + '\n' + noteBody + '\n\n\n';
+                  }
+                )
+              )
+            };
+          }
+        )
 
-    return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+        const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
+
+        return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+    } else {
+        return ""
+    }
+
 }
 
 function getModuleName(link){
