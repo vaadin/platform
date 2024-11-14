@@ -78,6 +78,11 @@
                 <artifactId>vaadin-prod-bundle</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-core-components</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Flow -->
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -168,17 +173,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>copilot</artifactId>
                 <version>${copilot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>ui-tests</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>ui-tests</artifactId>
-                <version>${ui.tests.version}</version>
             </dependency>
             <!-- Free Components -->
             <dependency>

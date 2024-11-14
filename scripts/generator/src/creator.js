@@ -149,27 +149,63 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
 @param {Object} versions data object for product versions.
 @param {String} modulesReleaseNoteTemplate template string to replace versions in.
 */
-function createModulesReleaseNotes(versions, modulesReleaseNoteTemplate) {
-    const allVersions = Object.assign({}, versions.core, versions.vaadin);
-    let componentVersions = '';
-    for (let [versionName, version] of Object.entries(allVersions)) {
+function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate) {
 
-        if (version.component) {
-            const result = buildComponentReleaseNoteString(versionName, version);
-            componentVersions = componentVersions.concat(result);
-        }
+    const platformReleaseNote = requestGH(`https://api.github.com/repos/vaadin/platform/releases/tags/${version}`)
+    const platformReleaseNoteBody = platformReleaseNote.body;
+
+    let modulesReleaseNotes="";
+    let docLinks=[];
+
+    if(platformReleaseNoteBody) {
+
+        platformReleaseNoteBody.split("\n").forEach(
+          line => {
+            if (line.includes("https") && line.includes("docs")){
+              line.split("](").forEach(
+                l => l.split("))").filter(docs=>docs.includes("https")).forEach(
+                  doc => docLinks.push(doc)
+                )
+              )
+            };
+            if (line.includes("https") && line.includes("tag") && !line.includes("platform")){
+              line.split("](").forEach(
+                l => l.split("))").filter(notes=>notes.includes("https")).forEach(
+                  noteLink => {
+                    moduleName = getModuleName(noteLink)
+                    noteVersion = getReleaseNoteVersion(noteLink)
+                    noteBody = getReleaseNoteBody(moduleName, noteVersion)
+
+                    modulesReleaseNotes += moduleName + ' ' + noteVersion + '\n' + noteBody + '\n\n\n';
+                  }
+                )
+              )
+            };
+          }
+        )
+
+        const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
+
+        return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+    } else {
+        return ""
     }
 
-    const changed = getChangedReleaseNotesSincePrevious(versions);
+}
 
-    let modulesReleaseNotes = '';
-    changed.split("\n").forEach((split) => {
-        modulesReleaseNotes += split.substring(0, 1) == '#' || split == '' ? split+'\n\n' : '## '+requestGH(split)['name']+'\n\n'+requestGH(split)['body']+'\n\n';
-    });
+function getModuleName(link){
+  return link.substring(link.lastIndexOf("/vaadin/") + "/vaadin/".length, link.lastIndexOf("/releases"));
+}
 
-    const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
+function getReleaseNoteVersion(link){
+  return link.substring(link.lastIndexOf("releases/tag/") + "releases/tag/".length)
+}
 
-    return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+function getReleaseNoteBody(name, version){
+  link=`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`
+  const token = process.env['GITHUB_TOKEN'];
+  releaseNoteFull = requestGHWithToken(link, token)
+  return releaseNoteFull.body
 }
 
 /**
@@ -480,10 +516,11 @@ function buildComponentReleaseNoteString(versionName, version) {
 }
 
 function requestGH(path) {
-    // TODO: use token to have higher rate limit
+    // when calling github api for multiple times
+    // please use the requestGHWithToken(path, token)
     const res = request('GET', path, {
         headers: {
-            'user-agent': 'vaadin-platform',
+            'user-agent': 'vaadin-platform'
         },
     });
     if (res.statusCode != 200) {
@@ -497,6 +534,26 @@ function requestGH(path) {
     }
     return retValue
 }
+
+function requestGHWithToken(path, token){
+    const res = request('GET', path, {
+        headers: {
+            'user-agent': 'vaadin-platform',
+            'Authorization': `token ${token}`,
+        },
+    });
+    if (res.statusCode != 200) {
+        return '';
+    }
+    let retValue = '';
+    try {
+        retValue = JSON.parse(res.getBody('utf8'));
+    } catch (error) {
+        retValue = error;
+    }
+    return retValue
+}
+
 exports.createJson = createJson;
 exports.createNestedJson = createNestedJson;
 exports.createPackageJson = createPackageJson;
