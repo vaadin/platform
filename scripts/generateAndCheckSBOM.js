@@ -11,6 +11,7 @@ const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 const SBOM_URL = 'https://github.com/vaadin/platform/releases/download/%%VERSION%%/Software.Bill.Of.Materials.json'
 const testProject = path.resolve('vaadin-platform-sbom');
+const coreProject = path.resolve('vaadin-core-sbom');
 const licenseWhiteList = [
   'ISC',
   'MIT',
@@ -89,7 +90,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: true, useOSV: true, useOWASP: true,
+  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : true,
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -102,9 +103,10 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--version': cmd.version = process.argv[++i]; break;
     case '--compare': cmd.org = process.argv[++i]; break;
     case '--quick': cmd.quick = true; break;
+    case '--skip-check-core-licenses' : cmd.checkCoreLicenses = false; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses]`);
       process.exit(1);
   }
 }
@@ -397,6 +399,12 @@ function checkLicenses(licenses) {
   return ret;
 }
 
+function checkCoreLicenses(){
+  let ret="";
+  console.log("Starting license check for Vaadin Core.");
+  return ret;
+}
+
 function checkVunerabilities(vuls) {
   let err = "", msg = "";
   Object.keys(vuls).forEach(v => {
@@ -539,6 +547,16 @@ async function main() {
   log(`cd ${testProject}`);
   process.chdir(testProject);
 
+  let coreLicensesResult=undefined;
+  let coreLicenses=undefined;
+
+  if(cmd.checkCoreLicenses){
+    log(`generating Core SBOM`);
+    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ../vaadin-core-sbom');
+    coreLicenses = sumarizeLicenses('../vaadin-core-sbom/target/bom.json');
+    coreLicensesResult = checkLicenses(coreLicenses);
+  }
+
   if (!cmd.quick) {
     // Ensure package.json and node_modules are empty
     await run('rm -rf package.json node_modules frontend src');
@@ -590,6 +608,8 @@ async function main() {
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
+
+
   const errLic = checkLicenses(licenses);
   const errVul = checkVunerabilities(vulnerabilities).err;
   const msgVul = checkVunerabilities(vulnerabilities).msg;
@@ -617,6 +637,20 @@ async function main() {
     md += `\n### 🔒 No Vulnerabilities\n`;
     html += `\n<h3>🔒 No Vulnerabilities</h3>\n`;
   }
+
+  if (cmd.checkCoreLicenses) {
+    if (coreLicensesResult) {
+      md += `\n### 🚫 Found Core License Issues\n`;
+      html += `\n<h3>>🚫 Found Core License Issues</h3>\n`;
+      md += reportLicenses(coreLicenses).md;
+      html += reportLicenses(coreLicenses).html;
+    } else {
+      errMsg += `- 📔 No Core License Issues\n`;
+      md += `\n### 📔 CoreLicenses\n`;
+      html += `\n<h3>📔 Core Licenses</h3>\n`;
+    }
+  }
+
   if (errLic) {
     md += `\n### 🚫 Found License Issues\n`;
     html += `\n<h3>>🚫 Found License Issues</h3>\n`;
