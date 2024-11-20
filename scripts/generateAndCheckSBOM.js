@@ -50,6 +50,8 @@ const licenseWhiteList = [
   'https://opensource.org/licenses/MIT'
 ];
 
+const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
+
 const cveWhiteList = {
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
     cves: ['CVE-2023-35116'],
@@ -389,19 +391,13 @@ function sumarizeOWASP(f, summary) {
   return summary;
 }
 
-function checkLicenses(licenses) {
+function checkLicenses(licenses, whiteList) {
   let ret = "";
   Object.keys(licenses).forEach(lic => {
-    if (licenseWhiteList.indexOf(lic) < 0) {
+    if (whiteList.indexOf(lic) < 0) {
       ret += `  - Invalid license '${lic}' in: ${licenses[lic].join(' and ')}\n`;
     }
   });
-  return ret;
-}
-
-function checkCoreLicenses(){
-  let ret="";
-  console.log("Starting license check for Vaadin Core.");
   return ret;
 }
 
@@ -552,9 +548,9 @@ async function main() {
 
   if(cmd.checkCoreLicenses){
     log(`generating Core SBOM`);
-    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ../vaadin-core-sbom');
-    coreLicenses = sumarizeLicenses('../vaadin-core-sbom/target/bom.json');
-    coreLicensesResult = checkLicenses(coreLicenses);
+    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ' + coreProject);
+    coreLicenses = sumarizeLicenses(coreProject+'/target/bom.json');
+    coreLicensesResult = checkLicenses(coreLicenses, coreLicensesWhiteList);
   }
 
   if (!cmd.quick) {
@@ -610,7 +606,7 @@ async function main() {
 
 
 
-  const errLic = checkLicenses(licenses);
+  const errLic = checkLicenses(licenses, licenseWhiteList);
   const errVul = checkVunerabilities(vulnerabilities).err;
   const msgVul = checkVunerabilities(vulnerabilities).msg;
   let md = "";
@@ -642,6 +638,7 @@ async function main() {
     if (coreLicensesResult) {
       md += `\n### 🚫 Found Core License Issues\n`;
       html += `\n<h3>>🚫 Found Core License Issues</h3>\n`;
+      errMsg += `- 📔 Found Core License Issues:\n` + coreLicensesResult+`\n`;
       md += reportLicenses(coreLicenses).md;
       html += reportLicenses(coreLicenses).html;
     } else {
