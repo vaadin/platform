@@ -11,6 +11,7 @@ const path = require('path');
 const VAADIN_LICENSE = 'https://vaadin.com/commercial-license-and-service-terms';
 const SBOM_URL = 'https://github.com/vaadin/platform/releases/download/%%VERSION%%/Software.Bill.Of.Materials.json'
 const testProject = path.resolve('vaadin-platform-sbom');
+const coreProject = path.resolve('vaadin-core-sbom');
 const licenseWhiteList = [
   'ISC',
   'MIT',
@@ -48,6 +49,8 @@ const licenseWhiteList = [
   'https://www.bouncycastle.org/licence.html',
   'https://opensource.org/licenses/MIT'
 ];
+
+const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
 
 const cveWhiteList = {
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
@@ -89,7 +92,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: true, useOSV: true, useOWASP: true,
+  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : true,
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -102,9 +105,10 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--version': cmd.version = process.argv[++i]; break;
     case '--compare': cmd.org = process.argv[++i]; break;
     case '--quick': cmd.quick = true; break;
+    case '--skip-check-core-licenses' : cmd.checkCoreLicenses = false; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses]`);
       process.exit(1);
   }
 }
@@ -387,10 +391,10 @@ function sumarizeOWASP(f, summary) {
   return summary;
 }
 
-function checkLicenses(licenses) {
+function checkLicenses(licenses, whiteList) {
   let ret = "";
   Object.keys(licenses).forEach(lic => {
-    if (licenseWhiteList.indexOf(lic) < 0) {
+    if (whiteList.indexOf(lic) < 0) {
       ret += `  - Invalid license '${lic}' in: ${licenses[lic].join(' and ')}\n`;
     }
   });
@@ -539,6 +543,16 @@ async function main() {
   log(`cd ${testProject}`);
   process.chdir(testProject);
 
+  let coreLicensesResult=undefined;
+  let coreLicenses=undefined;
+
+  if(cmd.checkCoreLicenses){
+    log(`generating Core SBOM`);
+    await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ' + coreProject);
+    coreLicenses = sumarizeLicenses(coreProject+'/target/bom.json');
+    coreLicensesResult = checkLicenses(coreLicenses, coreLicensesWhiteList);
+  }
+
   if (!cmd.quick) {
     // Ensure package.json and node_modules are empty
     await run('rm -rf package.json node_modules frontend src');
@@ -590,7 +604,9 @@ async function main() {
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
-  const errLic = checkLicenses(licenses);
+
+
+  const errLic = checkLicenses(licenses, licenseWhiteList);
   const errVul = checkVunerabilities(vulnerabilities).err;
   const msgVul = checkVunerabilities(vulnerabilities).msg;
   let md = "";
@@ -617,6 +633,21 @@ async function main() {
     md += `\n### 🔒 No Vulnerabilities\n`;
     html += `\n<h3>🔒 No Vulnerabilities</h3>\n`;
   }
+
+  if (cmd.checkCoreLicenses) {
+    if (coreLicensesResult) {
+      md += `\n### 🚫 Found Core License Issues\n`;
+      html += `\n<h3>>🚫 Found Core License Issues</h3>\n`;
+      errMsg += `- 📔 Found Core License Issues:\n` + coreLicensesResult+`\n`;
+      md += reportLicenses(coreLicenses).md;
+      html += reportLicenses(coreLicenses).html;
+    } else {
+      errMsg += `- 📔 No Core License Issues\n`;
+      md += `\n### 📔 CoreLicenses\n`;
+      html += `\n<h3>📔 Core Licenses</h3>\n`;
+    }
+  }
+
   if (errLic) {
     md += `\n### 🚫 Found License Issues\n`;
     html += `\n<h3>>🚫 Found License Issues</h3>\n`;
