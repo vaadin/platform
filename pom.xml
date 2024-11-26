@@ -35,6 +35,7 @@
             <id>sbom</id>
             <modules>
                 <module>vaadin-platform-sbom</module>
+                <module>vaadin-core-sbom</module>
             </modules>
         </profile>
         <profile>
