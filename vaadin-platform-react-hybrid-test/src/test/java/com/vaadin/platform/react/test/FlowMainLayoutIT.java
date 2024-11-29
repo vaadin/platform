@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.html.testbench.AnchorElement;
+import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
 public class FlowMainLayoutIT extends AbstractPlatformTest {
 
@@ -16,13 +17,49 @@ public class FlowMainLayoutIT extends AbstractPlatformTest {
         waitUntil(ExpectedConditions.presenceOfElementLocated(
                 By.id("flow-main")));
 
-        // Navigate to Flow view
+        // Navigate to Hilla view
         getMenuElement("Hello React in Flow Layout").get().click();
 
         waitUntil(ExpectedConditions.presenceOfElementLocated(
                 By.id("flow-hilla")));
 
-        // navigate away from Flow view
+        // navigate away from Hilla view
+        getMenuElement("Flow Hello").get().click();
+
+        waitForElement("Should have navigated to HelloWorld Flow",
+                By.id("flow-hello"));
+    }
+
+    @Test
+    public void hillaViewWithFlowOptOut() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-main")));
+
+        // Navigate to Hilla view without Flow layout
+        SideNavItemElement helloReactNoFlowLayout = getMenuElement(
+                "Hello React NO Flow Layout").get();
+        helloReactNoFlowLayout.click();
+
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("no-flow-hilla")));
+
+        Assert.assertTrue("No menu should be available for view",
+                ExpectedConditions.stalenessOf(helloReactNoFlowLayout)
+                        .apply(getDriver()));
+    }
+
+    @Test
+    public void hillaView_deepTree_FlowLayoutExists() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-main")));
+
+        // Navigate to Hilla view
+        getMenuElement("Non root React in Flow").get().click();
+
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-hilla-deep-tree")));
+
+        // navigate away from Hilla view
         getMenuElement("Flow Hello").get().click();
 
         waitForElement("Should have navigated to HelloWorld Flow",

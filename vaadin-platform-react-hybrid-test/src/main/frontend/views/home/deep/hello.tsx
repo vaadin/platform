@@ -5,16 +5,16 @@ import { Notification } from '@vaadin/react-components/Notification.js';
 
 export const config: ViewConfig = {
     menu: {
-        title: "Hello React in Flow Layout",
+        title: "Non root React in Flow",
     },
-    title: "Hilla in Flow"
+    title: "React in Flow Layout Deep Tree"
 };
 
 export default function HelloHilla() {
     const [name, setName] = useState("");
 
     return (
-        <VerticalLayout theme="padding" id={"flow-hilla"}>
+        <VerticalLayout theme="padding" id={"flow-hilla-deep-tree"}>
             <TextField label="Your name for Hilla" onValueChanged={(e) => setName(e.detail.value)} />
             <Button onClick = {() => Notification.show(`Hello ${name}` , {
                 position: 'middle',
