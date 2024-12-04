@@ -54,6 +54,10 @@ public class FlowLayout extends AppLayout {
                 nav.addItem(
                         new SideNavItem(menuEntry.title(), menuEntry.path()));
             }
+            if(menuEntry.path().startsWith("home") || menuEntry.path().startsWith("/home")) {
+                nav.addItem(
+                        new SideNavItem(menuEntry.title(), menuEntry.path()));
+            }
         });
 
         return nav;
