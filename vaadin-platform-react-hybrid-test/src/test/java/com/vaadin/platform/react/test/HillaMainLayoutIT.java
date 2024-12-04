@@ -24,7 +24,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         // navigate away from Flow view
         getMenuElement("React Components").get().click();
 
-        Assert.assertTrue("React components view should be shown",
+        waitUntil(driver ->
                 $(ButtonElement.class).id("open-overlay").isDisplayed());
     }
 
