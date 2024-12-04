@@ -67,6 +67,24 @@ public class FlowMainLayoutIT extends AbstractPlatformTest {
     }
 
     @Test
+    public void hillaView_deepTree_NotMatchOnAllPathParts() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-main")));
+
+        // Navigate to Hilla view
+        SideNavItemElement deepNoMatch = getMenuElement(
+                "React in Flow Layout Deep Tree not a match").get();
+        deepNoMatch.click();
+
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-hilla-deep-tree-not-match")));
+
+        Assert.assertTrue("No menu should be available for view",
+                ExpectedConditions.stalenessOf(deepNoMatch)
+                        .apply(getDriver()));
+    }
+
+    @Test
     public void navigateWithRouterLink() {
         waitForElement("Expected flow main view on load",
                 By.id("flow-main"));
