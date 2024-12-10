@@ -1,6 +1,6 @@
 import { LoginOverlay } from '@vaadin/react-components';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAuth } from 'Frontend/auth';
 import { ViewConfig } from "@vaadin/hilla-file-router/types.js";
 
