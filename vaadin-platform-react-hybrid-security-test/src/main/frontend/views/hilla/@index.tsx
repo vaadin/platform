@@ -1,5 +1,5 @@
 import type {ViewConfig} from "@vaadin/hilla-file-router/types.js";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 export const config: ViewConfig = {
     menu: {

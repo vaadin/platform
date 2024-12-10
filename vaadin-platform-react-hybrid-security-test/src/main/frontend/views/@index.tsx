@@ -1,6 +1,6 @@
 import {Button, VerticalLayout} from "@vaadin/react-components";
 import type { ViewConfig } from "@vaadin/hilla-file-router/types.js";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 export const config: ViewConfig = {
     menu: {

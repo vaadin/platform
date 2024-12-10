@@ -122,7 +122,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.6.0.beta7"
+            "javaVersion": "24.7.0.alpha1"
         },
         "flow-cdi": {
             "javaVersion": "15.1.0"
@@ -143,7 +143,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.6.0.beta5"
+           "javaVersion": "24.7.0.alpha2"
         },
         "horizontal-layout": {
             "jsVersion": "24.6.0-rc1",
@@ -391,7 +391,7 @@
             "javaVersion": "1.1.0.beta2"
         },
         "copilot": {
-            "javaVersion": "24.6.0.beta3"
+            "javaVersion": "24.7-SNAPSHOT"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.3.0"
