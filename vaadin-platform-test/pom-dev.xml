@@ -148,7 +148,7 @@
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>start</goal>
+                                    <goal>start-war</goal>
                                 </goals>
                             </execution>
                             <execution>
