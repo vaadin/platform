@@ -16,16 +16,17 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         Assert.assertNotNull(findElement(By.id("hilla")));
 
         // Navigate to Flow view
+        Assert.assertTrue(getMenuElement("Flow in hilla").isPresent());
         getMenuElement("Flow in hilla").get().click();
 
         waitUntil(ExpectedConditions.presenceOfElementLocated(
                 By.id("flow-hilla")));
 
         // navigate away from Flow view
+        Assert.assertTrue(getMenuElement("React Components").isPresent());
         getMenuElement("React Components").get().click();
 
-        Assert.assertTrue("React components view should be shown",
-                $(ButtonElement.class).id("open-overlay").isDisplayed());
+        waitUntil(driver -> $(ButtonElement.class).id("open-overlay").isDisplayed(), 10);
     }
 
     @Test
