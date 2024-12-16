@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "24.6.0-rc1",
+            "jsVersion": "24.6.0",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -469,7 +469,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "24.6.0-rc1",
+            "jsVersion": "24.6.0",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
@@ -484,7 +484,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "24.6.0-rc1",
+            "jsVersion": "24.6.0",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
