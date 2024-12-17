@@ -1,15 +1,16 @@
 package com.vaadin.platform.react.test;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.html.testbench.AnchorElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
+@Ignore("This test is disable until https://github.com/vaadin/hilla/issues/3002 got fixed")
 public class FlowMainLayoutIT extends AbstractPlatformTest {
 
     @Test
