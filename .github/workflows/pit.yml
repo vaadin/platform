@@ -77,8 +77,8 @@ jobs:
           for i in `echo $S`; do
             J='{"app":"'$i'"'
             [ -n "$V" ] && J=$J',"version":"'$V'"'
-            [ true = "$W" ] && M=$M$J',"os":"windows"},'
-            [ true = "$L" ] && M=$M$J',"os":"ubuntu"},'
+            [ true = "$W" ] && M=$M$J',"os":"windows-latest"},'
+            [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
           echo "$M"
@@ -88,7 +88,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
-    runs-on: ${{matrix.os}}-latest
+    runs-on: ${{matrix.os}}
     steps:
       - run: |
           # TEST PARAMETERS
