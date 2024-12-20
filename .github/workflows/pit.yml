@@ -64,15 +64,20 @@ jobs:
           # COMPUTE MATRIX
           echo "Computing matrix ..."
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${{secrets.CE_LICENSE}}" ] && exit 1
+          echo "${{inputs.version}}" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
+
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           V="${{inputs.version}}"
           W="${{inputs.windows}}"
           L="${{inputs.linux}}"
+          [ true != "$W" -a true != "$L" ] && W=true
           [ true != "$L" -a true != "$W" ] && L=true
           A="$A --starters=${{inputs.starters}}"
           [ true = "${{inputs.generated}}" ] && A="$A --generated"
           [ true = "${{inputs.demos}}" ] && A="$A --demos"
-          S=`./pit/scripts/pit/run.sh $A --list=${{inputs.join}}`
+          cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
+          echo "Generating list of starters: $cmd"
+          S=`eval $cmd`
           M='{"include":['
           for i in `echo $S`; do
             J='{"app":"'$i'"'
@@ -81,7 +86,7 @@ jobs:
             [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
-          echo "$M"
+          echo "Generated Matrix: $M"
           echo "matrix=$M" >> $GITHUB_OUTPUT
   run:
     needs: prepare
