@@ -156,9 +156,12 @@ jobs:
           echo "Keeping docker container running, push Ctrl-C to terminate ..."
           read key
       - if: ${{failure()}}
+        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | tr ',' _` >> $GITHUB_ENV
+        shell: bash
+      - if: ${{failure()}}
         uses: actions/upload-artifact@v4
         with:
-          name: failed-outputs-${{matrix.app}}
+          name: ${{ env.artifact_name }}
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
