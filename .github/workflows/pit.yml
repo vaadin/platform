@@ -13,6 +13,9 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12'
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -35,13 +38,13 @@ jobs:
           perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
           # Prepare frontend
           mvn vaadin:prepare-frontend -ntp -B || true
-          ls -l ~/.vaadin/node/
+          ls -l ~/.vaadin/node/ || true
           where node.exe || true
           where node || true
-          ~/.vaadin/node/node -v
-          ~/.vaadin/node/node.exe -v
-          ~/.vaadin/node/node --version
-          ~/.vaadin/node/node.exe --version
+          ~/.vaadin/node/node -v || true
+          ~/.vaadin/node/node.exe -v || true
+          ~/.vaadin/node/node --version || true
+          ~/.vaadin/node/node.exe --version || true
           # Build
           mvn -ntp -B || true
         shell: bash
