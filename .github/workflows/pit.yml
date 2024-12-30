@@ -67,7 +67,7 @@ jobs:
               public void run(String... args) throws Exception {
                   System.out.println("================================= Running NODE TESTS");
                   runCommand(List.of("where", "node.exe"));
-                  runCommand(List.of("C:\\Users\\runneradmin\\.vaadin\\node\\node.exe", "-v"));
+                  runCommand(List.of("C:/Users/runneradmin/.vaadin/node/node.exe", "-v"));
               }
           
               private void runCommand(List<String> command) {
