@@ -51,9 +51,12 @@ jobs:
           import java.util.Map;
           import java.util.concurrent.CompletableFuture;
           import java.util.concurrent.ExecutionException;
+          import java.util.concurrent.ExecutorService;
+          import java.util.concurrent.Executors;
           import java.util.concurrent.TimeUnit;
           import java.util.concurrent.TimeoutException;
           
+          import org.slf4j.Logger;
           import org.slf4j.LoggerFactory;
           import org.springframework.boot.CommandLineRunner;
           import org.springframework.core.Ordered;
@@ -66,6 +69,8 @@ jobs:
           @SpringComponent
           @Order(Ordered.HIGHEST_PRECEDENCE)
           public class TestNode implements CommandLineRunner {
+          
+              private final ExecutorService executor = Executors.newFixedThreadPool(4);
           
               @Override
               public void run(String... args) throws Exception {
@@ -154,18 +159,18 @@ jobs:
                   return processBuilder;
               }
           
-              public static CompletableFuture<Pair<String, String>> consumeProcessStreams(
+              public CompletableFuture<Pair<String, String>> consumeProcessStreams(
                       Process process) {
           
                   InputStream inputStream = process.getInputStream();
                   System.out.println("============ IS: " + inputStream);
                   CompletableFuture<String> stdOut = CompletableFuture
-                          .supplyAsync(() -> streamToString(inputStream, "IN"));
+                          .supplyAsync(() -> streamToString(inputStream, "IN"), executor);
           
                   InputStream errorStream = process.getErrorStream();
                   System.out.println("============ ES: " + errorStream);
                   CompletableFuture<String> stdErr = CompletableFuture
-                          .supplyAsync(() -> streamToString(errorStream, "ERR"));
+                          .supplyAsync(() -> streamToString(errorStream, "ERR"), executor);
                   return CompletableFuture.allOf(stdOut, stdErr).thenApply(
                           unused -> new Pair<>(stdOut.getNow(""), stdErr.getNow("")));
               }
