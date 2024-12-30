@@ -37,7 +37,7 @@ jobs:
           # Change version
           perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
           # Prepare frontend
-          mvn vaadin:prepare-frontend -ntp -B || true
+          mvn vaadin:prepare-frontend -ntp -B -X || true
           ls -l ~/.vaadin/node/ || true
           where node.exe || true
           where node || true
@@ -46,5 +46,5 @@ jobs:
           ~/.vaadin/node/node --version || true
           ~/.vaadin/node/node.exe --version || true
           # Build
-          mvn -ntp -B || true
+          mvn -ntp -B -X || true
         shell: bash
