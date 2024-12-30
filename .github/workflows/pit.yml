@@ -1,121 +1,15 @@
-name: PiT
-run-name: PiT ${{ inputs.version }} (lin=${{inputs.linux}} win=${{inputs.windows}} skip=${{inputs.skipcurrent}}) ${{inputs.starters}}
+name: Test
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version'
-        required: false
-        type: string
-      starters:
-        description: 'Starters to run, separated by comma'
-        required: false
-        type: string
-      skipcurrent:
-        description: 'Skip running tests in current version'
-        required: false
-        type: boolean
-        default: false
-      skipdev:
-        description: 'Skip running tests in dev mode'
-        required: false
-        type: boolean
-        default: false
-      debug:
-        description: 'Be verbose when running PiT steps'
-        required: false
-        type: boolean
-        default: false
-      linux:
-        description: 'Run build in linux runner'
-        required: false
-        type: boolean
-        default: true
-      windows:
-        description: 'Run build in windows runner'
-        required: false
-        type: boolean
-        default: false
-      generated:
-        description: 'Generate and run all supported start presets and archetypes'
-        required: false
-        type: boolean
-        default: false
-      demos:
-        description: 'Checkout and run all demos'
-        required: false
-        type: boolean
-        default: false
-      join:
-        description: 'Number of apps to run per container (default 1)'
-        required: false
-        type: choice
-        options: ["1", "2", "3", "4"]
-        default: "1"
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set.outputs.matrix }}
-    steps:
-      - id: set
-        shell: bash
-        run: |
-          # COMPUTE MATRIX
-          echo "Computing matrix ..."
-          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${{secrets.CE_LICENSE}}" ] && exit 1
-          V="${{inputs.version}}"
-          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
-
-          git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          W="${{inputs.windows}}"
-          L="${{inputs.linux}}"
-          [ true != "$W" -a true != "$L" ] && W=true
-          [ true != "$L" -a true != "$W" ] && L=true
-          A="$A --starters=${{inputs.starters}}"
-          [ true = "${{inputs.generated}}" ] && A="$A --generated"
-          [ true = "${{inputs.demos}}" ] && A="$A --demos"
-          cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
-          echo "Generating list of starters: $cmd"
-          S=`eval $cmd`
-          M='{"include":['
-          for i in `echo $S`; do
-            J='{"app":"'$i'"'
-            [ -n "$V" ] && J=$J',"version":"'$V'"'
-            [ true = "$W" ] && M=$M$J',"os":"windows-latest"},'
-            [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
-          done
-          M=`echo $M | sed -e s/,$//`']}'
-          echo "Generated Matrix: $M"
-          echo "matrix=$M" >> $GITHUB_OUTPUT
   run:
-    needs: prepare
-    strategy:
-      fail-fast: false
-      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
-    runs-on: ${{matrix.os}}
+    runs-on: windows-latest
     steps:
-      - run: |
-          # TEST PARAMETERS
-          [ -z "${{matrix.app}}" ] && exit 1
-          echo "RUNNING TEST FOR ${{matrix.app}} APP"
-        shell: bash
-      - run: |
-          # INSTALL PIT
-          git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          cd pit && git rev-parse --short HEAD
-        shell: bash
       - run: |
           # INSTALL LICENSE
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-          echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
         shell: bash
-      - if: ${{ env.ACT }}
-        run: |
-          # LINUX LIBS (ACT)
-          # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
       - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
@@ -130,38 +24,22 @@ jobs:
         with:
           maven-version: '3.9.0'
       - run: |
-          # PIT TESTS ${{matrix.app}} ${{inputs.version}}
-          echo "${{toJSON(inputs)}}"
-          [ -n "${{inputs.version}}" ] && ARG="--version=${{inputs.version}}"
-          [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
-          [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
-          [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
-          ./pit/scripts/pit/run.sh --path
-          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}"
-          # Output the PiT command to execute, so as we can run the same locally
-          echo "$CMD"
-          # Run PiT in test mode, so as we can copy and paste commands when reporting
-          $CMD --test
-          # Run PiT
-          $CMD
-        env:
-            GHTK: ${{secrets.GHTK}}
-            CE_LICENSE: ${{secrets.CE_LICENSE}}
-            OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
-            MAVEN_ARGS: ${{env.MAVEN_ARGS}}
+          # Show commands
+          set -x
+          # Clean stuff
+          rm -rf ~/.m2/repository/
+          rm -rf ~/.vaadin/node/
+          # Clone repo
+          git clone https://github.com/vaadin/designer-tutorial.git
+          cd designer-tutorial
+          # Change version
+          perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
+          # Run build
+          mvn -ntp -B || true
+          ls -l ~/.vaadin/node/
+          for i in 1 2 3 4 5 6 7 8 9 0; do
+            echo "Waiting $i  1 second"
+            sleep 1
+            ~/.vaadin/node/node -v
+          done
         shell: bash
-      - if: ${{ env.ACT }}
-        run: |
-          # WAIT (ACT)
-          echo "Keeping docker container running, push Ctrl-C to terminate ..."
-          read key
-      - if: ${{failure()}}
-        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | tr ',' _` >> $GITHUB_ENV
-        shell: bash
-      - if: ${{failure()}}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.artifact_name }}
-          path: tmp/**/*.out
-          if-no-files-found: ignore
-          retention-days: 7
