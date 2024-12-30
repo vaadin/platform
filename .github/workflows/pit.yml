@@ -36,6 +36,9 @@ jobs:
           cd designer-tutorial
           # Change version
           perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
+          # Set debug level
+          echo "logging.level.com.vaadin.exampledata.NodeUtil=debug" >> src/main/resources/application.properties
+          echo "logging.level.com.vaadin.flow.server.frontend=debug" >> src/main/resources/application.properties
           # Prepare frontend
           mvn vaadin:prepare-frontend -ntp -B -X || true
           ls -l ~/.vaadin/node/ || true
