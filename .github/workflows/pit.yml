@@ -179,10 +179,6 @@ jobs:
                   String ret = "";
                   System.out.println("============ START READING STREAM " + id);
                   try (InputStream handledStream = inputStream) {
-                      if (inputStream instanceof BufferedInputStream buffered) {
-                          System.out.println("================== RESETTING BUFFERED STREAM " + id);
-                          buffered.reset();
-                      }
                       //return IOUtils.toString(handledStream, StandardCharsets.UTF_8)
                       return new String(handledStream.readAllBytes(), StandardCharsets.UTF_8)
                               .replaceAll("\\\\R", System.lineSeparator());
