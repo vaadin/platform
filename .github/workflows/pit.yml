@@ -46,7 +46,6 @@ jobs:
           import java.io.IOException;
           import java.util.List;
           import java.util.Map;
-          import java.util.Optional;
           import java.util.concurrent.CompletableFuture;
           import java.util.concurrent.ExecutionException;
           import java.util.concurrent.TimeUnit;
@@ -57,7 +56,6 @@ jobs:
           import org.springframework.core.annotation.Order;
           
           import com.vaadin.flow.internal.Pair;
-          import com.vaadin.flow.server.frontend.FrontendToolsLocator;
           import com.vaadin.flow.server.frontend.FrontendUtils;
           import com.vaadin.flow.spring.annotation.SpringComponent;
           
@@ -67,40 +65,46 @@ jobs:
           
               @Override
               public void run(String... args) throws Exception {
-                  System.out.println("================================= Running TESTS NODE");
-                  Optional<File> node = new FrontendToolsLocator()
-                          .tryLocateTool("node");
-                  if (node.isPresent()) {
-                      List<String> versionCommand = List.of(node.get().getAbsolutePath(),
-                              "--version");
-                      try {
-                          Process process = createProcessBuilder(versionCommand).start();
-                          CompletableFuture<Pair<String, String>> streamConsumer = FrontendUtils
-                                  .consumeProcessStreams(process);
-                          int exitCode = process.waitFor();
-                          if (exitCode != 0) {
-                              throw new IOException(
-                                      "Process exited with non 0 exit code. (" + exitCode
-                                              + ")");
-                          }
-                          String version;
-                          try {
-                              version = streamConsumer.get(1, TimeUnit.SECONDS)
-                                      .getFirst();
-                          } catch (ExecutionException | TimeoutException e) {
-                              System.out.println("Cannot read node version");
-                              e.printStackTrace();
-                              version = "";
-                          }
-                          System.out.println(
-                                  "============== VERSION COMMAND OUTPUT: >>>>[ " + version + " ]<<<<");
-                      } catch (InterruptedException | IOException e) {
-                          throw new RuntimeException(String.format(
-                                  "Unable to detect version of node using command "
-                                          + String.join(" ", versionCommand)),
-                                  e);
+                  System.out.println("================================= Running NODE TESTS");
+                  runCommand(List.of("where", "node.exe"));
+                  runCommand(List.of("C:\\Users\\runneradmin\\.vaadin\\node\\node.exe", "-v"));
+              }
+          
+              private void runCommand(List<String> command) {
+                  System.out.println("Try to execute " + String.join(" ", command));
+                  try {
+                      Process process = createProcessBuilder(command).start();
+                      CompletableFuture<Pair<String, String>> streamConsumer = FrontendUtils
+                              .consumeProcessStreams(process);
+                      int exitCode = process.waitFor();
+                      if (exitCode != 0) {
+                          throw new IOException(
+                                  "Process exited with non 0 exit code. (" + exitCode
+                                          + ")");
                       }
+                      String out;
+                      String err;
+                      try {
+                          Pair<String, String> pair = streamConsumer.get(10, TimeUnit.SECONDS);
+                          out = pair.getFirst();
+                          err = pair.getSecond();
+                      } catch (ExecutionException | TimeoutException e) {
+                          System.out.println("Cannot get command output");
+                          e.printStackTrace();
+                          out = "";
+                          err = "";
+                      }
+                      System.out.println(
+                              "============== COMMAND OUT: >>>>[ " + out + " ]<<<<");
+                      System.out.println(
+                              "============== COMMAND ERR: >>>>[ " + err + " ]<<<<");
+                  } catch (InterruptedException | IOException e) {
+                      System.out.println(
+                              "Unable to detect version of node using command "
+                                      + String.join(" ", command));
+                      e.printStackTrace();
                   }
+                  //}
               }
           
               public static ProcessBuilder createProcessBuilder(List<String> command) {
@@ -146,6 +150,7 @@ jobs:
           
                   return processBuilder;
               }
+          
           }
           EOF
           # Prepare frontend
