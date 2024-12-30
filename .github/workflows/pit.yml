@@ -36,17 +36,13 @@ jobs:
           cd designer-tutorial
           # Change version
           perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
-          # Run build
-          mvn -ntp -B || true
+          # Prepare frontend
+          mvn vaadin:prepare-frontend -ntp -B || true
           ls -l ~/.vaadin/node/
-          for i in 1 2 3 4 5 6 7 8 9 0; do
-            echo "Waiting $i  1 second"
-            sleep 1
-            echo stderr:
-            ~/.vaadin/node/node -v > /dev/null 
-            echo stdout:
-            ~/.vaadin/node/node -v 2> /dev/null 
-          done
           where node.exe || true
           where node || true
+          ~/.vaadin/node/node -v
+          ~/.vaadin/node/node.exe -v
+          # Build
+          mvn -ntp -B || true
         shell: bash
