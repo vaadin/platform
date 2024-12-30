@@ -187,7 +187,7 @@ jobs:
           }
           EOF
           # Prepare frontend
-          mvn vaadin:prepare-frontend -ntp -B -X || true
+          mvn vaadin:prepare-frontend -ntp -B || true
           ls -l ~/.vaadin/node/ || true
           where node.exe || true
           where node || true
@@ -196,5 +196,5 @@ jobs:
           ~/.vaadin/node/node --version || true
           ~/.vaadin/node/node.exe --version || true
           # Build
-          mvn -ntp -B -X || true
+          mvn -ntp -B || true
         shell: bash
