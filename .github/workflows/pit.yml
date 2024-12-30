@@ -70,7 +70,7 @@ jobs:
               public void run(String... args) throws Exception {
                   System.out.println("================================= Running NODE TESTS");
                   runCommand(List.of("where", "node.exe"));
-                  runCommand(List.of("C:\\Users\\runneradmin\\.vaadin\\node\\node.exe", "-v"));
+                  runCommand(List.of("C:\\\\Users\\\\runneradmin\\\\.vaadin\\\\node\\\\node.exe", "-v"));
               }
           
               private void runCommand(List<String> command) {
@@ -175,7 +175,7 @@ jobs:
                   try (InputStream handledStream = inputStream) {
                       //return IOUtils.toString(handledStream, StandardCharsets.UTF_8)
                       return new String(handledStream.readAllBytes(), StandardCharsets.UTF_8)
-                              .replaceAll("\\R", System.lineSeparator());
+                              .replaceAll("\\\\R", System.lineSeparator());
                   } catch (IOException exception) {
                       // ignore exception on close()
                       LoggerFactory.getLogger(TestNode.class).warn("Couldn't close template input stream", exception);
