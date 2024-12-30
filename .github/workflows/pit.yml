@@ -53,6 +53,7 @@ jobs:
           import java.util.concurrent.ExecutionException;
           import java.util.concurrent.ExecutorService;
           import java.util.concurrent.Executors;
+          import java.util.concurrent.ForkJoinPool;
           import java.util.concurrent.TimeUnit;
           import java.util.concurrent.TimeoutException;
           
@@ -126,11 +127,6 @@ jobs:
                   if (commandFile.isAbsolute()) {
                       String commandPath = commandFile.getParent();
                       Map<String, String> environment = processBuilder.environment();
-                      System.out.println(
-                              "=================== ENVIRONMENT ===============");
-                      environment.forEach((k, v) -> System.out.println(k + "=" + v));
-                      System.out.println("==================================");
-          
                       String pathEnvVar;
                       if (FrontendUtils.isWindows()) {
                           /*
@@ -161,35 +157,44 @@ jobs:
           
               public CompletableFuture<Pair<String, String>> consumeProcessStreams(
                       Process process) {
+                  getLogger().debug("================= consumeProcessStreams {}",
+                  ForkJoinPool.commonPool().toString());
           
                   InputStream inputStream = process.getInputStream();
-                  System.out.println("============ IS: " + inputStream);
+                  getLogger().debug("============ IS: " + inputStream);
                   CompletableFuture<String> stdOut = CompletableFuture
-                          .supplyAsync(() -> streamToString(inputStream, "IN"), executor);
+                          .supplyAsync(() -> streamToString(inputStream, "IN"));
           
                   InputStream errorStream = process.getErrorStream();
-                  System.out.println("============ ES: " + errorStream);
+                  getLogger().debug("============ ES: " + errorStream);
                   CompletableFuture<String> stdErr = CompletableFuture
-                          .supplyAsync(() -> streamToString(errorStream, "ERR"), executor);
+                          .supplyAsync(() -> streamToString(errorStream, "ERR"));
                   return CompletableFuture.allOf(stdOut, stdErr).thenApply(
                           unused -> new Pair<>(stdOut.getNow(""), stdErr.getNow("")));
               }
           
               public static String streamToString(InputStream inputStream, String id) {
                   String ret = "";
-                  System.out.println("============ START READING STREAM " + id);
+                  getLogger().debug("============ START READING STREAM " + id);
                   try (InputStream handledStream = inputStream) {
+                      if (inputStream instanceof BufferedInputStream buffered) {
+                          System.out.println("================== RESETTING BUFFERED STREAM " + id);
+                          buffered.reset();
+                      }
                       //return IOUtils.toString(handledStream, StandardCharsets.UTF_8)
                       return new String(handledStream.readAllBytes(), StandardCharsets.UTF_8)
                               .replaceAll("\\\\R", System.lineSeparator());
                   } catch (IOException exception) {
                       // ignore exception on close()
-                      LoggerFactory.getLogger(TestNode.class).warn("Couldn't close template input stream", exception);
+                      getLogger().warn("Couldn't close template input stream", exception);
                   }
-                  System.out.println("============ DONE READING STREAM " + id + " ====> " + ret);
+                  getLogger().debug("============ DONE READING STREAM " + id + " ====> " + ret);
                   return ret;
               }
           
+              private static Logger getLogger() {
+                  return LoggerFactory.getLogger(TestNode.class);
+              }
           }
           EOF
           # Prepare frontend
