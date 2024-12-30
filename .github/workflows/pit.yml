@@ -147,7 +147,7 @@ jobs:
                   return processBuilder;
               }
           }
-          EOF          
+          EOF
           # Prepare frontend
           mvn vaadin:prepare-frontend -ntp -B -X || true
           ls -l ~/.vaadin/node/ || true
