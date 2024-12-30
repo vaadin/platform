@@ -39,6 +39,115 @@ jobs:
           # Set debug level
           echo "logging.level.com.vaadin.exampledata.NodeUtil=debug" >> src/main/resources/application.properties
           echo "logging.level.com.vaadin.flow.server.frontend=debug" >> src/main/resources/application.properties
+          cat << EOF > src/main/java/com/example/application/data/TestNode.java
+          package com.example.application.data;
+          
+          import java.io.File;
+          import java.io.IOException;
+          import java.util.List;
+          import java.util.Map;
+          import java.util.Optional;
+          import java.util.concurrent.CompletableFuture;
+          import java.util.concurrent.ExecutionException;
+          import java.util.concurrent.TimeUnit;
+          import java.util.concurrent.TimeoutException;
+          
+          import org.springframework.boot.CommandLineRunner;
+          import org.springframework.core.Ordered;
+          import org.springframework.core.annotation.Order;
+          
+          import com.vaadin.flow.internal.Pair;
+          import com.vaadin.flow.server.frontend.FrontendToolsLocator;
+          import com.vaadin.flow.server.frontend.FrontendUtils;
+          import com.vaadin.flow.spring.annotation.SpringComponent;
+          
+          @SpringComponent
+          @Order(Ordered.HIGHEST_PRECEDENCE)
+          public class TestNode implements CommandLineRunner {
+          
+              @Override
+              public void run(String... args) throws Exception {
+                  System.out.println("================================= Running TESTS NODE");
+                  Optional<File> node = new FrontendToolsLocator()
+                          .tryLocateTool("node");
+                  if (node.isPresent()) {
+                      List<String> versionCommand = List.of(node.get().getAbsolutePath(),
+                              "--version");
+                      try {
+                          Process process = createProcessBuilder(versionCommand).start();
+                          CompletableFuture<Pair<String, String>> streamConsumer = FrontendUtils
+                                  .consumeProcessStreams(process);
+                          int exitCode = process.waitFor();
+                          if (exitCode != 0) {
+                              throw new IOException(
+                                      "Process exited with non 0 exit code. (" + exitCode
+                                              + ")");
+                          }
+                          String version;
+                          try {
+                              version = streamConsumer.get(1, TimeUnit.SECONDS)
+                                      .getFirst();
+                          } catch (ExecutionException | TimeoutException e) {
+                              System.out.println("Cannot read node version");
+                              e.printStackTrace();
+                              version = "";
+                          }
+                          System.out.println(
+                                  "============== VERSION COMMAND OUTPUT: >>>>[ " + version + " ]<<<<");
+                      } catch (InterruptedException | IOException e) {
+                          throw new RuntimeException(String.format(
+                                  "Unable to detect version of node using command "
+                                          + String.join(" ", versionCommand)),
+                                  e);
+                      }
+                  }
+              }
+          
+              public static ProcessBuilder createProcessBuilder(List<String> command) {
+                  ProcessBuilder processBuilder = new ProcessBuilder(command);
+          
+                  /*
+                   * Ensure the location of the command to run is in PATH. This is in some
+                   * cases needed by npm to locate a node binary.
+                   */
+                  File commandFile = new File(command.get(0));
+                  if (commandFile.isAbsolute()) {
+                      String commandPath = commandFile.getParent();
+                      Map<String, String> environment = processBuilder.environment();
+                      System.out.println(
+                              "=================== ENVIRONMENT ===============");
+                      environment.forEach((k, v) -> System.out.println(k + "=" + v));
+                      System.out.println("==================================");
+          
+                      String pathEnvVar;
+                      if (FrontendUtils.isWindows()) {
+                          /*
+                           * Determine the name of the PATH environment variable on
+                           * Windows, as variables names are not case-sensitive (the
+                           * common name is "Path").
+                           */
+                          pathEnvVar = environment.keySet().stream()
+                                  .filter("PATH"::equalsIgnoreCase).findFirst()
+                                  .orElse("Path");
+                      } else {
+                          pathEnvVar = "PATH";
+                      }
+          
+                      String path = environment.get(pathEnvVar);
+                      if (path == null || path.isEmpty()) {
+                          path = commandPath;
+                      } else {
+                          // Ensure that a custom node is first in the path so it is used
+                          // e.g. for postinstall scripts that run "node something"
+                          path = commandPath + File.pathSeparatorChar + path;
+                      }
+                      environment.put(pathEnvVar, path);
+                  }
+          
+                  return processBuilder;
+              }
+          }
+          EOF          
           # Prepare frontend
           mvn vaadin:prepare-frontend -ntp -B -X || true
           ls -l ~/.vaadin/node/ || true
