@@ -158,7 +158,7 @@ jobs:
           
               public CompletableFuture<Pair<String, String>> consumeProcessStreams(
                       Process process) {
-                  getLogger().debug("================= consumeProcessStreams {}",
+                  getLogger().debug("================= consumeProcessStreams PRE {}",
                   ForkJoinPool.commonPool().toString());
           
                   InputStream inputStream = process.getInputStream();
@@ -168,6 +168,10 @@ jobs:
           
                   InputStream errorStream = process.getErrorStream();
                   getLogger().debug("============ ES: " + errorStream);
+
+                  getLogger().debug("================= consumeProcessStreams POST {}",
+                  ForkJoinPool.commonPool().toString());
+
                   CompletableFuture<String> stdErr = CompletableFuture
                           .supplyAsync(() -> streamToString(errorStream, "ERR"));
                   return CompletableFuture.allOf(stdOut, stdErr).thenApply(
