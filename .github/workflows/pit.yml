@@ -169,11 +169,11 @@ jobs:
                   InputStream errorStream = process.getErrorStream();
                   getLogger().debug("============ ES: " + errorStream);
 
-                  getLogger().debug("================= consumeProcessStreams POST {}",
-                  ForkJoinPool.commonPool().toString());
-
                   CompletableFuture<String> stdErr = CompletableFuture
                           .supplyAsync(() -> streamToString(errorStream, "ERR"));
+            
+                  getLogger().debug("================= consumeProcessStreams POST {}",
+                  ForkJoinPool.commonPool().toString());
                   return CompletableFuture.allOf(stdOut, stdErr).thenApply(
                           unused -> new Pair<>(stdOut.getNow(""), stdErr.getNow("")));
               }
@@ -182,10 +182,6 @@ jobs:
                   String ret = "";
                   getLogger().debug("============ START READING STREAM " + id);
                   try (InputStream handledStream = inputStream) {
-                      if (inputStream instanceof BufferedInputStream buffered) {
-                          System.out.println("================== RESETTING BUFFERED STREAM " + id);
-                          buffered.reset();
-                      }
                       //return IOUtils.toString(handledStream, StandardCharsets.UTF_8)
                       return new String(handledStream.readAllBytes(), StandardCharsets.UTF_8)
                               .replaceAll("\\\\R", System.lineSeparator());
