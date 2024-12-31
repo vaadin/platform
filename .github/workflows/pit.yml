@@ -37,9 +37,9 @@ jobs:
           # Change version
           # perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
           # Set debug level
-          echo "logging.level.com.vaadin.exampledata.NodeUtil=debug" >> src/main/resources/application.properties
-          echo "logging.level.com.example.application.data.TestNode=debug" >> src/main/resources/application.properties
-          echo "logging.level.com.vaadin.flow.server.frontend=debug" >> src/main/resources/application.properties
+          # echo "logging.level.com.vaadin.exampledata.NodeUtil=debug" >> src/main/resources/application.properties
+          # echo "logging.level.com.example.application.data.TestNode=debug" >> src/main/resources/application.properties
+          # echo "logging.level.com.vaadin.flow.server.frontend=debug" >> src/main/resources/application.properties
           cat << EOF > src/main/java/com/example/application/data/TestNode.java
           package com.example.application.data;
           
