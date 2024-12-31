@@ -35,7 +35,7 @@ jobs:
           git clone https://github.com/vaadin/designer-tutorial.git
           cd designer-tutorial
           # Change version
-          perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
+          # perl -pi -e 's|(\s*<'vaadin.version'>)[^\s]+(</'vaadin.version'>)|${1}24.7.0.alpha1${2}|g' pom.xml
           # Set debug level
           echo "logging.level.com.vaadin.exampledata.NodeUtil=debug" >> src/main/resources/application.properties
           echo "logging.level.com.example.application.data.TestNode=debug" >> src/main/resources/application.properties
