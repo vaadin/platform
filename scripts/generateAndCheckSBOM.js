@@ -66,7 +66,7 @@ const cveWhiteList = {
     cves: ['CVE-2024-26467'],
     description: 'This is coming from the tools, @cyclonedx/cyclonedx-npm, we have used for sbom module, FP for us.'
   },
-  'pkg:npm/libxmljs2@0.33.0' : {
+  'pkg:npm/libxmljs2@0.35.0' : {
     cves: ['CVE-2024-34394', 'CVE-2024-34393'],
     description: 'This is coming from the tools, @cyclonedx/cyclonedx, we have used for sbom module, FP for us.'
   },
