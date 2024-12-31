@@ -8,7 +8,8 @@ Vaadin {{platform}}
 -
 
 ### Flow
-- 
+- Change supported Node from 18 to 20
+  - Node 20 is the active LTS version for Node. Node 18 will be end of life soon and new libraries like React 19 support Node 20+
 
 ### Design System
 -
@@ -141,7 +142,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 </tr>
 <tr>
   <th>Node.js</th>
-  <td>Version 18 or newer</td>
+  <td>Version 20 or newer</td>
 </tr>
 <tr>
   <th>Spring Boot</th>
