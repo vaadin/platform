@@ -176,9 +176,6 @@ String oldPluginClassDef = 'public class HillaPlugin : Plugin<Project> {'
 String newPluginClassDef = 'public class VaadinPlugin : Plugin<Project> {'
 String oldPluginCreateEngineConf = 'HillaPlugin.createEngineConfiguration'
 String newPluginCreateEngineConf = 'VaadinPlugin.createEngineConfiguration'
-String importDef = 'import com.vaadin.gradle.VaadinPlugin'
-String projectDef = 'override fun apply(project: Project) {'
-String projectTaskDef = 'project.tasks.apply {'
 
 // Use NIO to walk through the directory
 Files.walk(Paths.get(directoryPath))
@@ -196,12 +193,6 @@ Files.walk(Paths.get(directoryPath))
         updatedContent = updatedContent.replace(oldPluginClassDef, newPluginClassDef)
         // Replace the old plugin method calls definition with the new one
         updatedContent = updatedContent.replace(oldPluginCreateEngineConf, newPluginCreateEngineConf)
-        // Add import for getBooleanProperty
-        updatedContent = updatedContent.replace(importDef,importDef+'\nimport com.vaadin.gradle.getBooleanProperty')
-        // Collect hilla used property
-        updatedContent = updatedContent.replace(projectDef, projectDef + '\nval hillaUsed = project.getBooleanProperty("hilla.active") ?: true;')
-        // Do not apply tasks if hilla not used
-        updatedContent = updatedContent.replace(projectTaskDef,'if(hillaUsed) '+projectTaskDef)
         // Write the updated content back to the file
         Files.write(path, updatedContent.getBytes())
         println "Updated package declaration in file: ${path}"
