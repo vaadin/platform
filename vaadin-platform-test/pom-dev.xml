@@ -52,6 +52,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>hilla-dev</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
