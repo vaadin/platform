@@ -1,167 +1,46 @@
-name: PiT
-run-name: PiT ${{ inputs.version }} (lin=${{inputs.linux}} win=${{inputs.windows}} skip=${{inputs.skipcurrent}}) ${{inputs.starters}}
+name: PiT CC
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version'
-        required: false
-        type: string
-      starters:
-        description: 'Starters to run, separated by comma'
-        required: false
-        type: string
-      skipcurrent:
-        description: 'Skip running tests in current version'
-        required: false
-        type: boolean
-        default: false
-      skipdev:
-        description: 'Skip running tests in dev mode'
-        required: false
-        type: boolean
-        default: false
-      debug:
-        description: 'Be verbose when running PiT steps'
-        required: false
-        type: boolean
-        default: false
-      linux:
-        description: 'Run build in linux runner'
-        required: false
-        type: boolean
-        default: true
-      windows:
-        description: 'Run build in windows runner'
-        required: false
-        type: boolean
-        default: false
-      generated:
-        description: 'Generate and run all supported start presets and archetypes'
-        required: false
-        type: boolean
-        default: false
-      demos:
-        description: 'Checkout and run all demos'
-        required: false
-        type: boolean
-        default: false
-      join:
-        description: 'Number of apps to run per container (default 1)'
-        required: false
-        type: choice
-        options: ["1", "2", "3", "4"]
-        default: "1"
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set.outputs.matrix }}
-    steps:
-      - id: set
-        shell: bash
-        run: |
-          # COMPUTE MATRIX
-          echo "Computing matrix ..."
-          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${{secrets.CE_LICENSE}}" ] && exit 1
-          V="${{inputs.version}}"
-          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
-
-          git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          W="${{inputs.windows}}"
-          L="${{inputs.linux}}"
-          [ true != "$W" -a true != "$L" ] && W=true
-          [ true != "$L" -a true != "$W" ] && L=true
-          A="$A --starters=${{inputs.starters}}"
-          [ true = "${{inputs.generated}}" ] && A="$A --generated"
-          [ true = "${{inputs.demos}}" ] && A="$A --demos"
-          cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
-          echo "Generating list of starters: $cmd"
-          S=`eval $cmd`
-          M='{"include":['
-          for i in `echo $S`; do
-            J='{"app":"'$i'"'
-            [ -n "$V" ] && J=$J',"version":"'$V'"'
-            [ true = "$W" ] && M=$M$J',"os":"windows-latest"},'
-            [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
-          done
-          M=`echo $M | sed -e s/,$//`']}'
-          echo "Generated Matrix: $M"
-          echo "matrix=$M" >> $GITHUB_OUTPUT
   run:
-    needs: prepare
-    strategy:
-      fail-fast: false
-      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     steps:
-      - run: |
-          # TEST PARAMETERS
-          [ -z "${{matrix.app}}" ] && exit 1
-          echo "RUNNING TEST FOR ${{matrix.app}} APP"
-        shell: bash
-      - run: |
-          # INSTALL PIT
-          git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          cd pit && git rev-parse --short HEAD
-        shell: bash
-      - run: |
-          # INSTALL LICENSE
+      - name: Check out branch
+        run: |
+          GHTK=${GITHUB_TOKEN:-${{secrets.GHTK}}}
+          git clone https://${GHTK}@github.com/vaadin/control-center.git
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+      - name: Set Vaadin license
+        run: |
+          TB_LICENSE=${{ secrets.TB_LICENSE }}
           mkdir -p ~/.vaadin/
-          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-          echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
-        shell: bash
-      - if: ${{ env.ACT }}
+          echo '{"username":"'`echo $TB_LICENSE | cut -d / -f1`'","proKey":"'`echo $TB_LICENSE | cut -d / -f2`'"}' > ~/.vaadin/proKey
+      - name: Build images
+        working-directory: control-center
         run: |
-          # LINUX LIBS (ACT)
-          # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
-      - uses: browser-actions/setup-chrome@latest
+          mvn -ntp -B -pl :control-center-app -Pproduction -DskipTests -am install
+          mvn -ntp -B -pl :control-center-app -Pproduction -Ddocker.tag=ci docker:build
+          mvn -ntp -B -pl :control-center-keycloak package -Ddocker.tag=ci docker:build
+      - name: Set up Python
+        uses: actions/setup-python@v5
+      - name: Set up Helm
+        uses: azure/setup-helm@v3.5
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+      - name: Set up cluster
+        uses: helm/kind-action@v1.8.0
         with:
-          chrome-version: stable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v5
-        with:
-          maven-version: '3.9.0'
-      - run: |
-          # PIT TESTS ${{matrix.app}} ${{inputs.version}}
-          echo "${{toJSON(inputs)}}"
-          [ -n "${{inputs.version}}" ] && ARG="--version=${{inputs.version}}"
-          [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
-          [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
-          [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
-          ./pit/scripts/pit/run.sh --path
-          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}}"
-          # Output the PiT command to execute, so as we can run the same locally
-          echo "$CMD"
-          # Run PiT in test mode, so as we can copy and paste commands when reporting
-          $CMD --test
-          # Run PiT
-          $CMD
-        env:
-            GHTK: ${{secrets.GHTK}}
-            CE_LICENSE: ${{secrets.CE_LICENSE}}
-            OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
-            MAVEN_ARGS: ${{env.MAVEN_ARGS}}
-        shell: bash
-      - if: ${{ env.ACT }}
+          cluster_name: kind
+      - name: Load images
         run: |
-          # WAIT (ACT)
-          echo "Keeping docker container running, push Ctrl-C to terminate ..."
-          read key
-      - if: ${{failure()}}
-        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | tr ',' _` >> $GITHUB_ENV
-        shell: bash
-      - if: ${{failure()}}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.artifact_name }}
-          path: tmp/**/*.out
-          if-no-files-found: ignore
-          retention-days: 7
+          kind load docker-image vaadin/control-center-app:ci
+          kind load docker-image vaadin/control-center-keycloak:ci
+      - name: Install chart
+        working-directory: control-center
+        run: |
+          ct install --config ct.yaml --charts charts/control-center
