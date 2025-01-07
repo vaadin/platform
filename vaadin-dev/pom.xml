@@ -52,7 +52,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
-            <exclusions>
         </dependency>
     </dependencies>
     <build>
