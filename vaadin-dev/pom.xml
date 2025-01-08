@@ -53,7 +53,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
             <exclusions>
-                <!-- io.projectreactor.netty:reactor-netty:jar:1.2.0 and netty-all:4.1.116.Final
+                <!-- io.projectreactor.netty:reactor-netty:jar:1.2.1 and netty-all:4.1.115.Final
                  failed the dependency convergence test, as netty-* has different versions   -->
                 <exclusion>
                     <groupId>io.netty</groupId>
@@ -77,10 +77,6 @@
                 </exclusion>
                 <exclusion>
                     <groupId>io.netty</groupId>
-                    <artifactId>netty-handler-proxy</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
                     <artifactId>netty-handler</artifactId>
                 </exclusion>
                 <exclusion>
@@ -93,19 +89,7 @@
                 </exclusion>
                 <exclusion>
                     <groupId>io.netty</groupId>
-                    <artifactId>netty-resolver-dns</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
                     <artifactId>netty-transport-native-unix-common</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-resolver-dns-native-macos</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-transport-native-epoll</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -137,11 +121,6 @@
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
-            <artifactId>netty-handler-proxy</artifactId>
-            <version>4.1.116.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
             <artifactId>netty-handler</artifactId>
             <version>4.1.116.Final</version>
         </dependency>
@@ -157,22 +136,7 @@
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns</artifactId>
-            <version>4.1.116.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
             <artifactId>netty-transport-native-unix-common</artifactId>
-            <version>4.1.116.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns-native-macos</artifactId>
-            <version>4.1.116.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-transport-native-epoll</artifactId>
             <version>4.1.116.Final</version>
         </dependency>
     </dependencies>
