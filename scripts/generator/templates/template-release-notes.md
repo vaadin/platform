@@ -5,7 +5,7 @@ Vaadin {{platform}}
 ## New and Noteworthy Since Vaadin 24.6
 
 **Notable Changes**
-- Due to the issue[https://github.com/spring-projects/spring-framework/issues/33936] from spring framework, we recommend you to use Springboot 3.4.1 or newer to build Vaadin 24.7 project
+- Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from spring framework, we recommend you to use Springboot 3.4.1 or newer to build Vaadin 24.7 project
 
 ### Flow
 - Change supported Node from 18 to 20
