@@ -16,6 +16,7 @@ import com.vaadin.dircompare.Arguments;
 import japicmp.cmp.JApiCmpArchive;
 import japicmp.cmp.JarArchiveComparator;
 import japicmp.cmp.JarArchiveComparatorOptions;
+import japicmp.filter.Filter;
 import japicmp.filter.JavadocLikePackageFilter;
 import japicmp.model.AccessModifier;
 import japicmp.model.JApiChangeStatus;
@@ -39,13 +40,12 @@ public class Comparator {
 
         System.out.printf("Comparing version %s with %s. Looking for standard maven directory in %s.\n", arguments.oldVersion, arguments.newVersion, vaadinRepositoryRoot);
 
-
         JarArchiveComparatorOptions comparatorOptions = new JarArchiveComparatorOptions();
         comparatorOptions.setAccessModifier(AccessModifier.PUBLIC);
-        comparatorOptions.getIgnoreMissingClasses().setIgnoreAllMissingClasses(true);
-        comparatorOptions.getFilters().getExcludes().add(new JavadocLikePackageFilter("com.vaadin.copilot", false));
+        comparatorOptions.getIgnoreMissingClasses().setIgnoreAllMissingClasses(!arguments.failOnMissingClasses);
+        List<Filter> excludes = comparatorOptions.getFilters().getExcludes();
+        arguments.excludes.forEach( ex-> excludes.add(new JavadocLikePackageFilter(ex, false)) ); //exclusive = false here means to include subpackages
         JarArchiveComparator jarArchiveComparator = new JarArchiveComparator(comparatorOptions);
-
 
         List<JApiCmpArchive> oldArchives = new ArrayList<>();
         List<JApiCmpArchive> newArchives = new ArrayList<>();
