@@ -34,10 +34,10 @@ public class Comparator {
         Arguments arguments = new Arguments();
         JCommander.newBuilder().addObject(arguments).build().parse(args);
 
-        String home = arguments.rootDir!=null? arguments.rootDir : System.getProperty("user.home");
-        Path vaadinRepositoryRoot = Paths.get(home, ".m2", "repository", "com", "vaadin");
+        String home = System.getProperty("user.home");
+        Path vaadinRepositoryRoot = arguments.rootDir!=null? Paths.get(arguments.rootDir) : Paths.get(home, ".m2", "repository", "com", "vaadin");
 
-        System.out.printf("Comparing version %s with %s. Looking for standard maven directory in %s.\n", arguments.oldVersion, arguments.newVersion, home);
+        System.out.printf("Comparing version %s with %s. Looking for standard maven directory in %s.\n", arguments.oldVersion, arguments.newVersion, vaadinRepositoryRoot);
 
 
         JarArchiveComparatorOptions comparatorOptions = new JarArchiveComparatorOptions();
