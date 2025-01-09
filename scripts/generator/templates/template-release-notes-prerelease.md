@@ -23,7 +23,7 @@ Vaadin {{platform}}
     </pluginRepositories>
 
 **Note**
-- Due to the issue[https://github.com/spring-projects/spring-framework/issues/33936] from spring framework, we recommend you to use **Springboot 3.4.1 or newer** to build Vaadin 24.7 project
+- Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from spring framework, we recommend you to use **Springboot 3.4.1 or newer** to build Vaadin 24.7 project
 
 ## <a id="_changelogs"></a> Changelogs
 
