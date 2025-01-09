@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterException;
 import com.vaadin.dircompare.Arguments;
 
 import japicmp.cmp.JApiCmpArchive;
@@ -33,7 +34,15 @@ public class Comparator {
     public static void main(String[] args) {
 
         Arguments arguments = new Arguments();
+        try{ 
         JCommander.newBuilder().addObject(arguments).build().parse(args);
+        }catch(ParameterException p){
+            System.out.println("An exception occured during parsing.");
+            System.out.println(p.getMessage());
+            System.out.println("Please use the program like this:");
+            p.getJCommander().usage();
+            System.exit(-1);
+        }
 
         String home = System.getProperty("user.home");
         Path vaadinRepositoryRoot = arguments.rootDir!=null? Paths.get(arguments.rootDir) : Paths.get(home, ".m2", "repository", "com", "vaadin");
