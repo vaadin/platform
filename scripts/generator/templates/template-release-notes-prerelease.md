@@ -22,6 +22,10 @@ Vaadin {{platform}}
         </pluginRepository>
     </pluginRepositories>
 
+**Note**
+- Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from spring framework, we recommend you to use **Springboot 3.4.1 or newer** to build Vaadin 24.7 project
+- Vaadin 24.7 is compatible with React Router v7, when upgrading application from v24.6, please remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
+
 ## <a id="_changelogs"></a> Changelogs
 
 <!-- Remove the ones that do not contain any changes/updates -->

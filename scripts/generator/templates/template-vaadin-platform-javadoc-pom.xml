@@ -46,6 +46,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!--No point to have copilot, as copilot does not have public API-->
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>copilot</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -104,6 +111,11 @@
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-loader-tools</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.springframework.security</groupId>
                     <artifactId>spring-security-core</artifactId>
                     <scope>provided</scope>
@@ -116,6 +128,11 @@
                 <dependency>
                     <groupId>org.springframework.security</groupId>
                     <artifactId>spring-security-oauth2-jose</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                 <dependency>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-oauth2-client</artifactId>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
