@@ -10,7 +10,6 @@ import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.html.testbench.AnchorElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
-@Ignore("This test is disable until https://github.com/vaadin/hilla/issues/3002 got fixed")
 public class FlowMainLayoutIT extends AbstractPlatformTest {
 
     @Test
