@@ -82,7 +82,7 @@ jobs:
           for i in `echo $S`; do
             J='{"app":"'$i'"'
             [ -n "$V" ] && J=$J',"version":"'$V'"'
-            [ true = "$W" ] && M=$M$J',"os":"windows-latest"},'
+            [ true = "$W" -a control-center != "$i" ] && M=$M$J',"os":"windows-latest"},'
             [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
@@ -94,6 +94,10 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
     runs-on: ${{matrix.os}}
+    services:
+      docker:
+        image: ${{ (matrix.app == 'control-center' ) && 'docker:dind' || '' }}
+        options: --privileged --shm-size=2g
     steps:
       - run: |
           # TEST PARAMETERS
@@ -111,7 +115,8 @@ jobs:
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
           echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
         shell: bash
-      - if: ${{ env.ACT }}
+      - name: Setup ACT local runner
+        if: ${{ env.ACT }}
         run: |
           # LINUX LIBS (ACT)
           # see https://github.com/browser-actions/setup-chrome/issues/240
@@ -129,6 +134,14 @@ jobs:
       - uses: stCarolas/setup-maven@v5
         with:
           maven-version: '3.9.0'
+      - name: Set up Helm
+        if: ${{ matrix.app == 'control-center' }}
+        uses: azure/setup-helm@v3.5
+      - name: Create k8s Kind Cluster
+        if: ${{ matrix.app == 'control-center' }}
+        uses: helm/kind-action@v1
+        with:
+          install_only: false          
       - run: |
           # PIT TESTS ${{matrix.app}} ${{inputs.version}}
           echo "${{toJSON(inputs)}}"
