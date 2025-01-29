@@ -73,7 +73,7 @@ public class FlowMainLayoutIT extends AbstractPlatformTest {
 
         // Navigate to Hilla view
         SideNavItemElement deepNoMatch = getMenuElement(
-                "React in Flow Layout Deep Tree not a match").get();
+                "Not a match for layout").get();
         deepNoMatch.click();
 
         waitUntil(ExpectedConditions.presenceOfElementLocated(
