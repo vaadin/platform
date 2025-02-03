@@ -162,6 +162,8 @@ jobs:
             CE_LICENSE: ${{secrets.CE_LICENSE}}
             OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
             MAVEN_ARGS: ${{env.MAVEN_ARGS}}
+            CC_CERT: ${{secrets.CC_CERT}}
+            CC_KEY: ${{secrets.CC_KEY}}
         shell: bash
       - if: ${{ env.ACT }}
         run: |
