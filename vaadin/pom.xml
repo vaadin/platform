@@ -239,5 +239,70 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>enforcer</id>
+            <activation>
+                <property>
+                    <name>!release</name>
+                </property>
+            </activation>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-bom</artifactId>
+                        <version>${project.version}</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-spreadsheet-flow</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>enforce</id>
+                                <configuration>
+                                    <rules>
+                                        <dependencyConvergence>
+                                            <excludes>
+                                                <!-- exclude flow-*, as sometimes, the dependencies are using flow snapshot instead of released version  -->
+                                                <exclude>com.vaadin:flow-*</exclude>
+                                                <!-- we will not align the slf4j version in platform, as the MPR support and license-checker -->
+                                                <exclude>org.slf4j:slf4j-api</exclude>
+                                                <!-- commons-lang3 in grid comes with a newer version until other commons from flow have the same -->
+                                                <exclude>org.apache.commons:commons-lang3</exclude>
+                                            </excludes>
+                                        </dependencyConvergence>
+                                        <requireUpperBoundDeps>
+                                            <excludes>
+                                                <exclude>com.vaadin:flow-server</exclude>
+                                                <exclude>com.vaadin:flow-html-components</exclude>
+                                                <exclude>com.vaadin:flow-data</exclude>
+                                                <exclude>com.vaadin:license-checker</exclude>
+                                                <exclude>org.slf4j:slf4j-api</exclude>
+                                            </excludes>
+                                        </requireUpperBoundDeps>
+                                    </rules>
+                                </configuration>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
