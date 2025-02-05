@@ -261,6 +261,7 @@
                 <dependency>
                     <groupId>com.vaadin</groupId>
                     <artifactId>vaadin-spreadsheet-flow</artifactId>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
             <build>
