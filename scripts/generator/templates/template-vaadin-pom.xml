@@ -182,7 +182,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>../../../vaadin/target/generated-sources</outputDirectory>
+                            <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
                             <delimiters>
                                 <delimeter>${*}</delimeter>
                             </delimiters>
