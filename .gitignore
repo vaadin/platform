@@ -41,6 +41,7 @@ scripts/generator/yarn-error.log
 **/.npmrc
 bin/
 
+vaadin/pom.xml
 vaadin-bom/pom.xml
 hilla-bom/pom.xml
 vaadin-spring-bom/pom.xml
