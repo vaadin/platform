@@ -126,7 +126,7 @@ jobs:
           chrome-version: stable
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
