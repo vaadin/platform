@@ -241,6 +241,11 @@
         </profile>
         <profile>
             <id>enforcer</id>
+            <activation>
+                <property>
+                    <name>!release</name>
+                </property>
+            </activation>
             <dependencyManagement>
                 <dependencies>
                     <dependency>
