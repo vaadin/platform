@@ -76,10 +76,6 @@ const cveWhiteList = {
   'pkg:npm/micromatch@4.0.7' : {
       cves: ['CVE-2024-4067'],
       description: 'Based on the assumption that the code is only run as part of a build, we take this as a false positive. Also we are tracking the development process to upgrade the vulnerable dependencies.'
-  },
-  'pkg:maven/io.netty/netty-common@4.1.118.Final' : {
-    cves: ['CVE-2025-25193'],
-    description: 'the cve has wrong version range, the related commit has been merged and released with 118.Final. referred in netty/issues/14795'
   }
 
 }
