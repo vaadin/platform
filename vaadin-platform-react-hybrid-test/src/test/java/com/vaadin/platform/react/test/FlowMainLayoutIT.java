@@ -10,7 +10,6 @@ import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.html.testbench.AnchorElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
-@Ignore("This test is disable until https://github.com/vaadin/hilla/issues/3002 got fixed")
 public class FlowMainLayoutIT extends AbstractPlatformTest {
 
     @Test
@@ -65,6 +64,24 @@ public class FlowMainLayoutIT extends AbstractPlatformTest {
 
         waitForElement("Should have navigated to HelloWorld Flow",
                 By.id("flow-hello"));
+    }
+
+    @Test
+    public void hillaView_deepTree_NotMatchOnAllPathParts() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-main")));
+
+        // Navigate to Hilla view
+        SideNavItemElement deepNoMatch = getMenuElement(
+                "Not a match for layout").get();
+        deepNoMatch.click();
+
+        waitUntil(ExpectedConditions.presenceOfElementLocated(
+                By.id("flow-hilla-deep-tree-not-match")));
+
+        Assert.assertTrue("No menu should be available for view",
+                ExpectedConditions.stalenessOf(deepNoMatch)
+                        .apply(getDriver()));
     }
 
     @Test

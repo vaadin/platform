@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>24.7-SNAPSHOT</version>
+        <version>{{platform}}</version>
     </parent>
     <artifactId>vaadin</artifactId>
     <packaging>jar</packaging>
@@ -19,6 +19,10 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        {{javadeps}}
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -29,6 +33,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spreadsheet-flow</artifactId>
+            <version>${vaadin.spreadsheet.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -79,6 +90,7 @@
                                         <exclude>com.vaadin:flow-html-components</exclude>
                                         <exclude>com.vaadin:flow-data</exclude>
                                         <exclude>org.slf4j:slf4j-api</exclude>
+                                        <exclude>com.vaadin:license-checker</exclude>
                                     </excludes>
                                 </requireUpperBoundDeps>
                             </rules>
