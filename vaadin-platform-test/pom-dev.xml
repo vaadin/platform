@@ -137,8 +137,8 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
+                        <groupId>org.eclipse.jetty.ee10</groupId>
+                        <artifactId>jetty-ee10-maven-plugin</artifactId>
                         <version>${jetty.version}</version>
                         <configuration>
                             <stopPort>9999</stopPort>
@@ -154,7 +154,7 @@
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>start</goal>
+                                    <goal>start-war</goal>
                                 </goals>
                             </execution>
                             <execution>
