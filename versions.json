@@ -388,7 +388,7 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.1.0"
+            "javaVersion": "1.2.0.alpha1"
         },
         "copilot": {
             "javaVersion": "24.7.0.alpha9"
