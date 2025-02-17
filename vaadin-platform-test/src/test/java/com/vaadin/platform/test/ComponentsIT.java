@@ -54,7 +54,7 @@ public class ComponentsIT extends ParallelTest {
         if (sauceUser != null && !sauceUser.isEmpty()) {
             if (browsers == null || browsers.isEmpty()) {
                 //drop safari-9 test, it leads to infrastructure error from saucelab
-                Parameters.setGridBrowsers("ie11,firefox,safari-10,safari-11,edge,edge-18");
+                Parameters.setGridBrowsers("ie11,firefox,safari-12,safari-11,edge,edge-18");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
