@@ -3,15 +3,15 @@ description: Product Requirements Document
 labels: ["PRD"]
 body:
 
-- type: textarea
+  - type: textarea
     id: description
     attributes:
       label: Description
       placeholder: Brief description of the feature (max ~30 words)
     validations:
       required: true
-
-- type: dropdown
+      
+  - type: dropdown
     id: tier
     attributes:
       label: Tier
@@ -21,10 +21,10 @@ body:
         - Pro
         - Premium
         - Ultimate
-      value: Free
+      default: 0
     validations:
       required: true
-
+      
   - type: dropdown
     id: license
     attributes:
@@ -32,148 +32,129 @@ body:
       options:
         - Apache 2.0
         - Proprietary
-      value: Apache 2.0
+      default: 0
     validations:
       required: true
+      
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      value: |
+        #### Background
+        <optional; context to the feature, e.g. the current state of the platform relevant to the feature.>
+         
+        #### Problem
+        <the user problem this feature will solve>
+         
+        #### Solution
+        <a detailed description of the soltion; images welcome>
+         
+        #### Notes
+        <optional; e.g. an explanation of why this particular solution was chosen instead of some other options, or links to existing related github issues.>
+    validations:
+      required: true
+      
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements
+      description: Once the PRD is approved, sub-issues are created in the appropriate repository. These items are checked once there are issues covering them and progress is tracked through the sub-issues.
+      value: |
+        - [ ] Requirement 1
+        - [ ] Requirement 2
+        - [ ] Requirement 3
 
-- type: textarea
-  id: motivation
-  attributes:
-    label: Motivation
-    value: |
-      "#### Background" |
-      | (optional)
-      |
-      "#### Problem" |
-      |
-      "#### Solution" |
-      |
-      "#### Notes" |
-      | (optional)
-      |
-      | (Remove unused sections)
-  validations:
-    required: true
+        - [ ] Documentation
+        - [ ] License check (remove if not needed)
+        - [ ] Feature flag (remove if not needed)
+    validations:
+      required: true
+      
+  - type: textarea
+    id: nice-to-haves
+    attributes:
+      label: Nice-to-haves
+      description: (Optional)
+      value: |
+        - [ ] Nice-to-have 1
+        - [ ] Nice-to-have 2
+        - [ ] Nice-to-have 3
+    validations:
+      required: false
+      
+  - type: textarea
+    id: limitations-risks
+    attributes:
+      label: Risks, limitations and breaking changes
+      value: |
+        #### Risks
+        <Known risks that should be mitigated during implementation.>
+        
+        #### Limitations
+        <Expected limitations that can be accepted if no workaround is found.>
+        
+        #### Breaking changes
+        <Any technical or behavioral breaking changes this is expected to cause.>
+    validations:
+      required: false
+      
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: Things that are explicitly out of scope that we feel are worth noting, including plans for future development.
+    validations:
+      required: false
+      
+  - type: textarea
+    id: materials
+    attributes:
+      label: Materials
+      description: RFC, designs, prototypes, discussion threads, etc.
+    validations:
+      required: false
 
-- type: textarea
-  id: requirements
-  attributes:
-    label: Requirements
-    description: Once the PRD is approved, sub-issues are created in the appropriate repository. These items are checked once there are issues covering them and progress is tracked through the sub-issues.
-    value: |
-      - [ ] Requirement 1
-      - [ ] Requirement 2
-      - [ ] Requirement 3
-  validations:
-    required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics
+      description: Tracked metrics and success criteria
+    validations:
+      required: false
+      
+  - type: checkboxes
+    id: pre-impl-checklist
+    attributes:
+      label: Pre-implementation checklist
+      description: Checked before implementation starts.
+      options:
+        - label: Estimated (estimate entered into Estimate custom field)
+        - label: Product Manager sign-off
+        - label: Engineering Manager sign-off
+    validations:
+      required: false  
 
-- type: checkboxes
-  id: standard-requirement-options
-  attributes:
-    label: Standard requirements
-    description: Check those that apply.
-    options:
-      - License check
-      - Feature flag
-      - Copilot support
-      - Figma-library support
-      - Accessibility requirements apply
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > Copilot and Figma support for Design System features should be discussed with Copilot and UX teams before implementation.
+            
+  - type: checkboxes
+    id: pre-release-checklist
+    attributes:
+      label: Pre-release checklist
+      description: Checked before feature is released.
+      options:
+        - label: Documented (link to documentation provided in sub-issue or comment)
+        - label: UX/DX tests conducted and blockers addressed
+        - label: Approved for release by Product Manager
+    validations:
+      required: false
 
-- type: textarea
-  id: nice-to-haves
-  attributes:
-    label: Nice-to-haves
-    description: (Optional)
-    value: |
-      - [ ] Nice-to-have 1
-      - [ ] Nice-to-have 2
-      - [ ] Nice-to-have 3
-  validations:
-    required: false
-
-- type: textarea
-  id: limitations-risks
-  attributes:
-    label: Risks, limitations and breaking changes
-    value: |
-      "#### Risks" |
-      | Known risks that should be mitigated during implementation.
-      |
-      "#### Limitations" |
-      | Expected limitations that can be accepted if no workaround is found.
-      |
-      "#### Breaking changes" |
-      |
-      | (Remove unused sections)
-  validations:
-    required: false
-
-- type: textarea
-  id: out-of-scope
-  attributes:
-    label: Out of scope
-    description: Things that are explicitly out of scope that we feel are worth noting, including plans for future development.
-  validations:
-    required: false
-
-- type: textarea
-  id: materials
-  attributes:
-    label: Materials
-    description: RFC, designs, prototypes, discussion threads, etc.
-  validations:
-    required: false
-
-- type: markdown
-  attributes:
-    value: "## Filled before implementation"
-
-- type: input
-  id: estimate
-  attributes:
-    label: Estimate
-    description: man-days
-  validations:
-    required: false  
-
-- type: checkboxes
-  id: pre-impl-checklist
-  attributes:
-    label: Pre-implementation checklist
-    options:
-      - Estimated
-      - Engineering Manager sign-off
-      - Product Manager sign-off
-  validations:
-    required: false  
-
-- type: markdown
-  attributes:
-    value: "## Filled before release"
-
-- type: textarea
-  id: docs
-  attributes:
-    label: Link(s) to documentation
-  validations:
-    required: false  
-
-- type: checkboxes
-  id: pre-release-checklist
-  attributes:
-    label: Pre-release checklist
-    options:
-      - Documented
-      - Security review conducted and risks addressed
-      - UX/DX tests conducted and blockers addressed
-      - Product Manager sign-off
-  validations:
-    required: false
-
-- type: textarea
-  id: metrics
-  attributes:
-    label: Metrics
-    description: Tracked metrics and success criteria
-  validations:
-    required: false  
+  - type: markdown
+    attributes:
+      value: |
+        > [!NOTE]
+        > Assign to the responsible PM and apply a label indicating the product.
