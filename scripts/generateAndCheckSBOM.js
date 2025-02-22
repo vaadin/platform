@@ -547,9 +547,11 @@ async function main() {
   log(`cd ${testProject}`);
   process.chdir(testProject);
 
+  if (!fs.existsSync(coreProject)) {
+    cmd.checkCoreLicenses = false;
+  }
   let coreLicensesResult=undefined;
   let coreLicenses=undefined;
-
   if(cmd.checkCoreLicenses){
     log(`generating Core SBOM`);
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ' + coreProject);
