@@ -96,7 +96,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : true,
+  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : fs.existsSync(coreProject),
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
