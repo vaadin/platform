@@ -316,7 +316,7 @@ function sumarizeOSV(f, summary) {
         v.affected.forEach(a => {
           const pkg = a.package.purl + "@" + p.package.version;
           summary[pkg] = summary[pkg] || {};
-          v.aliases.forEach(id => {
+          v.aliases && v.aliases.forEach(id => {
             summary[pkg][id] = summary[pkg][id] || {};
             summary[pkg][id].title = v.summary;
             summary[pkg][id].details = v.details;
