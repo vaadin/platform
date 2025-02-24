@@ -96,7 +96,7 @@ pre[b] {border: solid 1px darkgrey}
 </style>`;
 
 const cmd = {
-  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : true,
+  useBomber: true, useOSV: true, useOWASP: true, checkCoreLicenses : fs.existsSync(coreProject),
   hasOssToken: !!(process.env.OSSINDEX_USER && process.env.OSSINDEX_TOKEN)
 };
 for (let i = 2, l = process.argv.length; i < l; i++) {
@@ -547,9 +547,11 @@ async function main() {
   log(`cd ${testProject}`);
   process.chdir(testProject);
 
+  if (!fs.existsSync(coreProject)) {
+    cmd.checkCoreLicenses = false;
+  }
   let coreLicensesResult=undefined;
   let coreLicenses=undefined;
-
   if(cmd.checkCoreLicenses){
     log(`generating Core SBOM`);
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q -f ' + coreProject);
