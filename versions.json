@@ -143,7 +143,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.7.0.alpha14"
+            "javaVersion": "24.7.0.alpha15"
         },
         "horizontal-layout": {
             "jsVersion": "24.7.0-alpha10",
@@ -388,7 +388,7 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.2.0.alpha1"
+            "javaVersion": "1.2.0.alpha2"
         },
         "copilot": {
             "javaVersion": "24.7.0.alpha11"
