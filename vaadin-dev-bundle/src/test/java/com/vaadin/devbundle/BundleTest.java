@@ -10,7 +10,8 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
@@ -43,35 +44,43 @@ public class BundleTest {
                 "Expecting hybrid-package-lock.json to be present in dev-bundle, but was not");
     }
 
+    @Test
+    public void featureFlagsReset() throws IOException {
+        Predicate<String> enabledFeatureFlag = Pattern.compile("^window\\.Vaadin\\.featureFlags\\..* = true;$").asMatchPredicate();
+        int foundInFiles = findInBundleBuildFolder(enabledFeatureFlag);
+        Assertions.assertEquals(0, foundInFiles,
+                "Expecting all feature flags should be disabled in the dev-bundle");
+    }
+
     private int findInBundleBuildFolder(String needle) throws IOException {
         return findInBundleBuildFolder(line -> line.contains(needle));
     }
 
-    private int findInBundleBuildFolder(Function<String, Boolean> matcher)
+    private int findInBundleBuildFolder(Predicate<String> matcher)
             throws IOException {
         Path bundlerBuildFolder = Paths.get("target", "dev-bundle", "webapp",
                 "VAADIN", "build");
         return findInFiles(bundlerBuildFolder, matcher);
     }
 
-    private int findInFiles(Path path, Function<String, Boolean> matcher)
+    private int findInFiles(Path path, Predicate<String> matcher)
             throws IOException {
         AtomicInteger foundInFiles = new AtomicInteger();
         Files.walkFileTree(path, new FileVisitor<Path>() {
 
             @Override
             public FileVisitResult preVisitDirectory(Path dir,
-                    BasicFileAttributes attrs) throws IOException {
+                                                     BasicFileAttributes attrs) throws IOException {
                 return FileVisitResult.CONTINUE;
             }
 
             @Override
             public FileVisitResult visitFile(Path file,
-                    BasicFileAttributes attrs) throws IOException {
+                                             BasicFileAttributes attrs) throws IOException {
                 List<String> lines = FileUtils.readLines(file.toFile(),
                         StandardCharsets.UTF_8);
                 for (String line : lines) {
-                    if (matcher.apply(line)) {
+                    if (matcher.test(line)) {
                         foundInFiles.incrementAndGet();
                         break;
                     }
