@@ -44,6 +44,8 @@ Vaadin {{platform}}
 - **Automated Certificate Creation and Renewal**
 - **Environment variable management** for enhanced application configuration flexibility.
 
+## Modernization
+- **Feature Pack**: Wider Vaadin 7 component and API support.
 
 ## <a id="_changelogs"></a> Changelogs
 
