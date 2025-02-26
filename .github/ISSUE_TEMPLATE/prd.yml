@@ -153,6 +153,17 @@ body:
     validations:
       required: false
 
+  - type: dropdown
+    id: security-review
+    attributes:
+      label: Security review
+      options:
+        - Not applicable
+        - Peer reviewed
+        - Security audit conducted (link to internal report)
+    validations:
+      required: false
+
   - type: markdown
     attributes:
       value: |
