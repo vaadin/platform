@@ -136,7 +136,7 @@ Vaadin Designer supports the following IDEs:
 Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
 - Apache Tomcat 10.1
-- Open Liberty 23.0.0.1-beta
+- Open Liberty 23
 - RedHat JBoss EAP 8.0 beta
 - WildFly 35
 - Jetty 12 
