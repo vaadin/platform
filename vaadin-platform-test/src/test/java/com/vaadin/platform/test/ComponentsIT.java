@@ -112,7 +112,7 @@ public class ComponentsIT extends AbstractPlatformTest {
         assertTrue($.exists());
         String tagName = $.first().getTagName().toLowerCase();
         if (tagName.contains("-")) {
-            assertTrue((Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
+            assertTrue("Check failed for component " + tagName, (Boolean) executeScript("return !!window.customElements.get(arguments[0])", tagName));
         }
     }
 }
