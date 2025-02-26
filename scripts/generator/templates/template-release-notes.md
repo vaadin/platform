@@ -81,7 +81,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 - Chrome (evergreen)
 - Firefox (evergreen)
    - Firefox Extended Support Release (ESR)
-- Safari 15 or newer
+- Safari 15 (latest minor version in each major series) or newer.
 - Edge (Chromium, evergreen)
   </td>
 </tr>
@@ -90,7 +90,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <td>
 
 - Chrome (evergreen) for Android (4.4 or newer)
-- Safari for iOS (15 or newer)
+- Safari for iOS (15 or newer considering latest minor version in each major series)
   </td>
 </tr>
 <tr>
