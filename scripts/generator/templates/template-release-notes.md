@@ -7,6 +7,7 @@ Vaadin {{platform}}
 **Notable Changes**
 - Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from spring framework, we recommend you to use Springboot 3.4.1 or newer to build Vaadin 24.7 project
 - Vaadin 24.7 is compatible with React Router v7, when upgrading application from v24.6, please remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
+- Vaadin 24.7 requires jackson dependency (2.16.0+) to work
 
 
 ### Flow
@@ -78,19 +79,19 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <th>Desktop browser</th>
   <td>
 
-- Chrome (evergreen)
-- Firefox (evergreen)
-   - Firefox Extended Support Release (ESR)
-- Safari 15 or newer
-- Edge (Chromium, evergreen)
+- Chrome (evergreen).
+- Firefox (evergreen).
+   - Firefox Extended Support Release (ESR).
+- Safari 15 or newer (latest minor version in each major series).
+- Edge (Chromium, evergreen).
   </td>
 </tr>
 <tr>
   <th>Mobile browser</th>
   <td>
 
-- Chrome (evergreen) for Android (4.4 or newer)
-- Safari for iOS (15 or newer)
+- Chrome (evergreen) for Android (4.4 or newer).
+- Safari 15 for iOS or newer (latest minor version in each major series).
   </td>
 </tr>
 <tr>
@@ -135,10 +136,10 @@ Vaadin Designer supports the following IDEs:
 Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
 - Apache Tomcat 10.1
-- Open Liberty 23.0.0.1-beta
+- Open Liberty 23
 - RedHat JBoss EAP 8.0 beta
-- WildFly 27
-- Jetty 12 beta
+- WildFly 35
+- Jetty 12 
 - Payara Server 6
 - Payara Micro 6
   </td>
@@ -149,7 +150,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Version 3.3 or newer
+  <td>Version 3.4 or newer
   </td>
 </tr>
 </table>
