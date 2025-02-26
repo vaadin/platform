@@ -2,21 +2,50 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/project)
 
-## New and Noteworthy Since Vaadin 24.6
+# New and Noteworthy Since Vaadin 24.6
 
 **Notable Changes**
 - Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from spring framework, we recommend you to use Springboot 3.4.1 or newer to build Vaadin 24.7 project
 - Vaadin 24.7 is compatible with React Router v7, when upgrading application from v24.6, please remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
-- Vaadin 24.7 requires jackson dependency (2.16.0+) to work
-
 
 ### Flow
-- Change supported Node from 18 to 20
-  - Node 20 is the active LTS version for Node. Node 18 will be end of life soon and new libraries like React 19 support Node 20+
+- **Change supported Node from 18 to 20**: Node 20 is the active LTS version for Node. Node 18 will be end of life soon and new libraries like React 19 support Node 20+
+- **Fault-tolerant messaging for server-client communication**: This enhancement ensures reliable communication between server and client, improving the robustness of Vaadin applications.
 
-### Design System
--
+## Hilla
+- **File upload enhancements**: Improved file upload capabilities for Hilla applications.
+- **React 19 support**: Ensures compatibility with the latest version of React, enabling modern front-end development.
+- **Support for Kotlin Nullability in TypeScript Type Generation**: Enhances type safety between Kotlin and TypeScript.
+- **Add way to disable/configure progress indicator**: Provides developers the flexibility to manage UI loading indicators.
+- **Form validation fix in Kotlin**: Resolves issues with Hilla form validation in Kotlin projects.
 
+## Design System
+- **New Card Component and Dashboard Component**: Only the Web-Componentn and the React implementations.
+- **Add conditional selection of grid items in Grid**: Enhances the flexibility of data grid operations.
+- **Allow configure min and max rows in Text-Area**: Offers better control over text input fields.
+- **Implement HasEnabled interface in Upload**: Adds consistency to UI component enabling/disabling mechanisms.
+- **Add folder drag&drop upload in Upload**: Improves user experience for file uploads by supporting folder operations.
+- **Add support for Gantt chart**: New capability in Vaadin Charts to visually represent project schedules.
+- **Spring Data API for Grid and ComboBox**: Simplifies connecting Vaadin components to Spring Data repositories.
+- **Improvements to core layouts**.
+
+## Copilot
+- **React 19 support**.
+- **Custom Components**.
+- **Customizable Palette**: Provides an enhanced developer experience with a customizable command palette.
+- **Impersonation - quick user switching**: Facilitates easier testing and management of user roles by allowing quick user switching.
+- **Show a dismissable notification when a variable is renamed**: Improves user feedback mechanisms in the IDE.
+
+## Control Center
+- **Control Center GA**: version 1.2 is a major milestone marking the general availability of Control Center.
+- **Log viewer**: Introduces a new feature for viewing and analyzing application logs directly within Control Center, streamlining debugging and monitoring processes.
+- **Passkey (WebAuthn) authentication**: Adds enhanced security with support for WebAuthn, allowing users to authenticate using passkeys.
+- **Automated domain name updates**
+- **Automated Certificate Creation and Renewal**
+- **Environment variable management** for enhanced application configuration flexibility.
+
+## Modernization
+- **Feature Pack**: Wider Vaadin 7 component and API support.
 
 ## <a id="_changelogs"></a> Changelogs
 
@@ -139,7 +168,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 - Open Liberty 23
 - RedHat JBoss EAP 8.0 beta
 - WildFly 35
-- Jetty 12 
+- Jetty 12
 - Payara Server 6
 - Payara Micro 6
   </td>
