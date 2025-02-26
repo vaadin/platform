@@ -138,7 +138,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 - Apache Tomcat 10.1
 - Open Liberty 23.0.0.1-beta
 - RedHat JBoss EAP 8.0 beta
-- WildFly 35.0.0.Final
+- WildFly 35
 - Jetty 12 
 - Payara Server 6
 - Payara Micro 6
