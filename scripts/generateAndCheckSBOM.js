@@ -48,7 +48,7 @@ const licenseWhiteList = [
   'BlueOak-1.0.0',
   'https://www.bouncycastle.org/licence.html',
   'https://opensource.org/licenses/MIT',
-  'OFL-1.11'
+  'OFL-1.1'
 ];
 
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
