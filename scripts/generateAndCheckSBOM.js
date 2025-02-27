@@ -47,7 +47,8 @@ const licenseWhiteList = [
   'http://www.spdx.org/licenses/BSD-4-Clause',
   'BlueOak-1.0.0',
   'https://www.bouncycastle.org/licence.html',
-  'https://opensource.org/licenses/MIT'
+  'https://opensource.org/licenses/MIT',
+  'OFL-1.11'
 ];
 
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
