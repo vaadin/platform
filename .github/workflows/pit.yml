@@ -63,7 +63,7 @@ jobs:
         run: |
           # COMPUTE MATRIX
           echo "Computing matrix ..."
-          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${{secrets.CE_LICENSE}}" ] && exit 1
+          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${CE_LICENSE}" ] && exit 1
           V="${{inputs.version}}"
           [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
 
@@ -88,6 +88,8 @@ jobs:
           M=`echo $M | sed -e s/,$//`']}'
           echo "Generated Matrix: $M"
           echo "matrix=$M" >> $GITHUB_OUTPUT
+        env:
+          CE_LICENSE: ${{secrets.CE_LICENSE}}
   run:
     needs: prepare
     strategy:
