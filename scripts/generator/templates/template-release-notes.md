@@ -7,6 +7,7 @@ Vaadin {{platform}}
 **Notable Changes**
 - Due to an issue in the Spring Framework, we recommend using Spring Boot 3.4.1 or newer to build Vaadin 24.7 projects.
 - Vaadin 24.7 is compatible with React Router v7. When upgrading an application from v24.6, please remove the opt-in feature flag, i.e., future={{ v7_startTransition: true }}, from the custom routing file.
+- `flow-components` has a dependency on `spring-data-commons` to avoid a compilation error in some Eclipse versions due to indirect references. The module does not otherwise depend on Spring. You can exclude the dependency if you cannot have Spring dependencies in your application. If you encounter compilation errors in Eclipse, then you can add an empty org.springframework.data.domain.Pageable class in your application. See https://github.com/vaadin/flow-components/issues/7213 for more details.
 
 ### Flow
 - **Change supported Node version from 18 to 20**: Node 20 is the active LTS version. Node 18 will soon reach end of life, and new libraries like React 19 require Node 20+.
