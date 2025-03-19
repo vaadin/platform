@@ -6,7 +6,7 @@ Vaadin {{platform}}
 
 **Notable Changes**
 - **Use Spring Boot 3.4.1 or newer**: Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from Spring Framework, we recommend you to use Spring Boot 3.4.1 or newer to build Vaadin 24.7 projects
-- **Vaadin 24.7 is compatible with React Router v7**: When upgrading application from v24.6, please remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
+- **Vaadin 24.7 is compatible with React Router v7**: When upgrading application from v24.6, please change TypeScript imports from the `react-router-dom` npm package to `react-router` and remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
 - **Change supported Node from 18 to 20**: Node 20 is the active LTS version for Node. Node 18 will be end of life soon and new libraries like React 19 support Node 20+
 
 ### Flow
@@ -17,9 +17,10 @@ Vaadin {{platform}}
 ## Hilla
 - **File upload enhancements**: Improved file upload capabilities for Hilla applications.
 - **React 19 support**: Ensures compatibility with the latest version of React, enabling modern front-end development.
-- **Support for Kotlin Nullability in TypeScript Type Generation**: Enhances type safety between Kotlin and TypeScript.
 - **Add way to disable/configure progress indicator**: Provides developers the flexibility to manage UI loading indicators.
-- **Form validation fix in Kotlin**: Resolves issues with Hilla form validation in Kotlin projects.
+- **Form validation fix for Kotlin**: Resolves issues with Hilla form validation in Kotlin projects that are built with Gradle.
+- **JSpecify nullability support**: Enables using JSpecify standard `@Nullable` and `@NonNull` annotations and deprecates Hilla's non-standard annotations.
+- **Data binding enhancements**: New `useComboBoxDataProvider` and `useGridDataProvider` React hooks that simplify setting data provides with filtering.
 
 ## Design System
 - **New Card component**: The new [Card](https://vaadin.com/docs/latest/components/card) component provides a great looking, accessible and configurable implementation of this modern UI pattern, without writing a single line of CSS.
