@@ -5,48 +5,52 @@ Vaadin {{platform}}
 # New and Noteworthy Since Vaadin 24.6
 
 **Notable Changes**
-- Due to an issue in the Spring Framework, we recommend using Spring Boot 3.4.1 or newer to build Vaadin 24.7 projects.
-- Vaadin 24.7 is compatible with React Router v7. When upgrading an application from v24.6, please remove the opt-in feature flag, i.e., future={{ v7_startTransition: true }}, from the custom routing file.
-- `flow-components` has a dependency on `spring-data-commons` to avoid a compilation error in some Eclipse versions due to indirect references. The module does not otherwise depend on Spring. You can exclude the dependency if you cannot have Spring dependencies in your application. If you encounter compilation errors in Eclipse, then you can add an empty org.springframework.data.domain.Pageable class in your application. See https://github.com/vaadin/flow-components/issues/7213 for more details.
+- **Use Spring Boot 3.4.1 or newer**: Due to the [issue](https://github.com/spring-projects/spring-framework/issues/33936) from Spring Framework, we recommend you to use Spring Boot 3.4.1 or newer to build Vaadin 24.7 projects
+- **Vaadin 24.7 is compatible with React Router v7**: When upgrading application from v24.6, please change TypeScript imports from the `react-router-dom` npm package to `react-router` and remove the opt-in feature flag, i.e.: `future={{ v7_startTransition: true }}`, from custom routing file.
+- **Change supported Node from 18 to 20**: Node 20 is the active LTS version for Node. Node 18 will be end of life soon and new libraries like React 19 support Node 20+
 
 ### Flow
-- **Change supported Node version from 18 to 20**: Node 20 is the active LTS version. Node 18 will soon reach end of life, and new libraries like React 19 require Node 20+.
-- **Fault-tolerant messaging for server-client communication**: This enhancement ensures reliable communication between the server and client, improving the robustness of Vaadin applications.
+- **Fault-tolerant messaging for server-client communication**: This enhancement ensures reliable communication between server and client, improving the robustness of Vaadin applications.
+- **Add support for native image build Quarkus-based applications**.
+- **Add support for OAuth2 logout configuration**.
 
-### Hilla
+## Hilla
 - **File upload enhancements**: Improved file upload capabilities for Hilla applications.
 - **React 19 support**: Ensures compatibility with the latest version of React, enabling modern front-end development.
-- **Support for Kotlin nullability in TypeScript type generation**: Enhances type safety between Kotlin and TypeScript.
-- **Option to disable or configure the progress indicator**: Provides developers with flexibility in managing UI loading indicators.
-- **Form validation fix in Kotlin**: Resolves issues with Hilla form validation in Kotlin projects.
+- **Add way to disable/configure progress indicator**: Provides developers the flexibility to manage UI loading indicators.
+- **Form validation fix for Kotlin**: Resolves issues with Hilla form validation in Kotlin projects that are built with Gradle.
+- **JSpecify nullability support**: Enables using JSpecify standard `@Nullable` and `@NonNull` annotations and deprecates Hilla's non-standard annotations.
+- **Data binding enhancements**: New `useComboBoxDataProvider` and `useGridDataProvider` React hooks that simplify setting data provides with filtering.
 
-### Design System
-- **New Card Component and Dashboard Component**: Available for both the Web Component and React implementations.
-- **Add conditional selection of grid items in Grid**: Enhances the flexibility of data grid operations.
-- **Allow configuring min and max rows in Text-Area**: Offers better control over text input fields.
-- **Implement HasEnabled interface in Upload**: Adds consistency to UI component enabling/disabling mechanisms.
-- **Add folder drag-and-drop upload in Upload**: Improves the user experience for file uploads by supporting folder operations.
-- **Add support for Gantt chart**: Introduces a new capability in Vaadin Charts to visually represent project schedules.
-- **Spring Data API for Grid and ComboBox**: Simplifies connecting Vaadin components to Spring Data repositories.
-- **Improvements to core layouts**.
+## Design System
+- **New Card component**: The new [Card](https://vaadin.com/docs/latest/components/card) component provides a great looking, accessible and configurable implementation of this modern UI pattern, without writing a single line of CSS.
+- **Gantt chart**: Vaadin Charts now supports Gantt charts, providing a clear visualization of project schedules, timelines, and task dependencies, complete with drag & drop editing.
+- **Layout enhancements**: New alignment helpers in Horizontal Layout, spacing size API, and experimental tweaks to setWidthFull/setHeightFull API (behind a feature flag).
+- **Grid enhancements**: Shift-click multiselect and tooltip positioning API.
+- **Menu Items support custom properties**: Menu item types can be extended to add custom properties to them.
+- **Accessibility improvements**: Optionally show mouse focus rings on input fields; aria-label API for Grid; disabled buttons optionally focusable & hoverable.
+- **SideNav support for HasUrlParmeter**: SideNavItems now support views implementing the HasUrlParameter interface, in addition to route templates.
+- **Configurable min/max rows in Text Area**: Developers can now set minimum and maximum row count for Text Area components, including single-row support.
+- **Spring Data API for Grid and ComboBox**: A new Spring Data API simplifies connecting Grid and ComboBox to Spring Data repositories, reducing boilerplate code.
 
-### Copilot
+
+## Copilot
 - **React 19 support**.
 - **Custom Components**.
 - **Customizable Palette**: Provides an enhanced developer experience with a customizable command palette.
 - **Impersonation - quick user switching**: Facilitates easier testing and management of user roles by allowing quick user switching.
-- **Show a dismissible notification when a variable is renamed**: Improves user feedback mechanisms in the IDE.
+- **Show a dismissable notification when a variable is renamed**: Improves user feedback mechanisms in the IDE.
 
-### Control Center
-- **Control Center GA**: Version 1.2 is a major milestone, marking the general availability of Control Center.
+## Control Center
+- **Control Center GA**: version 1.2 is a major milestone marking the general availability of Control Center.
 - **Log viewer**: Introduces a new feature for viewing and analyzing application logs directly within Control Center, streamlining debugging and monitoring processes.
-- **Passkey (WebAuthn) authentication:** Enhances security by allowing users to authenticate using passkeys.
-- **Automated domain name updates**.
-- **Automated certificate creation and renewal**.
+- **Passkey (WebAuthn) authentication**: Adds enhanced security with support for WebAuthn, allowing users to authenticate using passkeys.
+- **Automated domain name updates**
+- **Automated Certificate Creation and Renewal**
 - **Environment variable management** for enhanced application configuration flexibility.
 
-### Modernization
-- **Feature Pack**: Expands Vaadin 7 component and API support.
+## Modernization
+- **Feature Pack**: Wider Vaadin 7 component and API support.
 
 ## <a id="_changelogs"></a> Changelogs
 
