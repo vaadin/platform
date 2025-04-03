@@ -285,7 +285,6 @@ public class ComponentsView extends AppLayout {
 
         Card card = new Card();
         card.setTitle(new Div("Lapland"));
-        card.setSubTitle(new Div("The Exotic North"));
         card.add(new Div("Lapland is the northern-most region of Finland and an active outdoor destination."));
 
         Checkbox checkbox = new Checkbox("Checkbox label");
