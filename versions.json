@@ -43,7 +43,7 @@
         },
         "card": {
             "javaVersion": "{{version}}",
-            "jsVersion": "24.8.0-alpha4",
+            "jsVersion": "24.8.0-alpha8",
             "mode": "lit",
             "npmName": "@vaadin/card"
         },
