@@ -198,6 +198,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-card-flow</artifactId>
+                <version>${card.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-checkbox-flow</artifactId>
                 <version>${checkbox.version}</version>
             </dependency>
@@ -382,6 +387,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-button-testbench</artifactId>
                 <version>${button.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-card-testbench</artifactId>
+                <version>${card.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
