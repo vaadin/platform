@@ -46,6 +46,7 @@ import com.vaadin.flow.component.avatar.AvatarGroup.AvatarGroupItem;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.card.Card;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.ListSeries;
@@ -281,6 +282,10 @@ public class ComponentsView extends AppLayout {
             log.log("Clicked button");
         });
         button.setIcon(icon);
+
+        Card card = new Card();
+        card.setTitle(new Div("Lapland"));
+        card.add(new Div("Lapland is the northern-most region of Finland and an active outdoor destination."));
 
         Checkbox checkbox = new Checkbox("Checkbox label");
         log.log("Checkbox default is " + checkbox.getValue());
@@ -667,6 +672,7 @@ public class ComponentsView extends AppLayout {
         WebComponentWrapper webComponentWrapper;
 
         components.add(button);
+        components.add(card);
         components.add(checkbox);
         components.add(checkboxGroup);
         components.add(comboBox);

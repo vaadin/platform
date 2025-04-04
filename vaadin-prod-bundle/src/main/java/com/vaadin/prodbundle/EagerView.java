@@ -7,6 +7,7 @@ import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.avatar.AvatarGroup;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.card.Card;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -76,6 +77,7 @@ public class EagerView extends Div {
     public Board board;
     public BigDecimalField bigDecimalField;
     public Button button;
+    public Card card;
     public Checkbox checkbox;
     public CheckboxGroup<String> checkboxGroup;
     public ComboBox<String> comboBox;
