@@ -480,6 +480,7 @@ public class ComponentsView extends AppLayout {
         IntStream.range(0, 6).forEach(i -> {
             formLayout.add(new TextField("FormLayout field " + i));
         });
+        formLayout.addFormItem(new TextField(), "formLayout form-item");
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.setId("verticallayout");

@@ -382,7 +382,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         List<TextFieldElement> textFields = formLayoutElement
                 .$(TextFieldElement.class).all();
 
-        Assert.assertEquals(6, textFields.size());
+        Assert.assertEquals(7, textFields.size());
     }
 
     @Test
