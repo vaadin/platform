@@ -6,6 +6,7 @@ import '@vaadin/avatar';
 import '@vaadin/avatar-group';
 import '@vaadin/board';
 import '@vaadin/board/src/vaadin-board-row';
+import '@vaadin/card';
 import '@vaadin/icon';
 import '@vaadin/scroller';
 import '@vaadin/virtual-list';
@@ -155,6 +156,12 @@ export class ComponentsView extends View {
         <vaadin-tooltip text="Click to save changes" for="confirm"></vaadin-tooltip>
         <vaadin-button theme="secondary">Secondary</vaadin-button>
         <vaadin-button theme="tertiary">Tertiary</vaadin-button>
+
+        <vaadin-card>
+          <div slot="title">Lapland</div>
+          <div slot="subtitle">The Exotic North</div>
+          <div>Lapland is the northern-most region of Finland and an active outdoor destination.</div>
+        </vaadin-card>
 
         <vaadin-icon name="vaadin:user"></vaadin-icon>
         <vaadin-iconset name="foo" size="16">

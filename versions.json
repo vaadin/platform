@@ -41,6 +41,12 @@
             "mode": "lit",
             "npmName": "@vaadin/button"
         },
+        "card": {
+            "javaVersion": "{{version}}",
+            "jsVersion": "24.7.2",
+            "mode": "lit",
+            "npmName": "@vaadin/card"
+        },
         "checkbox": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.7.2",
@@ -420,6 +426,7 @@
                 "@vaadin/avatar",
                 "@vaadin/avatar-group",
                 "@vaadin/button",
+                "@vaadin/card",
                 "@vaadin/checkbox",
                 "@vaadin/checkbox-group",
                 "@vaadin/combo-box",
