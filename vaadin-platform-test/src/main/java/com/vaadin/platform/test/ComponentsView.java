@@ -285,7 +285,6 @@ public class ComponentsView extends AppLayout {
 
         Card card = new Card();
         card.setTitle(new Div("Lapland"));
-        card.setSubTitle(new Div("The Exotic North"));
         card.add(new Div("Lapland is the northern-most region of Finland and an active outdoor destination."));
 
         Checkbox checkbox = new Checkbox("Checkbox label");
@@ -481,6 +480,7 @@ public class ComponentsView extends AppLayout {
         IntStream.range(0, 6).forEach(i -> {
             formLayout.add(new TextField("FormLayout field " + i));
         });
+        formLayout.addFormItem(new TextField(), "formLayout form-item");
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.setId("verticallayout");

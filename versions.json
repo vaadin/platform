@@ -43,7 +43,7 @@
         },
         "card": {
             "javaVersion": "{{version}}",
-            "jsVersion": "24.8.0-alpha4",
+            "jsVersion": "24.8.0-alpha8",
             "mode": "lit",
             "npmName": "@vaadin/card"
         },
@@ -149,7 +149,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.8.0.alpha2"
+            "javaVersion": "24.8-SNAPSHOT"
         },
         "horizontal-layout": {
             "jsVersion": "24.8.0-alpha8",
