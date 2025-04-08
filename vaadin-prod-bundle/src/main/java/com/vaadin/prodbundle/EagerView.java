@@ -33,6 +33,7 @@ import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.component.masterdetaillayout.MasterDetailLayout;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageList;
@@ -104,6 +105,7 @@ public class EagerView extends Div {
     public LoginOverlay loginOverlay;
     public LoginForm LoginForm;
     public LumoUtility lumoUtility;
+    public MasterDetailLayout masterDetailLayout;
     public MenuBar menuBar;
     public MessageInput messageInput;
     public MessageList messageList;

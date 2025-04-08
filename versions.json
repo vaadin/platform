@@ -199,6 +199,12 @@
             "mode": "lit",
             "npmName": "@vaadin/login"
         },
+        "master-detail-layout": {
+            "javaVersion": "{{version}}",
+            "jsVersion": "24.8.0-alpha8",
+            "mode": "lit",
+            "npmName": "@vaadin/master-detail-layout"
+        },
         "menu-bar": {
             "javaVersion": "{{version}}",
             "jsVersion": "24.8.0-alpha11",
@@ -451,6 +457,7 @@
                 "@vaadin/list-box",
                 "@vaadin/lit-renderer",
                 "@vaadin/login",
+                "@vaadin/master-detail-layout",
                 "@vaadin/menu-bar",
                 "@vaadin/message-input",
                 "@vaadin/message-list",
