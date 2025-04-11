@@ -201,7 +201,7 @@
         },
         "master-detail-layout": {
             "javaVersion": "{{version}}",
-            "jsVersion": "24.8.0-alpha8",
+            "jsVersion": "24.8.0-alpha11",
             "mode": "lit",
             "npmName": "@vaadin/master-detail-layout"
         },
