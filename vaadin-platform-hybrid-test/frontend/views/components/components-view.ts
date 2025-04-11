@@ -45,6 +45,7 @@ import '@vaadin/list-box';
 import '@vaadin/login/src/vaadin-login-form';
 import '@vaadin/login/src/vaadin-login-overlay';
 import '@vaadin/map';
+import '@vaadin/master-detail-layout';
 import '@vaadin/menu-bar';
 import '@vaadin/message-input';
 import '@vaadin/message-list';
@@ -290,6 +291,11 @@ export class ComponentsView extends View {
         <vaadin-progress-bar indeterminate></vaadin-progress-bar>
 
         <vaadin-popover></vaadin-popover>
+        
+        <vaadin-master-detail-layout>
+          <div>Master content</div>
+          <div slot="detail">Detail content</div>
+        </vaadin-master-detail-layout>
 
         <vaadin-menu-bar .items="${[
             {text: 'Home'},

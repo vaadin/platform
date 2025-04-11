@@ -126,6 +126,7 @@ import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.component.masterdetaillayout.MasterDetailLayout;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageList;
@@ -512,6 +513,10 @@ public class ComponentsView extends AppLayout {
         tabSheet.add("Tab two", new Span("Tab two content"));
         tabSheet.addSelectedChangeListener(event -> log.log("TabSheet selected index changed to " + tabSheet.getSelectedIndex()));
 
+        MasterDetailLayout masterDetailLayout = new MasterDetailLayout();
+        masterDetailLayout.setMaster(new Div("Master content"));
+        masterDetailLayout.setDetail(new Div("Detail content"));
+
         Div contextMenuTarget = new Div();
         contextMenuTarget.setText("Context Menu Target");
         contextMenuTarget.setId("context-menu-target");
@@ -730,6 +735,7 @@ public class ComponentsView extends AppLayout {
         layouts.add(splitVertical);
         layouts.add(tabs);
         layouts.add(tabSheet);
+        layouts.add(masterDetailLayout);
         layouts.add(contextMenuTarget);
         layouts.add(board);
         layouts.add(details);
