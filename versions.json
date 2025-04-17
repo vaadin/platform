@@ -576,7 +576,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.3.10",
+            "javaVersion": "9.4.0.alpha1",
             "pro": true
         }
     }
