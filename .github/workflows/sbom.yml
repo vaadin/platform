@@ -1,7 +1,5 @@
 name: SBOM
 on:
-  push:
-    branches: ["master", "24.0", "23.4"]
   pull_request:
     types: [opened, synchronize, reopened, edited]
     paths: ["versions.json", "**/pom.xml", ".github/workflows/sbom.yml", "scripts/generateAndCheckSBOM.js", "scripts/generator/templates/*.xml"]
@@ -48,34 +46,34 @@ jobs:
             && echo "🚫 **TB_LICENSE** is not defined, check that **${{github.repository}}** repo has a valid secret" \
             | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
         name: Check secrets
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      - uses: actions/setup-java@v3
+          node-version: '22'
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v4.5
+      - uses: stCarolas/setup-maven@v5
         with:
           maven-version: '3.8.2'
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v5
         with:
           go-version: 'stable'
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: |
-          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.5.0/bomber_0.5.0_linux_amd64.deb
-          sudo dpkg -i bomber_0.5.0_linux_amd64.deb
-        name: Install bomber-0.5.0
+          wget -q https://github.com/devops-kung-fu/bomber/releases/download/v0.5.1/bomber_0.5.1_linux_amd64.deb
+          sudo dpkg -i bomber_0.5.1_linux_amd64.deb
+        name: Install bomber-0.5.1
       - run: |
-          # Install dependency-check-9.0.2
+          # Install dependency-check-9.0.7
           cd /tmp
-          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v9.0.2/dependency-check-9.0.2-release.zip
-          unzip dependency-check-9.0.2-release.zip
+          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v9.0.7/dependency-check-9.0.7-release.zip
+          unzip dependency-check-9.0.7-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
-        name: Install dependency-check-9.0.2
+        name: Install dependency-check-9.0.7
       - run: |
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
@@ -87,7 +85,7 @@ jobs:
           [ true = "${{github.event.inputs.useFullOWASP}}" ] && A="$A --enable-full-owasp"
           [ true = "${{github.event.inputs.useSnapshots}}" ] && A="$A --useSnapshots"
           V="${{ github.event.inputs.version || github.event.release.tag_name }}"
-          [ -n "$V" ] && A="--version $V"
+          [ -n "$V" ] && A="$A --version $V"
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
