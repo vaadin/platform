@@ -65,6 +65,10 @@
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-web</artifactId>
                 </exclusion>
@@ -111,6 +115,18 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-websocket</artifactId>
             <version>9.0.104</version>
+        </dependency>
+        <!-- CVE-2023-6378, should be removed after spring-boot fix. 
+        https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot-dependencies/build.gradle#L849  -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+             <version>1.2.13</version>
         </dependency>
         <!-- End Spring -->
 
