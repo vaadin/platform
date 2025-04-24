@@ -36,7 +36,9 @@ const licenseWhiteList = [
   VAADIN_LICENSE,
   'https://www.highcharts.com/license',
   'http://www.gnu.org/licenses/lgpl-3.0.html',
-  'CC-BY-3.0'
+  'CC-BY-3.0',
+  'https://opensource.org/licenses/MIT',
+  'BlueOak-1.0.0'
 ];
 
 const cveWhiteList = {
