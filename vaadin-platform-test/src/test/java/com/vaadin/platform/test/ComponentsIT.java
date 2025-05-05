@@ -55,6 +55,8 @@ public class ComponentsIT extends AbstractPlatformTest {
             put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
             put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
             put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-context-menu-overlay", () -> $(DivElement.class).id("context-menu-target").click());
+
         }
     };
 
