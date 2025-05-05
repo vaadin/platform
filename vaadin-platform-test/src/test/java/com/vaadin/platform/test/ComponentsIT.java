@@ -53,8 +53,10 @@ public class ComponentsIT extends ParallelTest {
         String browsers = System.getProperty("grid.browsers");
         if (sauceUser != null && !sauceUser.isEmpty()) {
             if (browsers == null || browsers.isEmpty()) {
-                //drop safari-9 test, it leads to infrastructure error from saucelab
-                Parameters.setGridBrowsers("ie11,firefox,safari,edge,edge-18");
+                //drop safari-9 test, it leads to infrastructure error from saucelabs
+                //use safari-17 for now, as latest safari-18 will lead saucelabs 
+                //to use macOS 15 which is not supported at the moment
+                Parameters.setGridBrowsers("ie11,firefox,safari-17,edge,edge-18");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
