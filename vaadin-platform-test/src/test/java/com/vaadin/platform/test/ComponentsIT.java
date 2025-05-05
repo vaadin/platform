@@ -26,7 +26,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
                 // supported broswers : firefox esr is 102
-                Parameters.setGridBrowsers("firefox,firefox-102,edge");
+                Parameters.setGridBrowsers("firefox,firefox-102,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
