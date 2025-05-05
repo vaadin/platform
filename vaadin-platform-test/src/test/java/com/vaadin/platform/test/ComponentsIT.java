@@ -26,7 +26,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
                 // supported broswers : firefox esr is 102
-                Parameters.setGridBrowsers("firefox,firefox-102,safari,edge");
+                Parameters.setGridBrowsers("firefox,firefox-102,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
@@ -55,6 +55,8 @@ public class ComponentsIT extends AbstractPlatformTest {
             put("vaadin-login-overlay", () -> $(ButtonElement.class).id("open-login-overlay").click());
             put("vaadin-context-menu", () -> $(DivElement.class).id("context-menu-target").click());
             put("vaadin-context-menu-item", () -> $(DivElement.class).id("context-menu-target").click());
+            put("vaadin-context-menu-overlay", () -> $(DivElement.class).id("context-menu-target").click());
+
         }
     };
 
