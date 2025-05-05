@@ -26,7 +26,9 @@ public class ComponentsIT extends AbstractPlatformTest {
         if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
-                Parameters.setGridBrowsers("firefox,safari,edge");
+                // use safari-17 for now, as latest safari-18 will lead saucelabs 
+                // to use macOS 15 which is not supported at the moment
+                Parameters.setGridBrowsers("firefox,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
