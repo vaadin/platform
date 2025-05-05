@@ -26,7 +26,9 @@ public class ComponentsIT extends AbstractPlatformTest {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
                 // supported broswers : firefox esr is 102
-                Parameters.setGridBrowsers("firefox,firefox-102,safari,edge");
+                // use safari-17 for now, as latest safari-18 will lead saucelabs 
+                // to use macOS 15 which is not supported at the moment
+                Parameters.setGridBrowsers("firefox,firefox-102,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
