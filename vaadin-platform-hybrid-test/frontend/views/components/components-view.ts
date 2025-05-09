@@ -45,6 +45,7 @@ import '@vaadin/list-box';
 import '@vaadin/login/src/vaadin-login-form';
 import '@vaadin/login/src/vaadin-login-overlay';
 import '@vaadin/map';
+import '@vaadin/markdown';
 import '@vaadin/master-detail-layout';
 import '@vaadin/menu-bar';
 import '@vaadin/message-input';
@@ -244,6 +245,7 @@ export class ComponentsView extends View {
           <vaadin-number-field></vaadin-number-field>
           <vaadin-text-area></vaadin-text-area>
         </vaadin-form-layout>
+         <vaadin-markdown></vaadin-markdown>
 
         <vaadin-grid-sorter></vaadin-grid-sorter>
         <vaadin-grid-tree-toggle></vaadin-grid-tree-toggle>
