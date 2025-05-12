@@ -245,7 +245,7 @@ export class ComponentsView extends View {
           <vaadin-number-field></vaadin-number-field>
           <vaadin-text-area></vaadin-text-area>
         </vaadin-form-layout>
-         <vaadin-markdown></vaadin-markdown>
+        <vaadin-markdown></vaadin-markdown>
 
         <vaadin-grid-sorter></vaadin-grid-sorter>
         <vaadin-grid-tree-toggle></vaadin-grid-tree-toggle>

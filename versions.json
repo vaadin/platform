@@ -201,7 +201,7 @@
         },
         "markdown": {
             "javaVersion": "{{version}}",
-            "jsVersion": "24.8.0-alpha17",
+            "jsVersion": "24.8.0-alpha18",
             "mode": "lit",
             "npmName": "@vaadin/markdown"
         },
