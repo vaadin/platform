@@ -126,6 +126,7 @@ import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.component.markdown.Markdown;
 import com.vaadin.flow.component.masterdetaillayout.MasterDetailLayout;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.messages.MessageInput;
@@ -517,6 +518,8 @@ public class ComponentsView extends AppLayout {
         masterDetailLayout.setMaster(new Div("Master content"));
         masterDetailLayout.setDetail(new Div("Detail content"));
 
+        Markdown markdown = new Markdown("**Hello** _World_");
+
         Div contextMenuTarget = new Div();
         contextMenuTarget.setText("Context Menu Target");
         contextMenuTarget.setId("context-menu-target");
@@ -726,6 +729,7 @@ public class ComponentsView extends AppLayout {
         components.add(reactRouterOutlet);
         components.add(fieldSet);
         components.add(dashboard);
+        components.add(markdown);
 
         layouts.add(formLayout);
         layouts.add(verticalLayout);
