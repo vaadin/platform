@@ -283,6 +283,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-markdown-flow</artifactId>
+                <version>${markdown.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-master-detail-layout-flow</artifactId>
                 <version>${master.detail.layout.version}</version>
             </dependency>
@@ -507,6 +512,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-map-testbench</artifactId>
                 <version>${map.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-markdown-testbench</artifactId>
+                <version>${markdown.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
