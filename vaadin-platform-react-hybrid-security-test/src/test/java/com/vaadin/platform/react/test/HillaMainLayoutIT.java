@@ -59,7 +59,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         loginButton.click();
 
         // Wait for page reload that makes the button reference stale.
-        waitUntil(ExpectedConditions.stalenessOf(loginButton));
+        waitForElement("No login button found", By.id(LOGIN_BUTTON_ID));
 
         Assert.assertEquals("Only one route should be available", 1,
                 $(SideNavItemElement.class).all().size());
