@@ -58,8 +58,14 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         ButtonElement loginButton = $(ButtonElement.class).id(LOGIN_BUTTON_ID);
         loginButton.click();
 
+        waitForElement("Root view should be shown after logout.", By.id("hilla"));
+        Assert.assertEquals("Two buttons should be shown in the root view", 2,
+                $(ButtonElement.class).all().size());
+
+        $(ButtonElement.class).id("hilla").click();
+
         // Wait for page reload that makes the button reference stale.
-        waitUntil(ExpectedConditions.stalenessOf(loginButton));
+        waitForElement("No login button found", By.id(LOGIN_BUTTON_ID));
 
         Assert.assertEquals("Only one route should be available", 1,
                 $(SideNavItemElement.class).all().size());
