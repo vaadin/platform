@@ -5,8 +5,7 @@ import { useAuth } from 'Frontend/auth';
 import { ViewConfig } from "@vaadin/hilla-file-router/types.js";
 
 export const config: ViewConfig = {
-    menu: { exclude: true},
-    lazy: false,
+    menu: { exclude: true}
 }
 
 interface NavigateAndReloadProps {
