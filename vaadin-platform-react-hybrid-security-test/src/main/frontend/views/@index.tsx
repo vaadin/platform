@@ -17,7 +17,7 @@ export default function Public() {
 
     return (
         <VerticalLayout theme="padding">
-            <p>This is the Hill index page.</p>
+            <p>This is the Hilla index page.</p>
             <Button onClick={(e) => navigate("hilla")} id={"hilla"}>Hilla root</Button>
             <Button onClick={(e) => navigate("flow")} id={"flow"}>Flow root</Button>
         </VerticalLayout>
