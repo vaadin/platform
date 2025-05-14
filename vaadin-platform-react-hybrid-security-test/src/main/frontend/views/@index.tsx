@@ -6,6 +6,8 @@ export const config: ViewConfig = {
     menu: {
         title: "root",
     },
+    // should be removed after hilla https://github.com/vaadin/hilla/issues/3482
+    lazy: false,
     flowLayout: false
 };
 

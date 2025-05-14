@@ -28,8 +28,6 @@ export default function Layout() {
 
     async function doLogout() {
         await logout();
-        // Workaround for https://github.com/vaadin/hilla/issues/2235
-        window.location.reload();
     }
 
     return (
