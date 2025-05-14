@@ -6,7 +6,6 @@ import { ViewConfig } from "@vaadin/hilla-file-router/types.js";
 
 export const config: ViewConfig = {
     menu: { exclude: true},
-    lazy: false,
 }
 
 interface NavigateAndReloadProps {

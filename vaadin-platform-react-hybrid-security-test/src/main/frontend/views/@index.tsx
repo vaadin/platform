@@ -5,8 +5,8 @@ import {useNavigate} from "react-router";
 export const config: ViewConfig = {
     menu: {
         title: "root",
-        lazy: false,
     },
+    lazy: false,
     flowLayout: false
 };
 
