@@ -58,6 +58,13 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         ButtonElement loginButton = $(ButtonElement.class).id(LOGIN_BUTTON_ID);
         loginButton.click();
 
+        // test update after hilla https://github.com/vaadin/hilla/pull/3445
+       waitForElement("Root view should be shown after logout.", By.id("hilla"));
+        Assert.assertEquals("Two buttons should be shown in the root view", 2,
+                $(ButtonElement.class).all().size());
+
+        $(ButtonElement.class).id("hilla").click();
+
         // Wait for page reload that makes the button reference stale.
         waitForElement("No login button found", By.id(LOGIN_BUTTON_ID));
 
