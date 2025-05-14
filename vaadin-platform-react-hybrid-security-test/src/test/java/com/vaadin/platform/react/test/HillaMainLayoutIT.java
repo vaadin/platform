@@ -58,7 +58,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         ButtonElement loginButton = $(ButtonElement.class).id(LOGIN_BUTTON_ID);
         loginButton.click();
 
-        waitForElement("Root view should be shown after logout." By.id("hilla"))
+        waitForElement("Root view should be shown after logout.", By.id("hilla"));
         Assert.assertEquals("Two buttons should be shown in the root view", 2,
                 $(ButtonElement.class).all().size());
 
