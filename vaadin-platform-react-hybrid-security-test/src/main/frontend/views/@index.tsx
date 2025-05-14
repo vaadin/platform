@@ -6,6 +6,7 @@ export const config: ViewConfig = {
     menu: {
         title: "root",
     },
+    lazy: false,
     flowLayout: false
 };
 
