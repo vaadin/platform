@@ -13,7 +13,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void flowViewInHillaLayout() {
-        Assert.assertNotNull(findElement(By.id("hilla")));
+        waitForElement("Page is not ready when this check performs",
+                By.id("hilla"));
 
         // Navigate to Flow view
         getMenuElement("Flow in hilla").get().click();
@@ -30,6 +31,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void navigateUsingNavLink() {
+        waitForElement("Page is not ready when this check performs",
+                By.id("toHello"));
         findElement(By.id("toHello")).click();
 
         Assert.assertTrue("Navigation with NavLink failed.",
@@ -38,6 +41,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void backNavigationTest() {
+        waitForElement("Page is not ready when this check performs",
+                By.id("toHello"));
         findElement(By.id("toHello")).click();
 
         Assert.assertTrue("Navigation with NavLink failed.",
@@ -63,6 +68,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void forwardNavigationTest() {
+        waitForElement("Page is not ready when this check performs",
+                By.id("toHello"));
         findElement(By.id("toHello")).click();
 
         Assert.assertTrue("Navigation with NavLink failed.",

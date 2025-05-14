@@ -4,10 +4,8 @@ package com.vaadin.platform.react.test;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 
 import static com.vaadin.platform.react.test.views.FlowLayout.LOGIN_BUTTON_ID;
@@ -16,6 +14,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void anonymousUser_loginButtonAndOnlyAlwaysAllowItems() {
+        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertTrue("Login button should be visible",
                 $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertEquals("Login button should say 'Sign in''",
@@ -31,6 +30,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void loginUser_forAllAndUserViewsAvailable_logout_onlyPublicAvailable() {
+        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         $(ButtonElement.class).id(LOGIN_BUTTON_ID).click();
         login("user", "user");
 
@@ -71,6 +71,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void loginAdmin_forAllAndAdminViewsAvailable() {
+        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         $(ButtonElement.class).id(LOGIN_BUTTON_ID).click();
         login("admin", "admin");
 
