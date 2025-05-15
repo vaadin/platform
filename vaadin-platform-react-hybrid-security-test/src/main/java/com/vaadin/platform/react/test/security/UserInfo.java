@@ -3,7 +3,7 @@ package com.vaadin.platform.react.test.security;
 import java.util.Collection;
 import java.util.Collections;
 
-import com.vaadin.hilla.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * User information used in client-side authentication and authorization.
@@ -11,10 +11,10 @@ import com.vaadin.hilla.Nonnull;
  */
 public final class UserInfo {
 
-    @Nonnull
+    @NonNull
     private final String name;
-    @Nonnull
-    private final Collection<@Nonnull String> authorities;
+    @NonNull
+    private final Collection<@NonNull String> authorities;
 
     public UserInfo(String name, Collection<String> authorities) {
         this.name = name;
