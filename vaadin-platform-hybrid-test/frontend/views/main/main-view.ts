@@ -1,9 +1,10 @@
-import { CSSModule } from '../../utils/css-utils';
 import { AppLayout } from '@vaadin/app-layout';
 import '@vaadin/app-layout';
 import '@vaadin/app-layout/vaadin-drawer-toggle';
 import '@vaadin/avatar';
 import '@vaadin/tabs';
+import { color } from '@vaadin/vaadin-lumo-styles/color.js';
+import { typography } from '@vaadin/vaadin-lumo-styles/typography.js';
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js'
 import { router } from '../../index';
@@ -27,9 +28,8 @@ export class MainView extends LitElement {
 
   static get styles() {
     return [
-      CSSModule('lumo-typography'),
-      CSSModule('lumo-color'),
-      CSSModule('app-layout'),
+      typography,
+      color,
       css`
         :host {
           display: block;

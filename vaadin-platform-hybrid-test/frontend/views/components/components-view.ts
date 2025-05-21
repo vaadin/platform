@@ -52,8 +52,6 @@ import '@vaadin/message-input';
 import '@vaadin/message-list';
 import '@vaadin/number-field';
 import '@vaadin/password-field';
-import '@vaadin/polymer-legacy-adapter/style-modules';
-import '@vaadin/polymer-legacy-adapter/template-renderer';
 import '@vaadin/popover';
 import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
@@ -293,7 +291,7 @@ export class ComponentsView extends View {
         <vaadin-progress-bar indeterminate></vaadin-progress-bar>
 
         <vaadin-popover></vaadin-popover>
-        
+
         <vaadin-master-detail-layout>
           <div>Master content</div>
           <div slot="detail">Detail content</div>
@@ -359,9 +357,6 @@ export class ComponentsView extends View {
         </template>
       </vaadin-notification>
       <vaadin-map></vaadin-map>
-
-      <style-modules></style-modules>
-      <template-renderer></template-renderer>
 
       <vaadin-virtual-list
         .items="${[{ name: 'Juan' }, { name: 'John' }]}"
