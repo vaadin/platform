@@ -150,10 +150,9 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
             WebElement element, Class<? extends AbstractTheme> themeClass) {
         String themeName = themeClass.getSimpleName().toLowerCase();
         Boolean hasStyle = (Boolean) executeScript("" +
-                "var styles = Array.from(arguments[0]._template.content" +
-                ".querySelectorAll('style'))" +
-                ".filter(style => style.textContent.indexOf('" +
-                themeName + "') > -1);" +
+                "var styles = arguments[0].shadowRoot.adoptedStyleSheets" +
+                ".filter(({ cssRules }) => [...cssRules].map(r => r.cssText).join('')" +
+                ".includes(" + themeName + ") > -1);" +
                 "return styles.length > 0;", element);
 
         Assert.assertTrue("Element '" + element.getTagName() + "' should have" +
