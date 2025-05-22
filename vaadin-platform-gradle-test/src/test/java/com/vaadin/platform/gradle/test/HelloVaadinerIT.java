@@ -152,7 +152,7 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
         Boolean hasStyle = (Boolean) executeScript("" +
                 "var styles = arguments[0].shadowRoot.adoptedStyleSheets" +
                 ".filter(({ cssRules }) => [...cssRules].map(r => r.cssText).join('')" +
-                ".includes(" + themeName + ") > -1);" +
+                ".includes('" + themeName + "') > -1);" +
                 "return styles.length > 0;", element);
 
         Assert.assertTrue("Element '" + element.getTagName() + "' should have" +
