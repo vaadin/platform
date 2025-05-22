@@ -45,7 +45,7 @@ public class ComponentsIT extends ParallelTest {
         if (isSauce) {
             if (browsers == null || browsers.isEmpty()) {
                 // temporally drop safari
-                Parameters.setGridBrowsers("ie11,firefox,edge,edge-18");
+                Parameters.setGridBrowsers("firefox,edge,edge-18");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
