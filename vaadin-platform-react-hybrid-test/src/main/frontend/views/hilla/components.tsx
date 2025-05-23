@@ -152,13 +152,17 @@ export default function Components() {
             <MultiSelectComboBox
                 items={['apple', 'banana', 'lemon', 'orange']}></MultiSelectComboBox>
             <ConfirmDialog></ConfirmDialog>
-            <ContextMenu open-on="click">
-                <template>
-                    <ListBox>
-                        <Item>First menu item</Item>
-                        <Item>Second menu item</Item>
-                    </ListBox>
-                </template>
+            <ContextMenu
+                open-on="click"
+                renderer={() => {
+                    return (
+                        <ListBox>
+                            <Item>First menu item</Item>
+                            <Item>Second menu item</Item>
+                        </ListBox>
+                    );
+                }}
+            >
                 <p>Context Menu</p>
             </ContextMenu>
             <CookieConsent></CookieConsent>

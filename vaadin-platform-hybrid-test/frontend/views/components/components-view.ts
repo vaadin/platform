@@ -52,8 +52,6 @@ import '@vaadin/message-input';
 import '@vaadin/message-list';
 import '@vaadin/number-field';
 import '@vaadin/password-field';
-import '@vaadin/polymer-legacy-adapter/style-modules';
-import '@vaadin/polymer-legacy-adapter/template-renderer';
 import '@vaadin/popover';
 import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
@@ -191,13 +189,13 @@ export class ComponentsView extends View {
         <vaadin-combo-box .items="${[1,2,3,4,5]}"></vaadin-combo-box>
         <vaadin-multi-select-combo-box .items="${['apple', 'banana', 'lemon', 'orange']}"></vaadin-multi-select-combo-box>
         <vaadin-confirm-dialog></vaadin-confirm-dialog>
-        <vaadin-context-menu open-on="click">
-          <template>
-            <vaadin-list-box>
-              <vaadin-item>First menu item</vaadin-item>
-              <vaadin-item>Second menu item</vaadin-item>
-            </vaadin-list-box>
-          </template>
+        <vaadin-context-menu
+          open-on="click"
+          .items="${[
+            { text: "First menu item" },
+            { text: "Second menu item" },
+          ]}"
+        >
           <p>Context Menu</p>
         </vaadin-context-menu>
         <vaadin-cookie-consent></vaadin-cookie-consent>
@@ -293,7 +291,7 @@ export class ComponentsView extends View {
         <vaadin-progress-bar indeterminate></vaadin-progress-bar>
 
         <vaadin-popover></vaadin-popover>
-        
+
         <vaadin-master-detail-layout>
           <div>Master content</div>
           <div slot="detail">Detail content</div>
@@ -350,18 +348,20 @@ export class ComponentsView extends View {
         <div>-</div>
       </vaadin-app-layout>
 
-      <vaadin-notification opened duration="-1">
-        <template>
+      <vaadin-notification
+        opened
+        duration="-1"
+        .renderer="${(root: HTMLElement) => {
+          root.innerHTML = `
           <div>
             <b>Notice</b><br>
             Content
           </div>
-        </template>
-      </vaadin-notification>
-      <vaadin-map></vaadin-map>
+        `;
+        }}"
+      ></vaadin-notification>
 
-      <style-modules></style-modules>
-      <template-renderer></template-renderer>
+      <vaadin-map></vaadin-map>
 
       <vaadin-virtual-list
         .items="${[{ name: 'Juan' }, { name: 'John' }]}"
