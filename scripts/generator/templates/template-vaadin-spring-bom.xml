@@ -141,11 +141,6 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-material-theme</artifactId>
-                <version>${vaadin.material.theme.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
                 <artifactId>flow-server-production-mode</artifactId>
                 <version>${flow.version}</version>
             </dependency>
@@ -178,7 +173,7 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>signals</artifactId>
                 <version>${flow.version}</version>
-            </dependency>            
+            </dependency>
             <!-- Free Components -->
             <dependency>
                 <groupId>com.vaadin</groupId>

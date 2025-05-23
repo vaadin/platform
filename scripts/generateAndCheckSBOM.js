@@ -31,6 +31,7 @@ const licenseWhiteList = [
   'EPL-2.0',
   'AFL-2.1',
   'MPL-1.1',
+  'MPL-2.0',
   'CC0-1.0',
   'CC-BY-4.0',
   'Zlib',
