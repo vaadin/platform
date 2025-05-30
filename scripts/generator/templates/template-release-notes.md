@@ -150,7 +150,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Version 3.4 or newer
+  <td>Version 3.5 or newer
   </td>
 </tr>
 </table>
