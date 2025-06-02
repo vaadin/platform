@@ -67,14 +67,6 @@ const cveWhiteList = {
     cves: ['CVE-2024-21639', 'CVE-2024-21640'],
     description: 'Wait for the update from the jcefmaven community. Meanwhile the swing-kit is supposed to be used with fixed websites and not to browse the internet, we have a check for that, so the only possible attacker would be the same person that created the swing application, aka our customer devs. so this vulnerability is not classified by us as critical issue'
   },
-  'pkg:npm/railroad-diagrams@1.0.0' : {
-    cves: ['CVE-2024-26467'],
-    description: 'This is coming from the tools, @cyclonedx/cyclonedx-npm, we have used for sbom module, FP for us. '
-  },
-  'pkg:npm/libxmljs2@0.35.0' : {
-    cves: ['CVE-2024-34394', 'CVE-2024-34393'],
-    description: 'This is coming from the tools, @cyclonedx/cyclonedx, we have used for sbom module, FP for us. '
-  },
   'pkg:npm/micromatch@4.0.7' : {
       cves: ['CVE-2024-4067'],
       description: 'Based on the assumption that the code is only run as part of a build, we take this as a false positive. Also we are tracking the development process to upgrade the vulnerable dependencies.'
