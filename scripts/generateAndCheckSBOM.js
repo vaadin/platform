@@ -571,7 +571,6 @@ async function main() {
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
     await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
     await run('npm install --silent');
-    await run('npm install --silent --save-dev @cyclonedx/cyclonedx-npm');
     await run('npx --yes @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
   }
 
