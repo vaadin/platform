@@ -572,7 +572,7 @@ async function main() {
     await run('npm ls --depth 6', { output: 'target/tree-npm.txt' });
     await run('npm install --silent');
     await run('npm install --silent --save-dev @cyclonedx/cyclonedx-npm');
-    await run('npx @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
+    await run('npx --yes @cyclonedx/cyclonedx-npm --output-file target/bom-npm.json --output-format JSON');
   }
 
   log(`generating 'bom-vaadin.js'`);
