@@ -173,7 +173,7 @@ jobs:
           echo "Keeping docker container running, push Ctrl-C to terminate ..."
           read key
       - if: ${{failure()}}
-        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | tr ',' _` >> $GITHUB_ENV
+        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
         shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
