@@ -12,6 +12,7 @@
   <artifactId>com.vaadin.gradle.plugin</artifactId>
   <version>{{platform}}</version>
   <packaging>pom</packaging>
+  <name>vaadin gradle plugin portal</name>
   <dependencies>
     <dependency>
       <groupId>com.vaadin</groupId>
