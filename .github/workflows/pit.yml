@@ -139,11 +139,13 @@ jobs:
       - name: Set up Helm
         if: ${{ matrix.app == 'control-center' }}
         uses: azure/setup-helm@v3.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create k8s Kind Cluster
         if: ${{ matrix.app == 'control-center' }}
         uses: helm/kind-action@v1
         with:
-          install_only: false          
+          install_only: false
       - run: |
           # PIT TESTS ${{matrix.app}} ${{inputs.version}}
           echo "${{toJSON(inputs)}}"
