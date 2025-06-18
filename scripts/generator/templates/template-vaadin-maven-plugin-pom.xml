@@ -171,7 +171,7 @@
                         <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
-                        </goals>Add commentMore actions
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
