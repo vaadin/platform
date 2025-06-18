@@ -131,7 +131,7 @@
             "javaVersion": "24.8.0"
         },
         "flow-cdi": {
-            "javaVersion": "15.2.0.rc1"
+            "javaVersion": "15.2.0"
         },
         "flow-form-filler": {
             "javaVersion": "1.1.1"
@@ -372,7 +372,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "2.2.0.rc1"
+            "javaVersion": "2.2.0"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
