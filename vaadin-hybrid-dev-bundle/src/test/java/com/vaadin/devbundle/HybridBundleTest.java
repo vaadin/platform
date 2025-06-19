@@ -16,7 +16,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BundleTest {
+public class HybridBundleTest {
 
     @Test
     public void usageStatsIncluded() throws IOException {
@@ -31,7 +31,7 @@ public class BundleTest {
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
         int foundInFiles = findInBundleBuildFolder(line -> line.contains(needle)
-                && !line.contains("document.querySelector"));
+                && !line.contains("document.querySelector")&& !line.contains("copilot-main-resized"));
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
