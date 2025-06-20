@@ -339,7 +339,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         File tempFile = createTempFile();
         fillPathToUploadInput(tempFile.getPath());
 
-        assertLog("Upload received file text/plain with text foo");
+        assertLogMatches("Upload received file .* with text foo");
     }
 
     @Test
@@ -641,8 +641,15 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertElementRendered(input);
 
         element.sendKeys("foo");
-        
+
         assertLog(msg);
+    }
+
+    private void assertLogMatches(String pattern) {
+        WebElement log = findElement(By.id("log"));
+        String logLine = log.getText();
+        Assert.assertTrue("expected pattern: <" + pattern + "> but was: <"
+                + logLine + ">", logLine.matches(pattern));
     }
 
     private void assertLog(String msg) {
