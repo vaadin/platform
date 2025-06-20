@@ -337,9 +337,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertElementRendered(dropLabel);
 
         File tempFile = createTempFile();
-        fillPathToUploadInput(tempFile.getPath());
+        upload.upload(tempFile);
 
-        assertLogMatches("Upload received file .* with text foo");
+        assertLog("Upload received file " + tempFile.getName() + " with text foo");
     }
 
     @Test
@@ -645,13 +645,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertLog(msg);
     }
 
-    private void assertLogMatches(String pattern) {
-        WebElement log = findElement(By.id("log"));
-        String logLine = log.getText();
-        Assert.assertTrue("expected pattern: <" + pattern + "> but was: <"
-                + logLine + ">", logLine.matches(pattern));
-    }
-
     private void assertLog(String msg) {
         WebElement log = findElement(By.id("log"));
         Assert.assertEquals(msg, log.getText());
@@ -669,33 +662,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         writer.close();
         tempFile.deleteOnExit();
         return tempFile;
-    }
-
-    private void fillPathToUploadInput(String tempFileName) {
-        // create a valid path in upload input element. Instead of selecting a
-        // file by some file browsing dialog, we use the local path directly.
-        WebElement input = $(UploadElement.class).first()
-                .$(TestBenchElement.class).id("fileInput");
-        setLocalFileDetector(input);
-        input.sendKeys(tempFileName);
-    }
-
-    private void setLocalFileDetector(WebElement element) {
-        if (getRunLocallyBrowser() != null) {
-            return;
-        }
-
-        if (element instanceof WrapsElement) {
-            element = ((WrapsElement) element).getWrappedElement();
-        }
-        if (element instanceof RemoteWebElement) {
-            ((RemoteWebElement) element)
-                    .setFileDetector(new LocalFileDetector());
-        } else {
-            throw new IllegalArgumentException(
-                    "Expected argument of type RemoteWebElement, received "
-                            + element.getClass().getName());
-        }
     }
 
 }
