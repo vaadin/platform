@@ -58,17 +58,16 @@ jobs:
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
-      - name: Compute Matrix
+      - name: Compute Arguments and Matrix
         id: set
         shell: bash
         run: |
-          [ -z "${{secrets.GHTK}}" ] && exit 1
-          curl -s -H "Authorization: Bearer ${{secrets.GHTK}}" https://api.github.com/repos/vaadin/platform | jq '.permissions'  | grep -q '"pull": true' || exit 1
-
+          echo "Computing matrix ..."
+          [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${CE_LICENSE}" ] && exit 1
           V="${{inputs.version}}"
-          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" >&2 && exit 1
+          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
 
-          git clone -q https://github.com/vaadin/platform-in-test-script.git pit
+          git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           W="${{inputs.windows}}"
           L="${{inputs.linux}}"
           [ true != "$W" -a true != "$L" ] && W=true
@@ -89,7 +88,8 @@ jobs:
           M=`echo $M | sed -e s/,$//`']}'
           echo "Generated Matrix: $M"
           echo "matrix=$M" >> $GITHUB_OUTPUT
-          rm -rf pit
+        env:
+          CE_LICENSE: ${{secrets.CE_LICENSE}}
   run:
     needs: prepare
     strategy:
@@ -101,28 +101,29 @@ jobs:
         image: ${{ (matrix.app == 'control-center' ) && 'docker:dind' || '' }}
         options: --privileged --shm-size=2g
     steps:
-      - name: Check parameters
-        shell: bash
-        run: |
-          [ -n "${{matrix.app}}" ] && echo "RUNNING TEST FOR ${{matrix.app}} APP" || exit 1
-      - name: Setup ACT local runner
-        if: ${{ env.ACT }}
-        shell: bash
-        run: |
-          command -v sudo >/dev/null 2>&1 && S=sudo || S=
-          $S apt-get update -qq
-          $S apt-get install -qq -y vim iputils-ping curl git sudo unzip >/dev/null
       - name: Install PiT
-        shell: bash
         run: |
-          git clone -q https://github.com/vaadin/platform-in-test-script.git pit
+          git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           cd pit && git rev-parse --short HEAD
-      - name: Install Licenses
         shell: bash
+      - name: Setup License
         run: |
           mkdir -p ~/.vaadin/
-          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-          echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
+          echo '{"username":"'${TB%%/*}'","proKey":"'${TB#*/}'"}' > ~/.vaadin/proKey
+          echo "$SS" > ~/vaadin.spreadsheet.developer.license
+        shell: bash
+        env:
+          TB: ${{secrets.TB_LICENSE}}
+          SS: ${{secrets.SS_LICENSE}}
+      - name: Setup ACT local runner
+        if: ${{ env.ACT }}
+        run: |
+          # LINUX LIBS (ACT)
+          # see https://github.com/browser-actions/setup-chrome/issues/240
+          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
+      - uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -142,34 +143,37 @@ jobs:
         if: ${{ matrix.app == 'control-center' }}
         uses: helm/kind-action@v1
         with:
-          cluster_name: pit
-      - name: Setup ACT vars
-        if: ${{ env.ACT }}
-        shell: bash
-        run: |
-          echo "PATH=$PATH" >> vars.sh
-      - name: Run PiT ${{matrix.app}} ${{inputs.version}}
-        shell: bash
+          install_only: false
+      - name: Run PiT
         run: |
           echo "${{toJSON(inputs)}}"
           [ -n "${{inputs.version}}" ] && ARG="--version=${{inputs.version}}"
           [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
-          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --ghtk=${{secrets.GHTK}}"
+          ./pit/scripts/pit/run.sh --path
+          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GITHUB_TOKEN}}"
+          # Output the PiT command to execute, so as we can run the same locally
           echo "$CMD"
+          # Run PiT in test mode, so as we can copy and paste commands when reporting
+          $CMD --test
+          # Run PiT
           $CMD
         env:
-          OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
-          MAVEN_ARGS: ${{env.MAVEN_ARGS}}
-          CC_CERT: ${{secrets.CC_CERT}}
-          CC_KEY: ${{secrets.CC_KEY}}
-      - name: ACT Wait
-        if: ${{ always() && env.ACT }}
+            GHTK: ${{secrets.GHTK}}
+            CE_LICENSE: ${{secrets.CE_LICENSE}}
+            OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
+            MAVEN_ARGS: ${{env.MAVEN_ARGS}}
+            CC_CERT: ${{secrets.CC_CERT}}
+            CC_KEY: ${{secrets.CC_KEY}}
+        shell: bash
+      - if: ${{ env.ACT }}
+        name: Wait (ACT)
         run: |
           echo "Keeping docker container running, push Ctrl-C to terminate ..."
           read key
       - if: ${{failure()}}
+        name: Set artifact_name
         run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
         shell: bash
       - if: ${{failure()}}
