@@ -15,6 +15,7 @@
  */
 package com.vaadin.platform.test;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -27,7 +28,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import com.vaadin.flow.component.tabs.TabSheet;
 import org.apache.commons.io.IOUtils;
 
 import com.vaadin.collaborationengine.CollaborationAvatarGroup;
@@ -97,7 +97,6 @@ import com.vaadin.flow.component.html.HtmlObject;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Input;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
@@ -119,8 +118,8 @@ import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.RangeInput;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.FontIcon;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.listbox.ListBox;
@@ -150,6 +149,7 @@ import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.BigDecimalField;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -161,7 +161,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
-import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.webcomponent.WebComponentUI;
 import com.vaadin.flow.component.webcomponent.WebComponentWrapper;
@@ -175,12 +174,13 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.internal.MessageDigestUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.streams.UploadHandler;
 
 @Route("")
 public class ComponentsView extends AppLayout {
 
     static {
-        CollaborationEngineConfiguration cfg = new CollaborationEngineConfiguration(e -> {/* NO-OP */});
+        CollaborationEngineConfiguration cfg = new CollaborationEngineConfiguration();
         // Deactivate Push (https://github.com/vaadin/collaboration-engine-internal/issues/615)
         cfg.setAutomaticallyActivatePush(false);
         CollaborationEngine.configure(VaadinService.getCurrent(), cfg);
@@ -247,7 +247,7 @@ public class ComponentsView extends AppLayout {
         image.setWidth("20px");
         image.getElement().getStyle().set("background", "blue");
         Input input = new Input();
-        Label label = new Label("label");
+        NativeLabel label = new NativeLabel("label");
         NativeButton nativeButton = new NativeButton("nativeButton");
         Pre pre = new Pre("pre");
         Component sel = new HtmlComponent("select");
@@ -466,13 +466,14 @@ public class ComponentsView extends AppLayout {
             log.log("TextArea value changed from " + e.getOldValue() + " to " + e.getValue());
         });
 
-        MemoryBuffer buffer = new MemoryBuffer();
-        Upload upload = new Upload(buffer);
-        upload.addSucceededListener(
-                event -> handleUploadedFile(event.getMIMEType(), event.getMIMEType(), buffer.getInputStream()));
+        Upload upload = new Upload(UploadHandler.inMemory(
+                (metadata, data) -> handleUploadedFile(
+                        metadata.contentType(), metadata.fileName(), new ByteArrayInputStream(data)
+                )
+        ));
 
         Dialog dialog = new Dialog();
-        dialog.add(new Label("This is the contents of the dialog"));
+        dialog.add(new NativeLabel("This is the contents of the dialog"));
         Button dialogButton = new Button("open Dialog", event -> dialog.open());
         dialogButton.setId("open-dialog");
 
@@ -534,7 +535,7 @@ public class ComponentsView extends AppLayout {
 
         Board board = new Board();
         board.setId("board");
-        Label aheader = new Label("This is a board");
+        NativeLabel aheader = new NativeLabel("This is a board");
         aheader.getElement().getStyle().set("background-color", "lightblue");
         aheader.getElement().getStyle().set("text-align", "center");
         aheader.setWidth("100%");

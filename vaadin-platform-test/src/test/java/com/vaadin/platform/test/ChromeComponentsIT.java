@@ -337,9 +337,9 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertElementRendered(dropLabel);
 
         File tempFile = createTempFile();
-        fillPathToUploadInput(tempFile.getPath());
+        upload.upload(tempFile);
 
-        assertLog("Upload received file text/plain with text foo");
+        assertLog("Upload received file " + tempFile.getName() + " with text foo");
     }
 
     @Test
@@ -641,7 +641,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         assertElementRendered(input);
 
         element.sendKeys("foo");
-        
+
         assertLog(msg);
     }
 
@@ -662,33 +662,6 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         writer.close();
         tempFile.deleteOnExit();
         return tempFile;
-    }
-
-    private void fillPathToUploadInput(String tempFileName) {
-        // create a valid path in upload input element. Instead of selecting a
-        // file by some file browsing dialog, we use the local path directly.
-        WebElement input = $(UploadElement.class).first()
-                .$(TestBenchElement.class).id("fileInput");
-        setLocalFileDetector(input);
-        input.sendKeys(tempFileName);
-    }
-
-    private void setLocalFileDetector(WebElement element) {
-        if (getRunLocallyBrowser() != null) {
-            return;
-        }
-
-        if (element instanceof WrapsElement) {
-            element = ((WrapsElement) element).getWrappedElement();
-        }
-        if (element instanceof RemoteWebElement) {
-            ((RemoteWebElement) element)
-                    .setFileDetector(new LocalFileDetector());
-        } else {
-            throw new IllegalArgumentException(
-                    "Expected argument of type RemoteWebElement, received "
-                            + element.getClass().getName());
-        }
     }
 
 }
