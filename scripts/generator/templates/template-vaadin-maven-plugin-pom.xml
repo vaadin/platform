@@ -154,7 +154,7 @@
                     <execution>
                         <id>attach-sources</id>
                         <phase>package</phase>
-                        <goals>Add commentMore actions
+                        <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
