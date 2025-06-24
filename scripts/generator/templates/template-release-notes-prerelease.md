@@ -2,7 +2,7 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/project)
 
-*This is a pre-release for the Vaadin 24.8. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use this release, you'll need to have following repositories declared in your  project (Vaadin pre-releases are not pushed to Maven central) :*
+*This is a pre-release for the Vaadin 24.9. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use this release, you'll need to have following repositories declared in your  project (Vaadin pre-releases are not pushed to Maven central) :*
 
     <repositories>
         <repository>
