@@ -30,11 +30,11 @@ dependencies {
     // Vaadin
     implementation enforcedPlatform("com.vaadin:vaadin-bom:$vaadinVersion")
     implementation 'com.vaadin:vaadin'
-    
+
     testImplementation 'com.vaadin:vaadin-testbench'
     testImplementation 'junit:junit:4.13'
-    
-    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
     // logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties for logger configuration
     implementation 'org.slf4j:slf4j-simple:2.0.3'
