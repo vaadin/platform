@@ -79,7 +79,6 @@ import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Article;
 import com.vaadin.flow.component.html.Aside;
-import com.vaadin.flow.component.html.Code;
 import com.vaadin.flow.component.html.DescriptionList;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Emphasis;
@@ -226,8 +225,6 @@ public class ComponentsView extends AppLayout {
 
         Header header = new Header(span);
         
-        Code code = new Code("Code");
-
         Anchor anchor = new Anchor("#", "anchor");
 
         ListItem listItem = new ListItem("ordered list");
@@ -273,7 +270,7 @@ public class ComponentsView extends AppLayout {
 
         Scroller scroller = new Scroller(section);
 
-        Main main = new Main(div, header, code, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
+        Main main = new Main(div, header, anchor, orderedList, unorderedList, descriptionList, aside, article, nav,
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
                 nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow);
 
