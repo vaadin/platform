@@ -16,7 +16,7 @@
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
         <jna.version>5.15.0</jna.version>
-        <jakarta.ee.version>11.0.0</jakarta.ee.version>
+        <jakarta.ee.version>10.0.0</jakarta.ee.version>
     </properties>
 
     <distributionManagement>
