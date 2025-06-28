@@ -53,3 +53,4 @@ vaadin-hybrid-dev-bundle/pom.xml
 vaadin-dev-bundle/pom.xml
 vaadin-prod-bundle/pom.xml
 vaadin-prod-bundle/pom-unoptimized.xml
+vaadin-quarkus/pom.xml
