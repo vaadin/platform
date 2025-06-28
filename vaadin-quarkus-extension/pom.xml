@@ -16,7 +16,9 @@
         <vaadin.version>${project.version}</vaadin.version>
         <codestarts>${project.groupId}:${project.artifactId}:codestarts:jar:${project.version}</codestarts>
         <vaadin-quarkus>${project.groupId}:${project.artifactId}::jar:${project.version}</vaadin-quarkus>
+        <vaadin-quarkus-deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</vaadin-quarkus-deployment>
         <codestart>${project.groupId}:${project.artifactId}::jar:${project.version}</codestart>
+        <quarkus.version>3.15.0</quarkus.version>
     </properties>
 
     <repositories>
@@ -121,7 +123,7 @@
                                     <artifactId>vaadin-quarkus</artifactId>
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/build/quarkus-metadata</outputDirectory>
-                                    <includes>META-INF/quarkus-extension.yaml</includes>
+                                    <includes>META-INF/quarkus-extension.*</includes>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.vaadin</groupId>
@@ -156,8 +158,11 @@
                                 property, so the result in the filtered file is the expansion of 'artifact: "${vaadin-quarkus}"'
                             -->
                             <delimiters>
+                                <delimiter>com.vaadin\:*\:${com.vaadin:vaadin-quarkus:jar.version}</delimiter>
                                 <delimiter>com.vaadin:*::jar:${com.vaadin:vaadin-quarkus:jar.version}</delimiter>
                             </delimiters>
+                            <encoding>UTF-8</encoding>
+                            <propertiesEncoding>UTF-8</propertiesEncoding>
                             <useDefaultDelimiters>false</useDefaultDelimiters>
                             <outputDirectory>${project.build.directory}/build/quarkus-metadata-step1</outputDirectory>
                             <resources>
