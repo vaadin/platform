@@ -4,8 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-platform-parent</artifactId>
+        <artifactId>vaadin-quarkus-extension-parent</artifactId>
         <version>24.8-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>vaadin-quarkus-extension</artifactId>
@@ -17,6 +18,7 @@
         <codestarts>${project.groupId}:${project.artifactId}:codestarts:jar:${project.version}</codestarts>
         <vaadin-quarkus>${project.groupId}:${project.artifactId}::jar:${project.version}</vaadin-quarkus>
         <codestart>${project.groupId}:${project.artifactId}::jar:${project.version}</codestart>
+        <quarkus.version>3.20.1</quarkus.version>
     </properties>
 
     <repositories>
@@ -224,6 +226,25 @@
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-extension-maven-plugin</artifactId>
+                <version>${quarkus.version}</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>extension-descriptor</goal>
+                        </goals>
+                        <configuration>
+                            <extensionFile>${project.build.directory}/build/quarkus-metadata-step1/META-INF/quarkus-extension.yaml</extensionFile>
+                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}
+                            </deployment>
+                            <skipExtensionValidation>true</skipExtensionValidation>
                         </configuration>
                     </execution>
                 </executions>
