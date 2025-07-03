@@ -138,7 +138,7 @@ jobs:
         if: ${{ matrix.app == 'control-center' }}
         uses: azure/setup-helm@v3.5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Create k8s Kind Cluster
         if: ${{ matrix.app == 'control-center' }}
         uses: helm/kind-action@v1
@@ -152,7 +152,7 @@ jobs:
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
           ./pit/scripts/pit/run.sh --path
-          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GITHUB_TOKEN}}"
+          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GHTK}}"
           # Output the PiT command to execute, so as we can run the same locally
           echo "$CMD"
           # Run PiT in test mode, so as we can copy and paste commands when reporting
@@ -160,7 +160,6 @@ jobs:
           # Run PiT
           $CMD
         env:
-            GHTK: ${{secrets.GHTK}}
             CE_LICENSE: ${{secrets.CE_LICENSE}}
             OPENAI_TOKEN: ${{secrets.OPENAI_TOKEN}}
             MAVEN_ARGS: ${{env.MAVEN_ARGS}}
