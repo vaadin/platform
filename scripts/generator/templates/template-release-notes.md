@@ -82,7 +82,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 - Chrome (evergreen).
 - Firefox (evergreen).
    - Firefox Extended Support Release (ESR).
-- Safari 15 or newer (latest minor version in each major series).
+- Safari 17 or newer (latest minor version in each major series).
 - Edge (Chromium, evergreen).
   </td>
 </tr>
@@ -91,7 +91,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
   <td>
 
 - Chrome (evergreen) for Android (4.4 or newer).
-- Safari 15 for iOS or newer (latest minor version in each major series).
+- Safari 17 for iOS or newer (latest minor version in each major series).
   </td>
 </tr>
 <tr>
@@ -150,7 +150,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Version 3.4 or newer
+  <td>Version 4.0 or newer
   </td>
 </tr>
 </table>
