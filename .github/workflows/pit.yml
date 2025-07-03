@@ -65,7 +65,7 @@ jobs:
           echo "Computing matrix ..."
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${CE_LICENSE}" ] && exit 1
           V="${{inputs.version}}"
-          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|\.alpha[0-9]+|\.beta[0-9]+|\.rc[0-9]+)?$' && echo "Invalid version" && exit 1
+          [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|[\.-]alpha[0-9]+|[\.-]beta[0-9]+|[\.-]rc[0-9]+)?$' && echo "Invalid version"
 
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
           W="${{inputs.windows}}"
