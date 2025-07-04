@@ -81,29 +81,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.reformanda.semper</groupId>
-                <artifactId>dependencyversion-maven-plugin</artifactId>
-                <version>1.0.1</version>
-                <executions>
-                    <execution>
-                        <id>set-vaadin-quarkus-version</id>
-                        <goals>
-                            <goal>set-version</goal>
-                        </goals>
-                        <configuration>
-                            <propertySets>
-                                <propertySet>
-                                    <includes>
-                                        <include>com.vaadin:vaadin-quarkus:jar</include>
-                                    </includes>
-                                    <transitive>false</transitive>
-                                </propertySet>
-                            </propertySets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.5.0</version>
@@ -149,12 +126,12 @@
                         </goals>
                         <configuration>
                             <executable>java</executable>
-                            <basedir>${project.baseDir}</basedir>
+                            <workingDirectory>${project.basedir}/scripts</workingDirectory>
                             <arguments>
-                                <argument>./scripts/MetaDataReplacements.java</argument>
+                                <argument>MetaDataReplacements.java</argument>
                                 <argument>${project.build.directory}/build/quarkus-metadata/META-INF/quarkus-extension.yaml</argument>
                                 <argument>${project.version}</argument>
-                                <argument>${com.vaadin:vaadin-quarkus:jar.version}</argument>
+                                <argument>${vaadin.quarkus.version}</argument>
                             </arguments>
                         </configuration>
                     </execution>

@@ -12,17 +12,26 @@ public class MetaDataReplacements {
         }
 
         Path yamlFile = new File(args[0]).toPath();
+        if (!Files.exists(yamlFile)) {
+            System.err.println("Metadata YAML file not found at: " + yamlFile);
+            System.exit(1);
+        }
+
         String platformVersion = args[1];
+        if (platformVersion.isBlank()) {
+            System.err.println("Platform version cannot be blank");
+            System.exit(1);
+        }
         String vaadinQuarkusVersion = args[2];
+        if (vaadinQuarkusVersion.isBlank()) {
+            System.err.println("Platform version cannot be blank");
+            System.exit(1);
+        }
 
         System.out.println("Updating extension metadata template at " + yamlFile);
         System.out.println("Platform Version: " + platformVersion);
         System.out.println("Vaadin Quarkus Version: " + vaadinQuarkusVersion);
 
-        if (!Files.exists(yamlFile)) {
-            System.err.println("Metadata YAML file not found at: " + yamlFile);
-            System.exit(1);
-        }
 
         try {
             String content = Files.readString(yamlFile);
