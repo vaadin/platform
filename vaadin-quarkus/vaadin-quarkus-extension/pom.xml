@@ -119,20 +119,6 @@
                 <version>3.5.1</version>
                 <executions>
                     <execution>
-                        <id>show-java-version</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>${env.JAVA_HOME}/bin/java</executable>
-                            <workingDirectory>${project.basedir}/scripts</workingDirectory>
-                            <arguments>
-                                <argument>--version</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>prepare-extension-metadata</id>
                         <phase>process-resources</phase>
                         <goals>

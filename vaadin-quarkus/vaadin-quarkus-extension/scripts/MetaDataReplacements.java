@@ -28,7 +28,7 @@ public class MetaDataReplacements {
             System.exit(1);
         }
 
-        System.out.println("Updating extension metadata template at " + yamlFile);
+        System.out.println("Updating Vaadin Quarkus extension metadata template at " + yamlFile);
         System.out.println("Platform Version: " + platformVersion);
         System.out.println("Vaadin Quarkus Version: " + vaadinQuarkusVersion);
 
