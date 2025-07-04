@@ -50,7 +50,7 @@
             <modules>
                 <module>vaadin-jandex</module>
                 <module>vaadin-core-jandex</module>
-                <module>vaadin-quarkus-extension</module>
+                <module>vaadin-quarkus</module>
             </modules>
         </profile>
         <profile>

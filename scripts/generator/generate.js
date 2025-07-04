@@ -84,6 +84,9 @@ const hybridDevBundlePomResultFileName = getResultsFilePath('vaadin-hybrid-dev-b
 const prodBundleTemplateFileName = getTemplateFilePath('template-prod-bundle-pom.xml');
 const prodBundlePomResultFileName = getResultsFilePath('vaadin-prod-bundle-pom.xml');
 
+const vaadinQuarkusTemplateFileName = getTemplateFilePath('template-vaadin-quarkus-pom.xml');
+const vaadinQuarkusPomResultFileName = getResultsFilePath('vaadin-quarkus-pom.xml');
+
 const platform=argv['platform'];
 const versions = transformer.transformVersions(inputVersions, platform, argv['useSnapshots']);
 
@@ -120,6 +123,8 @@ writer.writeProperty(versions, ["flow"], platformJavadocTemplatePomFileName, pla
 writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
+writer.writeProperty(versions, ["vaadin-quarkus"], vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
+writer.writeMaven(versions, vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 
