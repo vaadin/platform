@@ -7,24 +7,24 @@ public class MetaDataReplacements {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.err.println("Usage: MetaDataReplacements <metadataFile> <platformVersion> <vaadin-quarkus-version>");
+            System.err.println("Usage: MetaDataReplacements <metadata-file> <platform-version> <vaadin-quarkus-version>");
             System.exit(1);
         }
 
         Path yamlFile = new File(args[0]).toPath();
         if (!Files.exists(yamlFile)) {
-            System.err.println("Metadata YAML file not found at: " + yamlFile);
+            System.err.println("Metadata YAML template file not found at: " + yamlFile);
             System.exit(1);
         }
 
         String platformVersion = args[1];
         if (platformVersion.isBlank()) {
-            System.err.println("Platform version cannot be blank");
+            System.err.println("Vaadin platform version cannot be blank");
             System.exit(1);
         }
         String vaadinQuarkusVersion = args[2];
         if (vaadinQuarkusVersion.isBlank()) {
-            System.err.println("Platform version cannot be blank");
+            System.err.println("vaadin-quarkus version cannot be blank");
             System.exit(1);
         }
 
