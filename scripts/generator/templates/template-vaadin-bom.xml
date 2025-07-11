@@ -16,7 +16,6 @@
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
         <jna.version>5.15.0</jna.version>
-        <jakarta.ee.version>11.0.0</jakarta.ee.version>
     </properties>
 
     <distributionManagement>
@@ -28,13 +27,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>jakarta.platform</groupId>
-                <artifactId>jakarta.jakartaee-bom</artifactId>
-                <version>${jakarta.ee.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-bom</artifactId>
