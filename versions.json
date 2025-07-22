@@ -562,7 +562,7 @@
             "javaVersion": "24.7.2"
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.13.4"
+            "javaVersion": "1.13.5"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
