@@ -394,10 +394,10 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.2.3"
+            "javaVersion": "1.2.6"
         },
         "copilot": {
-            "javaVersion": "24.7.11"
+            "javaVersion": "24.7.12"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.4.2"
@@ -562,7 +562,7 @@
             "javaVersion": "24.7.2"
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.13.4"
+            "javaVersion": "1.13.5"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
