@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
@@ -72,7 +73,7 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
         // Make sure that we close any modal dialog before each iteration
-        $("body").first().sendKeys(Keys.ESCAPE);
+        new Actions(getDriver()).sendKeys(Keys.ESCAPE).build().perform();
 
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         String className = testComponent.component != null ? testComponent.component.getName() : null;
