@@ -152,7 +152,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
 
-        WebElement dropDown = $("vaadin-date-picker-overlay").id("overlay");
+        WebElement dropDown = datePicker.$("vaadin-date-picker-overlay").first();
 
         assertElementRendered(dropDown);
 
@@ -171,7 +171,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         timePicker.$("div").attribute("part", "toggle-button").first().click();
 
-        WebElement dropDown = $("vaadin-time-picker-overlay").first();
+        WebElement dropDown = timePicker.$("vaadin-time-picker-overlay").first();
 
         assertElementRendered(dropDown);
 
@@ -186,7 +186,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         select.$("vaadin-input-container").attribute("part", "input-field").first().click();
 
-        WebElement dropDown = $("vaadin-select-overlay").first();
+        WebElement dropDown = select.$("vaadin-select-overlay").first();
 
         assertElementRendered(dropDown);
 
