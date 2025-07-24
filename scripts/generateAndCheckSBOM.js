@@ -82,8 +82,11 @@ const cveWhiteList = {
   'pkg:maven/io.netty/netty-common@4.1.118.Final' : {
     cves: ['CVE-2025-25193'],
     description: 'the cve has wrong version range, the related commit has been merged and released with 118.Final. referred in netty/issues/14795'
+  },
+  'pkg:maven/com.google.code.gson/gson@2.10' : {
+    cves: ['CVE-2025-53864'],
+    description: 'False positive: gson is used transitively via vaadin-swing-kit-client, but this CVE targets Connect2id Nimbus JOSE + JWT, which is not used in our context.'
   }
-
 }
 
 const STYLE = `<style>
