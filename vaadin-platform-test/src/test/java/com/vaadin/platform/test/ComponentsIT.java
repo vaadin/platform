@@ -6,10 +6,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
@@ -71,7 +72,7 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
         // Make sure that we close any modal dialog before each iteration
-        $("body").first().click();
+        $("body").first().sendKeys(Keys.ESCAPE);
 
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         String className = testComponent.component != null ? testComponent.component.getName() : null;
