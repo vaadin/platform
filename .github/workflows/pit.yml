@@ -1,6 +1,7 @@
 name: PiT
 run-name: PiT ${{ inputs.version }} (lin=${{inputs.linux}} win=${{inputs.windows}} skip=${{inputs.skipcurrent}}) ${{inputs.starters}}
 on:
+  push:
   workflow_dispatch:
     inputs:
       version:
@@ -62,20 +63,22 @@ jobs:
         id: set
         shell: bash
         run: |
-          echo "Computing matrix ..."
+          echo "Computing Arguments & Matrix ..."
+          set -x
           [ -z "${{secrets.GHTK}}" -o -z "${{secrets.TB_LICENSE}}" -o -z "${{secrets.SS_LICENSE}}" -o -z "${CE_LICENSE}" ] && exit 1
           V="${{inputs.version}}"
           [ -n "$V" ] && echo "$V" | grep -Eqv '^[0-9]+(\.[0-9]+)*(-SNAPSHOT|[\.-]alpha[0-9]+|[\.-]beta[0-9]+|[\.-]rc[0-9]+)?$' && echo "Invalid version"
-
           git clone -q https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
+          (cd pit && git checkout ts)
+          ./pit/scripts/pit/run-ts.sh --help
           W="${{inputs.windows}}"
           L="${{inputs.linux}}"
-          [ true != "$W" -a true != "$L" ] && W=true
-          [ true != "$L" -a true != "$W" ] && L=true
-          A="$A --starters=${{inputs.starters}}"
+          [ -n "$W" -a true != "$W" -a true != "$L" ] && W=true
+          [ true = "$L" -o -z "$W" ] && L=true
+          A="$A --generated"
           [ true = "${{inputs.generated}}" ] && A="$A --generated"
           [ true = "${{inputs.demos}}" ] && A="$A --demos"
-          cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
+          cmd="./pit/scripts/pit/run-ts.sh $A --list"
           echo "Generating list of starters: $cmd"
           S=`eval $cmd`
           M='{"include":['
@@ -104,7 +107,7 @@ jobs:
       - name: Install PiT
         run: |
           git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
-          cd pit && git rev-parse --short HEAD
+          cd pit && git checkout ts && git rev-parse --short HEAD
         shell: bash
       - name: Setup License
         run: |
@@ -151,8 +154,8 @@ jobs:
           [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
-          ./pit/scripts/pit/run.sh --path
-          CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GHTK}}"
+          # ./pit/scripts/pit/run-ts.sh --path
+          CMD="./pit/scripts/pit/run-ts.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GHTK}}"
           # Output the PiT command to execute, so as we can run the same locally
           echo "$CMD"
           # Run PiT in test mode, so as we can copy and paste commands when reporting
