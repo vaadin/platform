@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import com.vaadin.hilla.route.RouteUtil;
@@ -26,7 +26,7 @@ public class SecurityConfig extends VaadinWebSecurity {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(registry -> {
-            registry.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
+            registry.requestMatchers("/").permitAll();
             registry.requestMatchers(routeUtil::isRouteAllowed).permitAll();
         });
         super.configure(http);
@@ -36,7 +36,7 @@ public class SecurityConfig extends VaadinWebSecurity {
     @Override
     protected void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().requestMatchers(new AntPathRequestMatcher("/images/**"));
+        web.ignoring().requestMatchers("/images/**");
     }
 
     @Bean
