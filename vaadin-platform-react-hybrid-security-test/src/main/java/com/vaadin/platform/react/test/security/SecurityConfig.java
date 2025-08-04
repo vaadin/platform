@@ -36,7 +36,7 @@ public class SecurityConfig extends VaadinWebSecurity {
     @Override
     protected void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().requestMatchers(PathPatternRequestMatcher.pathPattern("/images/**"));
+        web.ignoring().requestMatchers("/images/**");
     }
 
     @Bean
