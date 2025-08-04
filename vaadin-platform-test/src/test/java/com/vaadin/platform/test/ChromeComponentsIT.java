@@ -134,7 +134,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         comboBox.$(TestBenchElement.class).id("toggleButton").click();
 
-        WebElement dropDown = $("vaadin-combo-box-overlay").id("overlay");
+        WebElement dropDown = comboBox.$("vaadin-combo-box-overlay").id("overlay");
 
         assertElementRendered(dropDown);
 
@@ -223,8 +223,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         grid.getCell(1, 1).click();
 
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
-                By.tagName("vaadin-context-menu-overlay")));
-        TestBenchElement contextMenuItem = $("vaadin-context-menu-overlay")
+                By.tagName("vaadin-context-menu")));
+        TestBenchElement contextMenuItem = $("vaadin-context-menu")
                 .first().$("vaadin-context-menu-item").first();
         Assert.assertEquals("foo", contextMenuItem.getText());
 
@@ -345,7 +345,8 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
     @Test
     public void dialogIsRendered() {
         $(ButtonElement.class).id("open-dialog").click();
-        TestBenchElement dialogOverlay = $("vaadin-dialog-overlay")
+        TestBenchElement dialog = $("vaadin-dialog").first();
+        TestBenchElement dialogOverlay = dialog.$("vaadin-dialog-overlay")
                 .id("overlay");
 
         TestBenchElement content = dialogOverlay.$(TestBenchElement.class)
@@ -353,7 +354,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         assertElementRendered(content);
 
-        TestBenchElement contentComponent = dialogOverlay.$(NativeLabelElement.class).first();
+        TestBenchElement contentComponent = dialog.$(NativeLabelElement.class).first();
 
         Assert.assertEquals("This is the contents of the dialog",
                 contentComponent.getText());
@@ -514,17 +515,16 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
 
         contextMenuTarget.click();
 
-        // Check to see if the context-menu is there.
-        // If not, a NoSuchElementException will be thrown
-        $("vaadin-context-menu").first();
+        TestBenchElement contextMenu = $("vaadin-context-menu").first();
 
-        TestBenchElement contextMenuOverlay = $("vaadin-context-menu-overlay").first();
+        TestBenchElement contextMenuOverlay = contextMenu.$("vaadin-context-menu-overlay")
+            .first();
 
         assertElementRendered(contextMenuOverlay);
 
         assertElementRendered(contextMenuOverlay.$(DivElement.class).id("overlay"));
 
-        List<TestBenchElement> items = contextMenuOverlay
+        List<TestBenchElement> items = contextMenu
                 .$("vaadin-context-menu-item").all();
         Assert.assertEquals(2, items.size());
 
