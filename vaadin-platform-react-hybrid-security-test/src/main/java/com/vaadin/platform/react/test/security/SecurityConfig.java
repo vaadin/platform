@@ -26,7 +26,7 @@ public class SecurityConfig extends VaadinWebSecurity {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(registry -> {
-            registry.requestMatchers(PathPatternRequestMatcher.pathPattern("/")).permitAll();
+            registry.requestMatchers("/").permitAll();
             registry.requestMatchers(routeUtil::isRouteAllowed).permitAll();
         });
         super.configure(http);
