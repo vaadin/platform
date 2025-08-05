@@ -27,7 +27,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vaadin.flow.component.login.testbench.LoginFormElement;
+import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavElement;
 import com.vaadin.flow.component.sidenav.testbench.SideNavItemElement;
 import com.vaadin.testbench.IPAddress;
@@ -131,10 +131,10 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     }
 
     protected void login(String username, String password) {
-        LoginFormElement loginForm = $(LoginFormElement.class).first();
-        loginForm.getUsernameField().setValue(username);
-        loginForm.getPasswordField().setValue(password);
-        loginForm.getSubmitButton().click();
-        waitUntil(ExpectedConditions.stalenessOf(loginForm));
+        LoginOverlayElement loginOverlay = $(LoginOverlayElement.class).first();
+        loginOverlay.getUsernameField().setValue(username);
+        loginOverlay.getPasswordField().setValue(password);
+        loginOverlay.getSubmitButton().click();
+        waitUntil(ExpectedConditions.stalenessOf(loginOverlay));
     }
 }
