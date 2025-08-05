@@ -159,6 +159,10 @@ public class ComponentUsageTest {
                 continue;
             }
             String tbTag = allTBElementTags.get(i);
+            if ("vaadin-context-menu-overlay".equals(tbTag)) {
+                // Exclude ContextMenuOverlayElement since it's broken in V25
+                continue;
+            }
             if ("*".equals(tbTag)) {
                 // some special components like GridTRElement has the * selector
                 continue;
