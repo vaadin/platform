@@ -26,10 +26,10 @@ import elemental.json.impl.JsonUtil;
 public class AllComponentsIncludedTest {
 
     private static final Set<String> lazyComponentFiles = Set.of(
-            "@vaadin/charts/vaadin-chart.js",
+            "@vaadin/charts/src/vaadin-chart.js",
             "@vaadin/icons/vaadin-iconset.js",
-            "@vaadin/map/vaadin-map.js",
-            "@vaadin/rich-text-editor/vaadin-rich-text-editor.js",
+            "@vaadin/map/src/vaadin-map.js",
+            "@vaadin/rich-text-editor/src/vaadin-rich-text-editor.js",
             "Frontend/generated/jar-resources/vaadin-map/mapConnector.js",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js");
 
