@@ -63,6 +63,12 @@
             <version>${flow.version}</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>copilot</artifactId>
+            <version>${copilot.version}</version>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
