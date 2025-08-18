@@ -14,7 +14,6 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
-import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.dashboard.Dashboard;
@@ -85,7 +84,6 @@ public class EagerView extends Div {
     public ComboBox<String> comboBox;
     public ConfirmDialog confirmDialog;
     public ContextMenu contextMenu;
-    public CookieConsent cookieConsent;
     public Crud<String> crud;
     public CustomField<String> customField;
     public Dashboard dashboard;
