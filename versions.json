@@ -539,9 +539,6 @@
             "mode": "lit",
             "npmName": "@vaadin/rich-text-editor"
         },
-        "vaadin-classic-components": {
-            "javaVersion": "24.2.1"
-        },
         "vaadin-core": {
             "jsVersion": "{{version}}",
             "npmName": "@vaadin/vaadin-core"
