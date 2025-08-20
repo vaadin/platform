@@ -57,7 +57,6 @@ import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.crud.CrudFilter;
@@ -566,8 +565,6 @@ public class ComponentsView extends AppLayout {
         Button confirmDialogButton = new Button("open confirm Dialog", event -> confirmDialog.open());
         confirmDialogButton.setId("open-confirm-dialog");
 
-        CookieConsent cookieConsent = new CookieConsent();
-
         AbstractBackEndDataProvider<Entity, CrudFilter> crudProvider = new AbstractBackEndDataProvider<Entity, CrudFilter>() {
             private static final long serialVersionUID = 1L;
 
@@ -711,7 +708,6 @@ public class ComponentsView extends AppLayout {
         components.add(integerField);
         components.add(textArea);
         components.add(upload);
-        components.add(cookieConsent);
         components.add(crud);
         components.add(openLoginOverlay);
         components.add(loginForm);

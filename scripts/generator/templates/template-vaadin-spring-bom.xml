@@ -430,11 +430,6 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-cookie-consent-testbench</artifactId>
-                <version>${cookie.consent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-crud-testbench</artifactId>
                 <version>${crud.version}</version>
             </dependency>
@@ -653,11 +648,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-rich-text-editor-flow</artifactId>
                 <version>${rich.text.editor.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-cookie-consent-flow</artifactId>
-                <version>${cookie.consent.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
