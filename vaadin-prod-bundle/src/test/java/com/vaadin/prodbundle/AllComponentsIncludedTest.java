@@ -32,7 +32,11 @@ public class AllComponentsIncludedTest {
             "@vaadin/rich-text-editor/src/vaadin-rich-text-editor.js",
             "Frontend/generated/jar-resources/vaadin-map/mapConnector.js",
             "Frontend/generated/jar-resources/vaadin-map/synchronization/index.js",
-            "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js");
+            "Frontend/generated/jar-resources/vaadin-spreadsheet/spreadsheet-export.js",
+            "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js",
+            "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet-styles.js",
+            "ol/proj",
+            "proj4");
 
     @Test
     public void compareStatsWithUnoptimized() throws IOException {
