@@ -485,7 +485,6 @@
             "exclusions": [
                 "@vaadin/board",
                 "@vaadin/charts",
-                "@vaadin/cookie-consent",
                 "@vaadin/crud",
                 "@vaadin/dashboard",
                 "@vaadin/grid-pro",
@@ -509,15 +508,6 @@
             "jsVersion": "25.0.0-alpha16",
             "mode": "lit",
             "npmName": "@vaadin/charts"
-        },
-        "cookie-consent": {
-            "javaVersion": "{{version}}",
-            "jsVersion": "25.0.0-alpha15",
-            "mode": "lit",
-            "npmName": "@vaadin/cookie-consent"
-        },
-        "cookieconsent": {
-            "jsVersion": "3.1.1"
         },
         "crud": {
             "javaVersion": "{{version}}",

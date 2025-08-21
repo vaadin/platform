@@ -20,7 +20,6 @@ import '@vaadin/checkbox-group';
 import '@vaadin/combo-box';
 import '@vaadin/multi-select-combo-box';
 import '@vaadin/confirm-dialog';
-import '@vaadin/cookie-consent';
 import '@vaadin/crud';
 import '@vaadin/crud/src/vaadin-crud-edit-column';
 import '@vaadin/dashboard';
@@ -198,7 +197,6 @@ export class ComponentsView extends View {
         >
           <p>Context Menu</p>
         </vaadin-context-menu>
-        <vaadin-cookie-consent></vaadin-cookie-consent>
         <vaadin-crud .items="${[{"name": "Juan", "surname": "Garcia"}]}">
         </vaadin-crud>
 

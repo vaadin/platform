@@ -60,7 +60,6 @@ import {
     BoardRow,
     Chart,
     ChartSeries,
-    CookieConsent,
     Crud,
     CrudEditColumn, Dashboard,
     GridPro,
@@ -165,7 +164,6 @@ export default function Components() {
             >
                 <p>Context Menu</p>
             </ContextMenu>
-            <CookieConsent></CookieConsent>
             <Crud items={[{"name": "Juan", "surname": "Garcia"}]}>
             </Crud>
 
