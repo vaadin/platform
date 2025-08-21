@@ -16,6 +16,7 @@ import com.vaadin.testbench.TestBenchElement;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -93,6 +94,7 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
     }
 
     @Test
+    @Ignore("https://github.com/vaadin/flow/issues/22073")
     public void verifyComponentStylesAppliedFromTheme() {
         TestBenchElement myField = $(TestBenchElement.class).id(TEXT_FIELD_ID);
         TestBenchElement input = myField.$("vaadin-input-container")
