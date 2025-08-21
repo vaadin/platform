@@ -1,3 +1,5 @@
+@import '@vaadin/vaadin-lumo-styles/lumo.css';
+
 .centered-content {
     margin: 0 auto;
     max-width: 250px;
