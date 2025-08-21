@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import com.vaadin.flow.internal.JsonUtils;
 
 import elemental.json.Json;
+import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.impl.JsonUtil;
 
@@ -50,10 +52,23 @@ public class AllComponentsIncludedTest {
         unoptimizedStats.remove("indexHtmlGenerated");
         optimizedStats.remove("indexHtmlGenerated");
 
-        List<String> unoptJson = List
-                .of(JsonUtil.stringify(unoptimizedStats, 2).split("\n"));
-        List<String> optJson = List
-                .of(JsonUtil.stringify(optimizedStats, 2).split("\n"));
+        // The unoptimized bundle should contain both Lumo and Aura but the optimized
+        // bundle should only have the default theme (Aura)
+        Set<String> lumoFiles = Set.of("@vaadin/vaadin-lumo-styles/lumo.css", "@vaadin/vaadin-themable-mixin",
+                "Frontend/generated/jar-resources/theme-util.js");
+        JsonArray bundleImports = unoptimizedStats.getArray("bundleImports");
+        for (int i = 0; i < bundleImports.length(); i++) {
+            String importName = bundleImports.getString(i);
+            if (lumoFiles.contains(importName)) {
+                bundleImports.remove(i--);
+            }
+        }
+        unoptimizedStats.getObject("frontendHashes").remove("theme-util.js");
+        List<String> unoptJson = new ArrayList<>(
+                List.of(JsonUtil.stringify(unoptimizedStats, 2).split("\n")));
+        List<String> optJson = new ArrayList<>(
+                List.of(JsonUtil.stringify(optimizedStats, 2).split("\n")));
+
         if (!unoptJson.equals(optJson)) {
             Patch<String> patch = DiffUtils.diff(unoptJson, optJson);
             List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff(
