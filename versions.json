@@ -550,14 +550,14 @@
             "javaVersion": "24.8.0"
         },
         "vaadin-license-checker": {
-            "javaVersion": "2.0.0-alpha2"
+            "javaVersion": "2.0.0-alpha3"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "10.0.0-alpha3",
+            "javaVersion": "10.0.0-alpha4",
             "pro": true
         }
     }
