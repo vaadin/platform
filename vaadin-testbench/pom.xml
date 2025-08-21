@@ -104,11 +104,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-cookie-consent-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-crud-testbench</artifactId>
             <scope>compile</scope>
         </dependency>

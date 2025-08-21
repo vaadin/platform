@@ -49,11 +49,6 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-cookie-consent-flow</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-crud-flow</artifactId>
         </dependency>
 
