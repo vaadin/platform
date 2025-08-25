@@ -149,7 +149,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.8.6"
+            "javaVersion": "24.8.7"
         },
         "horizontal-layout": {
             "jsVersion": "24.8.6",
@@ -423,7 +423,7 @@
             "jsVersion": "3.1.2"
         },
         "swing-kit": {
-            "javaVersion": "2.4-SNAPSHOT"
+            "javaVersion": "2.4.1"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "6.5.0"
@@ -573,7 +573,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "24.8.1"
+            "javaVersion": "24.8.2"
         },
         "vaadin-license-checker": {
             "javaVersion": "1.13.5"
