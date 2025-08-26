@@ -6,27 +6,34 @@ Vaadin {{platform}}
 
 # New and Noteworthy Since Vaadin 24.8
 Since Vaadin 24.9, you can start to use Vaadin Beta releases from **Maven Central**.
+Flow:
+  - add new HTML component `<code>`
+  - add new style methods: `STYLE_BACKGROUND_POSITION`, `STYLE_BACKGROUND_SIZE`, `STYLE_FILTER`, `STYLE_GAP`, `STYLE_ROTATE`
+  - add a short method to `SortDirection` enum (Thanks to @abdurasul29052002)
+  - add convenient API to set item from DataView
+  - Upgraded commercial trial experience ([read more](https://github.com/vaadin/platform/issues/7968))
 
-Flow - add new HTML component `<code>`
-Flow - add new style methods: `STYLE_BACKGROUND_POSITION`, `STYLE_BACKGROUND_SIZE`, `STYLE_FILTER`, `STYLE_GAP`, `STYLE_ROTATE`
-Flow - add a short method to `SortDirection` enum (Thanks to @abdurasul29052002)
-Flow - add convenient API to set item from DataView
-Flow - add support to build vaadin application with commercial banner
-DS - add `Tooltip` support for `SideNavItem`
+Design System:
+  - add `Tooltip` support for `SideNavItem`
+
+Hilla:
+  - support matching wildcard views with subdirectories
 
 ## Deprecation 
 
-Flow - Deprecate `HierarchyMapper`, `HierarchicalCommunicationController`, `HierarchicalArrayUpdater` and `HierarchicalUpdate`
-Flow - Deprecate methods in `HierarchicalDataCommunicator` (listed [here](https://github.com/vaadin/flow/pull/21889))
-Flow - Deprecate `webpackOutputDirectory`
-Flow - Deprecate `VaadinSession::setConfiguration(configuraiton)`
-Flow - Deprecate `setRequestedRange` and `computeRequestedRange`
-Flow - Deprecate `VaadinWebSecurity `
-Flow - Deprecate `arrayUpdater` and `dataupdater`
+Flow:
+  - Deprecate `HierarchyMapper`, `HierarchicalCommunicationController`, `HierarchicalArrayUpdater` and `HierarchicalUpdate`
+  - Deprecate methods in `HierarchicalDataCommunicator` (listed [here](https://github.com/vaadin/flow/pull/21889))
+  - Deprecate `webpackOutputDirectory`
+  - Deprecate `VaadinSession::setConfiguration(configuraiton)`
+  - Deprecate `setRequestedRange` and `computeRequestedRange`
+  - Deprecate `VaadinWebSecurity `
+  - Deprecate `arrayUpdater` and `dataupdater`
 
-DS - Deprecate `CookieConsent`
-DS - Deprecate legacy `Grid` API (listed [here](https://github.com/vaadin/flow-components/pull/7692))
-DS - Deprecate `TreeGridElement`'s _getNumberOfExpandedRows_ and _isLoadingExpandedRows_
+Design System:
+  - Deprecate `CookieConsent`
+  - Deprecate legacy `Grid` API (listed [here](https://github.com/vaadin/flow-components/pull/7692))
+  - Deprecate `TreeGridElement`'s _getNumberOfExpandedRows_ and _isLoadingExpandedRows_
 
 *Deprecated APIs will be removed in Vaadin 25
 
