@@ -5,7 +5,7 @@ Vaadin {{platform}}
 *This is a pre-release for the Vaadin 24.9. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. 
 
 # New and Noteworthy Since Vaadin 24.8
-Since Vaadin 24.9, you can start to use Vaadin Beta releases from **Maven Central**.
+Since Vaadin 24.9, you can start using Vaadin Beta and Release Candidate versions from **Maven Central**.
 Flow:
   - add new HTML component `<code>`
   - add new style methods: `STYLE_BACKGROUND_POSITION`, `STYLE_BACKGROUND_SIZE`, `STYLE_FILTER`, `STYLE_GAP`, `STYLE_ROTATE`
