@@ -1,28 +1,41 @@
 Vaadin {{platform}}
 
-[Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/project)
+[Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/start)
 
-*This is a pre-release for the Vaadin 24.9. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use this release, you'll need to have following repositories declared in your  project (Vaadin pre-releases are not pushed to Maven central) :*
+*This is a pre-release for the Vaadin 24.9. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. 
 
-    <repositories>
-        <repository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </repository>
-    </repositories>
+# New and Noteworthy Since Vaadin 24.8
+Since Vaadin 24.9, you can start using Vaadin Beta and Release Candidate versions from **Maven Central**.
+Flow:
+  - add new HTML component `<code>`
+  - add new style methods: `STYLE_BACKGROUND_POSITION`, `STYLE_BACKGROUND_SIZE`, `STYLE_FILTER`, `STYLE_GAP`, `STYLE_ROTATE`
+  - add a short method to `SortDirection` enum (Thanks to @abdurasul29052002)
+  - add convenient API to set item from DataView
+  - Upgraded commercial trial experience ([read more](https://github.com/vaadin/platform/issues/7968))
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </pluginRepository>
-    </pluginRepositories>
+Design System:
+  - add `Tooltip` support for `SideNavItem`
 
-**Note**
+Hilla:
+  - support matching wildcard views with subdirectories
+
+## Deprecation 
+
+Flow:
+  - Deprecate `HierarchyMapper`, `HierarchicalCommunicationController`, `HierarchicalArrayUpdater` and `HierarchicalUpdate`
+  - Deprecate methods in `HierarchicalDataCommunicator` (listed [here](https://github.com/vaadin/flow/pull/21889))
+  - Deprecate `webpackOutputDirectory`
+  - Deprecate `VaadinSession::setConfiguration(configuraiton)`
+  - Deprecate `setRequestedRange` and `computeRequestedRange`
+  - Deprecate `VaadinWebSecurity `
+  - Deprecate `arrayUpdater` and `dataupdater`
+
+Design System:
+  - Deprecate `CookieConsent`
+  - Deprecate legacy `Grid` API (listed [here](https://github.com/vaadin/flow-components/pull/7692))
+  - Deprecate `TreeGridElement`'s _getNumberOfExpandedRows_ and _isLoadingExpandedRows_
+
+*Deprecated APIs will be removed in Vaadin 25
 
 ## <a id="_changelogs"></a> Changelogs
 
