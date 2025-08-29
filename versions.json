@@ -149,7 +149,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.9.0-beta1"
+            "javaVersion": "24.9.0-beta2"
         },
         "horizontal-layout": {
             "jsVersion": "24.9.0-beta1",
