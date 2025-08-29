@@ -22,7 +22,14 @@ Vaadin {{platform}}
         </pluginRepository>
     </pluginRepositories>
 
-**Note**
+**Major Breaking Changes Since Vaadin 24**
+Vaadin 25 is under developing at the moment, the full migration guide will come when it gets close to beta release. 
+Thanks for your patience. For now, you can take the following link/contents as reference. 
+
+- [Breaking changes in flow](https://github.com/vaadin/platform/issues/7691)
+- Design System
+  - removed `Cookie Consent` ([link](https://github.com/vaadin/web-components/pull/10027))
+  - removed `overlayClass` property/ `setOverlayClassName` method ([link](https://github.com/vaadin/web-components/pull/9926)) 
 
 ## <a id="_changelogs"></a> Changelogs
 
