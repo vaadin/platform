@@ -37,6 +37,11 @@ Design System:
 
 *Deprecated APIs will be removed in Vaadin 25
 
+## Known Vulnerability 
+Vaadin 24.9 uses Springboot 3.5.x which contain the `commons-lang3:3.17.0`, based on security scanners, [CVE-2025-48924](https://nvd.nist.gov/vuln/detail/CVE-2025-48924) will be reported. 
+To get rid of this report, you can overwrite the dependency version by adding `<commons-lang3.version>3.18.0</commons-lang3.version>` to the property section in your pom.xml.
+More info about missing the latest version of `commons-lang3` in spring boot 3.5.x bom can be found [here](https://github.com/spring-projects/spring-boot/issues/46437)
+
 ## <a id="_changelogs"></a> Changelogs
 
 <!-- Remove the ones that do not contain any changes/updates -->
