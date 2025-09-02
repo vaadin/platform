@@ -27,8 +27,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>hilla-bom</artifactId>
-                <version>${hilla.version}</version>
+                <artifactId>flow-bom</artifactId>
+                <version>${flow.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -36,6 +36,13 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-components-bom</artifactId>
                 <version>${flow.components.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>hilla-bom</artifactId>
+                <version>${hilla.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -89,72 +96,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-core-components</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <!-- Flow -->
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-server</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-dev-server</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-lit-template</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-react</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-polymer-template</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-push</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-client</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-data</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-dnd</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-server-production-mode</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-spring</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-webpush</artifactId>
-                <version>${flow.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
