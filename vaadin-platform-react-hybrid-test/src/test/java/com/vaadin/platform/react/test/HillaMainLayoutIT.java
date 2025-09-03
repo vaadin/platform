@@ -65,8 +65,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
     public void forwardNavigationTest() {
         findElement(By.id("toHello")).click();
 
-        Assert.assertTrue("Navigation with NavLink failed.",
-                $(VerticalLayoutElement.class).id("HelloReact").isDisplayed());
+        waitForElement("Navigation with NavLink failed.",
+                By.id("HelloReact"));
 
         // Navigate to Flow view
         getMenuElement("Flow in hilla").get().click();
@@ -76,13 +76,13 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         getDriver().navigate().back();
         getDriver().navigate().back();
 
-        Assert.assertTrue("Should have returned to initial page",
-                findElement(By.id("toHello")).isDisplayed());
+        waitForElement("Should have returned to initial page",
+                By.id("toHello"));
 
         getDriver().navigate().forward();
 
-        Assert.assertTrue("Expected hilla view after forward",
-                $(VerticalLayoutElement.class).id("HelloReact").isDisplayed());
+        waitForElement("Expected hilla view after forward",
+                By.id("HelloReact"));
 
         getDriver().navigate().forward();
 
