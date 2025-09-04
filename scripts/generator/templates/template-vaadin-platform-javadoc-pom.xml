@@ -52,7 +52,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <!--No point to have copilot, as copilot does not have public API-->
