@@ -19,6 +19,10 @@ Design System:
 Hilla:
   - support matching wildcard views with subdirectories
 
+Copilot:
+  - Upgraded commercial trial experience ([read more](https://github.com/vaadin/platform/issues/7968))
+  - Figma Importer API ([read more](https://vaadin.com/docs/latest/tools/copilot))
+
 ## Deprecation 
 
 Flow:
