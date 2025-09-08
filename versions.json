@@ -128,7 +128,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.8.6"
+            "javaVersion": "24.8.7"
         },
         "flow-cdi": {
             "javaVersion": "15.2.1"
