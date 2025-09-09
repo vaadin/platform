@@ -583,7 +583,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.5.0-beta1",
+            "javaVersion": "9.5.0-rc1",
             "pro": true
         }
     }
