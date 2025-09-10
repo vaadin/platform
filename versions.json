@@ -400,7 +400,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "3.4.0-beta1"
+            "javaVersion": "3.4.0-rc1"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -409,18 +409,18 @@
             "javaVersion": "1.4.0-beta1"
         },
         "copilot": {
-            "javaVersion": "24.9.0-beta3"
+            "javaVersion": "24.9.0-rc1"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.5.0-beta1"
+            "javaVersion": "2.5.0-rc1"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.2.0-beta1",
-            "jsVersion": "3.2.0-beta1"
+            "javaVersion": "3.2.0-rc1",
+            "jsVersion": "3.2.0-rc1"
         },
         "sso-kit-starter": {
-            "javaVersion": "3.2.0-beta3",
-            "jsVersion": "3.2.0-beta3"
+            "javaVersion": "3.2.0-rc1",
+            "jsVersion": "3.2.0-rc1"
         },
         "swing-kit": {
             "javaVersion": "2.4.1"
