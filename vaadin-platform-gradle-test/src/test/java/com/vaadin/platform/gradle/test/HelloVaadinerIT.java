@@ -94,7 +94,6 @@ public class HelloVaadinerIT extends AbstractPlatformTest {
     }
 
     @Test
-    @Ignore("https://github.com/vaadin/flow/issues/22073")
     public void verifyComponentStylesAppliedFromTheme() {
         TestBenchElement myField = $(TestBenchElement.class).id(TEXT_FIELD_ID);
         TestBenchElement input = myField.$("vaadin-input-container")

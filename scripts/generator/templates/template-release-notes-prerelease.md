@@ -1,6 +1,6 @@
 Vaadin {{platform}}
 
-[Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/project)
+[Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/start)
 
 *This is a pre-release for the Vaadin 25.0. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use this release, you'll need to have following repositories declared in your  project (Vaadin pre-releases are not pushed to Maven central) :*
 
@@ -22,7 +22,14 @@ Vaadin {{platform}}
         </pluginRepository>
     </pluginRepositories>
 
-**Note**
+**Major Breaking Changes Since Vaadin 24**
+Vaadin 25 is under developing at the moment, the full migration guide will come when it gets close to beta release. 
+Thanks for your patience. For now, you can take the following link/contents as reference. 
+
+- [Breaking changes in flow](https://github.com/vaadin/platform/issues/7691)
+- Design System
+  - removed `Cookie Consent` ([link](https://github.com/vaadin/web-components/pull/10027))
+  - removed `overlayClass` property/ `setOverlayClassName` method ([link](https://github.com/vaadin/web-components/pull/9926)) 
 
 ## <a id="_changelogs"></a> Changelogs
 

@@ -24,6 +24,18 @@
         {{javadeps}}
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!--
             vaadin-hybrid-dev-bundle must be a project dependency otherwise it will be built
@@ -47,26 +59,22 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>hilla-dev</artifactId>
-            <version>${hilla.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
-            <version>${vaadin.spreadsheet.version}</version>
             <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev-server</artifactId>
-            <version>${flow.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
-            <version>${copilot.version}</version>
             <optional>true</optional>
         </dependency>
 

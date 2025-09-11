@@ -24,6 +24,18 @@
         {{javadeps}}
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -34,14 +46,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>hilla-dev</artifactId>
-            <version>${hilla.version}</version>
             <optional>true</optional>
         </dependency>
         <!-- Add hilla dependency to collect Hilla npm dependencies -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>hilla</artifactId>
-            <version>${hilla.version}</version>
             <optional>true</optional>
             <exclusions>
                 <!--
@@ -57,20 +67,17 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
-            <version>${vaadin.spreadsheet.version}</version>
             <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev-server</artifactId>
-            <version>${flow.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
-            <version>${copilot.version}</version>
             <optional>true</optional>
         </dependency>
 

@@ -92,8 +92,8 @@ public class AllComponentsIncludedTest {
                 .stream(optimizedStats.getArray("bundleImports"))
                 .map(v -> v.asString()).toList();
 
-        File generatedImports = Path.of("frontend", "generated", "flow",
-                "generated-flow-imports.js").toFile();
+        File generatedImports = Path.of("src", "main", "frontend", "generated",
+                "flow", "generated-flow-imports.js").toFile();
         Assertions.assertTrue(generatedImports.exists(),
                 "Generated imports file " + generatedImports.getAbsolutePath()
                         + " is missing");
