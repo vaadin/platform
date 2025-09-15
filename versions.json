@@ -31,6 +31,11 @@
             "mode": "lit",
             "npmName": "@vaadin/avatar-group"
         },
+        "aura": {
+            "jsVersion": "25.0.0-alpha19",
+            "mode": "lit",
+            "npmName": "@vaadin/aura"
+        },
         "button": {
             "jsVersion": "25.0.0-alpha19",
             "mode": "lit",
