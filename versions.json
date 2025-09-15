@@ -576,14 +576,14 @@
             "javaVersion": "24.8.2"
         },
         "vaadin-license-checker": {
-            "javaVersion": "2.0.0-rc1"
+            "javaVersion": "2.0.0"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.5.0-rc1",
+            "javaVersion": "9.5.0",
             "pro": true
         }
     }
