@@ -400,33 +400,33 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "3.4.0-rc1"
+            "javaVersion": "3.4.0"
         },
         "azure-kit": {
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.4.0-rc1"
+            "javaVersion": "1.4.0"
         },
         "copilot": {
             "javaVersion": "24.9.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "2.5.0-rc1"
+            "javaVersion": "2.5.0"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.2.0-rc1",
-            "jsVersion": "3.2.0-rc1"
+            "javaVersion": "3.2.0",
+            "jsVersion": "3.2.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "3.2.0-rc1",
-            "jsVersion": "3.2.0-rc1"
+            "javaVersion": "3.2.0",
+            "jsVersion": "3.2.0"
         },
         "swing-kit": {
             "javaVersion": "2.4.1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.6.0-rc1"
+            "javaVersion": "6.6.0"
         }
     },
     "platform": "{{version}}",
