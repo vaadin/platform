@@ -1,5 +1,7 @@
 package com.vaadin.platform.react.test.views;
 
+import jakarta.annotation.security.PermitAll;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
