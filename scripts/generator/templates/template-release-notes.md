@@ -137,7 +137,22 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 
 - Apache Tomcat 10.1
 - Open Liberty 23
-- RedHat JBoss EAP 8.0 beta
+- RedHat JBoss EAP 8.1
+  - To work with RedHat JBoss EAP 8.0, you will need to add the following content to the `jboss-deployment-structure.xml` placed under `WEB-INF` folder
+  <details>
+    <summary>Workaround for supporting RedHat JBoss EAP 8.0</summary>
+    
+   ```xml
+    <jboss-deployment-structure>
+      <deployment>
+        <exclude-subsystems>
+          <subsystem name="jaxrs" />
+        </exclude-subsystems>
+      </deployment>
+    </jboss-deployment-structure>
+   ```
+   
+  </details> 
 - WildFly 35
 - Jetty 12
 - Payara Server 6
