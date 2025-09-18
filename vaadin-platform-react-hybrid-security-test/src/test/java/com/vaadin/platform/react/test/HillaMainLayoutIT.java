@@ -14,7 +14,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void anonymousUser_loginButtonAndOnlyAlwaysAllowItems() {
-        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
+        waitUntil(driver -> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertTrue("Login button should be visible",
                 $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertEquals("Login button should say 'Sign in''",
@@ -30,15 +30,15 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void loginUser_forAllAndUserViewsAvailable_logout_onlyPublicAvailable() {
-        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
+        waitUntil(driver -> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         $(ButtonElement.class).id(LOGIN_BUTTON_ID).click();
         login("user", "user");
 
         // If Login has navigated us to / return to hilla
-        if ($(ButtonElement.class).withId("hilla").exists()) {
-            $(ButtonElement.class).id("hilla").click();
-        }
+        waitUntil(driver -> $(ButtonElement.class).withId("hilla").exists());
+        $(ButtonElement.class).id("hilla").click();
 
+        waitUntil(driver -> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertEquals(
                 "Login button should say 'sign out' as user is logged in",
                 "Sign out",
@@ -59,7 +59,7 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         loginButton.click();
 
         // test update after hilla https://github.com/vaadin/hilla/pull/3445
-       waitForElement("Root view should be shown after logout.", By.id("hilla"));
+        waitForElement("Root view should be shown after logout.", By.id("hilla"));
         Assert.assertEquals("Two buttons should be shown in the root view", 2,
                 $(ButtonElement.class).all().size());
 
@@ -78,15 +78,15 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
 
     @Test
     public void loginAdmin_forAllAndAdminViewsAvailable() {
-        waitUntil(driver-> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
+        waitUntil(driver -> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         $(ButtonElement.class).id(LOGIN_BUTTON_ID).click();
         login("admin", "admin");
 
         // If Login has navigated us to / return to hilla
-        if ($(ButtonElement.class).withId("hilla").exists()) {
-            $(ButtonElement.class).id("hilla").click();
-        }
+        waitUntil(driver -> $(ButtonElement.class).withId("hilla").exists());
+        $(ButtonElement.class).id("hilla").click();
 
+        waitUntil(driver -> $(ButtonElement.class).id(LOGIN_BUTTON_ID).isDisplayed());
         Assert.assertEquals(
                 "Login button should say 'sign out' as user is logged in",
                 "Sign out",
