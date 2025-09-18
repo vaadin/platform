@@ -3,39 +3,26 @@ package com.vaadin.platform.react.test.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
-import com.vaadin.flow.spring.security.VaadinWebSecurity;
-import com.vaadin.hilla.route.RouteUtil;
+import static com.vaadin.flow.spring.security.VaadinSecurityConfigurer.vaadin;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends VaadinWebSecurity {
-    private final RouteUtil routeUtil;
+public class SecurityConfig {
 
-    public SecurityConfig(RouteUtil routeUtil) {
-        this.routeUtil = routeUtil;
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain vaadinSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(registry -> {
-            registry.requestMatchers("/").permitAll();
-            registry.requestMatchers(routeUtil::isRouteAllowed).permitAll();
+            registry.requestMatchers("/", "/images/**").permitAll();
         });
-        super.configure(http);
-        setLoginView(http, "/login", "/");
-    }
-
-    @Override
-    protected void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-        web.ignoring().requestMatchers("/images/**");
+        http.with(vaadin(), vaadin -> vaadin.loginView("/login", "/"));
+        return http.build();
     }
 
     @Bean
