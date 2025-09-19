@@ -29,8 +29,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${project.version}</version>
+                <artifactId>flow-components-bom</artifactId>
+                <version>${flow.components.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
