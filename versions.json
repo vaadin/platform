@@ -1,5 +1,4 @@
 {
-    "bundles": {},
     "core": {
         "a11y-base": {
             "jsVersion": "25.0.0-alpha19",
