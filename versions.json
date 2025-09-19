@@ -1,10 +1,4 @@
 {
-    "bundles": {
-        "vaadin": {
-            "jsVersion": "25.0.0-alpha19",
-            "npmName": "@vaadin/bundles"
-        }
-    },
     "core": {
         "a11y-base": {
             "jsVersion": "25.0.0-alpha19",
