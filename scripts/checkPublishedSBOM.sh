@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Script to check published SBOMs for Vaadin Platform releases
+# Requires:
+# - curl
+# - jq
+# - go
+# - bomber
+# - osv-scanner
+# - GITHUB_TOKEN environment variable set with a valid GitHub token
+# For installing go, curl and jq you can use brew, choco, apt-get, depending on your OS
+# For installing bomber and osv-scanner:
+# - go install github.com/devops-kung-fu/bomber@latest
+# - go install github.com/google/osv-scanner/cmd/osv-scanner@latest
+
 # Function to validate date format (YYYY-MM-DD)
 validate_date() {
     local date_input="$1"
@@ -7,13 +20,13 @@ validate_date() {
         echo "Error: Invalid date format. Please use YYYY-MM-DD format (e.g., 2024-01-01)" >&2
         return 1
     fi
-    
+
     # Try to parse the date to ensure it's valid
     if ! date -j -f "%Y-%m-%d" "$date_input" >/dev/null 2>&1; then
         echo "Error: Invalid date. Please provide a valid date in YYYY-MM-DD format" >&2
         return 1
     fi
-    
+
     return 0
 }
 
@@ -22,7 +35,7 @@ validate_date() {
 date_is_greater_or_equal() {
     local date1="$1"
     local date2="$2"
-    
+
     # Simple string comparison works for YYYY-MM-DD format
     if [[ "$date1" > "$date2" ]] || [[ "$date1" == "$date2" ]]; then
         return 0
@@ -35,12 +48,12 @@ date_is_greater_or_equal() {
 # Returns 0 (true) if it's GA, 1 (false) if it's alpha, beta, RC, etc.
 is_ga_release() {
     local tag_name="$1"
-    
+
     # Check if the tag contains non-GA indicators (case insensitive)
     if [[ "$tag_name" =~ (alpha|beta|rc|snapshot|dev|pre|test) ]]; then
         return 1  # Not a GA release
     fi
-    
+
     return 0  # Is a GA release
 }
 
@@ -64,15 +77,15 @@ download_sbom() {
     local sbom_url="$3"
     local sbom_file
     sbom_file=$(generate_sbom_filepath "$release_date" "$tag_name")
-    
+
     # Check if file already exists
     if [ -f "$sbom_file" ]; then
         echo "  SBOM already exists: $sbom_file" >&2
         return 0
     fi
-    
+
     echo "  Downloading SBOM: $sbom_url" >&2
-    
+
     # Download with curl, follow redirects, fail on HTTP errors
     local temp_file="${sbom_file}.tmp"
     if curl -s -L -f -o "$temp_file" "$sbom_url"; then
@@ -102,14 +115,14 @@ scan_sbom() {
     sbom_file=$(generate_sbom_filepath "$release_date" "$tag_name")
     local bomber_scan_file="${sbom_file}.bomber.scan"
     local osv_scan_file="${sbom_file}.osv-scanner.scan"
-    
+
     # Only scan if requested and SBOM file exists
     if [ "$scan_sbom" != "true" ] || [ ! -f "$sbom_file" ]; then
         return 0
     fi
-    
+
     local scan_success=true
-    
+
     # Run bomber scan
     if [ ! -f "$bomber_scan_file" ]; then
         # Check if bomber is available
@@ -117,7 +130,7 @@ scan_sbom() {
             echo "  Warning: bomber command not found. Skipping bomber scan" >&2
         else
             echo "  Scanning SBOM with bomber: $sbom_file" >&2
-            
+
             # Run bomber scan and save output
             if bomber scan "$sbom_file" > "$bomber_scan_file" 2>&1; then
                 echo "  Bomber scan saved: $bomber_scan_file" >&2
@@ -130,7 +143,7 @@ scan_sbom() {
     else
         echo "  Bomber scan already exists: $bomber_scan_file" >&2
     fi
-    
+
     # Run osv-scanner
     if [ ! -f "$osv_scan_file" ]; then
         # Check if osv-scanner is available (try both PATH and Go bin directory)
@@ -142,15 +155,15 @@ scan_sbom() {
         else
             echo "  Warning: osv-scanner command not found. Skipping osv-scanner scan" >&2
         fi
-        
+
         if [ -n "$osv_cmd" ]; then
             echo "  Scanning SBOM with osv-scanner: $sbom_file" >&2
-            
+
             # Run osv-scanner and save output
             # Note: osv-scanner exits with code 1 when vulnerabilities are found, this is normal
             "$osv_cmd" --sbom="$sbom_file" > "$osv_scan_file" 2>&1
             local osv_exit_code=$?
-            
+
             if [ $osv_exit_code -eq 0 ] || [ $osv_exit_code -eq 1 ]; then
                 # Exit code 0 = no vulnerabilities, 1 = vulnerabilities found (both are successful scans)
                 echo "  OSV-Scanner scan saved: $osv_scan_file" >&2
@@ -164,7 +177,7 @@ scan_sbom() {
     else
         echo "  OSV-Scanner scan already exists: $osv_scan_file" >&2
     fi
-    
+
     if [ "$scan_success" = "true" ]; then
         return 0
     else
@@ -184,13 +197,13 @@ get_ga_releases_with_sbom() {
     local per_page=100
     local all_releases=()
     local cache_file="/tmp/platform_releases_all.txt"
-    
+
     # Check if GITHUB_TOKEN is set
     if [ -z "$GITHUB_TOKEN" ]; then
         echo "Error: GITHUB_TOKEN environment variable is not set" >&2
         return 1
     fi
-    
+
     # Check if cache exists and if there are new releases
     if [ -f "$cache_file" ]; then
         if ! check_for_new_releases "$min_date" "$cache_file"; then
@@ -198,14 +211,14 @@ get_ga_releases_with_sbom() {
             echo "Using cached releases from: $cache_file" >&2
             local cached_releases
             cached_releases=$(cat "$cache_file")
-            
+
             # Filter for GA releases and apply date filter
             local ga_releases=()
             while IFS= read -r release_info; do
                 if [ -n "$release_info" ]; then
                     local release_date=$(echo "$release_info" | cut -d' ' -f1)
                     local tag_name=$(echo "$release_info" | cut -d' ' -f2)
-                    
+
                     # Apply date filter and GA filter
                     if [ -n "$min_date" ]; then
                         if date_is_greater_or_equal "$release_date" "$min_date" && is_ga_release "$tag_name"; then
@@ -218,7 +231,7 @@ get_ga_releases_with_sbom() {
                     fi
                 fi
             done <<< "$cached_releases"
-            
+
             # Output GA releases with SBOM URLs
             echo "GA Releases:" >&2
             for release_info in "${ga_releases[@]}"; do
@@ -227,32 +240,32 @@ get_ga_releases_with_sbom() {
                 local sbom_url=$(generate_sbom_url "$tag_name")
                 echo "$release_info"
                 echo "  SBOM: $sbom_url"
-                
+
                 # Download SBOM if requested
                 if [ "$download_sbom" = "true" ]; then
                     download_sbom "$release_date" "$tag_name" "$sbom_url"
                     # Scan SBOM if requested
                     scan_sbom "$release_date" "$tag_name" "$scan_sbom"
                 fi
-                
+
                 # Show scan results if requested
                 if [ "$4" = "true" ]; then
                     show_scan_results "$release_date" "$tag_name"
                 fi
             done
-            
+
             echo "Total GA releases found: ${#ga_releases[@]}" >&2
             return 0
         fi
     fi
-    
+
     # Fetch fresh data (either no cache exists or new releases found)
     if [ -n "$min_date" ]; then
         echo "Fetching releases from ${repo} published on or after ${min_date}..." >&2
     else
         echo "Fetching all releases from ${repo}..." >&2
     fi
-    
+
     while true; do
         # Make API request with pagination
         local response
@@ -260,28 +273,28 @@ get_ga_releases_with_sbom() {
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             "${api_url}?page=${page}&per_page=${per_page}")
-        
+
         # Check if curl command was successful
         if [ $? -ne 0 ]; then
             echo "Error: Failed to fetch releases from GitHub API" >&2
             return 1
         fi
-        
+
         # Check if response is empty array (no more releases)
         if [ "$(echo "$response" | jq '. | length')" -eq 0 ]; then
             break
         fi
-        
+
         # Extract release info from the response and add to array
         local page_releases
         page_releases=$(echo "$response" | jq -r '.[] | "\(.published_at | split("T")[0]) \(.tag_name)"')
-        
+
         # Check if jq command was successful
         if [ $? -ne 0 ]; then
             echo "Error: Failed to parse JSON response" >&2
             return 1
         fi
-        
+
         # Add releases to array (clean up any extra whitespace, store ALL releases)
         while IFS= read -r release_info; do
             # Trim whitespace
@@ -290,29 +303,29 @@ get_ga_releases_with_sbom() {
                 all_releases+=("$release_info")
             fi
         done <<< "$page_releases"
-        
+
         # Move to next page
         ((page++))
-        
+
         # Safety check to prevent infinite loop (GitHub has max 1000 pages)
         if [ $page -gt 1000 ]; then
             echo "Warning: Reached maximum page limit (1000)" >&2
             break
         fi
     done
-    
+
     # Save all fetched releases to cache
     if [ ${#all_releases[@]} -gt 0 ]; then
         printf '%s\n' "${all_releases[@]}" > "$cache_file"
         echo "Cache saved to: $cache_file" >&2
     fi
-    
+
     # Filter for GA releases and apply date filtering
     local ga_releases=()
     for release_info in "${all_releases[@]}"; do
         local release_date=$(echo "$release_info" | cut -d' ' -f1)
         local tag_name=$(echo "$release_info" | cut -d' ' -f2)
-        
+
         # Apply date filter and GA filter
         if [ -n "$min_date" ]; then
             if date_is_greater_or_equal "$release_date" "$min_date" && is_ga_release "$tag_name"; then
@@ -324,7 +337,7 @@ get_ga_releases_with_sbom() {
             fi
         fi
     done
-    
+
     # Output GA releases with SBOM URLs
     echo "GA Releases:" >&2
     for release_info in "${ga_releases[@]}"; do
@@ -333,20 +346,20 @@ get_ga_releases_with_sbom() {
         local sbom_url=$(generate_sbom_url "$tag_name")
         echo "$release_info"
         echo "  SBOM: $sbom_url"
-        
+
         # Download SBOM if requested
         if [ "$download_sbom" = "true" ]; then
             download_sbom "$release_date" "$tag_name" "$sbom_url"
             # Scan SBOM if requested
             scan_sbom "$release_date" "$tag_name" "$scan_sbom"
         fi
-        
+
         # Show scan results if requested
         if [ "$4" = "true" ]; then
             show_scan_results "$release_date" "$tag_name"
         fi
     done
-    
+
     echo "Total GA releases found: ${#ga_releases[@]}" >&2
 }
 
@@ -356,48 +369,48 @@ check_for_new_releases() {
     local cache_file="$2"
     local repo="vaadin/platform"
     local api_url="https://api.github.com/repos/${repo}/releases"
-    
+
     # Check if GITHUB_TOKEN is set
     if [ -z "$GITHUB_TOKEN" ]; then
         echo "Error: GITHUB_TOKEN environment variable is not set" >&2
         return 1
     fi
-    
+
     echo "Checking for new releases..." >&2
-    
+
     # Get first page only
     local response
     response=$(curl -s \
         -H "Authorization: token $GITHUB_TOKEN" \
         -H "Accept: application/vnd.github.v3+json" \
         "${api_url}?page=1&per_page=100")
-    
+
     # Check if curl command was successful
     if [ $? -ne 0 ]; then
         echo "Error: Failed to fetch releases from GitHub API" >&2
         return 1
     fi
-    
+
     # Extract release info from first page
     local first_page_releases
     first_page_releases=$(echo "$response" | jq -r '.[] | "\(.published_at | split("T")[0]) \(.tag_name)"')
-    
+
     # Check if jq command was successful
     if [ $? -ne 0 ]; then
         echo "Error: Failed to parse JSON response" >&2
         return 1
     fi
-    
+
     # Get the first release from cache (most recent cached release)
     local cached_first_release=""
     if [ -f "$cache_file" ]; then
         cached_first_release=$(head -n 1 "$cache_file" 2>/dev/null)
     fi
-    
+
     # Get the first release from API (most recent release)
     local api_first_release=""
     api_first_release=$(echo "$first_page_releases" | head -n 1 | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
-    
+
     # Compare first releases
     if [ "$cached_first_release" = "$api_first_release" ]; then
         echo "No new releases found. Using cached data." >&2
@@ -420,13 +433,13 @@ get_all_releases() {
     local per_page=100
     local all_releases=()
     local cache_file="/tmp/platform_releases_all.txt"
-    
+
     # Check if GITHUB_TOKEN is set
     if [ -z "$GITHUB_TOKEN" ]; then
         echo "Error: GITHUB_TOKEN environment variable is not set" >&2
         return 1
     fi
-    
+
     # Check if cache exists and if there are new releases
     if [ -f "$cache_file" ]; then
         if ! check_for_new_releases "$min_date" "$cache_file"; then
@@ -434,7 +447,7 @@ get_all_releases() {
             echo "Using cached releases from: $cache_file" >&2
             local cached_releases
             cached_releases=$(cat "$cache_file")
-            
+
             # Apply date filter if needed
             if [ -n "$min_date" ]; then
                 while IFS= read -r release_info; do
@@ -445,7 +458,7 @@ get_all_releases() {
                         fi
                     fi
                 done <<< "$cached_releases"
-                
+
                 # Output filtered results with SBOM URLs
                 for release_info in "${all_releases[@]}"; do
                     local release_date=$(echo "$release_info" | cut -d' ' -f1)
@@ -453,14 +466,14 @@ get_all_releases() {
                     local sbom_url=$(generate_sbom_url "$tag_name")
                     echo "$release_info"
                     echo "  SBOM: $sbom_url"
-                    
+
                     # Download SBOM if requested
                     if [ "$download_sbom" = "true" ]; then
                         download_sbom "$release_date" "$tag_name" "$sbom_url"
                         # Scan SBOM if requested
                         scan_sbom "$release_date" "$tag_name" "$scan_sbom"
                     fi
-                    
+
                     # Show scan results if requested
                     if [ "$show_scans" = "true" ]; then
                         show_scan_results "$release_date" "$tag_name"
@@ -477,13 +490,13 @@ get_all_releases() {
                         local sbom_url=$(generate_sbom_url "$tag_name")
                         echo "$release_info"
                         echo "  SBOM: $sbom_url"
-                        
+
                         # Download SBOM if requested
                         if [ "$download_sbom" = "true" ]; then
                             download_sbom "$release_date" "$tag_name" "$sbom_url"
                             scan_sbom "$release_date" "$tag_name" "$scan_sbom"
                         fi
-                        
+
                         # Show scan results if requested
                         if [ "$show_scans" = "true" ]; then
                             show_scan_results "$release_date" "$tag_name"
@@ -496,14 +509,14 @@ get_all_releases() {
             fi
         fi
     fi
-    
+
     # Fetch fresh data (either no cache exists or new releases found)
     if [ -n "$min_date" ]; then
         echo "Fetching releases from ${repo} published on or after ${min_date}..." >&2
     else
         echo "Fetching all releases from ${repo}..." >&2
     fi
-    
+
     while true; do
         # Make API request with pagination
         local response
@@ -513,28 +526,28 @@ get_all_releases() {
             "${api_url}?page=${page}&per_page=${per_page}")
 
 
-        
+
         # Check if curl command was successful
         if [ $? -ne 0 ]; then
             echo "Error: Failed to fetch releases from GitHub API" >&2
             return 1
         fi
-        
+
         # Check if response is empty array (no more releases)
         if [ "$(echo "$response" | jq '. | length')" -eq 0 ]; then
             break
         fi
-        
+
         # Extract release info from the response and add to array
         local page_releases
         page_releases=$(echo "$response" | jq -r '.[] | "\(.published_at | split("T")[0]) \(.tag_name)"')
-        
+
         # Check if jq command was successful
         if [ $? -ne 0 ]; then
             echo "Error: Failed to parse JSON response" >&2
             return 1
         fi
-        
+
         # Add releases to array (clean up any extra whitespace, store ALL releases)
         while IFS= read -r release_info; do
             # Trim whitespace
@@ -543,24 +556,24 @@ get_all_releases() {
                 all_releases+=("$release_info")
             fi
         done <<< "$page_releases"
-        
+
         # Move to next page
         ((page++))
-        
+
         # Safety check to prevent infinite loop (GitHub has max 1000 pages)
         if [ $page -gt 1000 ]; then
             echo "Warning: Reached maximum page limit (1000)" >&2
             break
         fi
     done
-    
+
     # Save all fetched releases to cache
     local cache_file="/tmp/platform_releases_all.txt"
     if [ ${#all_releases[@]} -gt 0 ]; then
         printf '%s\n' "${all_releases[@]}" > "$cache_file"
         echo "Cache saved to: $cache_file" >&2
     fi
-    
+
     # Apply date filtering for output if needed
     local filtered_releases=()
     if [ -n "$min_date" ]; then
@@ -570,7 +583,7 @@ get_all_releases() {
                 filtered_releases+=("$release_info")
             fi
         done
-        
+
         # Output filtered releases with SBOM URLs
         for release_info in "${filtered_releases[@]}"; do
             local release_date=$(echo "$release_info" | cut -d' ' -f1)
@@ -578,13 +591,13 @@ get_all_releases() {
             local sbom_url=$(generate_sbom_url "$tag_name")
             echo "$release_info"
             echo "  SBOM: $sbom_url"
-            
+
             # Download SBOM if requested
             if [ "$download_sbom" = "true" ]; then
                 download_sbom "$release_date" "$tag_name" "$sbom_url"
                 scan_sbom "$release_date" "$tag_name" "$scan_sbom"
             fi
-            
+
             # Show scan results if requested
             if [ "$show_scans" = "true" ]; then
                 show_scan_results "$release_date" "$tag_name"
@@ -599,13 +612,13 @@ get_all_releases() {
             local sbom_url=$(generate_sbom_url "$tag_name")
             echo "$release_info"
             echo "  SBOM: $sbom_url"
-            
+
             # Download SBOM if requested
             if [ "$download_sbom" = "true" ]; then
                 download_sbom "$release_date" "$tag_name" "$sbom_url"
                 scan_sbom "$release_date" "$tag_name" "$scan_sbom"
             fi
-            
+
             # Show scan results if requested
             if [ "$show_scans" = "true" ]; then
                 show_scan_results "$release_date" "$tag_name"
@@ -615,34 +628,34 @@ get_all_releases() {
     fi
 }
 
-# Function to get latest version from each of the 4 most recent series  
+# Function to get latest version from each of the 4 most recent series
 get_latest_series_releases() {
     local download_sbom="$1"
-    local scan_sbom="$2" 
+    local scan_sbom="$2"
     local force_latest="$3"
     local ga_only="$4"
-    
+
     if [ "$ga_only" = "true" ]; then
         echo "Finding latest GA release from the 4 most recent series..." >&2
     else
         echo "Finding latest release (including pre-releases) from the 4 most recent series..." >&2
     fi
-    
+
     # Since releases are sorted by date (newest first), the first occurrence of each series is the latest
     local results=()
     local seen_series=()
     local series_count=0
-    
+
     while read -r date tag && [ $series_count -lt 4 ]; do
         # Apply GA filter if needed
         if [ "$ga_only" = "true" ] && ! is_ga_release "$tag"; then
             continue
         fi
-        
+
         # Extract series from version
         local series
         series=$(echo "$tag" | sed -n 's/^\([0-9][0-9]*\.[0-9][0-9]*\)\.[0-9][0-9]*.*$/\1/p')
-        
+
         if [ -n "$series" ]; then
             # Check if we've already seen this series
             local already_seen=false
@@ -652,7 +665,7 @@ get_latest_series_releases() {
                     break
                 fi
             done
-            
+
             # If this is a new series, it's the latest version for that series
             if [ "$already_seen" = false ]; then
                 results+=("$series $date $tag")
@@ -661,19 +674,19 @@ get_latest_series_releases() {
             fi
         fi
     done < "/tmp/platform_releases_all.txt"
-    
+
     # Sort results by series version (newest series first, then reverse to show oldest first)
     local sorted_results
     sorted_results=$(printf '%s\n' "${results[@]}" | sort -t' ' -k1,1rV | head -4 | sort -t' ' -k1,1V)
-    
+
     # Output results
     echo "$sorted_results" | while read -r series_name date version; do
         local sbom_url
         sbom_url=$(generate_sbom_url "$version")
-        
+
         echo "$date $version"
         echo "  SBOM: $sbom_url"
-        
+
         # Download SBOM if requested
         if [ "$download_sbom" = "true" ]; then
             # Remove existing scan files if --latest flag is used
@@ -689,11 +702,11 @@ get_latest_series_releases() {
                     rm -f "${sbom_file}.osv-scanner.scan"
                 fi
             fi
-            
+
             download_sbom "$date" "$version" "$sbom_url"
             scan_sbom "$date" "$version" "$scan_sbom"
         fi
-        
+
         # Show scan results if requested
         if [ "$5" = "true" ]; then
             show_scan_results "$date" "$version"
@@ -710,28 +723,28 @@ get_version_release() {
     local show_scans="$5"
     local repo="vaadin/platform"
     local api_url="https://api.github.com/repos/${repo}/releases/tags/${version_filter}"
-    
+
     # Check if GITHUB_TOKEN is set
     if [ -z "$GITHUB_TOKEN" ]; then
         echo "Error: GITHUB_TOKEN environment variable is not set" >&2
         return 1
     fi
-    
+
     echo "Fetching release information for version ${version_filter}..." >&2
-    
+
     # Make API request for specific tag
     local response
     response=$(curl -s \
         -H "Authorization: token $GITHUB_TOKEN" \
         -H "Accept: application/vnd.github.v3+json" \
         "${api_url}")
-    
+
     # Check if curl command was successful
     if [ $? -ne 0 ]; then
         echo "Error: Failed to fetch release information from GitHub API" >&2
         return 1
     fi
-    
+
     # Check if the release exists (API returns 404 for non-existent releases)
     local http_status
     http_status=$(echo "$response" | jq -r '.message // empty')
@@ -739,29 +752,29 @@ get_version_release() {
         echo "Error: Version ${version_filter} not found in repository ${repo}" >&2
         return 1
     fi
-    
+
     # Extract release info from the response
     local release_info
     release_info=$(echo "$response" | jq -r '"\(.published_at | split("T")[0]) \(.tag_name)"')
-    
+
     # Check if jq command was successful
     if [ $? -ne 0 ] || [ -z "$release_info" ]; then
         echo "Error: Failed to parse release information" >&2
         return 1
     fi
-    
+
     # Clean up whitespace
     release_info=$(echo "$release_info" | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
-    
+
     if [ -n "$release_info" ]; then
         local release_date=$(echo "$release_info" | cut -d' ' -f1)
         local tag_name=$(echo "$release_info" | cut -d' ' -f2)
         local sbom_url=$(generate_sbom_url "$tag_name")
-        
+
         echo "Version ${version_filter}:" >&2
         echo "$release_info"
         echo "  SBOM: $sbom_url"
-        
+
         # Download SBOM if requested
         if [ "$download_sbom" = "true" ]; then
             # Remove existing scan files if --latest flag is used
@@ -777,27 +790,27 @@ get_version_release() {
                     rm -f "${sbom_file}.osv-scanner.scan"
                 fi
             fi
-            
+
             download_sbom "$release_date" "$tag_name" "$sbom_url"
             scan_sbom "$release_date" "$tag_name" "$scan_sbom"
-            
+
             # Display scan results for version mode if --scan was used
             if [ "$scan_sbom" = "true" ]; then
                 local sbom_file
                 sbom_file=$(generate_sbom_filepath "$release_date" "$tag_name")
                 local bomber_scan_file="${sbom_file}.bomber.scan"
                 local osv_scan_file="${sbom_file}.osv-scanner.scan"
-                
+
                 echo "" >&2  # Add blank line for readability
                 echo "=== SCAN RESULTS ===" >&2
-                
+
                 # Display bomber scan results if available
                 if [ -f "$bomber_scan_file" ]; then
                     echo "" >&2
                     echo "--- Bomber Scan Results ---" >&2
                     cat "$bomber_scan_file"
                 fi
-                
+
                 # Display osv-scanner scan results if available (filter out duplicate PURL warnings)
                 if [ -f "$osv_scan_file" ]; then
                     echo "" >&2
@@ -806,12 +819,12 @@ get_version_release() {
                 fi
             fi
         fi
-        
+
         # Show scan results if requested (regardless of whether scan was performed in this run)
         if [ "$show_scans" = "true" ]; then
             show_scan_results "$release_date" "$tag_name"
         fi
-        
+
         echo "" >&2
         echo "Release found and processed." >&2
     else
@@ -824,15 +837,15 @@ get_version_release() {
 show_scan_results() {
     local release_date="$1"
     local tag_name="$2"
-    
+
     local sbom_file
     sbom_file=$(generate_sbom_filepath "$release_date" "$tag_name")
     local bomber_scan_file="${sbom_file}.bomber.scan"
     local osv_scan_file="${sbom_file}.osv-scanner.scan"
-    
+
     echo "" >&2  # Add blank line for readability
     echo "=== SCAN RESULTS FOR $tag_name ===" >&2
-    
+
     # Display bomber scan results if available
     if [ -f "$bomber_scan_file" ]; then
         echo "" >&2
@@ -843,7 +856,7 @@ show_scan_results() {
         echo "--- Bomber Scan Results ---" >&2
         echo "No bomber scan results available. Run with --scan to generate." >&2
     fi
-    
+
     # Display osv-scanner scan results if available (filter out duplicate PURL warnings)
     if [ -f "$osv_scan_file" ]; then
         echo "" >&2
@@ -854,7 +867,7 @@ show_scan_results() {
         echo "--- OSV-Scanner Scan Results ---" >&2
         echo "No osv-scanner scan results available. Run with --scan to generate." >&2
     fi
-    
+
     echo "" >&2
     echo "=========================" >&2
 }
@@ -863,26 +876,26 @@ show_scan_results() {
 check_dependencies() {
     local missing_deps=()
     local optional_deps=()
-    
+
     # Check required dependencies
     if ! command -v curl &> /dev/null; then
         missing_deps+=("curl")
     fi
-    
+
     if ! command -v jq &> /dev/null; then
         missing_deps+=("jq")
     fi
-    
+
     # Check optional scanning dependencies
     if ! command -v bomber &> /dev/null; then
         optional_deps+=("bomber")
     fi
-    
+
     # Check for osv-scanner in PATH and Go bin directory
     if ! command -v osv-scanner &> /dev/null && [ ! -x "$HOME/go/bin/osv-scanner" ]; then
         optional_deps+=("osv-scanner")
     fi
-    
+
     # Exit if required dependencies are missing
     if [ ${#missing_deps[@]} -gt 0 ]; then
         echo "Error: Required dependencies are missing:" >&2
@@ -895,7 +908,7 @@ check_dependencies() {
         echo "  - jq: Install via package manager (brew install jq, apt install jq, etc.)" >&2
         exit 1
     fi
-    
+
     # Warn about optional dependencies only when scanning is requested
     if [ "$1" = "scan" ] && [ ${#optional_deps[@]} -gt 0 ]; then
         echo "Warning: Optional scanning dependencies are missing:" >&2
@@ -920,10 +933,10 @@ main() {
     local scan_sbom="false"
     local force_latest="false"
     local show_scans="false"
-    
+
     # Check for required dependencies first
     check_dependencies
-    
+
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -973,7 +986,7 @@ main() {
                 echo "https://github.com/vaadin/platform/releases/download/{tag}/Software.Bill.Of.Materials.json"
                 echo ""
                 echo "Scanning creates two files for each SBOM:"
-                echo "  - file.bomber.scan (bomber vulnerability scanner output)"  
+                echo "  - file.bomber.scan (bomber vulnerability scanner output)"
                 echo "  - file.osv-scanner.scan (OSV vulnerability scanner output)"
                 echo ""
                 echo "Examples:"
@@ -993,7 +1006,7 @@ main() {
             *)
                 if [ -z "$date_filter" ]; then
                     date_filter="$1"
-                    
+
                     # Validate the date format
                     if ! validate_date "$date_filter"; then
                         echo "Usage: $0 [OPTIONS] [YYYY-MM-DD]" >&2
@@ -1009,21 +1022,21 @@ main() {
                 ;;
         esac
     done
-    
+
     # Validate that version filter and date filter are not used together
     if [ -n "$version_filter" ] && [ -n "$date_filter" ]; then
         echo "Error: Cannot use both --version and date filter together" >&2
         echo "Use --help for usage information" >&2
         exit 1
     fi
-    
 
-    
+
+
     # Check scanning dependencies if scan mode is requested
     if [ "$scan_sbom" = "true" ]; then
         check_dependencies "scan"
     fi
-    
+
     # Get releases based on mode
     if [ -n "$version_filter" ]; then
         # Version-specific mode
