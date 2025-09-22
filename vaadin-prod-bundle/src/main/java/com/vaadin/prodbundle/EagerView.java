@@ -65,7 +65,6 @@ import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility;
 
 @Route
 @JsModule("@vaadin/tooltip/vaadin-tooltip.js")
@@ -103,7 +102,6 @@ public class EagerView extends Div {
     public ListBox<String> listBox;
     public LoginOverlay loginOverlay;
     public LoginForm LoginForm;
-    public LumoUtility lumoUtility;
     public Markdown markdown;
     public MasterDetailLayout masterDetailLayout;
     public MenuBar menuBar;
