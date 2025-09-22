@@ -94,7 +94,6 @@ if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
 }
 
-writer.writeSeparateJson(versions.bundles, coreJsonTemplateFileName, vaadinCoreJsonFileName, "bundles");
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
 writer.writeNestedSeparateJson(versions.react['react-components'], coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
@@ -122,7 +121,7 @@ writer.writeProperty(versions, ["flow"], platformJavadocTemplatePomFileName, pla
 
 writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
-writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
+writer.writeProperty(versions, ["flow", "flow-components"], prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeProperty(versions, ["vaadin-quarkus"], vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);

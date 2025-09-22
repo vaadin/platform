@@ -36,7 +36,7 @@ public class VersionsFileTest {
                 new FileReader(file));
         bufferedReader.readLine();
         String secondLine = bufferedReader.readLine();
-        Assert.assertEquals("Unexpected content in file", "    \"bundles\": {",
+        Assert.assertEquals("Unexpected content in file", "    \"core\": {",
                 secondLine);
     }
 }

@@ -1,10 +1,4 @@
 {
-    "bundles": {
-        "vaadin": {
-            "jsVersion": "25.0.0-alpha19",
-            "npmName": "@vaadin/bundles"
-        }
-    },
     "core": {
         "a11y-base": {
             "jsVersion": "25.0.0-alpha19",
@@ -21,6 +15,11 @@
             "mode": "lit",
             "npmName": "@vaadin/app-layout"
         },
+        "aura": {
+            "jsVersion": "25.0.0-alpha19",
+            "mode": "lit",
+            "npmName": "@vaadin/aura"
+        },
         "avatar": {
             "jsVersion": "25.0.0-alpha19",
             "mode": "lit",
@@ -30,11 +29,6 @@
             "jsVersion": "25.0.0-alpha19",
             "mode": "lit",
             "npmName": "@vaadin/avatar-group"
-        },
-        "aura": {
-            "jsVersion": "25.0.0-alpha19",
-            "mode": "lit",
-            "npmName": "@vaadin/aura"
         },
         "button": {
             "jsVersion": "25.0.0-alpha19",
@@ -117,7 +111,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.0-SNAPSHOT"
+            "javaVersion": "25.0.0-alpha14"
         },
         "flow-cdi": {
             "javaVersion": "16.0.0-alpha1"
@@ -139,7 +133,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.0-SNAPSHOT"
+            "javaVersion": "25.0.0-alpha8"
         },
         "horizontal-layout": {
             "jsVersion": "25.0.0-alpha19",
@@ -368,7 +362,7 @@
             "javaVersion": "1.3.1"
         },
         "copilot": {
-            "javaVersion": "25.0.0-alpha5"
+            "javaVersion": "25.0.0-alpha6"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.4.3"
