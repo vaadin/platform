@@ -71,6 +71,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-lumo-theme</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-aura-theme-flow</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>

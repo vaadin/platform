@@ -319,6 +319,9 @@
         "vaadin-lumo-theme": {
             "javaVersion": "{{version}}"
         },
+        "vaadin-aura-theme-flow": {
+            "javaVersion": "{{version}}"
+        },
         "vaadin-messages": {
             "javaVersion": "{{version}}"
         },
