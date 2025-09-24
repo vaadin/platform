@@ -319,7 +319,7 @@
         "vaadin-lumo-theme": {
             "javaVersion": "{{version}}"
         },
-        "vaadin-aura-theme-flow": {
+        "vaadin-aura-theme": {
             "javaVersion": "{{version}}"
         },
         "vaadin-messages": {
