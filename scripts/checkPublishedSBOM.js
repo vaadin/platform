@@ -406,7 +406,7 @@ async function processReleases(releases, filterFn = null, actionFn = null) {
     const sbomUrl = generateSbomUrl(tagName);
 
     console.log(release);
-    
+
     // Only show SBOM URL if there's an action (download/scan/show)
     if (actionFn) {
       console.log(`  SBOM: ${sbomUrl}`);
@@ -545,7 +545,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
     const sbomUrl = generateSbomUrl(result.version);
 
     console.log(`${result.date} ${result.version}`);
-    
+
     // Only show SBOM URL if downloading or performing actions
     if (shouldDownload || shouldShow || shouldReport) {
       console.log(`  SBOM: ${sbomUrl}`);
@@ -600,7 +600,7 @@ async function getVersionRelease(versionFilter, shouldDownload, shouldScan, forc
 
   log(`Version ${versionFilter}:`);
   console.log(`${releaseDate} ${tagName}`);
-  
+
   // Only show SBOM URL if downloading or performing actions
   if (shouldDownload || shouldShow || shouldReport) {
     console.log(`  SBOM: ${sbomUrl}`);
@@ -822,7 +822,7 @@ async function generateReport(releases) {
   log('');
   log('=== GENERATING VULNERABILITY REPORT ===');
 
-  const packageVulns = new Map(); // packageKey:version -> { vaadinVersions: Set, vulnerabilities: Set }
+  const packageVulns = new Map(); // packageKey:version -> { vaadinVersions: Set, vulnerabilities: Set, severities: Set }
   const severityStats = { CRITICAL: 0, HIGH: 0, MODERATE: 0, LOW: 0 };
   const versionData = [];
 
@@ -884,11 +884,11 @@ async function generateReport(releases) {
   console.log(`${'TOTAL'.padEnd(10)}: ${total.toString().padStart(4)}`);
 
   // Package vulnerabilities section
-  console.log('\n' + '-'.repeat(90));
+  console.log('\n' + '-'.repeat(95));
   console.log('PACKAGES WITH VULNERABILITIES');
-  console.log('-'.repeat(90));
-  console.log('Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(25) + 'Count  Example');
-  console.log('-'.repeat(90));
+  console.log('-'.repeat(95));
+  console.log('Sev ' + 'Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(20) + 'Count  Example');
+  console.log('-'.repeat(95));
 
   const sortedPackages = Array.from(packageVulns.entries())
     .sort(([,a], [,b]) => b.vulnerabilities.size - a.vulnerabilities.size);
@@ -900,18 +900,127 @@ async function generateReport(releases) {
     const vaadinVersions = Array.from(data.vaadinVersions).sort();
     const vaadinVersionsStr = vaadinVersions.join(', ');
 
+    // Get highest severity as single letter
+    const maxSeverity = getHighestSeverity(data.severities);
+    const severityLetter = severityToLetter(maxSeverity);
+
     // Get first vulnerability, preferring CVE over GHSA
     const vulnArray = Array.from(data.vulnerabilities);
     const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
     const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
 
     console.log(
-      `${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(25)}${data.vulnerabilities.size.toString().padEnd(7)}${firstVuln}`
+      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${data.vulnerabilities.size.toString().padEnd(7)}${firstVuln}`
     );
   }
 
   console.log('\n' + '='.repeat(80));
   log(`Report generated successfully. Found ${total} vulnerabilities across ${packageVulns.size} packages.`);
+
+  // Also write to GitHub Step Summary if running in GitHub Actions
+  if (isGitHubActions()) {
+    writeVulnerabilityReportToGitHub(versionData, severityStats, packageVulns, total);
+  }
+}
+
+// Get the highest severity level from a set of severities
+function getHighestSeverity(severities) {
+  const severityOrder = ['CRITICAL', 'HIGH', 'MODERATE', 'LOW'];
+  for (const severity of severityOrder) {
+    if (severities.has(severity)) {
+      return severity;
+    }
+  }
+  return 'UNKNOWN';
+}
+
+// Convert severity to single letter
+function severityToLetter(severity) {
+  switch (severity) {
+    case 'CRITICAL': return 'C';
+    case 'HIGH': return 'H';
+    case 'MODERATE': return 'M';
+    case 'LOW': return 'L';
+    default: return '?';
+  }
+}
+
+// Check if running in GitHub Actions
+function isGitHubActions() {
+  return process.env.GITHUB_ACTIONS === 'true';
+}
+
+// Write to GitHub step summary
+function writeToGitHubStepSummary(content) {
+  if (!isGitHubActions()) return;
+
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  if (summaryFile) {
+    try {
+      fs.appendFileSync(summaryFile, content + '\n');
+    } catch (error) {
+      log('Warning: Failed to write to GitHub step summary:', error.message);
+    }
+  }
+}
+
+// Format and write vulnerability report to GitHub step summary
+function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVulns, total) {
+  let markdown = `\n## 🛡️ Vulnerability Report\n\n`;
+  markdown += `**Generated:** ${new Date().toISOString()}\n`;
+  markdown += `**Scanned versions:** ${versionData.length}\n`;
+  markdown += `**Date range:** ${versionData[versionData.length-1]?.releaseDate} to ${versionData[0]?.releaseDate}\n\n`;
+
+  // Severity summary
+  markdown += `### Severity Summary\n\n`;
+  markdown += `| Severity | Count | Percentage |\n`;
+  markdown += `|----------|-------|------------|\n`;
+
+  for (const [severity, count] of Object.entries(severityStats)) {
+    if (count > 0) {
+      const percentage = ((count/total)*100).toFixed(1);
+      markdown += `| ${severity} | ${count} | ${percentage}% |\n`;
+    }
+  }
+  markdown += `| **TOTAL** | **${total}** | **100%** |\n\n`;
+
+  // Package vulnerabilities table
+  if (packageVulns.size > 0) {
+    markdown += `### Packages with Vulnerabilities\n\n`;
+    markdown += `| Sev | Package:Version | Vaadin Versions | Count | Example |\n`;
+    markdown += `|-----|-----------------|-----------------|-------|----------|\n`;
+
+    const sortedPackages = Array.from(packageVulns.entries())
+      .sort(([,a], [,b]) => b.vulnerabilities.size - a.vulnerabilities.size);
+
+    for (const [packageVersionKey, data] of sortedPackages) {
+      // Remove groupId from Maven packages for cleaner display
+      const displayKey = packageVersionKey.replace(/^maven:([^:]+:)?([^:]+):(.+)$/, 'maven:$2:$3');
+
+      const vaadinVersions = Array.from(data.vaadinVersions).sort();
+      const vaadinVersionsStr = vaadinVersions.join(', ');
+
+      // Get highest severity as single letter
+      const maxSeverity = getHighestSeverity(data.severities);
+      const severityLetter = severityToLetter(maxSeverity);
+
+      // Get first vulnerability, preferring CVE over GHSA
+      const vulnArray = Array.from(data.vulnerabilities);
+      const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
+      const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
+
+      // Escape pipe characters in table content
+      const escapedDisplayKey = displayKey.replace(/\|/g, '\\|');
+      const escapedVersionsStr = vaadinVersionsStr.replace(/\|/g, '\\|');
+      const escapedFirstVuln = firstVuln.replace(/\|/g, '\\|');
+
+      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${data.vulnerabilities.size} | ${escapedFirstVuln} |\n`;
+    }
+  }
+
+  markdown += `\n---\n*Found ${total} vulnerabilities across ${packageVulns.size} packages*\n\n`;
+
+  writeToGitHubStepSummary(markdown);
 }
 
 // Normalize package names for consistent reporting
@@ -992,15 +1101,18 @@ function parseBomberResults(content, tagName, packageVulns, severityStats) {
           const cve = vulnerability.startsWith('CVE-') ? vulnerability : vulnerability;
 
           if (!packageVulns.has(packageVersionKey)) {
-            packageVulns.set(packageVersionKey, { vaadinVersions: new Set(), vulnerabilities: new Set() });
+            packageVulns.set(packageVersionKey, { vaadinVersions: new Set(), vulnerabilities: new Set(), severities: new Set() });
           }
 
           const pkg = packageVulns.get(packageVersionKey);
           pkg.vaadinVersions.add(tagName);
           pkg.vulnerabilities.add(cve);
 
-          // Count severity
+          // Track severity for this package
           const sev = severity.toUpperCase();
+          pkg.severities.add(sev);
+
+          // Count severity
           if (severityStats.hasOwnProperty(sev)) {
             severityStats[sev]++;
           }
@@ -1034,7 +1146,7 @@ function parseOsvResults(content, tagName, packageVulns, severityStats) {
           const packageVersionKey = `${ecosystem.toLowerCase()}:${normalizedName}:${version}`;
 
           if (!packageVulns.has(packageVersionKey)) {
-            packageVulns.set(packageVersionKey, { vaadinVersions: new Set(), vulnerabilities: new Set() });
+            packageVulns.set(packageVersionKey, { vaadinVersions: new Set(), vulnerabilities: new Set(), severities: new Set() });
           }
 
           const pkg = packageVulns.get(packageVersionKey);
@@ -1049,6 +1161,8 @@ function parseOsvResults(content, tagName, packageVulns, severityStats) {
             else if (score >= 7.0) severity = 'HIGH';
             else if (score >= 4.0) severity = 'MODERATE';
 
+            // Track severity for this package
+            pkg.severities.add(severity);
             severityStats[severity]++;
           }
         }
