@@ -409,7 +409,7 @@ async function processReleases(releases, filterFn = null, actionFn = null) {
 
     // Only show SBOM URL if there's an action (download/scan/show)
     if (actionFn) {
-      console.log(`  SBOM: ${sbomUrl}`);
+      log(`  SBOM: ${sbomUrl}`);
       await actionFn(releaseDate, tagName, sbomUrl);
     }
   }
@@ -548,7 +548,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
 
     // Only show SBOM URL if downloading or performing actions
     if (shouldDownload || shouldShow || shouldReport) {
-      console.log(`  SBOM: ${sbomUrl}`);
+      log(`  SBOM: ${sbomUrl}`);
     }
 
     if (shouldDownload) {
@@ -603,7 +603,7 @@ async function getVersionRelease(versionFilter, shouldDownload, shouldScan, forc
 
   // Only show SBOM URL if downloading or performing actions
   if (shouldDownload || shouldShow || shouldReport) {
-    console.log(`  SBOM: ${sbomUrl}`);
+    log(`  SBOM: ${sbomUrl}`);
   }
 
   if (shouldDownload) {
@@ -867,9 +867,12 @@ async function generateReport(releases) {
   console.log('\n' + '='.repeat(80));
   console.log('VULNERABILITY REPORT');
   console.log('='.repeat(80));
+  const dates = versionData.map(v => v.releaseDate).sort();
+  const dateRange = dates.length > 1 ? `${dates[0]} to ${dates[dates.length-1]}` : dates[0] || 'Unknown';
+
   console.log(`Generated: ${new Date().toISOString()}`);
   console.log(`Scanned versions: ${versionData.length}`);
-  console.log(`Date range: ${versionData[versionData.length-1]?.releaseDate} to ${versionData[0]?.releaseDate}`);
+  console.log(`Date range: ${dateRange}`);
 
   // Summary statistics
   console.log('\n' + '-'.repeat(40));
@@ -967,9 +970,12 @@ function writeToGitHubStepSummary(content) {
 // Format and write vulnerability report to GitHub step summary
 function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVulns, total) {
   let markdown = `\n## 🛡️ Vulnerability Report\n\n`;
+  const dates = versionData.map(v => v.releaseDate).sort();
+  const dateRange = dates.length > 1 ? `${dates[0]} to ${dates[dates.length-1]}` : dates[0] || 'Unknown';
+
   markdown += `**Generated:** ${new Date().toISOString()}\n`;
   markdown += `**Scanned versions:** ${versionData.length}\n`;
-  markdown += `**Date range:** ${versionData[versionData.length-1]?.releaseDate} to ${versionData[0]?.releaseDate}\n\n`;
+  markdown += `**Date range:** ${dateRange}\n\n`;
 
   // Severity summary
   markdown += `### Severity Summary\n\n`;
