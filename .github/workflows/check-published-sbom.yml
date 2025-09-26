@@ -42,11 +42,22 @@ jobs:
       - run: go install github.com/devops-kung-fu/bomber@latest
       - run: |
           A="--download --scan"
-          [ false = "${{github.event.inputs.ga}}" ] && A="$A --no-ga" || A="$A --ga"
-          [ false = "${{github.event.inputs.report}}" ] && A="$A --no-report" || A="$A --report"
-          [ false = "${{github.event.inputs.latest}}" ] && A="$A --no-latest" || A="$A --latest"
-          V="${{ github.event.inputs.version }}"
-          [ -n "$V" ] && A="$A --version $V"
+          # Set defaults for scheduled runs (when inputs are undefined)
+          GA="${{github.event.inputs.ga}}"
+          REPORT="${{github.event.inputs.report}}"
+          LATEST="${{github.event.inputs.latest}}"
+          VERSION="${{github.event.inputs.version}}"
+
+          # Use defaults if inputs are empty (scheduled run)
+          GA="${GA:-true}"
+          REPORT="${REPORT:-true}"
+          LATEST="${LATEST:-true}"
+
+          [ "$GA" = "false" ] && A="$A --no-ga" || A="$A --ga"
+          [ "$REPORT" = "false" ] && A="$A --no-report" || A="$A --report"
+          [ "$LATEST" = "false" ] && A="$A --no-latest" || A="$A --latest"
+          [ -n "$VERSION" ] && A="$A --version $VERSION"
+
           cmd="scripts/checkPublishedSBOM.js $A"
           echo "Running: $cmd"
           $cmd
