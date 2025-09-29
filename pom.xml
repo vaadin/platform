@@ -16,8 +16,8 @@
     <url>https://vaadin.com</url>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <spring.boot.version>4.0.0-M3</spring.boot.version>
         <jakarta.ee.version>11.0.0</jakarta.ee.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
