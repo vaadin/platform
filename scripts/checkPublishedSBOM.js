@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 // Script to check published SBOMs for Vaadin Platform releases
 // Requires:
 // - curl
@@ -498,7 +497,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
   const allReleases = await getAllReleases();
 
   const maxSeries = gaOnly ? 3 : 4;
-  
+
   if (gaOnly) {
     log(`Finding latest GA release from the ${maxSeries} most recent series...`);
   } else {
@@ -924,8 +923,7 @@ async function generateReport(releases) {
   console.log('\n' + '-'.repeat(40));
   console.log('SCANNED RELEASES');
   console.log('-'.repeat(40));
-  versionData.sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
-  
+
   // Calculate vulnerability count per release
   const releaseVulnCounts = new Map();
   for (const [packageVersionKey, data] of packageVulns.entries()) {
@@ -935,8 +933,37 @@ async function generateReport(releases) {
       releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
     }
   }
-  
-  for (const version of versionData) {
+
+  // Sort releases by semantic version descending (newest version first)
+  const sortedVersionData = [...versionData].sort((a, b) => {
+    // Extract major.minor.patch from version strings
+    const parseVersion = (version) => {
+      const match = version.match(/(\d+)\.(\d+)\.(\d+)/);
+      if (match) {
+        return {
+          major: parseInt(match[1]),
+          minor: parseInt(match[2]),
+          patch: parseInt(match[3]),
+          full: version
+        };
+      }
+      return { major: 0, minor: 0, patch: 0, full: version };
+    };
+
+    const versionA = parseVersion(a.tagName);
+    const versionB = parseVersion(b.tagName);
+
+    // Sort by major version descending
+    if (versionB.major !== versionA.major) return versionB.major - versionA.major;
+    // Then by minor version descending
+    if (versionB.minor !== versionA.minor) return versionB.minor - versionA.minor;
+    // Then by patch version descending
+    if (versionB.patch !== versionA.patch) return versionB.patch - versionA.patch;
+    // Finally by full version string descending (handles alpha/beta/rc)
+    return versionB.full.localeCompare(versionA.full);
+  });
+
+  for (const version of sortedVersionData) {
     const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
     const vulnText = vulnCount === 1 ? '1 vuln' : `${vulnCount} vulns`;
     console.log(`${version.releaseDate} - ${version.tagName} - ${vulnText}`);
@@ -1047,8 +1074,7 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
 
   // Scanned releases list
   markdown += `### Scanned Releases\n\n`;
-  const sortedVersionData = [...versionData].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
-  
+
   // Calculate vulnerability count per release
   const releaseVulnCounts = new Map();
   for (const [packageVersionKey, data] of packageVulns.entries()) {
@@ -1058,7 +1084,36 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
       releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
     }
   }
-  
+
+  // Sort releases by semantic version descending (newest version first)
+  const sortedVersionData = [...versionData].sort((a, b) => {
+    // Extract major.minor.patch from version strings
+    const parseVersion = (version) => {
+      const match = version.match(/(\d+)\.(\d+)\.(\d+)/);
+      if (match) {
+        return {
+          major: parseInt(match[1]),
+          minor: parseInt(match[2]),
+          patch: parseInt(match[3]),
+          full: version
+        };
+      }
+      return { major: 0, minor: 0, patch: 0, full: version };
+    };
+
+    const versionA = parseVersion(a.tagName);
+    const versionB = parseVersion(b.tagName);
+
+    // Sort by major version descending
+    if (versionB.major !== versionA.major) return versionB.major - versionA.major;
+    // Then by minor version descending
+    if (versionB.minor !== versionA.minor) return versionB.minor - versionA.minor;
+    // Then by patch version descending
+    if (versionB.patch !== versionA.patch) return versionB.patch - versionA.patch;
+    // Finally by full version string descending (handles alpha/beta/rc)
+    return versionB.full.localeCompare(versionA.full);
+  });
+
   for (const version of sortedVersionData) {
     const releaseUrl = `https://github.com/vaadin/platform/releases/tag/${version.tagName}`;
     const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
