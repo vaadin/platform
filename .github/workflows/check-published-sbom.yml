@@ -13,7 +13,7 @@ on:
         description: 'Check GA version'
         required: false
         type: boolean
-        default: true
+        default: false
       report:
         description: 'Generate report'
         required: false
@@ -53,9 +53,9 @@ jobs:
           REPORT="${REPORT:-true}"
           LATEST="${LATEST:-true}"
 
-          [ "$GA" = "false" ] && A="$A --no-ga" || A="$A --ga"
-          [ "$REPORT" = "false" ] && A="$A --no-report" || A="$A --report"
-          [ "$LATEST" = "false" ] && A="$A --no-latest" || A="$A --latest"
+          [ "$GA" = "false" ] || A="$A --ga"
+          [ "$REPORT" = "false" ] || A="$A --report"
+          [ "$LATEST" = "false" ] || A="$A --latest"
           [ -n "$VERSION" ] && A="$A --version $VERSION"
 
           cmd="scripts/checkPublishedSBOM.js $A"
