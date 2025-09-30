@@ -1034,7 +1034,8 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   markdown += `### Scanned Releases\n\n`;
   const sortedVersionData = [...versionData].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
   for (const version of sortedVersionData) {
-    markdown += `- **${version.tagName}** (${version.releaseDate})\n`;
+    const releaseUrl = `https://github.com/vaadin/platform/releases/tag/${version.tagName}`;
+    markdown += `- **[${version.tagName}](${releaseUrl})** (${version.releaseDate})\n`;
   }
   markdown += `\n`;
 
