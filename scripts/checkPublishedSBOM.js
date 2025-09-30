@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 // Script to check published SBOMs for Vaadin Platform releases
 // Requires:
 // - curl
@@ -335,7 +334,7 @@ async function checkForNewReleases() {
   log('Checking for new releases...');
 
   const releases = await fetchGitHubReleases(1, 100);
-  const apiFirstRelease = releases.length > 0 ?
+  const apiFirstRelease = releases.length > 0 && releases[0].published_at && releases[0].tag_name ?
     `${releases[0].published_at.split('T')[0]} ${releases[0].tag_name}` : '';
 
   let cachedFirstRelease = '';
@@ -365,6 +364,7 @@ async function getAllReleasesFromAPI() {
     if (releases.length === 0) break;
 
     for (const release of releases) {
+      if (!release.published_at || !release.tag_name) continue;
       const releaseDate = release.published_at.split('T')[0];
       const tagName = release.tag_name;
       allReleases.push(`${releaseDate} ${tagName}`);
@@ -492,14 +492,16 @@ async function getAllReleasesProcessed(minDate, shouldDownload, shouldScan, shou
   return results;
 }
 
-// Get latest version from each of the 4 most recent series
+// Get latest version from each of the most recent series (3 for GA, 4 for all releases)
 async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, gaOnly, shouldShow, shouldReport) {
   const allReleases = await getAllReleases();
 
+  const maxSeries = gaOnly ? 3 : 4;
+
   if (gaOnly) {
-    log('Finding latest GA release from the 4 most recent series...');
+    log(`Finding latest GA release from the ${maxSeries} most recent series...`);
   } else {
-    log('Finding latest release (including pre-releases) from the 4 most recent series...');
+    log(`Finding latest release (including pre-releases) from the ${maxSeries} most recent series...`);
   }
 
   const results = [];
@@ -507,7 +509,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
   let seriesCount = 0;
 
   for (const release of allReleases) {
-    if (seriesCount >= 4) break;
+    if (seriesCount >= maxSeries) break;
 
     const [date, tag] = release.split(' ');
 
@@ -537,7 +539,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
       const [bMajor, bMinor] = b.series.split('.').map(Number);
       return bMajor === aMajor ? bMinor - aMinor : bMajor - aMajor;
     })
-    .slice(0, 4)
+    .slice(0, maxSeries)
     .reverse();
 
   // Output results
@@ -591,6 +593,11 @@ async function getVersionRelease(versionFilter, shouldDownload, shouldScan, forc
 
   if (response.message === 'Not Found') {
     err(`Error: Version ${versionFilter} not found in repository vaadin/platform`);
+    process.exit(1);
+  }
+
+  if (!response.published_at || !response.tag_name) {
+    err(`Invalid release data for version ${versionFilter}`);
     process.exit(1);
   }
 
@@ -709,7 +716,7 @@ Options:
   --report               Generate comprehensive vulnerability report from existing scan files
   --version VERSION      Test specific version only (e.g., --version 24.7.0)
   --latest               When used with --version: force fresh scans by discarding cached scan files
-                         When used alone: show latest version from the 4 most recent release series
+                         When used alone: show latest version from recent release series (3 for GA, 4 for all)
                          (combine with --ga to show only GA versions from those series)
   --help, -h             Show this help message
 
@@ -729,7 +736,7 @@ Examples:
   ${scriptName} --version 24.7.0 --scan     # Test specific version 24.7.0 and scan it
   ${scriptName} --version 24.7.0 --scan --latest  # Force fresh scan of version 24.7.0
   ${scriptName} --latest                    # Show latest version from the 4 most recent series (includes pre-releases)
-  ${scriptName} --latest --ga               # Show latest GA version from the 4 most recent series
+  ${scriptName} --latest --ga               # Show latest GA version from the 3 most recent series
   ${scriptName} --latest --show             # Show latest versions and their scan results
   ${scriptName} --ga 2025-09-01 --show      # Show GA releases from date and their scan results
   ${scriptName} --ga 2025-09-01 --report    # Generate vulnerability report for GA releases from date`);
@@ -817,6 +824,31 @@ function parseArguments() {
   args = values;
 }
 
+// Deduplicate vulnerabilities by preferring CVE identifiers over GHSA when they likely refer to the same issue
+// This function groups vulnerabilities and returns only CVE identifiers when both CVE and GHSA exist for same package
+function deduplicateVulnerabilities(vulnerabilities) {
+  const vulnArray = Array.from(vulnerabilities);
+  const cveVulns = vulnArray.filter(v => v.startsWith('CVE-')).sort();
+  const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-')).sort();
+
+  // If we have both CVE and GHSA vulnerabilities for the same package/version,
+  // and the counts suggest they might be duplicates (same count or close),
+  // prefer showing only CVE identifiers
+  if (cveVulns.length > 0 && ghsaVulns.length > 0) {
+    // If counts are equal, likely the same vulnerabilities reported by different tools
+    if (cveVulns.length === ghsaVulns.length) {
+      return cveVulns;
+    }
+    // If counts are close (within 1), prefer CVE but note there might be additional GHSA-only issues
+    else if (Math.abs(cveVulns.length - ghsaVulns.length) <= 1) {
+      return cveVulns.length >= ghsaVulns.length ? cveVulns : [...cveVulns, ...ghsaVulns];
+    }
+  }
+
+  // Default: return all vulnerabilities, CVE first
+  return [...cveVulns, ...ghsaVulns];
+}
+
 // Generate vulnerability report from scan files
 async function generateReport(releases) {
   log('');
@@ -863,6 +895,19 @@ async function generateReport(releases) {
     return;
   }
 
+  // Count deduplicated vulnerabilities for accurate severity statistics
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+    const maxSeverity = getHighestSeverity(data.severities);
+
+    // Count each deduplicated vulnerability with its package's highest severity
+    for (let i = 0; i < deduplicatedVulns.length; i++) {
+      if (severityStats.hasOwnProperty(maxSeverity)) {
+        severityStats[maxSeverity]++;
+      }
+    }
+  }
+
   // Generate report
   console.log('\n' + '='.repeat(80));
   console.log('VULNERABILITY REPORT');
@@ -873,6 +918,56 @@ async function generateReport(releases) {
   console.log(`Generated: ${new Date().toISOString()}`);
   console.log(`Scanned versions: ${versionData.length}`);
   console.log(`Date range: ${dateRange}`);
+
+  // Scanned releases list
+  console.log('\n' + '-'.repeat(40));
+  console.log('SCANNED RELEASES');
+  console.log('-'.repeat(40));
+
+  // Calculate vulnerability count per release
+  const releaseVulnCounts = new Map();
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    for (const vaadinVersion of data.vaadinVersions) {
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const currentCount = releaseVulnCounts.get(vaadinVersion) || 0;
+      releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
+    }
+  }
+
+  // Sort releases by semantic version descending (newest version first)
+  const sortedVersionData = [...versionData].sort((a, b) => {
+    // Extract major.minor.patch from version strings
+    const parseVersion = (version) => {
+      const match = version.match(/(\d+)\.(\d+)\.(\d+)/);
+      if (match) {
+        return {
+          major: parseInt(match[1]),
+          minor: parseInt(match[2]),
+          patch: parseInt(match[3]),
+          full: version
+        };
+      }
+      return { major: 0, minor: 0, patch: 0, full: version };
+    };
+
+    const versionA = parseVersion(a.tagName);
+    const versionB = parseVersion(b.tagName);
+
+    // Sort by major version descending
+    if (versionB.major !== versionA.major) return versionB.major - versionA.major;
+    // Then by minor version descending
+    if (versionB.minor !== versionA.minor) return versionB.minor - versionA.minor;
+    // Then by patch version descending
+    if (versionB.patch !== versionA.patch) return versionB.patch - versionA.patch;
+    // Finally by full version string descending (handles alpha/beta/rc)
+    return versionB.full.localeCompare(versionA.full);
+  });
+
+  for (const version of sortedVersionData) {
+    const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
+    const vulnText = vulnCount === 1 ? '1 vuln' : `${vulnCount} vulns`;
+    console.log(`${version.releaseDate} - ${version.tagName} - ${vulnText}`);
+  }
 
   // Summary statistics
   console.log('\n' + '-'.repeat(40));
@@ -890,7 +985,7 @@ async function generateReport(releases) {
   console.log('\n' + '-'.repeat(95));
   console.log('PACKAGES WITH VULNERABILITIES');
   console.log('-'.repeat(95));
-  console.log('Sev ' + 'Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(20) + 'Count  Example');
+  console.log('Sev ' + 'Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(20) + 'Count  CVEs');
   console.log('-'.repeat(95));
 
   const sortedPackages = Array.from(packageVulns.entries())
@@ -907,13 +1002,13 @@ async function generateReport(releases) {
     const maxSeverity = getHighestSeverity(data.severities);
     const severityLetter = severityToLetter(maxSeverity);
 
-    // Get first vulnerability, preferring CVE over GHSA
-    const vulnArray = Array.from(data.vulnerabilities);
-    const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-    const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
+    // Get deduplicated vulnerabilities, preferring CVEs
+    const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+    const allVulns = deduplicatedVulns.join(', ');
+    const actualCount = deduplicatedVulns.length;
 
     console.log(
-      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${data.vulnerabilities.size.toString().padEnd(7)}${firstVuln}`
+      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${actualCount.toString().padEnd(7)}${allVulns}`
     );
   }
 
@@ -977,6 +1072,56 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   markdown += `**Scanned versions:** ${versionData.length}\n`;
   markdown += `**Date range:** ${dateRange}\n\n`;
 
+  // Scanned releases list
+  markdown += `### Scanned Releases\n\n`;
+
+  // Calculate vulnerability count per release
+  const releaseVulnCounts = new Map();
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    for (const vaadinVersion of data.vaadinVersions) {
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const currentCount = releaseVulnCounts.get(vaadinVersion) || 0;
+      releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
+    }
+  }
+
+  // Sort releases by semantic version descending (newest version first)
+  const sortedVersionData = [...versionData].sort((a, b) => {
+    // Extract major.minor.patch from version strings
+    const parseVersion = (version) => {
+      const match = version.match(/(\d+)\.(\d+)\.(\d+)/);
+      if (match) {
+        return {
+          major: parseInt(match[1]),
+          minor: parseInt(match[2]),
+          patch: parseInt(match[3]),
+          full: version
+        };
+      }
+      return { major: 0, minor: 0, patch: 0, full: version };
+    };
+
+    const versionA = parseVersion(a.tagName);
+    const versionB = parseVersion(b.tagName);
+
+    // Sort by major version descending
+    if (versionB.major !== versionA.major) return versionB.major - versionA.major;
+    // Then by minor version descending
+    if (versionB.minor !== versionA.minor) return versionB.minor - versionA.minor;
+    // Then by patch version descending
+    if (versionB.patch !== versionA.patch) return versionB.patch - versionA.patch;
+    // Finally by full version string descending (handles alpha/beta/rc)
+    return versionB.full.localeCompare(versionA.full);
+  });
+
+  for (const version of sortedVersionData) {
+    const releaseUrl = `https://github.com/vaadin/platform/releases/tag/${version.tagName}`;
+    const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
+    const vulnText = vulnCount === 1 ? '1 vuln' : `${vulnCount} vulns`;
+    markdown += `- **[${version.tagName}](${releaseUrl})** (${version.releaseDate}) - ${vulnText}\n`;
+  }
+  markdown += `\n`;
+
   // Severity summary
   markdown += `### Severity Summary\n\n`;
   markdown += `| Severity | Count | Percentage |\n`;
@@ -993,7 +1138,7 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   // Package vulnerabilities table
   if (packageVulns.size > 0) {
     markdown += `### Packages with Vulnerabilities\n\n`;
-    markdown += `| Sev | Package:Version | Vaadin Versions | Count | Example |\n`;
+    markdown += `| Sev | Package:Version | Vaadin Versions | Count | CVEs |\n`;
     markdown += `|-----|-----------------|-----------------|-------|----------|\n`;
 
     const sortedPackages = Array.from(packageVulns.entries())
@@ -1010,17 +1155,17 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
       const maxSeverity = getHighestSeverity(data.severities);
       const severityLetter = severityToLetter(maxSeverity);
 
-      // Get first vulnerability, preferring CVE over GHSA
-      const vulnArray = Array.from(data.vulnerabilities);
-      const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-      const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
+      // Get deduplicated vulnerabilities, preferring CVEs
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const allVulns = deduplicatedVulns.join(', ');
+      const actualCount = deduplicatedVulns.length;
 
       // Escape pipe characters in table content
       const escapedDisplayKey = displayKey.replace(/\|/g, '\\|');
       const escapedVersionsStr = vaadinVersionsStr.replace(/\|/g, '\\|');
-      const escapedFirstVuln = firstVuln.replace(/\|/g, '\\|');
+      const escapedAllVulns = allVulns.replace(/\|/g, '\\|');
 
-      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${data.vulnerabilities.size} | ${escapedFirstVuln} |\n`;
+      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${actualCount} | ${escapedAllVulns} |\n`;
     }
   }
 
@@ -1118,10 +1263,7 @@ function parseBomberResults(content, tagName, packageVulns, severityStats) {
           const sev = severity.toUpperCase();
           pkg.severities.add(sev);
 
-          // Count severity
-          if (severityStats.hasOwnProperty(sev)) {
-            severityStats[sev]++;
-          }
+          // Note: Severity counting moved to after deduplication
         }
       }
     }
@@ -1169,7 +1311,8 @@ function parseOsvResults(content, tagName, packageVulns, severityStats) {
 
             // Track severity for this package
             pkg.severities.add(severity);
-            severityStats[severity]++;
+
+            // Note: Severity counting moved to after deduplication
           }
         }
       }
@@ -1201,7 +1344,7 @@ async function main() {
       args.report
     );
   } else if (args.latest) {
-    // Latest series mode (4 most recent series)
+    // Latest series mode (3 for GA, 4 for all releases)
     await getLatestSeriesReleases(
       args.download,
       args.scan,
