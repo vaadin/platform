@@ -38,6 +38,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: 'stable'
+          cache: false
       - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
       - run: go install github.com/devops-kung-fu/bomber@latest
       - run: |
