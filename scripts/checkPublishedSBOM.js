@@ -493,14 +493,16 @@ async function getAllReleasesProcessed(minDate, shouldDownload, shouldScan, shou
   return results;
 }
 
-// Get latest version from each of the 4 most recent series
+// Get latest version from each of the most recent series (3 for GA, 4 for all releases)
 async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, gaOnly, shouldShow, shouldReport) {
   const allReleases = await getAllReleases();
 
+  const maxSeries = gaOnly ? 3 : 4;
+  
   if (gaOnly) {
-    log('Finding latest GA release from the 4 most recent series...');
+    log(`Finding latest GA release from the ${maxSeries} most recent series...`);
   } else {
-    log('Finding latest release (including pre-releases) from the 4 most recent series...');
+    log(`Finding latest release (including pre-releases) from the ${maxSeries} most recent series...`);
   }
 
   const results = [];
@@ -508,7 +510,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
   let seriesCount = 0;
 
   for (const release of allReleases) {
-    if (seriesCount >= 4) break;
+    if (seriesCount >= maxSeries) break;
 
     const [date, tag] = release.split(' ');
 
@@ -538,7 +540,7 @@ async function getLatestSeriesReleases(shouldDownload, shouldScan, forceLatest, 
       const [bMajor, bMinor] = b.series.split('.').map(Number);
       return bMajor === aMajor ? bMinor - aMinor : bMajor - aMajor;
     })
-    .slice(0, 4)
+    .slice(0, maxSeries)
     .reverse();
 
   // Output results
@@ -715,7 +717,7 @@ Options:
   --report               Generate comprehensive vulnerability report from existing scan files
   --version VERSION      Test specific version only (e.g., --version 24.7.0)
   --latest               When used with --version: force fresh scans by discarding cached scan files
-                         When used alone: show latest version from the 4 most recent release series
+                         When used alone: show latest version from recent release series (3 for GA, 4 for all)
                          (combine with --ga to show only GA versions from those series)
   --help, -h             Show this help message
 
@@ -735,7 +737,7 @@ Examples:
   ${scriptName} --version 24.7.0 --scan     # Test specific version 24.7.0 and scan it
   ${scriptName} --version 24.7.0 --scan --latest  # Force fresh scan of version 24.7.0
   ${scriptName} --latest                    # Show latest version from the 4 most recent series (includes pre-releases)
-  ${scriptName} --latest --ga               # Show latest GA version from the 4 most recent series
+  ${scriptName} --latest --ga               # Show latest GA version from the 3 most recent series
   ${scriptName} --latest --show             # Show latest versions and their scan results
   ${scriptName} --ga 2025-09-01 --show      # Show GA releases from date and their scan results
   ${scriptName} --ga 2025-09-01 --report    # Generate vulnerability report for GA releases from date`);
@@ -923,8 +925,21 @@ async function generateReport(releases) {
   console.log('SCANNED RELEASES');
   console.log('-'.repeat(40));
   versionData.sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+  
+  // Calculate vulnerability count per release
+  const releaseVulnCounts = new Map();
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    for (const vaadinVersion of data.vaadinVersions) {
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const currentCount = releaseVulnCounts.get(vaadinVersion) || 0;
+      releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
+    }
+  }
+  
   for (const version of versionData) {
-    console.log(`${version.releaseDate} - ${version.tagName}`);
+    const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
+    const vulnText = vulnCount === 1 ? '1 vuln' : `${vulnCount} vulns`;
+    console.log(`${version.releaseDate} - ${version.tagName} - ${vulnText}`);
   }
 
   // Summary statistics
@@ -1033,9 +1048,22 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   // Scanned releases list
   markdown += `### Scanned Releases\n\n`;
   const sortedVersionData = [...versionData].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+  
+  // Calculate vulnerability count per release
+  const releaseVulnCounts = new Map();
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    for (const vaadinVersion of data.vaadinVersions) {
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const currentCount = releaseVulnCounts.get(vaadinVersion) || 0;
+      releaseVulnCounts.set(vaadinVersion, currentCount + deduplicatedVulns.length);
+    }
+  }
+  
   for (const version of sortedVersionData) {
     const releaseUrl = `https://github.com/vaadin/platform/releases/tag/${version.tagName}`;
-    markdown += `- **[${version.tagName}](${releaseUrl})** (${version.releaseDate})\n`;
+    const vulnCount = releaseVulnCounts.get(version.tagName) || 0;
+    const vulnText = vulnCount === 1 ? '1 vuln' : `${vulnCount} vulns`;
+    markdown += `- **[${version.tagName}](${releaseUrl})** (${version.releaseDate}) - ${vulnText}\n`;
   }
   markdown += `\n`;
 
@@ -1261,7 +1289,7 @@ async function main() {
       args.report
     );
   } else if (args.latest) {
-    // Latest series mode (4 most recent series)
+    // Latest series mode (3 for GA, 4 for all releases)
     await getLatestSeriesReleases(
       args.download,
       args.scan,
