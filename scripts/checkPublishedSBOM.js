@@ -823,6 +823,31 @@ function parseArguments() {
   args = values;
 }
 
+// Deduplicate vulnerabilities by preferring CVE identifiers over GHSA when they likely refer to the same issue
+// This function groups vulnerabilities and returns only CVE identifiers when both CVE and GHSA exist for same package
+function deduplicateVulnerabilities(vulnerabilities) {
+  const vulnArray = Array.from(vulnerabilities);
+  const cveVulns = vulnArray.filter(v => v.startsWith('CVE-')).sort();
+  const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-')).sort();
+
+  // If we have both CVE and GHSA vulnerabilities for the same package/version,
+  // and the counts suggest they might be duplicates (same count or close),
+  // prefer showing only CVE identifiers
+  if (cveVulns.length > 0 && ghsaVulns.length > 0) {
+    // If counts are equal, likely the same vulnerabilities reported by different tools
+    if (cveVulns.length === ghsaVulns.length) {
+      return cveVulns;
+    }
+    // If counts are close (within 1), prefer CVE but note there might be additional GHSA-only issues
+    else if (Math.abs(cveVulns.length - ghsaVulns.length) <= 1) {
+      return cveVulns.length >= ghsaVulns.length ? cveVulns : [...cveVulns, ...ghsaVulns];
+    }
+  }
+
+  // Default: return all vulnerabilities, CVE first
+  return [...cveVulns, ...ghsaVulns];
+}
+
 // Generate vulnerability report from scan files
 async function generateReport(releases) {
   log('');
@@ -867,6 +892,19 @@ async function generateReport(releases) {
   if (versionData.length === 0) {
     log('No scan files found for the specified criteria. Run with --scan first.');
     return;
+  }
+
+  // Count deduplicated vulnerabilities for accurate severity statistics
+  for (const [packageVersionKey, data] of packageVulns.entries()) {
+    const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+    const maxSeverity = getHighestSeverity(data.severities);
+
+    // Count each deduplicated vulnerability with its package's highest severity
+    for (let i = 0; i < deduplicatedVulns.length; i++) {
+      if (severityStats.hasOwnProperty(maxSeverity)) {
+        severityStats[maxSeverity]++;
+      }
+    }
   }
 
   // Generate report
@@ -922,14 +960,13 @@ async function generateReport(releases) {
     const maxSeverity = getHighestSeverity(data.severities);
     const severityLetter = severityToLetter(maxSeverity);
 
-    // Get all vulnerabilities, preferring CVEs over GHSA
-    const vulnArray = Array.from(data.vulnerabilities);
-    const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-    const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-'));
-    const allVulns = [...cveVulns.sort(), ...ghsaVulns.sort()].join(', ');
+    // Get deduplicated vulnerabilities, preferring CVEs
+    const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+    const allVulns = deduplicatedVulns.join(', ');
+    const actualCount = deduplicatedVulns.length;
 
     console.log(
-      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${data.vulnerabilities.size.toString().padEnd(7)}${allVulns}`
+      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${actualCount.toString().padEnd(7)}${allVulns}`
     );
   }
 
@@ -1034,18 +1071,17 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
       const maxSeverity = getHighestSeverity(data.severities);
       const severityLetter = severityToLetter(maxSeverity);
 
-      // Get all vulnerabilities, preferring CVEs over GHSA
-      const vulnArray = Array.from(data.vulnerabilities);
-      const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-      const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-'));
-      const allVulns = [...cveVulns.sort(), ...ghsaVulns.sort()].join(', ');
+      // Get deduplicated vulnerabilities, preferring CVEs
+      const deduplicatedVulns = deduplicateVulnerabilities(data.vulnerabilities);
+      const allVulns = deduplicatedVulns.join(', ');
+      const actualCount = deduplicatedVulns.length;
 
       // Escape pipe characters in table content
       const escapedDisplayKey = displayKey.replace(/\|/g, '\\|');
       const escapedVersionsStr = vaadinVersionsStr.replace(/\|/g, '\\|');
       const escapedAllVulns = allVulns.replace(/\|/g, '\\|');
 
-      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${data.vulnerabilities.size} | ${escapedAllVulns} |\n`;
+      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${actualCount} | ${escapedAllVulns} |\n`;
     }
   }
 
@@ -1143,10 +1179,7 @@ function parseBomberResults(content, tagName, packageVulns, severityStats) {
           const sev = severity.toUpperCase();
           pkg.severities.add(sev);
 
-          // Count severity
-          if (severityStats.hasOwnProperty(sev)) {
-            severityStats[sev]++;
-          }
+          // Note: Severity counting moved to after deduplication
         }
       }
     }
@@ -1194,7 +1227,8 @@ function parseOsvResults(content, tagName, packageVulns, severityStats) {
 
             // Track severity for this package
             pkg.severities.add(severity);
-            severityStats[severity]++;
+
+            // Note: Severity counting moved to after deduplication
           }
         }
       }
