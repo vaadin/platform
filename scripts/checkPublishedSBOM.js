@@ -335,7 +335,7 @@ async function checkForNewReleases() {
   log('Checking for new releases...');
 
   const releases = await fetchGitHubReleases(1, 100);
-  const apiFirstRelease = releases.length > 0 ?
+  const apiFirstRelease = releases.length > 0 && releases[0].published_at && releases[0].tag_name ?
     `${releases[0].published_at.split('T')[0]} ${releases[0].tag_name}` : '';
 
   let cachedFirstRelease = '';
@@ -365,6 +365,7 @@ async function getAllReleasesFromAPI() {
     if (releases.length === 0) break;
 
     for (const release of releases) {
+      if (!release.published_at || !release.tag_name) continue;
       const releaseDate = release.published_at.split('T')[0];
       const tagName = release.tag_name;
       allReleases.push(`${releaseDate} ${tagName}`);
@@ -591,6 +592,11 @@ async function getVersionRelease(versionFilter, shouldDownload, shouldScan, forc
 
   if (response.message === 'Not Found') {
     err(`Error: Version ${versionFilter} not found in repository vaadin/platform`);
+    process.exit(1);
+  }
+
+  if (!response.published_at || !response.tag_name) {
+    err(`Invalid release data for version ${versionFilter}`);
     process.exit(1);
   }
 
@@ -874,6 +880,15 @@ async function generateReport(releases) {
   console.log(`Scanned versions: ${versionData.length}`);
   console.log(`Date range: ${dateRange}`);
 
+  // Scanned releases list
+  console.log('\n' + '-'.repeat(40));
+  console.log('SCANNED RELEASES');
+  console.log('-'.repeat(40));
+  versionData.sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+  for (const version of versionData) {
+    console.log(`${version.releaseDate} - ${version.tagName}`);
+  }
+
   // Summary statistics
   console.log('\n' + '-'.repeat(40));
   console.log('SEVERITY SUMMARY');
@@ -890,7 +905,7 @@ async function generateReport(releases) {
   console.log('\n' + '-'.repeat(95));
   console.log('PACKAGES WITH VULNERABILITIES');
   console.log('-'.repeat(95));
-  console.log('Sev ' + 'Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(20) + 'Count  Example');
+  console.log('Sev ' + 'Package:Version'.padEnd(40) + 'Vaadin Versions'.padEnd(20) + 'Count  CVEs');
   console.log('-'.repeat(95));
 
   const sortedPackages = Array.from(packageVulns.entries())
@@ -907,13 +922,14 @@ async function generateReport(releases) {
     const maxSeverity = getHighestSeverity(data.severities);
     const severityLetter = severityToLetter(maxSeverity);
 
-    // Get first vulnerability, preferring CVE over GHSA
+    // Get all vulnerabilities, preferring CVEs over GHSA
     const vulnArray = Array.from(data.vulnerabilities);
     const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-    const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
+    const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-'));
+    const allVulns = [...cveVulns.sort(), ...ghsaVulns.sort()].join(', ');
 
     console.log(
-      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${data.vulnerabilities.size.toString().padEnd(7)}${firstVuln}`
+      `${severityLetter}   ${displayKey.padEnd(40)}${vaadinVersionsStr.padEnd(20)}${data.vulnerabilities.size.toString().padEnd(7)}${allVulns}`
     );
   }
 
@@ -977,6 +993,14 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   markdown += `**Scanned versions:** ${versionData.length}\n`;
   markdown += `**Date range:** ${dateRange}\n\n`;
 
+  // Scanned releases list
+  markdown += `### Scanned Releases\n\n`;
+  const sortedVersionData = [...versionData].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+  for (const version of sortedVersionData) {
+    markdown += `- **${version.tagName}** (${version.releaseDate})\n`;
+  }
+  markdown += `\n`;
+
   // Severity summary
   markdown += `### Severity Summary\n\n`;
   markdown += `| Severity | Count | Percentage |\n`;
@@ -993,7 +1017,7 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
   // Package vulnerabilities table
   if (packageVulns.size > 0) {
     markdown += `### Packages with Vulnerabilities\n\n`;
-    markdown += `| Sev | Package:Version | Vaadin Versions | Count | Example |\n`;
+    markdown += `| Sev | Package:Version | Vaadin Versions | Count | CVEs |\n`;
     markdown += `|-----|-----------------|-----------------|-------|----------|\n`;
 
     const sortedPackages = Array.from(packageVulns.entries())
@@ -1010,17 +1034,18 @@ function writeVulnerabilityReportToGitHub(versionData, severityStats, packageVul
       const maxSeverity = getHighestSeverity(data.severities);
       const severityLetter = severityToLetter(maxSeverity);
 
-      // Get first vulnerability, preferring CVE over GHSA
+      // Get all vulnerabilities, preferring CVEs over GHSA
       const vulnArray = Array.from(data.vulnerabilities);
       const cveVulns = vulnArray.filter(v => v.startsWith('CVE-'));
-      const firstVuln = cveVulns.length > 0 ? cveVulns[0] : vulnArray[0];
+      const ghsaVulns = vulnArray.filter(v => v.startsWith('GHSA-'));
+      const allVulns = [...cveVulns.sort(), ...ghsaVulns.sort()].join(', ');
 
       // Escape pipe characters in table content
       const escapedDisplayKey = displayKey.replace(/\|/g, '\\|');
       const escapedVersionsStr = vaadinVersionsStr.replace(/\|/g, '\\|');
-      const escapedFirstVuln = firstVuln.replace(/\|/g, '\\|');
+      const escapedAllVulns = allVulns.replace(/\|/g, '\\|');
 
-      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${data.vulnerabilities.size} | ${escapedFirstVuln} |\n`;
+      markdown += `| ${severityLetter} | \`${escapedDisplayKey}\` | ${escapedVersionsStr} | ${data.vulnerabilities.size} | ${escapedAllVulns} |\n`;
     }
   }
 
