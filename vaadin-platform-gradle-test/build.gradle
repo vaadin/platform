@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id 'war'
-    id 'org.gretty' version '4.0.3'
+    id 'org.gretty' version '4.1.10'
     id 'com.vaadin.plugin.sauce.SauceConnectPlugin' version '0.0.15'
 }
 
