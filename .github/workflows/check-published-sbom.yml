@@ -1,0 +1,80 @@
+name: Check Published SBOM
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to check'
+        required: false
+        type: string
+        default: ''
+      ga:
+        description: 'Check GA version'
+        required: false
+        type: boolean
+        default: false
+      report:
+        description: 'Generate report'
+        required: false
+        type: boolean
+        default: true
+      latest:
+        description: 'Check latest version'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          cache: false
+      - run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
+      - run: go install github.com/devops-kung-fu/bomber@latest
+      - run: |
+          A="--download --scan"
+          # Set defaults for scheduled runs (when inputs are undefined)
+          GA="${{github.event.inputs.ga}}"
+          REPORT="${{github.event.inputs.report}}"
+          LATEST="${{github.event.inputs.latest}}"
+          VERSION="${{github.event.inputs.version}}"
+
+          # Use defaults if inputs are empty (scheduled run)
+          GA="${GA:-true}"
+          REPORT="${REPORT:-true}"
+          LATEST="${LATEST:-true}"
+
+          [ "$GA" = "false" ] || A="$A --ga"
+          [ "$REPORT" = "false" ] || A="$A --report"
+          [ "$LATEST" = "false" ] || A="$A --latest"
+          [ -n "$VERSION" ] && A="$A --version $VERSION"
+
+          cmd="scripts/checkPublishedSBOM.js $A"
+          echo "Running: $cmd"
+          $cmd
+        name: Check Published SBOM
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - if: ${{always()}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-sbom-check-results
+          path: |
+            /tmp/SBOM_*.json
+            /tmp/SBOM_*.json.bomber.scan
+            /tmp/SBOM_*.json.osv-scanner.scan
+            /tmp/*report*.json
+            /tmp/*report*.html
+            /tmp/*report*.txt
+          if-no-files-found: ignore
+          retention-days: 30
