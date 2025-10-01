@@ -10,6 +10,8 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -20,7 +22,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 @Layout("/flow")
 @RoutePrefix("flow")
 @AnonymousAllowed
-public class FlowLayout extends AppLayout {
+public class FlowLayout extends AppLayout implements AfterNavigationObserver {
     public static final String LOGIN_BUTTON_ID = "login-button";
     private final AuthenticationContext authenticationContext;
 
@@ -89,8 +91,7 @@ public class FlowLayout extends AppLayout {
     }
 
     @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
+    public void afterNavigation(AfterNavigationEvent event) {
         viewTitle.setText(getCurrentPageTitle());
     }
 

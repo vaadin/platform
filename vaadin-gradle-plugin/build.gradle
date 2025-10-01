@@ -23,8 +23,8 @@ defaultTasks 'jar'
 group pom.parent.groupId
 version = project.hasProperty('vaadin.version') ? project.getProperty('vaadin.version') : pom.parent.version
 archivesBaseName = pom.artifactId
-sourceCompatibility = 17
-targetCompatibility = 17
+sourceCompatibility = 21
+targetCompatibility = 21
 
 /***********************************************************************************************************************
  *
@@ -186,7 +186,7 @@ publishing {
  *
  **********************************************************************************************************************/
 wrapper {
-    gradleVersion = '8.7'
+    gradleVersion = '8.14'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -204,6 +204,6 @@ kotlin {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 }
