@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.vaadin.flow.component.login.testbench.LoginOverlayElement;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -108,6 +109,13 @@ public class ComponentsIT extends AbstractPlatformTest {
         if ($(ConfirmDialogElement.class).exists()){
             ConfirmDialogElement dialogElement = $(ConfirmDialogElement.class).waitForFirst();
             dialogElement.getConfirmButton().click();
+        }
+
+        // The component uses strict modality now, so prevents updates from the client.
+        // So we need to close the overlay before next test step
+        if ($(LoginOverlayElement.class).exists()){
+            LoginOverlayElement loginOverlayElement = $(LoginOverlayElement.class).waitForFirst();
+            loginOverlayElement.getForgotPasswordButton().click();
         }
     }
 
