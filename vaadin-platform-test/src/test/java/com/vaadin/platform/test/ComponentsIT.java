@@ -56,7 +56,7 @@ public class ComponentsIT extends ParallelTest {
                 //drop safari-9 test, it leads to infrastructure error from saucelabs
                 //use safari-17 for now, as latest safari-18 will lead saucelabs 
                 //to use macOS 15 which is not supported at the moment
-                Parameters.setGridBrowsers("ie11,firefox,safari-17,edge,edge-18");
+                Parameters.setGridBrowsers("ie11,firefox,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
