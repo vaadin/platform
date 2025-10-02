@@ -9,6 +9,8 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.server.menu.MenuConfiguration;
@@ -16,7 +18,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 
 @Layout("/flow")
 @RoutePrefix("flow")
-public class FlowLayout extends AppLayout {
+public class FlowLayout extends AppLayout implements AfterNavigationObserver {
 
     private H1 viewTitle;
 
@@ -70,8 +72,7 @@ public class FlowLayout extends AppLayout {
     }
 
     @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
+    public void afterNavigation(AfterNavigationEvent event) {
         viewTitle.setText(getCurrentPageTitle());
     }
 

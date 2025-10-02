@@ -150,7 +150,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         TestBenchElement textField = datePicker.$("input").first();
         assertElementRendered(textField);
 
-        datePicker.$(DivElement.class).attribute("part", "toggle-button").first().click();
+        datePicker.$(DivElement.class).withAttributeContainingWord("part", "toggle-button").first().click();
 
         WebElement dropDown = datePicker.$("vaadin-date-picker-overlay").first();
 
@@ -169,7 +169,7 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
         TestBenchElement textField = timePicker.$("input").first();
         assertElementRendered(textField);
 
-        timePicker.$("div").attribute("part", "toggle-button").first().click();
+        timePicker.$("div").withAttributeContainingWord("part", "toggle-button").first().click();
 
         WebElement dropDown = timePicker.$("vaadin-time-picker-overlay").first();
 
