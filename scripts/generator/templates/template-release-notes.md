@@ -119,7 +119,7 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Java</th>
-  <td>Version 17 of any JDK or JRE</td>
+  <td>Version 21 of any JDK or JRE</td>
 </tr>
 <tr>
   <th>Maven</th>
@@ -127,7 +127,7 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Gradle</th>
-  <td>Version 8.7 or newer</td>
+  <td>Version 8.14 or newer</td>
 </tr>
 <tr>
   <th>Application server</th>
