@@ -111,7 +111,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.0-SNAPSHOT"
+            "javaVersion": "25.0.0-alpha19"
         },
         "flow-cdi": {
             "javaVersion": "16.0.0-alpha1"
@@ -306,6 +306,9 @@
             "mode": "lit",
             "npmName": "@vaadin/upload"
         },
+        "vaadin-aura-theme": {
+            "javaVersion": "{{version}}"
+        },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-development-mode-detector"
@@ -317,9 +320,6 @@
             "releasenotes": true
         },
         "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-aura-theme": {
             "javaVersion": "{{version}}"
         },
         "vaadin-messages": {
