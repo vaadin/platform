@@ -31,7 +31,6 @@ public class AllComponentsIncludedTest {
             "@vaadin/icons/vaadin-iconset.js",
             "@vaadin/map/src/vaadin-map.js",
             "@vaadin/rich-text-editor/src/vaadin-rich-text-editor.js",
-            "@vaadin/vaadin-lumo-styles/vaadin-iconset.js",
             "Frontend/generated/jar-resources/vaadin-map/mapConnector.js",
             "Frontend/generated/jar-resources/vaadin-map/synchronization/index.js",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/spreadsheet-export.js",
