@@ -18,6 +18,7 @@ package com.vaadin.platform.react.test;
 import java.util.List;
 import java.util.Optional;
 
+import com.vaadin.flow.component.UI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -65,6 +66,7 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     @Before
     public void setUp() {
         getDriver().get(getRootURL() + getTestPath());
+        getDriver().manage().window().fullscreen();
     }
 
     /**
