@@ -361,9 +361,6 @@
         "azure-kit": {
             "version": "1.0.0"
         },
-        "control-center": {
-            "javaVersion": "1.3.1"
-        },
         "copilot": {
             "javaVersion": "25.0-SNAPSHOT"
         },
