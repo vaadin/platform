@@ -88,10 +88,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>control-center-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
         </dependency>
 
