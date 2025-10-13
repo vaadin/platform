@@ -113,11 +113,6 @@
                 <artifactId>vaadin-swing-kit-client-api</artifactId>
                 <version>${swing.kit.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>control-center-starter</artifactId>
-                <version>${control.center.version}</version>
-            </dependency>
 
             <!-- JNA -->
             <dependency>
