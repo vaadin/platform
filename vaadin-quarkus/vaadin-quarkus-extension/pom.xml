@@ -193,6 +193,11 @@
                             </deployment>
                             <skipExtensionValidation>true</skipExtensionValidation>
                             <skipCodestartValidation>true</skipCodestartValidation>
+                            <conditionalDevDependencies>
+                                <dependency>
+                                    ${project.groupId}:vaadin-dev:${project.version}
+                                </dependency>
+                            </conditionalDevDependencies>
                         </configuration>
                     </execution>
                 </executions>
