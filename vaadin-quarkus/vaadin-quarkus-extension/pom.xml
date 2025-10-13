@@ -68,6 +68,10 @@
             <exclusions>
                 <exclusion>
                     <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-dev</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
                     <artifactId>hilla-dev</artifactId>
                 </exclusion>
             </exclusions>
