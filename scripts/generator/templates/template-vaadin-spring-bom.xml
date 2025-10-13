@@ -155,11 +155,6 @@
                 <artifactId>license-checker</artifactId>
                 <version>${vaadin.license.checker.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin.flow.ai</groupId>
-                <artifactId>form-filler-addon</artifactId>
-                <version>${flow.form.filler.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

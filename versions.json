@@ -119,9 +119,6 @@
         "flow-components": {
             "javaVersion": "{{version}}"
         },
-        "flow-form-filler": {
-            "javaVersion": "1.1.1"
-        },
         "form-layout": {
             "jsVersion": "25.0.0-alpha21",
             "mode": "lit",
