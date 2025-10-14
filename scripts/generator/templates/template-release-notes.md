@@ -120,7 +120,7 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Maven</th>
-  <td>Version 3.5 or newer</td>
+  <td>Version 3.8 or newer</td>
 </tr>
 <tr>
   <th>Gradle</th>
