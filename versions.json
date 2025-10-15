@@ -114,7 +114,7 @@
             "javaVersion": "25.0.0-beta1"
         },
         "flow-cdi": {
-            "javaVersion": "16.0.0-alpha1"
+            "javaVersion": "16.0.0-beta1"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
@@ -203,10 +203,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "8.0.0-alpha2"
+            "javaVersion": "8.0.0-beta1"
         },
         "mpr-v8": {
-            "javaVersion": "8.0.0-alpha2"
+            "javaVersion": "8.0.0-beta1"
         },
         "multi-select-combo-box": {
             "jsVersion": "25.0.0-beta1",
@@ -326,7 +326,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "3.0.0-alpha3"
+            "javaVersion": "3.0.0-beta1"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
