@@ -326,7 +326,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "3.0.0-alpha2"
+            "javaVersion": "3.0.0-alpha3"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
