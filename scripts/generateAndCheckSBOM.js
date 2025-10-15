@@ -63,8 +63,8 @@ const cveWhiteList = {
     cves: ['CVE-2023-35116'],
     description: 'Not a valid CVE report based on the vendor analysis and [research](https://github.com/FasterXML/jackson-databind/issues/3972)'
   },
-  'pkg:maven/me.friwi/jcef-api@jcef-99c2f7a%2Bcef-127.3.1%2Bg6cbb30e%2Bchromium-127.0.6533.100' : {
-    cves: ['CVE-2024-21639', 'CVE-2024-21640'],
+  'pkg:maven/me.friwi/jcef-api@jcef-ca49ada%2Bcef-135.0.20%2Bge7de5c3%2Bchromium-135.0.7049.85' : {
+    cves: ['CVE-2024-21639', 'CVE-2024-21640', 'CVE-2024-9410'],
     description: 'Wait for the update from the jcefmaven community. Meanwhile the swing-kit is supposed to be used with fixed websites and not to browse the internet, we have a check for that, so the only possible attacker would be the same person that created the swing application, aka our customer devs. so this vulnerability is not classified by us as critical issue'
   },
   'pkg:npm/railroad-diagrams@1.0.0' : {
