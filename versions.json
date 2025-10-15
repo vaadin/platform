@@ -503,7 +503,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "24.8.0"
+            "javaVersion": "25.0.0-beta1"
         },
         "vaadin-license-checker": {
             "javaVersion": "2.1.0"
