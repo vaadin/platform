@@ -43,6 +43,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-quarkus-deployment</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-prod-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
