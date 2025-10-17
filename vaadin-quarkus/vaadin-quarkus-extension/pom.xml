@@ -16,7 +16,7 @@
     <properties>
         <vaadin.version>${project.version}</vaadin.version>
         <!-- Aligned with vaadin-quarkus -->
-        <quarkus.version>3.20.1</quarkus.version>
+        <quarkus.version>3.27.0</quarkus.version>
     </properties>
 
     <repositories>
