@@ -2,34 +2,11 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/start)
 
-*This is a pre-release for the Vaadin 25.0. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use this release, you'll need to have following repositories declared in your  project (Vaadin pre-releases are not pushed to Maven central) :*
+*This is a pre-release for the Vaadin 25.0. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. You can get this version from Maven Central directly.*
 
-    <repositories>
-        <repository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </repository>
-    </repositories>
+*This is a Major version Upgrade for Vaadin Framework, which contains breaking changes, behavior alters, feature enhancements and UX/DX improvements. We kindly ask for your patience, as we are working on the documentation to make your upgrade path smoother. Meanwhile we try to list all changes in each product's release note*
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </pluginRepository>
-    </pluginRepositories>
-
-**Major Breaking Changes Since Vaadin 24**
-Vaadin 25 is under developing at the moment, the full migration guide will come when it gets close to beta release. 
-Thanks for your patience. For now, you can take the following link/contents as reference. 
-
-- [Breaking changes in flow](https://github.com/vaadin/platform/issues/7691)
-- Design System
-  - removed `Cookie Consent` ([link](https://github.com/vaadin/web-components/pull/10027))
-  - removed `overlayClass` property/ `setOverlayClassName` method ([link](https://github.com/vaadin/web-components/pull/9926)) 
+*Notable changes and supported technologies can be found from release note [25.0.0-beta1](https://github.com/vaadin/platform/releases/edit/25.0.0-beta1)
 
 ## <a id="_changelogs"></a> Changelogs
 
