@@ -129,6 +129,12 @@
                         <exclude>**/*Fake*</exclude>
                         <exclude>vaadin-featureflags.properties</exclude>
                     </excludes>
+                    <archive>
+                        <manifestEntries>
+                            <Spring-Boot-Jar-Type>development-tool
+                            </Spring-Boot-Jar-Type>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
