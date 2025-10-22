@@ -131,7 +131,7 @@
             "javaVersion": "24.9.3"
         },
         "flow-cdi": {
-            "javaVersion": "15.2.0"
+            "javaVersion": "15.2.1"
         },
         "flow-form-filler": {
             "javaVersion": "1.1.1"
