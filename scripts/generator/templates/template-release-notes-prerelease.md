@@ -2,7 +2,7 @@ Vaadin {{platform}}
 
 [Changelogs](#_changelogs) · [Upgrading guides](#_upgrading_guides) · [Docs](https://vaadin.com/docs/latest/) · [Get Started](https://vaadin.com/start/)
 
-*This is a pre-release for the Vaadin 23.6. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
+*This is a pre-release for the Vaadin 23.7. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
 
 ## <a id="_changelogs"></a> Changelogs
 
