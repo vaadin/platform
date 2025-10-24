@@ -3,13 +3,13 @@
 Vaadin consists of a set of web components, a Java web framework, configurable themes, tools and a set of app templates.
 
 This is a maintenance release of Vaadin.
-See the full release notes for Vaadin 14.13 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.13.0), including new features, getting started, supported browsers and other technologies, and migration notes.
+See the full release notes for Vaadin 14.14 in [GitHub releases](https://github.com/vaadin/platform/releases/tag/14.14.0), including new features, getting started, supported browsers and other technologies, and migration notes.
 
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
 ## Support
-Vaadin 14 free support has been ended after 5 years (2019-2024) since the GA (general availability) release. Vaadin 14.13 is Extended Maintenance support version, which is served under [Vaadin Commercial License and Service Terms](https://vaadin.com/commercial-license-and-service-terms). More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap). You can contact us for you [licenses](https://vaadin.com/solutions/support).
+Vaadin 14 free support has been ended after 5 years (2019-2024) since the GA (general availability) release. Vaadin 14.14 is Extended Maintenance support version, which is served under [Vaadin Commercial License and Service Terms](https://vaadin.com/commercial-license-and-service-terms). More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap). You can contact us for you [licenses](https://vaadin.com/solutions/support).
 
 
 ## New and Noteworthy
