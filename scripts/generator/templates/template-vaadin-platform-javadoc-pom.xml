@@ -115,9 +115,11 @@
                     <artifactId>spring-boot-devtools</artifactId>
                     <scope>provided</scope>
                 </dependency>
+                <!-- used in hilla, not managed by spring-boot-bom-->
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-loader-tools</artifactId>
+                    <version>${spring.boot.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
