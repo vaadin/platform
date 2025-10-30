@@ -9,7 +9,7 @@ Vaadin 14 is an LTS (long term support) version, which will be supported for 5 y
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-## New and Noteworthy Since 14.12
+## New and Noteworthy Since 14.13
 - 
 
 {{componentNote}}
