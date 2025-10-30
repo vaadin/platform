@@ -12,7 +12,7 @@
     <artifactId>hilla-spring-boot-starter</artifactId>
     <name>Hilla Spring Boot Starter</name>
     <description>Spring Boot Starter for Hilla applications.</description>
-    <version>23.7-SNAPSHOT</version>
+    <version>${hilla.version}</version>
 
     <properties>
         <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>

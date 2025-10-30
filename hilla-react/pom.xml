@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
     <name>Hilla Platform for React</name>
     <description>Hilla Platform for React-based Applications</description>
-    <version>23.7-SNAPSHOT</version>
+    <version>${hilla.version}</version>
     <url>https://hilla.dev</url>
     <properties>
         <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
