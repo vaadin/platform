@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
@@ -8,9 +8,9 @@
         <version>25.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>vaadin-spring-boot-starter</artifactId>
-    <name>Spring Boot Starter</name>
-    <description>Spring Boot Starter for Vaadin Flow applications.</description>
+    <artifactId>hilla-spring-boot-starter</artifactId>
+    <name>Hilla Spring Boot Starter</name>
+    <description>Spring Boot Starter for Hilla applications.</description>
 
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
@@ -47,32 +47,11 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>hilla-dev</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>hilla</artifactId>
         </dependency>
-
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version>
-            <!-- CVE-2022-1471 TEMPORARY FIX UNTIL https://github.com/spring-projects/spring-boot/issues/33457 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- End Spring -->
     </dependencies>
 </project>
