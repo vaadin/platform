@@ -14,8 +14,6 @@ Vaadin {{platform}}
 
 ## Copilot
 
-## Control Center
-
 ## Modernization
 
 ## <a id="_changelogs"></a> Changelogs
@@ -36,7 +34,6 @@ Vaadin {{platform}}
   - AppSec Kit ([{{kits.appsec-kit-starter.javaVersion}}](https://vaadin.com/docs/latest/tools/appsec))
   - Azure Kit ([{{kits.azure-kit.version}}](https://vaadin.com/docs/latest/tools/azure-cloud ))
   - Collaboration Engine ([{{kits.vaadin-collaboration-engine.javaVersion}}](https://github.com/vaadin/collaboration-kit/releases/tag/{{kits.vaadin-collaboration-engine.javaVersion}}))
-  - Control Center ([{{kits.control-center.javaVersion}}](https://vaadin.com/docs/latest/control-center))
   - Copilot ([{{kits.copilot.javaVersion}}](https://vaadin.com/docs/latest/tools/copilot))
   - Kubernetes Kit ([{{kits.kubernetes-kit-starter.javaVersion}}](https://github.com/vaadin/kubernetes-kit/releases/tag/{{kits.kubernetes-kit-starter.javaVersion}}))
   - Observability Kit ([{{kits.observability-kit-starter.javaVersion}}](https://github.com/vaadin/observability-kit/releases/tag/{{kits.observability-kit-starter.javaVersion}}))
@@ -119,26 +116,26 @@ Vaadin Designer supports the following IDEs:
 </tr>
 <tr>
   <th>Java</th>
-  <td>Version 17 of any JDK or JRE</td>
+  <td>Version 21 of any JDK or JRE</td>
 </tr>
 <tr>
   <th>Maven</th>
-  <td>Version 3.5 or newer</td>
+  <td>Version 3.8 or newer</td>
 </tr>
 <tr>
   <th>Gradle</th>
-  <td>Version 8.7 or newer</td>
+  <td>Version 8.14 or newer</td>
 </tr>
 <tr>
   <th>Application server</th>
   <td>
 
-Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
+Vaadin Flow requires Java Servlet API 6 and Java 21 or newer. It is tested on:
 
 - Apache Tomcat 10.1
 - Open Liberty 23
 - RedHat JBoss EAP 8.1
-  - To work with RedHat JBoss EAP 8.0, you will need to add the following content to the `jboss-deployment-structure.xml` placed under `WEB-INF` folder
+  - To work with RedHat JBoss EAP 8.0, the following content needs to be added under `WEB-INF` folder as `jboss-deployment-structure.xml`
   <details>
     <summary>Workaround for supporting RedHat JBoss EAP 8.0</summary>
     
@@ -153,7 +150,22 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
    ```
    
   </details> 
-- WildFly 35
+- WildFly 36
+  - Latest WildFly is still using Jackson 2, in order to work with Vaadin 25, the following content needs to be added under `WEB-INF` folder as `jboss-deployment-structure.xml`
+  <details>
+    <summary>Workaround for supporting WildFly 36</summary>
+    
+   ```xml
+    <jboss-deployment-structure>
+      <deployment>
+        <exclude-subsystems>
+          <subsystem name="jaxrs" />
+        </exclude-subsystems>
+      </deployment>
+    </jboss-deployment-structure>
+   ```
+   
+  </details>   
 - Jetty 12
 - Payara Server 6
 - Payara Micro 6
@@ -161,7 +173,7 @@ Vaadin Flow requires Java Servlet API 6 and Java 17 or newer. It is tested on:
 </tr>
 <tr>
   <th>Node.js</th>
-  <td>Version 20 or newer</td>
+  <td>Version 24 or newer</td>
 </tr>
 <tr>
   <th>Spring Boot</th>

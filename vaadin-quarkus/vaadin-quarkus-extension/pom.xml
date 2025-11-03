@@ -68,7 +68,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>com.vaadin</groupId>
-                    <artifactId>hilla-dev</artifactId>
+                    <artifactId>vaadin-dev</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -193,6 +193,11 @@
                             </deployment>
                             <skipExtensionValidation>true</skipExtensionValidation>
                             <skipCodestartValidation>true</skipCodestartValidation>
+                            <conditionalDevDependencies>
+                                <dependency>
+                                    ${project.groupId}:vaadin-dev:${project.version}
+                                </dependency>
+                            </conditionalDevDependencies>
                         </configuration>
                     </execution>
                 </executions>
