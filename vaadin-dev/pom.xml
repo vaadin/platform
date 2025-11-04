@@ -46,11 +46,6 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hilla-dev</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>copilot</artifactId>
         </dependency>
     </dependencies>
