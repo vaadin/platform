@@ -134,16 +134,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-dropdown-menu-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-email-field-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-form-layout-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -154,7 +144,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-icon-testbench</artifactId>
+            <artifactId>vaadin-grid-pro-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -164,12 +154,27 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-virtual-list-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-list-box-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-login-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-map-testbench</artifactId>
+            <artifactId>vaadin-markdown-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-master-detail-layout-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -179,17 +184,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-message-input-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-message-list-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-multi-select-combo-box-testbench</artifactId>
+            <artifactId>vaadin-messages-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -199,12 +194,12 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-number-field-testbench</artifactId>
+            <artifactId>vaadin-ordered-layout-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-password-field-testbench</artifactId>
+            <artifactId>vaadin-popover-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -214,7 +209,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-radio-group-testbench</artifactId>
+            <artifactId>vaadin-radio-button-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -244,11 +239,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-text-area-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-text-field-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -260,38 +250,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-upload-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-virtual-list-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Pro components API (can be imported separately) -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-ckeditor-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-cookie-consent-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-cron-view-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-grid-pro-testbench</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-rich-text-renderer-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
 
