@@ -150,8 +150,8 @@ Vaadin Flow requires Java Servlet API 6 and Java 21 or newer. It is tested on:
    ```
    
   </details> 
-- WildFly 36
-  - Latest WildFly is still using Jackson 2, in order to work with Vaadin 25, the following content needs to be added under `WEB-INF` folder as `jboss-deployment-structure.xml`
+- WildFly 36 +
+  - Latest WildFly versions are still using Jackson 2, in order to work with Vaadin 25, the following content needs to be added under `WEB-INF` folder as `jboss-deployment-structure.xml`
   <details>
     <summary>Workaround for supporting WildFly 36</summary>
     
@@ -165,7 +165,21 @@ Vaadin Flow requires Java Servlet API 6 and Java 21 or newer. It is tested on:
     </jboss-deployment-structure>
    ```
    
-  </details>   
+  </details>
+  <details>
+    <summary>Workaround for supporting WildFly 37+</summary>
+    
+   ```xml
+    <jboss-deployment-structure>
+      <deployment>
+        <exclusions>
+            <module name="com.fasterxml.jackson.core.jackson-annotations"/>
+        </exclusions>
+      </deployment>
+    </jboss-deployment-structure>
+   ```
+   
+  </details>    
 - Jetty 12
 - Payara Server 6
 - Payara Micro 6
