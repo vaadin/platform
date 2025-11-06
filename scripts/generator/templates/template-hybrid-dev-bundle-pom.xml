@@ -43,11 +43,6 @@
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>hilla-dev</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- Add hilla dependency to collect Hilla npm dependencies -->
         <dependency>
             <groupId>com.vaadin</groupId>
