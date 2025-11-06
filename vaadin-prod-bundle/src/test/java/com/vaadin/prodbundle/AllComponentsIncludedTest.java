@@ -18,11 +18,9 @@ import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.vaadin.flow.internal.JsonUtils;
-
-import elemental.json.Json;
-import elemental.json.JsonObject;
-import elemental.json.impl.JsonUtil;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ObjectNode;
 
 public class AllComponentsIncludedTest {
 
@@ -39,11 +37,13 @@ public class AllComponentsIncludedTest {
             "ol/proj",
             "proj4");
 
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
     @Test
     public void compareStatsWithUnoptimized() throws IOException {
-        JsonObject unoptimizedStats = getStats(
+        ObjectNode unoptimizedStats = getStats(
                 "vaadin-prod-bundle-unoptimized/config/stats.json");
-        JsonObject optimizedStats = getStats(
+        ObjectNode optimizedStats = getStats(
                 "META-INF/VAADIN/config/stats.json");
 
         unoptimizedStats.remove("entryScripts");
@@ -51,11 +51,18 @@ public class AllComponentsIncludedTest {
         unoptimizedStats.remove("indexHtmlGenerated");
         optimizedStats.remove("indexHtmlGenerated");
 
-        unoptimizedStats.getObject("frontendHashes").remove("theme-util.js");
+        ((ObjectNode) unoptimizedStats.get("frontendHashes")).remove("theme-util.js");
+
+        // Pretty print both for diffing
+        String unoptPretty = MAPPER.writerWithDefaultPrettyPrinter()
+                .writeValueAsString(unoptimizedStats);
+        String optPretty = MAPPER.writerWithDefaultPrettyPrinter()
+                .writeValueAsString(optimizedStats);
+
         List<String> unoptJson = new ArrayList<>(
-                List.of(JsonUtil.stringify(unoptimizedStats, 2).split("\n")));
+                List.of(unoptPretty.split("\n")));
         List<String> optJson = new ArrayList<>(
-                List.of(JsonUtil.stringify(optimizedStats, 2).split("\n")));
+                List.of(optPretty.split("\n")));
 
         if (!unoptJson.equals(optJson)) {
             Patch<String> patch = DiffUtils.diff(unoptJson, optJson);
@@ -73,12 +80,15 @@ public class AllComponentsIncludedTest {
         // still included as part of a lazy component, like checkbox group is a
         // dependency of spreadsheet but should still be in the eager bundle
 
-        JsonObject optimizedStats = getStats(
+        ObjectNode optimizedStats = getStats(
                 "META-INF/VAADIN/config/stats.json");
 
-        List<String> bundleImports = JsonUtils
-                .stream(optimizedStats.getArray("bundleImports"))
-                .map(v -> v.asString()).toList();
+        List<String> bundleImports = new ArrayList<>();
+        if (optimizedStats.has("bundleImports") && optimizedStats.get("bundleImports").isArray()) {
+            for (JsonNode node : optimizedStats.get("bundleImports")) {
+                bundleImports.add(node.asText());
+            }
+        }
 
         File generatedImports = Path.of("src", "main", "frontend", "generated",
                 "flow", "generated-flow-imports.js").toFile();
@@ -108,7 +118,7 @@ public class AllComponentsIncludedTest {
         }
     }
 
-    private JsonObject getStats(String resource) throws IOException {
+    private ObjectNode getStats(String resource) throws IOException {
         try (InputStream stream = getClass().getClassLoader()
                 .getResourceAsStream(resource)) {
             if (stream == null) {
@@ -117,7 +127,11 @@ public class AllComponentsIncludedTest {
             }
 
             String string = IOUtils.toString(stream, StandardCharsets.UTF_8);
-            return Json.parse(string);
+            JsonNode root = MAPPER.readTree(string);
+            if (!(root instanceof ObjectNode)) {
+                throw new IOException("Invalid JSON format: expected an object at root in " + resource);
+            }
+            return (ObjectNode) root;
         }
     }
 }

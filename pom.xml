@@ -73,7 +73,9 @@
                 <module>vaadin-maven-plugin</module>
                 <module>vaadin-testbench</module>
                 <module>vaadin-testbench-junit5</module>
+                <module>vaadin-testbench-junit6</module>
                 <module>vaadin-spring-boot-starter</module>
+                <module>hilla-spring-boot-starter</module>
                 <module>vaadin-platform-javadoc</module>
                 <module>vaadin-hybrid-dev-bundle</module>
                 <module>vaadin-dev-bundle</module>
