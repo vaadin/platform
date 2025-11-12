@@ -6,7 +6,7 @@ Vaadin {{platform}}
 
 *This is a Major version Upgrade for Vaadin Framework, which contains breaking changes, behavior alters, feature enhancements and UX/DX improvements. We kindly ask for your patience, as we are working on the documentation to make your upgrade path smoother. Meanwhile we try to list all changes in each product's release note*
 
-*Notable changes and supported technologies can be found from release note [25.0.0-beta1](https://github.com/vaadin/platform/releases/edit/25.0.0-beta1)
+*Notable changes and supported technologies can be found from release note [25.0.0-beta1](https://github.com/vaadin/platform/releases/tag/25.0.0-beta1)
 
 ## <a id="_changelogs"></a> Changelogs
 
