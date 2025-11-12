@@ -73,7 +73,6 @@ jobs:
           [ true != "$W" -a true != "$L" ] && W=true
           [ true != "$L" -a true != "$W" ] && L=true
           A="$A --starters=${{inputs.starters}}"
-          [ true = "${{inputs.screenshots}}" ] && A="$A --screenshots"
           cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
           echo "Generating list of starters: $cmd"
           S=`eval $cmd`
@@ -150,6 +149,7 @@ jobs:
           [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
+          [ true = "${{inputs.screenshots}}" ] && ARG="$ARG --screenshots"
           ./pit/scripts/pit/run.sh --path
           CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GHTK}}"
           # Output the PiT command to execute, so as we can run the same locally
