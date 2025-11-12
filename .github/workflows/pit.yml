@@ -36,8 +36,8 @@ on:
         required: false
         type: boolean
         default: false
-      generated:
-        description: 'Generate and run all supported start presets and archetypes'
+      screenshots:
+        description: 'Save screenshots of all starters before and after'
         required: false
         type: boolean
         default: false
@@ -73,8 +73,7 @@ jobs:
           [ true != "$W" -a true != "$L" ] && W=true
           [ true != "$L" -a true != "$W" ] && L=true
           A="$A --starters=${{inputs.starters}}"
-          [ true = "${{inputs.generated}}" ] && A="$A --generated"
-          [ true = "${{inputs.demos}}" ] && A="$A --demos"
+          [ true = "${{inputs.screenshots}}" ] && A="$A --screenshots"
           cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
           echo "Generating list of starters: $cmd"
           S=`eval $cmd`
@@ -173,7 +172,9 @@ jobs:
           read key
       - if: ${{failure()}}
         name: Set artifact_name
-        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
+        run: |
+          echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
+          echo screenshots_name=`echo screenshots-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
         shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
@@ -182,3 +183,10 @@ jobs:
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
+      - if: ${{ true == inputs.screenshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.screenshots_name }}
+          path: tmp/**/screenshots.out/_*
+          if-no-files-found: ignore
+          retention-days: 2
