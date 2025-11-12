@@ -90,6 +90,10 @@ const cveWhiteList = {
   'pkg:maven/io.projectreactor.netty/reactor-netty-quic@1.0.0-RC1' : {
     cves: ['CVE-2023-34054', 'CVE-2023-34062'],
     description: 'False report: the linked CVE is for netty with http protocol and from 2023, which the netty-quic artifact was released 2025 with the netty suite 1.3.x'
+  },
+  'pkg:maven/org.cyclonedx/cyclonedx-core-java@11.0.0' : {
+    cves: ['CVE-2025-64518'],
+    description: 'This is from a tool we use to generate the sbom. '
   }
 }
 
