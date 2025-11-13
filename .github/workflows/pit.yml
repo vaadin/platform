@@ -122,7 +122,7 @@ jobs:
       - uses: browser-actions/setup-chrome@v2
         with:
           chrome-version: stable
-          install-dependencies: true
+          install-dependencies: ${{ env.ACT == 'true' }}
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -163,23 +163,17 @@ jobs:
             CC_CERT: ${{secrets.CC_CERT}}
             CC_KEY: ${{secrets.CC_KEY}}
         shell: bash
-      - if: ${{always()}}
-        name: Set artifact names
-        run: |
-          echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
-          echo screenshots_name=`echo screenshots-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
-        shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}
+          name: failures
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
       - if: ${{ true == inputs.screenshots }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.screenshots_name }}
+          name: screenshots
           path: tmp/**/screenshots.out/_*
           if-no-files-found: ignore
           retention-days: 2
