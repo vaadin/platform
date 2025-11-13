@@ -166,14 +166,14 @@ jobs:
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
         with:
-          name: failures
+          name: failures-${{matrix.app}}
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
       - if: ${{ true == inputs.screenshots }}
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots
+          name: screenshots-${{matrix.app}}
           path: tmp/**/screenshots.out/_*
           if-no-files-found: ignore
           retention-days: 2
