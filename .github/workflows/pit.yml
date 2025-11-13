@@ -58,6 +58,9 @@ jobs:
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Compute Arguments and Matrix
         id: set
         shell: bash
@@ -99,6 +102,9 @@ jobs:
         image: ${{ (matrix.app == 'control-center' ) && 'docker:dind' || '' }}
         options: --privileged --shm-size=2g
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Install PiT
         run: |
           git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
@@ -113,18 +119,10 @@ jobs:
         env:
           TB: ${{secrets.TB_LICENSE}}
           SS: ${{secrets.SS_LICENSE}}
-      - name: Setup ACT local runner
-        if: ${{ env.ACT }}
-        run: |
-          # LINUX LIBS (ACT)
-          # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
-      - uses: browser-actions/setup-chrome@latest
+      - uses: browser-actions/setup-chrome@v2
         with:
           chrome-version: stable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+          install-dependencies: true
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -165,13 +163,8 @@ jobs:
             CC_CERT: ${{secrets.CC_CERT}}
             CC_KEY: ${{secrets.CC_KEY}}
         shell: bash
-      - if: ${{ env.ACT }}
-        name: Wait (ACT)
-        run: |
-          echo "Keeping docker container running, push Ctrl-C to terminate ..."
-          read key
-      - if: ${{failure()}}
-        name: Set artifact_name
+      - if: ${{always()}}
+        name: Set artifact names
         run: |
           echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
           echo screenshots_name=`echo screenshots-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
