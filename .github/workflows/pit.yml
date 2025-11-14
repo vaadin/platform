@@ -163,17 +163,21 @@ jobs:
             CC_CERT: ${{secrets.CC_CERT}}
             CC_KEY: ${{secrets.CC_KEY}}
         shell: bash
+      - if: ${{always()}}
+        name: Set artifact_name
+        run: echo artifact_name=`echo ${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
+        shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
         with:
-          name: failures-${{ matrix.app.replace(':', '-') }}
+          name: failures-${{env.artifact_name}}
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
       - if: ${{ true == inputs.screenshots }}
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots-${{ matrix.app.replace(':', '-') }}
+          name: screenshots-${{env.artifact_name}}
           path: tmp/**/screenshots.out/_*
           if-no-files-found: ignore
           retention-days: 2
