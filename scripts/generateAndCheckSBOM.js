@@ -90,6 +90,10 @@ const cveWhiteList = {
   'pkg:maven/org.springframework.security/spring-security-core@6.5.3' : {
      cves: ['CVE-2025-41248'],
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
+  },
+  'pkg:maven/org.cyclonedx/cyclonedx-core-java@9.0.4' : {
+    cves: ['CVE-2025-64518'],
+    description: 'This is from a tool we use to generate the sbom. '
   }
 }
 
