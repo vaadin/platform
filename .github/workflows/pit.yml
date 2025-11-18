@@ -36,8 +36,8 @@ on:
         required: false
         type: boolean
         default: false
-      generated:
-        description: 'Generate and run all supported start presets and archetypes'
+      screenshots:
+        description: 'Save screenshots of all starters before and after'
         required: false
         type: boolean
         default: false
@@ -58,6 +58,9 @@ jobs:
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Compute Arguments and Matrix
         id: set
         shell: bash
@@ -73,8 +76,6 @@ jobs:
           [ true != "$W" -a true != "$L" ] && W=true
           [ true != "$L" -a true != "$W" ] && L=true
           A="$A --starters=${{inputs.starters}}"
-          [ true = "${{inputs.generated}}" ] && A="$A --generated"
-          [ true = "${{inputs.demos}}" ] && A="$A --demos"
           cmd="./pit/scripts/pit/run.sh $A --list=${{inputs.join}}"
           echo "Generating list of starters: $cmd"
           S=`eval $cmd`
@@ -101,6 +102,9 @@ jobs:
         image: ${{ (matrix.app == 'control-center' ) && 'docker:dind' || '' }}
         options: --privileged --shm-size=2g
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Install PiT
         run: |
           git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
@@ -115,18 +119,10 @@ jobs:
         env:
           TB: ${{secrets.TB_LICENSE}}
           SS: ${{secrets.SS_LICENSE}}
-      - name: Setup ACT local runner
-        if: ${{ env.ACT }}
-        run: |
-          # LINUX LIBS (ACT)
-          # see https://github.com/browser-actions/setup-chrome/issues/240
-          sudo ./pit/scripts/pit/docker/setup.sh --lib-chrome
-      - uses: browser-actions/setup-chrome@latest
+      - uses: browser-actions/setup-chrome@v2
         with:
           chrome-version: stable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+          install-dependencies: ${{ env.ACT == 'true' }}
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -151,6 +147,7 @@ jobs:
           [ true = "${{inputs.skipcurrent}}" ] && ARG="$ARG --skip-current"
           [ true = "${{inputs.skipdev}}" ] && ARG="$ARG --skip-dev"
           [ true = "${{inputs.debug}}" ] && ARG="$ARG --debug"
+          [ true = "${{inputs.screenshots}}" ] && ARG="$ARG --screenshots"
           ./pit/scripts/pit/run.sh --path
           CMD="./pit/scripts/pit/run.sh $ARG --starters=${{matrix.app}} --gh-token=${{secrets.GHTK}}"
           # Output the PiT command to execute, so as we can run the same locally
@@ -166,19 +163,21 @@ jobs:
             CC_CERT: ${{secrets.CC_CERT}}
             CC_KEY: ${{secrets.CC_KEY}}
         shell: bash
-      - if: ${{ env.ACT }}
-        name: Wait (ACT)
-        run: |
-          echo "Keeping docker container running, push Ctrl-C to terminate ..."
-          read key
-      - if: ${{failure()}}
+      - if: ${{always()}}
         name: Set artifact_name
-        run: echo artifact_name=`echo failed-outputs-${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
+        run: echo artifact_name=`echo ${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
         shell: bash
       - if: ${{failure()}}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}
+          name: failures-${{env.artifact_name}}
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
+      - if: ${{ true == inputs.screenshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{env.artifact_name}}
+          path: tmp/**/screenshots.out/_*
+          if-no-files-found: ignore
+          retention-days: 2
