@@ -271,7 +271,7 @@ public class ComponentUsageTest {
 
         File tsViewFile = new File(TS_VIEW);
         assertTrue("TS File Unavailable " + tsViewFile.getName(), tsViewFile.canRead());
-        List<String> tsLines = FileUtils.readLines(tsViewFile, "UTF-8");
+		List<String> tsLines = java.nio.file.Files.readAllLines(tsViewFile.toPath(), java.nio.charset.StandardCharsets.UTF_8);
 
         checkedList = checkLines(tsLines, jsImportRegexs, jsImports);
         if (!checkedList.isEmpty()) {
