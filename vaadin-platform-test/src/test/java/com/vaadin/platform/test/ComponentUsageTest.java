@@ -17,8 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
@@ -212,15 +210,15 @@ public class ComponentUsageTest {
         List<String> javaImports = allClasses.stream().map(c -> "import " + c.getName() + ";")
                 .collect(Collectors.toList());
         List<String> javaVarRegexs = allClasses.stream().map(c -> "^\\s*([\\w\\.]+\\.)?(" + c.getSimpleName()
-                + " *(<.*>)? *" + StringUtils.uncapitalize(c.getSimpleName()) + ") *[;=].*")
+                + " *(<.*>)? *" + uncapitalize(c.getSimpleName()) + ") *[;=].*")
                 .collect(Collectors.toList());
         List<String> javaVars = allClasses.stream()
-                .map(c -> c.getSimpleName() + " " + StringUtils.uncapitalize(c.getSimpleName()) + " =")
+                .map(c -> c.getSimpleName() + " " + uncapitalize(c.getSimpleName()) + " =")
                 .collect(Collectors.toList());
 
         File javaViewFile = new File(JAVA_VIEW);
         assertTrue("Java File Unavailable " + javaViewFile.getName(), javaViewFile.canRead());
-        List<String> javaLines = FileUtils.readLines(javaViewFile, "UTF-8");
+        List<String> javaLines = java.nio.file.Files.readAllLines(javaViewFile.toPath(), java.nio.charset.StandardCharsets.UTF_8);
 
         boolean fail = false;
         List<String> checkedList;
@@ -331,5 +329,12 @@ public class ComponentUsageTest {
             }
         }
         return values;
+    }
+
+    private static String uncapitalize(String s) {
+        if (s == null || s.isEmpty()) {
+            return s;
+        }
+        return Character.toLowerCase(s.charAt(0)) + s.substring(1);
     }
 }
