@@ -20,15 +20,6 @@
             <artifactId>vaadin-core</artifactId>
             <version>${project.version}</version>
             <exclusions>
-                <!--
-                    dev dependencies are usually excluded for production builds
-                    so they should not be indexed, to prevent classes to be found
-                    at build time but not at runtime.
-                -->
-                <exclusion>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>vaadin-dev</artifactId>
-                </exclusion>
                 <!-- Potentially optional dependencies according to online documentation -->
                 <exclusion>
                     <groupId>com.vaadin</groupId>
