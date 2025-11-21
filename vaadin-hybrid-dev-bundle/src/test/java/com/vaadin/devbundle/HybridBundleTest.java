@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +67,7 @@ public class HybridBundleTest {
             @Override
             public FileVisitResult visitFile(Path file,
                     BasicFileAttributes attrs) throws IOException {
-                List<String> lines = FileUtils.readLines(file.toFile(),
+                List<String> lines = Files.readAllLines(file,
                         StandardCharsets.UTF_8);
                 for (String line : lines) {
                     if (matcher.apply(line)) {
