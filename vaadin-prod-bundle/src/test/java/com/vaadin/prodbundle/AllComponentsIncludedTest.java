@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,10 +14,10 @@ import java.util.Set;
 import com.github.difflib.DiffUtils;
 import com.github.difflib.UnifiedDiffUtils;
 import com.github.difflib.patch.Patch;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.vaadin.flow.internal.StringUtil;
 
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
@@ -91,13 +92,13 @@ public class AllComponentsIncludedTest {
             }
         }
 
-        File generatedImports = Path.of("src", "main", "frontend", "generated",
-                "flow", "generated-flow-imports.js").toFile();
-        Assertions.assertTrue(generatedImports.exists(),
-                "Generated imports file " + generatedImports.getAbsolutePath()
+        Path generatedImports = Path.of("src", "main", "frontend", "generated",
+                "flow", "generated-flow-imports.js");
+        Assertions.assertTrue(generatedImports.toFile().exists(),
+                "Generated imports file " + generatedImports.toAbsolutePath()
                         + " is missing");
 
-        List<String> imports = FileUtils.readLines(generatedImports,
+        List<String> imports = Files.readAllLines(generatedImports,
                 StandardCharsets.UTF_8);
         Set<String> eagerImports = new HashSet<>(imports.stream()
                 .filter(row -> row.startsWith("import '")).map(row -> row
@@ -127,7 +128,7 @@ public class AllComponentsIncludedTest {
                         + resource + " in the classpath");
             }
 
-            String string = IOUtils.toString(stream, StandardCharsets.UTF_8);
+            String string = StringUtil.toUTF8String(stream);
             JsonNode root = MAPPER.readTree(string);
             if (!(root instanceof ObjectNode)) {
                 throw new IOException("Invalid JSON format: expected an object at root in " + resource);
