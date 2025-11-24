@@ -101,9 +101,9 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>prepare-frontend</goal>
                             <goal>build-frontend</goal>
                         </goals>
+                        <phase>process-classes</phase>
                         <configuration>
                             <optimizeBundle>${optimizeBundle}</optimizeBundle>
                         </configuration>

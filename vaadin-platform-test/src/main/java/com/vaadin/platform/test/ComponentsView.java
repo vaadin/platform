@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.IOUtils;
-
 import com.vaadin.collaborationengine.CollaborationAvatarGroup;
 import com.vaadin.collaborationengine.CollaborationEngine;
 import com.vaadin.collaborationengine.CollaborationEngineConfiguration;
@@ -172,6 +170,7 @@ import com.vaadin.flow.data.provider.hierarchy.HierarchicalDataProvider;
 import com.vaadin.flow.data.provider.hierarchy.HierarchicalQuery;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.internal.MessageDigestUtil;
+import com.vaadin.flow.internal.StringUtil;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.streams.UploadHandler;
@@ -759,7 +758,7 @@ public class ComponentsView extends AppLayout {
         if (mimeType.startsWith("text")) {
             String text = "";
             try {
-                text = IOUtils.toString(stream, "UTF-8");
+                text = StringUtil.toUTF8String(stream);
             } catch (IOException e) {
                 text = "exception reading stream";
             }
