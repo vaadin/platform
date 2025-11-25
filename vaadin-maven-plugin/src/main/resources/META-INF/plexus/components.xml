@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lifecycle mappings for Vaadin Maven Plugin extensions.
+  When users set <extensions>true</extensions> on vaadin-maven-plugin,
+  prepare-frontend and build-frontend goals execute automatically.
+
+  NOTE: This fully replaces the default lifecycle for jar/war packaging,
+  so all standard Maven plugin bindings must be included.
+
+  SEE: For the original list of default bindings, see:
+  https://maven.apache.org/ref/3.9.11/maven-core/default-bindings.html
+  https://github.com/apache/maven/blob/maven-3.9.x/maven-core/src/main/resources/META-INF/plexus/default-bindings.xml
+
+  STABILITY: The list of 8 phases with their bound plugins has been unchanged
+  since Maven 3.0 (2010), so this structure is safe and future-proof.
+-->
+<component-set>
+  <components>
+    <!-- JAR packaging -->
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>jar</role-hint>
+      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <lifecycles>
+          <lifecycle>
+            <id>default</id>
+            <phases>
+              <process-resources>
+                org.apache.maven.plugins:maven-resources-plugin:resources,
+                com.vaadin:vaadin-maven-plugin:prepare-frontend
+              </process-resources>
+              <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
+              <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
+              <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
+              <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
+              <prepare-package>com.vaadin:vaadin-maven-plugin:build-frontend</prepare-package>
+              <package>org.apache.maven.plugins:maven-jar-plugin:jar</package>
+              <install>org.apache.maven.plugins:maven-install-plugin:install</install>
+              <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
+            </phases>
+          </lifecycle>
+        </lifecycles>
+      </configuration>
+    </component>
+    <!-- WAR packaging -->
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>war</role-hint>
+      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <lifecycles>
+          <lifecycle>
+            <id>default</id>
+            <phases>
+              <process-resources>
+                org.apache.maven.plugins:maven-resources-plugin:resources,
+                com.vaadin:vaadin-maven-plugin:prepare-frontend
+              </process-resources>
+              <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
+              <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
+              <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
+              <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
+              <prepare-package>com.vaadin:vaadin-maven-plugin:build-frontend</prepare-package>
+              <package>org.apache.maven.plugins:maven-war-plugin:war</package>
+              <install>org.apache.maven.plugins:maven-install-plugin:install</install>
+              <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
+            </phases>
+          </lifecycle>
+        </lifecycles>
+      </configuration>
+    </component>
+  </components>
+</component-set>
