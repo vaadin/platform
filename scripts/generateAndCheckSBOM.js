@@ -87,6 +87,10 @@ const cveWhiteList = {
     cves: ['CVE-2025-53864'],
     description: 'False positive: gson is used transitively via vaadin-swing-kit-client, but this CVE targets Connect2id Nimbus JOSE + JWT, which is not used in our context.'
   },
+  'pkg:maven/org.cyclonedx/cyclonedx-core-java@9.0.4' : {
+    cves: ['CVE-2025-64518'],
+    description: 'This is coming from the tools, @cyclonedx/cyclonedx, we have used for sbom module, FP for us. '
+  },
   'pkg:maven/org.springframework.security/spring-security-core@6.5.1' : {
      cves: ['CVE-2025-41248'],
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
