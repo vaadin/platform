@@ -28,7 +28,7 @@ NOTE: that deploy needs to correctly set the credentials and target maven repo
 You can install the platform artifacts in your local maven cache by running the following command.
 ```
 mvn clean install -DskipTests
-````
+```
 
 Optionally you might need smoke tests package for running in servlet-containers tests, then you need to run
 ```
