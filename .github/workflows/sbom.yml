@@ -65,12 +65,12 @@ jobs:
           sudo dpkg -i bomber_0.5.1_linux_amd64.deb
         name: Install bomber-0.5.1
       - run: |
-          # Install dependency-check-9.0.7
+          # Install dependency-check-12.1.9
           cd /tmp
-          wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v9.0.7/dependency-check-9.0.7-release.zip
-          unzip dependency-check-9.0.7-release.zip
+          wget -q https://github.com/dependency-check/DependencyCheck/releases/download/v12.1.9/dependency-check-12.1.9-release.zip
+          unzip dependency-check-12.1.9-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
-        name: Install dependency-check-9.0.7
+        name: Install dependency-check-12.1.9
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
