@@ -57,15 +57,8 @@
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
             <version>${spring.boot.version}</version>
-            <!-- CVE-2022-1471 TEMPORARY FIX UNTIL https://github.com/spring-projects/spring-boot/issues/33457 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- End Spring -->
     </dependencies>
