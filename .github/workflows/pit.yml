@@ -178,6 +178,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots-${{env.artifact_name}}
-          path: tmp/**/screenshots.out/_*
+          path: tmp/**/screenshots.out
           if-no-files-found: ignore
           retention-days: 2
