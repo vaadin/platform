@@ -353,7 +353,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "4.0.0-beta1"
+            "javaVersion": "4.0.0-rc1"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -376,7 +376,7 @@
             "javaVersion": "3.0.0-beta1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "7.0.0-beta1"
+            "javaVersion": "7.0.0-rc1"
         }
     },
     "platform": "{{version}}",
