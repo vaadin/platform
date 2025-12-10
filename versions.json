@@ -359,7 +359,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.0.0-beta7"
+            "javaVersion": "25.0.0-rc1"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.0.0-beta2"
