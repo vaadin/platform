@@ -10,7 +10,7 @@
     </parent>
     <artifactId>vaadin-platform-parent</artifactId>
     <packaging>pom</packaging>
-    <version>25.0-SNAPSHOT</version>
+    <version>25.1-SNAPSHOT</version>
     <name>Vaadin Platform</name>
     <description>Vaadin Platform</description>
     <url>https://vaadin.com</url>
