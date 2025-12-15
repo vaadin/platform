@@ -130,7 +130,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.0.0-rc1"
+            "javaVersion": "25.0.0-rc2"
         },
         "horizontal-layout": {
             "jsVersion": "25.0.0-rc1",
@@ -359,7 +359,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.0.0-rc1"
+            "javaVersion": "25.0.0-rc2"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.0.0-rc1"
