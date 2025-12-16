@@ -101,6 +101,10 @@
                             <includes>
                                 <include>**</include>
                             </includes>
+                            <excludes>
+                                <!-- Keep plexus components.xml for Maven lifecycle extensions -->
+                                <exclude>resources/META-INF/plexus/**</exclude>
+                            </excludes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                     </filesets>
