@@ -506,7 +506,7 @@
             "javaVersion": "25.0.0-rc1"
         },
         "vaadin-license-checker": {
-            "javaVersion": "3.0.0-rc2"
+            "javaVersion": "3.0.0"
         },
         "vaadin-spreadsheet": {
             "pro": true
