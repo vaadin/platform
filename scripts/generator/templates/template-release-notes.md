@@ -7,10 +7,18 @@ Vaadin {{platform}}
 **Notable Changes**
 
 ### Flow
+- Styles and themes now primarily loaded with @Stylesheet annotation
 
 ## Hilla
 
 ## Design System
+- New Aura theme
+- New component base styles for easier customization
+- Tailwind CSS support (experimental)
+- All components migrated from Polymer to Lit
+- Cluster support in Map component
+- Markdown (& HTML) support in Tooltips
+- TreeGrid flat hierarchy format support
 
 ## Copilot
 
