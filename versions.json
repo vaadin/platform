@@ -111,7 +111,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.0.0"
+            "javaVersion": "25.1-SNAPSHOT"
         },
         "flow-cdi": {
             "javaVersion": "16.0.0"
@@ -130,7 +130,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.0.0"
+            "javaVersion": "25.1-SNAPSHOT"
         },
         "horizontal-layout": {
             "jsVersion": "25.0.0",
