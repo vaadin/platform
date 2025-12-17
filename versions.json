@@ -114,7 +114,7 @@
             "javaVersion": "25.0.0"
         },
         "flow-cdi": {
-            "javaVersion": "16.0.0-rc1"
+            "javaVersion": "16.0.0"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
@@ -203,10 +203,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "8.0.0-rc1"
+            "javaVersion": "8.0.0"
         },
         "mpr-v8": {
-            "javaVersion": "8.0.0-rc1"
+            "javaVersion": "8.0.0"
         },
         "multi-select-combo-box": {
             "jsVersion": "25.0.0",
@@ -326,7 +326,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "3.0.0-rc1"
+            "javaVersion": "3.0.0"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
@@ -353,7 +353,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "4.0.0-rc1"
+            "javaVersion": "4.0.0"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -362,21 +362,21 @@
             "javaVersion": "25.0.0"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "3.0.0-rc1"
+            "javaVersion": "3.0.0"
         },
         "observability-kit-starter": {
-            "javaVersion": "4.0.0-rc1",
-            "jsVersion": "4.0.0-rc11"
+            "javaVersion": "4.0.0",
+            "jsVersion": "4.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "4.0.0-rc1",
-            "jsVersion": "4.0.0-rc1"
+            "javaVersion": "4.0.0",
+            "jsVersion": "4.0.0"
         },
         "swing-kit": {
-            "javaVersion": "3.0.0-rc1"
+            "javaVersion": "3.0.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "7.0.0-rc1"
+            "javaVersion": "7.0.0"
         }
     },
     "platform": "{{version}}",
@@ -503,7 +503,7 @@
             "pro": true
         },
         "vaadin-feature-pack": {
-            "javaVersion": "25.0.0-rc1"
+            "javaVersion": "25.0.0"
         },
         "vaadin-license-checker": {
             "javaVersion": "3.0.0"
