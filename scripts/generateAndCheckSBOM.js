@@ -290,7 +290,7 @@ function sortReleases(releases) {
 
 async function getReleases() {
   return (await run(`git ls-remote --tags origin`, { debug: false }))
-    .stdout.split('\n').map(l => l.replace(/.*refs\/tags\//, '')).filter(l => /^[2-9][3-9]\.\d/.test(l));
+    .stdout.split('\n').map(l => l.replace(/.*refs\/tags\//, '')).filter(l => /^[2-9][3-9]\.\d.\d/.test(l));
 }
 
 async function getBranches() {
