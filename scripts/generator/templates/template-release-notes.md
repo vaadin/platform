@@ -130,9 +130,9 @@ Vaadin Designer supports the following IDEs:
   <th>Application server</th>
   <td>
 
-Vaadin Flow requires Java Servlet API 6 and Java 21 or newer. It is tested on:
+Vaadin Flow requires Java Servlet API 6.1 and Java 21 or newer. It is tested on:
 
-- Apache Tomcat 10.1
+- Apache Tomcat 11
 - Open Liberty 23
 - RedHat JBoss EAP 8.1
   - To work with RedHat JBoss EAP 8.0, the following content needs to be added under `WEB-INF` folder as `jboss-deployment-structure.xml`
