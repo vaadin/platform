@@ -36,6 +36,7 @@ const licenseWhiteList = [
   'CC-BY-4.0',
   'Zlib',
   'WTFPL',
+  'Python-2.0',
   'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
   'https://www.gnu.org/software/classpath/license.html',
   VAADIN_LICENSE,
