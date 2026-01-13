@@ -117,7 +117,7 @@
             "javaVersion": "16.0.0"
         },
         "flow-components": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "form-layout": {
             "jsVersion": "25.1.0-alpha1",
@@ -130,7 +130,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.1-SNAPSHOT"
+            "javaVersion": "25.1.0-alpha1"
         },
         "horizontal-layout": {
             "jsVersion": "25.1.0-alpha1",
@@ -304,7 +304,7 @@
             "npmName": "@vaadin/upload"
         },
         "vaadin-aura-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
@@ -317,19 +317,19 @@
             "releasenotes": true
         },
         "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "vaadin-messages": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "vaadin-ordered-layout": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "vaadin-quarkus": {
             "javaVersion": "3.1.0-alpha1"
         },
         "vaadin-renderer": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.1.0-alpha1"
         },
         "vaadin-router": {
             "jsVersion": "2.0.1",
@@ -359,7 +359,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.1-SNAPSHOT"
+            "javaVersion": "25.1.0-alpha1"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.0.0"
