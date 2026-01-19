@@ -131,10 +131,11 @@ public abstract class AbstractPlatformTest extends ParallelTest {
     }
 
     protected void login(String username, String password) {
+        waitUntil(driver -> $(LoginOverlayElement.class).exists());
         LoginOverlayElement loginOverlay = $(LoginOverlayElement.class).first();
         loginOverlay.getUsernameField().setValue(username);
         loginOverlay.getPasswordField().setValue(password);
         loginOverlay.getSubmitButton().click();
-        waitUntil(ExpectedConditions.stalenessOf(loginOverlay));
+        waitUntil(ExpectedConditions.stalenessOf(loginOverlay), 30);
     }
 }
