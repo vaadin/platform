@@ -93,8 +93,6 @@
                                         <exclude>org.slf4j:slf4j-api</exclude>
                                         <!-- commons-lang3 in grid comes with a newer version until other commons from flow have the same -->
                                         <exclude>org.apache.commons:commons-lang3</exclude>
-                                        <!-- until copilot upgrades in 24.8.0.alpha3 (vaadin-dev-server 3.26.4 vs copilot 3.26.3 -->
-                                        <exclude>com.github.javaparser:javaparser-core</exclude>
                                     </excludes>
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
