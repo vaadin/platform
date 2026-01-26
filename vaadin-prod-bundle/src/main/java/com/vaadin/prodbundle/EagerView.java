@@ -63,6 +63,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.UploadManager;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.router.Route;
 
@@ -130,6 +131,7 @@ public class EagerView extends Div {
     public Tooltip tooltip;
     public TooltipConfiguration tooltipConfiguration;
     public Upload upload;
+    public UploadManager uploadManager;
     public VerticalLayout verticalLayout;
     public VirtualList<String> virtualList;
 
