@@ -2,48 +2,13 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/start)
 
-*This is a pre-release for the Vaadin 24.9. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. 
+*This is a pre-release for the Vaadin 24.10. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. 
 
-# New and Noteworthy Since Vaadin 24.8
-Since Vaadin 24.9, you can start using Vaadin Beta and Release Candidate versions from **Maven Central**.
-Flow:
-  - add new HTML component `<code>`
-  - add new style methods: `STYLE_BACKGROUND_POSITION`, `STYLE_BACKGROUND_SIZE`, `STYLE_FILTER`, `STYLE_GAP`, `STYLE_ROTATE`
-  - add a short method to `SortDirection` enum (Thanks to @abdurasul29052002)
-  - add convenient API to set item from DataView
-  - Upgraded commercial trial experience ([read more](https://github.com/vaadin/platform/issues/7968))
-
-Design System:
-  - add `Tooltip` support for `SideNavItem`
-
-Hilla:
-  - support matching wildcard views with subdirectories
-
-Copilot:
-  - Upgraded commercial trial experience ([read more](https://github.com/vaadin/platform/issues/7968))
-  - Figma Importer API ([read more](https://vaadin.com/docs/latest/tools/copilot))
+# New and Noteworthy Since Vaadin 24.9
 
 ## Deprecation 
 
-Flow:
-  - Deprecate `HierarchyMapper`, `HierarchicalCommunicationController`, `HierarchicalArrayUpdater` and `HierarchicalUpdate`
-  - Deprecate methods in `HierarchicalDataCommunicator` (listed [here](https://github.com/vaadin/flow/pull/21889))
-  - Deprecate `webpackOutputDirectory`
-  - Deprecate `VaadinSession::setConfiguration(configuraiton)`
-  - Deprecate `setRequestedRange` and `computeRequestedRange`
-  - Deprecate `VaadinWebSecurity `
-  - Deprecate `arrayUpdater` and `dataupdater`
-
-Design System:
-  - Deprecate `CookieConsent`
-  - Deprecate legacy `Grid` API (listed [here](https://github.com/vaadin/flow-components/pull/7692))
-  - Deprecate `TreeGridElement`'s _getNumberOfExpandedRows_ and _isLoadingExpandedRows_
-
-*Deprecated APIs will be removed in Vaadin 25
-
 ## Known Vulnerability 
-
-Vaadin 24.9 uses Spring Boot 3.5.x, which includes `commons-lang3:3.17.0`. Security scanners may report [CVE-2025-48924](https://nvd.nist.gov/vuln/detail/CVE-2025-48924) due to this version. To address the issue, users can override the dependency by adding `<commons-lang3.version>3.18.0</commons-lang3.version>` to the `<properties>` section in their pom.xml. More details about the missing latest version of commons-lang3 in the Spring Boot 3.5.x BOM can be found [here](https://github.com/spring-projects/spring-boot/issues/46437)
 
 
 ## <a id="_changelogs"></a> Changelogs
