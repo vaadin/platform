@@ -46,6 +46,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
+            <version>${vaadin.spreadsheet.version}</version>
             <optional>true</optional>
         </dependency>
 
