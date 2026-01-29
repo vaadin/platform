@@ -125,6 +125,7 @@ writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileNam
 writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeProperty(versions, ["vaadin-quarkus"], vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
+writer.writeMaven(versions, prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeMaven(versions, vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 
