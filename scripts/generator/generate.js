@@ -111,5 +111,6 @@ writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, dev
 writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeProperty(versions, ["flow"], prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
+writer.writeMaven(versions, prodBundleTemplateFileName, prodBundlePomResultFileName);
 writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 
