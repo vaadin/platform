@@ -11,32 +11,32 @@
             "npmName": "@vaadin/a11y-base"
         },
         "accordion": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/accordion"
         },
         "app-layout": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/app-layout"
         },
         "avatar": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/avatar"
         },
         "avatar-group": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/avatar-group"
         },
         "button": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/button"
         },
         "checkbox": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/checkbox"
         },
@@ -45,7 +45,7 @@
             "npmName": "@vaadin/checkbox-group"
         },
         "combo-box": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/combo-box"
         },
@@ -54,37 +54,37 @@
             "npmName": "@vaadin/component-base"
         },
         "confirm-dialog": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/confirm-dialog"
         },
         "context-menu": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/context-menu"
         },
         "custom-field": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/custom-field"
         },
         "date-picker": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/date-picker"
         },
         "date-time-picker": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/date-time-picker"
         },
         "details": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/details"
         },
         "dialog": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/dialog"
         },
@@ -97,7 +97,7 @@
             "npmName": "@vaadin/field-base"
         },
         "field-highlighter": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/field-highlighter"
         },
@@ -111,12 +111,12 @@
             "javaVersion": "1.1.1"
         },
         "form-layout": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/form-layout"
         },
         "grid": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/grid"
         },
@@ -129,7 +129,7 @@
             "npmName": "@vaadin/icon"
         },
         "icons": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/icons"
         },
@@ -146,7 +146,7 @@
             "npmName": "@vaadin/item"
         },
         "list-box": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/list-box"
         },
@@ -155,12 +155,12 @@
             "npmName": "@vaadin/lit-renderer"
         },
         "login": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/login"
         },
         "menu-bar": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/menu-bar"
         },
@@ -183,7 +183,7 @@
             "npmName": "@vaadin/multi-select-combo-box"
         },
         "notification": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/notification"
         },
@@ -204,12 +204,12 @@
             "npmName": "@vaadin/polymer-legacy-adapter"
         },
         "progress-bar": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/progress-bar"
         },
         "radio-group": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/radio-group"
         },
@@ -218,22 +218,22 @@
             "npmName": "@vaadin/scroller"
         },
         "select": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/select"
         },
         "side-nav": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/side-nav"
         },
         "split-layout": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/split-layout"
         },
         "tabs": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/tabs"
         },
@@ -246,12 +246,12 @@
             "npmName": "@vaadin/text-area"
         },
         "text-field": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/text-field"
         },
         "time-picker": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/time-picker"
         },
@@ -260,7 +260,7 @@
             "npmName": "@vaadin/tooltip"
         },
         "upload": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/upload"
         },
@@ -274,7 +274,7 @@
             "releasenotes": true
         },
         "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "24.3.20"
         },
         "vaadin-material-styles": {
             "jsVersion": "24.3.22",
@@ -282,19 +282,19 @@
             "releasenotes": true
         },
         "vaadin-material-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "24.3.20"
         },
         "vaadin-messages": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "24.3.20"
         },
         "vaadin-ordered-layout": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "24.3.20"
         },
         "vaadin-quarkus": {
             "javaVersion": "2.0.2"
         },
         "vaadin-renderer": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "24.3.20"
         },
         "vaadin-router": {
             "jsVersion": "1.7.5",
@@ -310,7 +310,7 @@
             "npmName": "@vaadin/vertical-layout"
         },
         "virtual-list": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/virtual-list"
         }
@@ -349,17 +349,17 @@
     },
     "vaadin": {
         "board": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/board"
         },
         "charts": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/charts"
         },
         "cookie-consent": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/cookie-consent"
         },
@@ -367,22 +367,22 @@
             "jsVersion": "3.1.1"
         },
         "crud": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/crud"
         },
         "grid-pro": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/grid-pro"
         },
         "map": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/map"
         },
         "rich-text-editor": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "jsVersion": "24.3.22",
             "npmName": "@vaadin/rich-text-editor"
         },
@@ -400,7 +400,7 @@
             "javaVersion": "1.12.14"
         },
         "vaadin-spreadsheet": {
-            "javaVersion": "{{version}}",
+            "javaVersion": "24.3.20",
             "pro": true
         },
         "vaadin-testbench": {
