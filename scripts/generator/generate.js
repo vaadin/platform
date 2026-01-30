@@ -125,4 +125,4 @@ writer.writeProperty(versions, "flow", gradlePortalPluginTemplatePomFileName, gr
 writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platformJavadocResultPomFileName);
 
 writer.writeProperty(versions, "flow", devBundleTemplateFileName, devBundlePomResultFileName);
-
+writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
