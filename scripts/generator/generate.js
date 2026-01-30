@@ -103,4 +103,5 @@ writer.writeProperty(versions, "flow", platformJavadocTemplatePomFileName, platf
 
 writer.writeProperty(versions, "flow", devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeProperty(versions, "flow", prodBundleTemplateFileName, prodBundlePomResultFileName);
-
+writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
+writer.writeMaven(versions, prodBundleTemplateFileName, prodBundlePomResultFileName);
