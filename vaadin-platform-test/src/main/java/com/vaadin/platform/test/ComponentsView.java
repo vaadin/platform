@@ -159,6 +159,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.UploadButton;
+import com.vaadin.flow.component.upload.UploadDropZone;
+import com.vaadin.flow.component.upload.UploadFileList;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.webcomponent.WebComponentUI;
 import com.vaadin.flow.component.webcomponent.WebComponentWrapper;
@@ -472,6 +475,10 @@ public class ComponentsView extends AppLayout {
                 )
         ));
 
+        UploadButton uploadButton = new UploadButton();
+        UploadDropZone uploadDropZone = new UploadDropZone();
+        UploadFileList uploadFileList = new UploadFileList();
+
         Dialog dialog = new Dialog();
         dialog.add(new NativeLabel("This is the contents of the dialog"));
         Button dialogButton = new Button("open Dialog", event -> dialog.open());
@@ -708,7 +715,7 @@ public class ComponentsView extends AppLayout {
         components.add(numberField);
         components.add(integerField);
         components.add(textArea);
-        components.add(upload);
+        components.add(upload, uploadButton, uploadDropZone, uploadFileList);
         components.add(crud);
         components.add(openLoginOverlay);
         components.add(loginForm);
