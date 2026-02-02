@@ -71,6 +71,17 @@
             <properties>
                 <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <configuration>
+                            <skipPublishing>true</skipPublishing>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <!-- separate platform modules for active by default it must be after hilla modules -->
         <profile>
