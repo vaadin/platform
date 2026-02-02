@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <hilla.version>1.4-SNAPSHOT</hilla.version>
+        <hilla.version>1.4.1</hilla.version>
         <spring.boot.version>2.7.18</spring.boot.version>
         <!-- sb 2.x has end of free support, new spring framework 5.3 has security fixes -->
         <spring-framework.version>5.3.32</spring-framework.version>
