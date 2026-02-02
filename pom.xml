@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <hilla.version>2.0-SNAPSHOT</hilla.version>
+        <hilla.version>2.0.14</hilla.version>
         <spring.boot.version>3.0.10</spring.boot.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>11.0.13</jetty.version>
