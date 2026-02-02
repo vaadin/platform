@@ -263,6 +263,11 @@
             "mode": "lit",
             "npmName": "@vaadin/side-nav"
         },
+        "slider": {
+            "jsVersion": "25.1.0-alpha5",
+            "mode": "lit",
+            "npmName": "@vaadin/slider"
+        },
         "split-layout": {
             "jsVersion": "25.1.0-alpha5",
             "mode": "lit",
