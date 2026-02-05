@@ -49,6 +49,7 @@ import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.component.shared.TooltipConfiguration;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.slider.Slider;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabSheet;
@@ -122,6 +123,7 @@ public class EagerView extends Div {
     public Select<String> select;
     public SideNav sideNav;
     public SideNavItem sideNavItem;
+    public Slider slider;
     public SplitLayout splitLayout;
     public SvgIcon svgIcon;
     public Tabs tabs;

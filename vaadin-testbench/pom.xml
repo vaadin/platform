@@ -234,6 +234,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-slider-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-split-layout-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
