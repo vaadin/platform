@@ -122,11 +122,6 @@
                 <artifactId>copilot</artifactId>
                 <version>${copilot.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>signals</artifactId>
-                <version>${flow.version}</version>
-            </dependency>
             <!-- Free Components -->
             <dependency>
                 <groupId>com.vaadin</groupId>
