@@ -49,6 +49,7 @@ import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.component.shared.TooltipConfiguration;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.slider.RangeSlider;
 import com.vaadin.flow.component.slider.Slider;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -119,6 +120,7 @@ public class EagerView extends Div {
     public Popover popover;
     public ProgressBar progressBar;
     public RadioButtonGroup<String> radioButtonGroup;
+    public RangeSlider rangeSlider;
     public Scroller scroller;
     public Select<String> select;
     public SideNav sideNav;

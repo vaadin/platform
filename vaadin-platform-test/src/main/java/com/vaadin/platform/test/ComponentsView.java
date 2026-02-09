@@ -144,6 +144,7 @@ import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.slider.RangeSlider;
 import com.vaadin.flow.component.slider.Slider;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
@@ -670,6 +671,7 @@ public class ComponentsView extends AppLayout {
         sideNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
         sideNav.addItem(sideNavItem);
 
+        RangeSlider rangeSlider = new RangeSlider();
         Slider slider = new Slider();
 
         NativeLabel nativeLabel = new NativeLabel("Native Label");
@@ -735,6 +737,7 @@ public class ComponentsView extends AppLayout {
         components.add(mapComponent);
         components.add(popover);
         components.add(sideNav);
+        components.add(rangeSlider);
         components.add(slider);
         components.add(nativeLabel);
         components.add(reactRouterOutlet);
