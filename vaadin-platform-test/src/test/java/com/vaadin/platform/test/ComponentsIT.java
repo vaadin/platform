@@ -72,6 +72,7 @@ public class ComponentsIT extends AbstractPlatformTest {
     private <T extends TestBenchElement> void checkElement(TestComponent testComponent) {
         // Make sure that we close any modal dialog before each iteration
         $("body").first().click();
+        waitUntil(driver->!$("vaadin-dialog-overlay").exists(), 30);
 
         String tag = testComponent.localName != null ? testComponent.localName : testComponent.tag;
         String className = testComponent.component != null ? testComponent.component.getName() : null;
