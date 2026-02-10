@@ -29,7 +29,9 @@ public class BundleTest {
     public void copilotIncluded() throws IOException {
         String needle = "copilot-main";
         int foundInFiles = findInBundleBuildFolder(line -> line.contains(needle)
-                && !line.contains("document.querySelector")&& !line.contains("copilot-main-resized"));
+                && !line.contains("document.querySelector")
+                && !line.contains("document.body.querySelector")
+                && !line.contains("copilot-main-resized"));
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
