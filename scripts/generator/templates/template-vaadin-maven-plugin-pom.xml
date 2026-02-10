@@ -56,9 +56,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.6.2</version>
+                    <version>3.15.2</version>
                     <configuration>
                         <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                        <requiredJavaVersion>11</requiredJavaVersion>
+                        <requiredMavenVersion>3.5</requiredMavenVersion>
                     </configuration>
                     <executions>
                         <execution>
@@ -172,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.15.2</version>
             </plugin>
         </plugins>
     </reporting>
