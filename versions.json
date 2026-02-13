@@ -128,7 +128,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "24.10.0-alpha1"
+            "javaVersion": "24.10.0-alpha2"
         },
         "flow-cdi": {
             "javaVersion": "15.2.1"
@@ -149,7 +149,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "24.9.10"
+            "javaVersion": "24.10.0-alpha1"
         },
         "horizontal-layout": {
             "jsVersion": "24.10.0-alpha1",
@@ -228,10 +228,10 @@
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
-            "javaVersion": "7.0.11"
+            "javaVersion": "7.1.0-alpha1"
         },
         "mpr-v8": {
-            "javaVersion": "7.0.11"
+            "javaVersion": "7.1.0-alpha1"
         },
         "multi-select-combo-box": {
             "jsVersion": "24.10.0-alpha1",
@@ -583,7 +583,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "9.5.3",
+            "javaVersion": "9.6.0-alpha1",
             "pro": true
         }
     }
