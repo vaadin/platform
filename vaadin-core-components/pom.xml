@@ -37,6 +37,10 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ai-components-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-accordion-flow</artifactId>
         </dependency>
         <dependency>
