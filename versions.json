@@ -434,6 +434,7 @@
                 "@vaadin/scroller",
                 "@vaadin/select",
                 "@vaadin/side-nav",
+                "@vaadin/slider",
                 "@vaadin/split-layout",
                 "@vaadin/tabs",
                 "@vaadin/tabsheet",
