@@ -144,6 +144,8 @@ import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.slider.RangeSlider;
+import com.vaadin.flow.component.slider.Slider;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -159,6 +161,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.UploadButton;
+import com.vaadin.flow.component.upload.UploadDropZone;
+import com.vaadin.flow.component.upload.UploadFileList;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.component.webcomponent.WebComponentUI;
 import com.vaadin.flow.component.webcomponent.WebComponentWrapper;
@@ -472,6 +477,10 @@ public class ComponentsView extends AppLayout {
                 )
         ));
 
+        UploadButton uploadButton = new UploadButton();
+        UploadDropZone uploadDropZone = new UploadDropZone();
+        UploadFileList uploadFileList = new UploadFileList();
+
         Dialog dialog = new Dialog();
         dialog.add(new NativeLabel("This is the contents of the dialog"));
         Button dialogButton = new Button("open Dialog", event -> dialog.open());
@@ -662,6 +671,9 @@ public class ComponentsView extends AppLayout {
         sideNavItem.addItem(new SideNavItem("Nav item 2 - 2", "/2/2"));
         sideNav.addItem(sideNavItem);
 
+        RangeSlider rangeSlider = new RangeSlider();
+        Slider slider = new Slider();
+
         NativeLabel nativeLabel = new NativeLabel("Native Label");
         ReactRouterOutlet reactRouterOutlet = new ReactRouterOutlet();
         FieldSet fieldSet = new FieldSet();
@@ -708,7 +720,7 @@ public class ComponentsView extends AppLayout {
         components.add(numberField);
         components.add(integerField);
         components.add(textArea);
-        components.add(upload);
+        components.add(upload, uploadButton, uploadDropZone, uploadFileList);
         components.add(crud);
         components.add(openLoginOverlay);
         components.add(loginForm);
@@ -725,6 +737,8 @@ public class ComponentsView extends AppLayout {
         components.add(mapComponent);
         components.add(popover);
         components.add(sideNav);
+        components.add(rangeSlider);
+        components.add(slider);
         components.add(nativeLabel);
         components.add(reactRouterOutlet);
         components.add(fieldSet);

@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>25.0-SNAPSHOT</version>
+        <version>25.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.vaadin</groupId>
@@ -35,6 +35,10 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ai-components-flow</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-accordion-flow</artifactId>
@@ -154,6 +158,10 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-renderer-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-slider-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>

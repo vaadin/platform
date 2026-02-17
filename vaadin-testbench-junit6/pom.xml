@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-platform-parent</artifactId>
-        <version>25.0-SNAPSHOT</version>
+        <version>25.1-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-testbench-junit6</artifactId>
     <packaging>jar</packaging>
@@ -225,6 +225,11 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-side-nav-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-slider-testbench</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>

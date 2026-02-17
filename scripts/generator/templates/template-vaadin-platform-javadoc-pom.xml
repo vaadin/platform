@@ -102,7 +102,13 @@
                 </dependency>
                 <dependency>
                     <groupId>com.vaadin</groupId>
-                    <artifactId>flow-archive-extractor</artifactId>
+                    <artifactId>flow-build-tools</artifactId>
+                    <version>${flow.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-dev-server</artifactId>
                     <version>${flow.version}</version>
                     <scope>provided</scope>
                 </dependency>

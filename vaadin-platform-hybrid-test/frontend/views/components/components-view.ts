@@ -59,6 +59,8 @@ import '@vaadin/scroller/vaadin-scroller';
 import '@vaadin/side-nav';
 import '@vaadin/side-nav/vaadin-side-nav-item.js';
 import '@vaadin/side-nav/src/vaadin-side-nav-item';
+import '@vaadin/slider';
+import '@vaadin/slider/vaadin-range-slider.js';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
 import '@vaadin/tabsheet';
@@ -67,6 +69,9 @@ import '@vaadin/text-area';
 import '@vaadin/text-field';
 import '@vaadin/tooltip';
 import '@vaadin/upload';
+import '@vaadin/upload/src/vaadin-upload-button';
+import '@vaadin/upload/src/vaadin-upload-drop-zone';
+import '@vaadin/upload/src/vaadin-upload-file-list';
 import '@vaadin/vertical-layout';
 import '@vaadin/virtual-list/vaadin-virtual-list';
 import '@vaadin/context-menu';
@@ -320,6 +325,10 @@ export class ComponentsView extends View {
           </vaadin-side-nav-item>
         </vaadin-side-nav>
 
+        <vaadin-slider></vaadin-slider>
+
+        <vaadin-range-slider></vaadin-range-slider>
+
         <vaadin-split-layout>
           <div><vaadin-button>RIGHT</vaadin-button></div>
           <div><vaadin-button>LEFT</vaadin-button></div>
@@ -338,6 +347,9 @@ export class ComponentsView extends View {
         </vaadin-tabsheet>
 
         <vaadin-upload></vaadin-upload>
+        <vaadin-upload-button></vaadin-upload-button>
+        <vaadin-upload-drop-zone></vaadin-upload-drop-zone>
+        <vaadin-upload-file-list></vaadin-upload-file-list>
 
         <vaadin-message foo="bar"></vaadin-message>
         <vaadin-message-input></vaadin-message-input>

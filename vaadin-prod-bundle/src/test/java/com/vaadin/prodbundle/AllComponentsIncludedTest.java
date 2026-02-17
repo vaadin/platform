@@ -36,6 +36,7 @@ public class AllComponentsIncludedTest {
             "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet-styles.js",
             "ol/proj",
+            "ol/extent",
             "proj4");
 
     private static final ObjectMapper MAPPER = new ObjectMapper();

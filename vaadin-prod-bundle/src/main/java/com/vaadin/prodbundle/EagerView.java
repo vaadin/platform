@@ -49,6 +49,8 @@ import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.component.shared.TooltipConfiguration;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.slider.RangeSlider;
+import com.vaadin.flow.component.slider.Slider;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabSheet;
@@ -63,6 +65,10 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.UploadButton;
+import com.vaadin.flow.component.upload.UploadDropZone;
+import com.vaadin.flow.component.upload.UploadFileList;
+import com.vaadin.flow.component.upload.UploadManager;
 import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.router.Route;
 
@@ -114,10 +120,12 @@ public class EagerView extends Div {
     public Popover popover;
     public ProgressBar progressBar;
     public RadioButtonGroup<String> radioButtonGroup;
+    public RangeSlider rangeSlider;
     public Scroller scroller;
     public Select<String> select;
     public SideNav sideNav;
     public SideNavItem sideNavItem;
+    public Slider slider;
     public SplitLayout splitLayout;
     public SvgIcon svgIcon;
     public Tabs tabs;
@@ -130,6 +138,10 @@ public class EagerView extends Div {
     public Tooltip tooltip;
     public TooltipConfiguration tooltipConfiguration;
     public Upload upload;
+    public UploadManager uploadManager;
+    public UploadButton uploadButton;
+    public UploadDropZone uploadDropZone;
+    public UploadFileList uploadFileList;
     public VerticalLayout verticalLayout;
     public VirtualList<String> virtualList;
 
