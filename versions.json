@@ -7,80 +7,80 @@
     },
     "core": {
         "accordion": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/accordion"
         },
         "app-layout": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/app-layout"
         },
         "avatar": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/avatar"
         },
         "avatar-group": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/avatar-group"
         },
         "button": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/button"
         },
         "checkbox": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/checkbox"
         },
         "checkbox-group": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/checkbox-group"
         },
         "combo-box": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/combo-box"
         },
         "component-base": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/component-base"
         },
         "confirm-dialog": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/confirm-dialog"
         },
         "context-menu": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/context-menu"
         },
         "custom-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/custom-field"
         },
         "date-picker": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/date-picker"
         },
         "date-time-picker": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/date-time-picker"
         },
         "details": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/details"
         },
         "dialog": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/dialog"
         },
         "email-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/email-field"
         },
         "field-base": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/field-base"
         },
         "field-highlighter": {
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
@@ -90,31 +90,31 @@
             "javaVersion": "14.1.1"
         },
         "form-layout": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/form-layout"
         },
         "grid": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/grid"
         },
         "horizontal-layout": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/horizontal-layout"
         },
         "icon": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/icon"
         },
         "icons": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/icons"
         },
         "input-container": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/input-container"
         },
         "integer-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/integer-field"
         },
         "iron-icon": {
@@ -144,31 +144,31 @@
             "npmVersion": "3.0.1"
         },
         "item": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/item"
         },
         "list-box": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/list-box"
         },
         "lit-renderer": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/lit-renderer"
         },
         "login": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/login"
         },
         "menu-bar": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/menu-bar"
         },
         "message-input": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/message-input"
         },
         "message-list": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/message-list"
         },
         "mpr-v7": {
@@ -178,99 +178,99 @@
             "javaVersion": "6.1.12"
         },
         "multi-select-combo-box": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/multi-select-combo-box"
         },
         "notification": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/notification"
         },
         "number-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/number-field"
         },
         "overlay": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/overlay"
         },
         "password-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/password-field"
         },
         "polymer-legacy-adapter": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/polymer-legacy-adapter"
         },
         "progress-bar": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/progress-bar"
         },
         "radio-group": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/radio-group"
         },
         "scroller": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/scroller"
         },
         "select": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/select"
         },
         "split-layout": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/split-layout"
         },
         "tabs": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/tabs"
         },
         "tabsheet": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/tabsheet"
         },
         "text-area": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/text-area"
         },
         "text-field": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/text-field"
         },
         "time-picker": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/time-picker"
         },
         "tooltip": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/tooltip"
         },
         "upload": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/upload"
         },
         "vaadin-accordion": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-accordion"
         },
         "vaadin-app-layout": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-app-layout"
         },
         "vaadin-avatar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-avatar"
         },
         "vaadin-button": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-button"
         },
         "vaadin-checkbox": {
@@ -280,49 +280,49 @@
                 "Checkbox Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-checkbox"
         },
         "vaadin-combo-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-combo-box"
         },
         "vaadin-confirm-dialog": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-confirm-dialog"
         },
         "vaadin-context-menu": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-context-menu"
         },
         "vaadin-custom-field": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-custom-field"
         },
         "vaadin-date-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-date-picker"
         },
         "vaadin-date-time-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-date-time-picker"
         },
         "vaadin-details": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-details"
         },
         "vaadin-development-mode-detector": {
@@ -332,18 +332,18 @@
         "vaadin-dialog": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-dialog"
         },
         "vaadin-field-highlighter": {
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/field-highlighter"
         },
         "vaadin-form-layout": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-form-layout"
         },
         "vaadin-grid": {
@@ -354,42 +354,42 @@
                 "Grid Context Menu"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-grid"
         },
         "vaadin-icon": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-icon"
         },
         "vaadin-icons": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-icons"
         },
         "vaadin-item": {
             "component": true,
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-item"
         },
         "vaadin-list-box": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-list-box"
         },
         "vaadin-list-mixin": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-list-mixin"
         },
         "vaadin-login": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-login"
         },
         "vaadin-lumo-styles": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
@@ -397,7 +397,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-material-styles": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-material-styles",
             "releasenotes": true
         },
@@ -407,19 +407,19 @@
         "vaadin-menu-bar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-menu-bar"
         },
         "vaadin-messages": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-messages"
         },
         "vaadin-notification": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-notification"
         },
         "vaadin-ordered-layout": {
@@ -430,18 +430,18 @@
                 "Flex Layout"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-ordered-layout"
         },
         "vaadin-overlay": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-overlay",
             "releasenotes": true
         },
         "vaadin-progress-bar": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-progress-bar"
         },
         "vaadin-quarkus": {
@@ -454,7 +454,7 @@
                 "Radio Button Group"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-radio-button"
         },
         "vaadin-renderer": {
@@ -469,13 +469,13 @@
         "vaadin-select": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-select"
         },
         "vaadin-split-layout": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-split-layout"
         },
         "vaadin-spreadsheet": {
@@ -490,11 +490,11 @@
                 "Tabsheet"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-tabs"
         },
         "vaadin-template-renderer": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-template-renderer"
         },
         "vaadin-text-field": {
@@ -509,24 +509,24 @@
                 "Number Field"
             ],
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-text-field"
         },
         "vaadin-themable-mixin": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-themable-mixin",
             "releasenotes": true
         },
         "vaadin-time-picker": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-time-picker"
         },
         "vaadin-upload": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-upload"
         },
         "vaadin-usage-statistics": {
@@ -536,16 +536,16 @@
         "vaadin-virtual-list": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-virtual-list",
             "releasenotes": true
         },
         "vertical-layout": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vertical-layout"
         },
         "virtual-list": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/virtual-list"
         }
     },
@@ -579,50 +579,50 @@
     },
     "vaadin": {
         "board": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/board"
         },
         "charts": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/charts"
         },
         "cookie-consent": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/cookie-consent"
         },
         "cookieconsent": {
             "jsVersion": "3.1.1"
         },
         "crud": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
             "javaVersion": "8.1.2"
         },
         "grid-pro": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/grid-pro"
         },
         "map": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/map"
         },
         "rich-text-editor": {
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/rich-text-editor"
         },
         "vaadin-board": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-board",
             "pro": true
         },
         "vaadin-charts": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-charts",
             "pro": true
         },
@@ -632,7 +632,7 @@
         "vaadin-cookie-consent": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-cookie-consent",
             "pro": true
         },
@@ -643,7 +643,7 @@
         "vaadin-crud": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-crud",
             "pro": true
         },
@@ -653,7 +653,7 @@
         "vaadin-grid-pro": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-grid-pro",
             "pro": true
         },
@@ -663,7 +663,7 @@
         "vaadin-map": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/map",
             "pro": true
         },
@@ -673,7 +673,7 @@
         "vaadin-rich-text-editor": {
             "component": true,
             "javaVersion": "{{version}}",
-            "jsVersion": "23.6.2",
+            "jsVersion": "23.6.3",
             "npmName": "@vaadin/vaadin-rich-text-editor",
             "pro": true
         },
