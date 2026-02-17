@@ -40,6 +40,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>2.0.0-M2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${project.version}</version>
@@ -252,6 +259,23 @@
                     <groupId>com.microsoft.playwright</groupId>
                     <artifactId>playwright</artifactId>
                     <version>1.47.0</version>
+                    <scope>provided</scope>
+                </dependency>
+                <!-- used in AI Components -->
+                <dependency>
+                    <groupId>dev.langchain4j</groupId>
+                    <artifactId>langchain4j</artifactId>
+                    <version>1.11.0</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.ai</groupId>
+                    <artifactId>spring-ai-client-chat</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.ai</groupId>
+                    <artifactId>spring-ai-model</artifactId>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
