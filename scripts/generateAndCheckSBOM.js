@@ -49,7 +49,7 @@ const licenseWhiteList = [
   'BlueOak-1.0.0',
   'https://www.bouncycastle.org/licence.html',
   'https://opensource.org/licenses/MIT',
-  'OFL-1.1'，
+  'OFL-1.1',
   'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'
 ];
 
