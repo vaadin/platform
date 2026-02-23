@@ -42,10 +42,20 @@ import {
     NumberField,
     PasswordField,
     Popover,
-    ProgressBar, RadioButton, RadioGroup,
+    ProgressBar,
+    RadioButton,
+    RadioGroup,
+    RangeSlider,
     Scroller,
-    Select, SideNav, SideNavItem, SplitLayout, Tab,
-    Tabs, TabSheet, TabSheetTab,
+    Select,
+    SideNav,
+    SideNavItem,
+    Slider,
+    SplitLayout,
+    Tab,
+    Tabs,
+    TabSheet,
+    TabSheetTab,
     TextArea,
     TextField,
     TimePicker,
@@ -53,7 +63,6 @@ import {
     Upload,
     VerticalLayout,
     VirtualList,
-    VirtualListItemModel
 } from "@vaadin/react-components";
 import type { ViewConfig } from "@vaadin/hilla-file-router/types.js";
 import {
@@ -62,7 +71,8 @@ import {
     Chart,
     ChartSeries,
     Crud,
-    CrudEditColumn, Dashboard,
+    CrudEditColumn,
+    Dashboard,
     GridPro,
     GridProEditColumn,
     RichTextEditor
@@ -262,6 +272,8 @@ export default function Components() {
                 <RadioButton label="Option three"></RadioButton>
             </RadioGroup>
 
+            <RangeSlider></RangeSlider>
+
             <RichTextEditor></RichTextEditor>
 
             <SideNav collapsible>
@@ -275,6 +287,8 @@ export default function Components() {
                         2</SideNavItem>
                 </SideNavItem>
             </SideNav>
+
+            <Slider></Slider>
 
             <SplitLayout>
                 <div><Button>RIGHT</Button></div>
