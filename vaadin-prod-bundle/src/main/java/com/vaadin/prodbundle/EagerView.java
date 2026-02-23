@@ -5,6 +5,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.avatar.AvatarGroup;
+import com.vaadin.flow.component.badge.Badge;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.card.Card;
@@ -80,6 +81,7 @@ public class EagerView extends Div {
     public AppLayout appLayout;
     public Avatar avatar;
     public AvatarGroup avatarGroup;
+    public Badge badge;
     public Board board;
     public BigDecimalField bigDecimalField;
     public Button button;

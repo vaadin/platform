@@ -10,6 +10,7 @@ import '@vaadin/card';
 import '@vaadin/icon';
 import '@vaadin/scroller';
 import '@vaadin/virtual-list';
+import '@vaadin/badge';
 import '@vaadin/board/vaadin-board';
 import '@vaadin/board/vaadin-board-row';
 import '@vaadin/button';
@@ -135,6 +136,7 @@ export class ComponentsView extends View {
             {name: 'Foo Bar', colorIndex: 3}
          ]}" ></vaadin-avatar-group>
         <vaadin-avatar abbr="SK" name="Jens Jansson"></vaadin-avatar>
+        <vaadin-badge number="3">new messages</vaadin-badge>
         <vaadin-board>
           <vaadin-board-row board-cols="4"><label>Board</label></vaadin-board-row>
           <vaadin-board-row>
