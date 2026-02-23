@@ -86,9 +86,6 @@ This is the prerelease version of Vaadin 14.x for evaluating a number of new fea
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
 - There are [some issues](https://github.com/vaadin/flow/issues/5146) in using Web Sockets as the Push channel in certain OSGi environments, but long polling works.
 
-## Components
-- The dark theme preset does not work in IE11 when applied to the `<html>` element.
-
 # Migrating from Vaadin 8
 See [the migration guide](https://vaadin.com/docs/v10/flow/migration/1-migrating-v8-v10.html)
 

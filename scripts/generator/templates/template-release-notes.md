@@ -110,10 +110,6 @@ Development is supported with the following operating systems, for any OS versio
   - Firefox on the [supported](https://www.mozilla.org/en-US/firefox/92.0/system-requirements/) platforms
   - Safari on [macOS](https://support.apple.com/en-us/HT201260) 10.9 or later
   - Edge Chromium on the systems [supported](https://docs.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems) by the vendor.
-- Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
-  - (see _Known Issues and Limitations_ below)
-- Internet Explorer 11 on Windows 7, Windows 8 and Windows 10
-  - (see _Known Issues and Limitations_ below)
 
 ## Mobile Browsers
 The following built-in browsers in the following mobile operating systems:
@@ -165,9 +161,6 @@ Migration guide available in [vaadin.com/docs](https://vaadin.com/docs/v14/flow/
 
 ## OSGi support
 - OSGi with npm does not work in V14.0.0-V14.1.0. We are working on a fix for V14.x.
-
-## Performance
-- Due to the limitation of web components polyfills, component rendering on IE11 and EdgeHTML can be upto 5-10 times slower than on other browsers
 
 ## Flow
 - The Template-in-Template feature has [some limitations](https://github.com/vaadin/flow/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Atemplate-in-template+)
