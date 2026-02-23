@@ -104,7 +104,7 @@ export default function Components() {
                 {name: 'Foo Bar', colorIndex: 3}
             ]}></AvatarGroup>
             <Avatar abbr="SK" name="Jens Jansson"></Avatar>
-            <Badge number="3">new messages</Badge>
+            <Badge number={3}>new messages</Badge>
             <Board className="board-column-span">
                 <BoardRow  {...{'board-cols': '4'}}><label>Board</label></BoardRow>
                 <BoardRow>
