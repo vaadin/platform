@@ -30,6 +30,11 @@
             "mode": "lit",
             "npmName": "@vaadin/avatar-group"
         },
+        "badge": {
+            "jsVersion": "25.1.0-alpha8",
+            "mode": "lit",
+            "npmName": "@vaadin/badge"
+        },
         "button": {
             "jsVersion": "25.1.0-alpha8",
             "mode": "lit",
@@ -392,6 +397,7 @@
                 "@vaadin/app-layout",
                 "@vaadin/avatar",
                 "@vaadin/avatar-group",
+                "@vaadin/badge",
                 "@vaadin/button",
                 "@vaadin/card",
                 "@vaadin/checkbox",

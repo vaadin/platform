@@ -41,6 +41,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.avatar.AvatarGroup;
 import com.vaadin.flow.component.avatar.AvatarGroup.AvatarGroupItem;
+import com.vaadin.flow.component.badge.Badge;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
@@ -286,6 +287,8 @@ public class ComponentsView extends AppLayout {
         SvgIcon svgIcon = new SvgIcon();;
         components.add(fontIcon);
         components.add(svgIcon);
+
+        Badge badge = new Badge("new messages", 3);
 
         Button button = new Button("Button text", e -> {
             log.log("Clicked button");
@@ -693,6 +696,7 @@ public class ComponentsView extends AppLayout {
         WebComponentUI webComponentUI;
         WebComponentWrapper webComponentWrapper;
 
+        components.add(badge);
         components.add(button);
         components.add(card);
         components.add(checkbox);
