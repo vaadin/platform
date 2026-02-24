@@ -38,6 +38,11 @@
             <artifactId>vaadin-testbench-core-junit5</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench-unit-junit5</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- Flow HTML components -->
         <dependency>
