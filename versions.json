@@ -31,7 +31,7 @@
             "npmName": "@vaadin/avatar-group"
         },
         "badge": {
-            "jsVersion": "25.1.0-alpha8",
+            "jsVersion": "25.1.0-alpha9",
             "mode": "lit",
             "npmName": "@vaadin/badge"
         },
