@@ -373,7 +373,7 @@
             "jsVersion": "4.0.0"
         },
         "swing-kit": {
-            "javaVersion": "3.0.0"
+            "javaVersion": "3.0.1"
         },
         "vaadin-collaboration-engine": {
             "javaVersion": "7.0.0"
