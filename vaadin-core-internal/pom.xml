@@ -80,19 +80,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core-components</artifactId>
         </dependency>
-        <!-- browserless test dependency -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>browserless-test-junit6</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>browserless-test-quarkus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>browserless-test-shared</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
