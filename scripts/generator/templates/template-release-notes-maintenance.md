@@ -11,6 +11,7 @@ Vaadin {{platform}}
   - Web Components ([{{core.accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.accordion.jsVersion}}))
   - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
 - TestBench ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
+- Browserless Test([{{core.browserless-test.javaVersion}}](https://vaadin.com/docs/next/flow/testing/browserless))
 - Feature Pack([{{vaadin.vaadin-feature-pack.javaVersion}}](https://vaadin.com/docs/latest/tools/modernization-toolkit/feature-pack))
 - Modernization Toolkit ([Documentation](https://vaadin.com/docs/latest/tools/modernization-toolkit))
   - Feature Pack ([Documentation](https://vaadin.com/docs/latest/tools/modernization-toolkit/feature-pack))
