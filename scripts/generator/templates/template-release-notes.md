@@ -2,7 +2,7 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/upgrading ) · [Docs](https://vaadin.com/docs/) · [Get Started](https://vaadin.com/docs/latest/getting-started/start)
 
-# New and Noteworthy Since Vaadin 24
+# New and Noteworthy Since Vaadin 25.1
 
 **Notable Changes**
 
@@ -58,12 +58,12 @@ Vaadin {{platform}}
 
 
 ## Support
-Vaadin 24 is the latest stable version, with extended support options available ([release model](https://vaadin.com/roadmap)).
+Vaadin 25 is the latest stable version, with extended support options available ([release model](https://vaadin.com/roadmap)).
 
 
 <!-- Non-LTS:
 
-Vaadin 24 is supported for one month after Vaadin 25 has been released ([release model](https://vaadin.com/roadmap)).
+Vaadin 25 is supported for one month after Vaadin 26 has been released ([release model](https://vaadin.com/roadmap)).
 
 -->
 Vaadin also provides [commercial support and warranty](https://vaadin.com/solutions/support).
