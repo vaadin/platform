@@ -91,6 +91,26 @@ const cveWhiteList = {
   'pkg:maven/org.springframework.security/spring-security-core@6.5.3' : {
      cves: ['CVE-2025-41248'],
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
+  }，
+  'pkg:npm/dompurify@3.2.7' : {
+    cves: ['CVE-2026-0540'],
+    description: 'This will be addressed in the next vaadin 24.9 release'
+  },
+  'pkg:npm/serialize-javascript@6.0.2' : {
+    cves: ['GHSA-5c6j-r48x-rmvq'],
+    description: 'This is a transitive dependency from workbox:7.4.0. We keep on tracking this issue https://github.com/GoogleChrome/workbox/issues/3470'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@1.9.20' : {
+    cves: ['CVE-2020-29582'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-common@1.9.0' : {
+    cves: ['CVE-2020-29582'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.6.20' : {
+    cves: ['CVE-2020-29582'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
   }
 }
 
