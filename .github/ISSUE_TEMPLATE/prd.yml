@@ -17,7 +17,7 @@ body:
       label: Tier
       options:
         - Free
-        - Plus
+        - Email
         - Pro
         - Premium
         - Ultimate
