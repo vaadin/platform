@@ -91,7 +91,7 @@ const cveWhiteList = {
   'pkg:maven/org.springframework.security/spring-security-core@6.5.3' : {
      cves: ['CVE-2025-41248'],
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
-  }，
+  },
   'pkg:npm/dompurify@3.2.7' : {
     cves: ['CVE-2026-0540'],
     description: 'This will be addressed in the next vaadin 24.9 release'
