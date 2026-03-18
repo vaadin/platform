@@ -375,15 +375,15 @@
             "javaVersion": "25.1.0-beta3"
         },
         "kubernetes-kit-starter": {
-            "javaVersion": "3.0.1"
+            "javaVersion": "3.1.0-rc1"
         },
         "observability-kit-starter": {
             "javaVersion": "4.0.0",
             "jsVersion": "4.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "4.0.0",
-            "jsVersion": "4.0.0"
+            "javaVersion": "4.1.0-rc1",
+            "jsVersion": "4.1.0-rc1"
         },
         "swing-kit": {
             "javaVersion": "3.0.1"
