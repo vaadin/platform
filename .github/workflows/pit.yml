@@ -58,9 +58,9 @@ jobs:
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Compute Arguments and Matrix
         id: set
         shell: bash
@@ -102,9 +102,9 @@ jobs:
         image: ${{ (matrix.app == 'control-center' ) && 'docker:dind' || '' }}
         options: --privileged --shm-size=2g
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Install PiT
         run: |
           git clone https://${{secrets.GHTK}}@github.com/vaadin/platform-in-test-script.git pit
@@ -123,11 +123,11 @@ jobs:
         with:
           chrome-version: stable
           install-dependencies: ${{ env.ACT == 'true' }}
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v5
+      - uses: stCarolas/setup-maven@v5.1
         with:
           maven-version: '3.9.0'
       - name: Set up Helm
@@ -178,14 +178,14 @@ jobs:
         run: echo artifact_name=`echo ${{matrix.app}} | sed -e 's/[^a-zA-Z0-9._-]/_/g'` >> $GITHUB_ENV
         shell: bash
       - if: ${{failure()}}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: failures-${{env.artifact_name}}
           path: tmp/**/*.out
           if-no-files-found: ignore
           retention-days: 7
       - if: ${{ true == inputs.screenshots }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: screenshots-${{env.artifact_name}}
           path: tmp/**/screenshots.out
