@@ -140,6 +140,16 @@ jobs:
         uses: helm/kind-action@v1
         with:
           install_only: false
+      - name: Pre-install WildFly for CDI starter
+        if: ${{ contains(matrix.app, 'cdi') }}
+        shell: bash
+        run: |
+          WILDFLY_VERSION=38.0.1.Final
+          WILDFLY_HOME=$HOME/wildfly-$WILDFLY_VERSION
+          curl -sL "https://github.com/wildfly/wildfly/releases/download/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.zip" -o /tmp/wildfly.zip
+          unzip -q /tmp/wildfly.zip -d $HOME
+          rm /tmp/wildfly.zip
+          echo "WILDFLY_HOME=$WILDFLY_HOME" >> $GITHUB_ENV
       - name: Run PiT
         run: |
           echo "${{toJSON(inputs)}}"
