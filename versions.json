@@ -36,7 +36,7 @@
             "npmName": "@vaadin/badge"
         },
         "browserless-test": {
-            "javaVersion": "1.0.0-rc1"
+            "javaVersion": "1.0.0"
         },
         "button": {
             "jsVersion": "25.1.0-rc1",
@@ -527,7 +527,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "10.1.0-rc1",
+            "javaVersion": "10.1.0",
             "pro": true
         }
     }
