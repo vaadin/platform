@@ -96,6 +96,14 @@ const cveWhiteList = {
   'pkg:maven/org.cyclonedx/cyclonedx-core-java@11.0.0' : {
     cves: ['CVE-2025-64518'],
     description: 'This is from a tool we use to generate the sbom. '
+  },
+  'pkg:npm/serialize-javascript@6.0.2' : {
+    cves: ['GHSA-5c6j-r48x-rmvq'],
+    description: 'This is a transitive dependency from workbox:7.4.0. We keep on tracking this issue https://github.com/GoogleChrome/workbox/issues/3470'
+  },
+  'pkg:npm/glob@11.1.0' : {
+    cves: ['CVE-2025-64756'],
+     description: 'False positive: based on the CVE statement, version 11.1.0 should out of the affected version range'
   }
 }
 
