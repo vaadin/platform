@@ -19,8 +19,8 @@ body:
         - Free
         - Email
         - Pro
-        - Premium
-        - Ultimate
+        - Team
+        - Enterprise
       default: 0
     validations:
       required: true
