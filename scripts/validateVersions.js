@@ -45,7 +45,7 @@ if (fs.existsSync('package-lock.json')){
 } 
 
 console.log('Running npm install ...');
-run('npm install')
+run('npm install --ignore-scripts')
 .then(() => console.log("Running npm ls ..."))
 .then(() => run('npm ls'))
 .then(out => {
