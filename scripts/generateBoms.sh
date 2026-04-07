@@ -6,7 +6,7 @@ version=`mvn -N help:evaluate -Dexpression=project.version -q -DforceStdout | gr
 snapshot=$1
 
 # install npm deps needed for the generator node script
-[ ! -d scripts/generator/node_modules ] && (cd scripts/generator && npm install)
+[ ! -d scripts/generator/node_modules ] && (cd scripts/generator && npm --ignore-scripts install)
 
 # run the generator
 cmd="node scripts/generator/generate.js --platform=$version --versions=versions.json $snapshot"

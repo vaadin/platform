@@ -11,7 +11,7 @@ mkdir "$vaadinNpmDir"
 cp "$scriptDir"/generator/results/vaadin-package.json "$vaadinNpmDir"/package.json
 
 pushd $vaadinCoreNpmDir
-npm install
+npm install --ignore-scripts
 vaadinCorePackage=`npm pack`
 popd
 
@@ -19,8 +19,8 @@ pushd $vaadinNpmDir
 perl -pi -e "s~\"\@vaadin/vaadin-core\": .*~\"\@vaadin/vaadin-core\": \"file:$vaadinCoreNpmDir/$vaadinCorePackage\",~g" package.json
 cat package.json
 rm -rf node_modules package-lock.json
-npm install
-npm install -g find-duplicate-dependencies
+npm install --ignore-scripts
+npm install --ignore-scripts -g find-duplicate-dependencies
 result=`find-duplicate-dependencies`
 popd
 
