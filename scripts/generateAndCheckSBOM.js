@@ -95,7 +95,11 @@ const cveWhiteList = {
   },
   'pkg:maven/org.cyclonedx/cyclonedx-core-java@11.0.0' : {
     cves: ['CVE-2025-64518'],
-    description: 'This is from a tool we use to generate the sbom. '
+    description: 'This is from a tool we use to generate the sbom.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
+    cves: ['CVE-2025-67030'],
+    description: 'FP: based on https://github.com/advisories/GHSA-6fmv-xxpf-w3cw, version 3.6.1 should have the fix.'
   }
 }
 
