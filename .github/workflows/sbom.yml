@@ -32,6 +32,11 @@ on:
             required: false
             type: boolean
             default: false
+          updateNVD:
+            description: 'Force NVD database update (ignore cache)'
+            required: false
+            type: boolean
+            default: false
           version:
             description: 'Use set Platform Version to:'
             required: false
@@ -79,6 +84,13 @@ jobs:
           mkdir -p ~/.vaadin/
           echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
         name: Install proKey
+      - name: Restore NVD database cache
+        id: nvd-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: /tmp/nvd-cache
+          key: nvd-db-will-not-match
+          restore-keys: nvd-db-
       - run: |
           [ false = "${{github.event.inputs.useBomber}}" ] && A="$A --disable-bomber"
           [ false = "${{github.event.inputs.useOSV}}" ] && A="$A --disable-osv-scan"
@@ -87,6 +99,9 @@ jobs:
           [ true = "${{github.event.inputs.useSnapshots}}" ] && A="$A --useSnapshots"
           V="${{ github.event.inputs.version || github.event.release.tag_name }}"
           [ -n "$V" ] && A="$A --version $V"
+          if [ "${{ steps.nvd-cache.outputs.cache-matched-key }}" != "" ] && [ true != "${{ github.event.inputs.updateNVD }}" ]; then
+            A="$A --nvd-cache-dir /tmp/nvd-cache --skip-nvd-update"
+          fi
           cmd="scripts/generateAndCheckSBOM.js $A"
           echo "Running: $cmd"
           $cmd
