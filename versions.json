@@ -353,7 +353,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "4.0.1"
+            "javaVersion": "4.0.2"
         },
         "azure-kit": {
             "version": "1.0.0"
