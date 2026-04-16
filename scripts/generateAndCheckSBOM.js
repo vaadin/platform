@@ -108,7 +108,19 @@ const cveWhiteList = {
   'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
     cves: ['CVE-2025-67030'],
     description: 'FP: version 3.6.1 includes the fix per GHSA-6fmv-xxpf-w3cw (patched in 3.6.1+).'
-  }
+  },
+  'pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@11.0.20' : {
+    cves: ['CVE-2026-34500', 'CVE-2026-34483', 'CVE-2026-34487', 'BIT-tomcat-2026-34500', 'BIT-tomcat-2026-34483', 'BIT-tomcat-2026-34487', 'CVE-2026-34486'],
+    description: 'This dependency is coming from springframework as transitive dependency, Vaadin does not use or depend on Tomcat. Tomcat is a runtime deployment choice made by application developers, which can be upgraded on the application side to Tomcat 9.0.117+, 10.1.54+, or 11.0.21+. The corresponding springboot updates will come in their next releases (4.0.6).'
+  },
+  'pkg:maven/org.apache.tomcat/tomcat-catalina@11.0.20' : {
+    cves: ['BIT-tomcat-2026-34500', 'CVE-2026-34500', 'BIT-tomcat-2026-34483', 'CVE-2026-34483', 'BIT-tomcat-2026-34487', 'CVE-2026-34487'],
+    description: 'This dependency is coming from springframework as transitive dependency, Vaadin does not use or depend on Tomcat. Tomcat is a runtime deployment choice made by application developers, which can be upgraded on the application side to Tomcat 9.0.117+, 10.1.54+, or 11.0.21+. The corresponding springboot updates will come in their next releases (4.0.6).'
+  },
+  'pkg:maven/org.apache.tomcat/tomcat@11.0.20' : {
+    cves: ['BIT-tomcat-2026-34500', 'CVE-2026-34500', 'BIT-tomcat-2026-34483', 'CVE-2026-34483', 'BIT-tomcat-2026-34487', 'CVE-2026-34487'],
+    description: 'This dependency is coming from springframework as transitive dependency, Vaadin does not use or depend on Tomcat. Tomcat is a runtime deployment choice made by application developers, which can be upgraded on the application side to Tomcat 9.0.117+, 10.1.54+, or 11.0.21+. The corresponding springboot updates will come in their next releases (4.0.6).'
+  },
 }
 
 const STYLE = `<style>
