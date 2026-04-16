@@ -103,7 +103,11 @@ const cveWhiteList = {
   },
   'pkg:npm/glob@11.1.0' : {
     cves: ['CVE-2025-64756'],
-     description: 'False positive: based on the CVE statement, version 11.1.0 should out of the affected version range'
+    description: 'False positive: based on the CVE statement, version 11.1.0 is out of the affected version range.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
+    cves: ['CVE-2025-67030'],
+    description: 'FP: version 3.6.1 includes the fix per GHSA-6fmv-xxpf-w3cw (patched in 3.6.1+).'
   }
 }
 
