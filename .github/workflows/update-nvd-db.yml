@@ -19,7 +19,7 @@ jobs:
           unzip dependency-check-12.1.9-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
       - name: Restore previous NVD cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: /tmp/nvd-cache
           key: nvd-db-will-not-match
@@ -32,7 +32,7 @@ jobs:
             --nvdApiKey ${{ secrets.NVD_API_KEY }} \
             --nvdApiDelay 6000
       - name: Save NVD cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: /tmp/nvd-cache
           key: nvd-db-${{ github.run_id }}
