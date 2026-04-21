@@ -406,7 +406,7 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.4.3"
+            "javaVersion": "1.4.4"
         },
         "copilot": {
             "javaVersion": "24.10.2"
@@ -419,8 +419,8 @@
             "jsVersion": "3.2.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "3.2.2",
-            "jsVersion": "3.2.2"
+            "javaVersion": "3.2.3",
+            "jsVersion": "3.2.3"
         },
         "swing-kit": {
             "javaVersion": "2.4.2"
