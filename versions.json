@@ -125,7 +125,7 @@
             "javaVersion": "16.0.0"
         },
         "flow-components": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.0-alpha3"
         },
         "form-layout": {
             "jsVersion": "25.2.0-alpha8",
@@ -372,7 +372,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.2.0-alpha1"
+            "javaVersion": "25.2.0-alpha2"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.1.0"
