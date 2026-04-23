@@ -125,7 +125,7 @@
             "javaVersion": "16.0.0"
         },
         "flow-components": {
-            "javaVersion": "25.2.0-alpha3"
+            "javaVersion": "{{version}}"
         },
         "form-layout": {
             "jsVersion": "25.2.0-alpha8",
