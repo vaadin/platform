@@ -111,6 +111,10 @@ const cveWhiteList = {
   'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.6.20' : {
     cves: ['CVE-2020-29582'],
     description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
+    cves: ['CVE-2025-67030'],
+    description: 'FP: Based on https://github.com/advisories/GHSA-6fmv-xxpf-w3cw, version 3.6.1 is the patched version.'
   }
 }
 
