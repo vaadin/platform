@@ -382,8 +382,8 @@
             "jsVersion": "4.1.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "4.1.0",
-            "jsVersion": "4.1.0"
+            "javaVersion": "4.1.1",
+            "jsVersion": "4.1.1"
         },
         "swing-kit": {
             "javaVersion": "3.0.1"
