@@ -51,9 +51,7 @@ Vaadin {{platform}}
 
 ## <a id="_upgrading_guides"></a> Upgrading guides
 
-- [Upgrading Flow to Vaadin 24](https://vaadin.com/docs/latest/flow/upgrading/changes/#changes-in-vaadin-24)
-- [Upgrading Fusion to Vaadin 24](https://vaadin.com/docs/latest/fusion/upgrading/changes/#changes-in-vaadin-24)
-- [Upgrading Design System to Vaadin 24](https://vaadin.com/docs/latest/ds/upgrading)
+- [Upgrading to Vaadin 25](https://vaadin.com/docs/next/upgrading)
 
 
 
@@ -192,7 +190,7 @@ Vaadin Flow requires Java Servlet API 6.1 and Java 21 or newer. It is tested on:
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Version 4.0 or newer
+  <td>Version 4.1 or newer
   </td>
 </tr>
 </table>
