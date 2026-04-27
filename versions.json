@@ -111,7 +111,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.0.10"
+            "javaVersion": "25.0.11"
         },
         "flow-cdi": {
             "javaVersion": "16.0.0"
@@ -369,8 +369,8 @@
             "jsVersion": "4.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "4.0.1",
-            "jsVersion": "4.0.1"
+            "javaVersion": "4.0.2",
+            "jsVersion": "4.0.2"
         },
         "swing-kit": {
             "javaVersion": "3.0.1"
