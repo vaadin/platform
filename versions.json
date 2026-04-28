@@ -36,7 +36,7 @@
             "npmName": "@vaadin/badge"
         },
         "browserless-test": {
-            "javaVersion": "1.1-SNAPSHOT"
+            "javaVersion": "1.1.0-alpha1"
         },
         "button": {
             "jsVersion": "25.2.0-alpha9",
@@ -138,7 +138,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.2.0-alpha4"
+            "javaVersion": "25.2.0-alpha5"
         },
         "horizontal-layout": {
             "jsVersion": "25.2.0-alpha9",
