@@ -1,0 +1,38 @@
+name: Update NVD Database Cache
+on:
+  schedule:
+    - cron: '0 2 * * *' # Daily at 2am UTC
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secrets
+        run: |
+          [ -z "${{secrets.NVD_API_KEY}}" ] \
+            && echo "🚫 **NVD_API_KEY** is not defined" \
+            | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
+      - name: Install dependency-check
+        run: |
+          cd /tmp
+          wget -q https://github.com/dependency-check/DependencyCheck/releases/download/v12.1.9/dependency-check-12.1.9-release.zip
+          unzip dependency-check-12.1.9-release.zip
+          sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
+      - name: Restore previous NVD cache
+        uses: actions/cache/restore@v5
+        with:
+          path: /tmp/nvd-cache
+          key: nvd-db-will-not-match
+          restore-keys: nvd-db-
+      - name: Update NVD database
+        run: |
+          mkdir -p /tmp/nvd-cache
+          dependency-check --updateonly \
+            --data /tmp/nvd-cache \
+            --nvdApiKey ${{ secrets.NVD_API_KEY }} \
+            --nvdApiDelay 6000
+      - name: Save NVD cache
+        uses: actions/cache/save@v5
+        with:
+          path: /tmp/nvd-cache
+          key: nvd-db-${{ github.run_id }}

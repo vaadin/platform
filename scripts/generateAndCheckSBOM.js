@@ -95,7 +95,11 @@ const cveWhiteList = {
   },
   'pkg:maven/org.cyclonedx/cyclonedx-core-java@11.0.0' : {
     cves: ['CVE-2025-64518'],
-    description: 'This is from a tool we use to generate the sbom. '
+    description: 'This is from a tool we use to generate the sbom.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
+    cves: ['CVE-2025-67030'],
+    description: 'FP: based on https://github.com/advisories/GHSA-6fmv-xxpf-w3cw, version 3.6.1 should have the fix.'
   }
 }
 
@@ -125,9 +129,11 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--compare': cmd.org = process.argv[++i]; break;
     case '--quick': cmd.quick = true; break;
     case '--skip-check-core-licenses' : cmd.checkCoreLicenses = false; break;
+    case '--nvd-cache-dir': cmd.nvdCacheDir = process.argv[++i]; break;
+    case '--skip-nvd-update': cmd.skipNvdUpdate = true; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses] [--nvd-cache-dir <path>] [--skip-nvd-update]`);
       process.exit(1);
   }
 }
@@ -615,12 +621,20 @@ async function main() {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.existsSync('package-lock.json') && fs.unlinkSync('package-lock.json')
-    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -q`, { throw: false });
+    let owaspArgs = `-DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -q`;
+    if (cmd.nvdCacheDir) owaspArgs += ` -DdataDirectory=${cmd.nvdCacheDir}`;
+    if (cmd.skipNvdUpdate) owaspArgs += ` -DautoUpdate=false`;
+    log(cmd.skipNvdUpdate ? `OWASP: using cached NVD database from ${cmd.nvdCacheDir}` : 'OWASP: downloading NVD database (no cache or update forced)');
+    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check ${owaspArgs}`, { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
   if (cmd.useFullOWASP) {
-    !cmd.quick && await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+    let fullOwaspArgs = '-f JSON -f HTML --prettyPrint --out target --scan .';
+    if (cmd.nvdCacheDir) fullOwaspArgs += ` --data ${cmd.nvdCacheDir}`;
+    if (cmd.skipNvdUpdate) fullOwaspArgs += ` --noupdate`;
+    log(cmd.skipNvdUpdate ? `Full OWASP: using cached NVD database from ${cmd.nvdCacheDir}` : 'Full OWASP: downloading NVD database (no cache or update forced)');
+    !cmd.quick && await run(`dependency-check ${fullOwaspArgs}`);
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
