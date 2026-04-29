@@ -36,7 +36,7 @@
             "npmName": "@vaadin/badge"
         },
         "browserless-test": {
-            "javaVersion": "1.1-SNAPSHOT"
+            "javaVersion": "1.1.0-alpha1"
         },
         "button": {
             "jsVersion": "25.2.0-alpha9",
@@ -122,7 +122,7 @@
             "javaVersion": "25.2.0-alpha8"
         },
         "flow-cdi": {
-            "javaVersion": "16.0.0"
+            "javaVersion": "16.0.1"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
@@ -138,7 +138,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.2.0-alpha4"
+            "javaVersion": "25.2.0-alpha5"
         },
         "horizontal-layout": {
             "jsVersion": "25.2.0-alpha9",
@@ -372,7 +372,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.2.0-alpha2"
+            "javaVersion": "25.2.0-alpha3"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.1.0"
