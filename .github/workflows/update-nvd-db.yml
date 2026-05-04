@@ -15,8 +15,8 @@ jobs:
       - name: Install dependency-check
         run: |
           cd /tmp
-          wget -q https://github.com/dependency-check/DependencyCheck/releases/download/v12.1.9/dependency-check-12.1.9-release.zip
-          unzip dependency-check-12.1.9-release.zip
+          wget -q https://github.com/dependency-check/DependencyCheck/releases/download/v12.2.2/dependency-check-12.2.2-release.zip
+          unzip dependency-check-12.2.2-release.zip
           sudo ln -s /tmp/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
       - name: Restore previous NVD cache
         uses: actions/cache/restore@v5
