@@ -92,6 +92,10 @@ const cveWhiteList = {
      cves: ['CVE-2025-41248'],
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
   },
+  'pkg:maven/org.springframework.boot/spring-boot-starter-aop@3.5.13' : {
+     cves: ['CVE-2026-40972', 'CVE-2026-40973', 'CVE-2026-40975', 'CVE-2026-40977'],
+     description: 'Pulled in transitively via spring-cloud-kubernetes-fabric8-config:3.3.2 (the latest available release), where the platform parent already pins spring.boot.version to the latest 3.5.x. Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter — using the latest Spring Boot version is recommended.'
+  },
   'pkg:npm/serialize-javascript@6.0.2' : {
     cves: ['GHSA-5c6j-r48x-rmvq'],
     description: 'This is a transitive dependency from workbox:7.4.0. We keep on tracking this issue https://github.com/GoogleChrome/workbox/issues/3470'
