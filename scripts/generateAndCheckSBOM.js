@@ -625,7 +625,8 @@ async function main() {
     if (cmd.nvdCacheDir) owaspArgs += ` -DdataDirectory=${cmd.nvdCacheDir}`;
     if (cmd.skipNvdUpdate) owaspArgs += ` -DautoUpdate=false`;
     log(cmd.skipNvdUpdate ? `OWASP: using cached NVD database from ${cmd.nvdCacheDir}` : 'OWASP: downloading NVD database (no cache or update forced)');
-    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check ${owaspArgs}`, { throw: false });
+    // Keep version in sync with .github/workflows/sbom.yml and .github/workflows/update-nvd-db.yml — NVD cache schema must match.
+    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:12.2.2:check ${owaspArgs}`, { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
