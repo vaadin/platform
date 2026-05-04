@@ -69,7 +69,22 @@
                     <groupId>org.yaml</groupId>
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
+                <!-- log4j-to-slf4j 2.24.3 (pinned by spring-boot ${spring.boot.version}) is reported
+                     vulnerable to CVE-2026-34478, CVE-2026-34480, CVE-2025-68161, CVE-2026-34481.
+                     Exclude it here and pin a non-vulnerable version below. Remove this workaround
+                     once spring-boot bumps its log4j2.version past the affected range. -->
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Pinned to override the vulnerable 2.24.3 transitively pulled by spring-boot-starter-logging.
+             See the exclusion above. Drop this once spring-boot bumps log4j2.version. -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-to-slf4j</artifactId>
+            <version>2.25.4</version>
         </dependency>
         <!-- End Spring -->
     </dependencies>
