@@ -13,6 +13,7 @@ jobs:
             && echo "🚫 **NVD_API_KEY** is not defined" \
             | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
       - name: Install dependency-check
+        # Keep version in sync with scripts/generateAndCheckSBOM.js and .github/workflows/sbom.yml — NVD cache schema must match.
         run: |
           cd /tmp
           wget -q https://github.com/dependency-check/DependencyCheck/releases/download/v12.2.2/dependency-check-12.2.2-release.zip
