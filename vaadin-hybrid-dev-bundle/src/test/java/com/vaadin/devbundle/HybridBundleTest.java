@@ -32,7 +32,8 @@ public class HybridBundleTest {
         int foundInFiles = findInBundleBuildFolder(line -> line.contains(needle)
                 && !line.contains("document.querySelector")
                 && !line.contains("document.body.querySelector")
-                && !line.contains("copilot-main-resized"));
+                && !line.contains("copilot-main-resized")
+                && !line.contains("localName === \"copilot-main\""));
         Assertions.assertEquals(1, foundInFiles,
                 "The key '" + needle + "' should be found in one file");
     }
