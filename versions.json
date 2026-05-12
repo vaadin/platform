@@ -455,7 +455,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "25.2.0-alpha10",
+            "jsVersion": "25.2.0-alpha11",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
@@ -469,7 +469,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "25.2.0-alpha10",
+            "jsVersion": "25.2.0-alpha11",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
