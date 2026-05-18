@@ -1,4 +1,6 @@
 import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 export interface Update {
     section: string;
@@ -13,9 +15,15 @@ interface RunOptions {
     allowFailure?: boolean;
 }
 
+// All git/gh commands run from the repo root regardless of where the script
+// was invoked from. Required because the GitHub Actions workflow sets
+// `working-directory: scripts/check-versions`, so without this override
+// `git add versions.json` would look in the wrong directory.
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+
 function run(cmd: string, args: string[], opts: RunOptions = {}): { code: number; stdout: string; stderr: string } {
     const res = spawnSync(cmd, args, {
-        cwd: opts.cwd,
+        cwd: opts.cwd ?? REPO_ROOT,
         encoding: "utf8",
         shell: false,
     });
