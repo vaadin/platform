@@ -252,22 +252,45 @@ async function checkNpm(
 async function main(): Promise<void> {
     const cli = parseCli(process.argv.slice(2));
 
+    // Read versions.json from origin/<base> whenever the user passes a
+    // non-default --base (i.e. they're asking about a specific branch) or
+    // when --create-pr is set (we always want the live state of the PR
+    // target). Otherwise fall back to the local working-tree copy — useful
+    // for dry-runs against uncommitted local edits.
+    const readFromRemote = cli.createPr || cli.base !== "main";
+
     if (cli.createPr) {
         // Pre-flight before we touch anything: the working tree must be clean
         // so the only diff after the run is versions.json itself, and gh must
         // be authenticated so the final step doesn't strand us mid-flow.
         assertCleanWorkingTree();
         assertGhAvailable();
-        // PR target may be any branch (release branches, etc.); always read
-        // versions.json from the remote tip of that branch so the proposed
-        // diff is against the actual target state, not the local checkout.
-        fetchOrigin([cli.base]);
+    }
+    if (readFromRemote) {
+        if (cli.createPr) {
+            // Must hit the network — the create/update PR flow assumes the
+            // resolved ref is the current upstream tip.
+            fetchOrigin([cli.base]);
+        } else {
+            // Dry-run / non-PR use: best-effort. If we're offline or auth
+            // fails, fall back to whatever local origin/<base> ref exists.
+            try {
+                fetchOrigin([cli.base]);
+            } catch (err) {
+                console.error(
+                    `(warning: could not fetch origin/${cli.base}; using cached ref. ${(err as Error).message.split("\n")[0]})`,
+                );
+            }
+        }
     }
 
     let data: VersionsJson;
-    if (cli.createPr) {
+    if (readFromRemote) {
         const raw = readFileFromRef(`origin/${cli.base}`, "versions.json");
         data = JSON.parse(raw) as VersionsJson;
+        if (cli.verbose || !cli.createPr) {
+            console.error(`(reading versions.json from origin/${cli.base})`);
+        }
     } else {
         data = readVersions();
     }
