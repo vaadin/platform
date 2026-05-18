@@ -1,0 +1,98 @@
+name: Maintenance version check
+
+# Scans versions.json for newer maintenance (patch-level) releases of every
+# module and opens/updates one rolling PR per maintained branch. See
+# scripts/check-versions/README.md for full docs.
+#
+# IMPORTANT: GitHub Actions only honors this workflow file on the default
+# branch (main). Scheduled runs and workflow_dispatch triggers always
+# read THIS file from main, even when targeting another branch in the
+# matrix. The same applies to scripts/check-versions/* — keep both this
+# YAML and the script source on main; older copies on release branches
+# are ignored. The script itself reads versions.json from origin/<base>,
+# so the target branch's own state is still used for the actual scan.
+
+on:
+  schedule:
+    # Mon-Fri at 08:00 UTC. UTC is the only TZ GitHub Actions accepts for cron;
+    # adjust the hour if you want a different local-time anchor.
+    - cron: '0 8 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      base:
+        description: 'Target a single branch (leave blank to run the full matrix)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # Decide which set of branches this run should fan out to. Scheduled runs
+  # always hit every maintained branch; manual runs may pick one via the
+  # `base` input.
+  resolve-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      bases: ${{ steps.set.outputs.bases }}
+    steps:
+      - id: set
+        env:
+          INPUT_BASE: ${{ github.event.inputs.base }}
+        run: |
+          if [[ -n "$INPUT_BASE" ]]; then
+            echo "bases=[\"$INPUT_BASE\"]" >> "$GITHUB_OUTPUT"
+          else
+            # Keep this list in sync with the platform's currently maintained branches.
+            echo 'bases=["main","25.2","25.1","24.10","24.9","23.7","23.6","14.14"]' >> "$GITHUB_OUTPUT"
+          fi
+
+  check:
+    needs: resolve-matrix
+    runs-on: ubuntu-latest
+    # One branch failing must not cancel the others — each branch has an
+    # independent rolling PR.
+    strategy:
+      fail-fast: false
+      matrix:
+        base: ${{ fromJson(needs.resolve-matrix.outputs.bases) }}
+    concurrency:
+      # Serialize multiple runs targeting the same base so two scheduled runs
+      # don't race to update the same PR. Different bases proceed in parallel.
+      group: check-versions-${{ matrix.base }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          # Full history so the script can fetch and inspect arbitrary refs
+          # (origin/<base>, existing PR branches) without shallow-clone issues.
+          fetch-depth: 0
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        working-directory: scripts/check-versions
+        run: npm ci
+
+      - name: Configure git identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Run maintenance check + create/update PR
+        working-directory: scripts/check-versions
+        env:
+          # gh CLI reads GH_TOKEN automatically. GITHUB_TOKEN is granted the
+          # contents:write + pull-requests:write permissions above, which is
+          # enough to push branches and open/edit PRs in this repo.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_BASE: ${{ matrix.base }}
+        run: |
+          echo "Targeting base branch: $TARGET_BASE"
+          npx tsx src/index.ts --create-pr --base "$TARGET_BASE"
