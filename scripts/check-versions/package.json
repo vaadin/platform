@@ -1,0 +1,25 @@
+{
+    "name": "check-versions",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Scans versions.json and reports/applies latest maintenance versions for each Vaadin module.",
+    "engines": {
+        "node": ">=24"
+    },
+    "scripts": {
+        "start": "tsx src/index.ts",
+        "check": "tsx src/index.ts --dry-run",
+        "test": "tsx --test src/semver.test.ts"
+    },
+    "dependencies": {
+        "fast-xml-parser": "^4.5.0",
+        "semver": "^7.6.3"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.0",
+        "@types/semver": "^7.5.8",
+        "tsx": "^4.19.0",
+        "typescript": "^5.6.0"
+    }
+}
