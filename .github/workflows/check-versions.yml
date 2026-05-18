@@ -77,8 +77,16 @@ jobs:
           node-version: '24'
 
       - name: Install dependencies
+        # Using `npm install` (not `npm ci`) because this repo's .gitignore
+        # excludes all package-lock.json files, so there's no lockfile to
+        # honor. Deps in package.json use `^` ranges, which is stable enough
+        # for a daily maintenance-check script.
+        #
+        # --ignore-scripts blocks pre/post-install hooks from running — a
+        # supply-chain hardening measure. None of our direct deps (semver,
+        # fast-xml-parser, tsx, typescript, @types/*) need install scripts.
         working-directory: scripts/check-versions
-        run: npm ci
+        run: npm install --ignore-scripts --no-audit --no-fund
 
       - name: Configure git identity
         run: |
