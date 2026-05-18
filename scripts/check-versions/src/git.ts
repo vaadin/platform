@@ -81,8 +81,10 @@ export function findUniqueBranchName(base: string): string {
 export const PR_TITLE_PREFIX = "chore: maintenance version bumps";
 
 export function commitTitle(date: string, base: string): string {
-    const suffix = base === "main" ? "" : ` [${base}]`;
-    return `${PR_TITLE_PREFIX} (${date})${suffix}`;
+    // The base branch is always included so the title is self-explanatory in
+    // the PR list (otherwise reviewers have to open each PR to see which
+    // branch it targets).
+    return `${PR_TITLE_PREFIX} [${base}] (${date})`;
 }
 
 export function commitBody(updates: Update[], base: string): string {
