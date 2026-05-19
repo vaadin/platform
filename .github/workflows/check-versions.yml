@@ -14,9 +14,9 @@ name: Maintenance version check
 
 on:
   schedule:
-    # Mon-Fri at 08:00 UTC. UTC is the only TZ GitHub Actions accepts for cron;
+    # Mon-Fri at 06:00 UTC/09:00 EEST. UTC is the only TZ GitHub Actions accepts for cron;
     # adjust the hour if you want a different local-time anchor.
-    - cron: '0 8 * * 1-5'
+    - cron: '0 6 * * 1-5'
   workflow_dispatch:
     inputs:
       base:
