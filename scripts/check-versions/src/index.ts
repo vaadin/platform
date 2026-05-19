@@ -351,11 +351,19 @@ async function main(): Promise<void> {
             `${counters.errors} errors`,
     );
 
-    if (counters.updated > 0 && !cli.dryRun) {
-        writeVersions(data);
-        console.log(`Wrote ${VERSIONS_JSON_PATH}`);
-    } else if (counters.updated > 0) {
-        console.log(`(dry-run: ${VERSIONS_JSON_PATH} not modified)`);
+    if (counters.updated > 0) {
+        if (cli.createPr) {
+            // In create-pr mode the actual write happens on the PR branch
+            // below, AFTER checking it out from origin/<base>. Writing here
+            // first would leave a dirty versions.json on the trigger ref and
+            // make `git checkout -b <bot-branch> origin/<base>` abort with
+            // "Your local changes to the following files would be overwritten".
+        } else if (cli.dryRun) {
+            console.log(`(dry-run: ${VERSIONS_JSON_PATH} not modified)`);
+        } else {
+            writeVersions(data);
+            console.log(`Wrote ${VERSIONS_JSON_PATH}`);
+        }
     }
 
     if (cli.createPr) {
