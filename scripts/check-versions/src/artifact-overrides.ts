@@ -13,6 +13,9 @@ export const ARTIFACT_ID_OVERRIDES: Record<string, string | "skip"> = {
     "swing-kit": "vaadin-swing-kit-flow",
     "vaadin-feature-pack": "vaadin-feature-pack-flow",
     "vaadin-testbench": "vaadin-testbench-core",
+    "flow-spring": "vaadin-spring",
+    "vaadin-classic-components": "vaadin-classic-components-flow",
+
 };
 
 /**
@@ -35,6 +38,8 @@ export const SKIP_MODULES: ReadonlySet<string> = new Set<string>([
     // Add module keys here, one per line, with a brief comment explaining why.
     // Example:
     // "vaadin-quarkus",   // pinned to 3.1.1 until quarkus 4.x upgrade lands
+    "gradle", // skip this update in 14.14
+    "flow-form-filler", // discontinued product in V24
 ]);
 
 /**

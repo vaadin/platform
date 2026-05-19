@@ -14,9 +14,9 @@ name: Maintenance version check
 
 on:
   schedule:
-    # Mon-Fri at 06:00 UTC/09:00 EEST. UTC is the only TZ GitHub Actions accepts for cron;
+    # Mon-Fri at 05:00 UTC/08:00 EEST. UTC is the only TZ GitHub Actions accepts for cron;
     # adjust the hour if you want a different local-time anchor.
-    - cron: '0 6 * * 1-5'
+    - cron: '0 5 * * 1-5'
   workflow_dispatch:
     inputs:
       base:
@@ -46,7 +46,7 @@ jobs:
             echo "bases=[\"$INPUT_BASE\"]" >> "$GITHUB_OUTPUT"
           else
             # Keep this list in sync with the platform's currently maintained branches.
-            echo 'bases=["main","25.2","25.1","24.10","24.9","23.7","23.6","14.14"]' >> "$GITHUB_OUTPUT"
+            echo 'bases=["main","25.1","24.10","24.9","23.7","23.6","14.14"]' >> "$GITHUB_OUTPUT"
           fi
 
   check:
