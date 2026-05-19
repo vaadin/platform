@@ -561,7 +561,7 @@
             "version": "1.1.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "1.0.0"
+            "javaVersion": "1.0.1"
         },
         "swing-kit": {
             "version": "1.0.1"
@@ -627,7 +627,7 @@
             "pro": true
         },
         "vaadin-classic-components": {
-            "javaVersion": "23.3.1"
+            "javaVersion": "23.3.3"
         },
         "vaadin-cookie-consent": {
             "component": true,
@@ -658,7 +658,7 @@
             "pro": true
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.13.4"
+            "javaVersion": "1.13.6"
         },
         "vaadin-map": {
             "component": true,
