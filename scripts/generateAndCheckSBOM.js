@@ -121,6 +121,10 @@ const cveWhiteList = {
     cves: ['BIT-tomcat-2026-34500', 'CVE-2026-34500', 'BIT-tomcat-2026-34483', 'CVE-2026-34483', 'BIT-tomcat-2026-34487', 'CVE-2026-34487'],
     description: 'This dependency is coming from springframework as transitive dependency, Vaadin does not use or depend on Tomcat. Tomcat is a runtime deployment choice made by application developers, which can be upgraded on the application side to Tomcat 9.0.117+, 10.1.54+, or 11.0.21+. The corresponding springboot updates will come in their next releases (4.0.6).'
   },
+  'pkg:maven/com.vaadin/vaadin-swing-kit-flow@3.0.1' : {
+    cves: ['CVE-2021-33604'],
+    description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
+  },
 }
 
 const STYLE = `<style>
