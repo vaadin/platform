@@ -324,9 +324,38 @@ async function main(): Promise<void> {
 
         if (typeof module.javaVersion === "string") {
             const current = module.javaVersion;
+            // "Linked" jsVersion: the module has a jsVersion field but no
+            // npmName to look it up. Convention in versions.json is that
+            // such jsVersion just mirrors javaVersion (e.g. observability-
+            // kit-starter, sso-kit-starter). When the Maven check bumps
+            // javaVersion, also bump jsVersion to the same value so the
+            // file stays internally consistent. Only do this when they
+            // currently agree — if they diverge it's an editorial choice
+            // we shouldn't silently overwrite.
+            const linkedJsVersion =
+                typeof module.jsVersion === "string" &&
+                typeof module.npmName !== "string" &&
+                module.jsVersion === module.javaVersion
+                    ? module.jsVersion
+                    : null;
             tasks.push(() =>
                 checkMaven(section, name, current, cli, counters, updates, (newV) => {
                     module.javaVersion = newV;
+                    if (linkedJsVersion !== null) {
+                        module.jsVersion = newV;
+                        updates.push({
+                            section,
+                            name,
+                            field: "jsVersion",
+                            from: linkedJsVersion,
+                            to: newV,
+                        });
+                        logLine(
+                            "update",
+                            `${section}/${name}`,
+                            `jsVersion ${linkedJsVersion} → ${newV} (linked to javaVersion)`,
+                        );
+                    }
                 }),
             );
         }
