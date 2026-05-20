@@ -100,7 +100,11 @@ const cveWhiteList = {
   'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
     cves: ['CVE-2025-67030'],
     description: 'FP: based on https://github.com/advisories/GHSA-6fmv-xxpf-w3cw, version 3.6.1 should have the fix.'
-  }
+  },
+  'pkg:maven/com.vaadin/vaadin-swing-kit-flow@3.0.1' : {
+    cves: ['CVE-2021-33604'],
+    description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
+  },
 }
 
 const STYLE = `<style>
