@@ -127,6 +127,10 @@ const cveWhiteList = {
   'pkg:maven/io.netty/netty-transport-udt@4.1.133.Final' : {
     cves: ['CVE-2026-42582'],
     description: 'FP: Based on https://github.com/advisories/GHSA-2c5c-chwr-9hqw, the entire 4.1.x branch of Netty does not contain the HTTP/3 codec sub-module or the QpackDecoder class.'
+  },
+  'pkg:maven/com.vaadin/vaadin-swing-kit-flow@2.4.2' : {
+    cves: ['CVE-2021-33604'],
+    description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
   }
 }
 
