@@ -378,12 +378,12 @@
             "javaVersion": "3.1.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "4.1.0",
-            "jsVersion": "4.1.0"
-        },
-        "sso-kit-starter": {
             "javaVersion": "4.1.1",
             "jsVersion": "4.1.1"
+        },
+        "sso-kit-starter": {
+            "javaVersion": "4.1.2",
+            "jsVersion": "4.1.2"
         },
         "swing-kit": {
             "javaVersion": "3.0.1"
@@ -521,7 +521,7 @@
             "javaVersion": "25.0.0"
         },
         "vaadin-license-checker": {
-            "javaVersion": "3.0.1"
+            "javaVersion": "3.0.2"
         },
         "vaadin-spreadsheet": {
             "pro": true
