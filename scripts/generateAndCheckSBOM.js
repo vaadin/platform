@@ -105,6 +105,10 @@ const cveWhiteList = {
     cves: ['CVE-2021-33604'],
     description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
   },
+  'pkg:maven/com.networknt/json-schema-validator@1.5.9' : {
+    cves: ['CVE-2025-15104'],
+    description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
+  },
 }
 
 const STYLE = `<style>
