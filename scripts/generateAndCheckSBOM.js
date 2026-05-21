@@ -139,6 +139,10 @@ const cveWhiteList = {
   'pkg:maven/com.networknt/json-schema-validator@1.5.9' : {
     cves: ['CVE-2025-15104'],
     description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
+  },
+  'pkg:javascript/quill@1.3.7' : {
+    cves: ['CVE-2021-3163'],
+    description: 'Disputed. Researchers have claimed that this issue is not within the product itself, but is intended behavior in a web browser'
   }
 }
 
