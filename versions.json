@@ -365,8 +365,8 @@
             "javaVersion": "3.0.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "4.0.0",
-            "jsVersion": "4.0.0"
+            "javaVersion": "4.0.1",
+            "jsVersion": "4.0.1"
         },
         "sso-kit-starter": {
             "javaVersion": "4.0.2",
@@ -512,7 +512,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "10.0.5",
+            "javaVersion": "10.0.6",
             "pro": true
         }
     }
