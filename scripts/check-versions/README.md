@@ -114,6 +114,43 @@ npm test               # picker unit tests
 - **Snapshots** (value is `{{version}}` or ends with `-SNAPSHOT`) are
   left untouched and logged as `skip-snap`.
 
+### Stability invariant
+
+After the maintenance picker runs, the script checks one more cross-cutting
+rule on the resulting `versions.json`: every module's stability tier must
+meet the floor established by the platform anchors.
+
+- **Anchors:** `flow`, `hilla`, `copilot`.
+- **Tier ordering:** `alpha < beta < rc < stable`.
+- **Floor:** the *weakest* tier among the anchors present in `versions.json`
+  on that branch (e.g. on `24.10` all three are stable → floor = `stable`;
+  on `main` all three are alpha → floor = `alpha`).
+- **Rule:** every other module's tier must be `>=` the floor. Snapshots and
+  unparseable values are skipped.
+
+A violation is reported as `stability-warn` in the per-module output. The
+exit code is **not** changed — a violation is a warning, not an error, and
+the PR still opens/updates so the bot's valid bumps aren't held up. The
+warning is surfaced in two more places when `--create-pr` is set:
+
+1. **PR body:** a `## Stability check warnings` section is prepended above
+   the updates list, so the reviewer sees it first.
+2. **Sticky PR comment:** a single comment identified by a hidden
+   `<!-- check-versions:stability-v1 -->` marker. The comment is edited in
+   place on subsequent runs (no duplicates) and deleted once the situation
+   resolves, so the PR timeline stays clean.
+3. **Stability-only PR:** if there are no maintenance version bumps to make
+   *and* no PR already exists on the base branch, the script opens a PR
+   anyway — with an empty commit — so the warning has a place to live. This
+   is the only case in which the bot creates a PR without a `versions.json`
+   diff. The PR can be closed once the underlying modules are bumped (or
+   once the warning is acknowledged as expected).
+
+This catches the case where a maintenance release is about to ship with a
+prerelease module — e.g. `vaadin-spring-bom-24.10.6` going out with
+`mpr.v8.version=7.1.0-alpha1` while flow/hilla/copilot were all on stable
+`24.10.x`.
+
 > ⚠️ **Vaadin's prerelease format quirk.** Vaadin uses non-dotted
 > identifiers like `alpha12`, which the standard semver spec compares
 > **lexically** — meaning `alpha12 < alpha9`. This script applies a
@@ -196,11 +233,12 @@ Every per-module line uses one tag in the first column, followed by
 | `skip-private` | `src/artifact-overrides.ts` marks the module as `"skip"` (legacy alias for `SKIP_MODULES`). |
 | `warn-not-found` | The artifactId/npmName isn't published — almost certainly a wrong mapping. Treated as a warning that flips exit code to 1. |
 | `error` | Transient HTTP error from Maven/npm. Treated as an error that flips exit code to 1. |
+| `stability-warn` | The module's stability tier (alpha/beta/rc) is below the floor set by the `flow`/`hilla`/`copilot` anchors. Surfaced in the PR body and as a sticky PR comment. Does **not** change the exit code. See [Stability invariant](#stability-invariant). |
 
 The run ends with a one-line summary, e.g.
 
 ```
-Summary: 90 up-to-date, 1 updated, 7 snapshot, 0 skip-listed, 0 private, 0 not-found, 0 errors
+Summary: 90 up-to-date, 1 updated, 7 snapshot, 0 skip-listed, 0 private, 0 not-found, 0 errors, 0 stability-warn
 ```
 
 ---
@@ -327,7 +365,7 @@ Behavior notes:
 - **Idempotent across daily runs.** Run it every workday on the same base; you'll always end up with at most one open PR per base, kept current.
 - **Cannot be combined with `--dry-run` / `--check`** — the script errors at argument parsing.
 - **Refuses to PR if errors or warnings remain** (`error` or `warn-not-found` lines bump exit code to 1; the PR step is skipped). Fix mappings first.
-- **No updates → no PR.** If everything is already up-to-date, the script prints `No updates — nothing to PR.` and exits 0. An existing PR is **not** touched in that case — only when there are real updates does it get refreshed.
+- **No updates → no PR**, *unless* the stability invariant is violated. If everything is up-to-date and no stability warning fires, the script prints `No updates — nothing to PR.` and exits 0; an existing PR is not touched. If a stability warning *does* fire and no PR is open, the script opens a stability-only PR with an empty commit so the warning has a home (see [Stability invariant](#stability-invariant)). If an existing PR is open, its sticky stability comment is refreshed (or removed when warnings clear) but its `versions.json` commit is left untouched.
 - **Leaves you on the bot branch** after success. `git checkout <previous-branch>` when done.
 - **Force-push uses `--force-with-lease`** so a manual edit on the PR branch by a reviewer will block the script rather than overwrite silently.
 
@@ -442,9 +480,11 @@ scripts/check-versions/
     ├── versionsJson.ts       # read/write versions.json (sorted, 4-space, trailing \n)
     ├── semver.ts             # pickMaintenance, custom alphaN comparator, isSnapshotValue
     ├── semver.test.ts        # picker unit tests (node:test)
+    ├── stability.ts          # post-update anchor-floor invariant check
+    ├── stability.test.ts     # stability check unit tests (node:test)
     ├── maven.ts              # fetch maven-metadata.xml from both repos
     ├── npm.ts                # GET registry.npmjs.org/<pkg>
-    ├── git.ts                # --create-pr support: pre-flight, branch, commit, push, gh pr create
+    ├── git.ts                # --create-pr support: pre-flight, branch, commit, push, gh pr create, sticky stability comment
     └── artifact-overrides.ts # editable: ARTIFACT_ID_OVERRIDES + SKIP_MODULES + VERSION_BLOCKLIST
 ```
 
@@ -460,9 +500,11 @@ The script is self-contained — it has its own `package.json` and
 npm test
 ```
 
-Runs [`src/semver.test.ts`](src/semver.test.ts) via Node's built-in
-test runner. Currently 10 test cases covering the maintenance picker
-and the `alphaN` numeric ordering fix.
+Runs the test files under `src/*.test.ts` via Node's built-in test
+runner — currently [`src/semver.test.ts`](src/semver.test.ts) (maintenance
+picker and the `alphaN` numeric ordering fix) and
+[`src/stability.test.ts`](src/stability.test.ts) (anchor-floor invariant
+across the four stability tiers).
 
 To add a case, append to `semver.test.ts`:
 

@@ -15,6 +15,7 @@ import {
     assertGhAvailable,
     checkoutNewBranchFromBase,
     commitBody,
+    commitEmpty,
     commitFiles,
     commitTitle,
     fetchOrigin,
@@ -27,7 +28,9 @@ import {
     resetBranchToBase,
     Update,
     updatePullRequest,
+    upsertStabilityComment,
 } from "./git.js";
+import { checkStability } from "./stability.js";
 
 interface Cli {
     dryRun: boolean;
@@ -109,6 +112,7 @@ interface Counters {
     skippedListed: number;
     warnNotFound: number;
     errors: number;
+    stabilityWarnings: number;
 }
 
 function isSkipListed(name: string, cli: Cli): boolean {
@@ -119,7 +123,7 @@ function isSkipListed(name: string, cli: Cli): boolean {
     );
 }
 
-const PAD = 14;
+const PAD = 16;
 const NAME_PAD = 42;
 function logLine(tag: string, location: string, detail: string): void {
     console.log(`${tag.padEnd(PAD)}${location.padEnd(NAME_PAD)}${detail}`);
@@ -304,6 +308,7 @@ async function main(): Promise<void> {
         skippedListed: 0,
         warnNotFound: 0,
         errors: 0,
+        stabilityWarnings: 0,
     };
 
     const tasks: (() => Promise<void>)[] = [];
@@ -372,12 +377,32 @@ async function main(): Promise<void> {
 
     await runWithConcurrency(tasks, 8);
 
+    // Stability invariant: run AFTER updates have been applied to `data`, so
+    // any module the script just bumped into a higher tier (e.g. alpha ->
+    // stable) is evaluated at its post-update value. Only the residue that
+    // the bot couldn't fix gets flagged.
+    const stability = checkStability(data);
+    if (stability.violations.length > 0) {
+        counters.stabilityWarnings = stability.violations.length;
+        console.log("");
+        console.log(
+            `Stability: anchors are "${stability.floor}" — ${stability.violations.length} module(s) below floor:`,
+        );
+        for (const v of stability.violations) {
+            logLine(
+                "stability-warn",
+                `${v.section}/${v.name}`,
+                `${v.field}=${v.version} (${v.tier} < ${stability.floor})`,
+            );
+        }
+    }
+
     console.log("");
     console.log(
         `Summary: ${counters.upToDate} up-to-date, ${counters.updated} updated, ` +
             `${counters.skippedSnap} snapshot, ${counters.skippedListed} skip-listed, ` +
             `${counters.skippedPrivate} private, ${counters.warnNotFound} not-found, ` +
-            `${counters.errors} errors`,
+            `${counters.errors} errors, ${counters.stabilityWarnings} stability-warn`,
     );
 
     if (counters.updated > 0) {
@@ -400,13 +425,45 @@ async function main(): Promise<void> {
             console.error("Refusing to open a PR while errors / warn-not-found remain.");
             process.exit(1);
         }
+        const existing = findExistingPr(cli.base);
+
         if (updates.length === 0) {
-            console.log("No updates — nothing to PR.");
+            if (existing) {
+                console.log("No updates — leaving PR's versions.json commit untouched.");
+                // The stability picture may have changed since the PR's
+                // commit (e.g. a manual edit cleared a prerelease). Keep the
+                // sticky comment on the open PR in sync — post, edit, or
+                // delete as needed.
+                upsertStabilityComment(existing.number, stability);
+            } else if (stability.violations.length > 0) {
+                // No version bumps and no existing PR, but stability is
+                // violated. Open a stability-only PR with an empty commit so
+                // the warning surfaces somewhere the maintainer can act on.
+                const date = new Date().toISOString().slice(0, 10);
+                const title = commitTitle(date, cli.base);
+                const body = commitBody([], cli.base, stability);
+                const branchBase =
+                    cli.base === "main" ? `bot/versions-${date}` : `bot/versions-${cli.base}-${date}`;
+                const branch = findUniqueBranchName(branchBase);
+                console.log(
+                    `\nNo version updates, but ${stability.violations.length} stability violation(s) detected. Opening stability-only PR on branch ${branch}...`,
+                );
+                checkoutNewBranchFromBase(branch, cli.base);
+                commitEmpty(title, body);
+                pushBranch(branch);
+                const prUrl = openPullRequest(title, body, cli.base);
+                console.log(`Opened PR: ${prUrl}`);
+                const prNumberMatch = /\/pull\/(\d+)/.exec(prUrl);
+                if (prNumberMatch) {
+                    upsertStabilityComment(parseInt(prNumberMatch[1], 10), stability);
+                }
+            } else {
+                console.log("No updates — nothing to PR.");
+            }
         } else {
             const date = new Date().toISOString().slice(0, 10);
             const title = commitTitle(date, cli.base);
-            const body = commitBody(updates, cli.base);
-            const existing = findExistingPr(cli.base);
+            const body = commitBody(updates, cli.base, stability);
 
             if (existing) {
                 console.log(
@@ -421,6 +478,7 @@ async function main(): Promise<void> {
                 forcePushBranch(existing.headRefName);
                 updatePullRequest(existing.number, title, body);
                 console.log(`Updated PR: ${existing.url}`);
+                upsertStabilityComment(existing.number, stability);
             } else {
                 const branchBase =
                     cli.base === "main" ? `bot/versions-${date}` : `bot/versions-${cli.base}-${date}`;
@@ -432,6 +490,12 @@ async function main(): Promise<void> {
                 pushBranch(branch);
                 const prUrl = openPullRequest(title, body, cli.base);
                 console.log(`Opened PR: ${prUrl}`);
+                // Extract PR number from the URL (e.g. .../pull/123) to post
+                // the sticky comment if there are stability violations.
+                const prNumberMatch = /\/pull\/(\d+)/.exec(prUrl);
+                if (prNumberMatch) {
+                    upsertStabilityComment(parseInt(prNumberMatch[1], 10), stability);
+                }
             }
         }
     }
