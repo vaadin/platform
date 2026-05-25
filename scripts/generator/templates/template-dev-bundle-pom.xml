@@ -54,14 +54,16 @@
         <!--
             vaadin-hybrid-dev-bundle must be a project dependency otherwise it will be built
             after vaadin-dev-bundle because of modules configuration in root pom.
-            Configuring the dependency with provided scope will prevent it to be scanned by
-            flow-dev-bundle-plugin.
+             Configuring the dependency with test scope keeps the reactor ordering but prevents
+            flow-dev-bundle-plugin from finding the embedded reference dev-bundle on its
+            classpath (the plugin scans compile/runtime/system/provided scopes, not test),
+            so the local dev-bundle build is always performed instead of being skipped.
         -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>vaadin-hybrid-dev-bundle</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
+            <scope>test</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
