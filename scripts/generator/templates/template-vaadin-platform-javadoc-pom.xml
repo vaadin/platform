@@ -46,6 +46,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Using same version as vaadin-quarkus extension -->
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>3.32.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
@@ -127,6 +135,47 @@
                 <dependency>
                     <groupId>com.vaadin</groupId>
                     <artifactId>hilla-endpoint</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-shared</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-junit6</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-spring</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-quarkus</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-quarkus-extension</artifactId>
+                    <version>${project.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-security</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-junit5</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-test-security</artifactId>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
@@ -283,6 +332,15 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <sourceFileExcludes>
+                                <!-- browserless-test-shared and flow-server both ship a
+                                     package-info.java for com.vaadin.flow.component.geolocation,
+                                     causing javac to error on the duplicate @NullMarked. Exclude
+                                     both — the package classes themselves remain documented. -->
+                                <sourceFileExclude>com/vaadin/flow/component/geolocation/package-info.java</sourceFileExclude>
+                            </sourceFileExcludes>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>javadoc-jar</id>
