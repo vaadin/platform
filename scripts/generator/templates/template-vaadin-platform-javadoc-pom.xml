@@ -130,6 +130,26 @@
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-shared</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-junit6</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-spring</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>browserless-test-quarkus</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-web</artifactId>
                     <scope>provided</scope>
