@@ -62,6 +62,7 @@ import '@vaadin/side-nav/vaadin-side-nav-item.js';
 import '@vaadin/side-nav/src/vaadin-side-nav-item';
 import '@vaadin/slider';
 import '@vaadin/slider/vaadin-range-slider.js';
+import '@vaadin/slider/src/vaadin-range-slider';
 import '@vaadin/split-layout';
 import '@vaadin/tabs';
 import '@vaadin/tabsheet';
