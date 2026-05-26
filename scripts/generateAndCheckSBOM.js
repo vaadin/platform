@@ -570,7 +570,7 @@ async function main() {
 
   if (!cmd.quick) {
     await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
-    await run('mvn -ntp -B clean install -T 1C -q -DskipTests');
+    await run('mvn -ntp -B clean install -T 1C -q -DskipTests -Dvaadin.npm.minimumFrontendPackageAgeDays=0');
   }
 
   log(`cd ${testProject}`);
@@ -593,7 +593,7 @@ async function main() {
     await run('rm -rf package.json node_modules frontend src');
     fs.mkdirSync('node_modules');
     fs.writeFileSync("package.json","{}");
-    await run('mvn clean package -ntp -B -Pproduction -DskipTests -q');
+    await run('mvn clean package -ntp -B -Pproduction -DskipTests -q -Dvaadin.npm.minimumFrontendPackageAgeDays=0');
     await run('mvn dependency:tree -ntp -B', { output: 'target/tree-maven.txt' });
     await run('mvn -ntp -B org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -q');
     await run('npm ls --depth 6', { output: 'target/tree-npm.txt' , throw: false});
