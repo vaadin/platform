@@ -86,6 +86,29 @@
                 <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
             </properties>
         </profile>
+        <profile>
+            <id>oss</id>
+            <activation>
+                <property>
+                    <name>oss</name>
+                </property>
+            </activation>
+            <modules>
+                <module>vaadin</module>
+                <module>vaadin-core</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ee</id>
+            <activation>
+                <property>
+                    <name>ee</name>
+                </property>
+            </activation>
+            <modules>
+                <module>vaadin-ee</module>
+            </modules>
+        </profile>
         <!-- Needed so as we can skip this module on releasing and still nexus stating works -->
         <profile>
             <id>npm-it</id>
