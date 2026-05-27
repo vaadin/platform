@@ -51,6 +51,10 @@
             <artifactId>vaadin-spreadsheet-flow</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>license-checker</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
