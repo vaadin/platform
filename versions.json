@@ -36,7 +36,7 @@
             "npmName": "@vaadin/badge"
         },
         "browserless-test": {
-            "javaVersion": "1.1.0-alpha2"
+            "javaVersion": "1.1.0-beta1"
         },
         "button": {
             "jsVersion": "25.2.0-beta1",
@@ -138,7 +138,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.2-SNAPSHOT"
+            "javaVersion": "25.2.0-beta1"
         },
         "horizontal-layout": {
             "jsVersion": "25.2.0-beta1",
@@ -339,7 +339,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "3.2.0-alpha1"
+            "javaVersion": "3.2.0-beta1"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
@@ -372,7 +372,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.2.0-alpha8"
+            "javaVersion": "25.2.0-beta1"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.1.1"
@@ -527,7 +527,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "10.2.0-beta1",
+            "javaVersion": "25.2.0-beta1",
             "pro": true
         }
     }
