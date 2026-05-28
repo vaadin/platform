@@ -145,6 +145,33 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
     return render(releaseNoteTemplate, releaseNoteData);
 }
 
+const MODULE_CATEGORIES = [
+    { title: 'Flow & Hilla', modules: ['flow', 'hilla'] },
+    { title: 'Design System', modules: ['web-components', 'flow-components'] },
+    { title: 'Testing', modules: ['testbench', 'browserless-test'] },
+    { title: 'Tools', modules: ['copilot', 'designer'] },
+    { title: 'Kits', modules: ['appsec-kit', 'azure-kit', 'collaboration-kit', 'kubernetes-kit', 'observability-kit', 'sso-kit', 'swing-kit'] },
+    { title: 'Runtime', modules: ['multiplatform-runtime', 'vaadin-router'] },
+];
+
+// Modules that ship with the platform but whose GitHub release tag is not linked
+// from the platform release body. Fetched directly from their repos using the
+// version recorded in versions.json.
+const ADDITIONAL_MODULES = [
+    { name: 'copilot', getVersion: v => v.kits && v.kits.copilot && v.kits.copilot.javaVersion },
+    { name: 'browserless-test', getVersion: v => v.core && v.core['browserless-test'] && v.core['browserless-test'].javaVersion },
+];
+
+const NOISY_HEADING_PATTERN = /\b(internal|chores?|dependency|dependencies|tests?|documentation|polish|maintenance)\b/i;
+
+const EMOJI_SHORTCODES = {
+    boom: '💥', rocket: '🚀', bug: '🐛', nail_care: '💅',
+    memo: '📝', microscope: '🔬', house: '🏠', warning: '⚠️',
+    sparkles: '✨', tada: '🎉', wrench: '🔧', lock: '🔒',
+    zap: '⚡', fire: '🔥', hammer: '🔨', package: '📦',
+    art: '🎨', construction: '🚧', new: '🆕', books: '📚',
+};
+
 /**
 @param {Object} versions data object for product versions.
 @param {String} modulesReleaseNoteTemplate template string to replace versions in.
@@ -154,43 +181,183 @@ function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate
     const platformReleaseNote = requestGH(`https://api.github.com/repos/vaadin/platform/releases/tags/${version}`)
     const platformReleaseNoteBody = platformReleaseNote.body;
 
-    let modulesReleaseNotes="";
-    let docLinks=[];
-
-    if(platformReleaseNoteBody) {
-
-        platformReleaseNoteBody.split("\n").forEach(
-          line => {
-            if (line.includes("https") && line.includes("docs")){
-              line.split("](").forEach(
-                l => l.split("))").filter(docs=>docs.includes("https")).forEach(
-                  doc => docLinks.push(doc)
-                )
-              )
-            };
-            if (line.includes("https") && line.includes("tag") && !line.includes("platform")){
-              line.split("](").forEach(
-                l => l.split("))").filter(notes=>notes.includes("https")).forEach(
-                  noteLink => {
-                    moduleName = getModuleName(noteLink)
-                    noteVersion = getReleaseNoteVersion(noteLink)
-                    noteBody = getReleaseNoteBody(moduleName, noteVersion)
-
-                    modulesReleaseNotes += moduleName + ' ' + noteVersion + '\n' + noteBody + '\n\n\n';
-                  }
-                )
-              )
-            };
-          }
-        )
-
-        const modulesReleaseNoteData = Object.assign(versions, { modulesReleaseNotes: modulesReleaseNotes });
-
-        return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
-    } else {
-        return ""
+    if (!platformReleaseNoteBody) {
+        return "";
     }
 
+    const platformModules = collectModules(platformReleaseNoteBody);
+    const seenKeys = new Set(platformModules.map(m => `${m.name}@${m.version}`));
+    const extraModules = collectAdditionalModules(versions, seenKeys);
+    const modules = [...platformModules, ...extraModules]
+        .filter(m => m.body && m.body.trim());
+    sortModulesByCategory(modules);
+
+    const tocLines = [];
+    const contentChunks = [];
+    let currentCategory = null;
+
+    for (const mod of modules) {
+        if (mod.category !== currentCategory) {
+            tocLines.push(`- **${mod.category}**`);
+            currentCategory = mod.category;
+        }
+        const heading = `${formatModuleName(mod.name)} ${mod.version}`;
+        tocLines.push(`  - [${heading}](#${toAnchor(heading)})`);
+
+        contentChunks.push(
+            `\n---\n\n## [${heading}](${mod.releaseUrl})\n\n` +
+            transformModuleBody(mod.body)
+        );
+    }
+
+    const modulesToc = tocLines.join('\n');
+    const modulesReleaseNotes = contentChunks.join('\n');
+
+    const modulesReleaseNoteData = Object.assign(versions, {
+        modulesToc: modulesToc,
+        modulesReleaseNotes: modulesReleaseNotes,
+    });
+
+    return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
+}
+
+function collectModules(platformReleaseNoteBody) {
+    const modules = [];
+    const seen = new Set();
+    platformReleaseNoteBody.split("\n").forEach(line => {
+        if (!(line.includes("https") && line.includes("tag") && !line.includes("platform"))) {
+            return;
+        }
+        line.split("](").forEach(
+            l => l.split("))").filter(notes => notes.includes("https")).forEach(noteLink => {
+                const moduleName = getModuleName(noteLink);
+                const noteVersion = getReleaseNoteVersion(noteLink);
+                const key = `${moduleName}@${noteVersion}`;
+                if (seen.has(key)) {
+                    return;
+                }
+                seen.add(key);
+                const noteBody = getReleaseNoteBody(moduleName, noteVersion) || '';
+                modules.push({
+                    name: moduleName,
+                    version: noteVersion,
+                    releaseUrl: noteLink,
+                    body: noteBody,
+                    category: getCategoryForModule(moduleName),
+                });
+            })
+        );
+    });
+    return modules;
+}
+
+function collectAdditionalModules(versions, seenKeys) {
+    const result = [];
+    for (const spec of ADDITIONAL_MODULES) {
+        const version = spec.getVersion(versions);
+        if (!version) {
+            continue;
+        }
+        const key = `${spec.name}@${version}`;
+        if (seenKeys.has(key)) {
+            continue;
+        }
+        seenKeys.add(key);
+        result.push({
+            name: spec.name,
+            version: version,
+            releaseUrl: `https://github.com/vaadin/${spec.name}/releases/tag/${version}`,
+            body: getReleaseNoteBody(spec.name, version) || '',
+            category: getCategoryForModule(spec.name),
+        });
+    }
+    return result;
+}
+
+function getCategoryForModule(name) {
+    for (const cat of MODULE_CATEGORIES) {
+        if (cat.modules.includes(name)) {
+            return cat.title;
+        }
+    }
+    return 'Other';
+}
+
+function sortModulesByCategory(modules) {
+    const order = MODULE_CATEGORIES.map(c => c.title).concat(['Other']);
+    modules.sort((a, b) => {
+        const diff = order.indexOf(a.category) - order.indexOf(b.category);
+        return diff !== 0 ? diff : a.name.localeCompare(b.name);
+    });
+}
+
+function formatModuleName(name) {
+    return name.split('-')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+}
+
+function toAnchor(text) {
+    return text.toLowerCase()
+        .replace(/[^a-z0-9 -]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+}
+
+function transformModuleBody(body) {
+    let result = convertEmojiShortcodes(body);
+    result = wrapNoisySections(result);
+    result = demoteHeadings(result, 2);
+    return result.trim() + '\n';
+}
+
+function convertEmojiShortcodes(text) {
+    return text.replace(/:([a-z_]+):/g, (match, name) => EMOJI_SHORTCODES[name] || match);
+}
+
+function demoteHeadings(text, levels) {
+    return text.replace(/^(#{1,6}) /gm, (match, hashes) => {
+        const n = Math.min(6, hashes.length + levels);
+        return '#'.repeat(n) + ' ';
+    });
+}
+
+function wrapNoisySections(body) {
+    const lines = body.split('\n');
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+        const headingMatch = lines[i].match(/^(#{2,6})\s+(.+?)\s*$/);
+        if (headingMatch && NOISY_HEADING_PATTERN.test(headingMatch[2])) {
+            const level = headingMatch[1].length;
+            const title = stripInlineFormatting(headingMatch[2]);
+            i++;
+            const sectionLines = [];
+            while (i < lines.length) {
+                const next = lines[i].match(/^(#{1,6})\s+/);
+                if (next && next[1].length <= level) {
+                    break;
+                }
+                sectionLines.push(lines[i]);
+                i++;
+            }
+            out.push('');
+            out.push('<details>');
+            out.push(`<summary>${title}</summary>`);
+            out.push('');
+            out.push(...sectionLines);
+            out.push('</details>');
+            out.push('');
+        } else {
+            out.push(lines[i]);
+            i++;
+        }
+    }
+    return out.join('\n');
+}
+
+function stripInlineFormatting(text) {
+    return text.replace(/[`*_]/g, '').trim();
 }
 
 function getModuleName(link){
@@ -202,10 +369,20 @@ function getReleaseNoteVersion(link){
 }
 
 function getReleaseNoteBody(name, version){
-  link=`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`
   const token = process.env['GITHUB_TOKEN'];
-  releaseNoteFull = requestGHWithToken(link, token)
-  return releaseNoteFull.body
+  const direct = requestGHWithToken(`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`, token);
+  if (direct && direct.body) {
+    return direct.body;
+  }
+  // Tag lookup misses draft releases — fall back to listing and matching by tag_name/name.
+  const list = requestGHWithToken(`https://api.github.com/repos/vaadin/${name}/releases?per_page=30`, token);
+  if (Array.isArray(list)) {
+    const match = list.find(r => r.tag_name === version || r.name === version);
+    if (match && match.body) {
+      return match.body;
+    }
+  }
+  return '';
 }
 
 /**
