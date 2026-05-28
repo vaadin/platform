@@ -18,17 +18,17 @@ jobs:
             && echo "🚫 **GITHUB_TOKEN** is not defined, check that **${{github.repository}}** repo has a valid secret" \
             | tee -a $GITHUB_STEP_SUMMARY && exit 1 || exit 0
         name: Check secrets
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: stCarolas/setup-maven@v5
+      - uses: stCarolas/setup-maven@v5.1
         with:
           maven-version: '3.8.2'
       - run: |
