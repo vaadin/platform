@@ -148,10 +148,18 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
 const MODULE_CATEGORIES = [
     { title: 'Flow & Hilla', modules: ['flow', 'hilla'] },
     { title: 'Design System', modules: ['web-components', 'flow-components'] },
-    { title: 'Testing', modules: ['testbench'] },
+    { title: 'Testing', modules: ['testbench', 'browserless-test'] },
     { title: 'Tools', modules: ['copilot', 'designer'] },
     { title: 'Kits', modules: ['appsec-kit', 'azure-kit', 'collaboration-kit', 'kubernetes-kit', 'observability-kit', 'sso-kit', 'swing-kit'] },
     { title: 'Runtime', modules: ['multiplatform-runtime', 'vaadin-router'] },
+];
+
+// Modules that ship with the platform but whose GitHub release tag is not linked
+// from the platform release body. Fetched directly from their repos using the
+// version recorded in versions.json.
+const ADDITIONAL_MODULES = [
+    { name: 'copilot', getVersion: v => v.kits && v.kits.copilot && v.kits.copilot.javaVersion },
+    { name: 'browserless-test', getVersion: v => v.core && v.core['browserless-test'] && v.core['browserless-test'].javaVersion },
 ];
 
 const NOISY_HEADING_PATTERN = /\b(internal|chores?|dependency|dependencies|tests?|documentation|polish|maintenance)\b/i;
@@ -177,7 +185,10 @@ function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate
         return "";
     }
 
-    const modules = collectModules(platformReleaseNoteBody)
+    const platformModules = collectModules(platformReleaseNoteBody);
+    const seenKeys = new Set(platformModules.map(m => `${m.name}@${m.version}`));
+    const extraModules = collectAdditionalModules(versions, seenKeys);
+    const modules = [...platformModules, ...extraModules]
         .filter(m => m.body && m.body.trim());
     sortModulesByCategory(modules);
 
@@ -238,6 +249,29 @@ function collectModules(platformReleaseNoteBody) {
         );
     });
     return modules;
+}
+
+function collectAdditionalModules(versions, seenKeys) {
+    const result = [];
+    for (const spec of ADDITIONAL_MODULES) {
+        const version = spec.getVersion(versions);
+        if (!version) {
+            continue;
+        }
+        const key = `${spec.name}@${version}`;
+        if (seenKeys.has(key)) {
+            continue;
+        }
+        seenKeys.add(key);
+        result.push({
+            name: spec.name,
+            version: version,
+            releaseUrl: `https://github.com/vaadin/${spec.name}/releases/tag/${version}`,
+            body: getReleaseNoteBody(spec.name, version) || '',
+            category: getCategoryForModule(spec.name),
+        });
+    }
+    return result;
 }
 
 function getCategoryForModule(name) {
@@ -335,10 +369,20 @@ function getReleaseNoteVersion(link){
 }
 
 function getReleaseNoteBody(name, version){
-  link=`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`
   const token = process.env['GITHUB_TOKEN'];
-  releaseNoteFull = requestGHWithToken(link, token)
-  return releaseNoteFull.body
+  const direct = requestGHWithToken(`https://api.github.com/repos/vaadin/${name}/releases/tags/${version}`, token);
+  if (direct && direct.body) {
+    return direct.body;
+  }
+  // Tag lookup misses draft releases — fall back to listing and matching by tag_name/name.
+  const list = requestGHWithToken(`https://api.github.com/repos/vaadin/${name}/releases?per_page=30`, token);
+  if (Array.isArray(list)) {
+    const match = list.find(r => r.tag_name === version || r.name === version);
+    if (match && match.body) {
+      return match.body;
+    }
+  }
+  return '';
 }
 
 /**
