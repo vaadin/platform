@@ -161,11 +161,16 @@ function generateMaintenanceChangelog(versions) {
     const previousVersionsString = JSON.stringify(previousVersionsRaw).replace(/{{version}}/g, previousPlatform);
     const previousVersions = JSON.parse(previousVersionsString);
 
-    const lines = [];
+    const changedLines = [];
+    const unchangedLines = [];
     for (const spec of CHANGELOG_MODULES) {
         const currentVersion = spec.getVersion(versions);
         const previousVersion = spec.getVersion(previousVersions);
-        if (!currentVersion || !previousVersion || currentVersion === previousVersion) {
+        if (!currentVersion) {
+            continue;
+        }
+        if (!previousVersion || currentVersion === previousVersion) {
+            unchangedLines.push(formatUnchangedLine(spec, currentVersion));
             continue;
         }
         let isNewer;
@@ -175,17 +180,29 @@ function generateMaintenanceChangelog(versions) {
             isNewer = true;
         }
         if (!isNewer) {
+            unchangedLines.push(formatUnchangedLine(spec, currentVersion));
             continue;
         }
-        lines.push(formatChangelogLine(spec, previousVersion, currentVersion));
+        changedLines.push(formatChangelogLine(spec, previousVersion, currentVersion));
     }
 
-    const heading = `## Changes since [${previousPlatform}](https://github.com/vaadin/platform/releases/tag/${previousPlatform})\n`;
-    const result = lines.length === 0
-        ? `${heading}\n_No module version changes since ${previousPlatform}._\n`
-        : `${heading}\n${lines.join('\n')}\n`;
+    const changedHeading = `## Changes since [${previousPlatform}](https://github.com/vaadin/platform/releases/tag/${previousPlatform})\n`;
+    const changedSection = changedLines.length === 0
+        ? `${changedHeading}\n_No module version changes since ${previousPlatform}._\n`
+        : `${changedHeading}\n${changedLines.join('\n')}\n`;
+    const unchangedSection = unchangedLines.length === 0
+        ? ''
+        : `\n## Unchanged Modules\n\n${unchangedLines.join('\n')}\n`;
+    const result = changedSection + unchangedSection;
     _changelogCache[versions.platform] = result;
     return result;
+}
+
+function formatUnchangedLine(spec, currVersion) {
+    if (spec.docsUrl) {
+        return `- **${spec.displayName}**: ${currVersion} ([docs](${spec.docsUrl}))`;
+    }
+    return `- **${spec.displayName}**: [${currVersion}](https://github.com/${spec.repo}/releases/tag/${spec.tagPrefix}${currVersion})`;
 }
 
 function formatChangelogLine(spec, prevVersion, currVersion) {
