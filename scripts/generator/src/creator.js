@@ -132,18 +132,138 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
         }
     }
 
-    //const changed = getChangedSincePrevious(versions);
-    //console.log(versions.platform);
+    const changelogs = generateMaintenanceChangelog(versions);
     let releaseNoteData;
     if(!versions.platform.includes("SNAPSHOT")){
         const componentNote = getComponentReleaseNote(versions.platform);
-        releaseNoteData = Object.assign(versions, { components: componentVersions }, { componentNote: componentNote });
+        releaseNoteData = Object.assign(versions, { components: componentVersions, componentNote: componentNote, changelogs: changelogs });
     } else {
-        releaseNoteData = Object.assign(versions, { components: componentVersions });
+        releaseNoteData = Object.assign(versions, { components: componentVersions, changelogs: changelogs });
     }
 
     return render(releaseNoteTemplate, releaseNoteData);
 }
+
+function generateMaintenanceChangelog(versions) {
+    const previousPlatform = calculatePreviousVersion(versions.platform);
+    if (!previousPlatform) {
+        return '';
+    }
+    if (_changelogCache[versions.platform] !== undefined) {
+        return _changelogCache[versions.platform];
+    }
+
+    const previousVersionsRaw = requestGH(`https://raw.githubusercontent.com/vaadin/platform/${previousPlatform}/versions.json`);
+    if (!previousVersionsRaw) {
+        _changelogCache[versions.platform] = '';
+        return '';
+    }
+    const previousVersionsString = JSON.stringify(previousVersionsRaw).replace(/{{version}}/g, previousPlatform);
+    const previousVersions = JSON.parse(previousVersionsString);
+
+    const changedLines = [];
+    const unchangedLines = [];
+    for (const spec of CHANGELOG_MODULES) {
+        const currentVersion = spec.getVersion(versions);
+        const previousVersion = spec.getVersion(previousVersions);
+        if (!currentVersion) {
+            continue;
+        }
+        if (!previousVersion || currentVersion === previousVersion) {
+            unchangedLines.push(formatUnchangedLine(spec, currentVersion));
+            continue;
+        }
+        let isNewer;
+        try {
+            isNewer = compareVersions(toSemVer(currentVersion), toSemVer(previousVersion)) > 0;
+        } catch (e) {
+            isNewer = true;
+        }
+        if (!isNewer) {
+            unchangedLines.push(formatUnchangedLine(spec, currentVersion));
+            continue;
+        }
+        changedLines.push(formatChangelogLine(spec, previousVersion, currentVersion));
+    }
+
+    const changedHeading = `## Changes since [${previousPlatform}](https://github.com/vaadin/platform/releases/tag/${previousPlatform})\n`;
+    const changedSection = changedLines.length === 0
+        ? `${changedHeading}\n_No module version changes since ${previousPlatform}._\n`
+        : `${changedHeading}\n${changedLines.join('\n')}\n`;
+    const unchangedSection = unchangedLines.length === 0
+        ? ''
+        : `\n## Unchanged Modules\n\n${unchangedLines.join('\n')}\n`;
+    const result = changedSection + unchangedSection;
+    _changelogCache[versions.platform] = result;
+    return result;
+}
+
+function formatUnchangedLine(spec, currVersion) {
+    if (spec.docsUrl) {
+        return `- **${spec.displayName}**: ${currVersion} ([docs](${spec.docsUrl}))`;
+    }
+    return `- **${spec.displayName}**: [${currVersion}](https://github.com/${spec.repo}/releases/tag/${spec.tagPrefix}${currVersion})`;
+}
+
+function formatChangelogLine(spec, prevVersion, currVersion) {
+    if (spec.docsUrl) {
+        return `- **${spec.displayName}**: ${prevVersion} → ${currVersion} ([docs](${spec.docsUrl}))`;
+    }
+    const intermediates = getIntermediateReleases(spec, prevVersion, currVersion);
+    const chain = [prevVersion, ...intermediates, currVersion];
+    const segments = chain.map(v => `[${v}](https://github.com/${spec.repo}/releases/tag/${spec.tagPrefix}${v})`);
+    return `- **${spec.displayName}**: ${segments.join(' → ')}`;
+}
+
+function getIntermediateReleases(spec, prevVersion, currVersion) {
+    const token = process.env['GITHUB_TOKEN'];
+    const url = `https://api.github.com/repos/${spec.repo}/releases?per_page=50`;
+    const list = token ? requestGHWithToken(url, token) : requestGH(url);
+    if (!Array.isArray(list)) {
+        return [];
+    }
+    const candidates = list
+        .map(r => (r.tag_name || '').replace(/^v/, ''))
+        .filter(t => t && t !== prevVersion && t !== currVersion);
+    const inRange = candidates.filter(t => {
+        try {
+            return compareVersions(toSemVer(t), toSemVer(prevVersion)) > 0
+                && compareVersions(toSemVer(t), toSemVer(currVersion)) < 0;
+        } catch (e) {
+            return false;
+        }
+    });
+    return inRange.sort((a, b) => {
+        try { return compareVersions(toSemVer(a), toSemVer(b)); } catch (e) { return 0; }
+    });
+}
+
+// Modules tracked in the maintenance changelog. Each spec reads its version
+// from versions.json; if changed since the previous platform release, the line
+// is emitted with intermediate releases (for repos on GitHub).
+const CHANGELOG_MODULES = [
+    { displayName: 'Flow',                repo: 'vaadin/flow',                 tagPrefix: '',  getVersion: v => v.core && v.core.flow && v.core.flow.javaVersion },
+    { displayName: 'Hilla',               repo: 'vaadin/hilla',                tagPrefix: '',  getVersion: v => v.core && v.core.hilla && v.core.hilla.javaVersion },
+    { displayName: 'Web Components',      repo: 'vaadin/web-components',       tagPrefix: 'v', getVersion: v => v.core && v.core.accordion && v.core.accordion.jsVersion },
+    { displayName: 'Flow Components',     repo: 'vaadin/flow-components',      tagPrefix: '',  getVersion: v => v.platform },
+    { displayName: 'TestBench',           repo: 'vaadin/testbench',            tagPrefix: '',  getVersion: v => v.vaadin && v.vaadin['vaadin-testbench'] && v.vaadin['vaadin-testbench'].javaVersion },
+    { displayName: 'Browserless Test',    repo: 'vaadin/browserless-test',     tagPrefix: '',  getVersion: v => v.core && v.core['browserless-test'] && v.core['browserless-test'].javaVersion },
+    { displayName: 'Multiplatform Runtime (MPR)', repo: 'vaadin/multiplatform-runtime', tagPrefix: '', getVersion: v => v.core && v.core['mpr-v8'] && v.core['mpr-v8'].javaVersion },
+    { displayName: 'Router',              repo: 'vaadin/vaadin-router',        tagPrefix: 'v', getVersion: v => v.core && v.core['vaadin-router'] && v.core['vaadin-router'].jsVersion },
+    { displayName: 'Copilot',             repo: 'vaadin/copilot',              tagPrefix: '',  getVersion: v => v.kits && v.kits.copilot && v.kits.copilot.javaVersion },
+    { displayName: 'Collaboration Engine', repo: 'vaadin/collaboration-kit',   tagPrefix: '',  getVersion: v => v.kits && v.kits['vaadin-collaboration-engine'] && v.kits['vaadin-collaboration-engine'].javaVersion },
+    { displayName: 'Kubernetes Kit',      repo: 'vaadin/kubernetes-kit',       tagPrefix: '',  getVersion: v => v.kits && v.kits['kubernetes-kit-starter'] && v.kits['kubernetes-kit-starter'].javaVersion },
+    { displayName: 'Observability Kit',   repo: 'vaadin/observability-kit',    tagPrefix: '',  getVersion: v => v.kits && v.kits['observability-kit-starter'] && v.kits['observability-kit-starter'].javaVersion },
+    { displayName: 'SSO Kit',             repo: 'vaadin/sso-kit',              tagPrefix: '',  getVersion: v => v.kits && v.kits['sso-kit-starter'] && v.kits['sso-kit-starter'].javaVersion },
+    { displayName: 'CDI add-on',          repo: 'vaadin/cdi',                  tagPrefix: '',  getVersion: v => v.core && v.core['flow-cdi'] && v.core['flow-cdi'].javaVersion },
+    { displayName: 'Quarkus plugin',      repo: 'vaadin/quarkus',              tagPrefix: '',  getVersion: v => v.core && v.core['vaadin-quarkus'] && v.core['vaadin-quarkus'].javaVersion },
+    // Docs-only modules — no GitHub releases, so intermediate versions can't be listed.
+    { displayName: 'AppSec Kit',  docsUrl: 'https://vaadin.com/docs/latest/tools/appsec',      getVersion: v => v.kits && v.kits['appsec-kit-starter'] && v.kits['appsec-kit-starter'].javaVersion },
+    { displayName: 'Azure Kit',   docsUrl: 'https://vaadin.com/docs/latest/tools/azure-cloud', getVersion: v => v.kits && v.kits['azure-kit'] && v.kits['azure-kit'].version },
+    { displayName: 'Swing Kit',   docsUrl: 'https://vaadin.com/docs/latest/tools/swing',       getVersion: v => v.kits && v.kits['swing-kit'] && v.kits['swing-kit'].javaVersion },
+];
+
+const _changelogCache = {};
 
 /**
 @param {Object} versions data object for product versions.
