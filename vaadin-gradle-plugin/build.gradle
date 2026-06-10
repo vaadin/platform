@@ -105,10 +105,16 @@ task sourcesJar(type: Jar) {
 }
 
 /**
- * Artifacts in build
+ * Artifacts in build.
+ *
+ * Note: do NOT add `jar` here. The base plugin already registers the main jar
+ * in the `archives` configuration, and adding it again makes it appear twice.
+ * The Gradle Plugin Portal now rejects publishing the same artifact (JAR) more
+ * than once. Upgrading com.gradle.plugin-publish to 1.x (as on main, see
+ * e66fb0b4) is the long-term fix, but 1.x drops Gradle 7 support, so on this
+ * branch we keep 0.11.0 and only register the extra sources jar.
  */
 artifacts {
-    archives jar
     archives sourcesJar
 }
 
