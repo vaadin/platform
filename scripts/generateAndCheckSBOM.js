@@ -116,15 +116,15 @@ const cveWhiteList = {
     cves: ['CVE-2025-67030'],
     description: 'FP: Based on https://github.com/advisories/GHSA-6fmv-xxpf-w3cw, version 3.6.1 is the patched version.'
   },
-  'pkg:maven/io.netty/netty-codec-memcache@4.1.133.Final' : {
+  'pkg:maven/io.netty/netty-codec-memcache@4.1.135.Final' : {
     cves: ['CVE-2026-42582'],
     description: 'FP: Based on https://github.com/advisories/GHSA-2c5c-chwr-9hqw, the entire 4.1.x branch of Netty does not contain the HTTP/3 codec sub-module or the QpackDecoder class.'
   },
-  'pkg:maven/io.netty/netty-codec-mqtt@4.1.133.Final' : {
+  'pkg:maven/io.netty/netty-codec-mqtt@4.1.135.Final' : {
     cves: ['CVE-2026-42582'],
     description: 'FP: Based on https://github.com/advisories/GHSA-2c5c-chwr-9hqw, the entire 4.1.x branch of Netty does not contain the HTTP/3 codec sub-module or the QpackDecoder class.'
   },
-  'pkg:maven/io.netty/netty-transport-udt@4.1.133.Final' : {
+  'pkg:maven/io.netty/netty-transport-udt@4.1.135.Final' : {
     cves: ['CVE-2026-42582'],
     description: 'FP: Based on https://github.com/advisories/GHSA-2c5c-chwr-9hqw, the entire 4.1.x branch of Netty does not contain the HTTP/3 codec sub-module or the QpackDecoder class.'
   },
@@ -132,7 +132,7 @@ const cveWhiteList = {
     cves: ['CVE-2021-33604'],
     description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
   },
-  'pkg:maven/io.netty/netty-transport@4.1.133.Final' : {
+  'pkg:maven/io.netty/netty-transport@4.1.135.Final' : {
     cves: ['CVE-2026-42582'],
     description: 'FP: Based on https://github.com/advisories/GHSA-2c5c-chwr-9hqw, the entire 4.1.x branch of Netty does not contain the HTTP/3 codec sub-module or the QpackDecoder class.'
   },
