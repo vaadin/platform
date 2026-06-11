@@ -93,7 +93,7 @@ const cveWhiteList = {
      description: 'Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter.'
   },
   'pkg:maven/org.springframework.boot/spring-boot-starter-aop@3.5.13' : {
-     cves: ['CVE-2026-40972', 'CVE-2026-40973', 'CVE-2026-40975', 'CVE-2026-40977'],
+     cves: ['CVE-2026-40971', 'CVE-2026-40972', 'CVE-2026-40973', 'CVE-2026-40974', 'CVE-2026-40975', 'CVE-2026-40977'],
      description: 'Pulled in transitively via spring-cloud-kubernetes-fabric8-config:3.3.2 (the latest available release), where the platform parent already pins spring.boot.version to the latest 3.5.x. Spring dependency can be managed by the end user with using <spring.boot.version> or the parent spring boot starter — using the latest Spring Boot version is recommended.'
   },
   'pkg:npm/dompurify@3.2.7' : {
