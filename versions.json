@@ -35,6 +35,11 @@
             "mode": "lit",
             "npmName": "@vaadin/badge"
         },
+        "breadcrumbs": {
+            "jsVersion": "25.2.0-rc2",
+            "mode": "lit",
+            "npmName": "@vaadin/breadcrumbs"
+        },
         "browserless-test": {
             "javaVersion": "1.1.0-beta1"
         },

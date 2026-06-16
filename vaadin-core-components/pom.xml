@@ -53,6 +53,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-breadcrumbs-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-flow</artifactId>
         </dependency>
         <dependency>
