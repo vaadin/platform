@@ -13,6 +13,8 @@ import '@vaadin/virtual-list';
 import '@vaadin/badge';
 import '@vaadin/board/vaadin-board';
 import '@vaadin/board/vaadin-board-row';
+import '@vaadin/breadcrumbs';
+import '@vaadin/breadcrumbs/src/vaadin-breadcrumbs-item.js';
 import '@vaadin/button';
 import '@vaadin/charts';
 import '@vaadin/charts/src/vaadin-chart';
@@ -158,6 +160,11 @@ export class ComponentsView extends View {
             </vaadin-board-row>
           </vaadin-board-row>
         </vaadin-board>
+
+        <vaadin-breadcrumbs>
+          <vaadin-breadcrumbs-item path="/">Home</vaadin-breadcrumbs-item>
+          <vaadin-breadcrumbs-item>Current</vaadin-breadcrumbs-item>
+        </vaadin-breadcrumbs>
 
         <vaadin-button theme="primary" id="confirm">Primary</vaadin-button>
         <vaadin-tooltip text="Click to save changes" for="confirm"></vaadin-tooltip>
