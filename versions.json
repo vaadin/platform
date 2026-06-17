@@ -406,6 +406,7 @@
                 "@vaadin/avatar",
                 "@vaadin/avatar-group",
                 "@vaadin/badge",
+                "@vaadin/breadcrumbs",
                 "@vaadin/button",
                 "@vaadin/card",
                 "@vaadin/checkbox",
