@@ -527,7 +527,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.2.0-beta1",
+            "javaVersion": "25.2.0-rc1",
             "pro": true
         }
     }
