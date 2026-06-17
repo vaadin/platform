@@ -41,7 +41,7 @@
             "npmName": "@vaadin/breadcrumbs"
         },
         "browserless-test": {
-            "javaVersion": "1.1.0-beta1"
+            "javaVersion": "1.1.0-rc1"
         },
         "button": {
             "jsVersion": "25.2.0-rc2",
@@ -143,7 +143,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.2.0-rc1"
+            "javaVersion": "25.2.0-rc2"
         },
         "horizontal-layout": {
             "jsVersion": "25.2.0-rc2",
@@ -532,7 +532,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.2.0-beta1",
+            "javaVersion": "25.2.0-rc1",
             "pro": true
         }
     }
