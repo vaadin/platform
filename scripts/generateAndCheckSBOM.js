@@ -143,7 +143,19 @@ const cveWhiteList = {
   'pkg:javascript/quill@1.3.7' : {
     cves: ['CVE-2021-3163'],
     description: 'Disputed. Researchers have claimed that this issue is not within the product itself, but is intended behavior in a web browser'
-  }
+  },
+  'pkg:npm/%40opentelemetry%2Fcore@1.9.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/%40opentelemetry%2Fcore@1.8.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/%40opentelemetry/core@1.9.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
 }
 
 const STYLE = `<style>
