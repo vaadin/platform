@@ -74,6 +74,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-breadcrumbs-testbench</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-testbench</artifactId>
             <scope>compile</scope>
         </dependency>

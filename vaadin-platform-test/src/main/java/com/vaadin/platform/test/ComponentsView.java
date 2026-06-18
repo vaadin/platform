@@ -44,6 +44,8 @@ import com.vaadin.flow.component.avatar.AvatarGroup.AvatarGroupItem;
 import com.vaadin.flow.component.badge.Badge;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
+import com.vaadin.flow.component.breadcrumbs.Breadcrumbs;
+import com.vaadin.flow.component.breadcrumbs.BreadcrumbsItem;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.card.Card;
 import com.vaadin.flow.component.charts.Chart;
@@ -291,6 +293,11 @@ public class ComponentsView extends AppLayout {
         components.add(svgIcon);
 
         Badge badge = new Badge("new messages", 3);
+
+        Breadcrumbs breadcrumbs = new Breadcrumbs(Breadcrumbs.Mode.MANUAL);
+        BreadcrumbsItem homeItem = new BreadcrumbsItem("Home", "/");
+        BreadcrumbsItem currentItem = new BreadcrumbsItem("Current");
+        breadcrumbs.add(homeItem, currentItem);
 
         Button button = new Button("Button text", e -> {
             log.log("Clicked button");
@@ -702,6 +709,7 @@ public class ComponentsView extends AppLayout {
         WebComponentWrapper webComponentWrapper;
 
         components.add(badge);
+        components.add(breadcrumbs);
         components.add(button);
         components.add(card);
         components.add(checkbox);

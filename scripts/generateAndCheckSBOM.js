@@ -109,6 +109,18 @@ const cveWhiteList = {
     cves: ['CVE-2025-15104'],
     description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
   },
+  'pkg:npm/%40opentelemetry%2Fcore@1.9.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/%40opentelemetry%2Fcore@1.8.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/%40opentelemetry/core@1.9.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
 }
 
 const STYLE = `<style>

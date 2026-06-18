@@ -5,6 +5,8 @@ import {
     Avatar,
     AvatarGroup,
     Badge,
+    Breadcrumbs,
+    BreadcrumbsItem,
     Button,
     Checkbox,
     CheckboxGroup,
@@ -125,6 +127,11 @@ export default function Components() {
                     </BoardRow>
                 </BoardRow>
             </Board>
+
+            <Breadcrumbs>
+                <BreadcrumbsItem path="/">Home</BreadcrumbsItem>
+                <BreadcrumbsItem>Current</BreadcrumbsItem>
+            </Breadcrumbs>
 
             <Button theme="primary" id="confirm">Primary</Button>
             <Tooltip text="Click to save changes" for="confirm"></Tooltip>
