@@ -127,7 +127,7 @@
             "javaVersion": "25.2.0"
         },
         "flow-cdi": {
-            "javaVersion": "16.1.0-rc1"
+            "javaVersion": "16.1.0"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
@@ -143,7 +143,7 @@
             "npmName": "@vaadin/grid"
         },
         "hilla": {
-            "javaVersion": "25.2.0-rc2"
+            "javaVersion": "25.2.0"
         },
         "horizontal-layout": {
             "jsVersion": "25.2.0",
@@ -344,7 +344,7 @@
             "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
-            "javaVersion": "3.2.0-rc1"
+            "javaVersion": "3.2.0"
         },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
