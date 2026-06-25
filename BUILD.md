@@ -23,6 +23,30 @@ For releasing a new platform from CI servers the workflow should be:
 
 NOTE: that deploy needs to correctly set the credentials and target maven repo
 
+### Umbrella artifacts: vaadin, vaadin-core and vaadin-ee
+
+The release modules are split across three profiles in the root `pom.xml`:
+
+| Profile | Activation | Modules it adds |
+|---------|------------|-----------------|
+| `platform` | active by default (disabled with `-DskipPlatform`) | everything except `vaadin`, `vaadin-core`, `vaadin-ee` |
+| `oss` | `-Doss` | `vaadin`, `vaadin-core` |
+| `ee` | `-Dee` | `vaadin-ee` |
+
+`vaadin-ee` is the Enterprise Edition umbrella. It depends on `vaadin-core-internal` and `vaadin-internal`, so it pulls every component the same way `vaadin` does, and it carries an EE license check.
+
+A release repository does not allow overwriting an already published artifact, so the parent pom (`vaadin-platform-parent`) and the shared modules are deployed only once. A full reactor build deploys the parent pom plus the modules of the active profiles, while a `-pl` build deploys only the listed modules and not the parent. This gives five deploy options:
+
+| # | What gets deployed | Command | Parent pom |
+|---|--------------------|---------|------------|
+| 1 | everything: `vaadin` + `vaadin-ee` + parent + modules | `mvn deploy -Doss -Dee` | yes (first time) |
+| 2 | everything except `vaadin`/`vaadin-core` | `mvn deploy -Dee` | yes (first time) |
+| 3 | everything except `vaadin-ee` | `mvn deploy -Doss` | yes (first time) |
+| 4 | only `vaadin-ee` (after #3) | `mvn deploy -pl vaadin-ee -Dee` | no (already there) |
+| 5 | only `vaadin`/`vaadin-core` (after #2) | `mvn deploy -pl vaadin,vaadin-core -Doss` | no (already there) |
+
+Valid combinations so the parent pom is deployed exactly once: all at once (#1), EE first and OSS later (#2 then #5), or OSS first and EE later (#3 then #4). Combine these with the normal release flags (`-Pproduction,release,javadocs,flatten-pom -DskipTests -DshrinkWrap`).
+
 ## Installing in local repo
 
 You can install the platform artifacts in your local maven cache by running the following command.
@@ -33,6 +57,11 @@ mvn clean install -DskipTests
 Optionally you might need smoke tests package for running in servlet-containers tests, then you need to run
 ```
 mvn clean install -DskipTests -Pproduction -Pnpm-it
+```
+
+To install a single umbrella, for example `vaadin-ee`, build just that module (the rest of the platform at the same version must already be available in the repository):
+```
+mvn -pl vaadin-ee -Dee clean install -DskipTests
 ```
 
 ## Running tests
