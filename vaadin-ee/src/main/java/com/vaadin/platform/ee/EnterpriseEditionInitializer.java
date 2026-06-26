@@ -21,40 +21,12 @@ import com.vaadin.pro.licensechecker.Capability;
 import com.vaadin.pro.licensechecker.LicenseChecker;
 
 /**
- * Service initialization listener to verify the Vaadin EE license.
+ * Service initialization listener for Vaadin Enterprise Edition.
  * <p>
- * The actual license check is delegated to
- * {@link BaseLicenseCheckerServiceInitListener}; this class only declares the
- * {@value #PRODUCT_NAME} product and logs an Enterprise Edition banner.
- * <p>
- * Agreed behavior for a missing or non covering {@value #PRODUCT_NAME} license
- * (decided with the Flow team):
- * <p>
- * Development mode: behave exactly like a commercial component such as Charts.
- * The license check is delegated to {@link BaseLicenseCheckerServiceInitListener},
- * which hands a missing key to Vaadin Dev Tools so Copilot can offer to start a
- * trial. The application keeps running so the trial on ramp is possible (relevant
- * for users who picked EE from start.vaadin.com without a subscription).
- * <p>
- * TODO (separate task): the Copilot / Dev Tools dialog currently only mentions the
- * pro web components and says nothing about {@value #PRODUCT_NAME}, which is
- * confusing. The dialog needs to be reworked to present the EE trial explicitly.
- * For this the license-checker should also offer a pre-trial for
- * {@value #PRODUCT_NAME} (return {@code PreTrialLicenseValidationException} with a
- * {@code PreTrial}, instead of a plain {@code LicenseException}), the same way it
- * does for products that have a frontend component.
- * <p>
- * Production mode: there is no hard runtime check (Vaadin never hard fails at
- * runtime). Enforcement is two fold:
- * <ul>
- * <li>TODO: the production build must fail when no {@value #PRODUCT_NAME} license
- * is present. Because {@value #PRODUCT_NAME} has no frontend component,
- * {@code build-frontend} does not detect it today, so this check has to be added
- * in flow / the Vaadin Maven plugin.</li>
- * <li>TODO: emit a console warning at runtime in production, reusing the mechanism
- * recently added for the extended maintenance warning, since each running instance
- * needs a license in addition to the one used at build time.</li>
- * </ul>
+ * It declares the {@value #PRODUCT_NAME} product and delegates the actual license
+ * check to {@code super} ({@link BaseLicenseCheckerServiceInitListener}). At
+ * runtime it logs a banner: the normal one when the license is valid, or a warning
+ * when no valid license is found.
  */
 public class EnterpriseEditionInitializer
         extends BaseLicenseCheckerServiceInitListener {
