@@ -59,6 +59,21 @@
 
     <build>
         <plugins>
+            <!-- Mark the jar as a commercial product so the production build
+                 (flow build-frontend) requires a vaadin-ee license and fails
+                 when none is present. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <CvdlName>vaadin-ee</CvdlName>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>io.reformanda.semper</groupId>
                 <artifactId>dependencyversion-maven-plugin</artifactId>
