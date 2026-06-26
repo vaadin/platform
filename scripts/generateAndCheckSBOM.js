@@ -141,6 +141,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:npm/esbuild@0.27.7' : {
+    cves: ['GHSA-g7r4-m6w7-qqqr'],
+    description: "In flow, esbuild 0.27.7 is pulled in only as a transitive dependency of Vite (vite@7.3.5), declared in:flow-server/src/main/resources/com/vaadin/flow/server/frontend/dependencies/vite/package.json & vaadin-dev-server/package.json (vite@7.3.2)Vite uses esbuild purely as a library — for dependency pre-bundling and TS/JSX transforms. Vite's dev server is its own Node/connect-based HTTP server; it never starts esbuild's serve feature, which is the only code path the advisory touches. Vaadin in turn runs Vite as the dev server (ViteHandler $\rightarrow$ vite executable, vite build for production), so esbuild's vulnerable serve path is never exercised.So even on Windows dev machines, the attack surface (esbuild's own --servedir server) is simply not in use."
+  },
 }
 
 const STYLE = `<style>
