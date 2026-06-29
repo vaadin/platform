@@ -25,7 +25,7 @@ import com.vaadin.pro.licensechecker.LicenseChecker;
  * <p>
  * It declares the {@value #PRODUCT_NAME} product and delegates the actual license
  * check to {@code super} ({@link BaseLicenseCheckerServiceInitListener}). At
- * runtime it logs a banner: the normal one when the license is valid, or a warning
+ * runtime it logs a banner: the normal one when the license is valid, or an error
  * when no valid license is found.
  */
 public class EnterpriseEditionInitializer
@@ -46,7 +46,7 @@ public class EnterpriseEditionInitializer
         boolean productionMode = event.getSource()
                 .getDeploymentConfiguration().isProductionMode();
 
-        // Same banner in development and production: a big warning when there is
+        // Same banner in development and production: a big error when there is
         // no valid license, the normal banner otherwise.
         if (isLicensed(version, productionMode)) {
             logEnterpriseBanner(version);
@@ -94,7 +94,7 @@ public class EnterpriseEditionInitializer
 
     private void logNoLicenseBanner(String productVersion) {
         String version = orUnknown(productVersion);
-        LOGGER.warn("""
+        LOGGER.error("""
 
 
                 ################################################################################
