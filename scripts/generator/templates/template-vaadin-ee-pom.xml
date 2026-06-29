@@ -112,11 +112,12 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <includeDependencySources>false</includeDependencySources>
-                    <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
+                <!-- Override the inherited configuration completely so this
+                     umbrella does not aggregate dependency sources, which would
+                     try to invoke javadoc on the internal modules and fail. -->
+                <configuration combine.self="override">
+                    <doclint>none</doclint>
                     <quiet>true</quiet>
-                    <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
             </plugin>
 
