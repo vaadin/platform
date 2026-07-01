@@ -21,6 +21,7 @@ import com.vaadin.flow.internal.StringUtil;
 
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ArrayNode;
 import tools.jackson.databind.node.ObjectNode;
 
 public class AllComponentsIncludedTest {
@@ -40,6 +41,16 @@ public class AllComponentsIncludedTest {
             "ol/extent",
             "proj4");
 
+    // React Router support (react, react-router and the generated
+    // ReactRouterOutletElement) is pulled into the non-optimized bundle but
+    // tree-shaken out of the optimized one, since none of the eager views use
+    // it. These are framework files, not Vaadin components, so ignore them
+    // when comparing the two bundles.
+    private static final Set<String> reactRouterImports = Set.of(
+            "react",
+            "react-router",
+            "Frontend/generated/jar-resources/ReactRouterOutletElement.tsx");
+
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Test
@@ -55,6 +66,11 @@ public class AllComponentsIncludedTest {
         optimizedStats.remove("indexHtmlGenerated");
 
         ((ObjectNode) unoptimizedStats.get("frontendHashes")).remove("theme-util.js");
+        ((ObjectNode) unoptimizedStats.get("frontendHashes"))
+                .remove("ReactRouterOutletElement.tsx");
+
+        removeReactRouterImports(unoptimizedStats);
+        removeReactRouterImports(optimizedStats);
 
         // Pretty print both for diffing
         String unoptPretty = MAPPER.writerWithDefaultPrettyPrinter()
@@ -117,6 +133,17 @@ public class AllComponentsIncludedTest {
                         + bundleImport
                         + "' is included but not eagerly loaded. If it is part of a lazy loaded component only, update this test. Otherwise, include the relevant component in "
                         + EagerView.class.getName());
+            }
+        }
+    }
+
+    private void removeReactRouterImports(ObjectNode stats) {
+        JsonNode imports = stats.get("bundleImports");
+        if (imports instanceof ArrayNode array) {
+            for (int i = array.size() - 1; i >= 0; i--) {
+                if (reactRouterImports.contains(array.get(i).asText())) {
+                    array.remove(i);
+                }
             }
         }
     }
