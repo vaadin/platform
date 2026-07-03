@@ -50,6 +50,7 @@ bin/
 vaadin/pom.xml
 vaadin-bom/pom.xml
 hilla-bom/pom.xml
+vaadin-ee/pom.xml
 vaadin-spring-bom/pom.xml
 vaadin-maven-plugin/pom.xml
 vaadin-gradle-plugin/pom.xml
