@@ -51,7 +51,8 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
+            <artifactId>vaadin-core-internal</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Spring -->
