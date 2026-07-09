@@ -25,14 +25,19 @@ import com.vaadin.testbench.parallel.SauceLabsIntegration;
 public class ComponentsIT extends AbstractPlatformTest {
 
     static {
-        if (SauceLabsIntegration.isConfiguredForSauceLabs()) {
+        // Run on a grid when using Sauce Labs or a Selenium hub. The browser
+        // set can be overridden from CI with -Dgrid.browsers=... (comma
+        // separated), e.g. to exclude browsers that are flaky on the grid.
+        boolean onGrid = SauceLabsIntegration.isConfiguredForSauceLabs()
+                || System.getProperty(
+                        "com.vaadin.testbench.Parameters.hubHostname") != null;
+        if (onGrid) {
             String browsers = System.getProperty("grid.browsers");
             if (browsers == null || browsers.isEmpty()) {
-                // supported broswers : firefox esr is 128
-                Parameters.setGridBrowsers("firefox,firefox-128,safari-17,edge");
-            } else {
-                Parameters.setGridBrowsers(browsers);
+                // supported browsers : firefox esr is 128
+                browsers = "firefox,firefox-128,safari-17,edge";
             }
+            Parameters.setGridBrowsers(browsers);
         }
     }
 
