@@ -350,7 +350,7 @@
             "releasenotes": true
         },
         "vaadin-themable-mixin": {
-            "jsVersion": "25.2.3",
+            "jsVersion": "25.1.6",
             "mode": "lit",
             "npmName": "@vaadin/vaadin-themable-mixin"
         },
