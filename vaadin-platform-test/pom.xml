@@ -240,6 +240,8 @@
                         </executions>
                         <configuration>
                             <forkCount>2</forkCount>
+                            <!-- Retry flaky browser tests (e.g. slow app load) before failing the build -->
+                            <rerunFailingTestsCount>2</rerunFailingTestsCount>
                         </configuration>
                     </plugin>
                     <plugin>

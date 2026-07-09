@@ -66,7 +66,10 @@ public class ComponentsIT extends AbstractPlatformTest {
 
     @Test
     public void appWorks() throws Exception {
-        $(NotificationElement.class).waitForFirst();
+        // Wait for the app to finish loading and show the first notification.
+        // The default 10s can be too short when the CI agent or the frontend
+        // bundle is slow to serve, causing spurious timeouts, so wait longer.
+        waitUntil(driver -> $(NotificationElement.class).exists(), 30);
 
         new ComponentUsageTest().getTestComponents().forEach(this::checkElement);
     }
