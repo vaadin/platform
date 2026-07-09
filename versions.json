@@ -349,6 +349,11 @@
             "npmName": "@vaadin/router",
             "releasenotes": true
         },
+        "vaadin-themable-mixin": {
+            "jsVersion": "25.2.3",
+            "mode": "lit",
+            "npmName": "@vaadin/vaadin-themable-mixin"
+        },
         "vaadin-usage-statistics": {
             "jsVersion": "2.1.3",
             "npmName": "@vaadin/vaadin-usage-statistics"
