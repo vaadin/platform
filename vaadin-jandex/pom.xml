@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin</artifactId>
+            <artifactId>vaadin-internal</artifactId>
             <version>${project.version}</version>
             <exclusions>
                 <!-- Potentially optional dependencies according to online documentation -->
