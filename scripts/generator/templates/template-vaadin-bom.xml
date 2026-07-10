@@ -16,6 +16,12 @@
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
         <jna.version>5.18.1</jna.version>
+        <!-- Security overrides: force fixed transitive versions -->
+        <logback.security.version>1.5.35</logback.security.version>
+        <tomcat.security.version>11.0.24</tomcat.security.version>
+        <jackson2.security.version>2.22.1</jackson2.security.version>
+        <jackson3.security.version>3.1.5</jackson3.security.version>
+        <kotlin.security.version>2.4.0</kotlin.security.version>
     </properties>
 
     <distributionManagement>
@@ -27,6 +33,63 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--
+             Security overrides. These force fixed transitive versions ahead of
+             Spring Boot / Flow / Hilla management. Declared before the
+             vaadin-spring-bom import so the imported BOMs win. Remove each once
+             the upstream (Spring Boot, Flow, Hilla) ships the fixed version.
+            -->
+            <!-- jackson 2.x, CVE-2026-54515 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson2.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- jackson 3.x, CVE-2026-54515 -->
+            <dependency>
+                <groupId>tools.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson3.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- kotlin, CVE-2026-53914 -->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>${kotlin.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- logback, CVE-2026-10532 -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.security.version}</version>
+            </dependency>
+            <!-- tomcat embed, CVE-2026-53434/55276/53404/55955/55956/50229 -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-websocket</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-bom</artifactId>
