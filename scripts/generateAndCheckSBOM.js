@@ -121,6 +121,18 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.22.1' : {
+    cves: ['CVE-2026-54515'],
+    description: 'Not affected: Vaadin and Hilla deserialize endpoint input with the default Jackson mapper. The bypass requires MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, which Vaadin does not enable (verified in Hilla JacksonObjectMapperFactory). vulnerable_code_not_in_execute_path. Tracked upstream in vaadin/hilla#5801 and vaadin/appsec-kit#238.'
+  },
+  'pkg:maven/tools.jackson.core/jackson-databind@2.22.1' : {
+    cves: ['CVE-2026-54515'],
+    description: 'False report: the resolved tools.jackson jackson-databind (3.1.5) is not affected per osv.dev. This entry is a SBOM version mislabel. Tracked upstream in vaadin/flow#24962 and vaadin/hilla#5801.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.4.0' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: osv.dev reports kotlin-stdlib 2.4.0 as not affected. owasp flags it via imprecise CPE matching. Tracked upstream in vaadin/flow#24962 and vaadin/hilla#5801.'
+  },
 }
 
 const STYLE = `<style>
