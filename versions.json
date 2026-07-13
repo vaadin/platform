@@ -598,7 +598,7 @@
             "npmName": "@vaadin/crud"
         },
         "flow-osgi": {
-            "javaVersion": "8.1-SNAPSHOT"
+            "javaVersion": "8.1.3"
         },
         "grid-pro": {
             "jsVersion": "23.6.4",
