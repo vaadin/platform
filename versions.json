@@ -567,7 +567,7 @@
             "version": "1.0.1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "5.3-SNAPSHOT"
+            "javaVersion": "5.3.2"
         }
     },
     "platform": "{{version}}",
