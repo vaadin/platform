@@ -54,6 +54,7 @@ import {
     SideNavItem,
     Slider,
     SplitLayout,
+    Switch;
     Tab,
     Tabs,
     TabSheet,
@@ -166,6 +167,7 @@ export default function Components() {
                 <Checkbox value="2" label="Option two"></Checkbox>
                 <Checkbox value="3" label="Option three"></Checkbox>
             </CheckboxGroup>
+            <vaadin-switch label="Notifications"></vaadin-switch>
             <ComboBox items={[1, 2, 3, 4, 5]}></ComboBox>
             <MultiSelectComboBox
                 items={['apple', 'banana', 'lemon', 'orange']}></MultiSelectComboBox>

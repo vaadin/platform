@@ -286,6 +286,11 @@
             "mode": "lit",
             "npmName": "@vaadin/split-layout"
         },
+        "switch": {
+            "jsVersion": "25.3.0-alpha4",
+            "mode": "lit",
+            "npmName": "@vaadin/switch"
+        },
         "tabs": {
             "jsVersion": "25.3.0-alpha4",
             "mode": "lit",
@@ -456,6 +461,7 @@
                 "@vaadin/side-nav",
                 "@vaadin/slider",
                 "@vaadin/split-layout",
+                "@vaadin/switch",
                 "@vaadin/tabs",
                 "@vaadin/tabsheet",
                 "@vaadin/text-area",
