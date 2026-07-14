@@ -30,6 +30,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
@@ -47,13 +48,23 @@ public abstract class AbstractReloadBenchmarkTest extends ParallelTest {
     public static final int SERVER_PORT = Integer
             .parseInt(System.getProperty("serverPort", "8888"));
 
+    static String hostName;
+
     @BeforeClass
     public static void setupClass() {
         String sauceKey = SauceLabsIntegration.getSauceAccessKey();
         String hubHost = System.getProperty(
                 "com.vaadin.testbench.Parameters.hubHostname");
-        if ((sauceKey == null || sauceKey.isEmpty())
-                && (hubHost == null || hubHost.isEmpty())) {
+        boolean isSauce = sauceKey != null && !sauceKey.isEmpty();
+        boolean isHub = hubHost != null && !hubHost.isEmpty();
+
+        // When the browser runs on a remote hub, "localhost" resolves on the
+        // hub node rather than the machine running the app, so use a reachable
+        // site-local address instead.
+        hostName = (!isSauce && isHub) ? IPAddress.findSiteLocalAddress()
+                : "localhost";
+
+        if (!isSauce && !isHub) {
             String driver = System.getProperty("webdriver.chrome.driver");
             if (driver == null || !new File(driver).exists()) {
                 WebDriverManager.chromedriver().setup();
@@ -118,7 +129,7 @@ public abstract class AbstractReloadBenchmarkTest extends ParallelTest {
     }
 
     protected String getDeploymentHostname() {
-        return "localhost";
+        return hostName;
     }
 
     @BrowserConfiguration

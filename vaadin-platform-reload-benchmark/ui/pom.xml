@@ -134,12 +134,8 @@
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <version>${spring.boot.version}</version>
                         <configuration>
-                            <!-- Raised for troubleshooting: give a cold-cache
-                                 `npm install` plenty of time before the plugin
-                                 stops waiting and shuts the server down.
-                                 500ms * 1200 = 10 minutes. -->
                             <wait>500</wait>
-                            <maxAttempts>1200</maxAttempts>
+                            <maxAttempts>240</maxAttempts>
                             <jmxPort>9009</jmxPort>
                             <systemPropertyVariables>
                                 <route.hierarchy.enabled>${route.hierarchy.enabled}</route.hierarchy.enabled>
