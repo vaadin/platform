@@ -54,7 +54,7 @@ import {
     SideNavItem,
     Slider,
     SplitLayout,
-    Switch;
+    Switch,
     Tab,
     Tabs,
     TabSheet,
