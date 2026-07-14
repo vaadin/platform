@@ -7,6 +7,12 @@
     <property name="LOG_FILE" value="${LOG_FILE:-target/reload-benchmark.log}"/>
     <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
 
+    <!-- Extra detail for troubleshooting the CI `npm install` failure: logs the
+         npm command, node/npm versions, working directory and per-task progress
+         of the frontend build and dev-mode startup. -->
+    <logger name="com.vaadin.flow.server.frontend" level="DEBUG"/>
+    <logger name="com.vaadin.base.devserver" level="DEBUG"/>
+
     <root level="INFO">
         <appender-ref ref="FILE"/>
     </root>
