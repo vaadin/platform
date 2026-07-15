@@ -33,6 +33,24 @@ function splitLabelNumber(pre: readonly (string | number)[]): { label: string; n
     return { label: m[1].toLowerCase(), num: parseInt(m[2], 10) };
 }
 
+/**
+ * True only for a recognized Vaadin prerelease tier: a single `alphaN`,
+ * `betaN`, or `rcN` identifier.
+ *
+ * Upstream also publishes irregular dev builds such as
+ * `25.3.0-dev.3a3c2d7d2a` (a `-dev.<commit-hash>` snapshot). Those are
+ * multi-identifier prereleases whose first identifier (`dev`) sorts
+ * *lexically greater* than `alpha` under plain semver comparison, so
+ * without this guard the picker would happily "upgrade" `25.3.0-alpha4`
+ * to `25.3.0-dev.<hash>` (see platform PR #9156). A dev build is not a
+ * release candidate, so it must never be an upgrade target — we only ever
+ * advance along the alpha < beta < rc ladder.
+ */
+function isRecognizedPrerelease(sv: semver.SemVer): boolean {
+    const split = splitLabelNumber(sv.prerelease);
+    return split !== null && split.label in LABEL_RANK;
+}
+
 function comparePrerelease(a: semver.SemVer, b: semver.SemVer): number {
     const aSplit = splitLabelNumber(a.prerelease);
     const bSplit = splitLabelNumber(b.prerelease);
@@ -90,6 +108,7 @@ export function pickMaintenance(current: string, candidates: string[]): string |
 
     const sameBasePre = sameMinor
         .filter((x) => x.sv.patch === cur.patch && x.sv.prerelease.length > 0)
+        .filter((x) => isRecognizedPrerelease(x.sv))
         .filter((x) => comparePrerelease(x.sv, cur) > 0)
         .sort((a, b) => comparePrerelease(b.sv, a.sv))[0];
 
