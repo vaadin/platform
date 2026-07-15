@@ -28,8 +28,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
@@ -63,13 +61,6 @@ public abstract class AbstractReloadBenchmarkTest extends ParallelTest {
         // site-local address instead.
         hostName = (!isSauce && isHub) ? IPAddress.findSiteLocalAddress()
                 : "localhost";
-
-        if (!isSauce && !isHub) {
-            String driver = System.getProperty("webdriver.chrome.driver");
-            if (driver == null || !new File(driver).exists()) {
-                WebDriverManager.chromedriver().setup();
-            }
-        }
     }
 
     @Before
