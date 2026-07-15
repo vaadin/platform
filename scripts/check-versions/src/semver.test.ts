@@ -83,6 +83,31 @@ test("prerelease: alphaN numeric ordering — picks highest alpha by integer suf
     );
 });
 
+test("prerelease: irregular -dev.<hash> build is never picked over an alpha", () => {
+    // Real registry data from platform PR #9156: upstream publishes
+    // 25.3.0-dev.3a3c2d7d2a alongside the alpha line. "dev" sorts lexically
+    // above "alpha", so the picker must NOT treat it as an upgrade.
+    assert.equal(
+        pickMaintenance("25.3.0-alpha4", [
+            "25.3.0-alpha4",
+            "25.3.0-dev.3a3c2d7d2a",
+        ]),
+        null,
+    );
+});
+
+test("prerelease: real alpha still picked even when a -dev.<hash> build exists", () => {
+    // The dev build is ignored, but a genuine higher alpha still applies.
+    assert.equal(
+        pickMaintenance("25.3.0-alpha3", [
+            "25.3.0-alpha3",
+            "25.3.0-alpha4",
+            "25.3.0-dev.3a3c2d7d2a",
+        ]),
+        "25.3.0-alpha4",
+    );
+});
+
 test("hasOutOfScopeNewer: stable newer minor counts", () => {
     assert.equal(hasOutOfScopeNewer("25.0.0", ["25.0.0", "25.1.0"]), true);
 });
