@@ -16,8 +16,8 @@
 package com.vaadin.platform.reload;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -38,7 +38,18 @@ public class SpringDevToolsReloadUtils {
         return startTriggerButton;
     }
 
-    public static String runAndCalculateAverageResult(
+    /**
+     * Runs the given reload test the requested number of times and returns the
+     * <em>median</em> of the measured reload times.
+     * <p>
+     * The median is used instead of the arithmetic mean because this benchmark
+     * exercises the full platform component set: each Spring DevTools restart
+     * re-scans a large classpath and rebuilds a large frontend graph, so the
+     * measurements have a systematic warm-up outlier (the first reload) and
+     * occasional GC/CI spikes. The mean lets a single outlier dominate the
+     * result, whereas the median reports the steady-state reload time.
+     */
+    public static String runAndCalculateMedianResult(
             int numberOfTimesToRunTest, Supplier<String> test) {
         var allResults = new ArrayList<BigDecimal>();
         IntStream.range(0, numberOfTimesToRunTest).forEach(index -> allResults
@@ -48,11 +59,19 @@ public class SpringDevToolsReloadUtils {
                 allResults.stream().map(BigDecimal::toString)
                         .collect(Collectors.joining(",")));
 
-        var result = allResults.stream().reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO)
-                .divide(BigDecimal.valueOf(allResults.size()),
-                        RoundingMode.UNNECESSARY);
+        List<BigDecimal> sorted = allResults.stream().sorted()
+                .collect(Collectors.toList());
+        int size = sorted.size();
+        BigDecimal median;
+        if (size % 2 == 1) {
+            median = sorted.get(size / 2);
+        } else {
+            // Division by 2 always terminates in base 10, so no rounding needed.
+            median = sorted.get(size / 2 - 1).add(sorted.get(size / 2))
+                    .divide(BigDecimal.valueOf(2));
+        }
+        System.out.printf("Median result: %s%n", median);
 
-        return result.toString();
+        return median.toString();
     }
 }

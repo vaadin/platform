@@ -33,7 +33,7 @@ public class SpringDevToolsReloadViewIT extends AbstractReloadBenchmarkTest {
     @Test
     public void testSpringBootReloadTime_withLargerApp() {
         optionalAssertByReloadThreshold(printTestResultToLog(
-                SpringDevToolsReloadUtils.runAndCalculateAverageResult(5,
+                SpringDevToolsReloadUtils.runAndCalculateMedianResult(5,
                         this::runTestReturnResult)));
     }
 
