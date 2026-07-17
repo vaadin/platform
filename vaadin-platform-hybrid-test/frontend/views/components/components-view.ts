@@ -66,6 +66,7 @@ import '@vaadin/slider';
 import '@vaadin/slider/vaadin-range-slider.js';
 import '@vaadin/slider/src/vaadin-range-slider';
 import '@vaadin/split-layout';
+import '@vaadin/switch';
 import '@vaadin/tabs';
 import '@vaadin/tabsheet';
 import '@vaadin/tabs/src/vaadin-tab';
@@ -200,6 +201,7 @@ export class ComponentsView extends View {
           <vaadin-checkbox value="2" label="Option two"></vaadin-checkbox>
           <vaadin-checkbox value="3" label="Option three"></vaadin-checkbox>
         </vaadin-checkbox-group>
+        <vaadin-switch label="Notifications"></vaadin-switch>
         <vaadin-combo-box .items="${[1,2,3,4,5]}"></vaadin-combo-box>
         <vaadin-multi-select-combo-box .items="${['apple', 'banana', 'lemon', 'orange']}"></vaadin-multi-select-combo-box>
         <vaadin-confirm-dialog></vaadin-confirm-dialog>

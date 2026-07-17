@@ -53,6 +53,7 @@ import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.ListSeries;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
+import com.vaadin.flow.component.checkbox.Switch;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
@@ -318,6 +319,8 @@ public class ComponentsView extends AppLayout {
         checkboxGroup.setItems("foo", "bar");
         checkboxGroup.addValueChangeListener(event -> log
                 .log("CheckboxGroup value changed from '" + event.getOldValue() + "' to '" + event.getValue() + "'"));
+
+        Switch switchComponent = new Switch("Notification");
 
         ComboBox<String> comboBox = new ComboBox<>("ComboBox label");
         comboBox.setItems("First", "Second", "Third");
@@ -714,6 +717,7 @@ public class ComponentsView extends AppLayout {
         components.add(card);
         components.add(checkbox);
         components.add(checkboxGroup);
+        components.add(switchComponent);
         components.add(comboBox);
         components.add(multiSelectComboBox);
         components.add(dialogButton);
