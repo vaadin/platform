@@ -287,7 +287,7 @@
             "npmName": "@vaadin/split-layout"
         },
         "switch": {
-            "jsVersion": "25.3.0-alpha4",
+            "jsVersion": "25.3.0-alpha6",
             "mode": "lit",
             "npmName": "@vaadin/switch"
         },
