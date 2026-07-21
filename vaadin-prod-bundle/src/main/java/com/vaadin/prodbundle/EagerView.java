@@ -13,6 +13,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.card.Card;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
+import com.vaadin.flow.component.checkbox.Switch;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
@@ -134,6 +135,7 @@ public class EagerView extends Div {
     public DecimalSlider slider;
     public SplitLayout splitLayout;
     public SvgIcon svgIcon;
+    public Switch switchComponent;
     public Tabs tabs;
     public Tab tab;
     public TabSheet tabSheet;
