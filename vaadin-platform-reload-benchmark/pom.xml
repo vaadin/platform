@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-platform-parent</artifactId>
+        <version>25.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>vaadin-platform-reload-benchmark</artifactId>
+    <packaging>pom</packaging>
+    <name>Vaadin Platform Spring Boot reload-time benchmark</name>
+    <description>Measures Spring DevTools reload time of a large Vaadin
+        application built against the full platform component set.</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+        <!-- Build-time only, for the code-generator Maven plugin module. -->
+        <maven.version>3.9.9</maven.version>
+        <maven-plugin-annotations.version>3.15.1</maven-plugin-annotations.version>
+    </properties>
+
+    <modules>
+        <module>generator</module>
+        <module>library</module>
+        <module>theme</module>
+        <module>ui</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

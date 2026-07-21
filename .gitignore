@@ -22,6 +22,8 @@ vaadin-platform-gradle-test/.gradle
 vaadin-platform-sbom/frontend/
 vaadin-platform-sbom/vite.config.ts
 vaadin-platform-sbom/vite.generated.ts
+vaadin-platform-reload-benchmark/ui/vite.config.ts
+vaadin-platform-reload-benchmark/ui/vite.generated.ts
 .DS_Store
 .vscode
 

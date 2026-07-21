@@ -133,6 +133,12 @@
                 <module>vaadin-platform-react-hybrid-security-test</module>
             </modules>
         </profile>
+        <profile>
+            <id>reload-benchmark</id>
+            <modules>
+                <module>vaadin-platform-reload-benchmark</module>
+            </modules>
+        </profile>
     </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
