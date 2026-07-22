@@ -124,7 +124,7 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.3.0-alpha3"
+            "javaVersion": "25.3.gradle-frontend-inplace-runtime-classpath-SNAPSHOT"
         },
         "flow-cdi": {
             "javaVersion": "16.1.0"
