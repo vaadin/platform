@@ -1,6 +1,7 @@
 Vaadin {{platform}}
 
 *This is a maintenance release for Vaadin 24.10. See [24.10.0 release notes](https://github.com/vaadin/platform/releases/tag/24.10.0) for details and resources.*
+*Note: This is a commercial release for Vaadin 24.10. Contact [Vaadin Enterprise](https://vaadin.com/enterprise) for your licenses.*
 
 ## Changelogs
 
