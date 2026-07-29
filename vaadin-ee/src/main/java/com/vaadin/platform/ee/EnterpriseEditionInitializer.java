@@ -12,6 +12,7 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.flow.internal.UsageStatistics;
 import com.vaadin.flow.server.Platform;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.startup.BaseLicenseCheckerServiceInitListener;
@@ -52,6 +53,14 @@ public class EnterpriseEditionInitializer
             logEnterpriseBanner(version);
         } else {
             logNoLicenseBanner(version);
+        }
+
+        // Report that this application depends on Enterprise Edition. Usage
+        // statistics are gathered in development mode only (the client
+        // gatherer is stripped from production bundles), so there is nothing
+        // to report from production instances.
+        if (!productionMode) {
+            UsageStatistics.markAsUsed(PRODUCT_NAME, version);
         }
 
         // Delegate the real license handling (in dev mode this offers the trial
