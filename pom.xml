@@ -139,6 +139,12 @@
                 <module>vaadin-platform-reload-benchmark</module>
             </modules>
         </profile>
+        <profile>
+            <id>theme-component-css</id>
+            <modules>
+                <module>vaadin-platform-theme-component-css-test</module>
+            </modules>
+        </profile>
     </profiles>
     <scm>
         <url>https://github.com/vaadin/platform</url>
