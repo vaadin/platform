@@ -182,6 +182,10 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence>
+                                    <excludes>
+                                        <!-- Workaround: org.jspecify:jspecify:1.0.1 has not been shipped with io.projectreactor:reactor-core (AI-components) and selenium (testbench)  -->
+                                        <exclude>org.jspecify:jspecify</exclude>
+                                    </excludes>
                                 </dependencyConvergence>
                             </rules>
                         </configuration>
