@@ -115,7 +115,13 @@ writer.writeReleaseNotes(versions, releaseNotesTemplateFileName, releaseNotesRes
 writer.writeReleaseNotes(versions, releaseNotesMaintenanceTemplateFileName, releaseNotesMaintenanceResultFileName);
 writer.writeReleaseNotes(versions, releaseNotesPrereleaseTemplateFileName, releaseNotesPrereleaseResultFileName);
 if(!versions.platform.includes('SNAPSHOT')){
-  writer.writeModulesReleaseNotes(versions, versions.platform, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
+  // The modules release note is an optional documentation artifact built from the GitHub API.
+  // It must never abort the generation of the poms, which the SBOM and the release build need.
+  try {
+    writer.writeModulesReleaseNotes(versions, versions.platform, modulesReleaseNotesFileName, modulesReleaseNotesResultFileName);
+  } catch (error) {
+    console.warn(`Skipped ${modulesReleaseNotesResultFileName}: ${error.message}`);
+  }
 }
 
 writer.writeProperty(versions, ["flow","hilla"], mavenPluginTemplatePomFileName, mavenPluginResultPomFileName);

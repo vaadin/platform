@@ -303,3 +303,63 @@ describe('Release notes creator', function () {
         expect(previousSnapshotVersion).to.equal('');
     });
 });
+
+describe('Module release link parser', function () {
+    it('should parse links written in the parenthesized format', function () {
+        const body = '- Flow ([24.10.9](https://github.com/vaadin/flow/releases/tag/24.10.9)) and Hilla ([24.10.7](https://github.com/vaadin/hilla/releases/tag/24.10.7))\n'
+            + '  - Web Components ([24.10.4](https://github.com/vaadin/web-components/releases/tag/v24.10.4))\n';
+
+        const result = creator.parseModuleReleaseLinks(body);
+
+        expect(result).to.deep.equal([
+            { name: 'flow', version: '24.10.9', releaseUrl: 'https://github.com/vaadin/flow/releases/tag/24.10.9' },
+            { name: 'hilla', version: '24.10.7', releaseUrl: 'https://github.com/vaadin/hilla/releases/tag/24.10.7' },
+            { name: 'web-components', version: 'v24.10.4', releaseUrl: 'https://github.com/vaadin/web-components/releases/tag/v24.10.4' },
+        ]);
+    });
+
+    it('should parse links written in the arrow chain format', function () {
+        const body = '- **Flow**: [25.2.4](https://github.com/vaadin/flow/releases/tag/25.2.4) → [25.2.5](https://github.com/vaadin/flow/releases/tag/25.2.5)\n';
+
+        const result = creator.parseModuleReleaseLinks(body);
+
+        expect(result).to.deep.equal([
+            { name: 'flow', version: '25.2.4', releaseUrl: 'https://github.com/vaadin/flow/releases/tag/25.2.4' },
+            { name: 'flow', version: '25.2.5', releaseUrl: 'https://github.com/vaadin/flow/releases/tag/25.2.5' },
+        ]);
+    });
+
+    it('should not leak carriage returns from CRLF bodies into the version', function () {
+        const body = '- **Flow**: [25.2.5](https://github.com/vaadin/flow/releases/tag/25.2.5)\r\n';
+
+        const result = creator.parseModuleReleaseLinks(body);
+
+        expect(result).to.deep.equal([
+            { name: 'flow', version: '25.2.5', releaseUrl: 'https://github.com/vaadin/flow/releases/tag/25.2.5' },
+        ]);
+    });
+
+    it('should skip links pointing at the platform repository', function () {
+        const body = '## Changes since [25.2.3](https://github.com/vaadin/platform/releases/tag/25.2.3)\r\n'
+            + '- **Hilla**: [25.2.5](https://github.com/vaadin/hilla/releases/tag/25.2.5)\r\n';
+
+        const result = creator.parseModuleReleaseLinks(body);
+
+        expect(result).to.deep.equal([
+            { name: 'hilla', version: '25.2.5', releaseUrl: 'https://github.com/vaadin/hilla/releases/tag/25.2.5' },
+        ]);
+    });
+
+    it('should produce versions that are safe to use in a request path', function () {
+        const body = '- **Flow**: [25.2.4](https://github.com/vaadin/flow/releases/tag/25.2.4) → [25.2.5](https://github.com/vaadin/flow/releases/tag/25.2.5)\r\n'
+            + '- Flow ([24.10.9](https://github.com/vaadin/flow/releases/tag/24.10.9))\r\n';
+
+        const result = creator.parseModuleReleaseLinks(body);
+
+        expect(result).to.have.length(3);
+        result.forEach(function (module) {
+            const path = `https://api.github.com/repos/vaadin/${module.name}/releases/tags/${module.version}`;
+            expect(path).to.match(/^[\x21-\x7e]+$/);
+        });
+    });
+});
