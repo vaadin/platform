@@ -532,7 +532,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "10.1.2",
+            "javaVersion": "10.1.3",
             "pro": true
         }
     }
