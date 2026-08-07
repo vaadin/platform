@@ -557,6 +557,12 @@ async function main() {
     if (tag) {
       log(`Checking out tag ${tag}`)
       await run(`git checkout ${tag}`, { debug: false });
+      // Tags are immutable, so a released tag keeps whatever build scripts it shipped with,
+      // including their bugs. Take the scripts from the branch and the versions.json from the
+      // tag, so that regenerating the SBOM of an old release uses the fixed tooling while the
+      // reported dependencies remain the ones that release actually shipped.
+      log(`Restoring scripts from ${prev.branch}`)
+      await run(`git checkout ${prev.branch} -- scripts/`, { debug: false });
     }
     onExit = async () => {
       await run(`git stash`, { debug: false, throw: false });
