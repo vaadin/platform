@@ -341,32 +341,47 @@ function createModulesReleaseNotes(versions, version, modulesReleaseNoteTemplate
     return render(modulesReleaseNoteTemplate, modulesReleaseNoteData);
 }
 
+// Matches a module release link anywhere in the note body. The version stops at the first
+// ')', whitespace or CR so that neither the closing markdown paren nor the CR of a CRLF
+// body ends up in the version, which would later make the GitHub API path unusable.
+const MODULE_RELEASE_LINK_RE = /https:\/\/github\.com\/vaadin\/([A-Za-z0-9._-]+)\/releases\/tag\/([^)\s]+)/g;
+
+/**
+Extract the module release links of a platform release note body.
+
+@param {String} platformReleaseNoteBody body of the platform release note.
+@return {Array} objects with the repo name, the tag and the release url, in note order.
+*/
+function parseModuleReleaseLinks(platformReleaseNoteBody) {
+    const links = [];
+    let match;
+    MODULE_RELEASE_LINK_RE.lastIndex = 0;
+    while ((match = MODULE_RELEASE_LINK_RE.exec(platformReleaseNoteBody)) !== null) {
+        const name = match[1];
+        if (name === 'platform') {
+            continue;
+        }
+        links.push({ name: name, version: match[2], releaseUrl: match[0] });
+    }
+    return links;
+}
+
 function collectModules(platformReleaseNoteBody) {
     const modules = [];
     const seen = new Set();
-    platformReleaseNoteBody.split("\n").forEach(line => {
-        if (!(line.includes("https") && line.includes("tag") && !line.includes("platform"))) {
+    parseModuleReleaseLinks(platformReleaseNoteBody).forEach(link => {
+        const key = `${link.name}@${link.version}`;
+        if (seen.has(key)) {
             return;
         }
-        line.split("](").forEach(
-            l => l.split("))").filter(notes => notes.includes("https")).forEach(noteLink => {
-                const moduleName = getModuleName(noteLink);
-                const noteVersion = getReleaseNoteVersion(noteLink);
-                const key = `${moduleName}@${noteVersion}`;
-                if (seen.has(key)) {
-                    return;
-                }
-                seen.add(key);
-                const noteBody = getReleaseNoteBody(moduleName, noteVersion) || '';
-                modules.push({
-                    name: moduleName,
-                    version: noteVersion,
-                    releaseUrl: noteLink,
-                    body: noteBody,
-                    category: getCategoryForModule(moduleName),
-                });
-            })
-        );
+        seen.add(key);
+        modules.push({
+            name: link.name,
+            version: link.version,
+            releaseUrl: link.releaseUrl,
+            body: getReleaseNoteBody(link.name, link.version) || '',
+            category: getCategoryForModule(link.name),
+        });
     });
     return modules;
 }
@@ -478,14 +493,6 @@ function wrapNoisySections(body) {
 
 function stripInlineFormatting(text) {
     return text.replace(/[`*_]/g, '').trim();
-}
-
-function getModuleName(link){
-  return link.substring(link.lastIndexOf("/vaadin/") + "/vaadin/".length, link.lastIndexOf("/releases"));
-}
-
-function getReleaseNoteVersion(link){
-  return link.substring(link.lastIndexOf("releases/tag/") + "releases/tag/".length)
 }
 
 function getReleaseNoteBody(name, version){
@@ -861,3 +868,4 @@ exports.addProperty = addProperty;
 exports.generateChangesString = generateChangesString;
 exports.calculatePreviousVersion = calculatePreviousVersion;
 exports.createModulesReleaseNotes = createModulesReleaseNotes;
+exports.parseModuleReleaseLinks = parseModuleReleaseLinks;
