@@ -78,6 +78,7 @@ import com.vaadin.flow.router.Route;
 
 @Route
 @JsModule("@vaadin/tooltip/vaadin-tooltip.js")
+@JsModule("@vaadin/field-highlighter/src/vaadin-ai-field-marker.js")
 public class EagerView extends Div {
 
     public Accordion accordion;
