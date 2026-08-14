@@ -18,7 +18,7 @@
         <jna.version>5.18.1</jna.version>
         <!-- Security overrides: force fixed transitive versions -->
         <logback.security.version>1.5.35</logback.security.version>
-        <tomcat.security.version>11.0.25</tomcat.security.version>
+        <tomcat.security.version>11.0.24</tomcat.security.version>
         <jackson2.security.version>2.22.1</jackson2.security.version>
         <jackson3.security.version>3.1.5</jackson3.security.version>
         <kotlin.security.version>2.4.0</kotlin.security.version>
