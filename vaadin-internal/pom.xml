@@ -39,6 +39,11 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ai-extensions-flow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-board-flow</artifactId>
         </dependency>
 

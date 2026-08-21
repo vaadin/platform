@@ -37,7 +37,7 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-ai-components-flow</artifactId>
+            <artifactId>vaadin-ai-core-flow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
