@@ -39,10 +39,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Manages the spring-ai artifacts used by the AI components. Keep in
+                 sync with the spring-ai version in vaadin-ai-core-flow. -->
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
-                <version>2.0.0-M2</version>
+                <version>2.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -310,11 +312,12 @@
                     <version>1.47.0</version>
                     <scope>provided</scope>
                 </dependency>
-                <!-- used in AI Components -->
+                <!-- Optional dependencies of the AI components, needed to resolve
+                     their public API when generating javadoc. -->
                 <dependency>
                     <groupId>dev.langchain4j</groupId>
                     <artifactId>langchain4j</artifactId>
-                    <version>1.11.0</version>
+                    <version>1.19.0</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
