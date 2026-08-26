@@ -105,6 +105,14 @@ const cveWhiteList = {
     cves: ['CVE-2021-33604'],
     description: 'false report: this CVE is targeting Vaadin version prior 20, swing-kit-flow is using vaadin 24+ version, the related issue has been fixed.'
   },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@2.4.0' : {
+    cves: ['CVE-2026-53914'],
+    description: 'FP: the report only affects org.jetbrains.kotlin:kotlin-gradle-plugin, the CPE for the kotlin product matches any kotlin artifact. We ship kotlin-reflect as a transitive dependency of the hilla typescript generator, not the gradle plugin.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.4.10' : {
+    cves: ['CVE-2026-53914'],
+    description: 'FP: the report only affects org.jetbrains.kotlin:kotlin-gradle-plugin, the CPE for the kotlin product matches any kotlin artifact. We ship kotlin-stdlib as a transitive dependency of the webpush library, not the gradle plugin.'
+  },
   'pkg:maven/com.networknt/json-schema-validator@1.5.9' : {
     cves: ['CVE-2025-15104'],
     description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
