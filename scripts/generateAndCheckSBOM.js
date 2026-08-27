@@ -121,6 +121,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:npm/%40opentelemetry/core@1.8.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.22.1' : {
     cves: ['CVE-2026-54515'],
     description: 'Not affected: Vaadin and Hilla deserialize endpoint input with the default Jackson mapper. The bypass requires MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, which Vaadin does not enable (verified in Hilla JacksonObjectMapperFactory). vulnerable_code_not_in_execute_path. Tracked upstream in vaadin/hilla#5801 and vaadin/appsec-kit#238.'
