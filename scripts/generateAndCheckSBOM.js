@@ -135,7 +135,11 @@ const cveWhiteList = {
   },
   'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.4.0' : {
     cves: ['CVE-2026-53914'],
-    description: 'False positive: osv.dev reports kotlin-stdlib 2.4.0 as not affected. owasp flags it via imprecise CPE matching. Tracked upstream in vaadin/flow#24962 and vaadin/hilla#5801.'
+    description: 'False positive: osv.dev reports kotlin-stdlib 2.4.0 as not affected. owasp flags it via imprecise CPE matching. kotlin-stdlib comes from flow-webpush, which already declares 2.4.0.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@2.1.21' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: the report only affects org.jetbrains.kotlin:kotlin-gradle-plugin, and the CPE for the kotlin product matches any kotlin artifact. We ship kotlin-reflect as a transitive dependency of hilla-typescript-generator, not the gradle plugin. osv.dev reports kotlin-reflect 2.1.21 as not affected.'
   },
 }
 
