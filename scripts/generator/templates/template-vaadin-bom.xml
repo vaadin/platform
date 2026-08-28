@@ -21,7 +21,6 @@
         <tomcat.security.version>11.0.25</tomcat.security.version>
         <jackson2.security.version>2.22.1</jackson2.security.version>
         <jackson3.security.version>3.1.5</jackson3.security.version>
-        <kotlin.security.version>2.4.0</kotlin.security.version>
     </properties>
 
     <distributionManagement>
@@ -52,14 +51,6 @@
                 <groupId>tools.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson3.security.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- kotlin, CVE-2026-53914 -->
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-bom</artifactId>
-                <version>${kotlin.security.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
