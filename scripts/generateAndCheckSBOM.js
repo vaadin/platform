@@ -57,6 +57,14 @@ const licenseWhiteList = [
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
 
 const cveWhiteList = {
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
+  'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
+    cves: ['CVE-2026-15195'],
+    description: 'The cve carries a git only range with no version mapping. The affected releases are 15.3.0 to 15.3.5, fixed in 15.3.6, while 11.7.2 predates that line by 17 months. It arrives through swagger-parser 10.1.1, which pins it exactly.'
+  },
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
     cves: ['CVE-2023-35116'],
     description: 'Not a valid CVE report based on the vendor analysis and [research](https://github.com/FasterXML/jackson-databind/issues/3972)'
