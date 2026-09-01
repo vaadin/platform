@@ -16,6 +16,10 @@
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
         <jna.version>5.18.1</jna.version>
+        <!-- Security overrides: force fixed transitive versions -->
+        <spring.framework.security.version>7.0.9</spring.framework.security.version>
+        <micrometer.security.version>1.17.1</micrometer.security.version>
+        <tomcat.security.version>11.0.25</tomcat.security.version>
     </properties>
 
     <distributionManagement>
@@ -27,6 +31,47 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--
+             Security overrides. These force fixed transitive versions ahead of
+             Spring Boot / Flow / Hilla / kits management. Declared first so that
+             they win over the versions coming from the imported BOMs. Remove
+             each one once the upstream ships the fixed version.
+            -->
+            <!-- spring framework, CVE-2026-41838 to CVE-2026-41855.
+                 observability-kit-spring pulls spring-context 7.0.7 while the
+                 rest of the spring modules resolve to 7.0.9 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.framework.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- micrometer, CVE-2026-40983, CVE-2026-40984.
+                 observability-kit-micrometer pulls micrometer 1.16.4 -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-bom</artifactId>
+                <version>${micrometer.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- tomcat embed, CVE-2026-66299 -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-websocket</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-bom</artifactId>
