@@ -33,6 +33,7 @@ public class AllComponentsIncludedTest {
             "@vaadin/vaadin-lumo-styles/vaadin-iconset.js",
             "Frontend/generated/jar-resources/vaadin-map/mapConnector.ts",
             "Frontend/generated/jar-resources/vaadin-map/synchronization/index.ts",
+            "Frontend/generated/jar-resources/vaadin-map/util.ts",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/spreadsheet-export.js",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet.js",
             "Frontend/generated/jar-resources/vaadin-spreadsheet/vaadin-spreadsheet-styles.js",
