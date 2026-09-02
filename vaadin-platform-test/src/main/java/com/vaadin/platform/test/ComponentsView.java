@@ -119,6 +119,16 @@ import com.vaadin.flow.component.html.Param;
 import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.RangeInput;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.Table;
+import com.vaadin.flow.component.html.TableBody;
+import com.vaadin.flow.component.html.TableCaption;
+import com.vaadin.flow.component.html.TableColumn;
+import com.vaadin.flow.component.html.TableColumnGroup;
+import com.vaadin.flow.component.html.TableDataCell;
+import com.vaadin.flow.component.html.TableFoot;
+import com.vaadin.flow.component.html.TableHead;
+import com.vaadin.flow.component.html.TableHeaderCell;
+import com.vaadin.flow.component.html.TableRow;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.FontIcon;
 import com.vaadin.flow.component.icon.Icon;
@@ -277,6 +287,22 @@ public class ComponentsView extends AppLayout {
         NativeTableHeaderCell nativeTableHeaderCell = new NativeTableHeaderCell();
         NativeTableRow nativeTableRow = new NativeTableRow();
 
+        TableCaption tableCaption = new TableCaption("table caption");
+        TableColumn tableColumn = new TableColumn();
+        TableColumnGroup tableColumnGroup = new TableColumnGroup(tableColumn);
+        TableHeaderCell tableHeaderCell = new TableHeaderCell("header cell");
+        TableRow tableRow = new TableRow(tableHeaderCell);
+        TableHead tableHead = new TableHead(tableRow);
+        TableDataCell tableDataCell = new TableDataCell("data cell");
+        TableBody tableBody = new TableBody(new TableRow(tableDataCell));
+        TableFoot tableFoot = new TableFoot(new TableRow(new TableDataCell("foot cell")));
+        Table table = new Table();
+        table.setCaption(tableCaption);
+        table.addColumnGroup(tableColumnGroup);
+        table.setHead(tableHead);
+        table.addBody(tableBody);
+        table.setFoot(tableFoot);
+
         // Using full qualified name since in parent class there is a Section Enum
         com.vaadin.flow.component.html.Section section =
                 new com.vaadin.flow.component.html.Section(new Span("section"));
@@ -285,7 +311,7 @@ public class ComponentsView extends AppLayout {
 
         Main main = new Main(div, header, abbr, anchor, orderedList, unorderedList, descriptionList, aside, code, article, nav,
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
-                nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow);
+                nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow, table);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
         FontIcon fontIcon = new FontIcon("fa-solid", "fa-user");
