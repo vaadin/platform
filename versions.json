@@ -127,7 +127,7 @@
             "javaVersion": "25.3.0-alpha9"
         },
         "flow-cdi": {
-            "javaVersion": "16.1.1"
+            "javaVersion": "16.1.2"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
