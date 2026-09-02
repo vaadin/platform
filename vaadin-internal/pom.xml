@@ -95,7 +95,7 @@
                         </goals>
                         <configuration>
                             <sourceFile>./vaadin-versions.json</sourceFile>
-                            <destinationFile>${basedir}/target/classes/vaadin-versions.json</destinationFile>
+                            <destinationFile>${basedir}/target/classes/META-INF/VAADIN/versions/vaadin-versions.json</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
