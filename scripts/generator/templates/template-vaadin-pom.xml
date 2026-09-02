@@ -80,6 +80,8 @@
                                         <exclude>com.vaadin:flow-*</exclude>
                                         <!-- we will not align the slf4j version in platform, as the MPR support and license-checker -->
                                         <exclude>org.slf4j:slf4j-api</exclude>
+                                        <!-- Project Reactor has not updated its jspecify dependency to the version used by flow-server -->
+                                        <exclude>org.jspecify:jspecify</exclude>
                                     </excludes>
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
