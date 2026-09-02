@@ -182,6 +182,10 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence>
+                                    <excludes>
+                                        <!-- Project Reactor has not updated its jspecify dependency to the version used by flow-server -->
+                                        <exclude>org.jspecify:jspecify</exclude>
+                                    </excludes>
                                 </dependencyConvergence>
                             </rules>
                         </configuration>
