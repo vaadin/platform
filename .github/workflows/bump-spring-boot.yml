@@ -101,7 +101,26 @@ jobs:
         # honor. --ignore-scripts blocks pre/post-install hooks as a
         # supply-chain hardening measure; none of the direct deps need them.
         working-directory: scripts/bump-spring-boot
-        run: npm install --ignore-scripts --no-audit --no-fund
+        run: |
+          # This repo's .gitignore excludes **/package.json and
+          # **/tsconfig.json broadly, with per-project whitelist entries. If
+          # the whitelist is missing, the checkout silently has no manifest:
+          # npm install becomes a no-op, npx fetches its own tsx, and the run
+          # dies on an opaque esbuild "top-level await / cjs" error. Check
+          # explicitly so the cause is stated instead of inferred.
+          for f in package.json tsconfig.json; do
+            if [[ ! -f "$f" ]]; then
+              echo "::error::scripts/bump-spring-boot/$f is missing from the checkout."
+              echo "::error::It is almost certainly excluded by .gitignore -- add '!scripts/bump-spring-boot/$f' to the whitelist next to the scripts/check-versions entries."
+              exit 1
+            fi
+          done
+          npm install --ignore-scripts --no-audit --no-fund
+          # Fail here rather than letting npx silently download a different tsx.
+          test -x node_modules/.bin/tsx || {
+            echo "::error::tsx was not installed into node_modules/.bin."
+            exit 1
+          }
 
       - name: Clone ${{ matrix.repo }}
         env:
@@ -123,7 +142,10 @@ jobs:
           GH_REPO: vaadin/${{ matrix.repo }}
         working-directory: scripts/bump-spring-boot
         run: |
-          npx tsx src/index.ts \
+          # `--no` refuses to fetch tsx from the network: use the one just
+          # installed, or fail loudly. Without it npx silently substitutes its
+          # own copy, which resolves this package's module type differently.
+          npx --no tsx src/index.ts \
             --repo '${{ matrix.repo }}' \
             --branch '${{ matrix.branch }}' \
             --repo-dir "$GITHUB_WORKSPACE/target" \
