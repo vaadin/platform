@@ -61,6 +61,54 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
   },
+  // The rest of the OpenTelemetry Java family, same CPE mismatch. The matched CPE is
+  // cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:* and these are Maven
+  // artifacts. Two paths bring them in: observability-kit-starter uses the Java SDK at
+  // 1.62.0, and selenium-remote-driver under vaadin-testbench brings the 1.64.0 line.
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-common@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-logs@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-metrics@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-trace@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom through observability-kit-starter, which uses the OpenTelemetry Java SDK.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-common@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-context@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-exporter-logging@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It is part of the OpenTelemetry Java SDK pulled in by observability-kit-starter.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-extension-autoconfigure@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It is part of the OpenTelemetry Java SDK pulled in by observability-kit-starter.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi@1.64.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It is part of the OpenTelemetry Java SDK pulled in by observability-kit-starter.'
+  },
   'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
     cves: ['CVE-2026-15195'],
     description: 'The cve carries a git only range with no version mapping. The affected releases are 15.3.0 to 15.3.5, fixed in 15.3.6, while 11.7.2 predates that line by 17 months. It arrives through swagger-parser 10.1.1, which pins it exactly.'
