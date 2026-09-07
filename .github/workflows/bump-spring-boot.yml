@@ -1,0 +1,246 @@
+name: Bump Spring Boot
+
+# Bumps the `spring.boot.version` Maven property to the newest patch release on
+# its own minor line, across several Vaadin repos and their maintained
+# branches, opening one rolling PR per repo/branch. See
+# scripts/bump-spring-boot/README.md for full docs.
+#
+# Patch-only, by design: major and minor upgrades change what a maintenance
+# branch ships and need human review. Note that Maven Central currently reports
+# `<latest>`/`<release>` for spring-boot-starter-parent as a milestone of a
+# newer minor, so the script anchors on each branch's own current value rather
+# than trusting either field.
+#
+# IMPORTANT: GitHub Actions only honors this workflow file on the default
+# branch (main). A workflow_dispatch always reads THIS file from main, so both
+# this YAML and scripts/bump-spring-boot/* must be merged to main before
+# anything can be dispatched -- the same caveat as check-versions.yml.
+#
+# Unlike check-versions.yml, this workflow writes to OTHER repositories, so the
+# job's GITHUB_TOKEN is useless for the push. It uses secrets.GHTK, the
+# cross-repo PAT already used by pit.yml to clone private repos.
+
+on:
+  workflow_dispatch:
+    inputs:
+      repos:
+        description: 'Comma-separated repos under vaadin/ to bump'
+        required: false
+        default: 'platform,flow,hilla,copilot-internal'
+        type: string
+      branches:
+        description: 'Comma-separated branches to target in each repo'
+        required: false
+        default: 'main,25.2,25.1'
+        type: string
+      dry_run:
+        description: 'Resolve versions and report only -- no branches, no PRs'
+        required: false
+        default: false
+        type: boolean
+
+# The GITHUB_TOKEN only needs to read this repo's own script. All writes to the
+# target repos go through GHTK.
+permissions:
+  contents: read
+
+jobs:
+  # Expand the two CSV inputs into the repo x branch cross product the bump job
+  # fans out over. Mirrors the resolve-matrix step in check-versions.yml.
+  resolve-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      cells: ${{ steps.set.outputs.cells }}
+    steps:
+      - id: set
+        env:
+          INPUT_REPOS: ${{ inputs.repos }}
+          INPUT_BRANCHES: ${{ inputs.branches }}
+        run: |
+          cells=$(node -e '
+            const split = (s) => s.split(",").map((v) => v.trim()).filter(Boolean);
+            const repos = split(process.env.INPUT_REPOS);
+            const branches = split(process.env.INPUT_BRANCHES);
+            if (repos.length === 0) throw new Error("No repos given");
+            if (branches.length === 0) throw new Error("No branches given");
+            const cells = repos.flatMap((repo) => branches.map((branch) => ({ repo, branch })));
+            // GitHub caps a matrix at 256 jobs; fail clearly rather than at dispatch time.
+            if (cells.length > 256) throw new Error(`${cells.length} cells exceeds the 256-job matrix limit`);
+            console.log(JSON.stringify(cells));
+          ')
+          echo "Matrix: $cells"
+          echo "cells=$cells" >> "$GITHUB_OUTPUT"
+
+  bump:
+    needs: resolve-matrix
+    runs-on: ubuntu-latest
+    name: ${{ matrix.repo }} [${{ matrix.branch }}]
+    strategy:
+      # One repo/branch failing must not cancel the others -- each cell has an
+      # independent rolling PR.
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.resolve-matrix.outputs.cells) }}
+    concurrency:
+      # Serialize runs targeting the same cell so two dispatches don't race to
+      # force-push the same rolling PR branch. Different cells run in parallel.
+      group: bump-spring-boot-${{ matrix.repo }}-${{ matrix.branch }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout platform (for the bump script)
+        uses: actions/checkout@v6
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        # `npm install` rather than `npm ci` because this repo's .gitignore
+        # excludes all package-lock.json files, so there is no lockfile to
+        # honor. --ignore-scripts blocks pre/post-install hooks as a
+        # supply-chain hardening measure; none of the direct deps need them.
+        working-directory: scripts/bump-spring-boot
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Clone ${{ matrix.repo }}
+        env:
+          GH_TOKEN: ${{ secrets.GHTK }}
+        run: |
+          if [[ -z "$GH_TOKEN" ]]; then
+            echo "::error::secrets.GHTK is not set. It is required to read and write vaadin/${{ matrix.repo }}."
+            exit 1
+          fi
+          # Every repo is cloned, including platform itself -- one code path,
+          # and it keeps this workflow's own checkout pristine.
+          git clone --quiet --no-single-branch --filter=blob:none \
+            "https://x-access-token:$GH_TOKEN@github.com/vaadin/${{ matrix.repo }}.git" target
+
+      - name: Bump spring.boot.version
+        env:
+          # Both git (via the remote URL above) and gh read this token.
+          GH_TOKEN: ${{ secrets.GHTK }}
+          GH_REPO: vaadin/${{ matrix.repo }}
+        working-directory: scripts/bump-spring-boot
+        run: |
+          npx tsx src/index.ts \
+            --repo '${{ matrix.repo }}' \
+            --branch '${{ matrix.branch }}' \
+            --repo-dir "$GITHUB_WORKSPACE/target" \
+            --result-file "$GITHUB_WORKSPACE/result.json" \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Summarize cell
+        # `always()` so a failed bump still contributes its error row to the
+        # aggregated report instead of disappearing from it.
+        if: always()
+        run: |
+          if [[ ! -f result.json ]]; then
+            # The script writes result.json in a finally block, so a missing
+            # file means it died before even parsing its arguments.
+            printf '{"repo":"%s","branch":"%s","status":"error","from":null,"to":null,"pr":null,"error":"the bump step produced no result"}\n' \
+              '${{ matrix.repo }}' '${{ matrix.branch }}' > result.json
+          fi
+          cat result.json
+          node -e '
+            const r = require(`${process.env.GITHUB_WORKSPACE}/result.json`);
+            const detail = r.status === "error"
+              ? (r.error ?? "unknown error").replace(/\s+/g, " ").trim()
+              : r.pr ? r.pr.url : `${r.from ?? "?"} -> ${r.to ?? "?"}`;
+            require("node:fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+              `- \`${r.repo}\` [\`${r.branch}\`]: **${r.status}** ${detail}\n`);
+          '
+
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          # One artifact per cell; the report job globs them back together.
+          name: result-${{ matrix.repo }}-${{ matrix.branch }}
+          path: result.json
+          retention-days: 30
+          if-no-files-found: error
+
+  # Matrix jobs cannot share outputs, so the per-cell results round-trip
+  # through artifacts to produce a single consolidated PR report. This is also
+  # what scripts/dispatch-spring-boot-bump.sh reads back.
+  report:
+    needs: bump
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download results
+        uses: actions/download-artifact@v6
+        with:
+          pattern: result-*
+          path: results
+        continue-on-error: true
+
+      - name: Render PR report
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const path = require("node:path");
+
+            const root = "results";
+            const files = fs.existsSync(root)
+              ? fs.readdirSync(root, { recursive: true })
+                  .map((f) => path.join(root, f))
+                  .filter((f) => f.endsWith("result.json") && fs.statSync(f).isFile())
+              : [];
+
+            const results = files.map((f) => JSON.parse(fs.readFileSync(f, "utf8")));
+            results.sort((a, b) => a.repo.localeCompare(b.repo) || b.branch.localeCompare(a.branch));
+
+            const out = [];
+            if (results.length === 0) {
+              out.push("## Spring Boot bump", "", "No results were produced.");
+            } else {
+              const prs = results.filter((r) => r.pr);
+              const created = prs.filter((r) => r.status === "created").length;
+              const updated = prs.filter((r) => r.status === "updated").length;
+              const current = results.filter((r) => r.status === "up-to-date").length;
+              const errors = results.filter((r) => r.status === "error");
+
+              out.push("## Spring Boot bump", "");
+
+              if (prs.length > 0) {
+                out.push(`### Pull requests (${created} created, ${updated} updated)`, "");
+                out.push("| repo | branch | from | to | pull request |", "| --- | --- | --- | --- | --- |");
+                for (const r of prs) {
+                  out.push(`| \`${r.repo}\` | \`${r.branch}\` | ${r.from} | **${r.to}** | [#${r.pr.number}](${r.pr.url}) |`);
+                }
+                out.push("");
+              } else {
+                out.push("### Pull requests", "", "No pull requests were opened or updated.", "");
+              }
+
+              if (errors.length > 0) {
+                out.push(`### Failures (${errors.length})`, "");
+                for (const r of errors) {
+                  // Collapse to one line: a raw multi-line git/gh error would
+                  // break out of the bullet list. The full text stays in the
+                  // cell log and in its result artifact.
+                  const msg = (r.error ?? "unknown error").replace(/\s+/g, " ").trim();
+                  out.push(`- \`${r.repo}\` [\`${r.branch}\`]: ${msg}`);
+                }
+                out.push("");
+              }
+
+              out.push("### All cells", "");
+              out.push("| repo | branch | status | detail |", "| --- | --- | --- | --- |");
+              for (const r of results) {
+                const detail = r.status === "error"
+                  ? (r.error ?? "").replace(/\s+/g, " ").trim().slice(0, 120)
+                  : r.pr ? `[#${r.pr.number}](${r.pr.url})`
+                  : r.status === "up-to-date" ? `already ${r.from}`
+                  : `${r.from ?? "?"} -> ${r.to ?? "?"}`;
+                out.push(`| \`${r.repo}\` | \`${r.branch}\` | ${r.status} | ${detail} |`);
+              }
+              out.push("", `${current} of ${results.length} cells were already up to date.`);
+            }
+
+            const text = out.join("\n") + "\n";
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
+            console.log(text);
+          '
