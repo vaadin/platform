@@ -269,7 +269,10 @@ if $local_mode; then
             # The bump script writes its own result file, including on failure,
             # so a thrown cell still reaches the report. `|| true` keeps one bad
             # cell from aborting the rest -- same intent as fail-fast: false.
-            ( cd "$bump_dir" && GH_TOKEN="$token" npx tsx src/index.ts \
+            # `npx --no` uses the locally installed tsx or fails, rather than
+            # silently fetching its own copy (which resolves this package's
+            # module type differently and breaks).
+            ( cd "$bump_dir" && GH_TOKEN="$token" npx --no tsx src/index.ts \
                 --repo "$repo" \
                 --branch "$cell_branch" \
                 --repo-dir "$clone" \

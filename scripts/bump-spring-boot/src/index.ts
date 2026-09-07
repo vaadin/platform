@@ -229,8 +229,24 @@ async function main(): Promise<number> {
     }
 }
 
-// Set the code rather than calling process.exit(): exiting while undici still
-// holds the HTTPS socket open trips a libuv assertion on Windows
+// Two deliberate choices here:
+//
+// Set `exitCode` rather than calling process.exit(): exiting while undici
+// still holds the HTTPS socket open trips a libuv assertion on Windows
 // (`!(handle->flags & UV_HANDLE_CLOSING)`). Letting the loop drain naturally
 // is both correct and quiet.
-process.exitCode = await main();
+//
+// Use .then() rather than top-level await: top-level await is only legal when
+// this file is treated as ESM, which depends on package.json being present and
+// declaring `"type": "module"`. This repo's .gitignore excludes
+// **/package.json broadly, so a missing whitelist entry once made tsx fall
+// back to CJS and fail with an opaque esbuild transform error. Avoiding
+// top-level await removes that whole failure mode.
+main()
+    .then((code) => {
+        process.exitCode = code;
+    })
+    .catch((err) => {
+        console.error(err instanceof Error ? err.message : String(err));
+        process.exitCode = 1;
+    });
