@@ -108,11 +108,6 @@
             "mode": "lit",
             "npmName": "@vaadin/dialog"
         },
-        "email-field": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/email-field"
-        },
         "field-base": {
             "jsVersion": "25.3.0-beta1",
             "mode": "lit",
@@ -164,11 +159,6 @@
             "jsVersion": "25.3.0-beta1",
             "mode": "lit",
             "npmName": "@vaadin/input-container"
-        },
-        "integer-field": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/integer-field"
         },
         "item": {
             "jsVersion": "25.3.0-beta1",
@@ -231,20 +221,10 @@
             "mode": "lit",
             "npmName": "@vaadin/notification"
         },
-        "number-field": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/number-field"
-        },
         "overlay": {
             "jsVersion": "25.3.0-beta1",
             "mode": "lit",
             "npmName": "@vaadin/overlay"
-        },
-        "password-field": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/password-field"
         },
         "popover": {
             "jsVersion": "25.3.0-beta1",
@@ -300,16 +280,6 @@
             "jsVersion": "25.3.0-beta1",
             "mode": "lit",
             "npmName": "@vaadin/tabsheet"
-        },
-        "text-area": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/text-area"
-        },
-        "text-field": {
-            "jsVersion": "25.3.0-beta1",
-            "mode": "lit",
-            "npmName": "@vaadin/text-field"
         },
         "time-picker": {
             "jsVersion": "25.3.0-beta1",

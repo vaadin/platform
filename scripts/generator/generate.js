@@ -4,6 +4,7 @@ const argv = require('minimist')(process.argv.slice(2));
 
 const writer = require('./src/writer');
 const transformer = require('./src/transformer');
+const jarVersions = require('./src/jarVersions');
 
 if (!argv['platform']) {
     console.log('Specify platform version as \'--platform=11.12.13\'');
@@ -105,7 +106,15 @@ writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJson
 writer.writeNestedSeparateJson(versions.react['react-components-pro'], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
-writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
+// The component integrations pin the npm versions of the packages they ship
+// in their own jars, and the versions file of the platform does not declare
+// them. The npm package of the platform still depends on all of them, so the
+// versions are read back from the jars rather than declared a second time.
+// Only the core packages are read, as the commercial jars still declare
+// theirs in the versions file.
+const pinnedVersions = jarVersions.readPinnedVersions(versions.core['flow-components'].javaVersion, argv['jars']);
+
+writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedVersions), corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenVaadinPomTemplateFileName, mavenVaadinPomResultFileName);
 writer.writeMaven(versions, mavenVaadinEePomTemplateFileName, mavenVaadinEePomResultFileName);
