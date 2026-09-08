@@ -31,7 +31,7 @@ on:
       branches:
         description: 'Comma-separated branches to target in each repo'
         required: false
-        default: 'main,25.2,25.1'
+        default: 'main,25.3,25.2,25.1'
         type: string
       dry_run:
         description: 'Resolve versions and report only -- no branches, no PRs'
