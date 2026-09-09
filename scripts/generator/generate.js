@@ -110,12 +110,11 @@ writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJs
 // in their own jars, and the versions file of the platform does not declare
 // them. The npm package of the platform still depends on all of them, so the
 // versions are read back from the jars rather than declared a second time.
-// Only the core packages are read, as the commercial jars still declare
-// theirs in the versions file.
 const pinnedVersions = jarVersions.readPinnedVersions(versions.core['flow-components'].javaVersion, argv['jars']);
+const pinnedPerPackage = jarVersions.splitPinnedVersions(pinnedVersions, versions.react['react-components-pro'].exclusions);
 
-writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedVersions), corePackageTemplateFileName, corePackageResultFileName);
-writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
+writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
+writer.writePackageJson(jarVersions.withPinnedVersions(versions.vaadin, pinnedPerPackage.vaadin), vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenVaadinPomTemplateFileName, mavenVaadinPomResultFileName);
 writer.writeMaven(versions, mavenVaadinEePomTemplateFileName, mavenVaadinEePomResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);

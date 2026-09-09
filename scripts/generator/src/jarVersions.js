@@ -183,7 +183,32 @@ function withPinnedVersions(versions, pinnedVersions) {
     return Object.assign({}, versions, added);
 }
 
+/**
+ * Splits the packages the jars pin between the core and the commercial npm
+ * package of the platform.
+ *
+ * Only the Vaadin packages are handed out: the npm packages of the platform
+ * depend on those and get whatever they depend on transitively, as they did
+ * when `versions.json` declared every one of them.
+ *
+ * @param {Object} pinnedVersions the npm package names and versions from the jars
+ * @param {Array} proPackages the packages of the commercial pack, i.e. the
+ *   exclusions of its React components
+ * @return {Object} the pinned versions `core` and `vaadin` get
+ */
+function splitPinnedVersions(pinnedVersions, proPackages) {
+    const pro = new Set(proPackages || []);
+    const split = { core: {}, vaadin: {} };
+    Object.entries(pinnedVersions)
+        .filter(([npmName]) => npmName.startsWith('@vaadin/'))
+        .forEach(([npmName, version]) => {
+            split[pro.has(npmName) ? 'vaadin' : 'core'][npmName] = version;
+        });
+    return split;
+}
+
 exports.readPinnedVersions = readPinnedVersions;
 exports.withPinnedVersions = withPinnedVersions;
+exports.splitPinnedVersions = splitPinnedVersions;
 // export for testing purpose
 exports.readJarFolder = readJarFolder;

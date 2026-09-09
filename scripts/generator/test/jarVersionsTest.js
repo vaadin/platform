@@ -29,6 +29,22 @@ describe('Jar pinned versions', function () {
         });
     });
 
+    it('should split the packages the jars pin between the two npm packages', function () {
+        const result = jarVersions.splitPinnedVersions(
+            {
+                "@vaadin/text-field": "25.4.0",
+                "@vaadin/charts": "25.4.0",
+                "date-fns": "4.1.0"
+            },
+            ["@vaadin/charts", "@vaadin/crud"]
+        );
+
+        expect(result).to.deep.equal({
+            core: { "@vaadin/text-field": "25.4.0" },
+            vaadin: { "@vaadin/charts": "25.4.0" }
+        });
+    });
+
     it('should leave the versions alone when no jar pins a package', function () {
         const versions = {
             "text-field": {
