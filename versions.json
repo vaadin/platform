@@ -125,7 +125,7 @@
             "javaVersion": "16.1.2"
         },
         "flow-components": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.4.pin-versions-SNAPSHOT"
         },
         "form-layout": {
             "jsVersion": "25.3.0-beta1",
