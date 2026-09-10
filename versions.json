@@ -1,22 +1,7 @@
 {
     "core": {
-        "a11y-base": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/a11y-base"
-        },
         "browserless-test": {
             "javaVersion": "1.2.0-beta1"
-        },
-        "component-base": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/component-base"
-        },
-        "field-base": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/field-base"
         },
         "flow": {
             "javaVersion": "25.4-SNAPSHOT"
@@ -30,26 +15,11 @@
         "hilla": {
             "javaVersion": "25.3.0-beta2"
         },
-        "input-container": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/input-container"
-        },
-        "lit-renderer": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/lit-renderer"
-        },
         "mpr-v7": {
             "javaVersion": "8.0.1"
         },
         "mpr-v8": {
             "javaVersion": "8.0.1"
-        },
-        "overlay": {
-            "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
-            "npmName": "@vaadin/overlay"
         },
         "vaadin-aura-theme": {
             "javaVersion": "{{version}}"
