@@ -17,6 +17,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.lang.model.SourceVersion;
+
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
@@ -210,10 +212,10 @@ public class ComponentUsageTest {
         List<String> javaImports = allClasses.stream().map(c -> "import " + c.getName() + ";")
                 .collect(Collectors.toList());
         List<String> javaVarRegexs = allClasses.stream().map(c -> "^\\s*([\\w\\.]+\\.)?(" + c.getSimpleName()
-                + " *(<.*>)? *" + uncapitalize(c.getSimpleName()) + ") *[;=].*")
+                + " *(<.*>)? *" + variableName(c) + ") *[;=].*")
                 .collect(Collectors.toList());
         List<String> javaVars = allClasses.stream()
-                .map(c -> c.getSimpleName() + " " + uncapitalize(c.getSimpleName()) + " =")
+                .map(c -> c.getSimpleName() + " " + variableName(c) + " =")
                 .collect(Collectors.toList());
 
         File javaViewFile = new File(JAVA_VIEW);
@@ -329,6 +331,17 @@ public class ComponentUsageTest {
             }
         }
         return values;
+    }
+
+    /**
+     * Name of the variable the view is expected to declare for the given
+     * component. It is the uncapitalized simple name, suffixed with
+     * {@code Component} when that would be a reserved word, e.g. {@code Switch}
+     * cannot be assigned to a variable named {@code switch}.
+     */
+    private static String variableName(Class<?> c) {
+        String name = uncapitalize(c.getSimpleName());
+        return SourceVersion.isKeyword(name) ? name + "Component" : name;
     }
 
     private static String uncapitalize(String s) {

@@ -14,7 +14,7 @@ import '@vaadin/badge';
 import '@vaadin/board/vaadin-board';
 import '@vaadin/board/vaadin-board-row';
 import '@vaadin/breadcrumbs';
-import '@vaadin/breadcrumbs/src/vaadin-breadcrumbs-item.js';
+import '@vaadin/breadcrumbs/src/vaadin-breadcrumbs-item';
 import '@vaadin/button';
 import '@vaadin/charts';
 import '@vaadin/charts/src/vaadin-chart';
