@@ -2,6 +2,7 @@
     "core": {
         "a11y-base": {
             "jsVersion": "25.3.0-beta2",
+            "mode": "lit",
             "npmName": "@vaadin/a11y-base"
         },
         "accordion": {
@@ -113,6 +114,7 @@
         },
         "field-base": {
             "jsVersion": "25.3.0-beta2",
+            "mode": "lit",
             "npmName": "@vaadin/field-base"
         },
         "field-highlighter": {
@@ -332,6 +334,7 @@
         },
         "vaadin-lumo-styles": {
             "jsVersion": "25.3.0-beta2",
+            "mode": "lit",
             "npmName": "@vaadin/vaadin-lumo-styles",
             "releasenotes": true
         },
@@ -357,6 +360,7 @@
         },
         "vaadin-themable-mixin": {
             "jsVersion": "25.3.0-beta2",
+            "mode": "lit",
             "npmName": "@vaadin/vaadin-themable-mixin"
         },
         "vaadin-usage-statistics": {
