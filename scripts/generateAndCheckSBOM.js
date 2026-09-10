@@ -604,7 +604,7 @@ async function main() {
 
   if (!cmd.quick) {
     await run(`./scripts/generateBoms.sh${cmd.useSnapshots ? ' --useSnapshots' :''}`, { debug: false });
-    await run('mvn -ntp -B clean install Poss,ee -T 1C -q -DskipTests -Dvaadin.npm.minimumFrontendPackageAgeDays=0');
+    await run('mvn -ntp -B clean install -Poss,ee -T 1C -q -DskipTests -Dvaadin.npm.minimumFrontendPackageAgeDays=0');
   }
 
   log(`cd ${testProject}`);
