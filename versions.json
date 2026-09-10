@@ -17,7 +17,6 @@
         },
         "aura": {
             "jsVersion": "25.3.0-beta2",
-            "mode": "lit",
             "npmName": "@vaadin/aura"
         },
         "avatar": {
