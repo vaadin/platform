@@ -24,8 +24,8 @@ keeps depending on them; see [scripts/generator/README.md](scripts/generator/REA
 For releasing a new platform from CI servers the workflow should be:
  1. set the version to release in pom.xml file by running `mvn versions:set -DnewVersion=n.n.n`
  2. generate and update other pom.xml files by running `./scripts/generateBoms.sh` script, if you want to use snapshots run `./scripts/generateBoms.sh --useSnapshots` instead.
- 3. package  `mvn package -Pjavadocs -DskipTests`
- 4. deploy `mvn deploy -Pproduction,release,javadocs,flatten-pom -DskipTests -DshrinkWrap`
+ 3. package  `mvn package -Doss -Dee -Pjavadocs -DskipTests`
+ 4. deploy `mvn deploy -Pproduction,release,javadocs,flatten-pom -DskipTests -DshrinkWrap` (add `-Doss` and/or `-Dee`, see the deploy options below)
  5. generate release notes `node scripts/generator/generate.js --platform=n.n.n --versions=versions.json`
 
 NOTE: that deploy needs to correctly set the credentials and target maven repo
@@ -58,12 +58,14 @@ Valid combinations so the parent pom is deployed exactly once: all at once (#1),
 
 You can install the platform artifacts in your local maven cache by running the following command.
 ```
-mvn clean install -DskipTests
+mvn clean install -Doss -Dee -DskipTests
 ```
+
+`-Doss` and `-Dee` are what add the umbrella modules (`vaadin`, `vaadin-core` and `vaadin-ee`) to the reactor, see the profile table above. They are needed even when you only care about the other modules: `vaadin-platform-javadoc`, `vaadin-platform-test` and the hybrid test modules all depend on `com.vaadin:vaadin`, so without `-Doss` the build fails with `com.vaadin:vaadin:jar:<version> was not found` as soon as the version in the repository has not been published yet (which is always the case for a freshly bumped `-SNAPSHOT`). Drop `-Dee` if you do not need the Enterprise Edition umbrella.
 
 Optionally you might need smoke tests package for running in servlet-containers tests, then you need to run
 ```
-mvn clean install -DskipTests -Pproduction -Pnpm-it
+mvn clean install -Doss -DskipTests -Pproduction -Pnpm-it
 ```
 
 To install a single umbrella, for example `vaadin-ee`, build just that module (the rest of the platform at the same version must already be available in the repository):
@@ -85,20 +87,20 @@ In Addition, tests include Collaboration Engine, you need to provide a [valid li
 1. You need valid Sauce Labs credentials for running the tests
 2. For Smoke Integration Tests run:
 ```
-mvn verify -Pproduction,npm-it \
+mvn verify -Doss -Pproduction,npm-it \
   -Dsa.user=your_username -Dsa.key=your_key \
   -Dce.license=your_ce_license
 ```
 2. For Fusion Integration Tests run:
 ```
-mvn verify -Pproduction,fusion-hybrid \
+mvn verify -Doss -Pproduction,fusion-hybrid \
   -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key \
   -Dce.license=your_ce_license
 ```
 3. For Servlet Contaner Integration Tests need to run:
 ```
-mvn install -Pproduction,npm-it -DskipTests
-mvn verify -Pproduction,npm-it-servlet-containers \
+mvn install -Doss -Pproduction,npm-it -DskipTests
+mvn verify -Doss -Pproduction,npm-it-servlet-containers \
   -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key \
   -Dce.license=your_ce_license
 ```
@@ -120,7 +122,7 @@ cd vaadin-platform-gradle-test
 
 2. Then run the smoke tests in other terminal
 ```
-mvn verify -Pproduction,npm-it \
+mvn verify -Doss -Pproduction,npm-it \
   -Dce.license=your_ce_license \
   -Dcom.vaadin.testbench.Parameters.hubHostname=localhost \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
@@ -131,7 +133,7 @@ _NOTE:_ when docker container is running you can visit to http://localhost:7900 
 
 1. For Flow Integration Tests run:
 ```
-mvn verify -Pproduction,npm-it \
+mvn verify -Doss -Pproduction,npm-it \
   -Dce.license=your_ce_license \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
@@ -139,7 +141,7 @@ Note that the number of test in parallel can be increased if your computer has e
 
 2. For Fusion Integration Tests run:
 ```
-mvn verify -Pproduction,fusion-hybrid \
+mvn verify -Doss -Pproduction,fusion-hybrid \
   -Dce.license=your_ce_license
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```
@@ -147,12 +149,12 @@ mvn verify -Pproduction,fusion-hybrid \
 
 First compile e install smoke tests if not done already:
 ```
-mvn install -DskipTests -Pproduction,npm-it
+mvn install -Doss -DskipTests -Pproduction,npm-it
 ```
 
 Then run the tests:
 ```
-mvn verify -Pproduction,npm-it-servlet-containers \
+mvn verify -Doss -Pproduction,npm-it-servlet-containers \
   -Dce.license=your_ce_license \
   -Dcom.vaadin.testbench.Parameters.testsInParallel=1
 ```

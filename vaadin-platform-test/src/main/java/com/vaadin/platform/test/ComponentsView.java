@@ -322,9 +322,9 @@ public class ComponentsView extends AppLayout {
         Badge badge = new Badge("new messages", 3);
 
         Breadcrumbs breadcrumbs = new Breadcrumbs(Breadcrumbs.Mode.MANUAL);
-        BreadcrumbsItem homeItem = new BreadcrumbsItem("Home", "/");
+        BreadcrumbsItem breadcrumbsItem = new BreadcrumbsItem("Home", "/");
         BreadcrumbsItem currentItem = new BreadcrumbsItem("Current");
-        breadcrumbs.add(homeItem, currentItem);
+        breadcrumbs.add(breadcrumbsItem, currentItem);
 
         Button button = new Button("Button text", e -> {
             log.log("Clicked button");
