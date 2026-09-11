@@ -4,6 +4,7 @@ const argv = require('minimist')(process.argv.slice(2));
 
 const writer = require('./src/writer');
 const transformer = require('./src/transformer');
+const jarVersions = require('./src/jarVersions');
 
 if (!argv['platform']) {
     console.log('Specify platform version as \'--platform=11.12.13\'');
@@ -105,8 +106,19 @@ writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJson
 writer.writeNestedSeparateJson(versions.react['react-components-pro'], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
-writer.writePackageJson(versions.core, corePackageTemplateFileName, corePackageResultFileName);
-writer.writePackageJson(versions.vaadin, vaadinPackageTemplateFileName, vaadinPackageResultFileName);
+// The component integrations pin the npm versions of the packages they ship
+// in their own jars, so this file no longer declares them. The two npm
+// packages written below, @vaadin/vaadin-core and @vaadin/vaadin, list every
+// component as a dependency, and the version to depend on used to come from
+// the entries that are now gone; without reading them back out of the jars
+// those packages would lose some seventy dependencies. Nothing else of the
+// generation needs them: the boms take the Java versions from this file, and
+// the versions files written above pin only what the platform declares.
+const pinnedVersions = jarVersions.readPinnedVersions(versions.core['flow-components'].javaVersion, argv['jars']);
+const pinnedPerPackage = jarVersions.splitPinnedVersions(pinnedVersions, versions.react['react-components-pro'].exclusions);
+
+writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
+writer.writePackageJson(jarVersions.withPinnedVersions(versions.vaadin, pinnedPerPackage.vaadin), vaadinPackageTemplateFileName, vaadinPackageResultFileName);
 writer.writeMaven(versions, mavenVaadinPomTemplateFileName, mavenVaadinPomResultFileName);
 writer.writeMaven(versions, mavenVaadinEePomTemplateFileName, mavenVaadinEePomResultFileName);
 writer.writeMaven(versions, mavenBomTemplateFileName, mavenBomResultFileName);
