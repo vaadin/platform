@@ -109,17 +109,20 @@ if (!fs.existsSync(resultsDir)) {
 // generation needs them: the boms take the Java versions from this file, and
 // the versions files written below pin only what the platform declares.
 const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars']);
+// The core React components come from the base jar of the components. The
+// commercial ones stay here: that jar is on the classpath of every
+// application, and one using only core components must not install the
+// commercial packages.
 const reactComponents = pinnedEntries['@vaadin/react-components'];
-const reactComponentsPro = pinnedEntries['@vaadin/react-components-pro'];
-if (!reactComponents || !reactComponentsPro) {
+if (!reactComponents) {
     console.warn(
-        'The jars pin no React components, so the npm packages of the platform will not depend on them' +
-            ' and every component counts as a core one.'
+        'The jars pin no React components, so @vaadin/vaadin-core will not depend on them.'
     );
 }
+const reactComponentsPro = versions.react['react-components-pro'];
 const pinnedPerPackage = jarVersions.splitPinnedVersions(
     jarVersions.pinnedVersions(pinnedEntries),
-    reactComponentsPro ? reactComponentsPro.exclusions : []
+    reactComponentsPro.exclusions
 );
 
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
@@ -129,9 +132,7 @@ if (reactComponents) {
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
 
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
-if (reactComponentsPro) {
-    writer.writeNestedSeparateJson(reactComponentsPro, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
-}
+writer.writeNestedSeparateJson(reactComponentsPro, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
