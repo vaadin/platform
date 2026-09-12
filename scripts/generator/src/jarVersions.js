@@ -86,15 +86,28 @@ function collectPackages(node, packages) {
         .filter((value) => value && typeof value === 'object')
         .forEach((value) => {
             if (value.npmName) {
-                const version = value.npmVersion || value.jsVersion;
-                if (version) {
-                    packages[value.npmName] = version;
-                }
+                packages[value.npmName] = value;
             } else {
                 collectPackages(value, packages);
             }
         });
     return packages;
+}
+
+/**
+ * Takes the version of each entry, for the callers that only need those.
+ *
+ * @param {Object} entries the entries by npm package name
+ * @returns {Object} the version by npm package name
+ */
+function pinnedVersions(entries) {
+    return Object.entries(entries)
+        .map(([npmName, entry]) => [npmName, entry.npmVersion || entry.jsVersion])
+        .filter(([, version]) => version)
+        .reduce((versions, [npmName, version]) => {
+            versions[npmName] = version;
+            return versions;
+        }, {});
 }
 
 /**
@@ -125,7 +138,7 @@ function findJars(dir, version) {
  *   folder of the local Maven repository by default
  * @return {Object} the npm package names and the versions they are pinned to
  */
-function readPinnedVersions(version, jarsDir) {
+function readPinnedEntries(version, jarsDir) {
     const dir = jarsDir || path.join(process.env.HOME || '', '.m2/repository/com/vaadin');
     const jars = findJars(dir, version);
     const packages = {};
@@ -207,7 +220,8 @@ function splitPinnedVersions(pinnedVersions, proPackages) {
     return split;
 }
 
-exports.readPinnedVersions = readPinnedVersions;
+exports.readPinnedEntries = readPinnedEntries;
+exports.pinnedVersions = pinnedVersions;
 exports.withPinnedVersions = withPinnedVersions;
 exports.splitPinnedVersions = splitPinnedVersions;
 // export for testing purpose

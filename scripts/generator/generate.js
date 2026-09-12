@@ -98,24 +98,42 @@ if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
 }
 
-writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
-writer.writeNestedSeparateJson(versions.react['react-components'], coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
-writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
-
-writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
-writer.writeNestedSeparateJson(versions.react['react-components-pro'], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
-writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
-
 // The component integrations pin the npm versions of the packages they ship
 // in their own jars, so this file no longer declares them. The two npm
 // packages written below, @vaadin/vaadin-core and @vaadin/vaadin, list every
 // component as a dependency, and the version to depend on used to come from
 // the entries that are now gone; without reading them back out of the jars
-// those packages would lose some seventy dependencies. Nothing else of the
+// those packages would lose some seventy dependencies. The React components
+// come from the jars as well, with the packages they bring, which is what
+// tells the commercial components from the core ones. Nothing else of the
 // generation needs them: the boms take the Java versions from this file, and
-// the versions files written above pin only what the platform declares.
-const pinnedVersions = jarVersions.readPinnedVersions(versions.core['flow-components'].javaVersion, argv['jars']);
-const pinnedPerPackage = jarVersions.splitPinnedVersions(pinnedVersions, versions.react['react-components-pro'].exclusions);
+// the versions files written below pin only what the platform declares.
+const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars']);
+// The core React components come from the base jar of the components. The
+// commercial ones stay here: that jar is on the classpath of every
+// application, and one using only core components must not install the
+// commercial packages.
+const reactComponents = pinnedEntries['@vaadin/react-components'];
+if (!reactComponents) {
+    console.warn(
+        'The jars pin no React components, so @vaadin/vaadin-core will not depend on them.'
+    );
+}
+const reactComponentsPro = versions.react['react-components-pro'];
+const pinnedPerPackage = jarVersions.splitPinnedVersions(
+    jarVersions.pinnedVersions(pinnedEntries),
+    reactComponentsPro.exclusions
+);
+
+writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
+if (reactComponents) {
+    writer.writeNestedSeparateJson(reactComponents, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
+}
+writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
+
+writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
+writer.writeNestedSeparateJson(reactComponentsPro, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
+writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.vaadin, pinnedPerPackage.vaadin), vaadinPackageTemplateFileName, vaadinPackageResultFileName);
