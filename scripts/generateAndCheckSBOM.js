@@ -51,8 +51,7 @@ const licenseWhiteList = [
   'https://www.bouncycastle.org/licence.html',
   'https://opensource.org/licenses/MIT',
   'OFL-1.1',
-  'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html',
-  '(BSD-3-Clause OR GPL-2.0)'
+  'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'
 ];
 
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
@@ -288,6 +287,12 @@ async function consolidateSBoms(...boms) {
     // See https://github.com/mapbox/jsonlint README
     if (/jsonlint-lines-primitives/.test(c.purl) && !c.licenses) {
       c.licenses = [{ license: { id: 'MIT' } }];
+    }
+    // node-forge is offered under BSD-3-Clause or GPL-2.0 and we take the BSD one.
+    // sumarizeLicenses splits the OR expression and checks each half on its own, so
+    // leaving the expression makes the GPL half be reported as an invalid license.
+    if (/pkg:npm\/node-forge@/.test(c.purl)) {
+      c.licenses = [{ license: { id: 'BSD-3-Clause' } }];
     }
   });
   return ret;
