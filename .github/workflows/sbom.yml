@@ -56,7 +56,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-java@v5
         with:
-          java-version: '21'
+          # 14.14.0 ships a vaadin-maven-plugin whose asm cannot read class file
+          # major version 65, so build-frontend fails on java 21
+          java-version: '17'
           distribution: 'temurin'
       - uses: stCarolas/setup-maven@v5.1
         with:
