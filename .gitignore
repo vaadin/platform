@@ -22,6 +22,13 @@ vaadin-platform-test/package-lock.json
 vaadin-platform-test/package.json
 vaadin-platform-test/webpack.config.js
 vaadin-platform-test/webpack.generated.js
+vaadin-platform-sbom/package-lock.json
+vaadin-platform-sbom/package.json
+vaadin-platform-sbom/tsconfig.json
+vaadin-platform-sbom/types.d.ts
+vaadin-platform-sbom/webpack.config.js
+vaadin-platform-sbom/webpack.generated.js
+vaadin-platform-sbom/frontend/
 
 vaadin-bom/pom.xml
 vaadin-spring-bom/pom.xml
