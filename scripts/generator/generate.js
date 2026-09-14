@@ -113,12 +113,31 @@ const reactComponents = pinnedEntries['@vaadin/react-components'];
 const reactComponentsPro = pinnedEntries['@vaadin/react-components-pro'];
 if (!reactComponents || !reactComponentsPro) {
     console.warn(
-        'The jars pin no React components, so the npm packages of the platform will not depend on them' +
-            ' and every component counts as a core one.'
+        `The jars pin ${!reactComponents && !reactComponentsPro ? 'neither of the React components' : !reactComponents ? 'no core React components' : 'no commercial React components'},` +
+            ' so the npm packages of the platform will not depend on them and every component counts as a core one.'
     );
+} else if (!reactComponentsPro.exclusions || reactComponentsPro.exclusions.length === 0) {
+    // Without them every commercial package would be written into the core
+    // npm package, which is worse than not writing the packages at all
+    console.error(
+        'The commercial React components pinned by the jars bring no package, so there is nothing to tell the commercial components from the core ones.'
+    );
+    process.exit(1);
 }
+// The React components are pinned for the versions files, not for the npm
+// packages of the platform: those depend on the web components, which a React
+// application gets through the React components rather than the other way
+// round, so the two are left out of what is handed to them
+const reactComponentPackages = [reactComponents, reactComponentsPro]
+    .filter(Boolean)
+    .map((reactComponent) => reactComponent.npmName);
+const componentVersions = Object.fromEntries(
+    Object.entries(jarVersions.pinnedVersions(pinnedEntries)).filter(
+        ([npmName]) => !reactComponentPackages.includes(npmName)
+    )
+);
 const pinnedPerPackage = jarVersions.splitPinnedVersions(
-    jarVersions.pinnedVersions(pinnedEntries),
+    componentVersions,
     reactComponentsPro ? reactComponentsPro.exclusions : []
 );
 
