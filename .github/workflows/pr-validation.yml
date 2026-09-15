@@ -196,11 +196,22 @@ jobs:
       - name: Purge Vaadin and Hilla artifacts from the local repo
         run: rm -rf ~/.m2/repository/com/vaadin ~/.m2/repository/dev/hilla ~/.gradle
 
+      # DEVIATION: TeamCity runs the ITs against browsers on the Selenium grid,
+      # so nothing ever started a browser on the agent itself. Here they use
+      # the runner's own Chrome, and the runner has no X display — without a
+      # virtual one Chrome exits at startup and every test errors with
+      # SessionNotCreatedException ("Chrome instance exited"). Xvfb ships with
+      # the ubuntu runner images; it is installed here in case that changes.
+      - name: Ensure Xvfb is available
+        run: command -v xvfb-run || { sudo apt-get update && sudo apt-get install -y xvfb; }
+
       - name: Environment info
         run: |
           echo "---> node/npm"; node -v; npm -v
           echo "---> java";     java -version
           echo "---> maven";    mvn -v
+          echo "---> chrome";   google-chrome --version || true
+          echo "---> xvfb";     command -v xvfb-run
           echo "---> disk";     df -k
 
       # Step 3, second half.
@@ -248,12 +259,12 @@ jobs:
       # DEVIATION: TeamCity drives Chrome through the internal grid at
       # pr-validation-hub.rnd.aws.int.vaadin.com and keeps a Sauce Connect
       # tunnel open around it (steps 13/26). Neither is used here — the ITs
-      # run against the Chrome preinstalled on the runner, so they cover one
-      # browser where the grid fanned them out across a browser set.
+      # run against the Chrome preinstalled on the runner, under Xvfb, so they
+      # cover one browser where the grid fanned them out across a browser set.
       - name: Run npm tests [platform]
         if: matrix.suite == 'maven'
         run: |
-          mvn $MAVEN_ARGS -Dvaadin.bowerMode=false -Denforcer.skip=true \
+          xvfb-run -a mvn $MAVEN_ARGS -Dvaadin.bowerMode=false -Denforcer.skip=true \
             -Pnpm-it,'!bower-it',jandex,hilla,dev-bundle,gradle,production,hybrid-security,react-hybrid,oss,ee,reload-benchmark,theme-component-css \
             -Dpath.to.java="$JAVA_HOME/bin/" \
             -Dcom.vaadin.testbench.Parameters.runLocally=chrome \
@@ -269,7 +280,7 @@ jobs:
       - name: Run bower tests
         if: matrix.suite == 'maven' && steps.profiles.outputs.bower == 'true'
         run: |
-          mvn $MAVEN_ARGS -Dvaadin.bowerMode=true -Denforcer.skip=true \
+          xvfb-run -a mvn $MAVEN_ARGS -Dvaadin.bowerMode=true -Denforcer.skip=true \
             -Pbower-it,'!npm-it' \
             -Dcom.vaadin.testbench.Parameters.runLocally=chrome \
             -Dfailsafe.rerunFailingTestsCount=3 \
@@ -284,11 +295,16 @@ jobs:
       # on the runner, the mode AbstractPlatformTest logs as "LOCAL". The two
       # retry properties TeamCity also passes are dropped: there is no failsafe
       # in this build, and `system.`-prefixed properties are TeamCity-only.
+      #
+      # Xvfb rather than -Dcom.vaadin.testbench.Parameters.headless=true,
+      # because build.gradle forwards only testsInParallel, test.use.hub, the
+      # licence and hubHostname into the test JVM — a system property set here
+      # would never reach TestBench.
       - name: Run Gradle tests
         if: matrix.suite == 'gradle' && steps.profiles.outputs.gradle == 'true'
         working-directory: vaadin-platform-gradle-test
         run: |
-          ./gradlew clean build \
+          xvfb-run -a ./gradlew clean build \
             -Pvaadin.productionMode \
             -Dcom.vaadin.testbench.Parameters.testsInParallel=1 \
             -Dvaadin.npm.minimumFrontendPackageAgeDays=0 \
