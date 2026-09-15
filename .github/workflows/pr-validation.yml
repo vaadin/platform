@@ -155,21 +155,21 @@ jobs:
             name: Build and run Gradle tests (Java 21)
             timeout: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Step 5: node 24 via the NVM installer.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
           cache: maven
 
       - name: Pin Maven ${{ env.MAVEN_VERSION }}
-        uses: stCarolas/setup-maven@v5
+        uses: stCarolas/setup-maven@v5.1
         with:
           maven-version: ${{ env.MAVEN_VERSION }}
 
@@ -331,7 +331,7 @@ jobs:
       # not.
       - name: Upload failure diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pr-validation-diagnostics-${{ matrix.suite }}
           if-no-files-found: ignore
