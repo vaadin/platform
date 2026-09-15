@@ -61,6 +61,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core W3CBaggagePropagator.extract(), fixed in JS 2.8.0) and its only CPE targets node.js. io.opentelemetry is opentelemetry-java, an unrelated codebase on its own 1.x line, so the version range matches only by CPE collision; osv-scanner and ossindex report nothing for this coordinate. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
   'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
     cves: ['CVE-2026-15195'],
     description: 'The cve carries a git only range with no version mapping. The affected releases are 15.3.0 to 15.3.5, fixed in 15.3.6, while 11.7.2 predates that line by 17 months. It arrives through swagger-parser 10.1.1, which pins it exactly.'
