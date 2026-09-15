@@ -13,7 +13,7 @@
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.3.0-beta2"
+            "javaVersion": "25.3.0-beta3"
         },
         "mpr-v7": {
             "javaVersion": "8.0.1"
@@ -61,7 +61,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.3.0-beta2"
+            "javaVersion": "25.3.0-beta3"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.1.1"
