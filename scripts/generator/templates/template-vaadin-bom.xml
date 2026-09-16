@@ -97,7 +97,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-cdi</artifactId>
-                <version>${flow.cdi.version}</version>
+                <version>${flow.version}</version>
             </dependency>
 
             <dependency>
