@@ -49,29 +49,33 @@ export const FLOW_KEY = "flow";
 const FLOW_PARENT_ARTIFACT_ID = "flow-project";
 
 /**
- * Platform branches that still get releases, newest first.
+ * Platform branches this audit covers, newest first.
  *
- * Keep this in sync with the supported versions listed in the repository
- * README: 25 and 24 receive feature releases, 23 and 14 are maintained under
- * a commercial license. Branches of older minors are only touched for
- * security releases; add one here while such a release is being prepared.
+ * The first block is the maintained set — the same list the `check-versions`
+ * workflow fans out to, keep the two in sync. The second block is the older
+ * minors that are superseded inside their generation but still ship to
+ * customers on extended support, so a license checker that cannot validate
+ * their keys still matters there. Branches older than those are frozen:
+ * add one here while a security release is being prepared for it.
  */
 export const SUPPORTED_BRANCHES: readonly string[] = [
+    // Maintained — mirrors .github/workflows/check-versions.yml
     "main",
     "25.3",
     "25.2",
     "25.1",
-    "25.0",
     "24.10",
     "24.9",
+    "23.7",
+    "23.6",
+    "14.14",
+    // Superseded minors still used under extended support
+    "25.0",
     "24.8",
     "24.7",
     "24.6",
     "24.5",
     "24.4",
-    "23.7",
-    "23.6",
-    "14.14",
 ];
 
 /**
