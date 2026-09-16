@@ -39,6 +39,22 @@ async function fetchMetadata(url: string): Promise<string[] | null> {
     return Array.isArray(v) ? v : [v];
 }
 
+/**
+ * Fetch the raw pom of `com.vaadin:<artifactId>:<version>`, trying the stable
+ * repository first and the prerelease Nexus second. Returns null when the
+ * artifact is published in neither.
+ */
+export async function fetchPom(artifactId: string, version: string): Promise<string | null> {
+    for (const base of [STABLE_BASE, PRERELEASE_BASE]) {
+        const url = `${base}/${artifactId}/${version}/${artifactId}-${version}.pom`;
+        const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+        if (res.status === 404) continue;
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+        return await res.text();
+    }
+    return null;
+}
+
 export async function fetchMavenVersions(
     moduleKey: string,
     cliOverrides: Map<string, string | "skip">,
