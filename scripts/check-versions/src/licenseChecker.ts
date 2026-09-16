@@ -35,7 +35,7 @@ import { parseArgs } from "node:util";
 import { XMLParser } from "fast-xml-parser";
 import semver from "semver";
 import { fetchMavenVersions, fetchPom } from "./maven.js";
-import { currentBranch, fetchOrigin, readFileFromRef } from "./git.js";
+import { fetchOrigin, readFileFromRef } from "./git.js";
 import { isSnapshotValue } from "./semver.js";
 import { iterateModules, readVersions, VersionsJson } from "./versionsJson.js";
 
@@ -79,16 +79,22 @@ export const SUPPORTED_BRANCHES: readonly string[] = [
 ];
 
 /**
- * The license-checker major line a platform branch has to use.
+ * The license-checker major line a platform release has to use, derived from
+ * the flow version it ships.
  *
  * 1.x must not be used anywhere any more: its newest release is from
  * December 2025 and the offline-key fixes released as 2.3.2 and 3.1.2 were
- * never backported to it. Branches up to 24.9 use the 2.x line, 24.10 and
- * newer use 3.x — the split 24.9 and 24.10 already ship.
+ * never backported to it. Flow 24.10 is where the 3.x line starts; anything
+ * older — 24.9 and down, and the 23 and 14 lines' flow 23.x / 2.x — uses
+ * 2.x. That is the split 24.9 and 24.10 already ship.
+ *
+ * Keyed off the flow pin rather than the branch name, so it is also right
+ * for a backport branch, a bot branch or a detached HEAD, where the name
+ * says nothing about the line. An unparseable pin (a `{{version}}`
+ * placeholder, say) falls back to the newest line.
  */
-export function requiredMajor(branch: string): number {
-    if (branch === "main" || branch === "WORKTREE") return 3;
-    const match = /^(\d+)\.(\d+)$/.exec(branch);
+export function requiredMajor(flowVersion: string): number {
+    const match = /^(\d+)\.(\d+)/.exec(flowVersion);
     if (!match) return 3;
     const [major, minor] = [parseInt(match[1], 10), parseInt(match[2], 10)];
     if (major > 24) return 3;
@@ -386,9 +392,7 @@ async function main(): Promise<void> {
                 flowVersion,
                 flowLicenseChecker: await fetchFlowLicenseChecker(flowVersion),
                 available: lookup.versions,
-                // --worktree is judged by the checked-out branch's name; a
-                // name that isn't a release branch is treated like main.
-                requiredMajor: requiredMajor(branch === "WORKTREE" ? currentBranch() : branch),
+                requiredMajor: requiredMajor(flowVersion),
             }),
         );
     }

@@ -188,12 +188,15 @@ use:
 - **1.x must not be used anywhere.** Its newest release is from December 2025
   and the offline-key fixes released as 2.3.2 / 3.1.2 were never backported to
   it, so there is nothing to update to inside that line.
-- **2.x** for branches up to 24.9, **3.x** for 24.10 and newer — the split
-  that 24.9 and 24.10 already ship.
+- **2.x** up to flow 24.9, **3.x** from flow 24.10 on — the split that 24.9
+  and 24.10 already ship. The 23 and 14 lines ship flow 23.x / 2.x, so they
+  are on 2.x as well.
 
 A version off the required line is reported as `wrong-major` and the newest
 release of the required line is named as the target. The rule lives in
-`requiredMajor()`; adjust it there when a line moves.
+`requiredMajor()`; adjust it there when a line moves. It reads the branch's
+**flow pin**, not the branch name, so it is also correct under `--worktree`
+on a backport or bot branch whose name says nothing about the line.
 
 ```bash
 npm run audit:license-checker              # all supported branches

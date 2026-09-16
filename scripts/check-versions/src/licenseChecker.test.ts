@@ -37,9 +37,9 @@ function input(overrides: Partial<BranchInput>): BranchInput {
         available: AVAILABLE,
         ...overrides,
     };
-    // Default to the line the branch under test actually has to use, so a
+    // Default to the line the flow pin under test actually requires, so a
     // case only has to spell out requiredMajor when that is the point.
-    return { requiredMajor: requiredMajor(merged.branch), ...merged };
+    return { requiredMajor: requiredMajor(merged.flowVersion), ...merged };
 }
 
 function kinds(audit: { findings: { kind: string }[] }): string[] {
@@ -80,14 +80,22 @@ test("consistent but stale branch reports only the available update", () => {
     assert.match(audit.findings[0].message, /minor update from 3\.0\.3, same major line/);
 });
 
-test("requiredMajor: 1.x is never required, 24.10 is where 3.x starts", () => {
-    assert.equal(requiredMajor("main"), 3);
-    assert.equal(requiredMajor("25.0"), 3);
-    assert.equal(requiredMajor("24.10"), 3);
-    assert.equal(requiredMajor("24.9"), 2);
-    assert.equal(requiredMajor("24.4"), 2);
-    assert.equal(requiredMajor("23.6"), 2);
-    assert.equal(requiredMajor("14.14"), 2);
+test("requiredMajor: 1.x is never required, flow 24.10 is where 3.x starts", () => {
+    assert.equal(requiredMajor("25.4-SNAPSHOT"), 3);
+    assert.equal(requiredMajor("25.0.15"), 3);
+    assert.equal(requiredMajor("24.10-SNAPSHOT"), 3);
+    assert.equal(requiredMajor("24.10.12"), 3);
+    assert.equal(requiredMajor("24.9.26"), 2);
+    assert.equal(requiredMajor("24.4.17"), 2);
+    assert.equal(requiredMajor("23.7.0-beta5"), 2);
+    // The 14 line ships flow 2.x, which must not read as "license-checker 2.x
+    // because the majors happen to match" — it lands on 2.x for being older
+    // than 24.10, same as every other pre-24.10 line.
+    assert.equal(requiredMajor("2.13.7"), 2);
+    // Derived from the flow pin, not the branch name, so a branch name never
+    // reaches this function. An unusable pin falls back to the newest line.
+    assert.equal(requiredMajor("{{version}}"), 3);
+    assert.equal(requiredMajor(""), 3);
 });
 
 test("a 1.x pin is reported as wrong-major, pointing at the required line", () => {
