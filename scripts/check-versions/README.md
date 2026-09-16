@@ -161,6 +161,46 @@ prerelease module — e.g. `vaadin-spring-bom-24.10.6` going out with
 
 ---
 
+## License checker audit
+
+`versions.json` is not the only thing that decides which
+`com.vaadin:license-checker` a Vaadin application uses — and the other path
+is the one that breaks builds:
+
+| Path | Comes from | Affects |
+| --- | --- | --- |
+| Runtime | `vaadin-license-checker.javaVersion` → `dependencyManagement` pin in `vaadin-bom` | the checker on the application classpath |
+| Build time | the license-checker that the pinned **flow** release depends on | the check that `vaadin-maven-plugin` / the Gradle plugin run during `build-frontend` |
+
+A plugin resolves its own dependencies, so neither the `vaadin-bom` pin nor a
+user pinning `license-checker` in their own pom changes the build-time check.
+When the two paths drift apart, a license-checker fix can be shipped in the
+BOM while every production build still runs the old checker — for example a
+platform release whose BOM pins the version that fixes an offline-key error,
+while `mvn package` keeps failing with that same error.
+
+[`src/licenseChecker.ts`](src/licenseChecker.ts) audits both paths across the
+supported platform branches (read with `git show <branch>:versions.json`,
+nothing is checked out) and reports, per branch, whether the two agree and
+whether they are on the newest license-checker of their **major** line. A
+major upgrade is never proposed — moving a platform line from 1.x to 2.x is a
+deliberate decision, not maintenance.
+
+```bash
+npm run audit:license-checker              # all supported branches
+npx tsx src/licenseChecker.ts --branch 24.8 --branch 23.6
+npx tsx src/licenseChecker.ts --worktree   # the versions.json on disk
+npx tsx src/licenseChecker.ts --fetch      # git fetch the branches first
+```
+
+The branch list lives in `SUPPORTED_BRANCHES` in that file; keep it in sync
+with the supported versions in the repository README. The command exits `1`
+when any branch needs a change, so it can be used as a CI guard. A branch
+pinning flow to a snapshot is reported as a `note`, not a failure — its
+license-checker cannot be resolved from a published pom.
+
+---
+
 ## CLI reference
 
 ```
@@ -482,6 +522,8 @@ scripts/check-versions/
     ├── semver.test.ts        # picker unit tests (node:test)
     ├── stability.ts          # post-update anchor-floor invariant check
     ├── stability.test.ts     # stability check unit tests (node:test)
+    ├── licenseChecker.ts      # cross-branch license-checker audit (bom pin vs. flow release)
+    ├── licenseChecker.test.ts # license-checker audit unit tests (node:test)
     ├── maven.ts              # fetch maven-metadata.xml from both repos
     ├── npm.ts                # GET registry.npmjs.org/<pkg>
     ├── git.ts                # --create-pr support: pre-flight, branch, commit, push, gh pr create, sticky stability comment
@@ -502,9 +544,11 @@ npm test
 
 Runs the test files under `src/*.test.ts` via Node's built-in test
 runner — currently [`src/semver.test.ts`](src/semver.test.ts) (maintenance
-picker and the `alphaN` numeric ordering fix) and
+picker and the `alphaN` numeric ordering fix),
 [`src/stability.test.ts`](src/stability.test.ts) (anchor-floor invariant
-across the four stability tiers).
+across the four stability tiers) and
+[`src/licenseChecker.test.ts`](src/licenseChecker.test.ts) (bom-pin vs.
+flow-release comparison, no network).
 
 To add a case, append to `semver.test.ts`:
 
