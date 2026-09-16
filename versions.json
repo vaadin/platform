@@ -548,7 +548,7 @@
             "javaVersion": "24.5.1"
         },
         "vaadin-license-checker": {
-            "javaVersion": "1.13.2"
+            "javaVersion": "2.3.2"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "24.5.14",
