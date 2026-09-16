@@ -182,9 +182,18 @@ while `mvn package` keeps failing with that same error.
 [`src/licenseChecker.ts`](src/licenseChecker.ts) audits both paths across the
 supported platform branches (read with `git show <branch>:versions.json`,
 nothing is checked out) and reports, per branch, whether the two agree and
-whether they are on the newest license-checker of their **major** line. A
-major upgrade is never proposed — moving a platform line from 1.x to 2.x is a
-deliberate decision, not maintenance.
+whether they are on the newest release of the major line that branch has to
+use:
+
+- **1.x must not be used anywhere.** Its newest release is from December 2025
+  and the offline-key fixes released as 2.3.2 / 3.1.2 were never backported to
+  it, so there is nothing to update to inside that line.
+- **2.x** for branches up to 24.9, **3.x** for 24.10 and newer — the split
+  that 24.9 and 24.10 already ship.
+
+A version off the required line is reported as `wrong-major` and the newest
+release of the required line is named as the target. The rule lives in
+`requiredMajor()`; adjust it there when a line moves.
 
 ```bash
 npm run audit:license-checker              # all supported branches

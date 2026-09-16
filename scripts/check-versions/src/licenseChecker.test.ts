@@ -6,6 +6,7 @@ import {
     isActionable,
     licenseCheckerVersionFromPom,
     renderAudit,
+    requiredMajor,
 } from "./licenseChecker.js";
 
 /** Every license-checker release line the platform branches sit on. */
@@ -28,7 +29,7 @@ const AVAILABLE = [
 ];
 
 function input(overrides: Partial<BranchInput>): BranchInput {
-    return {
+    const merged = {
         branch: "test",
         pinned: "3.1.2",
         flowVersion: "25.2.9",
@@ -36,6 +37,9 @@ function input(overrides: Partial<BranchInput>): BranchInput {
         available: AVAILABLE,
         ...overrides,
     };
+    // Default to the line the branch under test actually has to use, so a
+    // case only has to spell out requiredMajor when that is the point.
+    return { requiredMajor: requiredMajor(merged.branch), ...merged };
 }
 
 function kinds(audit: { findings: { kind: string }[] }): string[] {
@@ -58,30 +62,60 @@ test("bom pin newer than the flow release it ships (the 23.6.14 offline key case
     assert.equal(audit.latestInMajor, "2.3.2");
 });
 
-test("bom pin older than flow's, and both behind the major line", () => {
+test("bom pin older than flow's, and both behind the required line", () => {
     const audit = auditBranch(
-        input({ branch: "24.5", pinned: "1.13.2", flowVersion: "24.5.17", flowLicenseChecker: "1.13.4" }),
+        input({ branch: "24.9", pinned: "2.3.0", flowVersion: "24.9.26", flowLicenseChecker: "2.3.1" }),
     );
     assert.deepEqual(kinds(audit), ["behind-flow", "stale"]);
-    // Staleness is measured from flow's 1.13.4, not from the lower bom pin.
-    assert.match(audit.findings[1].message, /patch update from 1\.13\.4/);
+    // Staleness is measured from flow's 2.3.1, not from the lower bom pin.
+    assert.match(audit.findings[1].message, /patch update from 2\.3\.1/);
 });
 
 test("consistent but stale branch reports only the available update", () => {
     const audit = auditBranch(
-        input({ branch: "24.8", pinned: "1.13.5", flowVersion: "24.8.16", flowLicenseChecker: "1.13.5" }),
+        input({ branch: "25.0", pinned: "3.0.3", flowVersion: "25.0.15", flowLicenseChecker: "3.0.3" }),
     );
     assert.deepEqual(kinds(audit), ["stale"]);
-    assert.equal(audit.latestInMajor, "1.13.6");
+    assert.equal(audit.latestInMajor, "3.1.2");
+    assert.match(audit.findings[0].message, /minor update from 3\.0\.3, same major line/);
 });
 
-test("a newer major is never proposed as the update target", () => {
+test("requiredMajor: 1.x is never required, 24.10 is where 3.x starts", () => {
+    assert.equal(requiredMajor("main"), 3);
+    assert.equal(requiredMajor("25.0"), 3);
+    assert.equal(requiredMajor("24.10"), 3);
+    assert.equal(requiredMajor("24.9"), 2);
+    assert.equal(requiredMajor("24.4"), 2);
+    assert.equal(requiredMajor("23.6"), 2);
+    assert.equal(requiredMajor("14.14"), 2);
+});
+
+test("a 1.x pin is reported as wrong-major, pointing at the required line", () => {
     const audit = auditBranch(
-        input({ branch: "24.4", pinned: "1.12.14", flowVersion: "24.4.17", flowLicenseChecker: "1.12.14" }),
+        input({ branch: "24.8", pinned: "1.13.5", flowVersion: "24.8.16", flowLicenseChecker: "1.13.5" }),
     );
-    assert.deepEqual(kinds(audit), ["stale"]);
-    assert.equal(audit.latestInMajor, "1.13.6");
-    assert.match(audit.findings[0].message, /minor update from 1\.12\.14, same major line/);
+    assert.deepEqual(kinds(audit), ["wrong-major"]);
+    // 1.13.6 exists upstream but is never the target — the branch has to
+    // leave the 1.x line entirely.
+    assert.equal(audit.latestInMajor, "2.3.2");
+    assert.match(audit.findings[0].message, /must use the 2\.x line \(2\.3\.2\)/);
+    assert.match(audit.findings[0].message, /vaadin-bom pins 1\.13\.5 and flow 24\.8\.16 builds against 1\.13\.5/);
+});
+
+test("wrong-major names only the path that is off the line", () => {
+    const audit = auditBranch(
+        input({ branch: "24.5", pinned: "2.3.2", flowVersion: "24.5.17", flowLicenseChecker: "1.13.4" }),
+    );
+    assert.deepEqual(kinds(audit), ["wrong-major"]);
+    assert.match(audit.findings[0].message, /^flow 24\.5\.17 builds against 1\.13\.4/);
+});
+
+test("a 3.x pin on a 2.x branch is wrong-major too", () => {
+    const audit = auditBranch(
+        input({ branch: "23.6", pinned: "3.1.2", flowVersion: "23.6.14", flowLicenseChecker: "2.3.2" }),
+    );
+    assert.deepEqual(kinds(audit), ["wrong-major"]);
+    assert.match(audit.findings[0].message, /vaadin-bom pins 3\.1\.2 — this branch must use the 2\.x line/);
 });
 
 test("prereleases are never proposed as the update target", () => {
@@ -115,7 +149,7 @@ test("renderAudit prints both resolution paths and the findings", () => {
             input({ branch: "23.6", pinned: "2.3.2", flowVersion: "23.6.14", flowLicenseChecker: "2.3.1" }),
         ),
     ]);
-    assert.match(out, /ok {3}25\.2 {4}bom=3\.1\.2 {2}flow=25\.2\.9 -> 3\.1\.2/);
+    assert.match(out, /ok {3}25\.2 {4}bom=3\.1\.2 {2}flow=25\.2\.9 -> 3\.1\.2 {2}must-use=3\.x \(3\.1\.2\)/);
     assert.match(out, /FAIL 23\.6 {4}bom=2\.3\.2 {2}flow=23\.6\.14 -> 2\.3\.1/);
     assert.match(out, /ahead-of-flow:/);
 });

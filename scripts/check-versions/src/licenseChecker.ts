@@ -20,11 +20,11 @@
  * `mvn package` keeps failing with an offline-key error that 2.3.2 fixed.
  *
  * This module reports, per branch:
+ *  - whether both paths are on the license-checker major line the branch has
+ *    to use (see {@link requiredMajor} — 1.x is not allowed anywhere),
  *  - the `versions.json` pin vs. the license-checker of the pinned flow
  *    release (they must match),
- *  - whether that version is the newest license-checker released in the same
- *    major line — major upgrades are never proposed, they are a deliberate,
- *    breaking decision per platform line.
+ *  - whether that version is the newest release of that major line.
  *
  * Usage:
  *   npx tsx src/licenseChecker.ts                  # audit the supported branches
@@ -35,7 +35,7 @@ import { parseArgs } from "node:util";
 import { XMLParser } from "fast-xml-parser";
 import semver from "semver";
 import { fetchMavenVersions, fetchPom } from "./maven.js";
-import { fetchOrigin, readFileFromRef } from "./git.js";
+import { currentBranch, fetchOrigin, readFileFromRef } from "./git.js";
 import { isSnapshotValue } from "./semver.js";
 import { iterateModules, readVersions, VersionsJson } from "./versionsJson.js";
 
@@ -74,12 +74,32 @@ export const SUPPORTED_BRANCHES: readonly string[] = [
     "14.14",
 ];
 
+/**
+ * The license-checker major line a platform branch has to use.
+ *
+ * 1.x must not be used anywhere any more: its newest release is from
+ * December 2025 and the offline-key fixes released as 2.3.2 and 3.1.2 were
+ * never backported to it. Branches up to 24.9 use the 2.x line, 24.10 and
+ * newer use 3.x — the split 24.9 and 24.10 already ship.
+ */
+export function requiredMajor(branch: string): number {
+    if (branch === "main" || branch === "WORKTREE") return 3;
+    const match = /^(\d+)\.(\d+)$/.exec(branch);
+    if (!match) return 3;
+    const [major, minor] = [parseInt(match[1], 10), parseInt(match[2], 10)];
+    if (major > 24) return 3;
+    if (major === 24 && minor >= 10) return 3;
+    return 2;
+}
+
 export type FindingKind =
+    /** A version off the major line this branch must use — a 1.x pin, typically. */
+    | "wrong-major"
     /** BOM pin is newer than the checker flow's plugins run — the fix is not in the build. */
     | "ahead-of-flow"
     /** BOM pin is older than flow's — the BOM downgrades the checker at runtime. */
     | "behind-flow"
-    /** A newer license-checker exists in the same major line. */
+    /** A newer license-checker exists in the major line this branch uses. */
     | "stale"
     /** Flow pin is a snapshot / unpublished, so its license-checker is unknown. */
     | "unresolved-flow";
@@ -99,10 +119,12 @@ export interface BranchInput {
     flowLicenseChecker: string | null;
     /** Every license-checker version published upstream. */
     available: readonly string[];
+    /** Major line this branch must be on, see {@link requiredMajor}. */
+    requiredMajor: number;
 }
 
 export interface BranchAudit extends BranchInput {
-    /** Newest stable license-checker sharing the pin's major, null if none. */
+    /** Newest stable license-checker of the required major line, null if none. */
     latestInMajor: string | null;
     findings: Finding[];
 }
@@ -136,7 +158,27 @@ function latestStableInMajor(available: readonly string[], major: number): strin
 export function auditBranch(input: BranchInput): BranchAudit {
     const findings: Finding[] = [];
     const pinnedSv = parse(input.pinned);
-    const latestInMajor = pinnedSv ? latestStableInMajor(input.available, pinnedSv.major) : null;
+    const latestInMajor = latestStableInMajor(input.available, input.requiredMajor);
+
+    // A version off the required major line makes the rest of the report
+    // moot: both paths have to move to the newest release of that line, so
+    // report that one target instead of a patch update within a dead line.
+    const offLine = [
+        { label: `vaadin-bom pins ${input.pinned}`, sv: pinnedSv },
+        input.flowLicenseChecker === null
+            ? null
+            : {
+                  label: `flow ${input.flowVersion} builds against ${input.flowLicenseChecker}`,
+                  sv: parse(input.flowLicenseChecker),
+              },
+    ].filter((x): x is { label: string; sv: semver.SemVer } => !!x?.sv && x.sv.major !== input.requiredMajor);
+    if (offLine.length > 0) {
+        findings.push({
+            kind: "wrong-major",
+            message: `${offLine.map((x) => x.label).join(" and ")} — this branch must use the ${input.requiredMajor}.x line (${latestInMajor ?? "no stable release"})`,
+        });
+        return { ...input, latestInMajor, findings };
+    }
 
     if (input.flowLicenseChecker === null) {
         findings.push({
@@ -191,7 +233,7 @@ export function renderAudit(audits: readonly BranchAudit[]): string {
     for (const audit of audits) {
         const status = audit.findings.length === 0 ? "ok" : isActionable(audit) ? "FAIL" : "note";
         lines.push(
-            `${status.padEnd(4)} ${audit.branch.padEnd(width)}  bom=${audit.pinned}  flow=${audit.flowVersion} -> ${audit.flowLicenseChecker ?? "?"}  latest-in-major=${audit.latestInMajor ?? "?"}`,
+            `${status.padEnd(4)} ${audit.branch.padEnd(width)}  bom=${audit.pinned}  flow=${audit.flowVersion} -> ${audit.flowLicenseChecker ?? "?"}  must-use=${audit.requiredMajor}.x (${audit.latestInMajor ?? "?"})`,
         );
         for (const finding of audit.findings) {
             lines.push(`       ${finding.kind}: ${finding.message}`);
@@ -340,6 +382,9 @@ async function main(): Promise<void> {
                 flowVersion,
                 flowLicenseChecker: await fetchFlowLicenseChecker(flowVersion),
                 available: lookup.versions,
+                // --worktree is judged by the checked-out branch's name; a
+                // name that isn't a release branch is treated like main.
+                requiredMajor: requiredMajor(branch === "WORKTREE" ? currentBranch() : branch),
             }),
         );
     }
