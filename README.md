@@ -22,7 +22,7 @@ Learn more about our [release model](https://vaadin.com/roadmap).
 | 24.4   | 24.4 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
 | 24.7   | 24.7 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
 | 24.9   | 24.9 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
-| 24.10  | 24.10 (LATEST 24 minor release, Java 17+, Jakarta EE 10, Spring-boot 3) |
+| 24.10  | 24.10 (LATEST commercial with Java 17+, Jakarta EE 10, Spring-boot 3)   |
 | 25.1   | 25.1 (maintenance release, Java 21+, Jakarta EE 11, Spring-boot 4)      |
 | 25.2   | 25.2 (LATEST release, Java 21+, Jakarta EE 11, Spring-boot 4)           |
 | 25.3   | 25.3 (Vaadin 25.3 pre-release, Java 21+, Jakarta EE 11, Spring-boot 4)  |
