@@ -15,11 +15,18 @@ Learn more about our [release model](https://vaadin.com/roadmap).
 
 ## Supported versions
 
-- **25** (Java 21 support, feature releases)
-- **24** (Java 17 support, feature releases)
-- **23** (Latest Java 11 support, no feature updates, **commercial license**)
-- **14** (LTS, Java 8 support, no feature updates, **commercial license**)
-- **10** (LTS, no feature updates)
+| Branch | [Platform Version](https://github.com/vaadin/platform/releases)         |
+|--------|-------------------------------------------------------------------------|
+| 14.14  | 14.14 (LATEST commercial with Java 8+ support and Servlet 3)            |
+| 23.6   | 23.6 (LATEST commercial with Java 11+ support and Servlet 3)            |
+| 24.4   | 24.4 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
+| 24.7   | 24.7 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
+| 24.9   | 24.9 (commercially supported, Java 17+, Jakarta EE 10, Spring-boot 3)   |
+| 24.10  | 24.10 (LATEST 24 minor release, Java 17+, Jakarta EE 10, Spring-boot 3) |
+| 25.1   | 25.1 (maintenance release, Java 21+, Jakarta EE 11, Spring-boot 4)      |
+| 25.2   | 25.2 (LATEST release, Java 21+, Jakarta EE 11, Spring-boot 4)           |
+| 25.3   | 25.3 (Vaadin 25.3 pre-release, Java 21+, Jakarta EE 11, Spring-boot 4)  |
+| main   | 25.4 (Vaadin 25.4 preparations, Java 21+, Jakarta EE 11, Spring-boot 4) |
 
 For new users, the latest major version is recommended.  
 
