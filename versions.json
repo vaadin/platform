@@ -10,7 +10,7 @@
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.3.0-beta3"
+            "javaVersion": "25.3.0-rc2"
         },
         "mpr-v7": {
             "javaVersion": "8.0.1"
@@ -58,13 +58,13 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "25.3.0-beta3"
+            "javaVersion": "25.3.0-rc1"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "3.1.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "5.0.0-beta1"
+            "javaVersion": "5.0.0-rc1"
         },
         "sso-kit-starter": {
             "javaVersion": "4.2-SNAPSHOT",
@@ -142,7 +142,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "25.3.0-beta3",
+            "jsVersion": "25.3.0-rc1",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
@@ -156,7 +156,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "25.3.0-beta3",
+            "jsVersion": "25.3.0-rc1",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
