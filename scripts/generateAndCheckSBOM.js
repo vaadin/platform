@@ -57,6 +57,10 @@ const licenseWhiteList = [
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
 
 const cveWhiteList = {
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js (cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:*), not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. Same case as the 1.64.0 entry below.'
+  },
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.64.0' : {
     cves: ['CVE-2026-54285'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
