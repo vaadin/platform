@@ -57,6 +57,18 @@ const licenseWhiteList = [
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
 
 const cveWhiteList = {
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js (cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:*), not the Java artifact. osv.dev reports opentelemetry-api 1.65.0 as not affected. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. Same case as the 1.64.0 entry below.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.4.10' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: the advisory only affects org.jetbrains.kotlin:kotlin-gradle-plugin, and the cpe:2.3:a:jetbrains:kotlin CPE matches any kotlin artifact. osv.dev reports kotlin-stdlib 2.4.10 as not affected. kotlin-stdlib comes from flow-webpush, not the gradle plugin.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@2.1.21' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: the advisory only affects org.jetbrains.kotlin:kotlin-gradle-plugin, and the cpe:2.3:a:jetbrains:kotlin CPE matches any kotlin artifact. osv.dev reports kotlin-reflect 2.1.21 as not affected. We ship kotlin-reflect as a transitive dependency of hilla-typescript-generator, not the gradle plugin.'
+  },
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.64.0' : {
     cves: ['CVE-2026-54285'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
