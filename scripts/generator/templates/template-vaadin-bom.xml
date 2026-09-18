@@ -16,6 +16,8 @@
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
         <jna.version>5.18.1</jna.version>
+        <!-- Security overrides: force fixed transitive versions -->
+        <tomcat.security.version>11.0.25</tomcat.security.version>
     </properties>
 
     <distributionManagement>
@@ -27,6 +29,28 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--
+             Security overrides. These force fixed transitive versions ahead of
+             Spring Boot / Flow / Hilla management. Declared before the
+             vaadin-spring-bom import so these versions win. Remove each once
+             the upstream (Spring Boot, Flow, Hilla) ships the fixed version.
+            -->
+            <!-- tomcat embed, CVE-2026-65905/65182/68525 -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-websocket</artifactId>
+                <version>${tomcat.security.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring-bom</artifactId>
