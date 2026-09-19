@@ -17,7 +17,7 @@ regardless of which node a user is connected to. The initial implementation is b
 
 #### Background
 
-Vaadin 25.1 introduced signals for reactive UI state in Flow. Shared signals
+Flow has signals for reactive UI state. Shared signals
 (`SharedValueSignal`, `SharedNumberSignal`, `SharedListSignal`, `SharedMapSignal`) already
 share state between users — but only between users connected to the *same* node. The
 machinery for going further is in place: `AbstractSharedSignal` is built on
@@ -137,6 +137,11 @@ current rather than stale.
       (`SignalCommand.ClearOwnerCommand`).
 - [ ] Spring Boot auto-configuration with properties under `vaadin.signals.cluster.*`,
       enabled by adding the dependency and pointing it at Redis.
+- [ ] Metrics for log lag, catch-up time, snapshot size and rejected-command rate, exposed
+      through Micrometer so Observability Kit picks them up — a divergence or a node falling
+      behind has to be visible in production without attaching a debugger.
+- [ ] A reference collaborative example, deployed and running on a multi-node cluster, that
+      demonstrates state converging across nodes and surviving the loss of one.
 - [ ] Documentation covering the programming model, the Redis setup, and the operational
       characteristics (ordering, durability, compaction).
 - [ ] License check
@@ -144,16 +149,7 @@ current rather than stale.
 
 ## Nice-to-haves
 
-- [ ] A second backend implementation (Hazelcast or PostgreSQL) validating that the SPI is
-      genuinely backend-neutral.
-- [ ] Metrics for log lag, catch-up time, snapshot size and rejected-command rate, exposed
-      through Micrometer so Observability Kit picks them up.
 - [ ] A non-Spring configuration path for standalone servlet deployments.
-- [ ] A reference collaborative example running on a multi-node cluster.
-
-## Release plan
-
-Proposed for Vaadin 25.4 — to be confirmed with the release plan.
 
 ## Risks, limitations and breaking changes
 
@@ -193,8 +189,10 @@ Proposed for Vaadin 25.4 — to be confirmed with the release plan.
 
 ## Out of scope
 
-- Backends other than Redis in the initial release. The SPI is designed so Hazelcast, Kafka,
-  PostgreSQL and others can be added without changing the programming model.
+- **A second backend implementation.** Hazelcast, Kafka, PostgreSQL and others are follow-up
+  work. The SPI is designed so they can be added without changing the programming model, but
+  only Redis is built here — and the SPI is therefore validated against one backend, not
+  proven backend-neutral until a second one lands.
 - Persisting signal state as a system of record, or any query/history API over the event log.
 - Cross-datacenter or geo-replicated clusters.
 - Changes to the signal programming model itself — clustered signals are the existing shared
