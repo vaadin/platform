@@ -1,8 +1,4 @@
-# PRD: Clustered Signals: Redis-backed shared state across cluster nodes
-
-> Draft rewrite of [vaadin/platform#8703](https://github.com/vaadin/platform/issues/8703),
-> following the format of [vaadin/platform#9001](https://github.com/vaadin/platform/issues/9001).
-> Not filed yet — the issue is overwritten with this content once reviewed.
+# PRD: Clustered Signals
 
 **Tier:** Enterprise
 **License:** Proprietary
@@ -87,9 +83,9 @@ it. `SignalCommand.SnapshotCommand` already carries exactly this payload.
 
 ##### Why Redis first
 
-The original issue left the backend open and listed candidates ranging from Kafka to
-PostgreSQL to Hazelcast. Scoping the first implementation to one backend is what makes the
-feature shippable, and Redis is the one to pick:
+A wide range of systems could provide the building blocks — Kafka, RabbitMQ, PostgreSQL,
+MongoDB, Hazelcast. Scoping the first implementation to one backend is what makes the feature
+shippable, and Redis is the one to pick:
 
 - **Vaadin clustering customers already run it.** Kubernetes Kit ships a Redis backend for
   session replication (`RedisConnector`, on Spring Data Redis). The signal backend can reuse
