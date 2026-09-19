@@ -101,9 +101,9 @@ feature shippable, and Redis is the one to pick:
   shard, so the total order the design needs is the order Redis already provides — and
   different signal identifiers land on different shards, which is the partitioning the design
   wants anyway.
-- **It keeps the SPI honest.** Building against one real backend, with the abstraction sized
-  to it, is a better foundation for a second backend than designing the abstraction for five
-  hypothetical ones.
+- **It keeps the SPI honest.** One real backend, sized to a system that actually exists, is a
+  better foundation than an abstraction designed for five hypothetical ones. Prototypes for
+  Kafka and PostgreSQL then check that the abstraction did not just get shaped around Redis.
 
 ##### Serialization and session replication
 
@@ -115,15 +115,27 @@ reconnects to the log and catches up from the latest snapshot. This keeps one se
 listeners out of another session's serialized state, and means a deserialized signal is
 current rather than stale.
 
+This lifts the `NotSerializableException` guard in `SignalTree.writeObject` for clustered
+trees. The guard exists to stop a shared signal from silently breaking a clustered
+deployment; once clustered signals serialize correctly there is nothing left to guard
+against, and a case that fails today starts working.
+
 ## Requirements
 
 - [ ] A `ClusteredSignalFactory` that returns shared signals (`getValue`, `getNumber`,
       `getList`, `getMap`) for a string identifier, with instances for the same identifier in
       the same JVM resolving to the same signal.
 - [ ] An event-log SPI that a backend implements to submit commands, subscribe to confirmed
-      commands in a stable total order, and read and write snapshots.
+      commands in a stable total order, and read and write snapshots — with a conformance
+      test suite any implementation can be run against.
 - [ ] A Redis implementation of that SPI, built on Redis Streams and reusing the
       application's configured `RedisConnectionFactory`.
+- [ ] AI-generated prototype implementations of the SPI for Kafka and PostgreSQL,
+      demonstrating that a backend with different ordering and delivery semantics can be
+      built against the abstraction without changing it. These are evidence that the SPI is
+      backend-neutral, not shipped backends — they need to run the same conformance tests as
+      the Redis implementation, and whatever they force the SPI to change is the point of
+      building them.
 - [ ] Commands are applied optimistically on the submitting node and reconciled against the
       confirmed order, with conflicting commands rejected consistently on every node.
 - [ ] A signal instance created for an existing identifier catches up to the current state
@@ -184,15 +196,13 @@ current rather than stale.
 - This is the first real use of the asynchronous shared-signal APIs, which may surface
   adjustments to `AsynchronousSignalTree` and to the internal listener-registration APIs
   (associating a listener with a session, for serialization).
-- The `NotSerializableException` guard in `SignalTree.writeObject` is relaxed for clustered
-  trees, which become serializable as a reconnectable reference.
 
 ## Out of scope
 
-- **A second backend implementation.** Hazelcast, Kafka, PostgreSQL and others are follow-up
-  work. The SPI is designed so they can be added without changing the programming model, but
-  only Redis is built here — and the SPI is therefore validated against one backend, not
-  proven backend-neutral until a second one lands.
+- **A second *supported* backend.** Redis is the only backend that ships, is documented and
+  is supported. The Kafka and PostgreSQL prototypes above exist to prove the SPI holds up;
+  hardening either one — or adding Hazelcast or anything else — is follow-up work, and the
+  programming model does not change when it happens.
 - Persisting signal state as a system of record, or any query/history API over the event log.
 - Cross-datacenter or geo-replicated clusters.
 - Changes to the signal programming model itself — clustered signals are the existing shared
@@ -208,6 +218,8 @@ Success criteria:
   a soak test that includes node restarts.
 - Catch-up time for a new instance stays bounded as the log ages, rather than growing with
   total history.
+- The Kafka and PostgreSQL prototypes pass the SPI conformance suite, and any SPI change they
+  forced is understood and deliberate rather than a sign the abstraction leaked Redis.
 - Validated with at least one pilot customer running an actual cluster.
 
 ## Pre-implementation checklist
