@@ -381,7 +381,7 @@
     },
     "kits": {
         "appsec-kit-starter": {
-            "javaVersion": "4.0.4"
+            "javaVersion": "4.1.0"
         },
         "azure-kit": {
             "version": "1.0.0"
@@ -393,17 +393,17 @@
             "javaVersion": "3.1.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "5.0.0-rc1"
+            "javaVersion": "5.0.0"
         },
         "sso-kit-starter": {
-            "javaVersion": "4.2.0-rc1",
-            "jsVersion": "4.2.0-rc1"
+            "javaVersion": "4.2.0",
+            "jsVersion": "4.2.0"
         },
         "swing-kit": {
             "javaVersion": "3.0.1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "7.0.0"
+            "javaVersion": "7.1.0"
         }
     },
     "platform": "{{version}}",
