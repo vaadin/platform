@@ -41,7 +41,7 @@
             "npmName": "@vaadin/breadcrumbs"
         },
         "browserless-test": {
-            "javaVersion": "25.3.0-rc1"
+            "javaVersion": "25.3.0"
         },
         "button": {
             "jsVersion": "25.3.0",
@@ -543,7 +543,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.3.0-rc1",
+            "javaVersion": "25.3.0",
             "pro": true
         }
     }
