@@ -64,7 +64,7 @@
             "javaVersion": "3.1.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "5.0.0-rc1"
+            "javaVersion": "5.0.0"
         },
         "sso-kit-starter": {
             "javaVersion": "4.2-SNAPSHOT",
@@ -142,7 +142,7 @@
                 "@vaadin/vertical-layout",
                 "@vaadin/virtual-list"
             ],
-            "jsVersion": "25.3.0-rc1",
+            "jsVersion": "25.3.0",
             "mode": "react",
             "npmName": "@vaadin/react-components"
         },
@@ -156,7 +156,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "25.3.0-rc1",
+            "jsVersion": "25.3.0",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
@@ -179,7 +179,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.3.0-rc1",
+            "javaVersion": "25.3.0",
             "pro": true
         }
     }
