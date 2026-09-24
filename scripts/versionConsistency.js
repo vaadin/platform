@@ -9,8 +9,11 @@
  * - the web component version against the `@NpmPackage` annotation of the
  *   button in flow-components, on the branch the pull request targets,
  * - the packages `versions.json` declares against the dependencies of Flow
- *   and the peer dependencies of the bundles,
- * - the minor and patch of the React components against the web components.
+ *   and the peer dependencies of the bundles.
+ *
+ * `versions.json` no longer lists the web components one by one, so the web
+ * component version is read from `@vaadin/react-components`, which is
+ * released in lockstep with them.
  *
  * The script exits with 1 when any of them disagree.
  *
@@ -22,7 +25,7 @@
  *   baseBranch=main GITHUB_TOKEN=... node scripts/versionConsistency.js
  *
  * A version may be given in the environment as well, as `flowVersion`,
- * `bundlesVersion`, `wcVersion` or `rcVersion`, which takes precedence over
+ * `bundlesVersion` or `wcVersion`, which takes precedence over
  * what `versions.json` says.
  */
 
@@ -167,8 +170,7 @@ async function main() {
 
   const flowVersion = version('flowVersion', () => versions.core.flow.javaVersion);
   const bundlesVersion = version('bundlesVersion', () => versions.bundles.vaadin.jsVersion);
-  const wcVersion = version('wcVersion', () => versions.core.button.jsVersion);
-  const rcVersion = version('rcVersion', () => versions.react['react-components'].jsVersion);
+  const wcVersion = version('wcVersion', () => versions.react['react-components'].jsVersion);
 
   if (bundlesVersion && bundlesVersion != 'null' && wcVersion && bundlesVersion != wcVersion) {
     console.error('\x1b[33m', `WebComponent version(${wcVersion}) is not matching @vaadin/bundles version(${bundlesVersion})`);
@@ -220,18 +222,6 @@ async function main() {
     compareDependency('platform', platformVersions, 'bundles', bundles.peerDependencies);
   } else {
     console.log('\x1b[32m', "don't have bundles info");
-  }
-
-  if (rcVersion != 'null') {
-    const [rcMajor, rcMinor, rcPatch] = rcVersion.split('.');
-    const [bMajor, bMinor, bPatch] = wcVersion.split('.');
-    console.log(rcMinor, bMinor, rcPatch, bPatch);
-    if (rcMinor != bMinor || rcPatch != bPatch) {
-      mismatch = true;
-      console.error(`WebComponent version(${wcVersion}) is not matching @vaadin/react-components version(${rcVersion})`);
-    }
-  } else {
-    console.log('\x1b[32m', "don't have react-components info");
   }
 
   // for flow 2.x, we dont need to check this
