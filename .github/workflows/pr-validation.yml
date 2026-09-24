@@ -7,46 +7,51 @@ name: PR validation
 # Both configs are the same 26-step template and differ only in which steps
 # are enabled: bt210 runs the Maven ITs, bt232 runs the Gradle test project.
 # TeamCity triggers them as two independent builds on two agents, so each one
-# repeats the whole preparation and `mvn install`. They are ported as the two
-# `suite` entries of the `validate` matrix below, which keeps that shape: the
-# suites run in parallel and each does its own install.
+# repeats the whole preparation and `mvn install`.
+#
+# DEVIATION: here the install runs once. The `build` job installs the
+# platform modules and publishes what it installed; the test suites and the
+# javadoc build each run in a job of their own on top of it, in parallel:
+#
+#   guard ─┬─ version-consistency
+#          └─ build ─┬─ npm-tests
+#                    ├─ react-tests
+#                    ├─ javadocs
+#                    └─ gradle-tests
 #
 # Steps 1-11 are identical in both configs:
 #   1  contributor CI rights          -> job `guard` (author_association)
 #   2  skip-ci label/title check      -> job `guard`
-#   3  prepare build, generate boms   -> `validate` (env info / Generate BOMs)
+#   3  prepare build, generate boms   -> prepare-build action
 #   4  check project java version     -> not ported; this branch builds on Java 21
-#   5  install node 24                -> `validate` (setup-node)
+#   5  install node 24                -> prepare-build action (setup-node)
 #   6  validate npm duplicated vers.  -> DISABLED in TeamCity, not ported
-#   7  values for version consistency -> not ported yet, see below
-#   8  version consistency test       -> not ported yet, see below
-#   9  set to a different version     -> `validate` (versions:set 99.0-SNAPSHOT)
-#   10 set gradle test version        -> `validate`
-#   11 install modules (production)   -> `validate` (mvn install)
+#   7  values for version consistency -> job `version-consistency`
+#   8  version consistency test       -> job `version-consistency`
+#   9  set to a different version     -> prepare-build action (versions:set)
+#   10 set gradle test version        -> prepare-build action
+#   11 install modules (production)   -> job `build` (mvn install)
 # (bt210 lists steps 4 and 5 the other way round; nothing else differs.)
 #
 # Then the Maven suite, bt210 numbering:
 #   12 install modules (java 11)      -> not ported; this branch builds on Java 21
 #   13 start sauce connect            -> not ported; the ITs run on local Chrome
 #   14 npm tests v14-v22 (java 8)     -> not ported; this branch builds on Java 21
-#   15 npm tests v23+ (java 17+)      -> `validate` (mvn verify)
+#   15 npm tests v23+ (java 17+)      -> jobs `npm-tests` and `react-tests`
 #   16-20, 22-24                      -> DISABLED in TeamCity, not ported
 #   21 OSGi tests (java 11)           -> DISABLED in TeamCity, not ported
-#   25 bower tests                    -> `validate`, only on branches with `bower-it`
+#   25 bower tests                    -> `npm-tests`, only on branches with `bower-it`
 #   26 stop sauce connect             -> not ported; the ITs run on local Chrome
 #
 # ...and the Gradle suite, bt232 numbering:
 #   12-16                             -> DISABLED in TeamCity, not ported
-#   17 run gradle tests               -> `validate` (./gradlew clean build)
-#   18 check mismatched jna versions  -> `validate` (./gradlew dependencies)
+#   17 run gradle tests               -> job `gradle-tests` (./gradlew clean build)
+#   18 check mismatched jna versions  -> job `gradle-tests` (./gradlew dependencies)
 #   19-25                             -> DISABLED in TeamCity, not ported
 #   26 remove node 20                 -> agent housekeeping; runners are ephemeral
 #
-# Steps 7 and 8, the version consistency test, are left out on purpose. Both
-# TeamCity steps are inert today — build #7711 has their two node commands
-# `echo skip:`-ed out — so porting them would only report on a state nobody is
-# acting on. They belong in a job of their own whenever that changes, since
-# they need neither the Maven build nor its local repository.
+# The javadoc build (`javadocs`) has no TeamCity counterpart in PR validation;
+# it catches javadoc errors that otherwise only surface at release time.
 #
 # Deliberate deviations from TeamCity are marked "DEVIATION" below.
 
@@ -77,6 +82,9 @@ env:
   JAVA_VERSION: 21
   # Freshly published npm packages must not be rejected by Flow's age guard.
   MAVEN_ARGS: -B -ntp -Dvaadin.npm.minimumFrontendPackageAgeDays=0
+  # What `build` hands to the jobs after it, see "Publish the installed
+  # artifacts" below.
+  MAVEN_ARTIFACTS: pr-validation-maven-artifacts
 
 jobs:
   # --- steps 1 & 2 ---------------------------------------------------------
@@ -131,141 +139,136 @@ jobs:
           echo "setting skip = $skip"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
-  # --- steps 3-5, 9-11, then 15/25 (maven) or 17/18 (gradle) ---------------
-  # Kept as one job per suite: every step after the BOM generation depends on
-  # artifacts installed into the same local Maven repository, exactly as on a
-  # single TeamCity agent. Splitting it would mean shipping ~1 GB of ~/.m2
-  # between jobs.
-  validate:
-    name: ${{ matrix.name }}
+  # --- steps 7 & 8 ---------------------------------------------------------
+  # Compares versions.json with what Flow, flow-components and the bundles
+  # declare on the branch the PR targets. It needs neither the Maven build nor
+  # its local repository, so it runs alongside `build` rather than in it, and
+  # a mismatch does not hold up the test jobs.
+  #
+  # DEVIATION: both TeamCity steps are inert today — build #7711 has their two
+  # node commands `echo skip:`-ed out — and the check lived inline in the
+  # build configuration. Here it runs scripts/versionConsistency.js, which
+  # reads the versions out of versions.json itself.
+  version-consistency:
+    name: Check version consistency
     needs: guard
     if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ matrix.timeout }}
-    strategy:
-      # The two suites are separate TeamCity builds; one failing must not hide
-      # the other's result.
-      fail-fast: false
-      matrix:
-        include:
-          - suite: maven
-            name: Build and run ITs (Java 21)
-            timeout: 90
-          - suite: gradle
-            name: Build and run Gradle tests (Java 21)
-            timeout: 60
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
 
-      # Step 5: TeamCity installs node 24 via NVM; this runs node 26.
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: maven
-
-      - name: Pin Maven ${{ env.MAVEN_VERSION }}
-        uses: stCarolas/setup-maven@v5.1
-        with:
-          maven-version: ${{ env.MAVEN_VERSION }}
-
-      # DEVIATION: TeamCity keeps the TestBench licence in an agent-wide build
-      # parameter, so every Maven and Gradle step inherits
-      # -Dvaadin.testbench.developer.license=... . On Actions it is written
-      # once to ~/.vaadin/proKey, the same place sbom.yml and pit.yml put it.
-      # Forked PRs get no secrets, hence the warning instead of a hard failure.
-      - name: Install the TestBench proKey
+      - name: Check versions.json against Flow, flow-components and bundles
         env:
-          TB_LICENSE: ${{ secrets.TB_LICENSE }}
-        run: |
-          if [ -z "$TB_LICENSE" ]; then
-            echo "::warning::secrets.TB_LICENSE is not set; TestBench cannot start a browser"
-            exit 0
-          fi
-          mkdir -p ~/.vaadin
-          printf '{"username":"%s","proKey":"%s"}' \
-            "${TB_LICENSE%%/*}" "${TB_LICENSE#*/}" > ~/.vaadin/proKey
+          # The other repositories are public; the token only lifts the
+          # anonymous rate limit.
+          GITHUB_TOKEN: ${{ github.token }}
+          baseBranch: ${{ github.base_ref || github.event.repository.default_branch }}
+        run: node scripts/versionConsistency.js
 
-      # Step 3, first half. Cached third-party artifacts are kept, but
-      # com/vaadin and dev/hilla must go: stale snapshots there would mask the
-      # very changes this build validates.
-      - name: Purge Vaadin and Hilla artifacts from the local repo
-        run: rm -rf ~/.m2/repository/com/vaadin ~/.m2/repository/dev/hilla ~/.gradle
+  # --- steps 3, 5, 9-11 ----------------------------------------------------
+  # Installs the platform modules once for every job below. The test modules
+  # are left out; each test job builds its own.
+  build:
+    name: Install modules (Java 21)
+    needs: guard
+    if: needs.guard.outputs.skip == 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
 
-      # DEVIATION: TeamCity runs the ITs against browsers on the Selenium grid,
-      # so nothing ever started a browser on the agent itself. Here they use
-      # the runner's own Chrome, and the runner has no X display — without a
-      # virtual one Chrome exits at startup and every test errors with
-      # SessionNotCreatedException ("Chrome instance exited"). Xvfb ships with
-      # the ubuntu runner images; it is installed here in case that changes.
-      - name: Ensure Xvfb is available
-        run: command -v xvfb-run || { sudo apt-get update && sudo apt-get install -y xvfb; }
+      - uses: ./.github/actions/prepare-build
+        with:
+          tb-license: ${{ secrets.TB_LICENSE }}
 
-      - name: Environment info
-        run: |
-          echo "---> node/npm"; node -v; npm -v
-          echo "---> java";     java -version
-          echo "---> maven";    mvn -v
-          echo "---> chrome";   google-chrome --version || true
-          echo "---> xvfb";     command -v xvfb-run
-          echo "---> disk";     df -k
-
-      # Step 3, second half.
-      - name: Generate BOMs
-        run: scripts/generateBoms.sh
-
-      # Step 3 sets run.bower.tests / run.gradle.tests from the profiles the
-      # *current branch's* pom actually declares. The profile list passed to
-      # Maven below is intentionally the full union across branches — Maven
-      # only warns about profiles that do not exist.
-      - name: Detect optional profiles
-        id: profiles
-        run: |
-          mvn -B -U help:all-profiles | grep -q 'bower-it' && bower=true || bower=false
-          [ -f vaadin-platform-gradle-test/gradle.properties ] && gradle=true || gradle=false
-          echo "Has bower: $bower / Has gradle: $gradle"
-          echo "bower=$bower"   >> "$GITHUB_OUTPUT"
-          echo "gradle=$gradle" >> "$GITHUB_OUTPUT"
-
-      # Step 9.
-      - name: Set reactor version to ${{ env.BUILD_VERSION }}
-        run: mvn $MAVEN_ARGS -DnewVersion=$BUILD_VERSION -DgenerateBackupPoms=false versions:set
-
-      # Step 10.
-      - name: Point the Gradle test project at the build version
-        if: steps.profiles.outputs.gradle == 'true'
-        working-directory: vaadin-platform-gradle-test
-        run: |
-          sed -i "s/vaadinVersion.*/vaadinVersion=$BUILD_VERSION/g" ./gradle.properties
-          sed -i "s/pluginVersion.*/pluginVersion=$BUILD_VERSION/g" ./gradle.properties
-
-      # Step 11. Both configs run this with the same goals and profiles, and
-      # the Gradle suite needs it too: build.gradle resolves the platform from
-      # mavenLocal() through `enforcedPlatform("com.vaadin:vaadin-bom")`.
+      # Step 11, without the npm-it, react-hybrid and hybrid-security
+      # profiles TeamCity also passes: those only add test modules to the
+      # reactor, and the test jobs build them.
       - name: Install modules for production mode
         run: |
           mvn $MAVEN_ARGS -e -V -U -DskipTests \
-            -Pnpm-it,production,jandex,hilla,dev-bundle,gradle,react-hybrid,hybrid-security,enforcer,ee,oss \
+            -Pproduction,jandex,hilla,dev-bundle,gradle,enforcer,ee,oss \
             -T 1C -Daether.syncContext.named.time=180 \
             install
 
-      # Step 15. Runs the ITs of vaadin-platform-test and the react-hybrid
-      # modules against a production-mode build.
-      #
-      # DEVIATION: TeamCity drives Chrome through the internal grid at
-      # pr-validation-hub.rnd.aws.int.vaadin.com and keeps a Sauce Connect
-      # tunnel open around it (steps 13/26). Neither is used here — the ITs
-      # run against the Chrome preinstalled on the runner, under Xvfb, so they
-      # cover one browser where the grid fanned them out across a browser set.
+      # Everything under com/vaadin and dev/hilla was purged at the start of
+      # this job, so what is there now is exactly this build: the modules it
+      # installed plus the Flow, Hilla and component snapshots it resolved.
+      # Shipping all of it, not only the reactor's own artifacts, keeps the
+      # test jobs on the same snapshots even if newer ones are published in
+      # between. The third-party artifacts come from the setup-java cache.
+      - name: Pack the installed artifacts
+        run: |
+          cd ~/.m2/repository
+          dirs=$(ls -d com/vaadin dev/hilla 2>/dev/null)
+          tar -cf "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar" $dirs
+          du -h "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar"
+
+      - name: Publish the installed artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ env.MAVEN_ARTIFACTS }}
+          path: ${{ env.MAVEN_ARTIFACTS }}.tar
+          # Jars are already compressed.
+          compression-level: 0
+          retention-days: 1
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pr-validation-diagnostics-build
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            **/target/*-reports/*.xml
+            vaadin-dev-bundle/target/dev-bundle/config/stats.json
+
+  # --- step 15, vaadin-platform-test, and step 25 ---------------------------
+  # DEVIATION: TeamCity drives Chrome through the internal grid at
+  # pr-validation-hub.rnd.aws.int.vaadin.com and keeps a Sauce Connect
+  # tunnel open around it (steps 13/26). Neither is used here — the ITs run
+  # against the Chrome preinstalled on the runner, under Xvfb, so they cover
+  # one browser where the grid fanned them out across a browser set. The same
+  # holds for `react-tests` and `gradle-tests`.
+  npm-tests:
+    name: Run npm tests (Java 21)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: prepare
+        uses: ./.github/actions/prepare-build
+        with:
+          tb-license: ${{ secrets.TB_LICENSE }}
+
+      - &restore-download
+        name: Download the installed artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ env.MAVEN_ARTIFACTS }}
+
+      - &restore-unpack
+        name: Unpack the installed artifacts into the local repo
+        run: |
+          tar -xf "$MAVEN_ARTIFACTS.tar" -C ~/.m2/repository
+          rm "$MAVEN_ARTIFACTS.tar"
+
+      # Step 15, the vaadin-platform-test half. -DskipPlatform takes the
+      # platform modules out of the reactor, so they come from the local repo
+      # as `build` installed them, and only the test modules are built.
+      # reload-benchmark is part of step 15 in TeamCity too.
       - name: Run npm tests [platform]
-        if: matrix.suite == 'maven'
         run: |
           xvfb-run -a mvn $MAVEN_ARGS -Dvaadin.bowerMode=false -Denforcer.skip=true \
-            -Pnpm-it,'!bower-it',jandex,hilla,dev-bundle,gradle,production,hybrid-security,react-hybrid,oss,ee,reload-benchmark,theme-component-css \
+            -DskipPlatform -Pnpm-it,'!bower-it',production,reload-benchmark \
             -Dpath.to.java="$JAVA_HOME/bin/" \
             -Dcom.vaadin.testbench.Parameters.runLocally=chrome \
             -Dcom.vaadin.testbench.Parameters.testsInParallel=4 \
@@ -278,7 +281,7 @@ jobs:
       # exact goals are not in the log — this reproduces the npm-test step with
       # the bower profile swapped in.
       - name: Run bower tests
-        if: matrix.suite == 'maven' && steps.profiles.outputs.bower == 'true'
+        if: steps.prepare.outputs.bower == 'true'
         run: |
           xvfb-run -a mvn $MAVEN_ARGS -Dvaadin.bowerMode=true -Denforcer.skip=true \
             -Pbower-it,'!npm-it' \
@@ -286,8 +289,90 @@ jobs:
             -Dfailsafe.rerunFailingTestsCount=3 \
             verify
 
-      # Gradle suite, step 17. `build` pulls in `integrationTest` through
-      # `check`, and Gretty starts and stops the app around it.
+      # TeamCity's artifact rules, plus the surefire/failsafe XML that the
+      # TeamCity runners reported automatically and Actions does not.
+      - &diagnostics
+        name: Upload failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pr-validation-diagnostics-${{ github.job }}
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            **/error-screenshots/**
+            **/target/*-reports/*.xml
+
+  # --- step 15, the react-hybrid modules -----------------------------------
+  react-tests:
+    name: Run React tests (Java 21)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/prepare-build
+        with:
+          tb-license: ${{ secrets.TB_LICENSE }}
+
+      - *restore-download
+      - *restore-unpack
+
+      - name: Run npm tests [react-hybrid]
+        run: |
+          xvfb-run -a mvn $MAVEN_ARGS -Denforcer.skip=true \
+            -DskipPlatform -Preact-hybrid,hybrid-security,production \
+            -Dpath.to.java="$JAVA_HOME/bin/" \
+            -Dcom.vaadin.testbench.Parameters.runLocally=chrome \
+            -Dcom.vaadin.testbench.Parameters.testsInParallel=4 \
+            -Dsystem.com.vaadin.testbench.Parameters.maxAttempts=3 \
+            -Dfailsafe.rerunFailingTestsCount=3 \
+            verify
+
+      - *diagnostics
+
+  # --- javadocs ------------------------------------------------------------
+  # The same javadoc build a release runs (-Pjavadocs, see BUILD.md), limited
+  # to the javadoc module: everything it documents comes from `build`.
+  javadocs:
+    name: Build javadocs (Java 21)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/prepare-build
+
+      - *restore-download
+      - *restore-unpack
+
+      - name: Build the javadoc module
+        run: mvn $MAVEN_ARGS -pl vaadin-platform-javadoc -Pjavadocs -DskipTests package
+
+  # --- steps 17 & 18 -------------------------------------------------------
+  # The Gradle test project resolves the platform from mavenLocal() through
+  # `enforcedPlatform("com.vaadin:vaadin-bom")`, which is what `build`
+  # installed.
+  gradle-tests:
+    name: Run Gradle tests (Java 21)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: prepare
+        uses: ./.github/actions/prepare-build
+        with:
+          tb-license: ${{ secrets.TB_LICENSE }}
+
+      - *restore-download
+      - *restore-unpack
+
+      # Step 17. `build` pulls in `integrationTest` through `check`, and
+      # Gretty starts and stops the app around it.
       #
       # DEVIATION: TeamCity points the ITs at the internal grid with
       # -Dcom.vaadin.testbench.Parameters.hubHostname=pr-validation-hub...;
@@ -301,7 +386,7 @@ jobs:
       # licence and hubHostname into the test JVM — a system property set here
       # would never reach TestBench.
       - name: Run Gradle tests
-        if: matrix.suite == 'gradle' && steps.profiles.outputs.gradle == 'true'
+        if: steps.prepare.outputs.gradle == 'true'
         working-directory: vaadin-platform-gradle-test
         run: |
           xvfb-run -a ./gradlew clean build \
@@ -311,11 +396,11 @@ jobs:
             -Dorg.gradle.daemon=false \
             --stacktrace
 
-      # Gradle suite, step 18. A `->` in the dependency tree means Gradle had
-      # to bump one jna coordinate to satisfy another; that mismatch can break
-      # the build on a different JDK, so it has to be fixed in vaadin-bom.
+      # Step 18. A `->` in the dependency tree means Gradle had to bump one jna
+      # coordinate to satisfy another; that mismatch can break the build on a
+      # different JDK, so it has to be fixed in vaadin-bom.
       - name: Check for mismatched jna versions
-        if: matrix.suite == 'gradle' && steps.profiles.outputs.gradle == 'true'
+        if: steps.prepare.outputs.gradle == 'true'
         working-directory: vaadin-platform-gradle-test
         run: |
           if ./gradlew dependencies | grep 'jna' | grep '>'; then
@@ -326,21 +411,15 @@ jobs:
             echo "OK"
           fi
 
-      # TeamCity's artifact rules, plus the surefire/failsafe and Gradle test
-      # XML that the TeamCity runners reported automatically and Actions does
-      # not.
       - name: Upload failure diagnostics
         if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: pr-validation-diagnostics-${{ matrix.suite }}
+          name: pr-validation-diagnostics-gradle-tests
           if-no-files-found: ignore
           retention-days: 7
           path: |
-            **/error-screenshots/**
-            **/target/*-reports/*.xml
             **/problems-report.html
-            vaadin-dev-bundle/target/dev-bundle/config/stats.json
             vaadin-platform-gradle-test/build/reports/**
             vaadin-platform-gradle-test/build/test-results/**/*.xml
             vaadin-platform-gradle-test/dep.log

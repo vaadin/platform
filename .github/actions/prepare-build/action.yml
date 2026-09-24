@@ -1,0 +1,117 @@
+name: Prepare the platform build
+description: >
+  The preparation every PR-validation build job shares: toolchain, TestBench
+  licence, a Vaadin-free local repo, the generated BOMs and the reactor at
+  the build version. The jobs that consume the `build` job's artifacts run it
+  too, so their sources are in exactly the state those artifacts came from.
+
+inputs:
+  tb-license:
+    description: TestBench licence, as `username/proKey`
+    required: false
+    default: ''
+
+outputs:
+  bower:
+    description: Whether this branch's pom declares the `bower-it` profile
+    value: ${{ steps.profiles.outputs.bower }}
+  gradle:
+    description: Whether this branch has the Gradle test project
+    value: ${{ steps.profiles.outputs.gradle }}
+
+runs:
+  using: composite
+  steps:
+    # Step 5: TeamCity installs node 24 via NVM; this runs node 26.
+    - uses: actions/setup-node@v5
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: ${{ env.JAVA_VERSION }}
+        cache: maven
+
+    - name: Pin Maven ${{ env.MAVEN_VERSION }}
+      uses: stCarolas/setup-maven@v5.1
+      with:
+        maven-version: ${{ env.MAVEN_VERSION }}
+
+    # DEVIATION: TeamCity keeps the TestBench licence in an agent-wide build
+    # parameter, so every Maven and Gradle step inherits
+    # -Dvaadin.testbench.developer.license=... . On Actions it is written
+    # once to ~/.vaadin/proKey, the same place sbom.yml and pit.yml put it.
+    # Forked PRs get no secrets, hence the warning instead of a hard failure.
+    - name: Install the TestBench proKey
+      shell: bash
+      env:
+        TB_LICENSE: ${{ inputs.tb-license }}
+      run: |
+        if [ -z "$TB_LICENSE" ]; then
+          echo "::warning::secrets.TB_LICENSE is not set; TestBench cannot start a browser"
+          exit 0
+        fi
+        mkdir -p ~/.vaadin
+        printf '{"username":"%s","proKey":"%s"}' \
+          "${TB_LICENSE%%/*}" "${TB_LICENSE#*/}" > ~/.vaadin/proKey
+
+    # Step 3, first half. Cached third-party artifacts are kept, but
+    # com/vaadin and dev/hilla must go: stale snapshots there would mask the
+    # very changes this build validates. In the jobs downstream of `build`,
+    # they are then replaced by the ones `build` resolved and installed.
+    - name: Purge Vaadin and Hilla artifacts from the local repo
+      shell: bash
+      run: rm -rf ~/.m2/repository/com/vaadin ~/.m2/repository/dev/hilla ~/.gradle
+
+    # DEVIATION: TeamCity runs the ITs against browsers on the Selenium grid,
+    # so nothing ever started a browser on the agent itself. Here they use
+    # the runner's own Chrome, and the runner has no X display — without a
+    # virtual one Chrome exits at startup and every test errors with
+    # SessionNotCreatedException ("Chrome instance exited"). Xvfb ships with
+    # the ubuntu runner images; it is installed here in case that changes.
+    - name: Ensure Xvfb is available
+      shell: bash
+      run: command -v xvfb-run || { sudo apt-get update && sudo apt-get install -y xvfb; }
+
+    - name: Environment info
+      shell: bash
+      run: |
+        echo "---> node/npm"; node -v; npm -v
+        echo "---> java";     java -version
+        echo "---> maven";    mvn -v
+        echo "---> chrome";   google-chrome --version || true
+        echo "---> xvfb";     command -v xvfb-run
+        echo "---> disk";     df -k
+
+    # Step 3, second half. The BOMs, the umbrella poms and the javadoc pom
+    # are generated and git-ignored, so every job has to generate them.
+    - name: Generate BOMs
+      shell: bash
+      run: scripts/generateBoms.sh
+
+    # Step 3 sets run.bower.tests / run.gradle.tests from the profiles the
+    # *current branch's* pom actually declares.
+    - name: Detect optional profiles
+      id: profiles
+      shell: bash
+      run: |
+        mvn -B -U help:all-profiles | grep -q 'bower-it' && bower=true || bower=false
+        [ -f vaadin-platform-gradle-test/gradle.properties ] && gradle=true || gradle=false
+        echo "Has bower: $bower / Has gradle: $gradle"
+        echo "bower=$bower"   >> "$GITHUB_OUTPUT"
+        echo "gradle=$gradle" >> "$GITHUB_OUTPUT"
+
+    # Step 9.
+    - name: Set reactor version to ${{ env.BUILD_VERSION }}
+      shell: bash
+      run: mvn $MAVEN_ARGS -DnewVersion=$BUILD_VERSION -DgenerateBackupPoms=false versions:set
+
+    # Step 10.
+    - name: Point the Gradle test project at the build version
+      if: steps.profiles.outputs.gradle == 'true'
+      shell: bash
+      working-directory: vaadin-platform-gradle-test
+      run: |
+        sed -i "s/vaadinVersion.*/vaadinVersion=$BUILD_VERSION/g" ./gradle.properties
+        sed -i "s/pluginVersion.*/pluginVersion=$BUILD_VERSION/g" ./gradle.properties
