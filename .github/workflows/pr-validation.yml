@@ -68,7 +68,7 @@ env:
   # Version the reactor is rewritten to, so the build never resolves released
   # artifacts from the very repo it is validating. Same value TeamCity uses.
   BUILD_VERSION: 99.0-SNAPSHOT
-  NODE_VERSION: 24.21.0
+  NODE_VERSION: 26.10.0
   MAVEN_VERSION: 3.9.2
   # TeamCity's java-version step probes maven.compiler.release because its
   # build config is shared across every platform branch (1.8 / 11 / 17 / 21).
@@ -157,7 +157,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      # Step 5: node 24 via the NVM installer.
+      # Step 5: TeamCity installs node 24 via NVM; this runs node 26.
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
