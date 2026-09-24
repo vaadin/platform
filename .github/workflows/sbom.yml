@@ -78,7 +78,7 @@ jobs:
         name: Install dependency-check-12.2.2
       - uses: actions/setup-node@v5
         with:
-          node-version: '24'
+          node-version: '26'
       - run: npm install --ignore-scripts -g npm@11.6.4
       - run: |
           mkdir -p ~/.vaadin/
