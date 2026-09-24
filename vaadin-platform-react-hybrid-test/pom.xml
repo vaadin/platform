@@ -76,38 +76,14 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
-            <exclusions>
-                <!-- slf4j-simple below is this app's SLF4J provider; without
-                     this exclusion Logback lands on the classpath too and the
-                     provider that wins is classpath-order dependent. When
-                     slf4j-simple wins, Spring Boot's AOT processor dies with
-                     "LoggerFactory is not a Logback LoggerContext", which
-                     breaks Hilla's endpoint discovery in build-frontend. -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>hilla-spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -126,11 +102,6 @@
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
         </dependency>
     </dependencies>
     <build>

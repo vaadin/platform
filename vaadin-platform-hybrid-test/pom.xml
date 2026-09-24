@@ -86,16 +86,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <!-- slf4j-simple below is this app's SLF4J provider; excluding
-                     the whole starter keeps Logback and the log4j/jul bridges
-                     off the classpath, so provider selection cannot depend on
-                     classpath order. See the react-hybrid test modules. -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -115,11 +105,6 @@
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
         </dependency>
 
         <dependency>
