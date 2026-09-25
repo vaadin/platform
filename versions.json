@@ -34,9 +34,6 @@
         "vaadin-ordered-layout": {
             "javaVersion": "{{version}}"
         },
-        "vaadin-quarkus": {
-            "javaVersion": "3.2.2"
-        },
         "vaadin-renderer": {
             "javaVersion": "{{version}}"
         },
