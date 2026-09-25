@@ -92,11 +92,22 @@ runs:
 
     # Step 3 sets run.bower.tests / run.gradle.tests from the profiles the
     # *current branch's* pom actually declares.
+    #
+    # help:all-profiles has to read every module, BOM imports included, so
+    # it is the first step to hit an unresolvable artifact. Its output is
+    # kept and grepped separately: piped straight into `grep -q ... ||
+    # bower=false`, a Maven failure would read as "no bower profile" and
+    # the error would only show up, cached, in the next step.
     - name: Detect optional profiles
       id: profiles
       shell: bash
       run: |
-        mvn -B -U help:all-profiles | grep -q 'bower-it' && bower=true || bower=false
+        profiles="$RUNNER_TEMP/all-profiles.txt"
+        if ! mvn -B -U help:all-profiles > "$profiles"; then
+          cat "$profiles"
+          exit 1
+        fi
+        grep -q 'bower-it' "$profiles" && bower=true || bower=false
         [ -f vaadin-platform-gradle-test/gradle.properties ] && gradle=true || gradle=false
         echo "Has bower: $bower / Has gradle: $gradle"
         echo "bower=$bower"   >> "$GITHUB_OUTPUT"
