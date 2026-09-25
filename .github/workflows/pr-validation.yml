@@ -202,11 +202,18 @@ jobs:
       # Shipping all of it, not only the reactor's own artifacts, keeps the
       # test jobs on the same snapshots even if newer ones are published in
       # between. The third-party artifacts come from the setup-java cache.
+      #
+      # dev/hilla is only there on branches old enough to resolve Hilla under
+      # its former groupId, so it is packed when it exists. Tested with `if`,
+      # not `ls`: `ls` exits 2 for any missing path, which fails the step.
       - name: Pack the installed artifacts
         run: |
           cd ~/.m2/repository
-          dirs=$(ls -d com/vaadin dev/hilla 2>/dev/null)
-          tar -cf "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar" $dirs
+          dirs=()
+          for d in com/vaadin dev/hilla; do
+            if [ -d "$d" ]; then dirs+=("$d"); fi
+          done
+          tar -cf "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar" "${dirs[@]}"
           du -h "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar"
 
       - name: Publish the installed artifacts
