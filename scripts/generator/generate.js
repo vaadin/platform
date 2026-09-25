@@ -144,7 +144,7 @@ writer.writeProperty(versions, ["flow"], platformJavadocTemplatePomFileName, pla
 writer.writeProperty(versions, ["flow", "hilla"], devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeProperty(versions, ["flow", "hilla"], hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeProperty(versions, ["flow", "flow-components"], prodBundleTemplateFileName, prodBundlePomResultFileName);
-writer.writeProperty(versions, ["vaadin-quarkus"], vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
+writer.writeProperty(versions, ["flow"], vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);
 writer.writeMaven(versions, devBundleTemplateFileName, devBundlePomResultFileName);
 writer.writeMaven(versions, hybridDevBundleTemplateFileName, hybridDevBundlePomResultFileName);
 writer.writeMaven(versions, vaadinQuarkusTemplateFileName, vaadinQuarkusPomResultFileName);

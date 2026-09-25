@@ -15,8 +15,8 @@
 
     <properties>
         <vaadin.version>${project.version}</vaadin.version>
-        <!-- Aligned with vaadin-quarkus -->
-        <quarkus.version>3.32.0</quarkus.version>
+        <!-- Aligned with vaadin-quarkus in Flow -->
+        <quarkus.version>3.33.0</quarkus.version>
     </properties>
 
     <repositories>
@@ -126,7 +126,7 @@
                                 <argument>MetaDataReplacements.java</argument>
                                 <argument>${project.build.directory}/build/quarkus-metadata/META-INF/quarkus-extension.yaml</argument>
                                 <argument>${project.version}</argument>
-                                <argument>${vaadin.quarkus.version}</argument>
+                                <argument>${flow.version}</argument>
                             </arguments>
                         </configuration>
                     </execution>
