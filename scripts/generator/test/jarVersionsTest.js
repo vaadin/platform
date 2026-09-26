@@ -45,6 +45,24 @@ describe('Jar pinned versions', function () {
         });
     });
 
+    it('should count every package as a core one when none is said to be commercial', function () {
+        const result = jarVersions.splitPinnedVersions(
+            {
+                "@vaadin/text-field": "25.4.0",
+                "@vaadin/charts": "25.4.0"
+            },
+            []
+        );
+
+        expect(result).to.deep.equal({
+            core: {
+                "@vaadin/text-field": "25.4.0",
+                "@vaadin/charts": "25.4.0"
+            },
+            vaadin: {}
+        });
+    });
+
     it('should leave the versions alone when no jar pins a package', function () {
         const versions = {
             "text-field": {
