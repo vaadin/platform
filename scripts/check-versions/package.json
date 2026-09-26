@@ -10,7 +10,8 @@
     "scripts": {
         "start": "tsx src/index.ts",
         "check": "tsx src/index.ts --dry-run",
-        "test": "tsx --test src/semver.test.ts src/stability.test.ts"
+        "audit:license-checker": "tsx src/licenseChecker.ts",
+        "test": "tsx --test src/semver.test.ts src/stability.test.ts src/licenseChecker.test.ts"
     },
     "dependencies": {
         "fast-xml-parser": "^4.5.0",

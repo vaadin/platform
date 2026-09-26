@@ -15,7 +15,6 @@
     <properties>
 {{javadeps}}
         <slf4j.version>2.0.17</slf4j.version>
-        <jna.version>5.18.1</jna.version>
         <!-- Security overrides: force fixed transitive versions -->
         <spring.framework.security.version>7.0.9</spring.framework.security.version>
         <micrometer.security.version>1.17.1</micrometer.security.version>
@@ -97,7 +96,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-cdi</artifactId>
-                <version>${flow.cdi.version}</version>
+                <version>${flow.version}</version>
             </dependency>
 
             <dependency>
@@ -157,18 +156,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-swing-kit-client-api</artifactId>
                 <version>${swing.kit.version}</version>
-            </dependency>
-
-            <!-- JNA -->
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna</artifactId>
-                <version>${jna.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna-platform</artifactId>
-                <version>${jna.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -86,7 +86,26 @@ jobs:
         # supply-chain hardening measure. None of our direct deps (semver,
         # fast-xml-parser, tsx, typescript, @types/*) need install scripts.
         working-directory: scripts/check-versions
-        run: npm install --ignore-scripts --no-audit --no-fund
+        run: |
+          # This repo's .gitignore excludes **/package.json and
+          # **/tsconfig.json broadly, with per-project whitelist entries. If
+          # the whitelist is missing, the checkout silently has no manifest:
+          # npm install becomes a no-op and npx fetches its own tsx, so the
+          # run dies far from the cause. Check explicitly so the cause is
+          # stated instead of inferred. Same guard as bump-spring-boot.yml.
+          for f in package.json tsconfig.json; do
+            if [[ ! -f "$f" ]]; then
+              echo "::error::scripts/check-versions/$f is missing from the checkout."
+              echo "::error::It is almost certainly excluded by .gitignore -- add '!scripts/check-versions/$f' to the whitelist next to the scripts/bump-spring-boot entries."
+              exit 1
+            fi
+          done
+          npm install --ignore-scripts --no-audit --no-fund
+          # Fail here rather than letting npx silently download a different tsx.
+          test -x node_modules/.bin/tsx || {
+            echo "::error::tsx was not installed into node_modules/.bin."
+            exit 1
+          }
 
       - name: Configure git identity
         run: |
@@ -103,4 +122,7 @@ jobs:
           TARGET_BASE: ${{ matrix.base }}
         run: |
           echo "Targeting base branch: $TARGET_BASE"
-          npx tsx src/index.ts --create-pr --base "$TARGET_BASE"
+          # `--no` refuses to fetch tsx from the network: use the one just
+          # installed, or fail loudly. Without it npx silently substitutes its
+          # own copy, which resolves this package's module type differently.
+          npx --no tsx src/index.ts --create-pr --base "$TARGET_BASE"
