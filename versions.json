@@ -61,7 +61,7 @@
             "javaVersion": "3.1.1"
         },
         "observability-kit-starter": {
-            "javaVersion": "5.0.0"
+            "javaVersion": "25.4-SNAPSHOT"
         },
         "sso-kit-starter": {
             "javaVersion": "4.2.0",
