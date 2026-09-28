@@ -69,6 +69,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-15195'],
     description: 'The cve carries a git only range with no version mapping. The affected releases are 15.3.0 to 15.3.5, fixed in 15.3.6, while 11.7.2 predates that line by 17 months. It arrives through swagger-parser 10.1.1, which pins it exactly.'
   },
+  'pkg:npm/source-map-js@1.2.1' : {
+    cves: ['CVE-2026-93749'],
+    description: 'Build-time only: source-map-js is a dev dependency of postcss used by Vite during build/dev and is not shipped in production bundles. Exploitation requires feeding a crafted indexed source map into the developer\'s own build (event-loop DoS only). No fixed version is published on npm yet (1.2.1 is latest); upgrade once available.'
+  },
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
     cves: ['CVE-2023-35116'],
     description: 'Not a valid CVE report based on the vendor analysis and [research](https://github.com/FasterXML/jackson-databind/issues/3972)'
