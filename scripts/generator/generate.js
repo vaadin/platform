@@ -98,24 +98,53 @@ if (!fs.existsSync(resultsDir)) {
     fs.mkdirSync(resultsDir);
 }
 
-writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
-writer.writeNestedSeparateJson(versions.react['react-components'], coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
-writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
-
-writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
-writer.writeNestedSeparateJson(versions.react['react-components-pro'], vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
-writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
-
 // The component integrations pin the npm versions of the packages they ship
 // in their own jars, so this file no longer declares them. The two npm
 // packages written below, @vaadin/vaadin-core and @vaadin/vaadin, list every
 // component as a dependency, and the version to depend on used to come from
 // the entries that are now gone; without reading them back out of the jars
-// those packages would lose some seventy dependencies. Nothing else of the
+// those packages would lose some seventy dependencies. The React components
+// come from the jars as well, with the packages they bring, which is what
+// tells the commercial components from the core ones. Nothing else of the
 // generation needs them: the boms take the Java versions from this file, and
-// the versions files written above pin only what the platform declares.
-const pinnedVersions = jarVersions.readPinnedVersions(versions.core['flow-components'].javaVersion, argv['jars']);
-const pinnedPerPackage = jarVersions.splitPinnedVersions(pinnedVersions, versions.react['react-components-pro'].exclusions);
+// the versions files written below pin only what the platform declares.
+// The artifacts this repository builds are of the same version and some ship
+// versions files written by this script, so they are not read back
+const ownArtifactIds = jarVersions.collectOwnArtifactIds(path.resolve(__dirname, '../..'));
+const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars'], ownArtifactIds);
+// The React components are declared by the base jar of the components, which
+// applications have on their classpath, so the versions files of the platform
+// do not repeat them. The packages the commercial ones bring still tell the
+// commercial components from the core ones for the two npm packages.
+const reactComponentsPro = pinnedEntries['@vaadin/react-components-pro'];
+if (!reactComponentsPro) {
+    console.warn('The jars pin no commercial React components, so every component counts as a core one.');
+} else if (!reactComponentsPro.exclusions || reactComponentsPro.exclusions.length === 0) {
+    // Without them every commercial package would be written into the core
+    // npm package, which is worse than not writing the packages at all
+    console.error(
+        'The commercial React components pinned by the jars bring no package, so there is nothing to tell the commercial components from the core ones.'
+    );
+    process.exit(1);
+}
+// The npm packages of the platform depend on the web components, not on the
+// React components, so those two are left out of what is handed to them
+const reactComponentPackages = ['@vaadin/react-components', '@vaadin/react-components-pro'];
+const componentVersions = Object.fromEntries(
+    Object.entries(jarVersions.pinnedVersions(pinnedEntries)).filter(
+        ([npmName]) => !reactComponentPackages.includes(npmName)
+    )
+);
+const pinnedPerPackage = jarVersions.splitPinnedVersions(
+    componentVersions,
+    reactComponentsPro ? reactComponentsPro.exclusions : []
+);
+
+writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
+writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
+
+writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
+writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.vaadin, pinnedPerPackage.vaadin), vaadinPackageTemplateFileName, vaadinPackageResultFileName);
