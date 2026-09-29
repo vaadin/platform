@@ -14,15 +14,6 @@ function createJson(versions, key, jsonTemplate) {
     return JSON.stringify(jsonTemplate, null, 4);
 }
 
-function createNestedJson(versions, key, nestedKey, nestedKey2, jsonTemplate) {
-
-    jsonTemplate[key][nestedKey] = {}
-
-    jsonTemplate[key][nestedKey][nestedKey2] = versions;
-
-    return JSON.stringify(jsonTemplate, null, 4);
-}
-
 /**
 @param {Object} versions data object for product versions.
 @param {Object} packageJsonTemplate template data object to put versions to.
@@ -282,7 +273,6 @@ const CHANGELOG_MODULES = [
     { displayName: 'Kubernetes Kit',      repo: 'vaadin/kubernetes-kit',       tagPrefix: '',  getVersion: v => v.kits && v.kits['kubernetes-kit-starter'] && v.kits['kubernetes-kit-starter'].javaVersion },
     { displayName: 'Observability Kit',   repo: 'vaadin/observability-kit',    tagPrefix: '',  getVersion: v => v.kits && v.kits['observability-kit-starter'] && v.kits['observability-kit-starter'].javaVersion },
     { displayName: 'SSO Kit',             repo: 'vaadin/sso-kit',              tagPrefix: '',  getVersion: v => v.kits && v.kits['sso-kit-starter'] && v.kits['sso-kit-starter'].javaVersion },
-    { displayName: 'Quarkus plugin',      repo: 'vaadin/quarkus',              tagPrefix: '',  getVersion: v => v.core && v.core['vaadin-quarkus'] && v.core['vaadin-quarkus'].javaVersion },
     // Docs-only modules — no GitHub releases, so intermediate versions can't be listed.
     { displayName: 'AppSec Kit',  docsUrl: 'https://vaadin.com/docs/latest/tools/appsec',      getVersion: v => v.kits && v.kits['appsec-kit-starter'] && v.kits['appsec-kit-starter'].javaVersion },
     { displayName: 'Azure Kit',   docsUrl: 'https://vaadin.com/docs/latest/tools/azure-cloud', getVersion: v => v.kits && v.kits['azure-kit'] && v.kits['azure-kit'].version },
@@ -858,7 +848,6 @@ function requestGHWithToken(path, token){
 }
 
 exports.createJson = createJson;
-exports.createNestedJson = createNestedJson;
 exports.createPackageJson = createPackageJson;
 exports.createMaven = createMaven;
 exports.createReleaseNotes = createReleaseNotes;
