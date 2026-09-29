@@ -112,13 +112,13 @@ if (!fs.existsSync(resultsDir)) {
 // versions files written by this script, so they are not read back
 const ownArtifactIds = jarVersions.collectOwnArtifactIds(path.resolve(__dirname, '../..'));
 const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars'], ownArtifactIds);
-const reactComponents = pinnedEntries['@vaadin/react-components'];
+// The React components are declared by the base jar of the components, which
+// applications have on their classpath, so the versions files of the platform
+// do not repeat them. The packages the commercial ones bring still tell the
+// commercial components from the core ones for the two npm packages.
 const reactComponentsPro = pinnedEntries['@vaadin/react-components-pro'];
-if (!reactComponents || !reactComponentsPro) {
-    console.warn(
-        `The jars pin ${!reactComponents && !reactComponentsPro ? 'neither of the React components' : !reactComponents ? 'no core React components' : 'no commercial React components'},` +
-            ' so the npm packages of the platform will not depend on them and every component counts as a core one.'
-    );
+if (!reactComponentsPro) {
+    console.warn('The jars pin no commercial React components, so every component counts as a core one.');
 } else if (!reactComponentsPro.exclusions || reactComponentsPro.exclusions.length === 0) {
     // Without them every commercial package would be written into the core
     // npm package, which is worse than not writing the packages at all
@@ -127,16 +127,11 @@ if (!reactComponents || !reactComponentsPro) {
     );
     process.exit(1);
 }
-// The React components are pinned for the versions files, not for the npm
-// packages of the platform: those depend on the web components, which a React
-// application gets through the React components rather than the other way
-// round, so the two are left out of what is handed to them
-const reactComponentPackages = [reactComponents, reactComponentsPro]
-    .filter(Boolean)
-    .map((reactComponent) => reactComponent.npmName);
+// The npm packages of the platform depend on the web components, not on the
+// React components, so those are left out of what is handed to them
 const componentVersions = Object.fromEntries(
     Object.entries(jarVersions.pinnedVersions(pinnedEntries)).filter(
-        ([npmName]) => !reactComponentPackages.includes(npmName)
+        ([npmName]) => pinnedEntries[npmName].mode !== 'react'
     )
 );
 const pinnedPerPackage = jarVersions.splitPinnedVersions(
@@ -145,15 +140,9 @@ const pinnedPerPackage = jarVersions.splitPinnedVersions(
 );
 
 writer.writeSeparateJson(versions.core, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core");
-if (reactComponents) {
-    writer.writeNestedSeparateJson(reactComponents, coreJsonTemplateFileName, vaadinCoreJsonFileName, "core", "react", "react-components");
-}
 writer.writeSeparateJson(versions.platform, coreJsonTemplateFileName, vaadinCoreJsonFileName, "platform");
 
 writer.writeSeparateJson(versions.vaadin, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin");
-if (reactComponentsPro) {
-    writer.writeNestedSeparateJson(reactComponentsPro, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "vaadin", "react", "react-components-pro");
-}
 writer.writeSeparateJson(versions.platform, vaadinJsonTemplateFileName, vaadinJsonResultFileName, "platform");
 
 writer.writePackageJson(jarVersions.withPinnedVersions(versions.core, pinnedPerPackage.core), corePackageTemplateFileName, corePackageResultFileName);
