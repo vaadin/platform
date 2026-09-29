@@ -1,6 +1,7 @@
 const render = require('./replacer.js');
 const request = require('sync-request');
 const compareVersions = require('compare-versions');
+const { execSync } = require('child_process');
 
 /**
 @param {Object} versions data object for product versions.
@@ -123,6 +124,12 @@ function createReleaseNotes(versions, releaseNoteTemplate) {
         }
     }
 
+    // The web components no longer have an entry in versions.json, their version
+    // is the one the Accordion integration of flow-components pins
+    if (releaseNoteTemplate.includes('{{webComponentsVersion}}')) {
+        versions.webComponentsVersion = getWebComponentsVersion(getPlatformBranch(versions.platform));
+    }
+
     const changelogs = generateMaintenanceChangelog(versions);
     let releaseNoteData;
     if(!versions.platform.includes("SNAPSHOT")){
@@ -178,6 +185,9 @@ function generateMaintenanceChangelog(versions) {
     }
     const previousVersionsString = JSON.stringify(previousVersionsRaw).replace(/{{version}}/g, previousPlatform);
     const previousVersions = JSON.parse(previousVersionsString);
+    // flow-components tags its releases with the platform version
+    versions.webComponentsVersion = versions.webComponentsVersion || getWebComponentsVersion(getPlatformBranch(versions.platform));
+    previousVersions.webComponentsVersion = getWebComponentsVersion(previousPlatform, false);
 
     const changedLines = [];
     const unchangedLines = [];
@@ -262,7 +272,7 @@ function getIntermediateReleases(spec, prevVersion, currVersion) {
 const CHANGELOG_MODULES = [
     { displayName: 'Flow',                repo: 'vaadin/flow',                 tagPrefix: '',  getVersion: v => v.core && v.core.flow && v.core.flow.javaVersion },
     { displayName: 'Hilla',               repo: 'vaadin/hilla',                tagPrefix: '',  getVersion: v => v.core && v.core.hilla && v.core.hilla.javaVersion },
-    { displayName: 'Web Components',      repo: 'vaadin/web-components',       tagPrefix: 'v', getVersion: v => v.core && v.core.accordion && v.core.accordion.jsVersion },
+    { displayName: 'Web Components',      repo: 'vaadin/web-components',       tagPrefix: 'v', getVersion: v => v.webComponentsVersion },
     { displayName: 'Flow Components',     repo: 'vaadin/flow-components',      tagPrefix: '',  getVersion: v => v.platform },
     { displayName: 'TestBench',           repo: 'vaadin/testbench',            tagPrefix: '',  getVersion: v => v.vaadin && v.vaadin['vaadin-testbench'] && v.vaadin['vaadin-testbench'].javaVersion },
     { displayName: 'Browserless Test',    repo: 'vaadin/browserless-test',     tagPrefix: '',  getVersion: v => v.core && v.core['browserless-test'] && v.core['browserless-test'].javaVersion },
@@ -808,6 +818,69 @@ function buildComponentReleaseNoteString(versionName, version) {
     return result;
 }
 
+const ACCORDION_SOURCE = 'vaadin-accordion-flow-parent/vaadin-accordion-flow/src/main/java/com/vaadin/flow/component/accordion/Accordion.java';
+const _webComponentsVersionCache = {};
+
+/**
+ * Reads the web components version that the Accordion integration of
+ * flow-components pins with its `@NpmPackage` annotation.
+ *
+ * @param {String} ref the branch or tag of flow-components to read it from
+ * @param {Boolean} fallbackToMain whether to read it from `main` when the ref
+ *   does not exist there, as for a branch flow-components has not cut yet
+ * @return {String} the version, or an empty string when it cannot be read
+ */
+function getWebComponentsVersion(ref, fallbackToMain = true) {
+    if (_webComponentsVersionCache[ref] !== undefined) {
+        return _webComponentsVersionCache[ref];
+    }
+    let source = requestText(`https://raw.githubusercontent.com/vaadin/flow-components/${ref}/${ACCORDION_SOURCE}`);
+    if (!source && fallbackToMain && ref !== 'main') {
+        console.warn(`flow-components has no ${ref}, reading the web components version from main`);
+        source = requestText(`https://raw.githubusercontent.com/vaadin/flow-components/main/${ACCORDION_SOURCE}`);
+    }
+    const match = /@NpmPackage\(\s*value\s*=\s*"@vaadin\/accordion"\s*,\s*version\s*=\s*"([^"]+)"/.exec(source);
+    if (!match) {
+        console.warn(`Unable to read the web components version from ${ACCORDION_SOURCE} of flow-components ${ref}`);
+    }
+    _webComponentsVersionCache[ref] = match ? match[1] : '';
+    return _webComponentsVersionCache[ref];
+}
+
+/**
+ * Finds the branch of the platform being built, which is the one of
+ * flow-components to read from as the two repositories branch alike.
+ *
+ * A detached checkout, as of a release tag, has no branch, so it is taken
+ * from the minor of the platform version instead.
+ *
+ * @param {String} platformVersion the platform version
+ * @return {String} the branch
+ */
+function getPlatformBranch(platformVersion) {
+    let branch = '';
+    try {
+        branch = execSync('git rev-parse --abbrev-ref HEAD', { cwd: __dirname, stdio: ['ignore', 'pipe', 'ignore'] })
+            .toString().trim();
+    } catch (e) {
+        // not a git checkout
+    }
+    if (branch && branch !== 'HEAD') {
+        return branch;
+    }
+    const minor = /^(\d+\.\d+)/.exec(platformVersion || '');
+    return minor ? minor[1] : 'main';
+}
+
+function requestText(path) {
+    const res = request('GET', path, {
+        headers: {
+            'user-agent': 'vaadin-platform'
+        },
+    });
+    return res.statusCode == 200 ? res.getBody('utf8') : '';
+}
+
 function requestGH(path) {
     // when calling github api for multiple times
     // please use the requestGHWithToken(path, token)
@@ -856,4 +929,5 @@ exports.addProperty = addProperty;
 exports.generateChangesString = generateChangesString;
 exports.calculatePreviousVersion = calculatePreviousVersion;
 exports.createModulesReleaseNotes = createModulesReleaseNotes;
+exports.getWebComponentsVersion = getWebComponentsVersion;
 exports.parseModuleReleaseLinks = parseModuleReleaseLinks;
