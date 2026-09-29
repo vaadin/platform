@@ -128,10 +128,11 @@ if (!reactComponentsPro) {
     process.exit(1);
 }
 // The npm packages of the platform depend on the web components, not on the
-// React components, so those are left out of what is handed to them
+// React components, so those two are left out of what is handed to them
+const reactComponentPackages = ['@vaadin/react-components', '@vaadin/react-components-pro'];
 const componentVersions = Object.fromEntries(
     Object.entries(jarVersions.pinnedVersions(pinnedEntries)).filter(
-        ([npmName]) => pinnedEntries[npmName].mode !== 'react'
+        ([npmName]) => !reactComponentPackages.includes(npmName)
     )
 );
 const pinnedPerPackage = jarVersions.splitPinnedVersions(
