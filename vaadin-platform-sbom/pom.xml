@@ -42,11 +42,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring-boot-starter</artifactId>
+            <artifactId>vaadin-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hilla-spring-boot-starter</artifactId>
+            <artifactId>hilla</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>

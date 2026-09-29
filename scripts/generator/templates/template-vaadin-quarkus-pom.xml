@@ -22,12 +22,12 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-quarkus</artifactId>
-                <version>${vaadin.quarkus.version}</version>
+                <version>${flow.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-quarkus-deployment</artifactId>
-                <version>${vaadin.quarkus.version}</version>
+                <version>${flow.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

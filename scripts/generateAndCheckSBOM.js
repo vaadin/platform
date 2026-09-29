@@ -61,9 +61,17 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core W3CBaggagePropagator.extract(), fixed in JS 2.8.0) and its only CPE targets node.js. io.opentelemetry is opentelemetry-java, an unrelated codebase on its own 1.x line, so the version range matches only by CPE collision; osv-scanner and ossindex report nothing for this coordinate. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
   'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
     cves: ['CVE-2026-15195'],
     description: 'The cve carries a git only range with no version mapping. The affected releases are 15.3.0 to 15.3.5, fixed in 15.3.6, while 11.7.2 predates that line by 17 months. It arrives through swagger-parser 10.1.1, which pins it exactly.'
+  },
+  'pkg:npm/source-map-js@1.2.1' : {
+    cves: ['CVE-2026-93749'],
+    description: 'Build-time only: source-map-js is a dev dependency of postcss used by Vite during build/dev and is not shipped in production bundles. Exploitation requires feeding a crafted indexed source map into the developer\'s own build (event-loop DoS only). No fixed version is published on npm yet (1.2.1 is latest); upgrade once available.'
   },
   'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4' : {
     cves: ['CVE-2023-35116'],

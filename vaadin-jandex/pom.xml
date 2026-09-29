@@ -36,9 +36,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss</groupId>
+            <groupId>io.smallrye</groupId>
             <artifactId>jandex</artifactId>
-            <version>3.1.6</version>
+            <version>3.6.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -47,21 +47,25 @@
         <plugins>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.1</version>
                 <executions>
                     <execution>
-                        <id>unpack-dependencies</id>
+                        <!-- Unpack only classes from artifacts that do not ship their own Jandex index -->
+                        <id>unpack-non-indexed-dependencies</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>unpack-dependencies</goal>
+                            <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <includes>**/com/vaadin/**/*.class</includes>
-                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <executable>${env.JAVA_HOME}/bin/java</executable>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>${project.basedir}/../scripts/jandex/UnpackNonIndexedJars.java</argument>
+                                <argument>${project.build.directory}/jandex-classes</argument>
+                                <classpath/>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -69,13 +73,22 @@
             <plugin>
                 <groupId>io.smallrye</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
-                <version>3.1.6</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>make-index</id>
                         <goals>
                             <goal>jandex</goal>
                         </goals>
+                        <configuration>
+                            <!-- Index only the unpacked classes, the index is still written to target/classes/META-INF -->
+                            <processDefaultFileSet>false</processDefaultFileSet>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.directory}/jandex-classes</directory>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
