@@ -108,7 +108,10 @@ if (!fs.existsSync(resultsDir)) {
 // tells the commercial components from the core ones. Nothing else of the
 // generation needs them: the boms take the Java versions from this file, and
 // the versions files written below pin only what the platform declares.
-const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars']);
+// The artifacts this repository builds are of the same version and some ship
+// versions files written by this script, so they are not read back
+const ownArtifactIds = jarVersions.collectOwnArtifactIds(path.resolve(__dirname, '../..'));
+const pinnedEntries = jarVersions.readPinnedEntries(versions.core['flow-components'].javaVersion, argv['jars'], ownArtifactIds);
 const reactComponents = pinnedEntries['@vaadin/react-components'];
 const reactComponentsPro = pinnedEntries['@vaadin/react-components-pro'];
 if (!reactComponents || !reactComponentsPro) {

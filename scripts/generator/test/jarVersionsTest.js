@@ -63,6 +63,27 @@ describe('Jar pinned versions', function () {
         });
     });
 
+    it('should collect the artifact ids of the modules a repository builds', function () {
+        const fs = require('fs');
+        const os = require('os');
+        const path = require('path');
+        const root = fs.mkdtempSync(path.join(os.tmpdir(), 'own-artifacts-'));
+        fs.mkdirSync(path.join(root, 'module'));
+        fs.mkdirSync(path.join(root, 'module', 'target'));
+        fs.writeFileSync(path.join(root, 'pom.xml'),
+            '<project><artifactId>platform-parent</artifactId></project>');
+        fs.writeFileSync(path.join(root, 'module', 'pom.xml'),
+            '<project><parent><artifactId>platform-parent</artifactId></parent>' +
+            '<!-- <artifactId>commented-out</artifactId> -->' +
+            '<artifactId>vaadin-core-internal</artifactId></project>');
+        fs.writeFileSync(path.join(root, 'module', 'target', 'pom.xml'),
+            '<project><artifactId>built-copy</artifactId></project>');
+
+        const ids = jarVersions.collectOwnArtifactIds(root);
+
+        expect([...ids].sort()).to.deep.equal(['platform-parent', 'vaadin-core-internal']);
+    });
+
     it('should leave the versions alone when no jar pins a package', function () {
         const versions = {
             "text-field": {

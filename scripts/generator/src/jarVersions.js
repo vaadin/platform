@@ -113,17 +113,61 @@ function pinnedVersions(entries) {
 /**
  * Finds the jars of the given version below a directory.
  */
-function findJars(dir, version) {
+function findJars(dir, version, excluded) {
     if (!fs.existsSync(dir)) {
         return [];
     }
+    const suffix = `-${version}.jar`;
     return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
         const file = path.join(dir, entry.name);
         if (entry.isDirectory()) {
-            return findJars(file, version);
+            return findJars(file, version, excluded);
         }
-        return entry.name.endsWith(`-${version}.jar`) ? [file] : [];
+        if (!entry.name.endsWith(suffix)) {
+            return [];
+        }
+        const artifactId = entry.name.slice(0, -suffix.length);
+        return excluded.has(artifactId) ? [] : [file];
     });
+}
+
+/**
+ * Collects the artifact ids of the modules a repository builds, from the
+ * pom.xml files below its root.
+ *
+ * The platform builds artifacts of the platform version too, some of which
+ * ship versions files of their own, like the one of vaadin-core-internal. Those
+ * are written from what this script reads, so reading them back from the
+ * local Maven repository would pin whatever the previous build wrote rather
+ * than what the component jars declare.
+ *
+ * @param {String} root the root directory of the repository
+ * @return {Set<String>} the artifact ids of its modules
+ */
+function collectOwnArtifactIds(root) {
+    const ids = new Set();
+    (function walk(dir) {
+        fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
+            if (entry.isDirectory()) {
+                if (!['node_modules', 'target', '.git'].includes(entry.name)) {
+                    walk(path.join(dir, entry.name));
+                }
+                return;
+            }
+            if (!/^pom.*\.xml$/.test(entry.name)) {
+                return;
+            }
+            const pom = fs
+                .readFileSync(path.join(dir, entry.name), 'utf8')
+                .replace(/<!--[\s\S]*?-->/g, '')
+                .replace(/<parent>[\s\S]*?<\/parent>/, '');
+            const artifactId = /<artifactId>\s*([^<\s]+)\s*<\/artifactId>/.exec(pom);
+            if (artifactId) {
+                ids.add(artifactId[1]);
+            }
+        });
+    })(root);
+    return ids;
 }
 
 /**
@@ -136,11 +180,13 @@ function findJars(dir, version) {
  * @param {String} version the version of the jars to read, the platform version
  * @param {String} jarsDir the directory to look the jars up below, the com/vaadin
  *   folder of the local Maven repository by default
+ * @param {Set<String>} excluded the artifact ids of the jars not to read, those
+ *   the platform builds itself
  * @return {Object} the npm package names and the versions they are pinned to
  */
-function readPinnedEntries(version, jarsDir) {
+function readPinnedEntries(version, jarsDir, excluded = new Set()) {
     const dir = jarsDir || path.join(process.env.HOME || '', '.m2/repository/com/vaadin');
-    const jars = findJars(dir, version);
+    const jars = findJars(dir, version, excluded);
     const packages = {};
     jars.forEach((jar) => {
         let files;
@@ -221,6 +267,7 @@ function splitPinnedVersions(pinnedVersions, proPackages) {
 }
 
 exports.readPinnedEntries = readPinnedEntries;
+exports.collectOwnArtifactIds = collectOwnArtifactIds;
 exports.pinnedVersions = pinnedVersions;
 exports.withPinnedVersions = withPinnedVersions;
 exports.splitPinnedVersions = splitPinnedVersions;
