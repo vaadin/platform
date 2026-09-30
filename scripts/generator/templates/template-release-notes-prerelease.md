@@ -28,7 +28,7 @@ Vaadin {{platform}}
 
 - Flow ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}})) and Hilla ([{{core.hilla.javaVersion}}](https://github.com/vaadin/hilla/releases/tag/{{core.hilla.javaVersion}}))
 - Design System
-  - Web Components ([{{core.accordion.jsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{core.accordion.jsVersion}}))
+  - Web Components ([{{webComponentsVersion}}](https://github.com/vaadin/web-components/releases/tag/v{{webComponentsVersion}}))
   - Flow Components ([{{platform}}](https://github.com/vaadin/flow-components/releases/tag/{{platform}}))
 - TestBench ([{{vaadin.vaadin-testbench.javaVersion}}](https://github.com/vaadin/testbench/releases/tag/{{vaadin.vaadin-testbench.javaVersion}}))
 - Browserless Test([{{core.browserless-test.javaVersion}}](https://vaadin.com/docs/next/flow/testing/browserless))
