@@ -21,6 +21,8 @@
         <tomcat.security.version>11.0.25</tomcat.security.version>
         <jackson2.security.version>2.22.1</jackson2.security.version>
         <jackson3.security.version>3.1.5</jackson3.security.version>
+        <spring.framework.security.version>7.0.9</spring.framework.security.version>
+        <spring.security.security.version>7.1.1</spring.security.security.version>
     </properties>
 
     <distributionManagement>
@@ -80,6 +82,22 @@
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-websocket</artifactId>
                 <version>${tomcat.security.version}</version>
+            </dependency>
+            <!-- spring framework, CVE-2026-47890/47891/47892/47893/59280/59281/59282/59283/59313/59314 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.framework.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring security, CVE-2026-47841/47842/47877/59270/59276/59277 -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>${spring.security.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
