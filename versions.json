@@ -342,7 +342,7 @@
             "releasenotes": true
         },
         "vaadin-lumo-theme": {
-            "javaVersion": "24.7.14"
+            "javaVersion": "{{version}}"
         },
         "vaadin-material-styles": {
             "jsVersion": "24.7.13",
@@ -363,7 +363,7 @@
             "javaVersion": "2.1.3"
         },
         "vaadin-renderer": {
-            "javaVersion": "24.7.14"
+            "javaVersion": "{{version}}"
         },
         "vaadin-router": {
             "jsVersion": "2.0.1",
