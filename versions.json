@@ -93,7 +93,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.3.0",
+            "javaVersion": "25.4-SNAPSHOT",
             "pro": true
         }
     }
