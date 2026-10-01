@@ -351,13 +351,13 @@
             "releasenotes": true
         },
         "vaadin-material-theme": {
-            "javaVersion": "24.7.14"
+            "javaVersion": "{{version}}"
         },
         "vaadin-messages": {
-            "javaVersion": "24.7.14"
+            "javaVersion": "{{version}}"
         },
         "vaadin-ordered-layout": {
-            "javaVersion": "24.7.14"
+            "javaVersion": "{{version}}"
         },
         "vaadin-quarkus": {
             "javaVersion": "2.1.3"
