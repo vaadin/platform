@@ -164,6 +164,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:maven/org.apache.logging.log4j/log4j-to-slf4j@2.24.3' : {
+    cves: ['CVE-2026-34477', 'CVE-2026-34478', 'CVE-2026-34480', 'CVE-2026-34481', 'CVE-2025-68161'],
+    description: 'False positive: these CVEs affect log4j-core (Rfc5424Layout, XmlLayout, Socket Appender TLS) and log4j-layout-template-json (JsonTemplateLayout). log4j-to-slf4j is only the Log4j API to SLF4J bridge and contains none of that code; osv.dev reports no vulnerabilities for it.'
+  },
 }
 
 const STYLE = `<style>
