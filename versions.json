@@ -4,7 +4,7 @@
             "javaVersion": "25.4.0-alpha1"
         },
         "flow": {
-            "javaVersion": "25.4.0-alpha1"
+            "javaVersion": "25.4.0-alpha2"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
