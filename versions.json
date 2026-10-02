@@ -71,7 +71,7 @@
             "javaVersion": "3.0.1"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "7.1.0"
+            "javaVersion": "25.4-SNAPSHOT"
         }
     },
     "platform": "{{version}}",
