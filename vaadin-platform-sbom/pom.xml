@@ -58,11 +58,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.vaadin.flow.ai</groupId>
-            <artifactId>form-filler-addon</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>appsec-kit-starter</artifactId>
         </dependency>
@@ -89,10 +84,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-swing-kit-client-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>control-center-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
