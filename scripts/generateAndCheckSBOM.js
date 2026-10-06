@@ -109,16 +109,16 @@ const cveWhiteList = {
     description: 'This is a transitive dependency from workbox:7.4.0. We keep on tracking this issue https://github.com/GoogleChrome/workbox/issues/3470'
   },
   'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@1.9.20' : {
-    cves: ['CVE-2020-29582'],
-    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders. CVE-2026-53914 only affects org.jetbrains.kotlin:kotlin-gradle-plugin (unsafe deserialization in the Kotlin build cache); the CPE for the kotlin product matches every kotlin artifact.'
   },
   'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-common@1.9.0' : {
-    cves: ['CVE-2020-29582'],
-    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders. CVE-2026-53914 only affects org.jetbrains.kotlin:kotlin-gradle-plugin (unsafe deserialization in the Kotlin build cache); the CPE for the kotlin product matches every kotlin artifact.'
   },
   'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.6.20' : {
-    cves: ['CVE-2020-29582'],
-    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders.'
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'The impact of this vulnerability is low, instead of taking the risk to break V24 with upgrading kotlin to 2.x, we focus on to not use deprecated API, to not use sensitive data in tests and to clean up the temp folders. CVE-2026-53914 only affects org.jetbrains.kotlin:kotlin-gradle-plugin (unsafe deserialization in the Kotlin build cache); the CPE for the kotlin product matches every kotlin artifact.'
   },
   'pkg:maven/org.codehaus.plexus/plexus-utils@3.6.1' : {
     cves: ['CVE-2025-67030'],
@@ -165,8 +165,24 @@ const cveWhiteList = {
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
   'pkg:maven/org.apache.logging.log4j/log4j-to-slf4j@2.24.3' : {
-    cves: ['CVE-2026-34477', 'CVE-2026-34478', 'CVE-2026-34480', 'CVE-2026-34481', 'CVE-2025-68161'],
-    description: 'False positive: these CVEs affect log4j-core (Rfc5424Layout, XmlLayout, Socket Appender TLS) and log4j-layout-template-json (JsonTemplateLayout). log4j-to-slf4j is only the Log4j API to SLF4J bridge and contains none of that code; osv.dev reports no vulnerabilities for it.'
+    cves: ['CVE-2026-34477', 'CVE-2026-34479', 'CVE-2026-49844'],
+    description: 'False positive: CVE-2026-34477 affects log4j-core (TLS verifyHostName), CVE-2026-34479 affects log4j-1.2-api (Log4j1XmlLayout) and CVE-2026-49844 affects log4j-api (MapMessage JSON serialization). log4j-to-slf4j is only the Log4j API to SLF4J bridge and contains none of that code; osv.dev reports no vulnerabilities for it.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.3.0' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: CVE-2026-53914 only affects org.jetbrains.kotlin:kotlin-gradle-plugin (unsafe deserialization in the Kotlin build cache); the CPE for the kotlin product matches every kotlin artifact.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.62.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core) and the CPE that matched targets node.js, not the Java artifact.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-common@1.65.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core) and the CPE that matched targets node.js, not the Java artifact.'
+  },
+  'pkg:npm/%40opentelemetry/core@1.8.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
 }
 
