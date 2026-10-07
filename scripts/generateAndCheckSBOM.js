@@ -77,7 +77,55 @@ const cveWhiteList = {
   'pkg:npm/path-to-regexp@2.4.0' : {
       cves: ['CVE-2024-45296'],
       description: "From vaadin-rounte:1.7.5. Very low impact for us since we're only running that code in the user's browser and the only impact is a degraded performance."
-    }
+    },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@1.9.20' : {
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'False positive: CVE-2020-29582 was fixed in Kotlin 1.4.21; CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@1.6.20' : {
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'False positive: CVE-2020-29582 was fixed in Kotlin 1.4.21; CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-context@1.51.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: CVE-2026-54285 affects opentelemetry-js, matched via a node.js CPE against a Java artifact.'
+  },
+  'pkg:maven/com.vaadin/vaadin-swing-kit-flow@2.3.0' : {
+    cves: ['CVE-2021-33604'],
+    description: 'False positive: CVE-2021-33604 is an old flow-server issue, matched via the generic vaadin CPE.'
+  },
+  'pkg:maven/org.cyclonedx/cyclonedx-core-java@9.0.4' : {
+    cves: ['CVE-2025-64518'],
+    description: 'This is coming from the build tools (maven plugin), not shipped at runtime, FP for us.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.4.2' : {
+    cves: ['CVE-2025-67030'],
+    description: 'This is coming from the build tools (maven plugin), not shipped at runtime, FP for us.'
+  },
+  'pkg:maven/com.vaadin/vaadin@24.4-SNAPSHOT' : {
+    cves: ['CVE-2025-15022', 'CVE-2026-2742'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-core@24.4-SNAPSHOT' : {
+    cves: ['CVE-2026-2742', 'CVE-2026-2741'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  },
+  'pkg:maven/com.vaadin/flow-server@24.4-SNAPSHOT' : {
+    cves: ['CVE-2026-2742'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-server@24.4-SNAPSHOT' : {
+    cves: ['CVE-2025-15022'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-spreadsheet-flow@24.4-SNAPSHOT' : {
+    cves: ['CVE-2025-15022'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-upload-flow@24.4-SNAPSHOT' : {
+    cves: [],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
+  }
 }
 
 const STYLE = `<style>
