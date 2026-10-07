@@ -40,7 +40,8 @@ public class MetaDataReplacements {
                     "com.vaadin:vaadin-quarkus-extension::jar:" + platformVersion);
             content = content.replace("com.vaadin:vaadin-quarkus:codestarts:jar:" + vaadinQuarkusVersion,
                     "com.vaadin:vaadin-quarkus-extension:codestarts:jar:" + platformVersion);
-            content = content.replace("unlisted: \"true\"", "unlisted: \"false\"");
+            // handles both string ("true") and boolean (true) values, preserving the original style
+            content = content.replaceAll("(unlisted:\\s*)(\"?)true\\2(?!\\w)", "$1$2false$2");
 
             Files.writeString(yamlFile, content);
             System.out.println("Successfully updated YAML file at: " + yamlFile);
