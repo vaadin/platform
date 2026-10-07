@@ -86,6 +86,70 @@ const cveWhiteList = {
   'pkg:maven/com.google.code.gson/gson@2.10' : {
     cves: ['CVE-2025-53864'],
     description: 'False positive: gson is used transitively via vaadin-swing-kit-client, but this CVE targets Connect2id Nimbus JOSE + JWT, which is not used in our context.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-reflect@1.9.20' : {
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'False positive: CVE-2020-29582 was fixed in Kotlin 1.4.21; CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-common@1.9.0' : {
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'False positive: CVE-2020-29582 was fixed in Kotlin 1.4.21; CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.6.20' : {
+    cves: ['CVE-2020-29582', 'CVE-2026-53914'],
+    description: 'False positive: CVE-2020-29582 was fixed in Kotlin 1.4.21; CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.3.0' : {
+    cves: ['CVE-2026-53914'],
+    description: 'False positive: CVE-2026-53914 affects build cache metadata (compiler/build tooling), not the runtime library. Matched via the generic jetbrains:kotlin CPE.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-api-incubator@1.44.1-alpha' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: CVE-2026-54285 affects opentelemetry-js, matched via a node.js CPE against a Java artifact.'
+  },
+  'pkg:maven/io.opentelemetry/opentelemetry-common@1.66.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'False positive: CVE-2026-54285 affects opentelemetry-js, matched via a node.js CPE against a Java artifact.'
+  },
+  'pkg:maven/com.vaadin/vaadin-swing-kit-flow@2.4.1' : {
+    cves: ['CVE-2021-33604'],
+    description: 'False positive: CVE-2021-33604 is an old flow-server issue, matched via the generic vaadin CPE.'
+  },
+  'pkg:maven/org.cyclonedx/cyclonedx-core-java@9.0.4' : {
+    cves: ['CVE-2025-64518'],
+    description: 'This is coming from the build tools (maven plugin), not shipped at runtime, FP for us.'
+  },
+  'pkg:maven/org.codehaus.plexus/plexus-utils@3.4.2' : {
+    cves: ['CVE-2025-67030'],
+    description: 'This is coming from the build tools (maven plugin), not shipped at runtime, FP for us.'
+  },
+  'pkg:javascript/quill@1.3.7' : {
+    cves: ['CVE-2021-3163'],
+    description: 'The CVE is disputed by the vendor, the reported behavior is not considered a vulnerability in quill.'
+  },
+  'pkg:maven/com.vaadin/vaadin@24.7-SNAPSHOT' : {
+    cves: ['CVE-2025-15022', 'GHSA-c7v7-rqfm-f44j', 'CVE-2026-2742'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.7 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-core@24.7-SNAPSHOT' : {
+    cves: ['CVE-2026-2742', 'CVE-2026-2741'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.7 branch.'
+  },
+  'pkg:maven/com.vaadin/flow-server@24.7-SNAPSHOT' : {
+    cves: ['CVE-2026-2742'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.7 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-server@24.7-SNAPSHOT' : {
+    cves: ['CVE-2025-15022'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.7 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-spreadsheet-flow@24.7-SNAPSHOT' : {
+    cves: ['CVE-2025-15022'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.7 branch.'
+  },
+  'pkg:maven/com.vaadin/vaadin-upload-flow@24.7-SNAPSHOT' : {
+    cves: ['GHSA-94g8-xv23-7656'],
+    description: 'False positive: the scanners do not compare SNAPSHOT versions, the fix is included since 24.7.7.'
   }
 }
 
@@ -115,9 +179,11 @@ for (let i = 2, l = process.argv.length; i < l; i++) {
     case '--compare': cmd.org = process.argv[++i]; break;
     case '--quick': cmd.quick = true; break;
     case '--skip-check-core-licenses' : cmd.checkCoreLicenses = false; break;
+    case '--nvd-cache-dir': cmd.nvdCacheDir = process.argv[++i]; break;
+    case '--skip-nvd-update': cmd.skipNvdUpdate = true; break;
     default:
       console.log(`Usage: ${path.relative('.', process.argv[1])}
-       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses]`);
+       [--useSnapshots] [--disable-bomber] [--disable-osv-scan] [--disable-owasp] [--enable-full-owasp] [--version x.x.x] [--quick] [--skip-check-core-licenses] [--nvd-cache-dir <path>] [--skip-nvd-update]`);
       process.exit(1);
   }
 }
@@ -605,12 +671,20 @@ async function main() {
     // https://github.com/jeremylong/DependencyCheck/issues/4293
     // https://github.com/jeremylong/DependencyCheck/issues/1947
     fs.existsSync('package-lock.json') && fs.unlinkSync('package-lock.json')
-    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -q`, { throw: false });
+    let owaspArgs = `-DnvdApiKey=${process.env.NVD_API_KEY} -DnvdApiDelay=6000 -Dformat=JSON -q`;
+    if (cmd.nvdCacheDir) owaspArgs += ` -DdataDirectory=${cmd.nvdCacheDir}`;
+    if (cmd.skipNvdUpdate) owaspArgs += ` -DautoUpdate=false`;
+    log(cmd.skipNvdUpdate ? `OWASP: using cached NVD database from ${cmd.nvdCacheDir}` : 'OWASP: downloading NVD database (no cache or update forced)');
+    !cmd.quick && await run(`mvn org.owasp:dependency-check-maven:check ${owaspArgs}`, { throw: false });
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
   if (cmd.useFullOWASP) {
-    !cmd.quick && await run('dependency-check -f JSON -f HTML --prettyPrint --out target --scan .');
+    let fullOwaspArgs = '-f JSON -f HTML --prettyPrint --out target --scan .';
+    if (cmd.nvdCacheDir) fullOwaspArgs += ` --data ${cmd.nvdCacheDir}`;
+    if (cmd.skipNvdUpdate) fullOwaspArgs += ` --noupdate`;
+    log(cmd.skipNvdUpdate ? `Full OWASP: using cached NVD database from ${cmd.nvdCacheDir}` : 'Full OWASP: downloading NVD database (no cache or update forced)');
+    !cmd.quick && await run(`dependency-check ${fullOwaspArgs}`);
     sumarizeOWASP('target/dependency-check-report.json', vulnerabilities);
   }
 
