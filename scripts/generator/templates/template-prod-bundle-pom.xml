@@ -125,6 +125,21 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
+                        <id>clean-prod-bundle-location</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Remove bundle files of previous builds, otherwise stale
+                                hashed chunks are packaged into the jar -->
+                                <delete dir="${project.build.outputDirectory}/vaadin-prod-bundle"
+                                    includeemptydirs="true" />
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>run</goal>
@@ -134,10 +149,10 @@
                                 <!-- Remove application class file, so as IT modules do not read
                                 @Theme annotations when
                              maven configures the classpath for multimodule projects -->
-                                <delete dir="target/classes/com/vaadin/prodbundle"
+                                <delete dir="${project.build.outputDirectory}/com/vaadin/prodbundle"
                                     includeemptydirs="true" />
                                 <!-- Move bundle files to vaadin-prod-bundle folder -->
-                                <delete dir="target/classes/META-INF/VAADIN"
+                                <delete dir="${project.build.outputDirectory}/META-INF/VAADIN"
                                     includeemptydirs="true" />
                             </target>
                         </configuration>
