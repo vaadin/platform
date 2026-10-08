@@ -67,6 +67,7 @@
                                     <excludes>
                                         <exclude>com.vaadin:flow-*</exclude>
                                         <exclude>org.slf4j:slf4j-api</exclude>
+                                        <exclude>org.apache.commons:commons-lang3</exclude>
                                     </excludes>
                                 </dependencyConvergence>
                                 <requireUpperBoundDeps>
@@ -75,6 +76,7 @@
                                         <exclude>com.vaadin:flow-html-components</exclude>
                                         <exclude>com.vaadin:flow-data</exclude>
                                         <exclude>org.slf4j:slf4j-api</exclude>
+                                        <exclude>org.apache.commons:commons-lang3</exclude>
                                     </excludes>
                                 </requireUpperBoundDeps>
                             </rules>

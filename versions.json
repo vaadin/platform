@@ -382,7 +382,7 @@
             "version": "1.0.0"
         },
         "copilot": {
-            "javaVersion": "24.4-SNAPSHOT"
+            "javaVersion": "24.4.22"
         },
         "kubernetes-kit-starter": {
             "javaVersion": "2.3.0"
@@ -399,7 +399,7 @@
             "javaVersion": "2.3.0"
         },
         "vaadin-collaboration-engine": {
-            "javaVersion": "6.2-SNAPSHOT"
+            "javaVersion": "6.2.5"
         }
     },
     "platform": "{{version}}",
