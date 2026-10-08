@@ -46,6 +46,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!--No point to have copilot, as copilot does not have public API-->
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>copilot</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -76,6 +83,13 @@
                     <groupId>org.osgi</groupId>
                     <artifactId>osgi.core</artifactId>
                     <version>7.0.0</version>
+                    <scope>provided</scope>
+                </dependency>
+                <!-- runtime dependency of selenium-api, used in testbench sources -->
+                <dependency>
+                    <groupId>org.jspecify</groupId>
+                    <artifactId>jspecify</artifactId>
+                    <version>1.0.1</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
