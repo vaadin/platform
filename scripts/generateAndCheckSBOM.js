@@ -125,6 +125,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-53914'],
     description: 'FP: the report only affects org.jetbrains.kotlin:kotlin-gradle-plugin, the CPE for the kotlin product matches any kotlin artifact. We ship kotlin-stdlib as a transitive dependency of the webpush library, not the gradle plugin.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.66.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-api artifact, which is a separate codebase and not affected.'
+  },
   'pkg:maven/com.networknt/json-schema-validator@1.5.9' : {
     cves: ['CVE-2025-15104'],
     description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
