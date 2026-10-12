@@ -20,20 +20,6 @@ function writeSeparateJson(versions, templateFileName, outputFileName, key) {
 @param {String} templateFileName absolute path to template file
 @param {String} outputFileName absolute path to output file
 */
-function writePackageJson(versions, templateFileName, outputFileName) {
-    const packageJsonTemplate = require(templateFileName);
-
-    const packageJsonResult = creator.createPackageJson(versions, packageJsonTemplate);
-
-    fs.writeFileSync(outputFileName, packageJsonResult);
-    console.log(`Wrote ${outputFileName}`);
-}
-
-/**
-@param {Object} versions data object for product versions.
-@param {String} templateFileName absolute path to template file
-@param {String} outputFileName absolute path to output file
-*/
 function writeMaven(versions, templateFileName, outputFileName) {
     const mavenTemplate = fs.readFileSync(templateFileName, 'utf8');
 
@@ -85,7 +71,6 @@ function writeModulesReleaseNotes(versions, version, templateFileName, outputFil
 }
 
 exports.writeSeparateJson = writeSeparateJson;
-exports.writePackageJson = writePackageJson;
 exports.writeMaven = writeMaven;
 exports.writeProperty = writeProperty;
 exports.writeReleaseNotes = writeReleaseNotes;

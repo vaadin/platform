@@ -15,9 +15,8 @@ scripts/generateBoms.sh --useSnapshots
 Some npm packages are no longer declared in `versions.json`: the jar of a
 component integration pins the npm versions of the packages it ships itself, in
 `META-INF/VAADIN/versions/`, which Flow reads from every jar on the classpath.
-The generator reads those versions back from the jars of the platform version in
-the local Maven repository, so that the `package.json` of `@vaadin/vaadin-core`
-keeps depending on them; see [scripts/generator/README.md](scripts/generator/README.md).
+The npm packages `@vaadin/vaadin-core` and `@vaadin/vaadin` are published from
+[vaadin/web-components](https://github.com/vaadin/web-components), not from here.
 
 ## Release process
 
