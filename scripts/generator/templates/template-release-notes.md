@@ -44,7 +44,7 @@ Vaadin {{platform}}
 **Official add-ons and plugins:**
 
 - Spring add-on ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
-- CDI add-on ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
+- CDI add-on ([{{core.flow.javaVersion}}](https://vaadin.com/docs/latest/flow/integrations/cdi))
 - Maven plugin ({{platform}})
 - Gradle plugin ({{platform}})
 - Quarkus plugin ([{{core.flow.javaVersion}}](https://github.com/vaadin/flow/releases/tag/{{core.flow.javaVersion}}))
