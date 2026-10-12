@@ -4,13 +4,13 @@
             "javaVersion": "25.4.0-alpha2"
         },
         "flow": {
-            "javaVersion": "25.4.0-alpha2"
+            "javaVersion": "25.4.0-alpha3"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.4.0-alpha2"
+            "javaVersion": "25.4-SNAPSHOT"
         },
         "mpr-v7": {
             "javaVersion": "8.0.1"
