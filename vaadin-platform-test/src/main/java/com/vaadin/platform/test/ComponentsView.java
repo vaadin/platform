@@ -81,6 +81,7 @@ import com.vaadin.flow.component.html.Abbr;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Article;
 import com.vaadin.flow.component.html.Aside;
+import com.vaadin.flow.component.html.Audio;
 import com.vaadin.flow.component.html.Code;
 import com.vaadin.flow.component.html.DescriptionList;
 import com.vaadin.flow.component.html.Div;
@@ -118,6 +119,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Param;
 import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.RangeInput;
+import com.vaadin.flow.component.html.Source;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.Table;
 import com.vaadin.flow.component.html.TableBody;
@@ -130,6 +132,7 @@ import com.vaadin.flow.component.html.TableHead;
 import com.vaadin.flow.component.html.TableHeaderCell;
 import com.vaadin.flow.component.html.TableRow;
 import com.vaadin.flow.component.html.UnorderedList;
+import com.vaadin.flow.component.html.Video;
 import com.vaadin.flow.component.icon.FontIcon;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.SvgIcon;
@@ -249,6 +252,10 @@ public class ComponentsView extends AppLayout {
         Abbr abbr = new Abbr("abbr");
         Anchor anchor = new Anchor("#", "anchor");
 
+        Audio audio = new Audio();
+        Video video = new Video();
+        Source source = new Source();
+
         ListItem listItem = new ListItem("ordered list");
         OrderedList orderedList = new OrderedList(listItem);
 
@@ -309,7 +316,7 @@ public class ComponentsView extends AppLayout {
 
         Scroller scroller = new Scroller(section);
 
-        Main main = new Main(div, header, abbr, anchor, orderedList, unorderedList, descriptionList, aside, code, article, nav,
+        Main main = new Main(audio, video, source, div, header, abbr, anchor, orderedList, unorderedList, descriptionList, aside, code, article, nav,
                 emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
                 nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow, table);
 
