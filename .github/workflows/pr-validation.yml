@@ -140,15 +140,16 @@ jobs:
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
   # --- steps 7 & 8 ---------------------------------------------------------
-  # Compares versions.json with what Flow, flow-components and the bundles
-  # declare on the branch the PR targets. It needs neither the Maven build nor
-  # its local repository, so it runs alongside `build` rather than in it, and
+  # Compares the npm versions of versions.json with the default dependencies
+  # Flow declares on the branch the PR targets. It needs neither the Maven
+  # build nor its local repository, so it runs alongside `build` rather than in it, and
   # a mismatch does not hold up the test jobs.
   #
   # DEVIATION: both TeamCity steps are inert today — build #7711 has their two
   # node commands `echo skip:`-ed out — and the check lived inline in the
   # build configuration. Here it runs scripts/versionConsistency.js, which
-  # reads the versions out of versions.json itself.
+  # reads the versions out of versions.json itself. The web component and
+  # @vaadin/bundles checks are gone, as versions.json no longer lists either.
   version-consistency:
     name: Check version consistency
     needs: guard
@@ -162,10 +163,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Check versions.json against Flow, flow-components and bundles
+      - name: Check versions.json against Flow
         env:
-          # The other repositories are public; the token only lifts the
-          # anonymous rate limit.
+          # Flow is public; the token only lifts the anonymous rate limit.
           GITHUB_TOKEN: ${{ github.token }}
           baseBranch: ${{ github.base_ref || github.event.repository.default_branch }}
         run: node scripts/versionConsistency.js

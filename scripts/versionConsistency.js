@@ -1,38 +1,26 @@
 #!/usr/bin/env node
 
 /**
- * Checks that the versions of `versions.json` agree with the versions the
- * projects it lists declare themselves.
+ * Checks that the npm package versions of `versions.json` agree with the
+ * default dependencies Flow declares, on the branch the pull request targets.
  *
- * It compares:
- * - the web component version against the `@vaadin/bundles` version,
- * - the web component version against the `@NpmPackage` annotation of the
- *   button in flow-components, on the branch the pull request targets,
- * - the packages `versions.json` declares against the dependencies of Flow
- *   and the peer dependencies of the bundles.
+ * The web components and `@vaadin/bundles` used to be compared here as well,
+ * but neither is listed in `versions.json` any more: the web component
+ * versions now come from flow-components.
  *
- * `versions.json` no longer lists the web components one by one, so the web
- * component version is read from `@vaadin/react-components`, which is
- * released in lockstep with them.
- *
- * The script exits with 1 when any of them disagree.
- *
- * This is the check the version consistency build step used to carry inline.
- * It reads the versions out of `versions.json` itself, so only the branch the
- * pull request targets has to be given to it, along with the token to read
- * the other repositories with:
+ * The script exits with 1 when any of them disagree. It reads the Flow
+ * version out of `versions.json` itself, so only the branch the pull request
+ * targets has to be given to it, along with the token to read Flow with:
  *
  *   baseBranch=main GITHUB_TOKEN=... node scripts/versionConsistency.js
  *
- * A version may be given in the environment as well, as `flowVersion`,
- * `bundlesVersion` or `wcVersion`, which takes precedence over
- * what `versions.json` says.
+ * The Flow version may be given in the environment as well, as `flowVersion`,
+ * which takes precedence over what `versions.json` says.
  */
 
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
-const exec = require('util').promisify(require('child_process').exec);
 
 const token = process.env['GITHUB_TOKEN'];
 
@@ -119,10 +107,6 @@ function compareDependency(project1, build1, project2, build2) {
 function consolidatePlatformVersions(platform) {
   let platformVersions = new Object();
 
-  if (platform.bundles) {
-    platformVersions[platform.bundles.vaadin.npmName] = platform.bundles.vaadin.jsVersion;
-  }
-
   for (let attributename in platform.core) {
     if (platform.core[attributename].npmName) {
       if (platform.core[attributename].npmVersion) {
@@ -136,12 +120,6 @@ function consolidatePlatformVersions(platform) {
   for (let attributename in platform.vaadin) {
     if (platform.vaadin[attributename].npmName) {
       platformVersions[platform.vaadin[attributename].npmName] = platform.vaadin[attributename].jsVersion;
-    }
-  }
-
-  for (let attributename in platform.react) {
-    if (platform.react[attributename].npmName) {
-      platformVersions[platform.react[attributename].npmName] = platform.react[attributename].jsVersion;
     }
   }
 
@@ -169,67 +147,20 @@ async function main() {
   }
 
   const flowVersion = version('flowVersion', () => versions.core.flow.javaVersion);
-  const bundlesVersion = version('bundlesVersion', () => versions.bundles.vaadin.jsVersion);
-  const wcVersion = version('wcVersion', () => versions.react['react-components'].jsVersion);
-
-  if (bundlesVersion && bundlesVersion != 'null' && wcVersion && bundlesVersion != wcVersion) {
-    console.error('\x1b[33m', `WebComponent version(${wcVersion}) is not matching @vaadin/bundles version(${bundlesVersion})`);
-    process.exit(1);
-  } else {
-    console.log('\x1b[32m', `WebComponent version(${wcVersion}) is matching @vaadin/bundles version(${bundlesVersion})`);
-  }
-
   const flowBranch = getBranch(flowVersion, baseBranch);
-  //bundles tags has the 'v' prefix
-  const bundlesBranch = `v${bundlesVersion}`;
+  const flowURL = `https://raw.githubusercontent.com/vaadin/flow/${flowBranch}/flow-server/src/main/resources/com/vaadin/flow/server/frontend/dependencies/default/package.json`;
 
-  let flowURL = `https://raw.githubusercontent.com/vaadin/flow/${flowBranch}/flow-server/src/main/resources/com/vaadin/flow/server/frontend/dependencies/default/package.json`;
-  let bundlesURL = `https://raw.githubusercontent.com/vaadin/bundles/${bundlesBranch}/package.json`;
-  let flowComponentURL = `https://raw.githubusercontent.com/vaadin/flow-components/${baseBranch}/vaadin-button-flow-parent/vaadin-button-flow/src/main/java/com/vaadin/flow/component/button/Button.java`;
-  let generateFileURL = `https://raw.githubusercontent.com/vaadin/flow-components/${baseBranch}/vaadin-button-flow-parent/vaadin-button-flow/src/main/java/com/vaadin/flow/component/button/GeneratedVaadinButton.java`;
-
-  let platformVersions = consolidatePlatformVersions(versions);
+  const platformVersions = consolidatePlatformVersions(versions);
 
   console.log(`flow resource：${flowURL}`);
-  let flow = await requestResource(flowURL);
-  console.log(`bundles resource：${bundlesURL}`);
-  let bundles = await requestResource(bundlesURL);
+  const flow = await requestResource(flowURL);
 
-  let flowComponentVersion = await exec(`curl -L -s ${flowComponentURL} | grep "@NpmPackage" | head -1 | cut -d '"' -f4`);
-  console.log(flowComponentVersion.stdout.length);
-
-  if (flowComponentVersion.stdout.length === 0) {
-    flowComponentVersion = await exec(`curl -L -s ${generateFileURL} | grep "@NpmPackage" | head -1 | cut -d '"' -f4`);
+  if (!flow || !flow.dependencies) {
+    console.error('[33m', `Cannot read the dependencies of Flow ${flowVersion}`);
+    process.exit(1);
   }
 
-  let componentVersion = flowComponentVersion.stdout.replace('\n', '');
-
-  if (flow && componentVersion.localeCompare(wcVersion)) {
-    mismatch = true;
-    console.error(
-      '\x1b[33m',
-      `web component versions in flow-components (${componentVersion}) and platform (${wcVersion}) are different`
-    );
-  } else {
-    console.log(
-      '\x1b[32m',
-      `web component versions in flow-components (${componentVersion}) and platform (${wcVersion}) are same`
-    );
-  }
-
-  if (flow && flow.dependencies && bundles && bundlesVersion != 'null') {
-    compareDependency('flow', flow.dependencies, 'bundles', bundles.peerDependencies);
-    compareDependency('platform', platformVersions, 'bundles', bundles.peerDependencies);
-  } else {
-    console.log('\x1b[32m', "don't have bundles info");
-  }
-
-  // for flow 2.x, we dont need to check this
-  if (flow) {
-    compareDependency('platform', platformVersions, 'flow', flow.dependencies);
-  } else {
-    console.log('\x1b[32m', "for flow 2.x, we dont need to check this");
-  }
+  compareDependency('platform', platformVersions, 'flow', flow.dependencies);
 
   if (mismatch) {
     process.exit(1);
