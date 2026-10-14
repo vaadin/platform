@@ -33,5 +33,6 @@ cp scripts/generator/results/vaadin-pom.xml vaadin/pom.xml
 cp scripts/generator/results/vaadin-ee-pom.xml vaadin-ee/pom.xml
 cp scripts/generator/results/vaadin-quarkus-pom.xml vaadin-quarkus/pom.xml
 
-cat vaadin-prod-bundle/pom.xml|perl -p -e "s~vaadin-prod-bundle~vaadin-prod-bundle-unoptimized~g"|perl -p -e "s~Vaadin Prod Bundle~Vaadin Prod Bundle Unoptimized~g"|perl -p -e "s~<optimizeBundle>true</optimizeBundle>~<optimizeBundle>false</optimizeBundle>~g"|perl -p -e "s~<skipTests>false</skipTests>~<skipTests>true</skipTests>~g" > vaadin-prod-bundle/pom-unoptimized.xml
+# The unoptimized bundle uses its own build directory, otherwise each jar packages the other bundle
+cat vaadin-prod-bundle/pom.xml|perl -p -e "s~vaadin-prod-bundle~vaadin-prod-bundle-unoptimized~g"|perl -p -e "s~Vaadin Prod Bundle~Vaadin Prod Bundle Unoptimized~g"|perl -p -e "s~<optimizeBundle>true</optimizeBundle>~<optimizeBundle>false</optimizeBundle>~g"|perl -p -e "s~<skipTests>false</skipTests>~<skipTests>true</skipTests>~g"|perl -p -e 's~<build>~<build>\n        <directory>\${project.basedir}/target-unoptimized</directory>~' > vaadin-prod-bundle/pom-unoptimized.xml
 perl -pi -e 's~</dependencies>~<dependency><groupId>com.vaadin</groupId><artifactId>vaadin-prod-bundle-unoptimized</artifactId><version>\${project.version}</version><optional>true</optional><scope>test</scope></dependency></dependencies>~'  vaadin-prod-bundle/pom.xml
