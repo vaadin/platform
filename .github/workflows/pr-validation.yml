@@ -93,7 +93,7 @@ jobs:
   # API round-trip are needed. Same bot allowlist.
   guard:
     name: Check CI rights and skip-ci
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     outputs:
       skip: ${{ steps.skip.outputs.skip }}
@@ -154,7 +154,7 @@ jobs:
     name: Check version consistency
     needs: guard
     if: needs.guard.outputs.skip == 'false'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
@@ -177,7 +177,7 @@ jobs:
     name: Install modules (Java 21)
     needs: guard
     if: needs.guard.outputs.skip == 'false'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
@@ -246,7 +246,7 @@ jobs:
   npm-tests:
     name: Run npm tests (Java 21)
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
@@ -314,7 +314,7 @@ jobs:
   react-tests:
     name: Run React tests (Java 21)
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
@@ -345,7 +345,7 @@ jobs:
   javadocs:
     name: Build javadocs (Java 21)
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
@@ -365,7 +365,7 @@ jobs:
   gradle-tests:
     name: Run Gradle tests (Java 21)
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
