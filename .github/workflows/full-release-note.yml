@@ -11,7 +11,7 @@ on:
             default: ''
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - run: |
           [ -z "${{secrets.GITHUB_TOKEN}}" ] \

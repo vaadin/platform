@@ -54,7 +54,7 @@ on:
         default: "1"
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
@@ -84,7 +84,7 @@ jobs:
             J='{"app":"'$i'"'
             [ -n "$V" ] && J=$J',"version":"'$V'"'
             [ true = "$W" -a control-center != "$i" ] && M=$M$J',"os":"windows-latest"},'
-            [ true = "$L" ] && M=$M$J',"os":"ubuntu-22.04"},'
+            [ true = "$L" ] && M=$M$J',"os":"ubuntu-26.04"},'
           done
           M=`echo $M | sed -e s/,$//`']}'
           echo "Generated Matrix: $M"
