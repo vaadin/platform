@@ -76,9 +76,12 @@ public class EnterpriseEditionInitializer
         };
         try {
             if (productionMode) {
-                // production needs a real license; a pre-trial does not count
+                // running a production application is a runtime check: it
+                // accepts a server key, a key allowing production builds or a
+                // distribution key embedded in the application; a pre-trial
+                // does not count
                 LicenseChecker.checkLicense(PRODUCT_NAME, version,
-                        BuildType.PRODUCTION, failOnMissingKey);
+                        BuildType.RUNTIME, failOnMissingKey);
             } else {
                 LicenseChecker.checkLicense(PRODUCT_NAME, version,
                         BuildType.DEVELOPMENT, failOnMissingKey,
