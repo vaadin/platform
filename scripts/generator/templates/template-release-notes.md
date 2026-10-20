@@ -77,7 +77,7 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 
 - Chrome (evergreen).
 - Firefox (evergreen).
-   - Firefox Extended Support Release (ESR).
+   - Firefox Extended Support Release (ESR). Note that Vaadin 25 doesn't support Firefox ESR 115.
 - Safari 17 or newer (latest minor version in each major series).
 - Edge (Chromium, evergreen).
   </td>
