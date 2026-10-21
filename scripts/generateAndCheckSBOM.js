@@ -145,6 +145,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.66.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-api artifact, which is a separate codebase and not affected.'
+  },
 }
 
 const STYLE = `<style>
