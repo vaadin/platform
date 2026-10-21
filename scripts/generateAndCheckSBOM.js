@@ -153,7 +153,7 @@ const cveWhiteList = {
     cves: ['CVE-2026-53914'],
     description: 'False positive: the report only affects org.jetbrains.kotlin:kotlin-gradle-plugin, and the CPE for the kotlin product matches any kotlin artifact. We ship kotlin-reflect as a transitive dependency of hilla-typescript-generator, not the gradle plugin. osv.dev reports kotlin-reflect 2.1.21 as not affected.'
   },
-  'pkg:maven/io.opentelemetry/opentelemetry-api@1.66.0' : {
+  'pkg:maven/io.opentelemetry/opentelemetry-common@1.66.0' : {
     cves: ['CVE-2026-54285'],
     description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-api artifact, which is a separate codebase and not affected.'
   },
