@@ -10,7 +10,7 @@
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.4.0-alpha3"
+            "javaVersion": "25.4.0-alpha4"
         },
         "mpr-v7": {
             "javaVersion": "8.0.1"
