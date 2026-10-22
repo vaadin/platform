@@ -17,7 +17,7 @@ name: Bump Spring Boot
 # anything can be dispatched -- the same caveat as check-versions.yml.
 #
 # Unlike check-versions.yml, this workflow writes to OTHER repositories, so the
-# job's GITHUB_TOKEN is useless for the push. It uses secrets.GHTK, the
+# job's GITHUB_TOKEN is useless for the push. It uses secrets.VAADIN_BOT_TOKEN, the
 # cross-repo PAT already used by pit.yml to clone private repos.
 
 on:
@@ -31,7 +31,7 @@ on:
       branches:
         description: 'Comma-separated branches to target in each repo'
         required: false
-        default: 'main,25.2,25.1,24.10,24.9'
+        default: 'main,25.3,25.2,25.1,24.10,24.9'
         type: string
       dry_run:
         description: 'Resolve versions and report only -- no branches, no PRs'
@@ -40,7 +40,7 @@ on:
         type: boolean
 
 # The GITHUB_TOKEN only needs to read this repo's own script. All writes to the
-# target repos go through GHTK.
+# target repos go through VAADIN_BOT_TOKEN.
 permissions:
   contents: read
 
@@ -124,10 +124,10 @@ jobs:
 
       - name: Clone ${{ matrix.repo }}
         env:
-          GH_TOKEN: ${{ secrets.GHTK }}
+          GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}
         run: |
           if [[ -z "$GH_TOKEN" ]]; then
-            echo "::error::secrets.GHTK is not set. It is required to read and write vaadin/${{ matrix.repo }}."
+            echo "::error::secrets.VAADIN_BOT_TOKEN is not set. It is required to read and write vaadin/${{ matrix.repo }}."
             exit 1
           fi
           # Every repo is cloned, including platform itself -- one code path,
@@ -138,7 +138,7 @@ jobs:
       - name: Bump spring.boot.version
         env:
           # Both git (via the remote URL above) and gh read this token.
-          GH_TOKEN: ${{ secrets.GHTK }}
+          GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}
           GH_REPO: vaadin/${{ matrix.repo }}
         working-directory: scripts/bump-spring-boot
         run: |
