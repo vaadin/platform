@@ -211,7 +211,7 @@
             "npmName": "@vaadin/message-input"
         },
         "message-list": {
-            "jsVersion": "25.3.3",
+            "jsVersion": "25.3.4",
             "mode": "lit",
             "npmName": "@vaadin/message-list"
         },
@@ -277,7 +277,7 @@
             "npmName": "@vaadin/side-nav"
         },
         "slider": {
-            "jsVersion": "25.3.3",
+            "jsVersion": "25.3.4",
             "mode": "lit",
             "npmName": "@vaadin/slider"
         },
