@@ -21,7 +21,7 @@ name: PR validation
 #
 # Steps 1-11 are identical in both configs:
 #   1  contributor CI rights          -> job `guard` (author_association)
-#   2  skip-ci label/title check      -> job `guard`
+#   2  skip-ci label/title check      -> job `guard`; skips all but `build`
 #   3  prepare build, generate boms   -> prepare-build action
 #   4  check project java version     -> not ported; this branch builds on Java 21
 #   5  install node 24                -> prepare-build action (setup-node)
@@ -126,13 +126,18 @@ jobs:
         run: |
           skip=false
           if [ -n "$PR" ]; then
-            # TeamCity greps the PR title and every commit message for
-            # [skip ci] / [skip-ci], and skips only when they ALL carry it.
+            # DEVIATION: TeamCity skips the whole build only when the PR title
+            # and every commit message carry [skip ci] / [skip-ci]. Here
+            # either the title or the latest commit message is enough, and
+            # `build` still runs; only the jobs after it are skipped.
+            #
+            # GitHub itself drops the whole run when the head commit says
+            # [skip ci] (with a space), before this job starts, so use
+            # [skip-ci] to keep the install.
             texts=$(
-              gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json title --jq .title
-              gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/commits" --paginate --jq '.[].commit.message'
+              gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json title,commits                 --jq '.title, (.commits[-1] | .messageHeadline, .messageBody)'
             )
-            if ! printf '%s\n' "$texts" | grep -vq '\[skip[[:space:]-]ci\]'; then
+            if printf '%s\n' "$texts" | grep -q '\[skip[[:space:]-]ci\]'; then
               skip=true
             fi
           fi
@@ -172,11 +177,10 @@ jobs:
 
   # --- steps 3, 5, 9-11 ----------------------------------------------------
   # Installs the platform modules once for every job below. The test modules
-  # are left out; each test job builds its own.
+  # are left out; each test job builds its own. Runs even with [skip-ci].
   build:
     name: Install modules (Java 21)
     needs: guard
-    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-26.04
     timeout-minutes: 60
     steps:
@@ -206,7 +210,10 @@ jobs:
       # dev/hilla is only there on branches old enough to resolve Hilla under
       # its former groupId, so it is packed when it exists. Tested with `if`,
       # not `ls`: `ls` exits 2 for any missing path, which fails the step.
+      #
+      # With [skip-ci] no job downloads them, so neither step runs.
       - name: Pack the installed artifacts
+        if: needs.guard.outputs.skip == 'false'
         run: |
           cd ~/.m2/repository
           dirs=()
@@ -217,6 +224,7 @@ jobs:
           du -h "$GITHUB_WORKSPACE/$MAVEN_ARTIFACTS.tar"
 
       - name: Publish the installed artifacts
+        if: needs.guard.outputs.skip == 'false'
         uses: actions/upload-artifact@v6
         with:
           name: ${{ env.MAVEN_ARTIFACTS }}
@@ -245,7 +253,8 @@ jobs:
   # holds for `react-tests` and `gradle-tests`.
   npm-tests:
     name: Run npm tests (Java 21)
-    needs: build
+    needs: [guard, build]
+    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-26.04
     timeout-minutes: 60
     steps:
@@ -313,7 +322,8 @@ jobs:
   # --- step 15, the react-hybrid modules -----------------------------------
   react-tests:
     name: Run React tests (Java 21)
-    needs: build
+    needs: [guard, build]
+    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-26.04
     timeout-minutes: 45
     steps:
@@ -344,7 +354,8 @@ jobs:
   # to the javadoc module: everything it documents comes from `build`.
   javadocs:
     name: Build javadocs (Java 21)
-    needs: build
+    needs: [guard, build]
+    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-26.04
     timeout-minutes: 30
     steps:
@@ -364,7 +375,8 @@ jobs:
   # installed.
   gradle-tests:
     name: Run Gradle tests (Java 21)
-    needs: build
+    needs: [guard, build]
+    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-26.04
     timeout-minutes: 45
     steps:
