@@ -2,6 +2,7 @@ package com.vaadin.platform.react.test;
 
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,8 +33,8 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
     public void navigateUsingNavLink() {
         findElement(By.id("toHello")).click();
 
-        Assert.assertTrue("Navigation with NavLink failed.",
-                $(VerticalLayoutElement.class).id("HelloReact").isDisplayed());
+        waitForElement("Navigation with NavLink failed.",
+                By.id("HelloReact"));
     }
 
     @Test
@@ -74,6 +75,9 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
         waitForElement("Expected flow view", By.id("flow-hilla"));
 
         getDriver().navigate().back();
+        waitForElement("Expected hilla view after forward",
+                By.id("HelloReact"));
+
         getDriver().navigate().back();
 
         waitForElement("Should have returned to initial page",
@@ -94,4 +98,5 @@ public class HillaMainLayoutIT extends AbstractPlatformTest {
     protected String getTestPath() {
         return "/hilla";
     }
+
 }
