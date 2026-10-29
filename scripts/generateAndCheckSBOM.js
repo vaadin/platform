@@ -165,6 +165,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-10758'],
     description: 'Not affected: lerc arrives through ol -> geotiff and is only used to decode LERC compressed GeoTIFF imagery. Vaadin Map does not expose a GeoTIFF source, so the decoder is never on the execution path; worst case impact would be a crashed browser tab. vulnerable_code_not_in_execute_path.'
   },
+  'pkg:npm/highcharts@12.2.0' : {
+    cves: ['CVE-2026-116796', 'CVE-2026-118244', 'CVE-2026-118246', 'CVE-2026-118250', 'CVE-2026-118251'],
+    description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12886, cherry-picked to 25.1, 25.2 and 25.3, ignores reserved segments in series.keys and point option names, credits links without a supported URL scheme and event attribute names in style options applied as SVG attributes, and parses text markup in an inert document when the default parser fails. Scanners keep flagging 12.2.0 by version only. The bump to Highcharts 12.6.2 (vaadin/web-components#13289) replaces these patches with the upstream fixes and clears the alert.'
+  },
 }
 
 const STYLE = `<style>
