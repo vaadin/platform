@@ -57,8 +57,8 @@ const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexO
 
 const cveWhiteList = {
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.64.0' : {
-    cves: ['CVE-2026-54285'],
-    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+    cves: ['CVE-2026-54285', 'CVE-2026-118259'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
   },
   'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
     cves: ['CVE-2026-15195'],
@@ -173,8 +173,8 @@ const cveWhiteList = {
     description: 'False positive: CVE-2026-53914 only affects org.jetbrains.kotlin:kotlin-gradle-plugin (unsafe deserialization in the Kotlin build cache); the CPE for the kotlin product matches every kotlin artifact.'
   },
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.62.0' : {
-    cves: ['CVE-2026-54285'],
-    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core) and the CPE that matched targets node.js, not the Java artifact.'
+    cves: ['CVE-2026-54285', 'CVE-2026-118259'],
+    description: 'False positive: the advisory is for opentelemetry-js (@opentelemetry/core) and the CPE that matched targets node.js, not the Java artifact. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
   },
   'pkg:maven/io.opentelemetry/opentelemetry-common@1.65.0' : {
     cves: ['CVE-2026-54285'],
@@ -183,6 +183,18 @@ const cveWhiteList = {
   'pkg:npm/%40opentelemetry/core@1.8.0' : {
     cves: ['CVE-2026-54285'],
     description: 'Not affected: @opentelemetry/core is a transitive dep of the browser Web SDK and is used only to ORIGINATE spans. The vulnerable W3CBaggagePropagator.extract() (inbound untrusted baggage parsing) is never on the execution path. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/picomatch@4.0.7' : {
+    cves: ['CVE-2026-112366'],
+    description: 'Build-time only: picomatch is pulled in by vite, rolldown and vite-plugin-checker and is not shipped in production bundles. The ReDoS requires an attacker supplied extglob pattern such as +(*), while the globs come from the developer\'s own build configuration. No fixed version is published on npm yet (4.0.7 is latest); upgrade once available.'
+  },
+  'pkg:npm/lerc@3.0.0' : {
+    cves: ['CVE-2026-10758'],
+    description: 'Not affected: lerc arrives through ol -> geotiff and is only used to decode LERC compressed GeoTIFF imagery. Vaadin Map does not expose a GeoTIFF source, so the decoder is never on the execution path; worst case impact would be a crashed browser tab. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/highcharts@9.2.2' : {
+    cves: ['CVE-2026-118250', 'CVE-2026-118251'],
+    description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12887 ignores reserved segments in series.keys and point option names (CVE-2026-118250) and credits links without a supported URL scheme (CVE-2026-118251). The other Highcharts CVEs of the same disclosure do not affect 9.2.2. Scanners keep flagging 9.2.2 by version only; Vaadin 24.10 keeps Highcharts 9.x, the upgrade to 12.x happened in Vaadin 25.'
   },
 }
 
