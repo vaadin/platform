@@ -125,7 +125,11 @@ const cveWhiteList = {
   'pkg:maven/com.vaadin/vaadin-upload-flow@24.4-SNAPSHOT' : {
     cves: [],
     description: 'False positive: the scanners do not compare SNAPSHOT versions, the fixes are included in the 24.4 branch.'
-  }
+  },
+  'pkg:npm/highcharts@9.2.2' : {
+    cves: ['CVE-2026-118250', 'CVE-2026-118251'],
+    description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12919 ignores reserved segments in series.keys and point option names (CVE-2026-118250) and credits links without a supported URL scheme (CVE-2026-118251). The other Highcharts CVEs of the same disclosure do not affect 9.2.2. Scanners keep flagging 9.2.2 by version only; Vaadin 24.4 keeps Highcharts 9.x, the upgrade to 12.x happened in Vaadin 25.'
+  },
 }
 
 const STYLE = `<style>
