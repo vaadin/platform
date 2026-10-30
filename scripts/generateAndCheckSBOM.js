@@ -157,6 +157,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285'],
     description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-api artifact, which is a separate codebase and not affected.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-common@1.67.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-common artifact, which is a separate codebase and not affected.'
+  },
   'pkg:npm/picomatch@4.0.7' : {
     cves: ['CVE-2026-112366'],
     description: 'Build-time only: picomatch is pulled in by vite, rolldown and vite-plugin-checker and is not shipped in production bundles. The ReDoS requires an attacker supplied extglob pattern such as +(*), while the globs come from the developer\'s own build configuration. No fixed version is published on npm yet (4.0.7 is latest); upgrade once available.'
