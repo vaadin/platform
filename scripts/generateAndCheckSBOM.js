@@ -150,7 +150,19 @@ const cveWhiteList = {
   'pkg:maven/com.vaadin/vaadin-upload-flow@24.7-SNAPSHOT' : {
     cves: ['GHSA-94g8-xv23-7656'],
     description: 'False positive: the scanners do not compare SNAPSHOT versions, the fix is included since 24.7.7.'
-  }
+  },
+  'pkg:npm/picomatch@4.0.7' : {
+    cves: ['CVE-2026-112366'],
+    description: 'Build-time only: picomatch is pulled in by vite, rolldown and vite-plugin-checker and is not shipped in production bundles. The ReDoS requires an attacker supplied extglob pattern such as +(*), while the globs come from the developer\'s own build configuration. No fixed version is published on npm yet (4.0.7 is latest); upgrade once available.'
+  },
+  'pkg:npm/lerc@3.0.0' : {
+    cves: ['CVE-2026-10758'],
+    description: 'Not affected: lerc arrives through ol -> geotiff and is only used to decode LERC compressed GeoTIFF imagery. Vaadin Map does not expose a GeoTIFF source, so the decoder is never on the execution path; worst case impact would be a crashed browser tab. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/highcharts@9.2.2' : {
+    cves: ['CVE-2026-118250', 'CVE-2026-118251'],
+    description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12918 ignores reserved segments in series.keys and point option names (CVE-2026-118250) and credits links without a supported URL scheme (CVE-2026-118251). The other Highcharts CVEs of the same disclosure do not affect 9.2.2. Scanners keep flagging 9.2.2 by version only; Vaadin 24.7 keeps Highcharts 9.x, the upgrade to 12.x happened in Vaadin 25.'
+  },
 }
 
 const STYLE = `<style>
