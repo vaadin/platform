@@ -58,12 +58,12 @@ const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexO
 
 const cveWhiteList = {
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
-    cves: ['CVE-2026-54285'],
-    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js (cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:*), not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. Same case as the 1.64.0 entry below.'
+    cves: ['CVE-2026-54285', 'CVE-2026-118259'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js (cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:*), not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. Same case as the 1.64.0 entry below. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
   },
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.64.0' : {
-    cves: ['CVE-2026-54285'],
-    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+    cves: ['CVE-2026-54285', 'CVE-2026-118259'],
+    description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js, not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
   },
   'pkg:npm/%40apidevtools/json-schema-ref-parser@11.7.2' : {
     cves: ['CVE-2026-15195'],
@@ -156,6 +156,18 @@ const cveWhiteList = {
   'pkg:maven/io.opentelemetry/opentelemetry-common@1.66.0' : {
     cves: ['CVE-2026-54285'],
     description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf). The CPE is matched against the Java opentelemetry-api artifact, which is a separate codebase and not affected.'
+  },
+  'pkg:npm/picomatch@4.0.7' : {
+    cves: ['CVE-2026-112366'],
+    description: 'Build-time only: picomatch is pulled in by vite, rolldown and vite-plugin-checker and is not shipped in production bundles. The ReDoS requires an attacker supplied extglob pattern such as +(*), while the globs come from the developer\'s own build configuration. No fixed version is published on npm yet (4.0.7 is latest); upgrade once available.'
+  },
+  'pkg:npm/lerc@3.0.0' : {
+    cves: ['CVE-2026-10758'],
+    description: 'Not affected: lerc arrives through ol -> geotiff and is only used to decode LERC compressed GeoTIFF imagery. Vaadin Map does not expose a GeoTIFF source, so the decoder is never on the execution path; worst case impact would be a crashed browser tab. vulnerable_code_not_in_execute_path.'
+  },
+  'pkg:npm/highcharts@12.2.0' : {
+    cves: ['CVE-2026-116796', 'CVE-2026-118244', 'CVE-2026-118246', 'CVE-2026-118250', 'CVE-2026-118251'],
+    description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12886, cherry-picked to 25.1, 25.2 and 25.3, ignores reserved segments in series.keys and point option names, credits links without a supported URL scheme and event attribute names in style options applied as SVG attributes, and parses text markup in an inert document when the default parser fails. Scanners keep flagging 12.2.0 by version only. The bump to Highcharts 12.6.2 (vaadin/web-components#13289) replaces these patches with the upstream fixes and clears the alert.'
   },
 }
 
