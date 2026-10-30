@@ -480,7 +480,7 @@
                 "@vaadin/map",
                 "@vaadin/rich-text-editor"
             ],
-            "jsVersion": "25.2.16",
+            "jsVersion": "25.2.17",
             "mode": "react",
             "npmName": "@vaadin/react-components-pro"
         }
