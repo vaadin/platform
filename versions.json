@@ -67,7 +67,7 @@
             "npmName": "@vaadin/details"
         },
         "dialog": {
-            "jsVersion": "23.6.7",
+            "jsVersion": "23.6.8",
             "npmName": "@vaadin/dialog"
         },
         "email-field": {
@@ -106,7 +106,7 @@
             "npmName": "@vaadin/icon"
         },
         "icons": {
-            "jsVersion": "23.6.7",
+            "jsVersion": "23.6.8",
             "npmName": "@vaadin/icons"
         },
         "input-container": {
@@ -573,7 +573,7 @@
     "platform": "{{version}}",
     "react": {
         "react-components": {
-            "jsVersion": "1.6.7",
+            "jsVersion": "1.6.8",
             "npmName": "@hilla/react-components"
         }
     },
