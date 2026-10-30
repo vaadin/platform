@@ -1,7 +1,7 @@
 {
     "bundles": {
         "vaadin": {
-            "jsVersion": "23.6.7",
+            "jsVersion": "23.6.8",
             "npmName": "@vaadin/bundles"
         }
     },
@@ -678,7 +678,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "8.3.4",
+            "javaVersion": "8.3.5",
             "pro": true
         }
     }
