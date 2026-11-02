@@ -11,6 +11,11 @@
     <packaging>jar</packaging>
     <name>Vaadin Platform (vaadin-core)</name>
     <description>Vaadin Platform (vaadin-core)</description>
+
+    <properties>
+        <jpms.module.name>com.vaadin.core</jpms.module.name>
+    </properties>
+
     <url>https://vaadin.com</url>
 
     <distributionManagement>
