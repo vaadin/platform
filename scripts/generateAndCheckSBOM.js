@@ -129,6 +129,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-54285', 'CVE-2026-118259'],
     description: 'CVE-2026-54285 is a FP: it targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf) and the CPE is matched against the Java opentelemetry-api artifact, a separate codebase. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
   },
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.67.0' : {
+    cves: ['CVE-2026-54285'],
+    description: 'FP: the CVE targets the OpenTelemetry JavaScript SDK (@opentelemetry/core < 2.8.0, CPE target_sw=node.js, GHSA-8988-4f7v-96qf) and the CPE is matched against the Java opentelemetry-api artifact, a separate codebase on its own 1.x line; osv-scanner and ossindex report nothing for this coordinate. It reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency.'
+  },
   'pkg:maven/com.networknt/json-schema-validator@1.5.9' : {
     cves: ['CVE-2025-15104'],
     description: 'FP: The CVE belongs to Nu Html Checker which produce a false positive on Networknt JSON Schema Validator due to the overlapping keyword or an overly broad CPE mapping rule.'
