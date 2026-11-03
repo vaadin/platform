@@ -838,7 +838,10 @@ async function main() {
 
 
 
-  await loadCveStatus(currVersion);
+  // A snapshot has no version a verdict can name: `25.3-SNAPSHOT` would compare as the start of
+  // the line, before any fix that shipped in a patch. Judge it as the newest release of its line,
+  // which is the last thing cve-status measured and what the snapshot is built on.
+  await loadCveStatus(currVersion.endsWith('-SNAPSHOT') && prev.lastPatch || currVersion);
 
   const errLic = checkLicenses(licenses, licenseWhiteList);
   const errVul = checkVunerabilities(vulnerabilities).err;
