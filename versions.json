@@ -18,24 +18,9 @@
         "mpr-v8": {
             "javaVersion": "8.0.1"
         },
-        "vaadin-aura-theme": {
-            "javaVersion": "{{version}}"
-        },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
             "npmName": "@vaadin/vaadin-development-mode-detector"
-        },
-        "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-messages": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-ordered-layout": {
-            "javaVersion": "{{version}}"
-        },
-        "vaadin-renderer": {
-            "javaVersion": "{{version}}"
         },
         "vaadin-router": {
             "jsVersion": "2.0.1",
