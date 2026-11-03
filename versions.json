@@ -124,13 +124,13 @@
             "npmName": "@vaadin/field-highlighter"
         },
         "flow": {
-            "javaVersion": "25.2.16"
+            "javaVersion": "25.2.17"
         },
         "flow-cdi": {
             "javaVersion": "16.1.2"
         },
         "flow-components": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "form-layout": {
             "jsVersion": "25.2.17",
@@ -322,7 +322,7 @@
             "npmName": "@vaadin/upload"
         },
         "vaadin-aura-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
@@ -335,19 +335,19 @@
             "releasenotes": true
         },
         "vaadin-lumo-theme": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "vaadin-messages": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "vaadin-ordered-layout": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "vaadin-quarkus": {
             "javaVersion": "3.2.3"
         },
         "vaadin-renderer": {
-            "javaVersion": "{{version}}"
+            "javaVersion": "25.2.13"
         },
         "vaadin-router": {
             "jsVersion": "2.0.1",
