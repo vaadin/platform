@@ -57,6 +57,10 @@ const licenseWhiteList = [
 const coreLicensesWhiteList = licenseWhiteList.toSpliced(licenseWhiteList.indexOf(VAADIN_LICENSE),1);
 
 const cveWhiteList = {
+  'pkg:maven/io.opentelemetry/opentelemetry-api@1.62.0' : {
+    cves: ['CVE-2026-54285', 'CVE-2026-118259'],
+    description: 'The version an application resolves on 25.2, through vaadin-testbench (selenium-remote-driver) and observability-kit-starter (opentelemetry-sdk). CVE-2026-54285 is a false positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers, and nothing in a Vaadin application passes this jar an incoming header. The copy that does is the one inside the Observability Kit 4 agent, which a scanner reading the application dependencies does not see, and cve-status publishes that as a risk on 25.2: https://vaadin.github.io/cve-status/ (verdict maven-io-opentelemetry-opentelemetry-api-tracestate-25-2).'
+  },
   'pkg:maven/io.opentelemetry/opentelemetry-api@1.65.0' : {
     cves: ['CVE-2026-54285', 'CVE-2026-118259'],
     description: 'False positive: the advisory is for opentelemetry-js and the CPE that matched targets node.js (cpe:2.3:a:opentelemetry:opentelemetry:*:*:*:*:*:node.js:*:*), not the Java artifact. It reaches the sbom transitively through selenium-remote-driver under vaadin-testbench, a test only dependency. Same case as the 1.64.0 entry below. CVE-2026-118259 (GHSA-ccrj-gw8r-854m, fixed in 1.67.0) is a ReDoS in W3CTraceContextPropagator.extract() parsing inbound tracestate headers. Not affected: the artifact reaches the sbom only through selenium-remote-driver under vaadin-testbench, a test only dependency acting as an http client, so untrusted inbound headers are never extracted. Upgrade once selenium ships 1.67.0+.'
