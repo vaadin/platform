@@ -163,6 +163,137 @@ const cveWhiteList = {
   },
 }
 
+// Verdicts published by https://github.com/vaadin/cve-status, read at build time. A finding either
+// list covers is known; the local list above stays as the fallback when the fetch fails.
+const CVE_STATUS_URL = 'https://vaadin.github.io/cve-status/assessments.json';
+const CVE_STATUS_SCHEMA = 1;
+let cveStatus;
+
+// ---- copied unchanged from vaadin/cve-status scripts/platform/known-vulnerabilities.js, which is
+// ---- tested against the verdicts there. Fix it there and copy it back, do not edit it here.
+// `pkg:npm/%40scope%2Fname@1.2.3?type=jar` -> `pkg:npm/@scope/name`. A scoped npm name keeps its @.
+function basePurl(purl) {
+  let p = purl.split('#')[0].split('?')[0];
+  try { p = decodeURIComponent(p); } catch (e) { /* a malformed escape is compared as written */ }
+  const at = p.lastIndexOf('@');
+  return at > p.lastIndexOf('/') ? p.slice(0, at) : p;
+}
+
+// 25.3.0-beta2 is 25.3, not something before it; 25.4-SNAPSHOT is 25.4.
+function versionTuple(version) {
+  return version.split(/[-+]/)[0].split('.').filter(p => /^\d+$/.test(p)).map(Number);
+}
+
+// alpha, beta, rc, then GA. Throws on anything else, which the caller reads as "does not match".
+function prereleaseTuple(version) {
+  const m = /^(\d+)\.(\d+)\.(\d+)(?:-(alpha|beta|rc)(\d+))?$/.exec(version.trim());
+  if (!m) {
+    throw new Error(`not a release or a prerelease of one: ${version}`);
+  }
+  const rank = m[4] ? ['alpha', 'beta', 'rc'].indexOf(m[4]) : 3;
+  return [+m[1], +m[2], +m[3], rank, +(m[5] || 0)];
+}
+
+// Lexicographic, a shorter prefix sorting first, as python compares tuples.
+function compareTuples(a, b) {
+  for (let i = 0; i < Math.min(a.length, b.length); i++) {
+    if (a[i] !== b[i]) {
+      return a[i] < b[i] ? -1 : 1;
+    }
+  }
+  return a.length - b.length;
+}
+
+// Whether a verdict's `affects`, a platform version range like `>=24.9,<25.3`, covers a platform
+// version. A bound is compared on the precision it was written with, so `>=24.9` is about the line.
+function matchesVersion(affects, version) {
+  if (!affects || affects.trim() === '*') {
+    return true;
+  }
+  const target = versionTuple(version);
+  for (const raw of affects.split(',')) {
+    const clause = raw.trim();
+    const m = /^(>=|<=|>|<|==)?\s*([0-9][0-9.]*(?:-[a-z]+[0-9]+)?)$/.exec(clause);
+    if (!m) {
+      throw new Error(`unsupported affects clause: ${clause}`);
+    }
+    const op = m[1] || '==';
+    let left, right;
+    if (m[2].includes('-')) {
+      left = prereleaseTuple(version);
+      right = prereleaseTuple(m[2]);
+    } else {
+      right = versionTuple(m[2]);
+      left = target.slice(0, right.length);
+    }
+    const c = compareTuples(left, right);
+    if ((op === '>=' && c < 0) || (op === '>' && c <= 0) || (op === '<=' && c > 0)
+        || (op === '<' && c >= 0) || (op === '==' && c !== 0)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Whether every advisory id reported on `purl` is covered by some verdict that names this package
+// and whose range covers `platformVersion`. An id is covered when the verdict names it or one of
+// its aliases, since osv-scanner prints `BIT-tomcat-2026-43515` beside `CVE-2026-43515`. Several
+// verdicts may share the package, one per batch of advisories, so the ids are covered by their
+// union; one id no verdict names keeps it unknown. A range that cannot be read covers nothing,
+// which fails towards red.
+function lookupVerdicts(entries, purl, ids, platformVersion) {
+  const base = basePurl(purl);
+  const matching = entries.filter(e => {
+    const pattern = basePurl(e.purl);
+    if (e.match === 'prefix' ? !base.startsWith(pattern.replace(/\*$/, '')) : base !== pattern) {
+      return false;
+    }
+    try {
+      return matchesVersion(e.affects, platformVersion);
+    } catch (err) {
+      return false;
+    }
+  });
+  const names = e => e.cves.concat(e.aliases || []);
+  const missing = ids.filter(id => !matching.some(e => names(e).includes(id)));
+  const listed = ids.length > 0 && missing.length === 0;
+  return { listed, missing, entries: matching.filter(e => names(e).some(id => ids.includes(id))) };
+}
+// ---- end of the copy
+
+async function loadCveStatus(version) {
+  const file = 'target/cve-status-assessments.json';
+  if ((await run(`curl -s -L --fail ${CVE_STATUS_URL} -o ${file}`, { throw: false })).code) {
+    log(`cannot read ${CVE_STATUS_URL}, only the local list is used`);
+    return;
+  }
+  let doc;
+  try {
+    doc = JSON.parse(fs.readFileSync(file));
+  } catch (error) {
+    log(`${CVE_STATUS_URL} is not json, only the local list is used`);
+    return;
+  }
+  if (doc.schema !== CVE_STATUS_SCHEMA || !Array.isArray(doc.entries)) {
+    log(`${CVE_STATUS_URL} has schema ${doc.schema}, expected ${CVE_STATUS_SCHEMA}, only the local list is used`);
+    return;
+  }
+  cveStatus = { entries: doc.entries, version };
+  log(`Known vulnerabilities: ${doc.entries.length} verdicts from cve-status (generated ${doc.generated_at}) for ${version}, ${Object.keys(cveWhiteList).length} in the local list`);
+}
+
+function knownVulnerability(v, ids) {
+  const asset = cveWhiteList[v];
+  if (asset && [...ids].sort().join(', ') === [...asset.cves].sort().join(', ')) {
+    return { listed: true, description: asset.description };
+  }
+  const found = cveStatus && lookupVerdicts(cveStatus.entries, v, ids, cveStatus.version);
+  if (found && found.listed) {
+    return { listed: true, description: `[cve-status] ${found.entries.map(e => e.description).join(' ')}` };
+  }
+  return { listed: false, description: asset && asset.description };
+}
+
 const STYLE = `<style>
 body {max-width: 800px; margin: auto; font-family: arial;padding-top: 2em;padding-bottom: 4em}
 table {width: 100%; border-collapse: collapse; font-size: 14px; border 1em 0 1em}
@@ -489,11 +620,9 @@ function checkLicenses(licenses, whiteList) {
 function checkVunerabilities(vuls) {
   let err = "", msg = "";
   Object.keys(vuls).forEach(v => {
-    const cves = Object.keys(vuls[v]).sort().join(', ');
-    const asset = cveWhiteList[v];
-    const listed = asset && cves ===  asset.cves.sort().join(', ');
+    const { listed, description } = knownVulnerability(v, Object.keys(vuls[v]));
     const line = `  - Vulnerabilities in: ${v} [${Object.keys(vuls[v]).join(', ')}] (${[...new Set(Object.values(vuls[v]).flatMap(o => o.scanner))].join(',')})
-    ${asset ? '👌 ' + asset.description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}\n`;
+    ${description ? '👌 ' + description + '\n' : ''}      · ${[...new Set(Object.values(vuls[v]).flatMap(o => o.cpes))].join('\n          · ')}\n`;
     listed ? msg += line: err += line;
   });
   return { err, msg };
@@ -531,16 +660,14 @@ function reportLicenses(licenses) {
 function reportVulnerabilities(vuls, known) {
   let md = "", html = "";
   Object.keys(vuls).forEach(v => {
-    const cves = Object.keys(vuls[v]).sort().join(', ');
-    const asset = cveWhiteList[v];
-    const listed = asset && cves ===  asset.cves.sort().join(', ') || false;
+    const { listed, description } = knownVulnerability(v, Object.keys(vuls[v]));
     if (known != listed) {
       return;
     }
     const title = o => o.title.replace(/&[a-z]+;|[<>\s\`"']/g, ' ').trim();
-    html += `<tr><td><code>${v}</code>${listed ? '<br>👌 ' + asset.description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
+    html += `<tr><td><code>${v}</code>${listed ? '<br>👌 ' + description :''}</td><td><ul><li>${Object.keys(vuls[v]).map(o =>
       `<a href="https://nvd.nist.gov/vuln/detail/${o}">${o}</a> <i>${title(vuls[v][o])}</i> (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul></td></tr>\n`;
-    md += `|\`${v}\`${listed ? '<br>👌 ' + asset.description :''}|<ul><li>${Object.keys(vuls[v]).map(o =>
+    md += `|\`${v}\`${listed ? '<br>👌 ' + description :''}|<ul><li>${Object.keys(vuls[v]).map(o =>
       `[${o}](https://nvd.nist.gov/vuln/detail/${o}) _${title(vuls[v][o])}_ (${[...new Set(vuls[v][o].scanner)].join(',')})`).join('<li>')}</ul>\n`;
   });
   html && (html = `<table><tr><th>Package</th><th>CVEs</th>\n${html}</table>\n`)
@@ -706,6 +833,8 @@ async function main() {
   }
 
 
+
+  await loadCveStatus(currVersion);
 
   const errLic = checkLicenses(licenses, licenseWhiteList);
   const errVul = checkVunerabilities(vulnerabilities).err;
