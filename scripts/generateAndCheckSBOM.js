@@ -165,6 +165,10 @@ const cveWhiteList = {
     cves: ['CVE-2026-116796', 'CVE-2026-118244', 'CVE-2026-118246', 'CVE-2026-118250', 'CVE-2026-118251'],
     description: 'Fixed in Vaadin Charts without bumping the bundled Highcharts (announced as CVE-2026-107588): vaadin/web-components#12886, cherry-picked to 25.1, 25.2 and 25.3, ignores reserved segments in series.keys and point option names, credits links without a supported URL scheme and event attribute names in style options applied as SVG attributes, and parses text markup in an inert document when the default parser fails. Scanners keep flagging 12.2.0 by version only. The bump to Highcharts 12.6.2 (vaadin/web-components#13289) replaces these patches with the upstream fixes and clears the alert.'
   },
+  'pkg:javascript/quill@2.0.3' : {
+    cves: ['CVE-2025-15056'],
+    description: 'Fixed in Vaadin Rich Text Editor without a Quill release to move to, as Quill is no longer maintained (2.0.3, its last release, is about two years old): vaadin/web-components#13272, in web-components 25.4.0-alpha5 and cherry-picked to 25.2 and 25.3, escapes the video and formula values before building the semantic HTML. The patched vendored copy keeps Quill\'s own version string 2.0.3, so scanners reading the bundled file keep flagging it by version only. cve-status covers the 25.2 and 25.3 lines; this entry covers 25.4, whose snapshot is judged as 25.4.0-alpha4, a release that predates the fix.'
+  },
 }
 
 // Verdicts published by https://github.com/vaadin/cve-status, read at build time. A finding either
