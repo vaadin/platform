@@ -22,6 +22,9 @@
         <jakarta.ee.version>11.0.0</jakarta.ee.version>
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>12.0.22</jetty.version>
+        <!-- Automatic-Module-Name of the jar, set in each published jar
+            module. Left empty, the manifest entry is omitted. -->
+        <jpms.module.name></jpms.module.name>
     </properties>
 
     <distributionManagement>
@@ -186,6 +189,16 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifestEntries>
+                                <Automatic-Module-Name>${jpms.module.name}</Automatic-Module-Name>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
                 <plugin>
                      <artifactId>maven-war-plugin</artifactId>
                      <version>3.3.1</version>

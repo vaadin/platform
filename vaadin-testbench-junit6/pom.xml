@@ -10,6 +10,11 @@
     <packaging>jar</packaging>
     <name>Vaadin TestBench junit6</name>
     <description>Vaadin TestBench Junit6</description>
+
+    <properties>
+        <jpms.module.name>com.vaadin.testbench.platform.junit6</jpms.module.name>
+    </properties>
+
     <url>https://vaadin.com</url>
 
     <licenses>

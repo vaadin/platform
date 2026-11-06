@@ -14,6 +14,10 @@
     <name>Vaadin Core Jandex index</name>
     <description>Jandex index for vaadin core packages</description>
 
+    <properties>
+        <jpms.module.name>com.vaadin.core.jandex</jpms.module.name>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
