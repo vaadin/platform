@@ -1,16 +1,16 @@
 {
     "core": {
         "browserless-test": {
-            "javaVersion": "25.4.0-alpha2"
+            "javaVersion": "25.4.0-alpha3"
         },
         "flow": {
-            "javaVersion": "25.4.0-alpha4"
+            "javaVersion": "25.4.0-alpha5"
         },
         "flow-components": {
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.4.0-alpha4"
+            "javaVersion": "25.4-SNAPSHOT"
         },
         "mpr-v7": {
             "javaVersion": "8.0.1"
@@ -78,7 +78,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.4.0-alpha1",
+            "javaVersion": "25.4.0-alpha2",
             "pro": true
         }
     }
