@@ -15,12 +15,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+    <!-- Resolved the way a Vaadin application resolves it, so the CVE check reports what a
+         customer deploys and the verdicts published by vaadin/cve-status, scanned from an
+         application of this same shape, apply to it. An application inherits
+         spring-boot-starter-parent and imports vaadin-bom: what vaadin-bom manages wins, being
+         declared in the application itself, and Spring Boot decides everything else (spring,
+         tomcat, logback, jackson). Importing vaadin-bom first and spring-boot-dependencies
+         second gives the same precedence without changing the parent. -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -32,6 +46,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
         </dependency>
+        <!-- Development mode, declared by the application on 25 the way both skeleton starters
+             do. It brings vaadin-dev-server, vaadin-dev-bundle and copilot. -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spreadsheet-flow</artifactId>
@@ -42,11 +63,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hilla</artifactId>
+            <artifactId>hilla-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -85,9 +106,24 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-swing-kit-client-api</artifactId>
         </dependency>
+        <!-- Copilot is not declared: it arrives under vaadin-dev, which is how an application
+             has it. -->
+
+        <!-- What the starter declares on top of Vaadin. An application brings these itself, so
+             a scanner reports them whatever Vaadin ships. -->
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>copilot</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
