@@ -153,6 +153,7 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.pdfviewer.PdfViewer;
 import com.vaadin.flow.component.popover.Popover;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -709,6 +710,8 @@ public class ComponentsView extends AppLayout {
 
         com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
 
+        PdfViewer pdfViewer = new PdfViewer();
+
         Popover popover = new Popover();
 
         SideNav sideNav = new SideNav("Navigation");
@@ -789,6 +792,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageInput);
         components.add(main);
         components.add(mapComponent);
+        components.add(pdfViewer);
         components.add(popover);
         components.add(sideNav);
         components.add(decimalRangeSlider);

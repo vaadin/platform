@@ -78,6 +78,7 @@ import {
     Dashboard,
     GridPro,
     GridProEditColumn,
+    PdfViewer,
     RichTextEditor
 } from "@vaadin/react-components-pro";
 
@@ -338,6 +339,7 @@ export default function Components() {
             <VirtualList items={[{name: 'Juan'}, {name: 'John'}]}>
             </VirtualList>
             <Dashboard></Dashboard>
+            <PdfViewer></PdfViewer>
         </VerticalLayout>
     );
 }
