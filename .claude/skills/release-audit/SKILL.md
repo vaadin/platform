@@ -9,7 +9,7 @@ You are auditing a Vaadin platform minor release for completeness. The argument 
 
 Call the target `$VERSION` and the previous minor `$PREV` below.
 
-**The one rule that matters most: report only work that is new in `$VERSION`.** Anything that already shipped in any `$PREV.x` release (the `.0` or a later maintenance release) must not appear, no matter how it got there: through the branch point, a cherry-pick, a manual backport, a forward merge, or a feature that was already public as experimental. Steps 3 and 4 filter mechanically; step 5 makes every analysis agent prove each entry against the shipped sources.
+**The one rule that matters most: report only work that is new in `$VERSION`.** Anything that already shipped in any `$PREV.x` release (the `.0` or a later maintenance release) must not appear, no matter how it got there: through the branch point, a cherry-pick, a manual backport, a forward merge, or a feature that was already public as experimental. Step 3 filters the commits mechanically; in step 4 every analysis agent proves each entry against the shipped sources, and step 4b double-checks.
 
 ## Workspace
 
@@ -19,7 +19,7 @@ Work in `$AUDIT_DIR`, default `~/scratch/release-audit` (never inside a reposito
 - `audit-tmp/` — manifest, commit lists, scratch
 - `release-audit-$VERSION.html` — the deliverable
 
-Re-runs reuse existing clones (`git -C repo/<name> fetch --all --tags --prune`). The per-repo result files are version-less: when the workspace holds results of another version, move them to `audit-tmp/results-<that version>/<name>/` first. For a re-run of the same version, keep the previous `result.md` of every repo whose window (step 4) gained no substantive commits since that run, re-analyze only the others, and say which repos were refreshed and which reused.
+Re-runs reuse existing clones (`git -C repo/<name> fetch --all --tags --prune`). The per-repo result files are version-less: when the workspace holds results of another version, move them to `audit-tmp/results-<that version>/<name>/` first. For a re-run of the same version, keep the previous `result.md` of every repo whose window (step 3) gained no substantive commits since that run, re-analyze only the others, and say which repos were refreshed and which reused.
 
 `SKILL_DIR` below is the directory containing this file.
 
@@ -41,7 +41,7 @@ The script reads `versions.json` of the platform branch for `$VERSION` (or `main
 
 It also adds `vaadin/web-components` (since 25.4 its version is `{{version}}`, which `checkUnreleased.js` skips) and `vaadin/platform` itself, picks `$PREV` (for `X.0`: the newest `(X-1).*` line whose `.0` was published before `X.0`), and reports:
 
-- `unresolved` — products whose repository or tag cannot be read (usually no access to a private repo). List them in the final report; do not guess.
+- `unresolved` — products whose repository or tag cannot be read (usually no access to a private repo), for the target or the previous pin. They are not audited, because without the previous pin there is no baseline. List them in the final report; do not guess.
 - `dropped_since_prev` — repositories that are no longer separate products, e.g. `vaadin/cdi` and `vaadin/quarkus` folded into `vaadin/flow`, `vaadin/react-components` into `vaadin/web-components` in 25.4. The importing repo's window then contains the imported history; only the move itself (new module location, changed coordinates) is a change.
 - `reference_repos` — `vaadin/docs`, `vaadin/browserless-test`, `vaadin/testbench`, `vaadin/flow-components` are cloned as reference material for the agents even when they have nothing to audit.
 
@@ -147,7 +147,7 @@ Generate the report with a python3 script that parses the status matrices of eve
 - Table of contents, then one section per repo: its refs and kept-commit count, the status matrix with color-coded badges (OK green, PARTIAL amber, MISSING red, N/A gray), and the Details in a collapsed `<details>`.
 - One line at the bottom listing the repos without changes, and one listing `unresolved` products.
 
-When running as the Slack bot, copy the file to `~/.claude/outbox/` so it is attached to the thread.
+If the runtime provides an outbox directory for attachments (e.g. `~/.claude/outbox/`), copy the file there.
 
 ## Step 6 — Report
 

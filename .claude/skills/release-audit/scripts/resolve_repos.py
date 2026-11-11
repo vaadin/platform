@@ -165,7 +165,10 @@ def main():
         if prev_p is None:
             entry["notes"].append(f"not in platform {prev}: new in {line}, audit its whole history")
         elif prev_p["status"] == "ERROR":
-            entry["notes"].append(f"previous pin {prev_p['version']} unresolved: {'; '.join(prev_p['notes'])}")
+            # Without a baseline the whole history would count as new: report it instead of auditing it.
+            unresolved.append({"product": p["name"], "repo": p["repo"], "version": p["version"],
+                               "notes": [f"previous pin {prev_p['version']}: {'; '.join(prev_p['notes'])}"]})
+            continue
         else:
             entry["shipped_ref"] = ref_for(prev_p, False)
             entry["unchanged"] = entry["shipped_ref"] == entry["dev_ref"]
