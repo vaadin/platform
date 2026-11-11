@@ -415,8 +415,8 @@
             "javaVersion": "2.6.0"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.2.1",
-            "jsVersion": "3.2.1"
+            "javaVersion": "3.2.2",
+            "jsVersion": "3.2.2"
         },
         "sso-kit-starter": {
             "javaVersion": "3.2.4",
