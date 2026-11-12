@@ -21,6 +21,7 @@
     </distributionManagement>
 
     <properties>
+        <jpms.module.name>com.vaadin.dev.bundle</jpms.module.name>
         {{javadeps}}
     </properties>
 

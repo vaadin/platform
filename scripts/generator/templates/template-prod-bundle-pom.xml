@@ -23,6 +23,7 @@
     <properties> {{javadeps}} 
       <optimizeBundle>true</optimizeBundle>
       <skipTests>false</skipTests>
+      <jpms.module.name>com.vaadin.prod.bundle</jpms.module.name>
     </properties>
 
     <dependencyManagement>
