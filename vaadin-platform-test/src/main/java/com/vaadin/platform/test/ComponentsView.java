@@ -104,6 +104,7 @@ import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.html.NativeDetails;
+import com.vaadin.flow.component.html.NativeForm;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.NativeTable;
 import com.vaadin.flow.component.html.NativeTableBody;
@@ -282,10 +283,11 @@ public class ComponentsView extends AppLayout {
         Component sel = new HtmlComponent("select");
         NativeDetails nativeDetails = new NativeDetails(new Span("native details"));
         nativeDetails.setContent(new Span("content"));
+        NativeForm nativeForm = new NativeForm();
+
         HtmlObject htmlObject = new HtmlObject();
         Param param = new Param();
         RangeInput rangeInput = new RangeInput();
-
         NativeTable nativeTable = new NativeTable();
         NativeTableBody nativeTableBody = new NativeTableBody();
         NativeTableCaption nativeTableCaption = new NativeTableCaption();
@@ -318,7 +320,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(audio, video, source, div, header, abbr, anchor, orderedList, unorderedList, descriptionList, aside, code, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, nativeForm, htmlObject, param, rangeInput,
                 nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow, table);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
