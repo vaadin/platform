@@ -15,6 +15,10 @@ export const ARTIFACT_ID_OVERRIDES: Record<string, string | "skip"> = {
     "vaadin-testbench": "vaadin-testbench-core",
     "flow-spring": "vaadin-spring",
     "vaadin-classic-components": "vaadin-classic-components-flow",
+    "flow-components": "vaadin-flow-components",
+    "vaadin-ordered-layout": "vaadin-ordered-layout-flow",
+    "vaadin-messages": "vaadin-messages-flow",
+    "vaadin-renderer": "vaadin-renderer-flow",
 
 };
 
