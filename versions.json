@@ -1,7 +1,7 @@
 {
     "core": {
         "browserless-test": {
-            "javaVersion": "25.4.0-alpha3"
+            "javaVersion": "25.4.0-alpha4"
         },
         "flow": {
             "javaVersion": "25.4.0-alpha7"
