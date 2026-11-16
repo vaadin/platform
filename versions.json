@@ -13,10 +13,10 @@
             "javaVersion": "25.4-SNAPSHOT"
         },
         "mpr-v7": {
-            "javaVersion": "25.4.0-alpha1"
+            "javaVersion": "25.4.0-alpha2"
         },
         "mpr-v8": {
-            "javaVersion": "25.4.0-alpha1"
+            "javaVersion": "25.4.0-alpha2"
         },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
