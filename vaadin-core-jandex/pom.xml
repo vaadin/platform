@@ -12,7 +12,7 @@
     <artifactId>vaadin-core-jandex</artifactId>
     <packaging>jar</packaging>
     <name>Vaadin Core Jandex index</name>
-    <description>Jandex index for vaadin core packages</description>
+    <description>DEPRECATED: no longer needed and will be removed in a future release. Vaadin artifacts now ship their own Jandex index; remove this dependency from your project.</description>
 
     <properties>
         <jpms.module.name>com.vaadin.core.jandex</jpms.module.name>
