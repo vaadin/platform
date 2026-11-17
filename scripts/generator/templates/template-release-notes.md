@@ -186,7 +186,7 @@ Vaadin Flow requires Java Servlet API 6.1 and Java 21 or newer. It is tested on:
 </tr>
 <tr>
   <th>Node.js</th>
-  <td>Version 26 or newer</td>
+  <td>Version 26.x</td>
 </tr>
 <tr>
   <th>NPM</th>
@@ -198,7 +198,7 @@ Vaadin Flow requires Java Servlet API 6.1 and Java 21 or newer. It is tested on:
 </tr>
 <tr>
   <th>Spring Boot</th>
-  <td>Version 4.1 or newer
+  <td>Version 4.2 or newer
   </td>
 </tr>
 </table>
