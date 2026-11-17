@@ -23,7 +23,10 @@
         <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <jetty.version>12.0.22</jetty.version>
         <!-- Automatic-Module-Name of the jar, set in each published jar
-            module. Left empty, the manifest entry is omitted. -->
+            that ends up in an application's module graph, following the
+            naming rule in Flow's CONVENTIONS.md. Test tooling and jars that
+            no module descriptor would require (e.g. SBOMs) stay unnamed.
+            Left empty, the manifest entry is omitted. -->
         <jpms.module.name></jpms.module.name>
     </properties>
 
@@ -191,13 +194,23 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifestEntries>
-                                <Automatic-Module-Name>${jpms.module.name}</Automatic-Module-Name>
-                            </manifestEntries>
-                        </archive>
-                    </configuration>
+                    <!-- 3.4.0+ omits manifest entries with an empty value -->
+                    <version>3.5.1</version>
+                    <executions>
+                        <execution>
+                            <!-- Only the main jar gets the module name, a
+                                test-jar with the same name would clash on
+                                the module path -->
+                            <id>default-jar</id>
+                            <configuration>
+                                <archive>
+                                    <manifestEntries>
+                                        <Automatic-Module-Name>${jpms.module.name}</Automatic-Module-Name>
+                                    </manifestEntries>
+                                </archive>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                      <artifactId>maven-war-plugin</artifactId>
@@ -260,6 +273,10 @@
                             artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
+                        <!-- Generate on the class path even when jars on it
+                            declare an Automatic-Module-Name; module mode
+                            fails on dependencies with overlapping packages -->
+                        <legacyMode>true</legacyMode>
                     </configuration>
                 </plugin>
                 <plugin>
