@@ -104,6 +104,7 @@ import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.html.NativeDetails;
+import com.vaadin.flow.component.html.NativeForm;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.NativeTable;
 import com.vaadin.flow.component.html.NativeTableBody;
@@ -153,6 +154,7 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.pdfviewer.PdfViewer;
 import com.vaadin.flow.component.popover.Popover;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -281,10 +283,11 @@ public class ComponentsView extends AppLayout {
         Component sel = new HtmlComponent("select");
         NativeDetails nativeDetails = new NativeDetails(new Span("native details"));
         nativeDetails.setContent(new Span("content"));
+        NativeForm nativeForm = new NativeForm();
+
         HtmlObject htmlObject = new HtmlObject();
         Param param = new Param();
         RangeInput rangeInput = new RangeInput();
-
         NativeTable nativeTable = new NativeTable();
         NativeTableBody nativeTableBody = new NativeTableBody();
         NativeTableCaption nativeTableCaption = new NativeTableCaption();
@@ -317,7 +320,7 @@ public class ComponentsView extends AppLayout {
         Scroller scroller = new Scroller(section);
 
         Main main = new Main(audio, video, source, div, header, abbr, anchor, orderedList, unorderedList, descriptionList, aside, code, article, nav,
-                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, htmlObject, param, rangeInput,
+                emphasis, footer, iFrame, image, input, label, nativeButton, pre, scroller, sel, nativeDetails, nativeForm, htmlObject, param, rangeInput,
                 nativeTable, nativeTableBody, nativeTableCell, nativeTableCaption, nativeTableFooter, nativeTableHeader, nativeTableHeaderCell, nativeTableRow, table);
 
         Icon icon = new Icon(VaadinIcon.AIRPLANE);
@@ -709,6 +712,8 @@ public class ComponentsView extends AppLayout {
 
         com.vaadin.flow.component.map.Map mapComponent = new com.vaadin.flow.component.map.Map();
 
+        PdfViewer pdfViewer = new PdfViewer();
+
         Popover popover = new Popover();
 
         SideNav sideNav = new SideNav("Navigation");
@@ -789,6 +794,7 @@ public class ComponentsView extends AppLayout {
         components.add(messageInput);
         components.add(main);
         components.add(mapComponent);
+        components.add(pdfViewer);
         components.add(popover);
         components.add(sideNav);
         components.add(decimalRangeSlider);

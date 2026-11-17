@@ -54,6 +54,7 @@ import '@vaadin/message-input';
 import '@vaadin/message-list';
 import '@vaadin/number-field';
 import '@vaadin/password-field';
+import '@vaadin/pdf-viewer';
 import '@vaadin/popover';
 import '@vaadin/progress-bar';
 import '@vaadin/radio-group';
@@ -304,6 +305,8 @@ export class ComponentsView extends View {
         <vaadin-login-overlay></vaadin-login-overlay>
 
         <vaadin-progress-bar indeterminate></vaadin-progress-bar>
+
+        <vaadin-pdf-viewer></vaadin-pdf-viewer>
 
         <vaadin-popover></vaadin-popover>
 

@@ -29,6 +29,7 @@ public class AllComponentsIncludedTest {
             "@vaadin/charts/src/vaadin-chart.js",
             "@vaadin/icons/vaadin-iconset.js",
             "@vaadin/map/src/vaadin-map.js",
+            "@vaadin/pdf-viewer/src/vaadin-pdf-viewer.js",
             "@vaadin/rich-text-editor/src/vaadin-rich-text-editor.js",
             "@vaadin/vaadin-lumo-styles/vaadin-iconset.js",
             "Frontend/generated/jar-resources/vaadin-map/mapConnector.ts",
