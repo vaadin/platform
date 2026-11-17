@@ -188,6 +188,10 @@
                     <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
                     <quiet>true</quiet>
                     <additionalparam>-Xdoclint:none</additionalparam>
+                    <!-- Generate on the class path: the bundle jars declare an
+                        Automatic-Module-Name, which would switch javadoc to
+                        module mode and make it fail -->
+                    <legacyMode>true</legacyMode>
                 </configuration>
             </plugin>
         </plugins>

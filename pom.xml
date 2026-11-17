@@ -273,10 +273,6 @@
                             artifact -->
                         <doclint>none</doclint>
                         <quiet>true</quiet>
-                        <!-- Generate on the class path even when jars on it
-                            declare an Automatic-Module-Name; module mode
-                            fails on dependencies with overlapping packages -->
-                        <legacyMode>true</legacyMode>
                     </configuration>
                 </plugin>
                 <plugin>
