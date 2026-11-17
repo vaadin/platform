@@ -12,6 +12,10 @@
     <name>Spring Boot Starter</name>
     <description>Spring Boot Starter for Vaadin Flow applications.</description>
 
+    <properties>
+        <jpms.module.name>com.vaadin.spring.boot.starter</jpms.module.name>
+    </properties>
+
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
 

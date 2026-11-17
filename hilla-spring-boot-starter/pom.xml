@@ -12,6 +12,10 @@
     <name>Hilla Spring Boot Starter</name>
     <description>Spring Boot Starter for Hilla applications.</description>
 
+    <properties>
+        <jpms.module.name>com.vaadin.hilla.spring.boot.starter</jpms.module.name>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

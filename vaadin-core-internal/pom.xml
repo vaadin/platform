@@ -14,6 +14,10 @@
     <artifactId>vaadin-core-internal</artifactId>
     <name>Vaadin Platform (vaadin-core-internal)</name>
 
+    <properties>
+        <jpms.module.name>com.vaadin.core.internal</jpms.module.name>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

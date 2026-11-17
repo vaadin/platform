@@ -13,6 +13,10 @@
     <name>Vaadin Quarkus Extension Deployment</name>
     <description>Deployment dependency for a Quarkus project.</description>
 
+    <properties>
+        <jpms.module.name>com.vaadin.quarkus.extension.deployment</jpms.module.name>
+    </properties>
+
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
 

@@ -20,6 +20,7 @@
     </distributionManagement>
 
     <properties>
+        <jpms.module.name>com.vaadin.platform</jpms.module.name>
         {{javadeps}}
     </properties>
 

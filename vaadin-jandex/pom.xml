@@ -14,6 +14,10 @@
     <name>Vaadin Jandex index</name>
     <description>DEPRECATED: no longer needed and will be removed in a future release. Vaadin artifacts now ship their own Jandex index; remove this dependency from your project.</description>
 
+    <properties>
+        <jpms.module.name>com.vaadin.jandex</jpms.module.name>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>

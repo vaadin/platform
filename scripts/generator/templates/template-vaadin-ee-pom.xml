@@ -24,6 +24,7 @@
     </distributionManagement>
 
     <properties>
+        <jpms.module.name>com.vaadin.ee</jpms.module.name>
         {{javadeps}}
     </properties>
 

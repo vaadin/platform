@@ -14,6 +14,7 @@
     <description>Dependency for a Quarkus project.</description>
 
     <properties>
+        <jpms.module.name>com.vaadin.quarkus.extension</jpms.module.name>
         <vaadin.version>${project.version}</vaadin.version>
         <!-- Aligned with vaadin-quarkus in Flow -->
         <quarkus.version>3.33.0</quarkus.version>
