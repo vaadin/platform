@@ -94,8 +94,10 @@ jobs:
   #
   # The payload reports a vaadin org member whose membership is private as
   # CONTRIBUTOR, though, so anything short of OWNER/MEMBER/COLLABORATOR falls
-  # back to TeamCity's /collaborators/<user> check, which counts access granted
-  # through the org (teams, base permission) and works with GITHUB_TOKEN.
+  # back to asking the API whether the author is a vaadin org member. That needs
+  # the bot PAT: GITHUB_TOKEN cannot see private membership, nor repository
+  # access granted through teams or the org's base permission. Fork PRs get no
+  # secrets, so they fall back to GITHUB_TOKEN, which sees public members only.
   guard:
     name: Check CI rights and skip-ci
     runs-on: ubuntu-26.04
@@ -108,7 +110,7 @@ jobs:
         env:
           ASSOCIATION: ${{ github.event.pull_request.author_association }}
           PR_USER: ${{ github.event.pull_request.user.login }}
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN || github.token }}
         run: |
           case "$ASSOCIATION" in
             OWNER|MEMBER|COLLABORATOR) authorized=true ;;
@@ -119,10 +121,11 @@ jobs:
               authorized=true ;;
           esac
           # Private org members arrive as CONTRIBUTOR; ask the API instead.
+          # 204 = member; 404 (or a redirect to public_members) = not visible.
           if [ "$authorized" != true ] &&
-             gh api "repos/$GITHUB_REPOSITORY/collaborators/$PR_USER" --silent 2>/dev/null; then
+             gh api "orgs/${GITHUB_REPOSITORY%%/*}/members/$PR_USER" --silent; then
             authorized=true
-            ASSOCIATION="$ASSOCIATION (has repository access)"
+            ASSOCIATION="$ASSOCIATION (vaadin org member)"
           fi
           echo "Authorized: $authorized, User: $PR_USER, Association: $ASSOCIATION"
           if [ "$authorized" != true ]; then
