@@ -89,8 +89,13 @@ env:
 jobs:
   # --- steps 1 & 2 ---------------------------------------------------------
   # DEVIATION: TeamCity calls /collaborators/<user> with a bot PAT. On Actions
-  # the PR payload already carries the author's association, so no token and no
-  # API round-trip are needed. Same bot allowlist.
+  # the PR payload already carries the author's association, which settles most
+  # PRs without an API round-trip. Same bot allowlist.
+  #
+  # The payload reports a vaadin org member whose membership is private as
+  # CONTRIBUTOR, though, so anything short of OWNER/MEMBER/COLLABORATOR falls
+  # back to TeamCity's /collaborators/<user> check, which counts access granted
+  # through the org (teams, base permission) and works with GITHUB_TOKEN.
   guard:
     name: Check CI rights and skip-ci
     runs-on: ubuntu-26.04
@@ -103,6 +108,7 @@ jobs:
         env:
           ASSOCIATION: ${{ github.event.pull_request.author_association }}
           PR_USER: ${{ github.event.pull_request.user.login }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           case "$ASSOCIATION" in
             OWNER|MEMBER|COLLABORATOR) authorized=true ;;
@@ -112,6 +118,12 @@ jobs:
             'dependabot[bot]'|'snyk-bot'|'github-actions[bot]'|'totally-not-ai[bot]'|'vaadin-bot')
               authorized=true ;;
           esac
+          # Private org members arrive as CONTRIBUTOR; ask the API instead.
+          if [ "$authorized" != true ] &&
+             gh api "repos/$GITHUB_REPOSITORY/collaborators/$PR_USER" --silent 2>/dev/null; then
+            authorized=true
+            ASSOCIATION="$ASSOCIATION (has repository access)"
+          fi
           echo "Authorized: $authorized, User: $PR_USER, Association: $ASSOCIATION"
           if [ "$authorized" != true ]; then
             echo "::error::user: $PR_USER is not a platform team member"
