@@ -113,6 +113,11 @@
                 <configuration combine.self="override">
                     <doclint>none</doclint>
                     <quiet>true</quiet>
+                    <!-- Generate on the class path: the Automatic-Module-Name
+                         would otherwise switch javadoc to module mode, which
+                         fails on the split package that vaadin-spreadsheet-flow
+                         shares with Apache POI (org.apache.poi.ss.formula) -->
+                    <legacyMode>true</legacyMode>
                 </configuration>
             </plugin>
 

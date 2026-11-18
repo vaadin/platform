@@ -254,8 +254,14 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.11.2</version>
                     <configuration>
+                        <!-- Generate on the class path: the platform and
+                            component jars declare an Automatic-Module-Name,
+                            which would switch javadoc to module mode. That
+                            fails on split packages, e.g. vaadin-spreadsheet-flow
+                            ships classes in org.apache.poi.ss.formula -->
+                        <legacyMode>true</legacyMode>
                         <includeDependencySources>true</includeDependencySources>
                         <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
                         <dependencySourceExcludes>
