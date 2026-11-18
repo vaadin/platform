@@ -1,7 +1,7 @@
 {
     "core": {
         "browserless-test": {
-            "javaVersion": "25.4.0-alpha4"
+            "javaVersion": "25.4.0-beta1"
         },
         "flow": {
             "javaVersion": "25.4.0-beta1"
@@ -13,10 +13,10 @@
             "javaVersion": "25.4.0-alpha7"
         },
         "mpr-v7": {
-            "javaVersion": "25.4.0-alpha2"
+            "javaVersion": "25.4.0-beta1"
         },
         "mpr-v8": {
-            "javaVersion": "25.4.0-alpha2"
+            "javaVersion": "25.4.0-beta1"
         },
         "vaadin-development-mode-detector": {
             "jsVersion": "2.0.7",
