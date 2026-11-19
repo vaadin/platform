@@ -543,7 +543,7 @@
             "pro": true
         },
         "vaadin-testbench": {
-            "javaVersion": "25.3.2",
+            "javaVersion": "25.3.3",
             "pro": true
         }
     }
