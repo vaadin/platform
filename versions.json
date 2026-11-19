@@ -576,7 +576,7 @@
             "javaVersion": "24.8.5"
         },
         "vaadin-license-checker": {
-            "javaVersion": "3.1.4"
+            "javaVersion": "3.1.5"
         },
         "vaadin-spreadsheet": {
             "javaVersion": "{{version}}",
