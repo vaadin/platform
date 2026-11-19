@@ -72,7 +72,7 @@
             "javaVersion": "25.4.0-beta1"
         },
         "vaadin-license-checker": {
-            "javaVersion": "3.1.4"
+            "javaVersion": "3.1.5"
         },
         "vaadin-spreadsheet": {
             "pro": true
