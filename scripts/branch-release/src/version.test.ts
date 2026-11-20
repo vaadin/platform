@@ -5,7 +5,7 @@ import { belongsToTrain, nextTrain, parseTrain, snapshotOf, trainFromBeta1Tag, t
 test("parseTrain accepts major.minor only", () => {
     assert.deepEqual(parseTrain("25.4"), { major: 25, minor: 4 });
     assert.deepEqual(parseTrain(" 26.0 "), { major: 26, minor: 0 });
-    for (const bad of ["25", "25.4.0", "25.4-SNAPSHOT", "v25.4", "25.04", ""]) {
+    for (const bad of ["25", "25.4.0", "25.5-SNAPSHOT", "v25.4", "25.04", ""]) {
         assert.throws(() => parseTrain(bad), /major\.minor/, bad);
     }
 });
@@ -24,7 +24,7 @@ test("only X.Y.0-beta1 tags yield a train", () => {
 
 test("belongsToTrain", () => {
     const t = parseTrain("25.4");
-    for (const v of ["25.4.0-alpha1", "25.4.0-beta2", "25.4.0-rc1", "25.4.0-RC3", "25.4-SNAPSHOT"]) {
+    for (const v of ["25.4.0-alpha1", "25.4.0-beta2", "25.4.0-rc1", "25.4.0-RC3", "25.5-SNAPSHOT"]) {
         assert.equal(belongsToTrain(v, t), true, v);
     }
     for (const v of ["25.4.0", "25.4.1", "25.3.0-beta1", "125.4.0-beta1", "25.40.0-beta1", "4.2.0", "{{version}}"]) {
