@@ -1,0 +1,205 @@
+name: Branch release
+
+# On a platform X.Y.0-beta1 release, for every repo on the X.Y train:
+#   1. create the X.Y maintenance branch from main, and
+#   2. open a PR moving main to X.(Y+1)-SNAPSHOT (project versions, Gradle
+#      versions, Vaadin dependency versions; platform's versions.json too).
+#
+# The repos come from versions.json at the release tag. See
+# scripts/branch-release/README.md for full docs, and
+# scripts/dispatch-branch-release.sh to run it by hand or locally.
+#
+# IMPORTANT: for `release` events GitHub reads this file from the tagged
+# commit; for workflow_dispatch it reads it from main. beta1 is tagged from
+# main, so in both cases this file and scripts/branch-release/* must be on main
+# beforehand.
+#
+# Writes to OTHER repositories, so it uses secrets.VAADIN_BOT_TOKEN (needs
+# contents: write and pull_requests: write on every repo on the train) rather
+# than the job's GITHUB_TOKEN -- same as bump-spring-boot.yml.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Train to branch, major.minor (e.g. 25.4). main moves to the next minor.'
+        required: true
+        type: string
+      repos:
+        description: 'Optional comma-separated subset of the train repos (default: all)'
+        required: false
+        default: ''
+        type: string
+      create_branch:
+        description: 'Create the X.Y branch where it does not exist yet'
+        required: false
+        default: true
+        type: boolean
+      dry_run:
+        description: 'Report only -- no branches, no PRs'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  resolve:
+    # Cheap pre-filter; select.ts enforces the exact X.Y.0-beta1 shape.
+    if: github.event_name == 'workflow_dispatch' || endsWith(github.event.release.tag_name, '.0-beta1')
+    runs-on: ubuntu-26.04
+    outputs:
+      version: ${{ steps.select.outputs.version }}
+      repos: ${{ steps.select.outputs.repos }}
+    steps:
+      # For a release this checks out the tag, so versions.json is exactly
+      # what was released.
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        working-directory: scripts/branch-release
+        run: |
+          # .gitignore excludes **/package.json and **/tsconfig.json except for
+          # whitelisted projects; say so instead of failing opaquely later.
+          for f in package.json tsconfig.json; do
+            [[ -f "$f" ]] || { echo "::error::scripts/branch-release/$f is missing -- check the .gitignore whitelist."; exit 1; }
+          done
+          npm install --ignore-scripts --no-audit --no-fund
+          test -x node_modules/.bin/tsx || { echo "::error::tsx was not installed."; exit 1; }
+
+      - id: select
+        working-directory: scripts/branch-release
+        env:
+          EVENT: ${{ github.event_name }}
+          TAG: ${{ github.event.release.tag_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_REPOS: ${{ inputs.repos }}
+        run: |
+          if [[ "$EVENT" == release ]]; then
+            args=(--tag "$TAG")
+          else
+            args=(--version "$INPUT_VERSION" --repos "$INPUT_REPOS")
+          fi
+          sel=$(npx --no tsx src/select.ts --versions-file "$GITHUB_WORKSPACE/versions.json" "${args[@]}")
+          echo "$sel"
+          echo "version=$(jq -r .version <<<"$sel")" >> "$GITHUB_OUTPUT"
+          echo "repos=$(jq -c .repos <<<"$sel")" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Branch release $(jq -r .version <<<"$sel")"
+            echo
+            echo "Repos: $(jq -r '.repos | map("`" + . + "`") | join(", ")' <<<"$sel")"
+            jq -r 'if (.unmapped | length) > 0 then "\n**Unmapped products on the train (not processed, add them to src/repos.ts):** " + (.unmapped | join(", ")) else empty end' <<<"$sel"
+            jq -r '.excluded[] | "\n- excluded `" + .product + "`: " + .reason' <<<"$sel"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  bump:
+    needs: resolve
+    runs-on: ubuntu-26.04
+    name: ${{ matrix.repo }}
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: ${{ fromJson(needs.resolve.outputs.repos) }}
+    concurrency:
+      group: branch-release-${{ matrix.repo }}
+      cancel-in-progress: false
+    steps:
+      # The script always comes from main: a release checkout would run the
+      # tag's copy, which is the same commit for beta1 anyway.
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        working-directory: scripts/branch-release
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          test -x node_modules/.bin/tsx || { echo "::error::tsx was not installed."; exit 1; }
+
+      - name: Clone ${{ matrix.repo }}
+        env:
+          GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}
+        run: |
+          if [[ -z "$GH_TOKEN" ]]; then
+            echo "::error::secrets.VAADIN_BOT_TOKEN is not set."
+            exit 1
+          fi
+          git clone --quiet --filter=blob:none --branch main \
+            "https://x-access-token:$GH_TOKEN@github.com/vaadin/${{ matrix.repo }}.git" target
+
+      - name: Branch and bump
+        env:
+          GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}
+          GH_REPO: vaadin/${{ matrix.repo }}
+        working-directory: scripts/branch-release
+        run: |
+          npx --no tsx src/index.ts \
+            --repo '${{ matrix.repo }}' \
+            --version '${{ needs.resolve.outputs.version }}' \
+            --repo-dir "$GITHUB_WORKSPACE/target" \
+            --result-file "$GITHUB_WORKSPACE/result.json" \
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
+            ${{ inputs.create_branch == false && '--no-branch' || '' }}
+
+      - name: Ensure a result
+        if: always()
+        run: |
+          if [[ ! -f result.json ]]; then
+            jq -n --arg r '${{ matrix.repo }}' --arg v '${{ needs.resolve.outputs.version }}' \
+              '{repo: $r, version: $v, next: null, branch: {status: "error", sha: null},
+                bump: {status: "error", from: null, to: null, files: 0, properties: []},
+                pr: null, warnings: [], error: "the bump step produced no result"}' > result.json
+          fi
+          cat result.json
+
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: result-${{ matrix.repo }}
+          path: result.json
+          retention-days: 30
+          if-no-files-found: error
+
+  report:
+    needs: [resolve, bump]
+    if: always() && needs.resolve.result == 'success'
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          pattern: result-*
+          path: results
+        continue-on-error: true
+
+      - name: Render report
+        run: |
+          shopt -s globstar nullglob
+          files=(results/**/result.json)
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "No results were produced." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          jq -s -r '
+            sort_by(.repo) as $r
+            | "### Results",
+              "",
+              "| repo | branch | main | pull request | notes |",
+              "| --- | --- | --- | --- | --- |",
+              ($r[] |
+                "| `\(.repo)` | \(.branch.status)\(if .branch.sha then " `" + .branch.sha[0:10] + "`" else "" end) | \(.bump.status)\(if .bump.from then " (" + .bump.from + " → " + (.bump.to // "?") + ")" else "" end) | \(if .pr then "[#\(.pr.number)](\(.pr.url))" else "" end) | \(([.error // empty, .branch.reason // empty] + .warnings) | map(gsub("[\\r\\n|]+"; " ")) | join("; ")) |"),
+              "",
+              "\([$r[] | select(.bump.status == "error" or .branch.status == "error")] | length) of \($r | length) repo(s) failed."
+          ' "${files[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
+          # Fail the run when any cell failed, so it is not mistaken for green.
+          jq -s -e 'all(.[]; .bump.status != "error" and .branch.status != "error")' "${files[@]}" >/dev/null

@@ -1,0 +1,20 @@
+{
+    "name": "branch-release",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "description": "On a platform X.Y.0-beta1 release, cuts the X.Y branch from main in every repo on the train and opens a PR moving main to X.(Y+1)-SNAPSHOT.",
+    "engines": {
+        "node": ">=24"
+    },
+    "scripts": {
+        "start": "tsx src/index.ts",
+        "select": "tsx src/select.ts",
+        "test": "tsx --test src/version.test.ts src/bump.test.ts src/repos.test.ts"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.0",
+        "tsx": "^4.19.0",
+        "typescript": "^5.6.0"
+    }
+}
