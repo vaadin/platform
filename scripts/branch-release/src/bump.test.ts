@@ -151,8 +151,18 @@ test("readProjectVersion ignores the parent and later sections", () => {
 test("file classification", () => {
     for (const f of ["pom.xml", "flow-tests/x/pom-production.xml", "pom-dev-mode.xml"]) assert.equal(isPomFile(f), true, f);
     for (const f of ["pom.xml.bak", "src/pommes.xml", "notpom.xml/a.txt"]) assert.equal(isPomFile(f), false, f);
-    for (const f of ["package-lock.json", "a/pnpm-lock.yaml", "yarn.lock", "x/node_modules/y/package.json", "gradle.lock"]) {
+    for (const f of [
+        "package-lock.json",
+        "a/pnpm-lock.yaml",
+        "yarn.lock",
+        "x/node_modules/y/package.json",
+        "gradle.lock",
+        ".github/workflows/pr-snapshot.yml",
+        ".github/workflows/README.md",
+    ]) {
         assert.equal(isSkippedFile(f), true, f);
     }
-    for (const f of ["package.json", "gradle.properties", "build/pom.xml"]) assert.equal(isSkippedFile(f), false, f);
+    for (const f of ["package.json", "gradle.properties", "build/pom.xml", ".github/supported-branches.json", "x/.github/workflows/a.yml"]) {
+        assert.equal(isSkippedFile(f), false, f);
+    }
 });
