@@ -10,7 +10,7 @@
     "scripts": {
         "start": "tsx src/index.ts",
         "select": "tsx src/select.ts",
-        "test": "tsx --test src/version.test.ts src/bump.test.ts src/repos.test.ts"
+        "test": "tsx --test src/version.test.ts src/bump.test.ts src/repos.test.ts src/labels.test.ts"
     },
     "devDependencies": {
         "@types/node": "^24.0.0",

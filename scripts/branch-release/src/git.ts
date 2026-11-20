@@ -86,3 +86,32 @@ export function findOpenPrMentioning(repo: Repo, base: string, needle: string, t
     const prs: OpenPr[] = JSON.parse(res.stdout || "[]");
     return prs.find((pr) => pr.title.includes(needle)) ?? null;
 }
+
+function ghApi(repo: Repo, args: string[]): { code: number; stdout: string; stderr: string } {
+    const res = spawnSync("gh", ["api", ...args], { cwd: repo.dir, encoding: "utf8" });
+    if (res.error) throw res.error;
+    return { code: res.status ?? 1, stdout: res.stdout ?? "", stderr: res.stderr ?? "" };
+}
+
+export interface RepoLabel {
+    name: string;
+    color: string;
+    description: string | null;
+}
+
+/** Every label of the repo (paginated). */
+export function listLabels(repo: Repo): RepoLabel[] {
+    const res = ghApi(repo, ["--paginate", `repos/${repo.slug}/labels?per_page=100`, "--jq", ".[] | {name, color, description}"]);
+    if (res.code !== 0) throw new Error(`could not list labels of ${repo.slug}: ${res.stderr.trim() || res.stdout.trim()}`);
+    return res.stdout
+        .split("\n")
+        .filter(Boolean)
+        .map((line) => JSON.parse(line) as RepoLabel);
+}
+
+export function createLabel(repo: Repo, name: string, color: string, description: string): void {
+    const args = ["-X", "POST", `repos/${repo.slug}/labels`, "-f", `name=${name}`, "-f", `color=${color}`];
+    if (description) args.push("-f", `description=${description}`);
+    const res = ghApi(repo, args);
+    if (res.code !== 0) throw new Error(`could not create label ${name} in ${repo.slug}: ${res.stderr.trim() || res.stdout.trim()}`);
+}

@@ -80,15 +80,16 @@ render_report() {
         return
     fi
     echo
-    printf '%-32s %-22s %-36s %s\n' repo branch main 'pull request / notes'
+    printf '%-32s %-22s %-24s %-36s %s\n' repo branch label main 'pull request / notes'
     jq -r '.[] | [
         .repo,
         (.branch.status + (if .branch.sha then " " + .branch.sha[0:10] else "" end)),
+        (if .label then .label.name + " " + .label.status else "" end),
         (.bump.status + (if .bump.from then " (" + .bump.from + " -> " + (.bump.to // "?") + ")" else "" end)),
         ((if .pr then .pr.url + " " else "" end)
           + (([.error // empty, .branch.reason // empty] + .warnings) | map(gsub("[[:space:]]+"; " ")) | join("; ")))
       ] | @tsv' <<<"$results" | tr -d '\r' |
-        while IFS=$'\t' read -r r b m n; do printf '%-32s %-22s %-36s %s\n' "$r" "$b" "$m" "$n"; done
+        while IFS=$'\t' read -r r b l m n; do printf '%-32s %-22s %-24s %-36s %s\n' "$r" "$b" "$l" "$m" "$n"; done
     local failed
     failed=$(jq '[.[] | select(.bump.status == "error" or .branch.status == "error")] | length' <<<"$results")
     echo

@@ -17,12 +17,15 @@ import {
     commitAllTracked,
     createRemoteBranch,
     discardWorkingTreeChanges,
+    createLabel,
     findOpenPrMentioning,
+    listLabels,
     listTrackedFiles,
     remoteBranchSha,
     revParse,
     shortStat,
 } from "./git.js";
+import { labelTemplate, targetLabelName } from "./labels.js";
 import { EXCLUDED_PRODUCTS, EXTRA_EDITS, MERGE_ORDER } from "./repos.js";
 import { Train, nextTrain, parseTrain, snapshotOf, snapshotTokenRegExp, trainName } from "./version.js";
 import {
@@ -59,11 +62,15 @@ export type BranchStatus = "created" | "exists" | "dry-run" | "skipped" | "error
 /** `exists`: a bump PR was already open; it is reported and left untouched. */
 export type BumpStatus = "created" | "exists" | "up-to-date" | "dry-run" | "error";
 
+export type LabelStatus = "created" | "exists" | "dry-run" | "skipped" | "error";
+
 export interface Result {
     repo: string;
     version: string;
     next: string;
     branch: { status: BranchStatus; sha: string | null; reason?: string };
+    /** The `target/X.Y` label, ensured once the X.Y branch exists. */
+    label: { name: string; status: LabelStatus };
     bump: {
         status: BumpStatus;
         from: string | null;
@@ -256,6 +263,36 @@ function prBody(cli: Cli, edits: Edits, stat: string, branchNote: string): strin
     return lines.join("\n");
 }
 
+/**
+ * Make sure the repo has a `target/X.Y` label for marking PRs to pick into the
+ * new branch. A failure here is a warning, not a failed run: the branch and the
+ * bump matter far more than a label, which can be added by hand.
+ */
+function ensureTargetLabel(repo: Repo, cli: Cli, result: Result): void {
+    const name = result.label.name;
+    try {
+        const labels = listLabels(repo);
+        if (labels.some((l) => l.name.toLowerCase() === name.toLowerCase())) {
+            result.label.status = "exists";
+        } else if (cli.dryRun) {
+            result.label.status = "dry-run";
+        } else {
+            const { color, description } = labelTemplate(labels, cli.train);
+            createLabel(repo, name, color, description);
+            result.label.status = "created";
+        }
+    } catch (err) {
+        // A dry run may lack gh credentials; that is not worth a warning.
+        if (cli.dryRun) {
+            result.label.status = "dry-run";
+        } else {
+            result.label.status = "error";
+            result.warnings.push(`label ${name}: ${err instanceof Error ? err.message : String(err)}`);
+        }
+    }
+    console.log(`  label ${name}: ${result.label.status}`);
+}
+
 async function main(): Promise<number> {
     const cli = parseCli();
     const repo: Repo = { name: cli.repo, slug: `vaadin/${cli.repo}`, dir: cli.repoDir };
@@ -269,6 +306,7 @@ async function main(): Promise<number> {
         version,
         next,
         branch: { status: "skipped", sha: null },
+        label: { name: targetLabelName(cli.train), status: "skipped" },
         bump: { status: "error", from: null, to: next, files: 0, properties: [] },
         pr: null,
         warnings: [],
@@ -317,6 +355,11 @@ async function main(): Promise<number> {
             result.branch = { status: "created", sha: base };
         }
         console.log(`  branch ${version}: ${result.branch.status}${result.branch.reason ? ` (${result.branch.reason})` : ""}`);
+
+        // ----------------------------------------------------------- label --
+        if (result.branch.status === "created" || result.branch.status === "exists" || result.branch.status === "dry-run") {
+            ensureTargetLabel(repo, cli, result);
+        }
 
         // ------------------------------------------------------------ bump --
         if (declared === next) {

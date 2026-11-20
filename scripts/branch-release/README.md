@@ -43,6 +43,7 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
 
 1. Fetch `origin/main` and read the root `pom.xml` project version.
 2. **Branch.** If `X.Y` exists on origin, it is left alone (`exists`). If main is not on `X.Y-SNAPSHOT`, the branch is not created (`skipped`): cutting it from a main that has already moved would give the maintenance branch the wrong version. Otherwise `X.Y` is pushed at main's SHA (a plain push, never a force push).
+   - **Label.** Once `X.Y` exists, the repo gets a `target/X.Y` label if it doesn't have one yet. Its colour (and description, with the branch name updated) is copied from the repo's newest `target/<major.minor>` label, falling back to `7fe88f`. If creating the label fails, that is a warning in the report, not a failed run.
 3. **Bump**, on `bot/bump-main-X.(Y+1)-SNAPSHOT`:
    - **Whole-token `X.Y-SNAPSHOT` → `X.(Y+1)-SNAPSHOT` in every tracked text file.** Lock files, `node_modules`, binaries and everything under `.github/workflows/` are skipped (workflow changes stay with each repo). This one rule covers every pom (including `pom-dev*.xml`, `pom-production.xml`, `pom-portal.xml` …), `gradle.properties`, Gradle test fallbacks such as flow's `AbstractGradleTest.kt`, and READMEs. Those are the files past manual bumps went after one by one.
    - **Pom `<*.version>` properties pinned to a train prerelease** (`X.Y.0-alphaN|betaN|rcN`) → `X.(Y+1)-SNAPSHOT`. This catches `testbench.version`, and copilot's `flow.version`, `hilla.version` and so on, which pin releases instead of snapshots.
@@ -84,4 +85,5 @@ Git/gh primitives are imported from `../bump-spring-boot/src/repo.ts`. `src/git.
 | `src/repos.ts` | product → repo map, exclusions, extra edits, merge order |
 | `src/bump.ts` | pure text transforms |
 | `src/version.ts` | train parsing and version strings |
-| `src/git.ts` | extra git primitives |
+| `src/labels.ts` | `target/X.Y` label name and the colour/description template |
+| `src/git.ts` | extra git and gh primitives (branch, PR lookup, labels) |
