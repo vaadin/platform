@@ -2,25 +2,9 @@ Vaadin {{platform}}
 
 [Upgrading](https://vaadin.com/docs/v25/upgrading) · [Docs](https://vaadin.com/docs/v25/) · [Get Started](https://vaadin.com/docs/v25/getting-started)
 
-*This is a pre-release for the Vaadin 25.4. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice. To use the alpha release, you'll need to have following repositories declared in your  project (Vaadin alpha pre-releases are not pushed to Maven central) :*
+*This is a pre-release for the Vaadin 25.4. We appreciate if you give it a try and [report any issues](https://github.com/vaadin/platform/issues/new) you notice.*
 
-    <repositories>
-        <repository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
-        </pluginRepository>
-    </pluginRepositories>
+*Full New and Noteworthy Since Vaadin 25.3 can be found from [Beta1 release note](https://github.com/vaadin/platform/releases/tag/25.4.0-beta1)*
 
 ## <a id="_changelogs"></a> Changelogs
 
