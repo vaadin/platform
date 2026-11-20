@@ -62,7 +62,7 @@
     "platform": "{{version}}",
     "vaadin": {
         "vaadin-core": {
-            "jsVersion": "{{version}}",
+            "jsVersion": "25.4.0-beta1",
             "npmName": "@vaadin/vaadin-core"
         },
         "vaadin-designer": {
