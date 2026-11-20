@@ -34,7 +34,7 @@ export function trainName(train: Train): string {
     return `${train.major}.${train.minor}`;
 }
 
-/** `25.4-SNAPSHOT` */
+/** `25.5-SNAPSHOT` */
 export function snapshotOf(train: Train): string {
     return `${trainName(train)}-SNAPSHOT`;
 }
@@ -44,7 +44,7 @@ export function escapeRegExp(value: string): string {
 }
 
 /**
- * Matches the train's SNAPSHOT as a whole token: `25.4-SNAPSHOT` but neither
+ * Matches the train's SNAPSHOT as a whole token: `25.5-SNAPSHOT` but neither
  * `125.4-SNAPSHOT`, `1.25.4-SNAPSHOT` nor `25.40-SNAPSHOT`.
  */
 export function snapshotTokenRegExp(train: Train): RegExp {
