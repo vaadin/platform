@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { BRANCH_ONLY_REPOS, MERGE_ORDER, PRODUCT_REPOS, selectRepos } from "./repos.js";
+import { MERGE_ORDER, PRODUCT_REPOS, selectRepos } from "./repos.js";
 import { parseTrain } from "./version.js";
 
 // Trimmed copy of platform's versions.json as of the 25.4.0-beta1 release.
@@ -46,8 +46,6 @@ test("selects the train's repos, platform first, mpr once", () => {
         "observability-kit",
         "platform",
         "testbench",
-        "vaadin",
-        "vaadin-core",
     ]);
 });
 
@@ -56,22 +54,18 @@ test("reports unmapped and excluded products instead of dropping them", () => {
     assert.deepEqual(sel.unmapped, ["brand-new-kit"]);
     assert.deepEqual(
         sel.excluded.map((e) => e.product),
-        ["vaadin-feature-pack"],
+        ["vaadin-core", "vaadin-feature-pack"],
     );
 });
 
 test("another train selects only platform and {{version}} products", () => {
     const sel = selectRepos(VERSIONS, parseTrain("25.5"));
-    assert.deepEqual(sel.repos, ["platform", "flow-components", "vaadin-core", "vaadin"]);
+    assert.deepEqual(sel.repos, ["platform", "flow-components"]);
 });
 
-test("every repo that gets a bump PR appears in the merge order exactly once", () => {
+test("every mapped repo appears in the merge order exactly once", () => {
     const ordered = MERGE_ORDER.flat();
     for (const repo of new Set([...Object.values(PRODUCT_REPOS), "platform"])) {
-        if (BRANCH_ONLY_REPOS.has(repo)) {
-            assert.equal(ordered.includes(repo), false, `${repo} is branch-only and gets no PR`);
-            continue;
-        }
         assert.equal(ordered.filter((r) => r === repo).length, 1, repo);
     }
 });

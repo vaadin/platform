@@ -21,8 +21,8 @@ import {
     revParse,
     shortStat,
 } from "./git.js";
-import { BRANCH_ONLY_REPOS, EXCLUDED_PRODUCTS, EXTRA_EDITS, MERGE_ORDER } from "./repos.js";
-import { Train, belongsToTrain, nextTrain, parseTrain, snapshotOf, snapshotTokenRegExp, trainName } from "./version.js";
+import { EXCLUDED_PRODUCTS, EXTRA_EDITS, MERGE_ORDER } from "./repos.js";
+import { Train, nextTrain, parseTrain, snapshotOf, snapshotTokenRegExp, trainName } from "./version.js";
 import {
     Repo,
     assertGhAvailable,
@@ -58,8 +58,7 @@ const LABELS = ["automated"];
 const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
 export type BranchStatus = "created" | "exists" | "dry-run" | "skipped" | "error";
-/** `skipped`: a branch-only repo, which never gets a bump PR. */
-export type BumpStatus = "created" | "updated" | "up-to-date" | "dry-run" | "skipped" | "error";
+export type BumpStatus = "created" | "updated" | "up-to-date" | "dry-run" | "error";
 
 export interface Result {
     repo: string;
@@ -241,12 +240,6 @@ function prBody(cli: Cli, edits: Edits, stat: string, branchNote: string): strin
     return lines.join("\n");
 }
 
-/** `version` from a package.json, or null. */
-function packageVersion(source: string): string | null {
-    const version = (JSON.parse(source) as { version?: unknown }).version;
-    return typeof version === "string" ? version : null;
-}
-
 async function main(): Promise<number> {
     const cli = parseCli();
     const repo: Repo = { name: cli.repo, slug: `vaadin/${cli.repo}`, dir: cli.repoDir };
@@ -276,17 +269,9 @@ async function main(): Promise<number> {
         }
 
         const base = revParse(repo, `origin/${MAIN}`);
-        const branchOnly = BRANCH_ONLY_REPOS.has(repo.name);
-        // npm meta-package repos carry the release version in package.json;
-        // everything else is a Maven build with the SNAPSHOT in the root pom.
-        const declared = branchOnly
-            ? packageVersion(readFileFromRef(repo, base, "package.json"))
-            : readProjectVersion(readFileFromRef(repo, base, ROOT_POM));
-        // Only cut X.Y from a main that is still on X.Y. Otherwise the
-        // maintenance branch would start with the wrong version on it.
-        const onTrain = branchOnly ? declared !== null && belongsToTrain(declared, cli.train) : declared === current;
+        const declared = readProjectVersion(readFileFromRef(repo, base, ROOT_POM));
         result.bump.from = declared;
-        console.log(`${repo.slug}: main is ${declared ?? "?"} at ${base.slice(0, 10)}${branchOnly ? " (branch only)" : ""}`);
+        console.log(`${repo.slug}: main is ${declared ?? "?"} at ${base.slice(0, 10)}`);
 
         // ---------------------------------------------------------- branch --
         const existing = remoteBranchSha(repo, version);
@@ -294,7 +279,9 @@ async function main(): Promise<number> {
             result.branch = { status: "exists", sha: existing };
         } else if (!cli.createBranch) {
             result.branch = { status: "skipped", sha: null, reason: "branch creation disabled" };
-        } else if (!onTrain) {
+        } else if (declared !== current) {
+            // Cutting X.Y from a main that is no longer on X.Y would produce a
+            // maintenance branch with the wrong version on it.
             result.branch = {
                 status: "skipped",
                 sha: null,
@@ -309,12 +296,6 @@ async function main(): Promise<number> {
         console.log(`  branch ${version}: ${result.branch.status}${result.branch.reason ? ` (${result.branch.reason})` : ""}`);
 
         // ------------------------------------------------------------ bump --
-        if (branchOnly) {
-            result.bump.status = "skipped";
-            result.bump.to = declared ?? next;
-            console.log("  main: branch-only repo, no bump");
-            return 0;
-        }
         if (declared === next) {
             result.bump.status = "up-to-date";
             console.log(`  main: already ${next}`);

@@ -34,10 +34,9 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
 `src/select.ts` reads platform's `versions.json`: the release tag for the release trigger, `main` for manual runs. It picks every product whose `javaVersion`/`version`/`jsVersion` is a prerelease or SNAPSHOT of `X.Y`, or `{{version}}`. Products are mapped to repos by the table in `src/repos.ts` (`PRODUCT_REPOS`). `mpr-v7` and `mpr-v8` are the same repo, so it is processed once. Platform is always included.
 
 - A product on the train **with no mapping** is listed as *unmapped* in the run summary and not processed. Add it to `PRODUCT_REPOS` and to `MERGE_ORDER`; a test enforces the latter.
-- **Branch-only repos** (`BRANCH_ONLY_REPOS`): `vaadin-core` and its companion `vaadin` (`COMPANION_REPOS`; it is not in versions.json). Both are npm meta-packages whose `package.json` version is written by the release process, so `main` never carries a SNAPSHOT. They get the `X.Y` branch, but no bump PR. The branch is cut only while `main`'s `package.json` is on the train (`X.Y.0-*`).
 - Some products are **excluded** on purpose (`EXCLUDED_PRODUCTS`) and show up as such in the report:
+  - `vaadin-core`: `@vaadin/vaadin-core` and `@vaadin/vaadin` have moved into web-components, which this job does not handle.
   - `vaadin-feature-pack` (feature-pack-internal): branched and bumped by hand.
-- web-components is not in versions.json at all, and is not touched.
 
 ## What a cell does (`src/index.ts`)
 

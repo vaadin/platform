@@ -17,30 +17,15 @@ export const PRODUCT_REPOS: Readonly<Record<string, string>> = {
     "observability-kit-starter": "observability-kit",
     "vaadin-collaboration-engine": "collaboration-kit",
     "vaadin-testbench": "testbench",
-    "vaadin-core": "vaadin-core",
 };
 
-/**
- * Repos that come along with a product but are not named in versions.json:
- * `vaadin/vaadin` (the `@vaadin/vaadin` npm meta-package) is released in
- * lockstep with `vaadin/vaadin-core`.
- */
-export const COMPANION_REPOS: Readonly<Record<string, readonly string[]>> = {
-    "vaadin-core": ["vaadin"],
-};
-
-/**
- * npm meta-package repos: their package.json version is written by the release
- * process itself, so `main` never carries a SNAPSHOT. This job only cuts the
- * X.Y branch there; no bump PR.
- */
-export const BRANCH_ONLY_REPOS: ReadonlySet<string> = new Set(["vaadin-core", "vaadin"]);
 
 /**
  * Products on the train that this job deliberately does not branch or bump,
  * with the reason shown in the report.
  */
 export const EXCLUDED_PRODUCTS: Readonly<Record<string, string>> = {
+    "vaadin-core": "@vaadin/vaadin-core and @vaadin/vaadin have moved into web-components, which is not handled here",
     "vaadin-feature-pack": "feature-pack-internal is branched and bumped by hand",
 };
 
@@ -53,7 +38,7 @@ export const EXTRA_EDITS: Readonly<Record<string, readonly ExtraEdit[]>> = {
 };
 
 /**
- * Order the bump PRs should be merged in (branch-only repos get no PR): a downstream repo's CI resolves the
+ * Order the PRs should be merged in: a downstream repo's CI resolves the
  * upstream X.(Y+1)-SNAPSHOT, which only exists once upstream's bump is merged
  * and its snapshot published.
  */
@@ -107,9 +92,7 @@ export function selectRepos(versions: VersionsJson, train: Train): Selection {
             unmapped.push(product);
             continue;
         }
-        for (const r of [repo, ...(COMPANION_REPOS[product] ?? [])]) {
-            if (!repos.includes(r)) repos.push(r);
-        }
+        if (!repos.includes(repo)) repos.push(repo);
     }
     return { repos, unmapped, excluded };
 }
