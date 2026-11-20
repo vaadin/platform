@@ -167,12 +167,18 @@ jobs:
                 bump: {status: "error", from: null, to: null, files: 0, properties: []},
                 pr: null, warnings: [], error: "the bump step produced no result"}' > result.json
           fi
+          # Stamp the attempt: "Re-run failed jobs" keeps earlier attempts'
+          # artifacts, and the report must use only each repo's newest result.
+          jq --argjson a "$GITHUB_RUN_ATTEMPT" '. + {attempt: $a}' result.json > result.tmp && mv result.tmp result.json
           cat result.json
 
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: result-${{ matrix.repo }}
+          # One artifact per repo *and attempt*; with a per-repo name, a re-run
+          # downloads several same-named artifacts into one directory and an
+          # older result can win.
+          name: result-${{ matrix.repo }}-attempt-${{ github.run_attempt }}
           path: result.json
           retention-days: 30
           if-no-files-found: error
@@ -196,8 +202,10 @@ jobs:
             echo "No results were produced." | tee -a "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          jq -s -r '
-            sort_by(.repo) as $r
+          # Newest attempt per repo: a re-run of failed jobs leaves the earlier
+          # attempts' results next to the new ones.
+          latest='group_by(.repo) | map(max_by(.attempt // 0))'
+          jq -s -r "$latest"' as $r
             | "### Results",
               "",
               "| repo | branch | label | main | pull request | notes |",
@@ -208,4 +216,4 @@ jobs:
               "\([$r[] | select(.bump.status == "error" or .branch.status == "error")] | length) of \($r | length) repo(s) failed."
           ' "${files[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
           # Fail the run when any cell failed, so it is not mistaken for green.
-          jq -s -e 'all(.[]; .bump.status != "error" and .branch.status != "error")' "${files[@]}" >/dev/null
+          jq -s -e "$latest"' | all(.[]; .bump.status != "error" and .branch.status != "error")' "${files[@]}" >/dev/null

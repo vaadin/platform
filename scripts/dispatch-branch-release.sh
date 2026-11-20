@@ -97,7 +97,10 @@ render_report() {
 }
 
 collect_results() {
-    find "$1" -name 'result*.json' -type f | sort | xargs cat 2>/dev/null | jq -s 'sort_by(.repo)'
+    # Newest attempt per repo: a re-run of failed jobs keeps earlier attempts'
+    # result artifacts in the run, and `gh run download` fetches them all.
+    find "$1" -name 'result*.json' -type f | sort | xargs cat 2>/dev/null |
+        jq -s 'group_by(.repo) | map(max_by(.attempt // 0))'
 }
 
 # ------------------------------------------------------------- local runner --
