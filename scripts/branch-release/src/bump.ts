@@ -99,6 +99,25 @@ export function trainConstantEdit(pathSuffix: string, constant: string): ExtraEd
 }
 
 /**
+ * Add the new maintenance branch right after `main` in a JSON branch list
+ * (`"branches": ["main", "25.3", ...]`), keeping the file's formatting. A
+ * no-op when the branch is already listed.
+ */
+export function supportedBranchesEdit(pathSuffix: string): ExtraEdit {
+    return {
+        pathSuffix,
+        description: "supported branches list",
+        apply(text, train) {
+            const branch = trainName(train);
+            const re = /("branches"\s*:\s*\[\s*)("main")(\s*,\s*)?/;
+            const list = /"branches"\s*:\s*\[([^\]]*)\]/.exec(text);
+            if (!list || list[1].includes(`"${branch}"`)) return text;
+            return text.replace(re, (_m, head: string, main: string, sep?: string) => `${head}${main}, "${branch}"${sep ?? ""}`);
+        },
+    };
+}
+
+/**
  * The project's own `<version>` from a root pom, ignoring `<parent>`'s. Reads
  * only the header before the first section that can carry other versions.
  */

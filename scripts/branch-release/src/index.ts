@@ -227,7 +227,7 @@ function prBody(cli: Cli, edits: Edits, stat: string, branchNote: string): strin
         "",
         "### Follow-ups not done by this PR",
         "",
-        `- [ ] Add \`${version}\` to branch lists in workflows, if this repo has any. Known ones: platform \`check-versions.yml\` / \`bump-spring-boot.yml\`, flow \`validation.yml\` / \`update-frontend-dependencies.yml\`, testbench \`bump-dependencies.yml\`.`,
+        `- [ ] Add \`${version}\` to branch lists in workflows, if this repo has any. Known ones: flow \`validation.yml\` / \`update-frontend-dependencies.yml\`, testbench \`bump-dependencies.yml\`.`,
         "",
         "<details><summary>Changed files</summary>",
         "",

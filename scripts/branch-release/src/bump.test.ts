@@ -6,6 +6,7 @@ import {
     isPomFile,
     isSkippedFile,
     readProjectVersion,
+    supportedBranchesEdit,
     replaceSnapshotLiteral,
     trainConstantEdit,
 } from "./bump.js";
@@ -119,6 +120,15 @@ test("trainConstantEdit bumps the collaboration-kit constant", () => {
     const edit = trainConstantEdit("/CollaborationEngine.java", "COLLABORATION_ENGINE_VERSION");
     const src = 'static final String COLLABORATION_ENGINE_VERSION = "25.4";\nString OTHER = "25.4";';
     assert.equal(edit.apply(src, T), 'static final String COLLABORATION_ENGINE_VERSION = "25.5";\nString OTHER = "25.4";');
+});
+
+test("supportedBranchesEdit adds the branch after main once, keeping formatting", () => {
+    const edit = supportedBranchesEdit("/.github/supported-branches.json");
+    const src = '{\r\n  "$comment": "x",\r\n  "branches": ["main", "25.3", "24.10"]\r\n}\r\n';
+    const out = edit.apply(src, T);
+    assert.equal(out, '{\r\n  "$comment": "x",\r\n  "branches": ["main", "25.4", "25.3", "24.10"]\r\n}\r\n');
+    assert.equal(edit.apply(out, T), out, "idempotent");
+    assert.equal(edit.apply('{"branches": ["main"]}', T), '{"branches": ["main", "25.4"]}');
 });
 
 test("readProjectVersion ignores the parent and later sections", () => {

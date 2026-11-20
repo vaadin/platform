@@ -1,4 +1,4 @@
-import { ExtraEdit, trainConstantEdit } from "./bump.js";
+import { ExtraEdit, supportedBranchesEdit, trainConstantEdit } from "./bump.js";
 import { Train, belongsToTrain } from "./version.js";
 
 /**
@@ -47,6 +47,9 @@ export const EXCLUDED_PRODUCTS: Readonly<Record<string, string>> = {
 /** Edits the generic literal/property rules cannot find, keyed by repo. */
 export const EXTRA_EDITS: Readonly<Record<string, readonly ExtraEdit[]>> = {
     "collaboration-kit": [trainConstantEdit("/CollaborationEngine.java", "COLLABORATION_ENGINE_VERSION")],
+    // The shared branch list read by check-versions, bump-spring-boot and the
+    // license-checker audit: the new maintenance branch joins it with the bump.
+    platform: [supportedBranchesEdit("/.github/supported-branches.json")],
 };
 
 /**

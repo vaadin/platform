@@ -47,7 +47,7 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
    - **Whole-token `X.Y-SNAPSHOT` → `X.(Y+1)-SNAPSHOT` in every tracked text file.** Lock files, `node_modules` and binaries are skipped. This one rule covers every pom (including `pom-dev*.xml`, `pom-production.xml`, `pom-portal.xml` …), `gradle.properties`, Gradle test fallbacks such as flow's `AbstractGradleTest.kt`, and READMEs. Those are the files past manual bumps went after one by one.
    - **Pom `<*.version>` properties pinned to a train prerelease** (`X.Y.0-alphaN|betaN|rcN`) → `X.(Y+1)-SNAPSHOT`. This catches `testbench.version`, and copilot's `flow.version`, `hilla.version` and so on, which pin releases instead of snapshots.
    - **Platform `versions.json`:** `javaVersion`/`version` values on the train → `X.(Y+1)-SNAPSHOT`. `jsVersion`, `{{version}}` and other trains (sso-kit 4.x …) are untouched.
-   - **Per-repo extras** (`EXTRA_EDITS`): collaboration-kit's `COLLABORATION_ENGINE_VERSION = "X.Y"`. If an extra edit changes nothing, a warning is shown in the PR and in the report.
+   - **Per-repo extras** (`EXTRA_EDITS`): collaboration-kit's `COLLABORATION_ENGINE_VERSION = "X.Y"`, and in platform, `X.Y` is added after `main` in `.github/supported-branches.json` (the shared branch list for check-versions, bump-spring-boot and the license-checker audit). If an extra edit changes nothing, a warning is shown in the PR and in the report.
    - **Safety check:** the root pom must now read `X.(Y+1)-SNAPSHOT` and no pom may still contain `X.Y-SNAPSHOT`, or the cell fails without pushing.
 4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups. Re-running resets the existing PR's branch to main, recommits and force-pushes, so the PR stays one commit.
 
@@ -59,7 +59,7 @@ A downstream repo's CI resolves upstream `X.(Y+1)-SNAPSHOT` artifacts, which onl
 
 ## Not done (listed in each PR as follow-ups)
 
-- Adding `X.Y` to workflow branch lists: platform `check-versions.yml` and `bump-spring-boot.yml`, flow `validation.yml` and `update-frontend-dependencies.yml`, testbench `bump-dependencies.yml`.
+- Adding `X.Y` to other repos' workflow branch lists: flow `validation.yml` and `update-frontend-dependencies.yml`, testbench `bump-dependencies.yml`.
 - npm package versions, such as hilla's `packages/ts/*/package.json`. Their release tooling owns them.
 
 ## Credentials
