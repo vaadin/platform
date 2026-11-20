@@ -1,7 +1,7 @@
 import { parseArgs } from "node:util";
 import fs from "node:fs";
 import path from "node:path";
-import { fetchSpringBootVersions, SPRING_BOOT_METADATA_URL } from "./maven.js";
+import { fetchSpringBootVersions, readVersionsFile, SPRING_BOOT_METADATA_URL } from "./maven.js";
 import { pickLatestPatch, hasOutOfScopeNewer } from "./patch.js";
 import { findSpringBootProperty, PROPERTY_NAME } from "./pom.js";
 import {
@@ -51,6 +51,7 @@ interface Cli {
     branch: string;
     repoDir: string;
     resultFile: string | null;
+    versionsFile: string | null;
     dryRun: boolean;
     verbose: boolean;
 }
@@ -63,6 +64,7 @@ function parseCli(argv: string[]): Cli {
             branch: { type: "string" },
             "repo-dir": { type: "string" },
             "result-file": { type: "string" },
+            "versions-file": { type: "string" },
             "dry-run": { type: "boolean", default: false },
             verbose: { type: "boolean", default: false },
         },
@@ -79,6 +81,7 @@ function parseCli(argv: string[]): Cli {
         branch: values.branch as string,
         repoDir: path.resolve(values["repo-dir"] as string),
         resultFile: (values["result-file"] as string | undefined) ?? null,
+        versionsFile: (values["versions-file"] as string | undefined) ?? null,
         dryRun: values["dry-run"] as boolean,
         verbose: values.verbose as boolean,
     };
@@ -147,8 +150,15 @@ async function main(): Promise<number> {
         const property = findSpringBootProperty(source, `${repo.slug}:${cli.branch}/${POM_PATH}`);
         result.from = property.current;
 
-        const available = await fetchSpringBootVersions();
-        if (cli.verbose) console.log(`fetched ${available.length} versions from Maven Central`);
+        // The workflow fetches once and hands every cell the same list, so
+        // Maven Central is not hit once per repo/branch (that got us HTTP 429).
+        const available = cli.versionsFile
+            ? readVersionsFile(cli.versionsFile)
+            : await fetchSpringBootVersions();
+        if (cli.verbose) {
+            const source = cli.versionsFile ?? "Maven Central";
+            console.log(`read ${available.length} Spring Boot versions from ${source}`);
+        }
 
         const next = pickLatestPatch(property.current, available);
 

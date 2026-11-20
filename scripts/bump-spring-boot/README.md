@@ -120,8 +120,9 @@ npx tsx src/index.ts --repo flow --branch 25.1 --repo-dir /path/to/clone --dry-r
 | `--branch <name>` | base branch to target |
 | `--repo-dir <path>` | checkout to operate on |
 | `--result-file <path>` | where to write the machine-readable outcome |
+| `--versions-file <path>` | read the Spring Boot version list from this JSON file (written by `src/fetch-versions.ts`) instead of fetching it from Maven Central |
 | `--dry-run` | resolve and report only; no branch, commit, push or PR |
-| `--verbose` | log how many versions came back from Maven Central |
+| `--verbose` | log how many versions were read, and from where |
 
 Exit code is 0 for a successful bump *and* for "already up to date"; 1 only on a real failure.
 
@@ -154,6 +155,11 @@ Both filters matter, and each guards against a real trap:
   reports both as `4.2.0-M1` — a *milestone* of a *newer minor*. Trusting either field would push
   every branch onto a prerelease of the wrong line. The metadata is read for its full version list
   only; those two fields are ignored.
+- **Fetched once per run.** A separate `fetch-versions` job reads the metadata and hands the list
+  to every repo/branch cell via `--versions-file` (`--local` does the same). Fetching it per cell
+  sent a dozen simultaneous requests and got the run rate-limited with HTTP 429. The single fetch
+  retries 404/408/429/5xx up to 5 times, honoring `Retry-After` and otherwise backing off
+  2s/5s/15s/30s with jitter; any other 4xx fails immediately.
 
 A version pinned to a prerelease (e.g. `main` on `4.2.0-RC2` ahead of GA) is left alone until a
 stable release of the same major.minor exists; from then on it is bumped to the newest stable patch
@@ -254,7 +260,8 @@ Files:
 | file | responsibility |
 | --- | --- |
 | `src/index.ts` | CLI and orchestration |
-| `src/maven.ts` | fetch + parse the Maven Central metadata (with retry) |
+| `src/maven.ts` | fetch + parse the Maven Central metadata (with retry), read a versions file |
+| `src/fetch-versions.ts` | fetch the version list once and write it as JSON for `--versions-file` |
 | `src/patch.ts` | pick the newest same-minor stable patch |
 | `src/pom.ts` | locate and rewrite the single property declaration |
 | `src/repo.ts` | git/gh primitives, parameterized on the checkout directory |
