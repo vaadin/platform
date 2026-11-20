@@ -240,6 +240,12 @@ if $local_mode; then
     echo
     $dry_run && echo "Running locally (dry run)." || echo "Running locally."
 
+    # Fetch the Spring Boot version list once and share it across cells, the
+    # same as the workflow's fetch-versions job (per-cell fetches got HTTP 429).
+    versions_file="$tmp/spring-boot-versions.json"
+    ( cd "$bump_dir" && npx --no tsx src/fetch-versions.ts --out "$versions_file" ) \
+        || { echo "error: could not fetch Spring Boot versions from Maven Central." >&2; exit 1; }
+
     for repo in "${valid_repos[@]}"; do
         clone="$tmp/$repo"
         printf 'cloning vaadin/%s ... ' "$repo"
@@ -277,6 +283,7 @@ if $local_mode; then
                 --branch "$cell_branch" \
                 --repo-dir "$clone" \
                 --result-file "$tmp/result-$repo-$cell_branch.json" \
+                --versions-file "$versions_file" \
                 $($dry_run && echo --dry-run) ) || true
         done
     done

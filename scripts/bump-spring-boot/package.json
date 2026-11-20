@@ -10,7 +10,8 @@
     "scripts": {
         "start": "tsx src/index.ts",
         "check": "tsx src/index.ts --dry-run",
-        "test": "tsx --test src/patch.test.ts src/pom.test.ts"
+        "fetch-versions": "tsx src/fetch-versions.ts",
+        "test": "tsx --test src/patch.test.ts src/pom.test.ts src/maven.test.ts"
     },
     "dependencies": {
         "fast-xml-parser": "^4.5.0",

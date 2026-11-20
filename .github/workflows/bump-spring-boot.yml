@@ -9,7 +9,9 @@ name: Bump Spring Boot
 # branch ships and need human review. Note that Maven Central currently reports
 # `<latest>`/`<release>` for spring-boot-starter-parent as a milestone of a
 # newer minor, so the script anchors on each branch's own current value rather
-# than trusting either field.
+# than trusting either field. The version list is fetched once per run (the
+# fetch-versions job) and shared with every cell, to stay under Maven
+# Central's rate limit.
 #
 # IMPORTANT: GitHub Actions only honors this workflow file on the default
 # branch (main). A workflow_dispatch always reads THIS file from main, so both
@@ -71,8 +73,44 @@ jobs:
           echo "Matrix: $cells"
           echo "cells=$cells" >> "$GITHUB_OUTPUT"
 
+  # Fetch the Spring Boot version list from Maven Central ONCE per run and
+  # share it with every cell. Each cell used to fetch it itself, and a dozen
+  # simultaneous requests got rate-limited (HTTP 429) by Maven Central.
+  fetch-versions:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout platform (for the bump script)
+        uses: actions/checkout@v6
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        # Same rationale as the install step in the bump job below.
+        working-directory: scripts/bump-spring-boot
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          test -x node_modules/.bin/tsx || {
+            echo "::error::tsx was not installed into node_modules/.bin."
+            exit 1
+          }
+
+      - name: Fetch Spring Boot versions
+        working-directory: scripts/bump-spring-boot
+        run: npx --no tsx src/fetch-versions.ts --out "$GITHUB_WORKSPACE/spring-boot-versions.json"
+
+      - name: Upload versions
+        uses: actions/upload-artifact@v6
+        with:
+          name: spring-boot-versions
+          path: spring-boot-versions.json
+          retention-days: 30
+          if-no-files-found: error
+
   bump:
-    needs: resolve-matrix
+    needs: [resolve-matrix, fetch-versions]
     runs-on: ubuntu-26.04
     name: ${{ matrix.repo }} [${{ matrix.branch }}]
     strategy:
@@ -122,6 +160,12 @@ jobs:
             exit 1
           }
 
+      - name: Download Spring Boot versions
+        uses: actions/download-artifact@v6
+        with:
+          name: spring-boot-versions
+          path: ${{ github.workspace }}
+
       - name: Clone ${{ matrix.repo }}
         env:
           GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}
@@ -150,6 +194,7 @@ jobs:
             --branch '${{ matrix.branch }}' \
             --repo-dir "$GITHUB_WORKSPACE/target" \
             --result-file "$GITHUB_WORKSPACE/result.json" \
+            --versions-file "$GITHUB_WORKSPACE/spring-boot-versions.json" \
             ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Summarize cell
@@ -187,7 +232,7 @@ jobs:
   # through artifacts to produce a single consolidated PR report. This is also
   # what scripts/dispatch-spring-boot-bump.sh reads back.
   report:
-    needs: bump
+    needs: [fetch-versions, bump]
     if: always()
     runs-on: ubuntu-26.04
     steps:
@@ -199,6 +244,8 @@ jobs:
         continue-on-error: true
 
       - name: Render PR report
+        env:
+          FETCH_RESULT: ${{ needs.fetch-versions.result }}
         run: |
           node -e '
             const fs = require("node:fs");
@@ -217,6 +264,9 @@ jobs:
             const out = [];
             if (results.length === 0) {
               out.push("## Spring Boot bump", "", "No results were produced.");
+              if (process.env.FETCH_RESULT !== "success") {
+                out.push("", "The fetch-versions job ended with \"" + process.env.FETCH_RESULT + "\", so no cell ran. Check its log.");
+              }
             } else {
               const prs = results.filter((r) => r.pr);
               const created = prs.filter((r) => r.status === "created").length;
