@@ -21,7 +21,7 @@
 #   ./scripts/dispatch-spring-boot-bump.sh --json
 #
 # Options:
-#   --repos a,b      repos under vaadin/ (default: platform,flow,hilla,copilot-internal)
+#   --repos a,b      repos under vaadin/ (default: platform,flow,flow-components,hilla,copilot-internal)
 #   --branches x,y   branches to target  (default: main,25.3,24.10,24.9)
 #   --local          run the bump here instead of dispatching to Actions
 #   --dry-run        resolve versions and report only; no branches, no PRs
@@ -34,7 +34,7 @@ set -euo pipefail
 
 WORKFLOW='bump-spring-boot.yml'
 CONTROL_REPO='vaadin/platform'
-DEFAULT_REPOS='platform,flow,hilla,copilot-internal'
+DEFAULT_REPOS='platform,flow,flow-components,hilla,copilot-internal'
 DEFAULT_BRANCHES='main,25.3,24.10,24.9'
 
 repos="$DEFAULT_REPOS"
@@ -120,9 +120,11 @@ for repo in "${repo_list[@]}"; do
             continue
         fi
 
-        current=$(grep -oE '<spring\.boot\.version>[^<]+' <<<"$pom" | head -1 | sed 's/.*>//' || true)
+        # Same properties as SUPPORTED_PROPERTIES in src/pom.ts.
+        current=$(grep -oE '<(spring\.boot\.version|spring-data-commons\.version)>[^<]+' <<<"$pom" \
+            | sed 's/^<//; s/>/ /' | paste -sd, - | sed 's/,/, /g' || true)
         if [[ -z "$current" ]]; then
-            skipped+=("$label — root pom.xml declares no spring.boot.version")
+            skipped+=("$label — root pom.xml declares neither spring.boot.version nor spring-data-commons.version")
             continue
         fi
 
@@ -149,7 +151,7 @@ fi
 
 if [[ ${#valid_repos[@]} -eq 0 || ${#valid_branches[@]} -eq 0 ]]; then
     echo
-    echo "Nothing to do — no target had a bumpable spring.boot.version."
+    echo "Nothing to do — no target had a bumpable spring.boot.version or spring-data-commons.version."
     exit 0
 fi
 

@@ -1,7 +1,9 @@
 # bump-spring-boot
 
 Keeps the `spring.boot.version` Maven property current across several Vaadin repos and their
-maintained branches, opening one rolling pull request per repo/branch.
+maintained branches, opening one rolling pull request per repo/branch. Repos that declare
+`spring-data-commons.version` instead (flow-components) are kept on the version Spring Boot's BOM
+manages — see [Spring Data Commons](#spring-data-commons).
 
 **Patch level only.** Minor and major bumps are intentionally *not* applied — those change what a
 maintenance branch ships and need human review. The script's job is to keep the patch level current,
@@ -23,7 +25,7 @@ nothing more.
 ./scripts/dispatch-spring-boot-bump.sh --local
 ```
 
-Defaults: repos `platform,flow,hilla,copilot-internal`, branches `main,25.3,24.10,24.9`.
+Defaults: repos `platform,flow,flow-components,hilla,copilot-internal`, branches `main,25.3,24.10,24.9`.
 
 ## Two ways to run it
 
@@ -167,6 +169,25 @@ of that line (`4.2.0-RC2` -> `4.2.0`).
 
 If a newer major/minor exists, the PR body says so in a note — visible, but never applied.
 
+## Spring Data Commons
+
+flow-components has no `spring.boot.version`; it declares `spring-data-commons.version` directly,
+and that version normally changes together with a Spring Boot update. The job bumps it to **the
+version Spring Boot's BOM manages**, not to Spring Data's own newest release:
+
+1. `fetch-versions` takes the newest stable Spring Boot release of every 3.x+ line, reads
+   `spring-data-bom.version` from its `spring-boot-dependencies` pom, then reads the
+   `spring-data-commons` version from that `spring-data-bom`. For example
+   Boot 4.2.0 → spring-data-bom 2026.1.0 → spring-data-commons 4.2.0, and
+   Boot 3.5.16 → 2025.0.13 → 3.5.13.
+2. Each branch picks from those managed versions with the same rules as Spring Boot: same
+   major.minor, stable only, never backwards, and a prerelease pin stays until its line has a stable
+   release (`4.2.0-RC1` → `4.2.0`).
+
+So a Spring Data patch that Spring Boot has not shipped yet is not picked up, and the branch stays on
+exactly what the matching Spring Boot release is tested with. A pom that declares both properties
+gets both bumped in one PR.
+
 ## Rolling PRs
 
 Each repo/branch gets at most one open PR, identified by the title prefix `chore: bump Spring Boot`.
@@ -182,9 +203,10 @@ Branch names are `bot/spring-boot-<base>-<YYYY-MM-DD>`, with `-2`…`-99` suffix
 
 ## The invariant this relies on
 
-All four repos declare `spring.boot.version` **exactly once**, in the **root `pom.xml`**:
+Each repo declares the property it uses **exactly once**, in the **root `pom.xml`**:
 
-- `platform/pom.xml`, `flow/pom.xml`, `hilla/pom.xml`, `copilot-internal/pom.xml`
+- `spring.boot.version`: `platform/pom.xml`, `flow/pom.xml`, `hilla/pom.xml`, `copilot-internal/pom.xml`
+- `spring-data-commons.version`: `flow-components/pom.xml`
 
 Everything else references `${spring.boot.version}` — 37 consumers in flow alone. That is what makes
 the edit a single-line replace, done with a targeted string substitution rather than an XML
@@ -233,7 +255,7 @@ alone — listed here so they stay tracked rather than forgotten.
 
 The workflow uses `secrets.GHTK`, the cross-repo PAT already used by `pit.yml`, because the job's own
 `GITHUB_TOKEN` cannot write to other repositories. It needs **contents: write** and
-**pull_requests: write** on all four repos, including private `copilot-internal`.
+**pull_requests: write** on all five repos, including private `copilot-internal`.
 
 > A secret's scopes cannot be read from outside, and cloning a private repo only proves *read*. If
 > pushes fail with a permission error, that is the first thing to check. flow's
@@ -248,7 +270,7 @@ it works even if `GHTK` turns out to lack write access.
 
 ```bash
 npm install
-npm test          # node:test unit tests for patch.ts and pom.ts
+npm test          # node:test unit tests for patch.ts, pom.ts and maven.ts
 npx tsc --noEmit  # typecheck
 ```
 
@@ -260,8 +282,8 @@ Files:
 | file | responsibility |
 | --- | --- |
 | `src/index.ts` | CLI and orchestration |
-| `src/maven.ts` | fetch + parse the Maven Central metadata (with retry), read a versions file |
-| `src/fetch-versions.ts` | fetch the version list once and write it as JSON for `--versions-file` |
+| `src/maven.ts` | fetch + parse Maven Central metadata and BOMs (with retry), read a versions file |
+| `src/fetch-versions.ts` | fetch the Boot version list and Boot → spring-data-commons mapping once, as JSON for `--versions-file` |
 | `src/patch.ts` | pick the newest same-minor stable patch |
 | `src/pom.ts` | locate and rewrite the single property declaration |
 | `src/repo.ts` | git/gh primitives, parameterized on the checkout directory |

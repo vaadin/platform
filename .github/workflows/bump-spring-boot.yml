@@ -2,7 +2,9 @@ name: Bump Spring Boot
 
 # Bumps the `spring.boot.version` Maven property to the newest patch release on
 # its own minor line, across several Vaadin repos and their maintained
-# branches, opening one rolling PR per repo/branch. See
+# branches, opening one rolling PR per repo/branch. Repos that declare
+# `spring-data-commons.version` instead (flow-components) get the version
+# Spring Boot's BOM manages, so they move in step with Spring Boot. See
 # scripts/bump-spring-boot/README.md for full docs.
 #
 # Patch-only, by design: major and minor upgrades change what a maintenance
@@ -28,7 +30,7 @@ on:
       repos:
         description: 'Comma-separated repos under vaadin/ to bump'
         required: false
-        default: 'platform,flow,hilla,copilot-internal'
+        default: 'platform,flow,flow-components,hilla,copilot-internal'
         type: string
       branches:
         description: 'Comma-separated branches to target in each repo'
@@ -179,7 +181,7 @@ jobs:
           git clone --quiet --no-single-branch --filter=blob:none \
             "https://x-access-token:$GH_TOKEN@github.com/vaadin/${{ matrix.repo }}.git" target
 
-      - name: Bump spring.boot.version
+      - name: Bump spring.boot.version / spring-data-commons.version
         env:
           # Both git (via the remote URL above) and gh read this token.
           GH_TOKEN: ${{ secrets.VAADIN_BOT_TOKEN }}

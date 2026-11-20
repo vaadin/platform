@@ -1,6 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { findSpringBootProperty, PROPERTY_NAME } from "./pom.js";
+import {
+    findOptionalProperty,
+    findProperty,
+    findSpringBootProperty,
+    PROPERTY_NAME,
+    SPRING_DATA_COMMONS_PROPERTY,
+} from "./pom.js";
 
 // Shaped like the real root poms: platform/pom.xml:21, flow/pom.xml:103,
 // hilla/pom.xml:87, copilot-internal/pom.xml:25.
@@ -76,4 +82,20 @@ test("ignores a property-reference-only pom", () => {
     // declaration site.
     const consumer = "<project><dependency><version>${spring.boot.version}</version></dependency></project>";
     assert.throws(() => findSpringBootProperty(consumer, "child/pom.xml"), /No <spring\.boot\.version>/);
+});
+
+test("finds spring-data-commons.version and leaves other properties alone", () => {
+    const pom = `<project>
+    <properties>
+        <spring-data-commons.version>4.2.0-RC1</spring-data-commons.version>
+        <spring-ai.version>2.0.2</spring-ai.version>
+    </properties>
+</project>
+`;
+    const prop = findProperty(pom, SPRING_DATA_COMMONS_PROPERTY, "pom.xml");
+    assert.equal(prop.current, "4.2.0-RC1");
+    const out = prop.replace("4.2.0");
+    assert.match(out, /<spring-data-commons\.version>4\.2\.0<\/spring-data-commons\.version>/);
+    assert.match(out, /<spring-ai\.version>2\.0\.2<\/spring-ai\.version>/);
+    assert.equal(findOptionalProperty(pom, PROPERTY_NAME, "pom.xml"), null);
 });
