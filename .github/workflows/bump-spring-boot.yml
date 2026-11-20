@@ -33,9 +33,9 @@ on:
         default: 'platform,flow,flow-components,hilla,copilot-internal'
         type: string
       branches:
-        description: 'Comma-separated branches to target in each repo'
+        description: 'Comma-separated branches to target in each repo (blank = all of .github/supported-branches.json)'
         required: false
-        default: 'main,25.3,24.10,24.9'
+        default: ''
         type: string
       dry_run:
         description: 'Resolve versions and report only -- no branches, no PRs'
@@ -56,6 +56,11 @@ jobs:
     outputs:
       cells: ${{ steps.set.outputs.cells }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/supported-branches.json
+          sparse-checkout-cone-mode: false
+
       - id: set
         env:
           INPUT_REPOS: ${{ inputs.repos }}
@@ -64,7 +69,12 @@ jobs:
           cells=$(node -e '
             const split = (s) => s.split(",").map((v) => v.trim()).filter(Boolean);
             const repos = split(process.env.INPUT_REPOS);
-            const branches = split(process.env.INPUT_BRANCHES);
+            // Blank input = the shared supported-branches list. Cells whose
+            // repo has no such branch, or whose pom declares no supported
+            // property (e.g. hilla on 23.x/14.x), report "skipped".
+            const branches = split(process.env.INPUT_BRANCHES).length > 0
+              ? split(process.env.INPUT_BRANCHES)
+              : require("./.github/supported-branches.json").branches;
             if (repos.length === 0) throw new Error("No repos given");
             if (branches.length === 0) throw new Error("No branches given");
             const cells = repos.flatMap((repo) => branches.map((branch) => ({ repo, branch })));
@@ -215,6 +225,7 @@ jobs:
             const r = require(`${process.env.GITHUB_WORKSPACE}/result.json`);
             const detail = r.status === "error"
               ? (r.error ?? "unknown error").replace(/\s+/g, " ").trim()
+              : r.status === "skipped" ? (r.reason ?? "")
               : r.pr ? r.pr.url : `${r.from ?? "?"} -> ${r.to ?? "?"}`;
             require("node:fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY,
               `- \`${r.repo}\` [\`${r.branch}\`]: **${r.status}** ${detail}\n`);
@@ -274,6 +285,7 @@ jobs:
               const created = prs.filter((r) => r.status === "created").length;
               const updated = prs.filter((r) => r.status === "updated").length;
               const current = results.filter((r) => r.status === "up-to-date").length;
+              const skipped = results.filter((r) => r.status === "skipped").length;
               const errors = results.filter((r) => r.status === "error");
 
               out.push("## Spring Boot bump", "");
@@ -308,10 +320,11 @@ jobs:
                   ? (r.error ?? "").replace(/\s+/g, " ").trim().slice(0, 120)
                   : r.pr ? `[#${r.pr.number}](${r.pr.url})`
                   : r.status === "up-to-date" ? `already ${r.from}`
+                  : r.status === "skipped" ? (r.reason ?? "")
                   : `${r.from ?? "?"} -> ${r.to ?? "?"}`;
                 out.push(`| \`${r.repo}\` | \`${r.branch}\` | ${r.status} | ${detail} |`);
               }
-              out.push("", `${current} of ${results.length} cells were already up to date.`);
+              out.push("", `${current} of ${results.length} cells were already up to date; ${skipped} skipped (branch or property not present in that repo).`);
             }
 
             const text = out.join("\n") + "\n";

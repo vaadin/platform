@@ -25,7 +25,11 @@ nothing more.
 ./scripts/dispatch-spring-boot-bump.sh --local
 ```
 
-Defaults: repos `platform,flow,flow-components,hilla,copilot-internal`, branches `main,25.3,24.10,24.9`.
+Defaults: repos `platform,flow,flow-components,hilla,copilot-internal`, branches from
+[`.github/supported-branches.json`](../../.github/supported-branches.json) (shared by every
+workflow). A repo that lacks one of those branches (hilla and copilot-internal have no 23.x/14.x),
+or whose pom declares neither `spring.boot.version` nor `spring-data-commons.version` there, is
+reported as `skipped`, not as a failure.
 
 ## Two ways to run it
 
@@ -137,7 +141,7 @@ as an error rather than disappearing from it:
   "pr": { "number": 2202, "url": "https://github.com/vaadin/flow/pull/2202" } }
 ```
 
-`status` is `created`, `updated`, `up-to-date`, `dry-run` or `error`.
+`status` is `created`, `updated`, `up-to-date`, `dry-run`, `skipped` or `error`.
 
 ## How the version is chosen
 

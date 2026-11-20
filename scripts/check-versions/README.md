@@ -205,8 +205,9 @@ npx tsx src/licenseChecker.ts --worktree   # the versions.json on disk
 npx tsx src/licenseChecker.ts --fetch      # git fetch the branches first
 ```
 
-The branch list lives in `SUPPORTED_BRANCHES` in that file; keep it in sync
-with the supported versions in the repository README. The command exits `1`
+The branch list is read from
+[`.github/supported-branches.json`](../../.github/supported-branches.json), the
+same list every workflow uses. The command exits `1`
 when any branch needs a change, so it can be used as a CI guard. A branch
 pinning flow to a snapshot is reported as a `note`, not a failure — its
 license-checker cannot be resolved from a published pom.
@@ -434,7 +435,7 @@ This script is wired up to run automatically on a schedule via
 [`.github/workflows/check-versions.yml`](../../.github/workflows/check-versions.yml):
 
 - **Schedule:** Mon–Fri at **08:00 UTC** (`cron: '0 8 * * 1-5'`). GitHub Actions cron is UTC-only; edit the hour to anchor to a different local time.
-- **Maintained-branch matrix:** scheduled runs fan out across every maintained branch in parallel — currently `main`, `25.2`, `25.1`, `24.10`, `24.9`, `23.7`, `23.6`, `14.14`. Each branch gets its own rolling PR. `fail-fast: false` so one branch failing doesn't cancel the others. The list lives in the `resolve-matrix` job in [`check-versions.yml`](../../.github/workflows/check-versions.yml) — update it there when adding or dropping a maintained branch.
+- **Maintained-branch matrix:** scheduled runs fan out across every supported branch in parallel. Each branch gets its own rolling PR. `fail-fast: false` so one branch failing doesn't cancel the others. The list lives in [`.github/supported-branches.json`](../../.github/supported-branches.json), shared by every workflow — add or drop a branch there only.
 - **Manual runs:** the workflow exposes a `workflow_dispatch` trigger with an optional `base` input. Leave it **blank** to fire a full matrix run on demand, or set it to a single branch to target just that one:
 
   ```bash

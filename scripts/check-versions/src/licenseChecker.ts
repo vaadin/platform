@@ -38,6 +38,7 @@ import { fetchMavenVersions, fetchPom } from "./maven.js";
 import { fetchOrigin, readFileFromRef } from "./git.js";
 import { isSnapshotValue } from "./semver.js";
 import { iterateModules, readVersions, VersionsJson } from "./versionsJson.js";
+import { readSupportedBranches } from "./supportedBranches.js";
 
 /** `versions.json` key holding the runtime license-checker pin. */
 export const LICENSE_CHECKER_KEY = "vaadin-license-checker";
@@ -49,34 +50,11 @@ export const FLOW_KEY = "flow";
 const FLOW_PARENT_ARTIFACT_ID = "flow-project";
 
 /**
- * Platform branches this audit covers, newest first.
- *
- * The first block is the maintained set — the same list the `check-versions`
- * workflow fans out to, keep the two in sync. The second block is the older
- * minors that are superseded inside their generation but still ship to
- * customers on extended support, so a license checker that cannot validate
- * their keys still matters there. Branches older than those are frozen:
- * add one here while a security release is being prepared for it.
+ * Platform branches this audit covers, newest first: the shared list in
+ * `.github/supported-branches.json`, the same one every workflow fans out to.
+ * Audit any other branch with `--branch`.
  */
-export const SUPPORTED_BRANCHES: readonly string[] = [
-    // Maintained — mirrors .github/workflows/check-versions.yml
-    "main",
-    "25.3",
-    "25.2",
-    "25.1",
-    "24.10",
-    "24.9",
-    "23.7",
-    "23.6",
-    "14.14",
-    // Superseded minors still used under extended support
-    "25.0",
-    "24.8",
-    "24.7",
-    "24.6",
-    "24.5",
-    "24.4",
-];
+export const SUPPORTED_BRANCHES: readonly string[] = readSupportedBranches();
 
 /**
  * The license-checker major line a platform release has to use, derived from
