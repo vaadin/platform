@@ -57,8 +57,20 @@ test("never moves backwards", () => {
     assert.equal(pickLatestPatch("4.1.5", CENTRAL), null);
 });
 
-test("leaves a hand-pinned prerelease alone", () => {
-    assert.equal(pickLatestPatch("4.0.0-M1", CENTRAL), null);
+test("keeps a prerelease pin while its line has no stable release", () => {
+    assert.equal(pickLatestPatch("4.2.0-M1", CENTRAL), null);
+    assert.equal(pickLatestPatch("4.2.0-RC2", [...CENTRAL, "4.2.0-RC1", "4.2.0-RC2"]), null);
+});
+
+test("moves a prerelease pin to the stable release once it ships", () => {
+    const withGa = [...CENTRAL, "4.2.0-RC1", "4.2.0-RC2", "4.2.0"];
+    assert.equal(pickLatestPatch("4.2.0-RC2", withGa), "4.2.0");
+    assert.equal(pickLatestPatch("4.2.0-RC2", [...withGa, "4.2.1"]), "4.2.1");
+    assert.equal(pickLatestPatch("4.0.0-M1", CENTRAL), "4.0.8");
+});
+
+test("a prerelease pin never crosses a minor boundary", () => {
+    assert.equal(pickLatestPatch("4.2.0-RC2", [...CENTRAL, "4.3.0"]), null);
 });
 
 test("ignores unparseable candidates instead of failing", () => {

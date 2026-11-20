@@ -23,7 +23,7 @@ nothing more.
 ./scripts/dispatch-spring-boot-bump.sh --local
 ```
 
-Defaults: repos `platform,flow,hilla,copilot-internal`, branches `main,25.2,25.1`.
+Defaults: repos `platform,flow,hilla,copilot-internal`, branches `main,25.3,24.10,24.9`.
 
 ## Two ways to run it
 
@@ -155,7 +155,9 @@ Both filters matter, and each guards against a real trap:
   every branch onto a prerelease of the wrong line. The metadata is read for its full version list
   only; those two fields are ignored.
 
-A version pinned by hand to a prerelease is left alone, on the assumption the pin was deliberate.
+A version pinned to a prerelease (e.g. `main` on `4.2.0-RC2` ahead of GA) is left alone until a
+stable release of the same major.minor exists; from then on it is bumped to the newest stable patch
+of that line (`4.2.0-RC2` -> `4.2.0`).
 
 If a newer major/minor exists, the PR body says so in a note — visible, but never applied.
 
