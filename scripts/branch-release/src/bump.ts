@@ -26,6 +26,20 @@ export function replaceSnapshotLiteral(text: string, train: Train): { text: stri
     return { text: out, count };
 }
 
+const PROPERTY_ELEMENT = /<([\w.-]+\.version)>[^<]*<\/\1>/g;
+const MASK = /\u0000(\d+)\u0000/g;
+
+/**
+ * Run `fn` over `text` with every `<*.version>` property element hidden, then
+ * put them back unchanged. Used when dependency upgrades are skipped: the
+ * project's own `<version>` still moves, `<flow.version>` and friends do not.
+ */
+export function withVersionPropertiesMasked(text: string, fn: (masked: string) => string): string {
+    const saved: string[] = [];
+    const masked = text.replace(PROPERTY_ELEMENT, (m) => `\u0000${saved.push(m) - 1}\u0000`);
+    return fn(masked).replace(MASK, (_m, i: string) => saved[Number(i)]);
+}
+
 /**
  * Point Vaadin dependency properties that are pinned to a prerelease of the
  * train (`<testbench.version>25.4.0-alpha2</testbench.version>`) at the next

@@ -57,3 +57,32 @@ export function commitAllTracked(repo: Repo, title: string, body: string): void 
     git(repo, ["add", "--update"]);
     git(repo, ["commit", "--quiet", "-m", title, "-m", body]);
 }
+
+export interface OpenPr {
+    number: number;
+    title: string;
+    url: string;
+}
+
+/**
+ * The first open PR against `base` whose title mentions `needle` (e.g.
+ * `25.5-SNAPSHOT`), or null. Matching on the version rather than this job's
+ * exact title also finds a bump PR someone opened by hand.
+ *
+ * In a dry run, gh may not be authenticated; a failed lookup is then treated
+ * as "no PR" instead of failing the preview.
+ */
+export function findOpenPrMentioning(repo: Repo, base: string, needle: string, tolerateFailure: boolean): OpenPr | null {
+    const res = spawnSync(
+        "gh",
+        ["pr", "list", "-R", repo.slug, "--base", base, "--state", "open", "--search", `${needle} in:title`, "--json", "number,title,url", "--limit", "50"],
+        { cwd: repo.dir, encoding: "utf8" },
+    );
+    if (res.error || res.status !== 0) {
+        if (tolerateFailure) return null;
+        const detail = [res.stdout, res.stderr, res.error?.message].filter(Boolean).join("\n").trim();
+        throw new Error(`\`gh pr list\` failed${detail ? `:\n${detail}` : ""}`);
+    }
+    const prs: OpenPr[] = JSON.parse(res.stdout || "[]");
+    return prs.find((pr) => pr.title.includes(needle)) ?? null;
+}

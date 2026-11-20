@@ -23,6 +23,7 @@ It runs by itself on the beta1 release (`.github/workflows/branch-release.yml`, 
 | `--version X.Y` | train to branch (required); `main` moves to `X.(Y+1)-SNAPSHOT` |
 | `--repos a,b` | subset of the train's repos (default: all) |
 | `--no-branch` | only open bump PRs; never create `X.Y` |
+| `--skip-dependencies` | only move the project version; leave Vaadin dependency versions (pom `<*.version>` properties, platform's `versions.json`) as they are. Workflow input: `bump_dependencies: false`. |
 | `--local` | run here in temp clones with your `gh` login, instead of in Actions. This also works before the workflow is on `main`. |
 | `--dry-run` | report what would change; no branches, no PRs |
 | `--no-follow`, `--json` | as in `dispatch-spring-boot-bump.sh` |
@@ -48,7 +49,8 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
    - **Platform `versions.json`:** `javaVersion`/`version` values on the train → `X.(Y+1)-SNAPSHOT`. `jsVersion`, `{{version}}` and other trains (sso-kit 4.x …) are untouched.
    - **Per-repo extras** (`EXTRA_EDITS`): collaboration-kit's `COLLABORATION_ENGINE_VERSION = "X.Y"`, and in platform, `X.Y` is added after `main` in `.github/supported-branches.json` (the shared branch list for check-versions, bump-spring-boot and the license-checker audit). If an extra edit changes nothing, a warning is shown in the PR and in the report.
    - **Safety check:** the root pom must now read `X.(Y+1)-SNAPSHOT` and no pom may still contain `X.Y-SNAPSHOT`, or the cell fails without pushing.
-4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups. Re-running resets the existing PR's branch to main, recommits and force-pushes, so the PR stays one commit.
+4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups.
+   - **An open PR is never touched.** If `main` already has an open PR whose title mentions `X.(Y+1)-SNAPSHOT` (from an earlier run, or opened by hand), the repo is reported as `exists` with that PR's link. No commit, push or edit is made. To regenerate it, close it and re-run.
 
 Every cell writes a `result.json`, even on failure. The workflow's report job and the dispatch script render them into one table.
 

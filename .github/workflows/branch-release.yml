@@ -37,6 +37,11 @@ on:
         required: false
         default: true
         type: boolean
+      bump_dependencies:
+        description: 'Also move Vaadin dependency versions (pom *.version properties, versions.json) to the next SNAPSHOT'
+        required: false
+        default: true
+        type: boolean
       dry_run:
         description: 'Report only -- no branches, no PRs'
         required: false
@@ -150,7 +155,8 @@ jobs:
             --repo-dir "$GITHUB_WORKSPACE/target" \
             --result-file "$GITHUB_WORKSPACE/result.json" \
             ${{ inputs.dry_run && '--dry-run' || '' }} \
-            ${{ inputs.create_branch == false && '--no-branch' || '' }}
+            ${{ inputs.create_branch == false && '--no-branch' || '' }} \
+            ${{ inputs.bump_dependencies == false && '--skip-dependencies' || '' }}
 
       - name: Ensure a result
         if: always()

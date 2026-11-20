@@ -20,6 +20,9 @@
 #   --version X.Y    train to branch (required); main moves to X.(Y+1)-SNAPSHOT
 #   --repos a,b      subset of the train's repos (default: all of them)
 #   --no-branch      do not create missing X.Y branches, only open bump PRs
+#   --skip-dependencies
+#                    only move the project version; leave Vaadin dependency
+#                    versions (pom *.version properties, versions.json) as they are
 #   --local          run here instead of dispatching to Actions
 #   --dry-run        report only; no branches, no PRs
 #   --no-follow      dispatch and exit without waiting (ignored with --local)
@@ -35,6 +38,7 @@ CONTROL_REPO='vaadin/platform'
 version=''
 repos=''
 create_branch=true
+bump_dependencies=true
 dry_run=false
 local_mode=false
 follow=true
@@ -50,6 +54,7 @@ while [[ $# -gt 0 ]]; do
         --version)   version="${2:?--version needs a value}"; shift 2 ;;
         --repos)     repos="${2:?--repos needs a value}"; shift 2 ;;
         --no-branch) create_branch=false; shift ;;
+        --skip-dependencies) bump_dependencies=false; shift ;;
         --dry-run)   dry_run=true; shift ;;
         --local)     local_mode=true; shift ;;
         --no-follow) follow=false; shift ;;
@@ -120,6 +125,7 @@ if $local_mode; then
     extra=()
     $dry_run && extra+=(--dry-run)
     $create_branch || extra+=(--no-branch)
+    $bump_dependencies || extra+=(--skip-dependencies)
 
     for repo in "${repo_list[@]}"; do
         echo
@@ -153,13 +159,14 @@ if ! gh auth status 2>&1 | grep -q 'workflow'; then
     echo "         run \`gh auth refresh -h github.com -s workflow\`, or use --local." >&2
 fi
 
-echo "Dispatching: version=$version repos=${repos:-<all>} create_branch=$create_branch dry_run=$dry_run"
+echo "Dispatching: version=$version repos=${repos:-<all>} create_branch=$create_branch bump_dependencies=$bump_dependencies dry_run=$dry_run"
 previous_id=$(gh run list -R "$CONTROL_REPO" --workflow "$WORKFLOW" --limit 1 --json databaseId -q '.[0].databaseId // 0')
 
 gh workflow run "$WORKFLOW" -R "$CONTROL_REPO" --ref main \
     -f "version=$version" \
     -f "repos=$repos" \
     -f "create_branch=$create_branch" \
+    -f "bump_dependencies=$bump_dependencies" \
     -f "dry_run=$dry_run"
 
 run_id=''
