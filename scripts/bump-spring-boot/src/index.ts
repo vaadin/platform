@@ -16,6 +16,7 @@ import {
     checkoutNewBranchFromBase,
     commitFiles,
     configureBotIdentity,
+    branchExistsOnOrigin,
     fetchOrigin,
     fetchOriginBestEffort,
     findExistingPr,
@@ -39,7 +40,7 @@ const PR_TITLE_PREFIX = "chore: bump Spring Boot";
 const POM_PATH = "pom.xml";
 const LABELS = ["dependencies", "automated"];
 
-export type Status = "created" | "updated" | "up-to-date" | "dry-run" | "error";
+export type Status = "created" | "updated" | "up-to-date" | "dry-run" | "skipped" | "error";
 
 /** One property's bump within a repo/branch. */
 export interface Change {
@@ -62,6 +63,16 @@ export interface Result {
     to: string | null;
     pr: { number: number; url: string } | null;
     error?: string;
+    /** Why a `skipped` cell had nothing to do. */
+    reason?: string;
+}
+
+/** Mark a cell as not applicable (no such branch, or nothing to bump on it). */
+function skip(result: Result, reason: string): number {
+    result.status = "skipped";
+    result.reason = reason;
+    console.log(`vaadin/${result.repo} [${result.branch}]: skipped, ${reason}`);
+    return 0;
 }
 
 /** A supported property as declared on the branch, plus the version to move it to (or null). */
@@ -224,6 +235,14 @@ async function main(): Promise<number> {
             throw new Error(`Not a git checkout: ${repo.dir}`);
         }
 
+        // Every repo is run against the same shared branch list
+        // (.github/supported-branches.json), but not every repo has every
+        // branch: hilla and copilot-internal start at 24.x, for example.
+        // That is expected, so it is a skip rather than a failure.
+        if (!branchExistsOnOrigin(repo, cli.branch)) {
+            return skip(result, `vaadin/${cli.repo} has no ${cli.branch} branch`);
+        }
+
         // A dry run only reads the pom, so it may fall back to a local
         // remote-tracking ref; a real bump must see the true tip of the base.
         if (cli.dryRun) {
@@ -239,7 +258,8 @@ async function main(): Promise<number> {
             (p) => p !== null,
         );
         if (declared.length === 0) {
-            throw new Error(`${pomLabel} declares none of ${SUPPORTED_PROPERTIES.map((n) => `<${n}>`).join(", ")}`);
+            // Older lines predate Spring Boot in that repo (e.g. 14.14).
+            return skip(result, `${POM_PATH} declares neither ${SUPPORTED_PROPERTIES.join(" nor ")}`);
         }
         result.from = summarize(declared.map((p) => ({ property: p.name, version: p.current })));
 

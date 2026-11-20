@@ -22,7 +22,7 @@
 #
 # Options:
 #   --repos a,b      repos under vaadin/ (default: platform,flow,flow-components,hilla,copilot-internal)
-#   --branches x,y   branches to target  (default: main,25.3,24.10,24.9)
+#   --branches x,y   branches to target  (default: .github/supported-branches.json)
 #   --local          run the bump here instead of dispatching to Actions
 #   --dry-run        resolve versions and report only; no branches, no PRs
 #   --no-follow      dispatch and exit without waiting (ignored with --local)
@@ -35,10 +35,10 @@ set -euo pipefail
 WORKFLOW='bump-spring-boot.yml'
 CONTROL_REPO='vaadin/platform'
 DEFAULT_REPOS='platform,flow,flow-components,hilla,copilot-internal'
-DEFAULT_BRANCHES='main,25.3,24.10,24.9'
+SUPPORTED_BRANCHES_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/.github/supported-branches.json"
 
 repos="$DEFAULT_REPOS"
-branches="$DEFAULT_BRANCHES"
+branches=''
 dry_run=false
 local_mode=false
 follow=true
@@ -63,6 +63,12 @@ while [[ $# -gt 0 ]]; do
         *) echo "error: unknown option $1" >&2; usage 1 ;;
     esac
 done
+
+if [[ -z "$branches" ]]; then
+    command -v jq >/dev/null 2>&1 || { echo "error: jq not found." >&2; exit 1; }
+    branches=$(jq -r '.branches | join(",")' "$SUPPORTED_BRANCHES_FILE") \
+        || { echo "error: could not read $SUPPORTED_BRANCHES_FILE" >&2; exit 1; }
+fi
 
 split_csv() { tr ',' '\n' <<<"$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | grep -v '^$' || true; }
 
@@ -183,6 +189,7 @@ render_report() {
     jq -r '.[] |
         [ .repo, .branch,
           ( if .status == "up-to-date" then "up to date (" + (.from // "?") + ")"
+            elif .status == "skipped" then "skipped: " + (.reason // "")
             elif .status == "error"   then "ERROR: " + ((.error // "unknown") | gsub("[[:space:]]+"; " "))
             else (.from // "?") + " -> " + (.to // "?") + "  " + .status
             end )
@@ -195,7 +202,7 @@ render_report() {
         if $dry_run; then
             echo "Dry run — no pull requests were created."
         else
-            echo "No pull requests were created or updated; every target was already up to date."
+            echo "No pull requests were created or updated; every target was already up to date or skipped."
         fi
     else
         created=$(jq '[.[] | select(.status == "created")] | length' <<<"$results")

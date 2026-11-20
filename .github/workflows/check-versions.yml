@@ -38,6 +38,11 @@ jobs:
     outputs:
       bases: ${{ steps.set.outputs.bases }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/supported-branches.json
+          sparse-checkout-cone-mode: false
+
       - id: set
         env:
           INPUT_BASE: ${{ github.event.inputs.base }}
@@ -45,8 +50,8 @@ jobs:
           if [[ -n "$INPUT_BASE" ]]; then
             echo "bases=[\"$INPUT_BASE\"]" >> "$GITHUB_OUTPUT"
           else
-            # Keep this list in sync with the platform's currently maintained branches.
-            echo 'bases=["main","25.3","24.10","24.9","24.7","24.4","23.7","23.6","14.14"]' >> "$GITHUB_OUTPUT"
+            # The supported branches live in one shared file; edit them there.
+            echo "bases=$(jq -c '.branches' .github/supported-branches.json)" >> "$GITHUB_OUTPUT"
           fi
 
   check:
