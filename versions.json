@@ -394,7 +394,7 @@
             "version": "1.0.0"
         },
         "control-center": {
-            "javaVersion": "1.2.6"
+            "javaVersion": "1.2.7"
         },
         "copilot": {
             "javaVersion": "24.7.19"
@@ -403,8 +403,8 @@
             "javaVersion": "2.4.3"
         },
         "observability-kit-starter": {
-            "javaVersion": "3.1.0",
-            "jsVersion": "3.1.0"
+            "javaVersion": "3.1.1",
+            "jsVersion": "3.1.1"
         },
         "sso-kit-starter": {
             "javaVersion": "3.1.2",
