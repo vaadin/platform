@@ -87,3 +87,13 @@ test("hasOutOfScopeNewer reports bigger upgrades without selecting them", () => 
     assert.equal(hasOutOfScopeNewer("3.5.16", CENTRAL), true, "4.x exists");
     assert.equal(hasOutOfScopeNewer("4.0.8", CENTRAL), true, "4.1.x exists");
 });
+
+test("spring-data-commons follows what each Spring Boot line's newest release manages", () => {
+    // Real mapping: Boot 3.5.16 -> 3.5.13, 4.1.3 -> 4.1.3, 4.2.0 -> 4.2.0.
+    // Spring Data's own newer patches (e.g. 3.5.14) are not candidates until Boot ships them.
+    const managed = ["3.5.13", "4.1.3", "4.2.0"];
+    assert.equal(pickLatestPatch("3.5.8", managed), "3.5.13", "flow-components 24.x");
+    assert.equal(pickLatestPatch("4.1.1", managed), "4.1.3", "flow-components 25.3");
+    assert.equal(pickLatestPatch("4.2.0-RC1", managed), "4.2.0", "flow-components main");
+    assert.equal(pickLatestPatch("3.5.14", managed), null, "never moves backwards");
+});

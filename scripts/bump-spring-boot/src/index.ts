@@ -1,9 +1,15 @@
 import { parseArgs } from "node:util";
 import fs from "node:fs";
 import path from "node:path";
-import { fetchSpringBootVersions, readVersionsFile, SPRING_BOOT_METADATA_URL } from "./maven.js";
+import {
+    fetchVersionData,
+    readVersionsFile,
+    springDataBomUrl,
+    SPRING_BOOT_METADATA_URL,
+    VersionData,
+} from "./maven.js";
 import { pickLatestPatch, hasOutOfScopeNewer } from "./patch.js";
-import { findSpringBootProperty, PROPERTY_NAME } from "./pom.js";
+import { findOptionalProperty, findProperty, PROPERTY_NAME, SPRING_DATA_COMMONS_PROPERTY, SUPPORTED_PROPERTIES } from "./pom.js";
 import {
     Repo,
     assertGhAvailable,
@@ -35,15 +41,80 @@ const LABELS = ["dependencies", "automated"];
 
 export type Status = "created" | "updated" | "up-to-date" | "dry-run" | "error";
 
+/** One property's bump within a repo/branch. */
+export interface Change {
+    property: string;
+    from: string;
+    to: string;
+}
+
 /** One repo/branch outcome. Serialized to `--result-file` for the run report. */
 export interface Result {
     repo: string;
     branch: string;
     status: Status;
+    /**
+     * Human-readable summaries for the run report. A plain version when the
+     * pom declares only spring.boot.version; otherwise each property is named,
+     * e.g. "spring-data-commons 4.2.0-RC1".
+     */
     from: string | null;
     to: string | null;
     pr: { number: number; url: string } | null;
     error?: string;
+}
+
+/** A supported property as declared on the branch, plus the version to move it to (or null). */
+interface Plan {
+    property: string;
+    current: string;
+    next: string | null;
+    /** A newer major/minor exists that this job deliberately does not take. */
+    biggerAvailable: boolean;
+    /** Extra PR-body line explaining where `next` came from. */
+    source: string;
+}
+
+/**
+ * Decide the next version for one property.
+ *
+ * spring.boot.version: newest stable patch of its own line.
+ * spring-data-commons.version: the version managed by the newest stable
+ * Spring Boot release of the matching line, so a repo that declares it
+ * directly (flow-components) moves in step with Spring Boot.
+ */
+function plan(property: string, current: string, data: VersionData): Plan {
+    if (property === PROPERTY_NAME) {
+        return {
+            property,
+            current,
+            next: pickLatestPatch(current, data.springBoot),
+            biggerAvailable: hasOutOfScopeNewer(current, data.springBoot),
+            source: `[spring-boot-starter-parent on Maven Central](${SPRING_BOOT_METADATA_URL})`,
+        };
+    }
+    if (property === SPRING_DATA_COMMONS_PROPERTY) {
+        const entries = Object.values(data.springData);
+        const managed = entries.map((e) => e.springDataCommons);
+        const next = pickLatestPatch(current, managed);
+        const entry = next ? entries.find((e) => e.springDataCommons === next) : undefined;
+        return {
+            property,
+            current,
+            next,
+            biggerAvailable: hasOutOfScopeNewer(current, managed),
+            source: entry
+                ? `managed by Spring Boot ${entry.springBoot} via [spring-data-bom ${entry.springDataBom}](${springDataBomUrl(entry.springDataBom)})`
+                : "",
+        };
+    }
+    throw new Error(`Unsupported property ${property}`);
+}
+
+/** Report summary: a bare version for the Boot-only case the report always showed, otherwise named. */
+function summarize(changes: { property: string; version: string }[]): string {
+    if (changes.length === 1 && changes[0].property === PROPERTY_NAME) return changes[0].version;
+    return changes.map((c) => `${c.property === PROPERTY_NAME ? "spring-boot" : c.property.replace(/\.version$/, "")} ${c.version}`).join(", ");
 }
 
 interface Cli {
@@ -87,23 +158,39 @@ function parseCli(argv: string[]): Cli {
     };
 }
 
-function commitTitle(version: string, branch: string): string {
-    return `${PR_TITLE_PREFIX} to ${version} [${branch}]`;
+/**
+ * Every title starts with PR_TITLE_PREFIX, which is how the next run finds
+ * this job's rolling PR for the branch.
+ */
+function commitTitle(changes: Change[], branch: string): string {
+    const boot = changes.find((c) => c.property === PROPERTY_NAME);
+    const others = changes
+        .filter((c) => c.property !== PROPERTY_NAME)
+        .map((c) => `${c.property.replace(/\.version$/, "")} to ${c.to}`);
+    const head = boot
+        ? [`${PR_TITLE_PREFIX} to ${boot.to}`, ...others].join(" and ")
+        : `${PR_TITLE_PREFIX}'s ${others.join(" and ")}`;
+    return `${head} [${branch}]`;
 }
 
-function prBody(repo: string, branch: string, from: string, to: string, biggerAvailable: boolean): string {
+function prBody(repo: string, branch: string, plans: Plan[]): string {
+    const bumps = plans.filter((p) => p.next !== null);
     const lines = [
-        `Bumps \`${PROPERTY_NAME}\` in \`${POM_PATH}\` from **${from}** to **${to}** on \`${branch}\`.`,
+        `Bumps on \`${branch}\` in \`${POM_PATH}\`:`,
         "",
-        `This is a **patch-only** bump: ${to} is the newest stable release on the ${from.split(".").slice(0, 2).join(".")}.x line.`,
+        "| property | from | to | source |",
+        "| --- | --- | --- | --- |",
+        ...bumps.map((p) => `| \`${p.property}\` | ${p.current} | **${p.next}** | ${p.source} |`),
+        "",
+        "This is a **patch-only** bump: each version stays on its own major.minor line.",
         "Major and minor upgrades are intentionally out of scope for this job and need human review.",
+        "`spring-data-commons` follows the version Spring Boot's BOM manages, so it moves in step with Spring Boot.",
         "",
         `- Repository: \`vaadin/${repo}\``,
         `- Target branch: \`${branch}\``,
-        `- Source of truth: [${PROPERTY_NAME} on Maven Central](${SPRING_BOOT_METADATA_URL})`,
     ];
 
-    if (biggerAvailable) {
+    if (bumps.some((p) => p.biggerAvailable)) {
         lines.push(
             "",
             "> [!NOTE]",
@@ -146,31 +233,39 @@ async function main(): Promise<number> {
             fetchOrigin(repo, [cli.branch]);
         }
 
+        const pomLabel = `${repo.slug}:${cli.branch}/${POM_PATH}`;
         const source = readFileFromRef(repo, `origin/${cli.branch}`, POM_PATH);
-        const property = findSpringBootProperty(source, `${repo.slug}:${cli.branch}/${POM_PATH}`);
-        result.from = property.current;
+        const declared = SUPPORTED_PROPERTIES.map((name) => findOptionalProperty(source, name, pomLabel)).filter(
+            (p) => p !== null,
+        );
+        if (declared.length === 0) {
+            throw new Error(`${pomLabel} declares none of ${SUPPORTED_PROPERTIES.map((n) => `<${n}>`).join(", ")}`);
+        }
+        result.from = summarize(declared.map((p) => ({ property: p.name, version: p.current })));
 
-        // The workflow fetches once and hands every cell the same list, so
+        // The workflow fetches once and hands every cell the same data, so
         // Maven Central is not hit once per repo/branch (that got us HTTP 429).
-        const available = cli.versionsFile
-            ? readVersionsFile(cli.versionsFile)
-            : await fetchSpringBootVersions();
+        const data = cli.versionsFile ? readVersionsFile(cli.versionsFile) : await fetchVersionData();
         if (cli.verbose) {
-            const source = cli.versionsFile ?? "Maven Central";
-            console.log(`read ${available.length} Spring Boot versions from ${source}`);
+            const from = cli.versionsFile ?? "Maven Central";
+            console.log(`read ${data.springBoot.length} Spring Boot versions from ${from}`);
         }
 
-        const next = pickLatestPatch(property.current, available);
+        const plans = declared.map((p) => plan(p.name, p.current, data));
+        const changes: Change[] = plans
+            .filter((p) => p.next !== null)
+            .map((p) => ({ property: p.property, from: p.current, to: p.next as string }));
 
-        if (next === null) {
+        if (changes.length === 0) {
             result.status = "up-to-date";
-            result.to = property.current;
-            console.log(`${repo.slug} [${cli.branch}]: up to date (${property.current})`);
+            result.to = result.from;
+            console.log(`${repo.slug} [${cli.branch}]: up to date (${result.from})`);
             return 0;
         }
 
-        result.to = next;
-        console.log(`${repo.slug} [${cli.branch}]: ${property.current} -> ${next}`);
+        // Unchanged properties keep their current version in the summary.
+        result.to = summarize(plans.map((p) => ({ property: p.property, version: p.next ?? p.current })));
+        for (const c of changes) console.log(`${repo.slug} [${cli.branch}]: ${c.property} ${c.from} -> ${c.to}`);
 
         if (cli.dryRun) {
             result.status = "dry-run";
@@ -181,14 +276,8 @@ async function main(): Promise<number> {
         assertGhAvailable(repo.dir);
         configureBotIdentity(repo);
 
-        const title = commitTitle(next, cli.branch);
-        const body = prBody(
-            repo.name,
-            cli.branch,
-            property.current,
-            next,
-            hasOutOfScopeNewer(property.current, available),
-        );
+        const title = commitTitle(changes, cli.branch);
+        const body = prBody(repo.name, cli.branch, plans);
         const existing = findExistingPr(repo, cli.branch, PR_TITLE_PREFIX);
 
         // Rolling PR: reuse this job's open PR for the branch if there is one,
@@ -204,7 +293,10 @@ async function main(): Promise<number> {
             checkoutNewBranchFromBase(repo, branch, cli.branch);
         }
 
-        fs.writeFileSync(path.join(repo.dir, POM_PATH), property.replace(next), "utf8");
+        // Apply one property at a time, re-locating each declaration in the
+        // already-edited source.
+        const updated = changes.reduce((src, c) => findProperty(src, c.property, pomLabel).replace(c.to), source);
+        fs.writeFileSync(path.join(repo.dir, POM_PATH), updated, "utf8");
         commitFiles(repo, [POM_PATH], title, body);
 
         if (existing) {
