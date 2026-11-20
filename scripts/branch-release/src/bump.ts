@@ -135,9 +135,15 @@ export function isPomFile(path: string): boolean {
     return /(^|\/)pom(-[^/]*)?\.xml$/.test(path);
 }
 
-const SKIPPED_FILE = /(^|\/)node_modules\/|(^|\/)(package-lock\.json|pnpm-lock\.yaml|yarn\.lock|[^/]*\.lock)$/;
+const SKIPPED_FILE =
+    /^\.github\/workflows\/|(^|\/)node_modules\/|(^|\/)(package-lock\.json|pnpm-lock\.yaml|yarn\.lock|[^/]*\.lock)$/;
 
-/** Tracked files the literal replacement should never touch: lock files and vendored node_modules. */
+/**
+ * Tracked files this job never edits: lock files, vendored node_modules, and
+ * anything under `.github/workflows/`. Workflow changes stay with each repo's
+ * maintainers, and a version in a workflow file is usually a comment or an
+ * example, not something the build reads.
+ */
 export function isSkippedFile(path: string): boolean {
     return SKIPPED_FILE.test(path);
 }
