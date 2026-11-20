@@ -22,7 +22,7 @@
 #
 # Options:
 #   --repos a,b      repos under vaadin/ (default: platform,flow,hilla,copilot-internal)
-#   --branches x,y   branches to target  (default: main,25.2,25.1)
+#   --branches x,y   branches to target  (default: main,25.3,24.10,24.9)
 #   --local          run the bump here instead of dispatching to Actions
 #   --dry-run        resolve versions and report only; no branches, no PRs
 #   --no-follow      dispatch and exit without waiting (ignored with --local)
@@ -35,7 +35,7 @@ set -euo pipefail
 WORKFLOW='bump-spring-boot.yml'
 CONTROL_REPO='vaadin/platform'
 DEFAULT_REPOS='platform,flow,hilla,copilot-internal'
-DEFAULT_BRANCHES='main,25.2,25.1'
+DEFAULT_BRANCHES='main,25.3,24.10,24.9'
 
 repos="$DEFAULT_REPOS"
 branches="$DEFAULT_BRANCHES"

@@ -23,10 +23,11 @@ export function pickLatestPatch(current: string, candidates: string[]): string |
     const cur = semver.parse(current);
     if (!cur) throw new Error(`Not a parseable semver version: ${JSON.stringify(current)}`);
 
-    // A prerelease current value means someone pinned a milestone by hand;
-    // picking a "newer stable patch" for them would silently undo that choice.
-    if (cur.prerelease.length > 0) return null;
-
+    // A prerelease current value (e.g. `main` tracking 4.2.0-RC2 ahead of GA)
+    // is kept until a stable release of the same line ships. Once 4.2.0 is
+    // out, the RC is no longer the latest and the newest stable patch on that
+    // line is picked below: `semver.gt` orders 4.2.0 above 4.2.0-RC2, and the
+    // major.minor filter keeps the pin on its own line.
     const best = candidates
         .map((v) => semver.parse(v))
         .filter((sv): sv is semver.SemVer => sv !== null)
