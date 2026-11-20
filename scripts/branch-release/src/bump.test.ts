@@ -9,6 +9,7 @@ import {
     supportedBranchesEdit,
     replaceSnapshotLiteral,
     trainConstantEdit,
+    withVersionPropertiesMasked,
 } from "./bump.js";
 import { parseTrain } from "./version.js";
 
@@ -62,6 +63,31 @@ test("bumpPomProperties moves train prereleases to the next SNAPSHOT", () => {
         changes.map((c) => `${c.property}:${c.from}`),
         ["flow.version:25.4.0-beta1", "testbench.version:25.4.0-alpha2", "hilla.version:25.4.0-rc1"],
     );
+});
+
+test("withVersionPropertiesMasked moves the project version but not dependency properties", () => {
+    const pom = `<project>
+    <version>25.4-SNAPSHOT</version>
+    <properties>
+        <flow.version>25.4-SNAPSHOT</flow.version>
+        <testbench.version>25.4.0-beta2</testbench.version>
+    </properties>
+    <dependency><version>25.4-SNAPSHOT</version></dependency>
+</project>`;
+    let count = 0;
+    const out = withVersionPropertiesMasked(pom, (t) => {
+        const r = replaceSnapshotLiteral(t, T);
+        count = r.count;
+        return r.text;
+    });
+    assert.equal(count, 2);
+    assert.equal(
+        out,
+        pom
+            .replace("<version>25.4-SNAPSHOT</version>\n    <properties>", "<version>25.5-SNAPSHOT</version>\n    <properties>")
+            .replace("<dependency><version>25.4-SNAPSHOT</version>", "<dependency><version>25.5-SNAPSHOT</version>"),
+    );
+    assert.match(out, /<flow\.version>25\.4-SNAPSHOT<\/flow\.version>/);
 });
 
 test("bumpVersionsJson touches only Java versions on the train and keeps formatting", () => {

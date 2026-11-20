@@ -57,3 +57,61 @@ export function commitAllTracked(repo: Repo, title: string, body: string): void 
     git(repo, ["add", "--update"]);
     git(repo, ["commit", "--quiet", "-m", title, "-m", body]);
 }
+
+export interface OpenPr {
+    number: number;
+    title: string;
+    url: string;
+}
+
+/**
+ * The first open PR against `base` whose title mentions `needle` (e.g.
+ * `25.5-SNAPSHOT`), or null. Matching on the version rather than this job's
+ * exact title also finds a bump PR someone opened by hand.
+ *
+ * In a dry run, gh may not be authenticated; a failed lookup is then treated
+ * as "no PR" instead of failing the preview.
+ */
+export function findOpenPrMentioning(repo: Repo, base: string, needle: string, tolerateFailure: boolean): OpenPr | null {
+    const res = spawnSync(
+        "gh",
+        ["pr", "list", "-R", repo.slug, "--base", base, "--state", "open", "--search", `${needle} in:title`, "--json", "number,title,url", "--limit", "50"],
+        { cwd: repo.dir, encoding: "utf8" },
+    );
+    if (res.error || res.status !== 0) {
+        if (tolerateFailure) return null;
+        const detail = [res.stdout, res.stderr, res.error?.message].filter(Boolean).join("\n").trim();
+        throw new Error(`\`gh pr list\` failed${detail ? `:\n${detail}` : ""}`);
+    }
+    const prs: OpenPr[] = JSON.parse(res.stdout || "[]");
+    return prs.find((pr) => pr.title.includes(needle)) ?? null;
+}
+
+function ghApi(repo: Repo, args: string[]): { code: number; stdout: string; stderr: string } {
+    const res = spawnSync("gh", ["api", ...args], { cwd: repo.dir, encoding: "utf8" });
+    if (res.error) throw res.error;
+    return { code: res.status ?? 1, stdout: res.stdout ?? "", stderr: res.stderr ?? "" };
+}
+
+export interface RepoLabel {
+    name: string;
+    color: string;
+    description: string | null;
+}
+
+/** Every label of the repo (paginated). */
+export function listLabels(repo: Repo): RepoLabel[] {
+    const res = ghApi(repo, ["--paginate", `repos/${repo.slug}/labels?per_page=100`, "--jq", ".[] | {name, color, description}"]);
+    if (res.code !== 0) throw new Error(`could not list labels of ${repo.slug}: ${res.stderr.trim() || res.stdout.trim()}`);
+    return res.stdout
+        .split("\n")
+        .filter(Boolean)
+        .map((line) => JSON.parse(line) as RepoLabel);
+}
+
+export function createLabel(repo: Repo, name: string, color: string, description: string): void {
+    const args = ["-X", "POST", `repos/${repo.slug}/labels`, "-f", `name=${name}`, "-f", `color=${color}`];
+    if (description) args.push("-f", `description=${description}`);
+    const res = ghApi(repo, args);
+    if (res.code !== 0) throw new Error(`could not create label ${name} in ${repo.slug}: ${res.stderr.trim() || res.stdout.trim()}`);
+}

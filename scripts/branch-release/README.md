@@ -23,6 +23,7 @@ It runs by itself on the beta1 release (`.github/workflows/branch-release.yml`, 
 | `--version X.Y` | train to branch (required); `main` moves to `X.(Y+1)-SNAPSHOT` |
 | `--repos a,b` | subset of the train's repos (default: all) |
 | `--no-branch` | only open bump PRs; never create `X.Y` |
+| `--skip-dependencies` | only move the project version; leave Vaadin dependency versions (pom `<*.version>` properties, platform's `versions.json`) as they are. Workflow input: `bump_dependencies: false`. |
 | `--local` | run here in temp clones with your `gh` login, instead of in Actions. This also works before the workflow is on `main`. |
 | `--dry-run` | report what would change; no branches, no PRs |
 | `--no-follow`, `--json` | as in `dispatch-spring-boot-bump.sh` |
@@ -42,13 +43,15 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
 
 1. Fetch `origin/main` and read the root `pom.xml` project version.
 2. **Branch.** If `X.Y` exists on origin, it is left alone (`exists`). If main is not on `X.Y-SNAPSHOT`, the branch is not created (`skipped`): cutting it from a main that has already moved would give the maintenance branch the wrong version. Otherwise `X.Y` is pushed at main's SHA (a plain push, never a force push).
+   - **Label.** Once `X.Y` exists, the repo gets a `target/X.Y` label if it doesn't have one yet. Its colour (and description, with the branch name updated) is copied from the repo's newest `target/<major.minor>` label, falling back to `7fe88f`. If creating the label fails, that is a warning in the report, not a failed run.
 3. **Bump**, on `bot/bump-main-X.(Y+1)-SNAPSHOT`:
    - **Whole-token `X.Y-SNAPSHOT` → `X.(Y+1)-SNAPSHOT` in every tracked text file.** Lock files, `node_modules`, binaries and everything under `.github/workflows/` are skipped (workflow changes stay with each repo). This one rule covers every pom (including `pom-dev*.xml`, `pom-production.xml`, `pom-portal.xml` …), `gradle.properties`, Gradle test fallbacks such as flow's `AbstractGradleTest.kt`, and READMEs. Those are the files past manual bumps went after one by one.
    - **Pom `<*.version>` properties pinned to a train prerelease** (`X.Y.0-alphaN|betaN|rcN`) → `X.(Y+1)-SNAPSHOT`. This catches `testbench.version`, and copilot's `flow.version`, `hilla.version` and so on, which pin releases instead of snapshots.
    - **Platform `versions.json`:** `javaVersion`/`version` values on the train → `X.(Y+1)-SNAPSHOT`. `jsVersion`, `{{version}}` and other trains (sso-kit 4.x …) are untouched.
    - **Per-repo extras** (`EXTRA_EDITS`): collaboration-kit's `COLLABORATION_ENGINE_VERSION = "X.Y"`, and in platform, `X.Y` is added after `main` in `.github/supported-branches.json` (the shared branch list for check-versions, bump-spring-boot and the license-checker audit). If an extra edit changes nothing, a warning is shown in the PR and in the report.
    - **Safety check:** the root pom must now read `X.(Y+1)-SNAPSHOT` and no pom may still contain `X.Y-SNAPSHOT`, or the cell fails without pushing.
-4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups. Re-running resets the existing PR's branch to main, recommits and force-pushes, so the PR stays one commit.
+4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups.
+   - **An open PR is never touched.** If `main` already has an open PR whose title mentions `X.(Y+1)-SNAPSHOT` (from an earlier run, or opened by hand), the repo is reported as `exists` with that PR's link. No commit, push or edit is made. To regenerate it, close it and re-run.
 
 Every cell writes a `result.json`, even on failure. The workflow's report job and the dispatch script render them into one table.
 
@@ -82,4 +85,5 @@ Git/gh primitives are imported from `../bump-spring-boot/src/repo.ts`. `src/git.
 | `src/repos.ts` | product → repo map, exclusions, extra edits, merge order |
 | `src/bump.ts` | pure text transforms |
 | `src/version.ts` | train parsing and version strings |
-| `src/git.ts` | extra git primitives |
+| `src/labels.ts` | `target/X.Y` label name and the colour/description template |
+| `src/git.ts` | extra git and gh primitives (branch, PR lookup, labels) |

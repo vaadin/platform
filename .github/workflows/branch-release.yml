@@ -37,6 +37,11 @@ on:
         required: false
         default: true
         type: boolean
+      bump_dependencies:
+        description: 'Also move Vaadin dependency versions (pom *.version properties, versions.json) to the next SNAPSHOT'
+        required: false
+        default: true
+        type: boolean
       dry_run:
         description: 'Report only -- no branches, no PRs'
         required: false
@@ -150,7 +155,8 @@ jobs:
             --repo-dir "$GITHUB_WORKSPACE/target" \
             --result-file "$GITHUB_WORKSPACE/result.json" \
             ${{ inputs.dry_run && '--dry-run' || '' }} \
-            ${{ inputs.create_branch == false && '--no-branch' || '' }}
+            ${{ inputs.create_branch == false && '--no-branch' || '' }} \
+            ${{ inputs.bump_dependencies == false && '--skip-dependencies' || '' }}
 
       - name: Ensure a result
         if: always()
@@ -194,10 +200,10 @@ jobs:
             sort_by(.repo) as $r
             | "### Results",
               "",
-              "| repo | branch | main | pull request | notes |",
-              "| --- | --- | --- | --- | --- |",
+              "| repo | branch | label | main | pull request | notes |",
+              "| --- | --- | --- | --- | --- | --- |",
               ($r[] |
-                "| `\(.repo)` | \(.branch.status)\(if .branch.sha then " `" + .branch.sha[0:10] + "`" else "" end) | \(.bump.status)\(if .bump.from then " (" + .bump.from + " → " + (.bump.to // "?") + ")" else "" end) | \(if .pr then "[#\(.pr.number)](\(.pr.url))" else "" end) | \(([.error // empty, .branch.reason // empty] + .warnings) | map(gsub("[\\r\\n|]+"; " ")) | join("; ")) |"),
+                "| `\(.repo)` | \(.branch.status)\(if .branch.sha then " `" + .branch.sha[0:10] + "`" else "" end) | \(if .label then "`" + .label.name + "` " + .label.status else "" end) | \(.bump.status)\(if .bump.from then " (" + .bump.from + " → " + (.bump.to // "?") + ")" else "" end) | \(if .pr then "[#\(.pr.number)](\(.pr.url))" else "" end) | \(([.error // empty, .branch.reason // empty] + .warnings) | map(gsub("[\\r\\n|]+"; " ")) | join("; ")) |"),
               "",
               "\([$r[] | select(.bump.status == "error" or .branch.status == "error")] | length) of \($r | length) repo(s) failed."
           ' "${files[@]}" | tee -a "$GITHUB_STEP_SUMMARY"

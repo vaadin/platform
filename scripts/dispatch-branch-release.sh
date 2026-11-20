@@ -20,6 +20,9 @@
 #   --version X.Y    train to branch (required); main moves to X.(Y+1)-SNAPSHOT
 #   --repos a,b      subset of the train's repos (default: all of them)
 #   --no-branch      do not create missing X.Y branches, only open bump PRs
+#   --skip-dependencies
+#                    only move the project version; leave Vaadin dependency
+#                    versions (pom *.version properties, versions.json) as they are
 #   --local          run here instead of dispatching to Actions
 #   --dry-run        report only; no branches, no PRs
 #   --no-follow      dispatch and exit without waiting (ignored with --local)
@@ -35,6 +38,7 @@ CONTROL_REPO='vaadin/platform'
 version=''
 repos=''
 create_branch=true
+bump_dependencies=true
 dry_run=false
 local_mode=false
 follow=true
@@ -50,6 +54,7 @@ while [[ $# -gt 0 ]]; do
         --version)   version="${2:?--version needs a value}"; shift 2 ;;
         --repos)     repos="${2:?--repos needs a value}"; shift 2 ;;
         --no-branch) create_branch=false; shift ;;
+        --skip-dependencies) bump_dependencies=false; shift ;;
         --dry-run)   dry_run=true; shift ;;
         --local)     local_mode=true; shift ;;
         --no-follow) follow=false; shift ;;
@@ -75,15 +80,16 @@ render_report() {
         return
     fi
     echo
-    printf '%-32s %-22s %-36s %s\n' repo branch main 'pull request / notes'
+    printf '%-32s %-22s %-24s %-36s %s\n' repo branch label main 'pull request / notes'
     jq -r '.[] | [
         .repo,
         (.branch.status + (if .branch.sha then " " + .branch.sha[0:10] else "" end)),
+        (if .label then .label.name + " " + .label.status else "" end),
         (.bump.status + (if .bump.from then " (" + .bump.from + " -> " + (.bump.to // "?") + ")" else "" end)),
         ((if .pr then .pr.url + " " else "" end)
           + (([.error // empty, .branch.reason // empty] + .warnings) | map(gsub("[[:space:]]+"; " ")) | join("; ")))
       ] | @tsv' <<<"$results" | tr -d '\r' |
-        while IFS=$'\t' read -r r b m n; do printf '%-32s %-22s %-36s %s\n' "$r" "$b" "$m" "$n"; done
+        while IFS=$'\t' read -r r b l m n; do printf '%-32s %-22s %-24s %-36s %s\n' "$r" "$b" "$l" "$m" "$n"; done
     local failed
     failed=$(jq '[.[] | select(.bump.status == "error" or .branch.status == "error")] | length' <<<"$results")
     echo
@@ -120,6 +126,7 @@ if $local_mode; then
     extra=()
     $dry_run && extra+=(--dry-run)
     $create_branch || extra+=(--no-branch)
+    $bump_dependencies || extra+=(--skip-dependencies)
 
     for repo in "${repo_list[@]}"; do
         echo
@@ -153,13 +160,14 @@ if ! gh auth status 2>&1 | grep -q 'workflow'; then
     echo "         run \`gh auth refresh -h github.com -s workflow\`, or use --local." >&2
 fi
 
-echo "Dispatching: version=$version repos=${repos:-<all>} create_branch=$create_branch dry_run=$dry_run"
+echo "Dispatching: version=$version repos=${repos:-<all>} create_branch=$create_branch bump_dependencies=$bump_dependencies dry_run=$dry_run"
 previous_id=$(gh run list -R "$CONTROL_REPO" --workflow "$WORKFLOW" --limit 1 --json databaseId -q '.[0].databaseId // 0')
 
 gh workflow run "$WORKFLOW" -R "$CONTROL_REPO" --ref main \
     -f "version=$version" \
     -f "repos=$repos" \
     -f "create_branch=$create_branch" \
+    -f "bump_dependencies=$bump_dependencies" \
     -f "dry_run=$dry_run"
 
 run_id=''
