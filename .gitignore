@@ -42,13 +42,15 @@ scripts/generator/yarn-error.log
 **/tsconfig.json
 **/types.d.ts
 
-# scripts/check-versions/ and scripts/bump-spring-boot/ are real Node projects
+# scripts/check-versions/, scripts/bump-spring-boot/ and scripts/branch-release/ are real Node projects
 # that need their own package.json + tsconfig.json tracked; whitelist them past
 # the broad **/package.json and **/tsconfig.json excludes above.
 !scripts/check-versions/package.json
 !scripts/check-versions/tsconfig.json
 !scripts/bump-spring-boot/package.json
 !scripts/bump-spring-boot/tsconfig.json
+!scripts/branch-release/package.json
+!scripts/branch-release/tsconfig.json
 **/.npmrc
 bin/
 
