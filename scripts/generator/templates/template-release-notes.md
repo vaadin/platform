@@ -70,6 +70,8 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 
 ## Supported technologies
 
+The minimum browser versions follow the [browser support policy](https://vaadin.com/docs/latest/compatibility#browser-support-policy).
+
 <table>
 <tr>
   <th>Desktop browser</th>
