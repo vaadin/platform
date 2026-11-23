@@ -18,7 +18,12 @@ import {
     createRemoteBranch,
     discardWorkingTreeChanges,
     createLabel,
+    checkoutRemoteBranch,
+    commentOnPr,
+    fetchRemoteBranch,
     findOpenPrMentioning,
+    type OpenPr,
+    pushFastForward,
     listLabels,
     listTrackedFiles,
     remoteBranchSha,
@@ -59,8 +64,11 @@ const LABELS = ["automated"];
 const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
 export type BranchStatus = "created" | "exists" | "dry-run" | "skipped" | "error";
-/** `exists`: a bump PR was already open; it is reported and left untouched. */
-export type BumpStatus = "created" | "exists" | "up-to-date" | "dry-run" | "error";
+/**
+ * `updated`: an open bump PR got a new commit. `unchanged`: an open bump PR already had
+ * this run's changes. `exists`: an open PR that cannot be updated (from a fork).
+ */
+export type BumpStatus = "created" | "updated" | "unchanged" | "exists" | "up-to-date" | "dry-run" | "error";
 
 export type LabelStatus = "created" | "exists" | "dry-run" | "skipped" | "error";
 
@@ -176,7 +184,7 @@ function applyEdits(repo: Repo, train: Train, bumpDependencies: boolean): Edits 
         for (const extra of extras) {
             if (!`/${file}`.endsWith(extra.pathSuffix)) continue;
             const after = extra.apply(text, train);
-            if (after !== text) extrasHit.add(extra.pathSuffix);
+            if (after !== text || extra.isDone(text, train)) extrasHit.add(extra.pathSuffix);
             text = after;
         }
 
@@ -293,6 +301,70 @@ function ensureTargetLabel(repo: Repo, cli: Cli, result: Result): void {
     console.log(`  label ${name}: ${result.label.status}`);
 }
 
+/**
+ * Bring an open bump PR up to date with this run's settings: apply the same
+ * edits on top of its branch and push them as one new commit. Never a reset
+ * or force push, so commits people added to the PR stay. When the edits
+ * change nothing, the PR is left exactly as it is.
+ */
+function updateExistingPr(repo: Repo, cli: Cli, result: Result, pr: OpenPr): number {
+    const next = snapshotOf(nextTrain(cli.train));
+    fetchRemoteBranch(repo, pr.headRefName);
+    if (cli.dryRun) {
+        checkoutDetached(repo, revParse(repo, `origin/${pr.headRefName}`));
+    } else {
+        checkoutRemoteBranch(repo, pr.headRefName);
+    }
+
+    const edits = applyEdits(repo, cli.train, cli.bumpDependencies);
+    result.warnings.push(...edits.warnings);
+    result.bump.files = edits.files.length;
+    result.bump.properties = edits.properties;
+
+    if (edits.files.length === 0) {
+        result.bump.status = "unchanged";
+        console.log(`  main: PR already has these changes, left untouched: ${pr.url}`);
+        return 0;
+    }
+
+    assertComplete(repo, cli.train, cli.bumpDependencies);
+    const stat = shortStat(repo);
+    console.log(`  main: updating PR #${pr.number} on ${pr.headRefName}, ${stat}`);
+    for (const c of edits.properties) console.log(`    ${c.file}: ${c.property} ${c.from} -> ${c.to}`);
+    for (const w of edits.warnings) console.log(`    warning: ${w}`);
+
+    if (cli.dryRun) {
+        discardWorkingTreeChanges(repo);
+        result.bump.status = "dry-run";
+        return 0;
+    }
+
+    const what = edits.properties.length > 0 ? "move dependency versions" : "update versions";
+    commitAllTracked(repo, `chore: ${what} to ${next}`, `Follow-up run of scripts/branch-release on top of #${pr.number}.`);
+    pushFastForward(repo, pr.headRefName);
+    commentOnPr(repo, pr.number, updateComment(cli, edits, stat));
+    result.bump.status = "updated";
+    console.log(`  PR updated: ${pr.url}`);
+    return 0;
+}
+
+/** The PR comment describing what a follow-up run added. */
+function updateComment(cli: Cli, edits: Edits, stat: string): string {
+    const lines = [
+        `Another run of \`scripts/branch-release\` (dependency upgrades ${cli.bumpDependencies ? "enabled" : "skipped"}) added a commit to this PR: ${stat}.`,
+    ];
+    if (edits.literals > 0) lines.push("", `- \`${snapshotOf(cli.train)}\` → \`${snapshotOf(nextTrain(cli.train))}\`: ${edits.literals} occurrence(s)`);
+    if (edits.properties.length > 0) {
+        lines.push("", "| file | property | from | to |", "| --- | --- | --- | --- |");
+        for (const c of edits.properties) lines.push(`| \`${c.file}\` | \`${c.property}\` | ${c.from} | ${c.to} |`);
+    }
+    if (edits.warnings.length > 0) {
+        lines.push("", "Needs a look:");
+        for (const w of edits.warnings) lines.push(`- ${w}`);
+    }
+    return lines.join("\n");
+}
+
 async function main(): Promise<number> {
     const cli = parseCli();
     const repo: Repo = { name: cli.repo, slug: `vaadin/${cli.repo}`, dir: cli.repoDir };
@@ -371,14 +443,21 @@ async function main(): Promise<number> {
             throw new Error(`root ${ROOT_POM} on main declares ${declared ?? "no version"}, expected ${current}`);
         }
 
-        // An open PR moving main to the next SNAPSHOT -- ours from an earlier
-        // run, or one a person opened -- is reported and never touched.
+        // Runs are repeatable: with no open bump PR one is created; with one,
+        // this run's edits are applied on top of its branch and pushed as a
+        // new commit, or nothing happens when they change nothing. So a first
+        // run with --skip-dependencies and a later one without it end up in
+        // the same PR.
         const existingPr = findOpenPrMentioning(repo, MAIN, next, cli.dryRun);
         if (existingPr) {
-            result.bump.status = "exists";
             result.pr = { number: existingPr.number, url: existingPr.url };
-            console.log(`  main: PR already open, left untouched: ${existingPr.url}`);
-            return 0;
+            if (existingPr.isCrossRepository) {
+                result.bump.status = "exists";
+                result.warnings.push(`PR #${existingPr.number} comes from a fork and cannot be updated from here`);
+                console.log(`  main: PR from a fork, left untouched: ${existingPr.url}`);
+                return 0;
+            }
+            return updateExistingPr(repo, cli, result, existingPr);
         }
 
         let prBranch: string;

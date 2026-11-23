@@ -51,7 +51,12 @@ Your own checkouts are never touched. The cell creates branches, sets a bot git 
    - **Per-repo extras** (`EXTRA_EDITS`): collaboration-kit's `COLLABORATION_ENGINE_VERSION = "X.Y"`, and in platform, `X.Y` is added after `main` in `.github/supported-branches.json` (the shared branch list for check-versions, bump-spring-boot and the license-checker audit). If an extra edit changes nothing, a warning is shown in the PR and in the report.
    - **Safety check:** the root pom must now read `X.(Y+1)-SNAPSHOT` and no pom may still contain `X.Y-SNAPSHOT`, or the cell fails without pushing.
 4. Commit, push and open the PR `chore: bump main to X.(Y+1)-SNAPSHOT`. The PR body lists changed properties, warnings, the merge order and follow-ups.
-   - **An open PR is never touched.** If `main` already has an open PR whose title mentions `X.(Y+1)-SNAPSHOT` (from an earlier run, or opened by hand), the repo is reported as `exists` with that PR's link. No commit, push or edit is made. To regenerate it, close it and re-run.
+   - **Runs are repeatable.** If `main` already has an open PR whose title mentions `X.(Y+1)-SNAPSHOT` (from an earlier run, or opened by hand), the same edits are applied on top of **that PR's branch**:
+     - edits change something → one new commit, pushed as a plain fast-forward (never forced, so commits people added stay), plus a PR comment listing what changed (`updated`)
+     - edits change nothing → the PR is left exactly as it is (`unchanged`)
+     - the PR comes from a fork → reported, not touched (`exists`)
+
+     Typical use: a first run with `--skip-dependencies` opens PRs that only move the project version; a later run without it adds the dependency moves to those same PRs. If someone pushed to the PR branch while the run was going, the push is refused and the repo shows `error`; just re-run.
 
 Every cell writes a `result.json`, even on failure. The workflow's report job and the dispatch script render them into one table.
 
