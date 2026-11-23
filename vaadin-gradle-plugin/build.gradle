@@ -188,8 +188,8 @@ publishing {
  *
  **********************************************************************************************************************/
 wrapper {
-    gradleVersion = '5.0'
-    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = '7.6.4'
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 // Travis kills the build if there's no stdout for 10 minutes: https://docs.travis-ci.com/user/common-build-problems/#build-times-out-because-no-output-was-received
