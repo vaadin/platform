@@ -62,6 +62,9 @@ export interface OpenPr {
     number: number;
     title: string;
     url: string;
+    headRefName: string;
+    /** True when the head branch lives in a fork; such a PR cannot be updated from here. */
+    isCrossRepository: boolean;
 }
 
 /**
@@ -75,7 +78,7 @@ export interface OpenPr {
 export function findOpenPrMentioning(repo: Repo, base: string, needle: string, tolerateFailure: boolean): OpenPr | null {
     const res = spawnSync(
         "gh",
-        ["pr", "list", "-R", repo.slug, "--base", base, "--state", "open", "--search", `${needle} in:title`, "--json", "number,title,url", "--limit", "50"],
+        ["pr", "list", "-R", repo.slug, "--base", base, "--state", "open", "--search", `${needle} in:title`, "--json", "number,title,url,headRefName,isCrossRepository", "--limit", "50"],
         { cwd: repo.dir, encoding: "utf8" },
     );
     if (res.error || res.status !== 0) {
@@ -114,4 +117,34 @@ export function createLabel(repo: Repo, name: string, color: string, description
     if (description) args.push("-f", `description=${description}`);
     const res = ghApi(repo, args);
     if (res.code !== 0) throw new Error(`could not create label ${name} in ${repo.slug}: ${res.stderr.trim() || res.stdout.trim()}`);
+}
+
+/** Fetch `branch` from origin into `refs/remotes/origin/<branch>`. */
+export function fetchRemoteBranch(repo: Repo, branch: string): void {
+    git(repo, ["fetch", "--quiet", "origin", `+refs/heads/${branch}:refs/remotes/origin/${branch}`]);
+}
+
+/** Check out a local `branch` at `origin/<branch>`, replacing any local copy. */
+export function checkoutRemoteBranch(repo: Repo, branch: string): void {
+    git(repo, ["checkout", "--quiet", "-B", branch, `origin/${branch}`]);
+}
+
+/**
+ * Push `branch` to origin as a plain fast-forward. Never forced: commits
+ * someone else added to the PR branch are kept, and if the branch moved
+ * since it was fetched the push fails instead of overwriting.
+ */
+export function pushFastForward(repo: Repo, branch: string): void {
+    git(repo, ["push", "--quiet", "origin", `HEAD:refs/heads/${branch}`]);
+}
+
+export function commentOnPr(repo: Repo, prNumber: number, body: string): void {
+    const res = spawnSync("gh", ["pr", "comment", String(prNumber), "-R", repo.slug, "--body", body], {
+        cwd: repo.dir,
+        encoding: "utf8",
+    });
+    if (res.error || res.status !== 0) {
+        const detail = [res.stdout, res.stderr, res.error?.message].filter(Boolean).join("\n").trim();
+        throw new Error(`\`gh pr comment\` failed${detail ? `:\n${detail}` : ""}`);
+    }
 }
