@@ -98,6 +98,11 @@ export interface ExtraEdit {
     pathSuffix: string;
     description: string;
     apply(text: string, train: Train): string;
+    /**
+     * True when the file already has the edit, e.g. on an open bump PR's branch
+     * during a follow-up run. Not changing such a file is expected, not a warning.
+     */
+    isDone(text: string, train: Train): boolean;
 }
 
 /** `NAME = "X.Y"` -> `NAME = "X.(Y+1)"` for a Java/Kotlin string constant. */
@@ -105,6 +110,9 @@ export function trainConstantEdit(pathSuffix: string, constant: string): ExtraEd
     return {
         pathSuffix,
         description: `${constant} constant`,
+        isDone(text, train) {
+            return new RegExp(`\\b${escapeRegExp(constant)}\\s*=\\s*"${escapeRegExp(trainName(nextTrain(train)))}"`).test(text);
+        },
         apply(text, train) {
             const re = new RegExp(`(\\b${escapeRegExp(constant)}\\s*=\\s*")${escapeRegExp(trainName(train))}(")`, "g");
             return text.replace(re, `$1${trainName(nextTrain(train))}$2`);
@@ -121,6 +129,10 @@ export function supportedBranchesEdit(pathSuffix: string): ExtraEdit {
     return {
         pathSuffix,
         description: "supported branches list",
+        isDone(text, train) {
+            const list = /"branches"\s*:\s*\[([^\]]*)\]/.exec(text);
+            return list !== null && list[1].includes(`"${trainName(train)}"`);
+        },
         apply(text, train) {
             const branch = trainName(train);
             const re = /("branches"\s*:\s*\[\s*)("main")(\s*,\s*)?/;
