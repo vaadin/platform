@@ -12,7 +12,7 @@ For every product in the branch's `versions.json` the script:
    it, otherwise the repository's default branch,
 4. counts the commits on that branch after the tag, using the GitHub compare API.
 
-A product pinned to a `-SNAPSHOT` version (e.g. `25.4-SNAPSHOT`) is marked
+A product pinned to a `-SNAPSHOT` version (e.g. `25.5-SNAPSHOT`) is marked
 **MUST RELEASE**: it has to be released before platform. Its commits are counted
 from the latest tag on the same `<major>.<minor>` line.
 

@@ -142,7 +142,7 @@ function printHelp() {
 
 /**
  * Parses `25.3.3`, `v25.3.3`, `25.4.0-alpha3`, `6.3.0.rc1` and the snapshot
- * forms `25.4-SNAPSHOT` / `25.4.1-SNAPSHOT`. Returns null for anything else.
+ * forms `25.5-SNAPSHOT` / `25.4.1-SNAPSHOT`. Returns null for anything else.
  */
 function parseVersion(text) {
   const snapshot = /^v?(\d+)\.(\d+)(?:\.(\d+))?-SNAPSHOT$/.exec(text);
