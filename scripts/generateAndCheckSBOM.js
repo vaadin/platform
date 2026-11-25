@@ -187,7 +187,7 @@ function basePurl(purl) {
   return at > p.lastIndexOf('/') ? p.slice(0, at) : p;
 }
 
-// 25.3.0-beta2 is 25.3, not something before it; 25.4-SNAPSHOT is 25.4.
+// 25.3.0-beta2 is 25.3, not something before it; 25.5-SNAPSHOT is 25.4.
 function versionTuple(version) {
   return version.split(/[-+]/)[0].split('.').filter(p => /^\d+$/.test(p)).map(Number);
 }

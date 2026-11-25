@@ -17,9 +17,9 @@ const T = parseTrain("25.4");
 
 test("replaceSnapshotLiteral replaces whole tokens only", () => {
     const input = [
-        "<version>25.4-SNAPSHOT</version>",
-        "vaadinVersion=25.4-SNAPSHOT",
-        'FALLBACK_VERSION = "25.4-SNAPSHOT"',
+        "<version>25.5-SNAPSHOT</version>",
+        "vaadinVersion=25.5-SNAPSHOT",
+        'FALLBACK_VERSION = "25.5-SNAPSHOT"',
         "<version>125.4-SNAPSHOT</version>",
         "<version>1.25.4-SNAPSHOT</version>",
         "<version>25.40-SNAPSHOT</version>",
@@ -49,7 +49,7 @@ test("bumpPomProperties moves train prereleases to the next SNAPSHOT", () => {
         <spring.boot.version>4.1.1</spring.boot.version>
         <old.version>25.3.0-beta1</old.version>
         <released.version>25.4.0</released.version>
-        <snap.version>25.4-SNAPSHOT</snap.version>
+        <snap.version>25.5-SNAPSHOT</snap.version>
     </properties>`;
     const { text, changes } = bumpPomProperties(pom, T, "pom.xml");
     assert.match(text, /<flow\.version>25\.5-SNAPSHOT<\/flow\.version>/);
@@ -67,12 +67,12 @@ test("bumpPomProperties moves train prereleases to the next SNAPSHOT", () => {
 
 test("withVersionPropertiesMasked moves the project version but not dependency properties", () => {
     const pom = `<project>
-    <version>25.4-SNAPSHOT</version>
+    <version>25.5-SNAPSHOT</version>
     <properties>
-        <flow.version>25.4-SNAPSHOT</flow.version>
+        <flow.version>25.5-SNAPSHOT</flow.version>
         <testbench.version>25.4.0-beta2</testbench.version>
     </properties>
-    <dependency><version>25.4-SNAPSHOT</version></dependency>
+    <dependency><version>25.5-SNAPSHOT</version></dependency>
 </project>`;
     let count = 0;
     const out = withVersionPropertiesMasked(pom, (t) => {
@@ -84,8 +84,8 @@ test("withVersionPropertiesMasked moves the project version but not dependency p
     assert.equal(
         out,
         pom
-            .replace("<version>25.4-SNAPSHOT</version>\n    <properties>", "<version>25.5-SNAPSHOT</version>\n    <properties>")
-            .replace("<dependency><version>25.4-SNAPSHOT</version>", "<dependency><version>25.5-SNAPSHOT</version>"),
+            .replace("<version>25.5-SNAPSHOT</version>\n    <properties>", "<version>25.5-SNAPSHOT</version>\n    <properties>")
+            .replace("<dependency><version>25.5-SNAPSHOT</version>", "<dependency><version>25.5-SNAPSHOT</version>"),
     );
     assert.match(out, /<flow\.version>25\.4-SNAPSHOT<\/flow\.version>/);
 });
@@ -100,7 +100,7 @@ test("bumpVersionsJson touches only Java versions on the train and keeps formatt
             "javaVersion": "{{version}}"
         },
         "hilla": {
-            "javaVersion": "25.4-SNAPSHOT"
+            "javaVersion": "25.5-SNAPSHOT"
         },
         "vaadin-router": {
             "jsVersion": "2.0.1",
@@ -125,11 +125,11 @@ test("bumpVersionsJson touches only Java versions on the train and keeps formatt
     const { text, changes } = bumpVersionsJson(input, T);
     assert.deepEqual(
         changes.map((c) => `${c.property}:${c.from}`),
-        ["flow.javaVersion:25.4.0-beta1", "hilla.javaVersion:25.4-SNAPSHOT", "azure-kit.version:25.4.0-alpha3"],
+        ["flow.javaVersion:25.4.0-beta1", "hilla.javaVersion:25.5-SNAPSHOT", "azure-kit.version:25.4.0-alpha3"],
     );
     const expected = input
         .replace('"javaVersion": "25.4.0-beta1"', '"javaVersion": "25.5-SNAPSHOT"')
-        .replace('"javaVersion": "25.4-SNAPSHOT"', '"javaVersion": "25.5-SNAPSHOT"')
+        .replace('"javaVersion": "25.5-SNAPSHOT"', '"javaVersion": "25.5-SNAPSHOT"')
         .replace('"version": "25.4.0-alpha3"', '"version": "25.5-SNAPSHOT"');
     assert.equal(text, expected);
     assert.doesNotThrow(() => JSON.parse(text));
@@ -171,10 +171,10 @@ test("readProjectVersion ignores the parent and later sections", () => {
         <version>3.0.0</version>
     </parent>
     <artifactId>flow-project</artifactId>
-    <version>25.4-SNAPSHOT</version>
+    <version>25.5-SNAPSHOT</version>
     <properties><x.version>9</x.version></properties>
 </project>`;
-    assert.equal(readProjectVersion(pom), "25.4-SNAPSHOT");
+    assert.equal(readProjectVersion(pom), "25.5-SNAPSHOT");
     assert.equal(readProjectVersion("<project><parent><version>1</version></parent><dependencies><version>2</version></dependencies></project>"), null);
 });
 
