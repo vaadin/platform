@@ -151,6 +151,7 @@
                             <systemProperties>
                                 <vaadin.ce.dataDir>${project.build.directory}</vaadin.ce.dataDir>
                                 <vaadin.productionMode>false</vaadin.productionMode>
+                                <vaadin.contentSecurityPolicy>${vaadin.contentSecurityPolicy}</vaadin.contentSecurityPolicy>
                             </systemProperties>
                         </configuration>
                         <executions>

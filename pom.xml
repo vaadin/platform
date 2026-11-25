@@ -28,6 +28,13 @@
             no module descriptor would require (e.g. SBOMs) stay unnamed.
             Left empty, the manifest entry is omitted. -->
         <jpms.module.name></jpms.module.name>
+        <!-- Content Security Policy mode of the integration test applications:
+            off, warn or strict, passed to each one as the
+            vaadin.contentSecurityPolicy system property. Strict mode sends a
+            nonce-based Content-Security-Policy header in production mode and
+            makes every API that sends JavaScript as a string throw. Run with
+            -Dvaadin.contentSecurityPolicy=off to test without it. -->
+        <vaadin.contentSecurityPolicy>strict</vaadin.contentSecurityPolicy>
     </properties>
 
     <distributionManagement>

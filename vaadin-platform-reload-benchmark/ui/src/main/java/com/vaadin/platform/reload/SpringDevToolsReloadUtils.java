@@ -31,7 +31,7 @@ public class SpringDevToolsReloadUtils {
         NativeButton startTriggerButton = new NativeButton("Click to Start",
                 event -> {
                     UI.getCurrent().getPage()
-                            .executeJs("window.benchmark.start(); return true;")
+                            .executeJs(BenchmarkJs.class).start()
                             .then(unused -> Application.triggerReload());
                 });
         startTriggerButton.setId("start-button");

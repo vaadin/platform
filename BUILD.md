@@ -111,6 +111,12 @@ cd vaadin-platform-gradle-test
   -Dsauce.user=your_username -Dsauce.sauceAccessKey=your_key
 ```
 
+All test applications run in strict Content Security Policy mode
+(`vaadin.contentSecurityPolicy=strict`): in production mode Vaadin sends a
+nonce-based `Content-Security-Policy` header, and every API that sends
+JavaScript as a string throws, in development mode too. Add
+`-Dvaadin.contentSecurityPolicy=off` to any of the commands above to run without it.
+
 ### Runing tests in selenium hub
 
 1. First you need to install docker in your local computer, and run the selenium standalone container

@@ -125,6 +125,7 @@
                             <jmxPort>9009</jmxPort>
                             <systemPropertyVariables>
                                 <route.hierarchy.enabled>${route.hierarchy.enabled}</route.hierarchy.enabled>
+                                <vaadin.contentSecurityPolicy>${vaadin.contentSecurityPolicy}</vaadin.contentSecurityPolicy>
                             </systemPropertyVariables>
                         </configuration>
                         <executions>
