@@ -1,6 +1,7 @@
 package com.vaadin.prodbundle;
 
 import com.vaadin.flow.component.accordion.Accordion;
+import com.vaadin.flow.component.ai.form.FormAIController;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -24,6 +25,7 @@ import com.vaadin.flow.component.dashboard.Dashboard;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.fieldhighlighter.FieldHighlighterInitializer;
@@ -31,6 +33,7 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.gridpro.GridPro;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.icon.FontIcon;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.listbox.ListBox;
@@ -78,7 +81,10 @@ import com.vaadin.flow.router.Route;
 
 @Route
 @JsModule("@vaadin/tooltip/vaadin-tooltip.js")
-@JsModule("@vaadin/field-highlighter/src/vaadin-ai-field-marker.js")
+// Not used by any field of this view. Naming the classes, rather than their
+// modules, also bundles their JavaScript definitions.
+@Uses(FormAIController.class)
+@Uses(IFrame.class)
 public class EagerView extends Div {
 
     public Accordion accordion;
