@@ -30,7 +30,7 @@ public class ComponentsIT extends AbstractPlatformTest {
             if (browsers == null || browsers.isEmpty()) {
                 // supported broswers : firefox esr is 140
                 // https://github.com/vaadin/flow/pull/26191
-                Parameters.setGridBrowsers("firefox,firefox-140,safari-17,edge");
+                Parameters.setGridBrowsers("firefox,firefox-153,safari-17,edge");
             } else {
                 Parameters.setGridBrowsers(browsers);
             }
