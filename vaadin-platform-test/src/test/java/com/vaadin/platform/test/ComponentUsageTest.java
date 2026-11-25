@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -92,6 +93,25 @@ public class ComponentUsageTest {
                 .collect(Collectors.toList());
     }
 
+    // Optional dependencies of component modules that are not on the test
+    // classpath. Classes depending on them cannot be loaded and are skipped.
+    private static final List<String> OPTIONAL_DEPENDENCY_PACKAGES = List.of(
+            "dev/langchain4j/",
+            "org/springframework/ai/");
+
+    private static Class<?> loadOrSkip(ClassInfo classInfo) {
+        try {
+            return classInfo.load();
+        } catch (NoClassDefFoundError e) {
+            String missing = String.valueOf(e.getMessage());
+            if (OPTIONAL_DEPENDENCY_PACKAGES.stream().anyMatch(missing::startsWith)) {
+                System.out.printf(">>> Skipping %s, it depends on optional %s%n", classInfo.getName(), missing);
+                return null;
+            }
+            throw e;
+        }
+    }
+
     private final Collection<TestComponent> testComponents = new ArrayList<>();
 
     public Collection<TestComponent> getTestComponents() {
@@ -102,7 +122,8 @@ public class ComponentUsageTest {
         ClassLoader cl = getClass().getClassLoader();
         ImmutableSet<ClassInfo> classInfos = ClassPath.from(cl)
                 .getTopLevelClassesRecursive("com.vaadin.flow.component");
-        List<Class<?>> vaadinClasses = classInfos.stream().map(ci -> ci.load()).collect(Collectors.toList());
+        List<Class<?>> vaadinClasses = classInfos.stream().map(ComponentUsageTest::loadOrSkip)
+                .filter(Objects::nonNull).collect(Collectors.toList());
         List<Class<? extends Component>> allComponentClasses = filterByType(vaadinClasses, Component.class);
         List<Class<? extends TestBenchElement>> allTBElementClasses = filterByType(vaadinClasses,
                 TestBenchElement.class);
