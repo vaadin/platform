@@ -81,7 +81,7 @@ test("consistent but stale branch reports only the available update", () => {
 });
 
 test("requiredMajor: 1.x is never required, flow 24.10 is where 3.x starts", () => {
-    assert.equal(requiredMajor("25.4-SNAPSHOT"), 3);
+    assert.equal(requiredMajor("25.5-SNAPSHOT"), 3);
     assert.equal(requiredMajor("25.0.15"), 3);
     assert.equal(requiredMajor("24.10-SNAPSHOT"), 3);
     assert.equal(requiredMajor("24.10.12"), 3);
