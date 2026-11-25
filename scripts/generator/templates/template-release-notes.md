@@ -70,24 +70,26 @@ Vaadin also provides [commercial support and warranty](https://vaadin.com/soluti
 
 ## Supported technologies
 
+The minimum browser versions follow the [browser support policy](https://vaadin.com/docs/latest/compatibility#browser-support-policy).
+
 <table>
 <tr>
   <th>Desktop browser</th>
   <td>
 
-- Chrome (evergreen).
-- Firefox (evergreen).
-   - Firefox Extended Support Release (ESR). Note that Vaadin 25 doesn't support Firefox ESR 115.
-- Safari 17 or newer (latest minor version in each major series).
-- Edge (Chromium, evergreen).
+- Chrome 158 or newer.
+- Firefox 160 or newer.
+   - Firefox Extended Support Release (ESR) 153 or newer.
+- Safari 17.6, 18.6, 26.6, and 27 or newer.
+- Edge (Chromium) 158 or newer.
   </td>
 </tr>
 <tr>
   <th>Mobile browser</th>
   <td>
 
-- Chrome (evergreen) for Android (4.4 or newer).
-- Safari 17 for iOS or newer (latest minor version in each major series).
+- Chrome 158 or newer for Android.
+- Safari 17.6, 18.6, 26.6, and 27 or newer for iOS.
   </td>
 </tr>
 <tr>
