@@ -1,7 +1,7 @@
 package com.vaadin.prodbundle;
 
 import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.ai.form.FormAIController;
+import com.vaadin.flow.component.ai.form.FormAiController;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -83,7 +83,7 @@ import com.vaadin.flow.router.Route;
 @JsModule("@vaadin/tooltip/vaadin-tooltip.js")
 // Not used by any field of this view. Naming the classes, rather than their
 // modules, also bundles their JavaScript definitions.
-@Uses(FormAIController.class)
+@Uses(FormAiController.class)
 @Uses(IFrame.class)
 public class EagerView extends Div {
 
