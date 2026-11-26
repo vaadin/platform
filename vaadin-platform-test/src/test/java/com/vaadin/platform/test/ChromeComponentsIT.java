@@ -631,6 +631,10 @@ public class ChromeComponentsIT extends AbstractPlatformTest {
                 // exclude icon deprecation warning
                 .filter(logEntry -> !logEntry.getMessage()
                         .contains("vaadin-iconset.js"))
+                // exclude the error Chrome 158 and newer log for the unload
+                // handler that the Spreadsheet client registers
+                .filter(logEntry -> !logEntry.getMessage().contains(
+                        "Permissions policy violation: unload is not allowed"))
                 .collect(Collectors.toList());
     }
 
