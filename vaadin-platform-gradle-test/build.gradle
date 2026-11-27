@@ -54,6 +54,10 @@ gretty {
     httpPort = 8080
     servletContainer = 'jetty11'
     integrationTestTask = 'integrationTest'
+    // Content Security Policy mode of the test application: off, warn or
+    // strict. Run with -Dvaadin.contentSecurityPolicy=off to test without it.
+    systemProperty 'vaadin.contentSecurityPolicy',
+            System.getProperty('vaadin.contentSecurityPolicy', 'strict')
 }
 
 def sauceUser = System.getProperty('sauce.user')

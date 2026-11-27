@@ -219,6 +219,9 @@
                         </executions>
                         <configuration>
                             <mainClass>com.vaadin.platform.fusion.test.Application</mainClass>
+                            <systemPropertyVariables>
+                                <vaadin.contentSecurityPolicy>${vaadin.contentSecurityPolicy}</vaadin.contentSecurityPolicy>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                     <plugin>

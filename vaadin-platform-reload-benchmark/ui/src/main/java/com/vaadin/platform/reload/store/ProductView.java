@@ -26,6 +26,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.platform.reload.BenchmarkJs;
 import com.vaadin.platform.reload.SpringDevToolsReloadUtils;
 
 @Route(value = "product", layout = CatalogLayout.class, registerAtStartup = false)
@@ -71,9 +72,9 @@ public class ProductView extends Div implements HasUrlParameter<Integer> {
                                             .doubleValue()));
                     result.setVisible(true);
 
-                }).addEventData("event.detail.result");
+                }).addEventDataPath("event.detail.result");
 
-        UI.getCurrent().getPage().executeJs(
-                "window.benchmark.measureRender($0);", startTriggerButton);
+        UI.getCurrent().getPage().executeJs(BenchmarkJs.class)
+                .measureRender(startTriggerButton.getElement());
     }
 }
